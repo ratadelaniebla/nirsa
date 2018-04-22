@@ -1,0 +1,181 @@
+<?page id = "pagCalidadPCC1Quimico" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="wiProteinas" apply="com.nw.webui.produccion.HarinaProteinasWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="Registro Gavetas por Proteinas" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+		
+			<grid width="99%">
+				<rows>
+					<row>
+						<label value="Fecha Recepción"/>						
+						<toolbar>
+							<datebox id="dteFecha" width="50%"/>
+							<toolbarbutton id="btnBuscarComprobantes" tooltiptext="Grabar" image="/img/buscar.gif" />
+						</toolbar>
+					</row>
+				</rows>	
+			</grid>
+							
+		
+			<grid width="99%">
+				<rows>
+					
+					<row>
+						<label value="Imprimir"/>	
+						<toolbar>
+							<vbox>
+								<toolbarbutton id="btnNotaRecepcion" label="Nota Recepción"  style="color:blue;font-size:11px;font-weight:bold"/>
+								<toolbarbutton id="btnDetallado" label="Detallado" style="color:blue;font-size:11px;font-weight:bold" />
+								<toolbarbutton id="btnRecepcion" label="Recepción Pesca" style="color:blue;font-size:11px;font-weight:bold" />
+							</vbox>
+						</toolbar>
+					</row>
+				</rows>
+			</grid>		
+		
+			<listbox id="lbxComprobantes" style="font-size:9px">
+				<listhead style="font-size:9px">
+					<listheader label="Comprobante" style="font-size:5px" width="30%" />
+					<listheader label="Proveedor" style="font-size:4px" width="48%" />
+					<listheader label="Estado" style="font-size:4px" width="21%" />
+				</listhead>
+			</listbox>		
+
+			<grid width="99%">
+				<rows>
+
+					<row>
+						<label value="Comprobante" />
+						<textbox id="txtComprobante" width="99%" readonly="true"></textbox>
+					</row>
+
+
+					<row>
+						<label value="Estado" />
+						<textbox id="txtEstadoComprobante" width="99%" readonly="true"/>
+					</row>
+
+					<row>
+						<label value="Cedula/RUC Proveedor" />
+						<textbox id="txtCedulaProveedor" width="99%" readonly="true"></textbox>
+					</row>
+
+					<row>
+						<label value="Proveedor" />
+						<textbox id="txtNombreProveedor" width="99%" height="45px" multiline="true" readonly="true"/>
+					</row>
+
+
+					<row>
+						<label value="Cedula Chofer" />
+						<textbox id="txtCedula" width="99%" readonly="true"></textbox>
+					</row>
+
+					<row>
+						<label value="Nombres Chofer" />
+						<textbox id="txtNombre" width="99%" height="99%" multiline="true"  readonly="true"/>
+					</row>
+
+					<row>						
+						<label value="Placa" />
+						<textbox id="txtPlaca" readonly="true" width="99%" />						
+					</row>
+					
+					<row>						
+						<label value="Origen Pesa" />
+						<textbox id="txtOrigen" readonly="true" width="99%" rows="2" />						
+					</row>					
+				</rows>
+			</grid>
+
+			<grid>
+				<rows>
+					<row>
+						<label value="Observación" />
+						<vbox>
+							<textbox id="txtObservacion" width="99%" height="45px" readonly="true" multiline="true"/>
+						</vbox>	
+					</row>
+				</rows>	
+			</grid>	
+
+<!-- 
+			<listbox id="lbxCajones" style="font-size:9px">
+				<listhead style="font-size:9px">
+					<listheader label="Cajon"  style="font-size:4px" width="21%" />
+					<listheader label="P.Bruto" style="font-size:4px" width="21%" />
+					<listheader label="Especies" style="font-size:3px" width="56%" />
+				</listhead>
+			</listbox>
+ -->
+
+
+			<grid width="99%"> 
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>			
+
+					<grid>
+							<rows>
+							
+								<row>
+									<hbox>
+										<label value="Grupo" />
+										<listbox id="lbxGrupoProteina" style="font-size:12px" mold="select" width="98%"/>
+									</hbox>										
+								</row>
+								
+								<row>
+									<hbox>
+										<label value="Especie" />
+										<listbox id="lbxEspecie" style="font-size:12px" mold="select" width="98%"/>
+									</hbox>									
+								</row>
+																							
+								<row>
+									<toolbar id="tbcontrol5">
+										<hbox>
+											<label value="Num.Gabetas" />
+											<textbox id="txtGabetas" maxlength="10" width="35%" style="color:blue;font-size:11px;font-weight:bold" />										
+											<toolbarbutton id="btnEspecie" tooltiptext="Agregar Especie" image="/img/crear.gif"/>
+											<toolbarbutton id="btnEliminarEspecie" tooltiptext="Eliminar Especie" image="/img/eliminar.gif"/>
+										</hbox>
+									</toolbar>
+								</row>
+								
+							</rows>
+					</grid>	
+								 												   
+					<listbox id="lbxEspeciesComprobante" model="@{wiProteinas.harinaComprobanteDetalleGrupoEspecieEstados}" multiple="true" checkmark="false" >																  															    
+						<listhead style="font-size:9px" >
+							<listheader label="Grupo" width="25%"/>
+							<listheader label="Especie" width="43%"/>
+							<listheader label="Gabetas" width="19%"/>
+							<listheader label="X" width="3%"/>
+						</listhead>
+																				
+
+						<listitem self="@{each=e}">
+							<listcell label="@{e.harinaGrupo.decripcion}" style="font-size:9px"></listcell>
+							<listcell label="@{e.harinaEspecie.descripcionespecie}" style="font-size:9px"></listcell>
+							<listcell label="@{e.numerogabetas}" style="font-size:9px"></listcell>
+							<listcell > 
+								<checkbox checked="@{e.eliminar}" > </checkbox> 
+							</listcell>
+																				     														     
+						</listitem>
+					</listbox>
+													
+
+
+		</vbox>
+	</window>
+</zk>

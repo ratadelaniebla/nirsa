@@ -1,0 +1,770 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DesperdicioCocidoReporte" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="137"/>
+	<property name="ireport.y" value="170"/>
+	<parameter name="LOGO2" class="java.lang.String"/>
+	<parameter name="USUARIO" class="java.lang.String"/>
+	<parameter name="fecha_inicio" class="java.util.Date"/>
+	<parameter name="fecha_fin" class="java.util.Date"/>
+	<parameter name="turno" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[select *
+  from
+  (
+   select t4.fecha_produccion ,t4.id_turno , t4.id_linea ,
+           sum(t4.peso_entero)      as peso_entero ,
+           sum(t4.desp_lote)        as  desperdicio  ,
+           sum(t4.desp_rechazo)     as rechazo ,
+           sum(t4.desp_otras_areas) as desp_otras_areas ,
+           sum(t4.desp_piso)        as desp_piso ,
+           sum(t4.desp_otrosdesperdicios) as desp_otrosdesperdicios
+
+            from
+
+      (
+	select id_produccion  , id_turno  , fecha_produccion , id_linea  , lote  idlote , idpdl   , id_especie_talla   ,
+	     especie , talla , estandar , peso_entero , peso_linea ,
+	     porcentaje_lote ,
+	     porcentaje_linea ,
+	     pesonetodesperdicio as lote ,
+	     (pesonetodesperdicio * (porcentaje_lote_c /100.00) )  desp_lote ,
+	     COALESCE(rechazo ,'0') rechazo ,
+	     COALESCE(rechazo ,'0') as desp_rechazo ,
+	     otras_areas,
+	     (otras_areas * (porcentaje_linea_c /100) * (porcentaje_lote_c /100) ) as desp_otras_areas,
+	     piso,
+	     (piso * (porcentaje_linea_c /100) * (porcentaje_lote_c /100) ) as desp_piso  ,
+	     ((pesonetodesperdicio * (porcentaje_lote_c /100) ) +
+	       (otras_areas * (porcentaje_linea_c /100) * (porcentaje_lote_c /100) ) +
+		(piso * (porcentaje_linea_c /100) * (porcentaje_lote_c /100) )  ) as desperdicio_total ,
+	      (estandar / 100) as std   ,
+	      (  peso_entero * (estandar / 100) ) as t_pond
+	      , otrosdesperdicios
+	      ,(otrosdesperdicios * (porcentaje_linea_c /100) * (porcentaje_lote_c /100) ) as desp_otrosdesperdicios
+
+	     from
+	       (
+		select idproduccion id_produccion,idturno id_turno,fecha_produccion,idlinea id_linea, idlote lote, idproducciondetallelote idpdl, idespecietalla id_especie_talla,
+		especie, talla, estandar,peso_entero,
+		sum(peso_entero) over (partition by idlinea) peso_linea,
+		ROUND((((peso_entero)/(sum(peso_entero) over (partition by idlinea)))*100)::NUMERIC,0) porcentaje_lote,
+		--(sum(peso_entero) over (partition by idproduccion)) total_produccion,
+		ROUND((((sum(peso_entero) over (partition by idlinea))*100)/((sum(peso_entero) over (partition by idproduccion)) ))::numeric,0) porcentaje_linea,
+		 (((peso_entero)/(sum(peso_entero) over (partition by idlinea)))*100)  porcentaje_lote_c,
+	         (((sum(peso_entero) over (partition by idlinea))*100)/((sum(peso_entero) over (partition by idproduccion)) )) porcentaje_linea_c,
+
+		(select sum(pesoneto) from
+		desperdicio_cajon_harina dch inner join desperdicio_detalle d
+		on (dch.iddesperdiciocajonharina = d.iddesperdiciocajonharina)
+		inner join detalle_lote_desperdicio dld on dld.iddesperdiciodetalle=d.iddesperdiciodetalle
+		inner join lugar_detalle ld on ld.idlugardetalle=d.idlugardetalle
+		--where dch.fechaproduccion =fecha_produccion and ld.numerolugar::INTEGER=t2.idlinea and  ( comparargrupodesperdicio( d.idarea::INTEGER  , dld.lote::INTEGER  ,  ld.numerolugar::INTEGER    ) )='LOTE' )pesonetodesperdicio ,
+		where dch.fechaproduccion =fecha_produccion and ld.numerolugar::INTEGER=t2.idlinea and  ( comparargrupodesperdicio( d.idarea::INTEGER  , dld.lote::INTEGER  ,  ld.numerolugar::INTEGER  , ld.idlugar::INTEGER ,d.idsubproducto::INTEGER   ) )='LOTE' )pesonetodesperdicio ,
+
+ 		(select sum(pesoneto) from
+		desperdicio_cajon_harina dch inner join desperdicio_detalle d
+		on (dch.iddesperdiciocajonharina = d.iddesperdiciocajonharina)
+		inner join detalle_lote_desperdicio dld on dld.iddesperdiciodetalle=d.iddesperdiciodetalle
+		inner join lugar_detalle ld on ld.idlugardetalle=d.idlugardetalle
+		--where dch.fechaproduccion =fecha_produccion and ld.numerolugar::INTEGER=t2.idlinea and dld.lote::INTEGER=t2.idlote::INTEGER AND ( comparargrupodesperdicio( d.idarea::INTEGER  , dld.lote::INTEGER  ,  ld.numerolugar::INTEGER    ) )='RECHAZO' )rechazo,
+		-- and ld.numerolugar::INTEGER=t2.idlinea
+		where dch.fechaproduccion =fecha_produccion  and dld.lote::INTEGER=t2.idlote::INTEGER AND ( comparargrupodesperdicio( d.idarea::INTEGER  , dld.lote::INTEGER  ,  ld.numerolugar::INTEGER , d.idlugar::INTEGER ,d.idsubproducto::INTEGER     ) )='RECHAZO' )rechazo,
+
+		(select  sum(pesoneto)  from
+		desperdicio_cajon_harina dch inner join desperdicio_detalle d
+		on (dch.iddesperdiciocajonharina = d.iddesperdiciocajonharina)
+		inner join detalle_lote_desperdicio dld on dld.iddesperdiciodetalle=d.iddesperdiciodetalle
+		inner join lugar_detalle ld on ld.idlugardetalle=d.idlugardetalle
+		--where dch.fechaproduccion =fecha_produccion AND  d.idturno=t2.idturno and ( comparargrupodesperdicio( d.idarea::INTEGER  , dld.lote::INTEGER  ,  ld.numerolugar::INTEGER    ) )='OTRAS AREAS'
+		where dch.fechaproduccion =fecha_produccion AND  d.idturno=t2.idturno and ( comparargrupodesperdicio( d.idarea::INTEGER  , dld.lote::INTEGER  ,  ld.numerolugar::INTEGER  , d.idlugar::INTEGER ,d.idsubproducto::INTEGER   ) )='OTRAS AREAS'
+		--limit 1
+		)otras_areas,
+
+		 (select sum(pesoneto) from
+		desperdicio_cajon_harina dch inner join desperdicio_detalle d
+		on (dch.iddesperdiciocajonharina = d.iddesperdiciocajonharina)
+		inner join detalle_lote_desperdicio dld on dld.iddesperdiciodetalle=d.iddesperdiciodetalle
+		inner join lugar_detalle ld on ld.idlugardetalle=d.idlugardetalle
+		--where dch.fechaproduccion =fecha_produccion AND  d.idturno=t2.idturno and  ( comparargrupodesperdicio( d.idarea::INTEGER  , dld.lote::INTEGER  ,  ld.numerolugar::INTEGER    ) )='PISO' )piso
+		where dch.fechaproduccion =fecha_produccion AND  d.idturno=t2.idturno and  ( comparargrupodesperdicio( d.idarea::INTEGER  , dld.lote::INTEGER  ,  ld.numerolugar::INTEGER , d.idlugar::INTEGER ,d.idsubproducto::INTEGER    ) )='PISO' )piso
+
+	       ,(select sum(pesoneto) from
+		desperdicio_cajon_harina dch inner join desperdicio_detalle d
+		on (dch.iddesperdiciocajonharina = d.iddesperdiciocajonharina)
+		inner join detalle_lote_desperdicio dld on dld.iddesperdiciodetalle=d.iddesperdiciodetalle
+		inner join lugar_detalle ld on ld.idlugardetalle=d.idlugardetalle
+		--where dch.fechaproduccion =fecha_produccion AND  d.idturno=t2.idturno and  ( comparargrupodesperdicio( d.idarea::INTEGER  , dld.lote::INTEGER  ,  ld.numerolugar::INTEGER    ) )='PISO' )piso
+		where dch.fechaproduccion =fecha_produccion AND  d.idturno=t2.idturno and  ( comparargrupodesperdicio( d.idarea::INTEGER  , dld.lote::INTEGER  ,  ld.numerolugar::INTEGER , d.idlugar::INTEGER ,d.idsubproducto::INTEGER    ) )='OTROS DESPERDICIOS' )otrosdesperdicios
+
+
+
+		from
+		(select p.idproduccion, lp.idturno, p.fechaproduccion::date fecha_produccion,
+			ldpc.idlinea, pdl.idlote, pdl.idproducciondetallelote,
+			 et.idespecietalla, e.nombre especie, t.nombre talla,
+			(
+			select eda.valor
+			from estandar_desperdicio_atun eda
+			where eda.idespecietalla = et.idespecietalla
+			)
+			estandar,
+
+			(
+			select
+			(sum (enteros)*1000) peso_entero_linea
+			from
+				(
+				select p1.idproduccion, lp1.idturno, p1.fechaproduccion::date,
+				pdl1.idlote,
+				edpc1.codbarra, epl1.especificacion clasificacion,
+				(
+				case when (edpc1.pescadoadicional > 0) THEN
+				(edpc1.canastillas*epl1.cantidad) + (edpc1.pescadoadicional)
+				else
+				edpc1.canastillas*epl1.cantidad
+				end
+				)
+				pescados,
+
+				epl1.cantidad
+				clasificacion,
+
+				(
+				  (
+				    (
+					(
+					case when (edpc1.pescadoadicional > 0) THEN
+					(edpc1.canastillas*epl1.cantidad) + (edpc1.pescadoadicional)
+					else
+					edpc1.canastillas*epl1.cantidad
+					end
+					)::float/(epl1.cantidad)
+				     )/14
+				  )
+				    /
+				      (rack_per_ton2(p1.idproduccion, pdl1.idlote, lp1.idturno))
+				)
+				enteros,
+
+				pdl1.peso peso_desglose,
+
+				edpc1.canastillas canastillas_completas,
+				edpc1.pescadoadicional pescado_adicional,
+
+				(
+				case when (edpc1.pescadoadicional > 0) THEN
+				(edpc1.canastillas*epl1.cantidad) + (edpc1.pescadoadicional)
+				else
+				edpc1.canastillas*epl1.cantidad
+				end
+				) pescados,
+				ldpc1.idlinea, (ldpc1.peso - ldpc1.tara) neto_planta
+				from limpieza_detalle_proceso_coche ldpc1, limpieza_detalle_proceso_lote ldpl1, limpieza_proceso lp1, eviscerado_detalle_proceso_coche edpc1,
+				eviscerado_pescados_lata epl1,
+				eviscerado_detalle_proceso edp1, produccion_detalle_lote_cajon pdlc1,
+				produccion_detalle_lote pdl1, produccion p1
+				where
+				ldpc1.idlimpiezadetalleprocesolote = ldpl1.idlimpiezadetalleprocesolote
+				and ldpl1.idlimpiezaproceso = lp1.idlimpiezaproceso
+				and lp1.idproduccion = p1.idproduccion
+				and ldpc1.evisceradodetalleprocesocoche = edpc1.idevisceradodetalleprocesocoche
+				and edpc1.idevisceradopescadoslata = epl1.idevisceradopescadoslata
+				and edpc1.idevisceradodetalleproceso = edp1.idevisceradodetalleproceso
+				and edp1.idproducciondetallelotecajon = pdlc1.idproducciondetallelotecajon
+				and pdlc1.idproducciondetallelote = pdl1.idproducciondetallelote
+				and p1.idproduccion = p.idproduccion
+				and lp1.idturno = lp.idturno
+				and ldpc1.idlinea = ldpc.idlinea
+				and pdl1.idproducciondetallelote = pdl.idproducciondetallelote
+				order by p1.idproduccion, lp1.idturno, edpc1.codbarra
+				)t1
+			group by idproduccion, fechaproduccion, idturno, idlinea, idlote
+			order by idproduccion, fechaproduccion, idturno, idlinea, idlote
+			)
+			peso_entero
+
+		from limpieza_detalle_proceso_coche ldpc, limpieza_detalle_proceso_lote ldpl, limpieza_proceso lp, eviscerado_detalle_proceso_coche edpc,
+		eviscerado_detalle_proceso edp, produccion_detalle_lote_cajon pdlc,
+		produccion_detalle_lote pdl, especie_talla et, especie e, talla t, produccion p
+		where
+		ldpc.idlimpiezadetalleprocesolote = ldpl.idlimpiezadetalleprocesolote
+		and ldpl.idlimpiezaproceso = lp.idlimpiezaproceso
+		and lp.idproduccion = p.idproduccion
+		and ldpc.evisceradodetalleprocesocoche = edpc.idevisceradodetalleprocesocoche
+		and edpc.idevisceradodetalleproceso = edp.idevisceradodetalleproceso
+		and edp.idproducciondetallelotecajon = pdlc.idproducciondetallelotecajon
+		and pdlc.idproducciondetallelote = pdl.idproducciondetallelote
+		and pdl.idespecietalla = et.idespecietalla
+		and et.idespecie = e.idespecie
+		and et.idtalla = t.idtalla
+		and p.fechaproduccion between $P{fecha_inicio} and $P{fecha_fin}
+		and lp.idturno = $P{turno}
+
+		group by p.idproduccion, lp.idturno, ldpc.idlinea, pdl.idproducciondetallelote, et.idespecietalla, e.idespecie, t.idtalla
+		order by p.idproduccion, lp.idturno, ldpc.idlinea, pdl.idlote
+		/*
+		group by idproduccion, fechaproduccion, idturno, idlinea, idproducciondetallelote, idlote
+		order by idproduccion, fechaproduccion, idturno, idlinea, idproducciondetallelote, idlote
+		*/
+
+		) as t2
+	    ) as t3
+         ) as t4 group by t4.fecha_produccion ,t4.id_turno , t4.id_linea order by t4.id_linea asc
+     ) as t5]]>
+	</queryString>
+	<field name="fecha_produccion" class="java.sql.Date"/>
+	<field name="id_turno" class="java.lang.Integer"/>
+	<field name="id_linea" class="java.lang.Integer"/>
+	<field name="peso_entero" class="java.lang.Double"/>
+	<field name="desperdicio" class="java.lang.Double"/>
+	<field name="rechazo" class="java.lang.Double"/>
+	<field name="desp_otras_areas" class="java.lang.Double"/>
+	<field name="desp_piso" class="java.lang.Double"/>
+	<field name="desp_otrosdesperdicios" class="java.lang.Double"/>
+	<variable name="peso_entero_1" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{peso_entero}]]></variableExpression>
+	</variable>
+	<variable name="desperdicio_1" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{desperdicio}]]></variableExpression>
+	</variable>
+	<variable name="rechazo_1" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{rechazo}]]></variableExpression>
+	</variable>
+	<variable name="desp_otras_areas_1" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{desp_otras_areas}]]></variableExpression>
+	</variable>
+	<variable name="desp_piso_1" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{desp_piso}]]></variableExpression>
+	</variable>
+	<variable name="desp_otrosdesperdicios_1" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{desp_otrosdesperdicios}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="124" y="0" width="340" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE DESPERDICIO POR LINEA]]></text>
+			</staticText>
+			<image scaleImage="RealSize">
+				<reportElement x="15" y="0" width="59" height="53"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{LOGO2}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="20" width="63" height="22"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Produccion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="90" height="20"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Inicio :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="90" y="20" width="28" height="22"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Linea]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="118" y="20" width="83" height="22"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Peso entero]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="187" y="0" width="97" height="20"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha Fin :]]></text>
+			</staticText>
+			<textField pattern="d/M/yyyy" isBlankWhenNull="true">
+				<reportElement x="284" y="0" width="106" height="20"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{fecha_fin}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="63" y="20" width="27" height="22"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Turno]]></text>
+			</staticText>
+			<textField pattern="d/M/yyyy" isBlankWhenNull="true">
+				<reportElement x="90" y="0" width="92" height="20"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{fecha_inicio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="201" y="20" width="77" height="22"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Desperdicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="278" y="20" width="56" height="22"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rechazo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="334" y="20" width="56" height="22"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Desp.Otras Areas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="390" y="20" width="56" height="22"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Desp. Piso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="446" y="20" width="56" height="22"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Desp.Otros Desperdicios]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField pattern="MM/dd/yyyy" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="63" height="16"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{fecha_produccion}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="63" y="0" width="27" height="16"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{id_turno}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="90" y="0" width="28" height="16"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{id_linea}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="118" y="0" width="83" height="16"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{peso_entero}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="201" y="0" width="77" height="16"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{desperdicio}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="278" y="0" width="56" height="16"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{rechazo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="334" y="0" width="56" height="16"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{desp_otras_areas}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="390" y="0" width="56" height="16"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{desp_piso}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="446" y="0" width="56" height="16"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{desp_otrosdesperdicios}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="21" splitType="Stretch">
+			<textField pattern="#,##0.00">
+				<reportElement x="118" y="0" width="83" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{peso_entero_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="201" y="0" width="77" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{desperdicio_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="278" y="0" width="56" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{rechazo_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="334" y="0" width="56" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{desp_otras_areas_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="390" y="0" width="56" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{desp_piso_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="446" y="0" width="56" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{desp_otrosdesperdicios_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="172" y="0" width="91" height="21"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Fecha Emisión:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="53" y="0" width="119" height="21"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{USUARIO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="434" y="0" width="60" height="21"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Pag. "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement x="263" y="0" width="115" height="21"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="494" y="0" width="60" height="21"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="53" height="21"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Usuario:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="378" y="0" width="56" height="21"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="26" splitType="Stretch"/>
+	</summary>
+</jasperReport>

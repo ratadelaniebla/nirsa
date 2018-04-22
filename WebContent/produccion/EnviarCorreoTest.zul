@@ -1,0 +1,21 @@
+<?page title="Barco" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winBarcoCreacion" apply="com.nw.webui.produccion.EnviarCorreoTestWindow" width="99%">
+	<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="Prueba de Envio de Correos" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="200px">
+		
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="ENVIAR CORREOS" /> 
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>
+	</vbox>
+</window>
+</zk>

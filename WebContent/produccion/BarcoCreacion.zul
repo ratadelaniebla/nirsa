@@ -1,0 +1,50 @@
+<?page title="Barco" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winBarcoCreacion" apply="com.nw.webui.produccion.BarcoCreacionWindow" width="99%">
+	<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="Consulta-Ingreso Barco" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="200px">
+		<grid >
+			<rows>
+				<row >
+					<label value="Barcos" ></label>
+					<listbox id="lbxBarco" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+			</rows>
+		</grid >
+		<grid >
+			<rows>
+				<row>
+					<label value="Nombre" ></label>
+					<textbox id="txtNombre" style="font-size:11px"  width="130px" > </textbox>
+				</row>
+				<row>
+					<label value="Número" ></label>
+					<textbox id="txtNumero" style="font-size:11px"  width="130px" maxlength="4" > </textbox>
+				</row>
+				<row >
+					<label value="Propiedad" ></label>
+					<listbox id="lbxPropiedad" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+				<row>
+					<label value="Nomina" ></label>
+					<textbox id="txtNomina" style="font-size:11px"  width="130px" maxlength="4" > </textbox>
+				</row>
+				
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif"/> 
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>
+	</vbox>
+</window>
+</zk>

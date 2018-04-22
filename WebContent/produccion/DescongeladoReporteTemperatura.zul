@@ -1,0 +1,46 @@
+<?page title="DESCONGELADO TEMP." contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="reporteTemperaturaDescongelado" apply="com.nw.webui.produccion.reporteTemperaturaDescongeladoWindow" >
+
+<label value="Reportes Descongelado Temp." style="color:blue;font-size:11px;font-weight:bold"/>
+		<vbox  id="vbxMain">
+		
+			<grid width="99%">
+				<rows>
+
+					<row>
+						<label value="Fecha :"/>
+						<datebox id="dteFecha1" width="110px" format="dd/MM/yyyy HH" />
+					</row>					
+                  
+					<row>
+						<label value="Hasta" />
+						<datebox id="dteFecha2" width="110px" format="dd/MM/yyyy HH"/>
+					</row>	  			
+					<!--  <row>
+						<label value="Turno :"/>	
+						<listbox id="lbxTurno" style="font-size:11px" mold="select" width="130px" > </listbox>
+					</row>	 -->
+					
+				</rows>
+			</grid>
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<label value="Imprimir" style="color:blue;font-size:12px;font-weight:bold"/>
+							<toolbar>
+								<vbox>
+								<toolbarbutton id="btnTemperaturaDescongelado" label="Temperatura Descongelado"/>
+							<!--  	<toolbarbutton id="btnCajonesDesconge" label="Cajones Descongelado"/>  -->
+								</vbox>
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+
+			
+	</vbox> 
+</window>
+</zk>

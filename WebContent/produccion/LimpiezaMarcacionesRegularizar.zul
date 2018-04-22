@@ -1,0 +1,43 @@
+<?page id = "pagLimpiezaHabilitarTomaMarcacionesEvolution" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winLimpiezaMarcacionesRegularizar" apply="com.nw.webui.produccion.LimpiezaMarcacionesRegularizarWindow">
+<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="REGULAR - MARCACIONES" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="99%">
+	
+	 	<grid width="99%"> 
+	 		<rows>
+	 		
+
+				<row>
+					<label value="Dia Produccion 1" style="color:blue" />
+					<datebox id="txtfProduccion" format="dd/MM/yyyy"  width="100px"> </datebox>
+			    </row>
+			    
+				<row>
+					<label value="Dia Produccion 2" style="color:blue" />
+					<datebox id="txtfProduccion2" format="dd/MM/yyyy"  width="100px"> </datebox>
+			    </row>
+			    
+			    <!-- 
+				<row >
+					<label value="Turno Labor" ></label>
+					<listbox id="lbxTurnoLabor" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+				 -->	 
+				
+				<row>
+					<label value="REGULAR MARCACIONES" ></label>
+					<toolbar>
+						<toolbarbutton id="btRegular" tooltiptext="REGULAR MARCIONES EMPLEADOS" image="/img/buscar.gif"/>
+					</toolbar>
+				</row>
+
+			  
+			</rows>
+		</grid>
+		
+	</vbox>
+
+	</window>
+</zk>

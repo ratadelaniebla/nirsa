@@ -1,0 +1,84 @@
+<?page id = "pagAsigMesas" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winAsigCamaraConsulta"  apply="com.nw.webui.produccion.CamaraConsultaMovimientoWindow">
+	<script src="/js/noBarra.js" type="text/javascript"/>
+	<label value="COMSULTA MOVIMIENTOS CAMARA" style="color:blue;font-size:12px;font-weight:bold"/>
+	<vbox width="@{area.anchoInterno}">
+     	  <grid width="99%">
+				<rows>
+					<row>
+						<label value="Fecha :" style="color:blue" />
+						<datebox id="dteFecReg" width="110px" disabled="true" />
+					</row>
+				</rows>
+			</grid>
+			
+		 <!-- <label value="Barco Descarga" style="color:blue" />
+						<listbox id="lbxBarcoDescarga" style="font-size:11px" mold="select"
+							width="99%" />   -->  
+		<grid width="99%">
+			<rows>
+				<row>
+				    <label value="Cajon :" width="10%"   />
+<!-- 				    
+				    <hbox>
+				    	<listbox id="lbxCajones" style="font-size:11px" mold="select" width="99%" />
+					    <toolbar>
+							<toolbarbutton id="btnRefrescar" tooltiptext="Grabar" image="/img/refrescar.gif"  />        
+						</toolbar>
+				    </hbox>
+-->
+					<hbox>	
+						<textbox id="txtCajon" style="font-size:10px" readonly="false" maxlength="20"/>
+						
+						<toolbar>
+								<toolbarbutton id="btnBuscarCajon" label="Buscar" style="color:blue;font-size:11px;font-weight:bold" />
+						</toolbar>
+					</hbox>
+				    
+					
+				</row>				
+			</rows>
+		</grid>
+		<textbox id="txtDescOrd" style="font-size:10px" readonly="true" maxlength="255" rows="4" width="98%"/>
+  		<grid width="99%">
+			<rows>
+			
+			<!-- 
+				<row><label value=" PreCámara" style="color:black"/> 
+				<checkbox checked="false" id="chkEst" /></row>
+			 -->
+			 	
+				<row>
+					<label value="Area :" id="Area" />
+					<textbox id="txtCamaraArea" style="font-size:11px" readonly="true" width="100px"/>
+				</row>				
+			</rows>
+		</grid>
+		
+		
+		
+		
+		<grid width="99%">
+		<rows>
+			<row >
+				<label value="Sin Cámara :" id="lbCamara" />
+				<textbox id="txtCamaras" readonly="true" style="font-size:11px"/>
+			</row>
+			<row>
+			    <label value="Columna :" width="20%"  />
+			    <textbox id="txtColumnas" style="font-size:11px" readonly="true"/>
+			</row>
+			<row>
+			   <label value="Fila :"  id="LblFila" />
+			   <textbox id="txtFilas" readonly="true" style="font-size:11px"/>
+			</row>
+			
+		</rows>
+		</grid>
+		<label value="Observaciones:" style="color:blue"/>
+		<textbox id="txtObs" maxlength="255" rows="3" readonly="true" width="99%"/>
+ 
+	</vbox>
+</window>
+</zk>

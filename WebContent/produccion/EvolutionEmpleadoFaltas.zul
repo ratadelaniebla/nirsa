@@ -1,0 +1,49 @@
+<?page id = "pagCalidadPCC1Quimico" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winEvolutionAprobacion" apply="com.nw.webui.produccion.EvolutionEmpleadoFaltasWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="" style="color:blue;font-size:12px;font-weight:bold" />
+		<label value="EVOLUTION ACTUALIZACIÓN FALTAS-MARCACIONES" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+		
+			<grid width="99%"> 
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar" tooltiptext="Actualizar Faltas" image="/img/grabar.gif"  label="Actualizar Faltas" />
+								<toolbarbutton id="btnGrabarMarcaciones" tooltiptext="Actualizar Marcaciones" label="Actualizar Marcaciones" />
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>		
+		
+			<grid width="99%">  
+				<rows>
+				<row>
+						<label value="Fecha desde:" />
+						<datebox id="dteFecha1" width="110px" format="dd/MM/yyyy" />
+				</row>
+				<row>
+						<label value="Fecha hasta:" />
+						<datebox id="dteFecha2" width="110px" format="dd/MM/yyyy" />
+				</row>
+				
+					<row>
+						<label value="Aprobar Validación" />
+						<checkbox id="chkIngreso" checked="false" />
+					</row>
+				<!--	<row>
+					<hbox>
+						<toolbar>
+							<toolbarbutton id="btnImprimir" label="Descargar Reporte de Datos Subidos a Evolution" tooltiptext="Visualizar/Descargar  Archivo" />
+						</toolbar>
+					</hbox>
+					</row>-->	
+				</rows>
+			</grid>			
+
+		</vbox>
+	</window>
+</zk>

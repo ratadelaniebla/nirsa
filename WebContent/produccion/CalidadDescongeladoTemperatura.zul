@@ -1,0 +1,186 @@
+<?page id = "Calidad Temperatura" title="" contentType="text/html;charset=UTF-8"?>
+<!--   -->
+<zk>
+	<window id="winTemperaturaCajones"
+		apply="com.nw.webui.produccion.CalidadControlTemperaturaPesWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="TEMPERATURA CAJON"
+			style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+			<grid>
+				<rows>
+			
+					<row>
+						<label value="Fec.Prod " style="color:blue" />
+						
+						<hbox>
+								<listbox id="lbxFechaActiva" style="font-size:11px" mold="select"> </listbox>							
+								<toolbar>
+										<toolbarbutton id="btnActualizarFech" 
+										tooltiptext="Actualizar" image="/img/refrescar.gif" />
+								</toolbar>
+						</hbox>							
+						
+					</row>
+	
+					<row >
+						<label value="Turno Producción" style="color:blue"></label>
+						<listbox id="lbxTurnoProduccion" style="font-size:11px" mold="select" width="130px" > </listbox>
+					</row>
+					<row>
+						<label value="Turno :" style="color:blue" />
+						<listbox id="lbxTurno" style="font-size:11px"
+							mold="select" width="100px" />
+					</row>
+				</rows>
+			</grid>
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar"
+									tooltiptext="Grabar" label="Grabar" image="/img/grabar.gif" />
+
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+
+		<grid width="99%">
+				<rows>
+					<row>
+						<label value="Lote " style="color:blue" ></label>
+						
+						<hbox>
+							<listbox id="lstLote" style="font-size:11px" mold="select"> </listbox>
+							
+							<toolbar>
+									<toolbarbutton id="btnActualizar" 
+									tooltiptext="Actualizar" image="/img/refrescar.gif" />
+							</toolbar>
+						</hbox>
+						
+						
+					</row>
+				</rows>
+			</grid>
+
+<!--  
+			<grid width="99%">
+				<rows>
+					 <row>
+				    <label value="Cajon :" style="color:blue" />	
+					    <hbox>
+					        <textbox id="txtCajon"  width="100px" > </textbox>
+					        <toolbar>
+								<toolbarbutton id="btnBuscarRegistro" tooltiptext="Grabar" image="/img/buscar.gif"/>
+						</toolbar>
+					    </hbox>
+					</row>
+					<row>
+					    <label value="Cajones :" style="color:blue" />
+					    <listbox id="lbxCajon" style="font-size:11px" mold="select" width="120px" />
+					</row>				
+					
+					<row>
+						<label value="Fecha Prod :" style="color:blue" />
+						<textbox id="txtFecha" width="95%"
+							disabled="false" readonly="true">
+						</textbox>
+					</row>
+					<row>
+						<label value="Turno Prod :" style="color:blue" />
+						<textbox id="txtTurno" width="95%"
+							disabled="false" readonly="true">
+						</textbox>
+					</row>
+					<row>
+						<label value="Lote:" style="color:blue" />
+						<textbox id="txtLote" width="95%"
+							disabled="false" readonly="true">
+						</textbox>
+					</row>
+					<row>
+						<label value="Pedido:" style="color:blue" />
+						<textbox id="txtPedido" width="95%"
+							disabled="false" readonly="true">
+						</textbox>
+					</row>
+					<row>
+						<label value="Barco" style="color:blue" />
+						<textbox id="txtBarco" width="95%"
+							disabled="false" readonly="true">
+						</textbox>
+					</row>
+					<row>
+						<label value="Cuba:" style="color:blue" />
+						<textbox id="txtCuba" width="100px"
+							disabled="false" readonly="true">
+						</textbox>
+					</row>
+					<row>
+						<label value="Esp-Talla :" style="color:blue" />
+						<textbox id="txtEspTalla" width="100px"
+							disabled="false" readonly="true" rows="3" multiline="true">
+						</textbox>
+					</row>
+					<row>
+						<label value="Num. Ducha" style="color:blue" />
+						<textbox id="txtDucha" width="100px"
+							disabled="false" readonly="true">
+						</textbox>
+					</row>
+				</rows>
+			</grid> -->
+			<grid width="99%">
+				<rows>
+
+<!--  					<row>
+						<label value="Temperatura Muestra:"
+							style="color:blue" />
+						<textbox id="txtTemperaturaMuestra" width="95px"
+							disabled="false">
+						</textbox>
+					</row>-->
+					<row>
+						<label value="Num Muestra:" style="color:blue" />
+						<textbox id="txtNumMuestra" width="95%"
+							readonly="true">
+						</textbox>
+					</row>
+					<row>
+						<label value="Num Muestra Lote"
+							style="color:blue" />
+						<textbox id="txtNMLote" width="95%"
+							readonly="true">
+						</textbox>
+					</row>
+
+				<row>
+					<label value="Temperatura 1" ></label>
+					<textbox id="txtTemperatura" width="100px"> </textbox>
+				</row>
+				
+				<row>
+					<label value="Temperatura 2" ></label>
+					<textbox id="txtTemperatura2" width="100px"> </textbox>
+				</row>
+
+				<row>
+					<label value="Temperatura 3" ></label>
+					<textbox id="txtTemperatura3" width="100px"> </textbox>
+				</row>
+
+				<row>
+					<label value="Temperatura 4" ></label>
+					<textbox id="txtTemperatura4" width="100px"> </textbox>
+				</row>
+
+
+				</rows>
+			</grid>
+		</vbox>
+	</window>
+</zk>

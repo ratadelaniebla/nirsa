@@ -1,0 +1,44 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winInicioLlenado" apply="com.nw.webui.produccion.EvisceradoReanudacionSecCocheWindow" width="99%">
+	<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="Reconteo Secuencia Coche" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="200px">
+		<grid >
+			<rows>
+				<row >
+					<label value="Habilitar/Deshabilitar" ></label>
+					<listbox id="lbxHabilitar" style="font-size:11px" mold="select" width="130px" >
+						<listitem label="" ></listitem> 
+						<listitem label="Habilitar" ></listitem>
+						<listitem label="DesHabilitar" ></listitem>
+					</listbox>
+				</row>
+				<row >
+					<label value="Secuencia" ></label>
+					<listbox id="lbxSecuencia" style="font-size:11px" mold="select" width="130px" > 
+					</listbox>
+				</row>				
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+						<hbox>
+							<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+							
+							<checkbox id="chbRevisado" label="Revisado" ></checkbox>
+						</hbox>
+						</toolbar>
+						
+					</vbox>
+					
+				</row>
+			</rows>
+		</grid>
+	</vbox>
+</window>
+</zk>

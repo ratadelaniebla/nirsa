@@ -1,0 +1,96 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winLimpiezaTaraCoches" apply="com.nw.webui.produccion.LimpiezaPilotoPesoDespellejadoWindow">
+<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="Peso Bandeja Despellejado" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="220px">
+	
+		<grid width="99%">  
+			<rows>
+<!--  				<row>
+					<label value="Fec.Prod. " style="color:blue" />
+					<listbox id="lbxFechaActiva" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>-->
+				<row>
+					<label value="Día Producción " style="color:blue" />
+					<textbox id="txtDiasProduccion" maxlength="255" width="110px" readonly="true"></textbox>
+				</row>
+			</rows>
+		</grid>
+		
+		
+<!--  		<grid >
+			<rows>
+				<row >
+					<label value="Turno " ></label>
+					<listbox id="lbxTurno" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>		
+			</rows>
+		</grid>-->
+		
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+				<row >
+
+					<label value="Despellejador " ></label>
+					
+					<hbox>
+						<textbox id="txtDespellejador" width="80px" > </textbox>
+				
+						<toolbar>
+								<toolbarbutton id="btnBuscar" label="Buscar" style="color:blue;font-size:11px;font-weight:bold"/>								
+						</toolbar>
+					
+					</hbox>
+				</row>
+
+				<row>
+					<toolbar>
+						<toolbarbutton id="btnCapturaPeso" tooltiptext="Buscar" label="Capturar Peso" style="color:blue;font-size:12px;font-weight:bold" />
+					</toolbar>
+					<textbox id="txtCapturaPeso" readonly="false" width="100px"> </textbox>
+				</row>
+								
+				<row>
+					<label value="# Coche " width="100px"></label>
+					<textbox id="txtNumCoche" readonly="true" width="100px" > </textbox>
+				</row>
+<!--  				<row>
+					<label value="# Coche Lote " ></label>
+					<textbox id="txtCocheLote" readonly="true" width="100px"> </textbox>
+				</row>-->
+				<row>
+					<label value="Lote " ></label>
+					<textbox id="txtLote" readonly="true" width="100px"> </textbox>
+				</row>
+				<row>
+					<label value="Especie-Talla " ></label>
+					<textbox id="txtEspecieTalla" readonly="true" width="100px"  rows="3">  </textbox>
+				</row>
+<!--  				<row>
+					<label value="# Canastillas " ></label>
+					<textbox id="txtCanastillas" readonly="true" width="100px"> </textbox>
+				</row>-->
+				<row>
+					<label value="Pescados x Lata " ></label>
+					<textbox id="txtPescadoLata" readonly="true" width="100px"> </textbox>
+				</row>
+
+
+			</rows>
+		</grid>
+	</vbox>
+</window>
+</zk>

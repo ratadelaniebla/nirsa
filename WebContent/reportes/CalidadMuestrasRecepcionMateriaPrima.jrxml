@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CalidadMuestrasPCC1B" language="groovy" pageWidth="595" pageHeight="670" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="324"/>
+	<parameter name="LOGO" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LOTEHACCP" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select t1.idcalidadmuestraareacabecera::TEXT || ' ' || t1.idcalidadmuestracabeceradescargamotivo::TEXT area_motivo,
+* from
+(
+select
+cmacc.idcalidadmuestraareacabecera,
+0::bigint idcalidadmuestracabeceradescargamotivo,
+(select array_to_string(array_agg(t1.usuario), ' <br/> ')  from (
+select DISTINCT u.usuario from calidad_muestra_area_detalle cmadu inner join usuario u
+on cmadu.idusuario = u.idusuario
+where cmadu.idcalidadmuestraareacabecera = cmacc.idcalidadmuestraareacabecera and idcalidadmuestragrupoanalisis = 2) t1) usuarios_histamina,
+
+calidad_muestra_lista_de_usuarios_muestra(cmacc.idcalidadmuestraareacabecera) usuarios_muestra,
+(select usu.usuario from usuario usu where usu.idusuario =  cmacap.idusuario and cmacap.accesoverificado = true ) usuarios_verificado,
+(select usu.usuario from usuario usu where usu.idusuario =  cmacap.idusuario and cmacap.accesorevision    = true ) usuarios_revision,
+
+
+(select barco.nombre from barco where barco.idbarco=(select barco_descarga.idbarco from barco_descarga where barco_descarga.idbarcodescarga=cmacc.idbarcodescarga ))as Barco,
+(select registro from barco_descarga where idbarcodescarga=cmacc.idbarcodescarga) as registro,
+cmacc.armador as Proveedor,
+--(select armador.descripcion from armador where armador.idarmador=(select barcd.idarmador from barco_descarga barcd where cc.idbarcodescarga=barcd.idbarcodescarga limit 1) ) as Proveedor,
+(select to_char(cmacc.fecharegistro, 'YYYY-MM-DD'))::DATE as fecha,
+(cmacc.idturno) as Turnos,
+(select mescla_cubas_por_lotehaccp(cmacc.lotehaccp)) as cuba,
+(cmacc.lotehaccp) as lotehaccp,
+(select especie.codigoqm from especie where especie.idespecie=(select especie_talla.idespecie from especie_talla where especie_talla.idespecietalla::INTEGER=cc.idmaterial::INTEGER LIMIT 1 )),
+totalnetohaccp as cantidad,
+cmacc.totalnetohaccp as cantidad,
+row_number() OVER () as numero,
+cma.descripcion area,
+
+cma.orden_area,
+cma.idcalidadmuestraarea,
+cma.texto_pie_pagina_accion_correctiva,
+cma.area_referencia,
+
+(select count(cmad1.idcalidadmuestraareadetalle) from calidad_muestra_area_detalle cmad1
+where cmad1.idcalidadmuestraareacabecera = cmacc.idcalidadmuestraareacabecera and cmad1.idcalidadmuestragrupoanalisis = 2 and cmad1.pintar = -1)::TEXT problemas,
+
+case when cmacc.idcalidadmuestraareamotivo is null then
+   cma.accion_correctiva
+else
+  (select cmam.texto from calidad_muestra_area_motivo cmam
+where cmam.idcalidadmuestraareamotivo = cmacc.idcalidadmuestraareamotivo)
+end accion_correctiva,
+
+(select array_to_string(array_agg(DISTINCT(t.idturno)), ' / ')  from calidad_muestra_area_detalle cmadt inner join turno t
+on cmadt.idturno = t.idturno
+where cmadt.idcalidadmuestraareacabecera = cmacc.idcalidadmuestraareamotivo and idcalidadmuestragrupoanalisis = 2) turno,
+
+(select array_to_string(array_agg(DISTINCT(to_char(cmadt.fecharegistro, 'DD/MM/YYYY')::TEXT)), '  ') from calidad_muestra_area_detalle cmadt
+where cmadt.idcalidadmuestraareacabecera = cmacc.idcalidadmuestraareamotivo and idcalidadmuestragrupoanalisis = 2 ) fecha,
+
+cmacc.mostrarvariable,
+cc.proposito
+
+
+FROM calidad_muestra_area_cabecera cmacc
+inner join calidad_muestra_area cma
+on cmacc.idcalidadmuestraarea = cma.idcalidadmuestraarea
+inner join camara_cajon cc
+on cc.idcamaracajon=cmacc.idcamaracajon
+left join calidad_muestra_area_cabecera_aprobacion cmacap
+on(cmacap.idcalidadmuestraareacabecera = cmacc.idcalidadmuestraareacabecera)
+
+
+WHERE cmacc.lotehaccp = $P{LOTEHACCP}  --157S003 '001001'
+  and cmacc.idcalidadmuestraarea <> 4
+and (select count(cmad1.idcalidadmuestraareadetalle) from calidad_muestra_area_detalle cmad1
+where cmad1.idcalidadmuestraareacabecera = cmacc.idcalidadmuestraareacabecera and cmad1.idcalidadmuestragrupoanalisis = 2) > 0
+--ORDER BY cma.orden_area, cma.idcalidadmuestraarea
+
+
+) t1
+
+ORDER BY t1.orden_area, t1.idcalidadmuestraarea]]>
+	</queryString>
+	<field name="area_motivo" class="java.lang.String"/>
+	<field name="idcalidadmuestraareacabecera" class="java.lang.Long"/>
+	<field name="idcalidadmuestracabeceradescargamotivo" class="java.lang.Long"/>
+	<field name="usuarios_histamina" class="java.lang.String"/>
+	<field name="usuarios_muestra" class="java.lang.String"/>
+	<field name="usuarios_verificado" class="java.lang.String"/>
+	<field name="usuarios_revision" class="java.lang.String"/>
+	<field name="barco" class="java.lang.String"/>
+	<field name="registro" class="java.lang.String"/>
+	<field name="proveedor" class="java.lang.String"/>
+	<field name="fecha" class="java.sql.Date"/>
+	<field name="turnos" class="java.lang.Integer"/>
+	<field name="cuba" class="java.lang.String"/>
+	<field name="lotehaccp" class="java.lang.String"/>
+	<field name="codigoqm" class="java.lang.String"/>
+	<field name="cantidad" class="java.lang.Double"/>
+	<field name="numero" class="java.lang.Long"/>
+	<field name="area" class="java.lang.String"/>
+	<field name="orden_area" class="java.lang.Integer"/>
+	<field name="idcalidadmuestraarea" class="java.lang.Long"/>
+	<field name="texto_pie_pagina_accion_correctiva" class="java.lang.String"/>
+	<field name="area_referencia" class="java.lang.String"/>
+	<field name="problemas" class="java.lang.String"/>
+	<field name="accion_correctiva" class="java.lang.String"/>
+	<field name="turno" class="java.lang.String"/>
+	<field name="mostrarvariable" class="java.lang.Boolean"/>
+	<field name="proposito" class="java.lang.String"/>
+	<group name="Area" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{area_motivo}]]></groupExpression>
+		<groupHeader>
+			<band height="25">
+				<textField isBlankWhenNull="true">
+					<reportElement x="176" y="15" width="188" height="10"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="5"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{area_referencia}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="206">
+				<staticText>
+					<reportElement x="77" y="92" width="100" height="13"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[ACEPTADO-ACCEPTED]]></text>
+				</staticText>
+				<rectangle>
+					<reportElement x="53" y="92" width="23" height="13"/>
+				</rectangle>
+				<rectangle>
+					<reportElement x="350" y="94" width="23" height="13"/>
+				</rectangle>
+				<staticText>
+					<reportElement x="373" y="93" width="116" height="13"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[RECHAZADO-REJECTED]]></text>
+				</staticText>
+				<line>
+					<reportElement x="24" y="141" width="168" height="1"/>
+				</line>
+				<line>
+					<reportElement x="361" y="140" width="166" height="1"/>
+				</line>
+				<line>
+					<reportElement x="25" y="185" width="168" height="1"/>
+				</line>
+				<staticText>
+					<reportElement x="33" y="144" width="133" height="10"/>
+					<textElement textAlignment="Center">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Analista Laboratorio / Lab analist]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="361" y="143" width="168" height="10"/>
+					<textElement textAlignment="Center">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Inspector QC / Quality Control Inspector ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="18" y="189" width="174" height="10"/>
+					<textElement textAlignment="Center">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Revisado- Reviewed]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="18" y="108" width="174" height="34"/>
+					<textElement textAlignment="Center" verticalAlignment="Bottom" markup="html">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{usuarios_histamina}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="361" y="107" width="166" height="33"/>
+					<textElement textAlignment="Center" verticalAlignment="Bottom" markup="html">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{usuarios_muestra}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement x="74" y="0" width="415" height="82" forecolor="#000000"/>
+					<box>
+						<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+						<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+						<leftPen lineWidth="0.5" lineColor="#FFFFFF"/>
+						<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+						<rightPen lineWidth="0.5" lineColor="#FFFFFF"/>
+					</box>
+					<textElement textAlignment="Justified" verticalAlignment="Middle">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{texto_pie_pagina_accion_correctiva}.replace(  "xx" , $F{problemas})]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="353" y="191" width="176" height="10"/>
+					<textElement textAlignment="Center">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Verificado - Verified]]></text>
+				</staticText>
+				<line>
+					<reportElement x="356" y="188" width="168" height="1"/>
+				</line>
+				<textField isBlankWhenNull="true">
+					<reportElement x="18" y="154" width="174" height="31"/>
+					<textElement textAlignment="Center" verticalAlignment="Bottom" markup="html">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{usuarios_revision}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="354" y="154" width="174" height="34"/>
+					<textElement textAlignment="Center" verticalAlignment="Bottom" markup="html">
+						<font size="6"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{usuarios_verificado}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<columnHeader>
+		<band height="106" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Transparent" x="364" y="82" width="89" height="12" backcolor="#CCCCFF"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad- Quantity Kg:]]></text>
+			</staticText>
+			<textField pattern="#########" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="455" y="82" width="100" height="12" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box leftPadding="5"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="69" width="100" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{turnos}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yy">
+				<reportElement x="455" y="57" width="100" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="167" y="0" width="263" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[NEGOCIOS INDUSTRIALES REAL S. A.]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="100" height="50"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{LOGO}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="167" y="14" width="263" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Departamento de Control de Calidad- QC Department]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="167" y="28" width="263" height="15">
+					<printWhenExpression><![CDATA[$F{orden_area} == 1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PCC1A - CCP1A]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="42" width="409" height="15">
+					<printWhenExpression><![CDATA[$F{orden_area} == 1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ RECEPCIÓN DE MATERIA PRIMA ATUN/ INCOMING RAW MATERIAL- TUNA FISH]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="57" width="82" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Barco-Vessel:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="69" width="82" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cuba-Celler:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="81" width="82" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Especie- Specie:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="82" y="57" width="113" height="13"/>
+				<box leftPadding="5"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{barco}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="82" y="69" width="113" height="13" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box leftPadding="5"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cuba}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="82" y="81" width="113" height="13" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box leftPadding="5"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{codigoqm}.replace("*" , "")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="194" y="69" width="89" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lote HACCP-HACCP Lot:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="194" y="57" width="89" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Registro-Register:]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="282" y="57" width="83" height="13" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box leftPadding="10"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{registro}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="282" y="69" width="83" height="13" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box leftPadding="10"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{lotehaccp}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="364" y="69" width="89" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Turnos-Shift:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="364" y="57" width="89" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha-Date:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="93" width="82" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo Cuba/Tipe Well:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="82" y="93" width="113" height="13"/>
+				<box leftPadding="5"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{proposito}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<subreport>
+				<reportElement x="82" y="0" width="388" height="10" isPrintWhenDetailOverflows="true">
+					<printWhenExpression><![CDATA[$F{idcalidadmuestracabeceradescargamotivo}.intValue()==0]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="IDCABECERA">
+					<subreportParameterExpression><![CDATA[$F{idcalidadmuestraareacabecera}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="idcalidadmuestracabeceradescargamotivo">
+					<subreportParameterExpression><![CDATA[$F{idcalidadmuestracabeceradescargamotivo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "CalidadMuestrasRecepcionMateriaPrima_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="10" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy H:mm a">
+				<reportElement x="430" y="0" width="125" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="293" y="0" width="16" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="250" y="0" width="43" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Pag. "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="21" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,48 @@
+<?page id = "pagLimpiezaAperturaCierre" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winLimpiezaAperturaCierre" apply="com.nw.webui.produccion.LimpiezaAperturaCierreWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="APERTURA-CIERRE LIMPIEZA" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+		
+			<grid width="99%">  
+				<rows>
+					<row>
+						<label value="Días Producción" />
+						<listbox id="lbxDiasProduccion" style="font-size:12px" mold="select" width="120px" />
+					</row>
+					<row>
+						<label value="Turno" />
+						<listbox id="lbxTurno" style="font-size:12px" mold="select" width="120px" />
+					</row>					
+					<row>
+						<label value="Apertura/Cierre"/>
+						<listbox id="lbxAperturaCierre" style="font-size:12px" mold="select" width="120px">
+							<listitem selected="true" label="Apertura" value="1" />
+							<listitem label="Cierre" value="0" />
+						</listbox>
+					</row>
+					
+								
+					
+<!--  						<row>
+						<label value="Turno"/>
+						<listbox id="lbxTurno" style="font-size:12px" mold="select" width="120px">
+						</listbox>
+					</row>-->
+				</rows>
+			</grid>				
+			
+			<grid width="99%"> 
+				<rows>
+					<row>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif" />
+						</toolbar>
+						<checkbox id="chkRevisado" label="Revisado"/>					
+					</row>
+				</rows>
+			</grid>		
+		</vbox>
+	</window>
+</zk>

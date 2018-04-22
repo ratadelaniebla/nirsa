@@ -1,0 +1,55 @@
+<?page id = "pagLonjasDetalleProcesoConteoFundas" title="" contentType="text/html;charset=UTF-8"?>
+<!-- R14 -->
+<zk>
+	<window id="winLonjasDetalleProcesoConteoFundas"
+		apply="com.nw.webui.produccion.LonjasDetalleProcesoConteoFundasWindow" > 
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="Registro de fundas en Lonjas"
+			style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain" width="99%">
+
+		    <grid width="99%">
+				<rows>
+					<row>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar"
+								tooltiptext="Grabar" image="/img/grabar.gif" />
+						</toolbar>
+					</row>
+				</rows>
+			</grid>
+
+
+			<grid width="99%">
+				<rows>
+
+					<row>
+						<label value="Producción/Turno" />
+						<textbox id="txtProduccionTurno" readonly="true" >
+						</textbox>	 			
+					</row>	
+
+					<row>
+						<label value="Ubicacion"></label>
+						<intbox id="ibxUbicacion"  />
+					</row>
+					
+					<row>
+						<label value="Tamaño"></label>
+						<listbox id="lbxFundaTallas" mold="select"
+							width="99%">
+						</listbox>
+					</row>
+					
+					<row>
+						<label value="Fundas"></label>
+						<intbox id="ibxFundas"  />
+					</row>
+				</rows>
+			</grid>
+
+
+
+		</vbox>
+	</window>
+</zk>

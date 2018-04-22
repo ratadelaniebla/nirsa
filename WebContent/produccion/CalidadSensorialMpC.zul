@@ -1,0 +1,53 @@
+<?page id = "pagCalidadSensorialMpC" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winCalidadSensorialMpC" apply="com.nw.webui.produccion.CalidadSensorialMpCWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<vbox id="vbxTitulos">
+			<label value="Creación Formato" style="color:blue;font-size:12px;font-weight:bold" />
+			<label value="Calidad Sensorial M.P." style="color:blue;font-size:12px;font-weight:bold" />
+		</vbox>
+		<vbox id="vbxMain">
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar"
+									tooltiptext="Grabar" image="/img/grabar.gif" />
+<!--								<toolbarbutton id="btnBuscar"
+  									tooltiptext="Buscar" image="/img/buscar.gif" />
+								<toolbarbutton id="btnNuevo"
+									tooltiptext="Nuevo" image="/img/crear.gif" />
+								<toolbarbutton id="btnActualizar"
+									tooltiptext="Actualizar" image="/img/refrescar.gif" />
+								<toolbarbutton id="btnEliminar"
+									tooltiptext="Eliminar" image="/img/eliminar.gif" />-->
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+			<grid width="99%">
+				<columns><column width="40%" /></columns>	
+				<rows>
+					<row>
+						<label value="Formato N°" />
+						<intbox id="txtNumFormato" maxlength="8" width="120px" style="color:blue" readonly="true" />
+					</row>
+					<row>
+						<label value="Barco" />
+  						<listbox id="lbxBarco" style="font-size:12px" mold="select" width="98%" />
+					</row>
+					<row>
+						<label value="Registro" />
+						<textbox id="txtRegistro" maxlength="8" width="98%" style="color:blue" readonly="true" />
+					</row>
+					<row>
+						<label value="N° Barco" />
+						<textbox id="txtNumBarco" maxlength="8" width="98%" style="color:blue" readonly="true" />
+					</row>
+				</rows>
+			</grid>
+		</vbox>
+	</window>
+</zk>

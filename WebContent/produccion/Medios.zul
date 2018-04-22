@@ -1,0 +1,56 @@
+<?page id = "pagMedios" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winMedios" apply="com.wm.webui.produccion.MediosWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="Medios" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox width="@{area.anchoInterno}">
+			<grid width="99%">
+				<rows>
+					<row>
+						<label value="" style="color:blue"></label>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+								<space />
+								<toolbarbutton id="btnBuscar" tooltiptext="Buscar" image="/img/buscar.gif"/>
+							</toolbar>
+							<toolbar>
+								<toolbarbutton id="btnNuevo" tooltiptext="Nuevo" image="/img/crear.gif" />
+								<toolbarbutton id="btnActualizar" tooltiptext="Actualizar" image="/img/refrescar.gif"/>
+								<toolbarbutton id="btnEliminar" tooltiptext="Eliminar" image="/img/eliminar.gif" />
+							</toolbar>
+						</vbox>
+					</row>
+					<row>
+						Tipo
+<!--  						<textbox id="txtTipoMedio" maxlength="8" width="98%" />-->
+						<listbox id="lbxTipoMedio" mold="select" width="90px" >
+							<listitem label="Tina" value="T"/>
+<!--  							<listitem label="Carro" value="C"/>-->
+							<listitem label="Bandeja" value="B"/>
+						</listbox>
+						
+					</row>
+					<row>
+						Medio
+						<textbox id="txtMedio" maxlength="8" width="98%" />
+					</row>
+<!--  					<row>
+						Peso Inicial
+						<decimalbox id="txtPesoIni" format="###.##" maxlength="8" width="98%" readonly="true" />
+					</row>-->
+					<row>
+						Peso/Tara
+						<decimalbox id="txtMtara" format="###.##" value="000.00" maxlength="8" width="98%" />
+					</row>
+				</rows>
+			</grid>
+			<hbox style="color:blue" width="99%">
+				<label value="Observaciones:" style="color:blue" />
+
+			</hbox>
+
+			<textbox id="txtObs" maxlength="255" rows="3" width="99%" />
+		</vbox>
+	</window>
+</zk>

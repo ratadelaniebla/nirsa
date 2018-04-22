@@ -1,0 +1,95 @@
+<?page id = "pagCalidadPCC1Quimico" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winComprobante" apply="com.nw.webui.produccion.HarinaComprobantesWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="" style="color:blue;font-size:12px;font-weight:bold" />
+		<label value="Recepción de Camión" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar" tooltiptext="Grabar"
+									image="/img/grabar.gif" />
+								<toolbarbutton id="btnNuevo" tooltiptext="Nuevo"
+									image="/img/crear.gif" />
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+
+			<grid width="99%">
+				<rows>
+
+					<row>
+						<label value="Fecha Recepción"/>
+						<datebox id="dteFecha" />
+					</row>
+					
+					<row>
+						<label value="Turno" />
+						<listbox id="lbxTurno" style="font-size:12px" mold="select" width="50%" />
+					</row>
+
+					<row>
+						<label value="Proveedor" />
+						
+						<hbox>						
+							<listbox id="lbxCliente" style="font-size:12px" mold="select" width="98%"/>								
+							<toolbar>
+								<toolbarbutton id="btnActualizar" tooltiptext="Actualizar lista de comprobantes" image="/img/refrescar.gif"/>
+							</toolbar>
+						</hbox>	
+																	
+					</row>
+
+
+					<row>						
+						<label value="Ced. Chofer" />
+
+						<hbox>						
+							<vbox>
+							
+								<hbox>	
+									<textbox id="txtCedulaChofer" width="99%" />
+									<toolbar>
+										<toolbarbutton id="btnBuscarChofer" tooltiptext="Grabar" image="/img/buscar.gif" />
+									</toolbar>
+								</hbox>
+								
+							</vbox>
+						</hbox>
+
+					</row>
+					<row>						
+						<label value="Nombres Chofer" />
+						<textbox id="txtChofer" width="99%" rows="2" readonly="true" />
+					</row>
+					<row>						
+						<label value="Placa" />
+						<textbox id="txtPlaca" onChange="self.setValue(self.getValue().toUpperCase().trim());" width="99%" maxlength="10" />
+					</row>
+
+					<row>						
+						<label value="Origen Pesca" />
+						<textbox id="txtOrigen" width="99%" onChange="self.setValue(self.getValue().toUpperCase().trim());" rows="2"  maxlength="10" />
+					</row>
+										
+				</rows>
+			</grid>
+				
+					<grid>
+						<rows>
+							<row>
+								<label value="Observación" />
+								<textbox id="txtObservacion" width="99%"  maxlength="200" rows="3" />
+							</row>
+						</rows>
+					</grid>
+
+		</vbox>
+	</window>
+</zk>

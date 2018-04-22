@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+
+<project name="nwl">
+
+	<property name="appname" 		value="${ant.project.name}" />
+	<property name="dist.dir" 		value="../dist" />
+	<property name="zip.file" 		value="${dist.dir}/${appname}Src.zip" />
+	
+	<property name="webcontent.dir" value="WebContent" />
+	<property name="webinf.dir" 	value="WEB-INF" />
+	<property name="build.dir" 		value="build" />
+
+	<property name="lib.dir" 		value="${webcontent.dir}/${webinf.dir}/lib"/>
+	<property name="src.dir" 		value="src" />
+
+    <property name="war.dir" 		value="${dist.dir}/${appname}" />
+	<property name="war.file" 		value="${dist.dir}/${appname}.war" />
+	<property name="warlib.dir" 	value="${war.dir}/${webinf.dir}/lib" />
+
+	<property name="class.dir" 		value="${build.dir}/classes" />
+	<property name="warclass.dir" 	value="${war.dir}/${webinf.dir}/classes" />
+
+	<property name="jar" 			value="${lib.dir}/postgresql-9.2-1002.jdbc4.jar"/>
+	<property name="driver" 		value="org.postgresql.Driver"/>
+
+	<property name="url" 			value="jdbc:postgresql://localhost:5432/nw_pruebas"/>
+	<property name="user" 			value="haroldnav"/>
+	<property name="pass" 			value="Nirvana76:"/>
+	<property name="pojos" 			value="src/com/nw/model"/>
+
+	<target name="1.hbm_maestro_detalle" 
+	    description="Agrega las instrucciones adecuadas para el enlace de las entidades maestro-detalle" > 
+
+		<replace file="${pojos}/BarcoDescarga.java">
+			<replacetoken>@GeneratedValue(strategy=GenerationType.IDENTITY)</replacetoken>
+		</replace>
+
+		<replace file="${pojos}/CalidadPcc.java">
+			<replacetoken>@GeneratedValue(strategy=GenerationType.IDENTITY)</replacetoken>
+		</replace>		
+		
+		<replace file="${pojos}/CalidadBpmDesembarco.java">
+			<replacetoken>@GeneratedValue(strategy=GenerationType.IDENTITY)</replacetoken>
+		</replace>		
+
+
+		<replace file="${pojos}/CalidadSensorialMp.java">
+			<replacetoken>@GeneratedValue(strategy=GenerationType.IDENTITY)</replacetoken>
+		</replace>		
+		
+				
+		<replace file="${pojos}/CalidadRespuestaPreguntaBpmdesembarco.java" 
+			token='@JoinColumn(name="idcalidadbpmdesembarco")' 
+			value='@JoinColumn(name="idcalidadbpmdesembarco", insertable = false, updatable = false)'>
+		</replace>
+
+		
+		<replace file="${pojos}/CalidadRespuestaPreguntaBpmdesembarco.java" 
+			token='@JoinColumn(name="idpreguntacalidadbpmdesembarco")' 
+			value='@JoinColumn(name="idpreguntacalidadbpmdesembarco", insertable = false, updatable = false)'>
+		</replace>		
+
+		<replace file="${pojos}/CalidadDetalleSensorialMp.java" 
+			token='private Long secuencialmuestra;' 
+			value="@GeneratedValue(strategy=GenerationType.IDENTITY) private Long secuencialmuestra ;">
+		</replace>			
+
+		
+		<replace file="${pojos}/CalidadDetalleSensorialMp.java" 
+			token='@JoinColumn(name="idcalidadsensorialmp")' 
+			value='@JoinColumn(name="idcalidadsensorialmp", insertable = false, updatable = false)'>
+		</replace>			
+
+		
+	</target>
+
+	<target name="2.hbm_quitar_esquemas" 
+	    description="Elimina los esquemas de las clases mapeadas de Hibernate" > 
+		<replace dir="${pojos}" value="">
+			<include name="**/*.java"/>
+			<replacetoken>,schema="DESA_2012"</replacetoken>
+		</replace>
+	</target>
+
+	<path id="master-classpath" description="Master CLASSPATH for this script">
+        <fileset dir="${lib.dir}">
+            <include name="*.jar" />
+        </fileset>
+    	<pathelement location="${class.dir}" />
+    </path>
+
+	<target name="ddl">
+		<sql classpath="${jar}"
+			driver="${driver}" 
+			url="${url}" 
+			userid="${user}" password="${pass}" 
+			print="yes"
+			src="recursos/sql/ddl.sql"
+		/>
+	</target>
+
+	<target name="drop">
+		<sql classpath="${jar}"
+			driver="${driver}" 
+			url="${url}" 
+			userid="${user}" password="${pass}" 
+			print="yes"
+			src="recursos/sql/drop.sql"
+		/>
+	</target>
+
+	<target name="insert">
+		<sql classpath="${jar}"
+			driver="${driver}" 
+			url="${url}" 
+			userid="${user}" password="${pass}" 
+			print="yes"
+			src="recursos/sql/insert.sql"
+		/>
+	</target>
+
+	<target name="query">
+		<sql classpath="${jar}"
+			driver="${driver}" 
+			url="${url}" 
+			userid="${user}" password="${pass}" 
+			print="yes"
+			src="recursos/sql/query.sql"
+		/>
+	</target>
+
+	<target name="test" 
+		description="Realizar pruebas unitarias de código Java">
+        <junit printsummary="true" showoutput="yes" filtertrace="false">
+        	<classpath refid="master-classpath" />
+            <batchtest fork="yes">
+                <formatter type="plain" />
+            	<fileset dir="${class.dir}">
+            		<include name="**/test/*Test.class" />
+                </fileset>
+            </batchtest>
+        </junit>
+	</target>
+
+	<target name="war" description="Construye el archivo WAR">
+        <mkdir dir="${war.dir}" />
+    	<!-- Copiar la carpeta WebContent -->
+    	<copy todir="${war.dir}">
+            <fileset dir="${webcontent.dir}">
+    			<exclude name="**/*.jar" />
+    		</fileset>
+		</copy>
+    	
+    	<!-- Copiar las clases -->
+    	<copy todir="${war.dir}/${webinf.dir}">
+	        <fileset dir="${build.dir}"/>
+   		</copy>
+
+    	<war destfile="${war.file}">
+            <fileset dir="${war.dir}" />
+        </war>
+    </target>
+
+	<target name="zip" 
+		description="Comprime el proyecto en la carpeta de distribucion dist especificada. Se ignoran las librerias y las clases compiladas">
+		<zip destfile="${zip.file}">
+			<fileset dir="." excludes="${build.dir}/**, ${lib.dir}/**" />
+		</zip>
+	</target>
+
+</project>

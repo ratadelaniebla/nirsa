@@ -1,0 +1,115 @@
+<?page title="ContralRend" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="reporteContraloriaRend" apply="com.nw.webui.produccion.ContraloriaReportesRendimientoWindow">
+<label value="REPORTES DE RENDIMIENTOS X PRODUCCION" style="color:blue;font-size:11px;font-weight:bold"/>
+		<vbox  id="vbxMain">
+		
+			<grid width="100%">
+				<rows>
+
+					<row>
+						<label value="Fecha :"/>
+						<datebox id="dteFecha" width="110px" format="dd/MM/yyyy" readonly="true"/>
+					</row> 
+					
+				<!-- <row >
+					<label value="Días Producción" ></label>
+					 <listbox id="lbxProduccion" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>	-->						
+					<row>
+						<label value="Turno :"/>	
+						<listbox id="lbxTurno" style="font-size:11px" mold="select" width="130px" > </listbox>
+					</row>	
+					
+				</rows>
+			</grid>
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<label value="Reportes" style="color:blue;font-size:12px;font-weight:bold"/>
+							<toolbar>
+								<vbox>
+									<hbox>
+										<toolbarbutton id="btnMermasCrudo" label="Reporte de Mermas Crudo"/>
+										<toolbarbutton id="btnExcelMermasCrudo" label="Excel" style="color:blue;font-size:11px;font-weight:bold"/>
+									</hbox>
+								</vbox>
+								<vbox>
+									<hbox>
+										<toolbarbutton id="btnMermasCocido" label="Reporte de Mermas Cocido"/>
+										<toolbarbutton id="btnExcelMermasCocido" label="Excel" style="color:blue;font-size:11px;font-weight:bold"/>
+									</hbox>
+								</vbox>
+
+								<vbox>
+									<hbox>								
+										<toolbarbutton id="btnDespCocidosxLinea" label="Reporte de Desp. Cocidos x Linea"/>
+										<toolbarbutton id="btnExcelDespCocidosxLinea" label="Excel" style="color:blue;font-size:11px;font-weight:bold"/>
+									</hbox>
+								</vbox>
+								
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+<label value="REPORTES DE RENDIMIENTOS X FECHAS" style="color:blue;font-size:11px;font-weight:bold"/>
+			<grid width="99%">
+				<rows>
+
+					<row>
+						<label value="Desde"/>
+  						<datebox id="dteFecha1" width="110px" format="dd/MM/yyyy HH" />
+					</row>					
+
+					<row>
+						<label value="Hasta"/>
+						<datebox id="dteFecha2" width="110px" format="dd/MM/yyyy HH" />
+					</row>					
+
+				</rows>
+			</grid>
+
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<label value="Reportes" style="color:blue;font-size:12px;font-weight:bold"/>
+							<toolbar>
+								
+								<vbox>
+									<hbox>
+										<toolbarbutton id="btnMermasCrudoPeriodo" label="Reporte de Mermas Crudo"/>
+										<toolbarbutton id="btnExcelMermasCrudoPeriodo" label="Excel" style="color:blue;font-size:11px;font-weight:bold"/>
+									</hbox>
+								</vbox>
+								<vbox>
+									<hbox>
+										<toolbarbutton id="btnMermasCocidoPeriodo" label="Reporte de Mermas Cocido"/>
+										<toolbarbutton id="btnExcelMermasCocidoPeriodo" label="Excel" style="color:blue;font-size:11px;font-weight:bold"/>
+									</hbox>
+								</vbox>
+								<vbox>
+									<hbox>
+										<toolbarbutton id="btnVerificaStdDespCrudo" label="Reporte de Verif. Stds. Crudo"/>
+										<toolbarbutton id="btnExcelVerificaStdDespCrudo" label="Excel" style="color:blue;font-size:11px;font-weight:bold"/>
+									</hbox>
+								</vbox>
+								<vbox>
+									<hbox>
+										<toolbarbutton id="btnVerificaStdDespCocido" label="Reporte de Verif. Stds. Cocido"/>
+										<toolbarbutton id="btnExcelVerificaStdDespCocido" label="Excel" style="color:blue;font-size:11px;font-weight:bold"/>
+									</hbox>
+								</vbox>
+								
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+			
+			
+	</vbox> 
+</window>
+</zk>

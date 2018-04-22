@@ -1,0 +1,66 @@
+<?page title="REPORTES LONJAS" contentType="text/html;charset=UTF-8"?>
+<!--  -->
+<zk>
+<window id="reporteDesperdicioCocido" apply="com.nw.webui.produccion.LiquidacionLomosAtunReporteWindow">
+<label value="REPORTES LOMOS DE ATUN" style="color:blue;font-size:11px;font-weight:bold"/>
+	 <vbox  id="vbxMain" width="99%">
+		    <grid width="98%">
+				<rows>
+					<row>
+						<label value="Fecha Inicio :"/>
+						<datebox id="dteFechaInicial" width="110px" format="dd/MM/yyyy" />
+					</row> 
+					<row>
+					  <label value="Fecha Fin :"/>
+						<datebox id="dteFechaFinal" width="110px" format="dd/MM/yyyy" />
+					</row>
+					<row  >
+					   <label value=""/>
+					    <toolbar>
+							<toolbarbutton id="btnConsultar" label="Buscar Orden Producción" width="320px" />
+						</toolbar>
+					   
+					</row>
+				    <row>
+					   <label value="Orden Fabricación :" style="color:blue" />
+				       <listbox id="lbxOrdenProduccion" style="font-size:11px" mold="select" width="80%" />
+					</row>
+			   </rows>
+			</grid>  	
+			
+		  <grid width="99%">
+			<rows>
+				<row>
+					<vbox width="100%" >
+						<toolbar>
+							<toolbarbutton id="btnPdf" label="Liquidacion Lomos PDF" width="320px" />
+						</toolbar>
+						
+						<toolbar>
+							<toolbarbutton id="btnExcel" label="Liquidacion Lomos EXCEL" />
+						</toolbar>
+						
+						<toolbar>
+							<toolbarbutton id="btnPdfResumenPorTunel" label="Lomos Resumen Por Tunel PDF" width="320px" />
+						</toolbar>
+						
+						<toolbar>
+							<toolbarbutton id="btnExcelResumenPorTunel" label="Lomos Resumen Por Tunel EXCEL" />
+						</toolbar>
+						
+						<toolbar>
+							<toolbarbutton id="btnPdfLomosCongelados" label="Lomos Congelados PDF" width="320px" />
+						</toolbar>
+						
+						<toolbar>
+							<toolbarbutton id="btnExcelLomosCongelados" label="Lomos Congelados EXCEL" />
+						</toolbar>
+						
+					</vbox>
+				</row>
+			</rows>
+		  </grid>	
+		 
+	</vbox> 
+</window>
+</zk>

@@ -1,0 +1,188 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winCajonesTraslado" apply="com.nw.webui.produccion.LoteCajonTrasladoWindow"  >
+  
+  <label value="Traslado Cajones - Lotes" style="color:blue;font-size:12px;font-weight:bold" />
+   <vbox id="vbxMain" > <!--  width="70%" -->
+    	<grid width="99%">
+					<rows>
+						<row align="center">
+							<vbox align="center">
+								<toolbar >
+									<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+									 	 
+								</toolbar>
+							</vbox>
+						</row>
+					</rows>
+			</grid>
+	   <grid width="99%" > 
+			<rows>
+				<row>
+					<label value="Origen"></label>
+				</row>
+			    <row>
+			    
+					<label value="Dia Produccion " style="color:blue"   />
+					
+					<hbox>
+						<listbox id="lbxProduccionFecha1" style="font-size:11px" mold="select" width="130px" > </listbox>
+						<toolbar >
+							<toolbarbutton id="btnActulizarP1"  tooltiptext="Actualizar" image="/img/refrescar.gif"/>
+						</toolbar>					
+					</hbox>						
+					
+					
+			    </row>
+			    
+			    
+			    <row >
+					<label value="Turno Producción" ></label>					
+					<listbox id="lbxTurnoProduccion1" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+				
+				
+				<row >
+					<label value="Lote" ></label>
+					
+					<hbox>
+						<listbox id="lbxLote1" style="font-size:11px" mold="select"> </listbox>
+						<toolbar >
+							<toolbarbutton id="btnActulizar1"  tooltiptext="Actualizar" image="/img/refrescar.gif"/>
+						</toolbar>					
+					</hbox>					
+					
+				</row>
+				
+				
+	
+				<row>
+					<label value="Estado" ></label>
+					
+					<hbox>
+						<listbox id="lbxEstado" style="font-size:10px" mold="select">
+								<listitem label="" value="0" />
+						    	<listitem label="EN RACKEO" value="1" />
+						    	<listitem label="EN DESCONGELADO" value="2" />
+						</listbox>
+					
+						<toolbar >
+							<toolbarbutton id="btnEstado1"  tooltiptext="Actualizar" image="/img/refrescar.gif"/>
+						</toolbar>					
+					</hbox>					
+					
+				</row>
+
+						
+				
+			</rows>
+	   </grid>
+	   
+	   
+	   <vbox spacing="0" width="99%">
+	   
+	        <toolbar >
+	          <toolbarbutton id="btnMover" label="Mover" ></toolbarbutton>
+	       </toolbar >   
+	          <separator></separator>
+	          <listbox id="lbxOrigen" model="@{winCajonesTraslado.produccionDetalleLoteCajonEstadosOrigen}"
+	             multiple="true"   checkmark="false" height="160px" width="99%" >
+						<listhead style="font-size:9px" >
+							<listheader label="Orden" width="20px" />
+							<listheader label="Cajon" width="40px" />
+							<listheader label="Especie" width="50px" />
+							<listheader label="Talla" width="50px" />
+							<listheader label="Barco" width="50px" />
+							<listheader label="Mover?" width="40px" />
+						</listhead>
+						      <listitem self="@{each=o}">
+						          	<listcell label="@{o.numero}" ></listcell>
+									<listcell  label="@{o.produccionDetalleLoteCajon.camaraCajon.cajon.idcajon}"></listcell>
+									<listcell  label="@{o.produccionDetalleLoteCajon.camaraCajon.especieTalla.especie.nombre}"></listcell>
+									<listcell  label="@{o.produccionDetalleLoteCajon.camaraCajon.especieTalla.talla.nombre}"></listcell>
+									<listcell  label="@{o.produccionDetalleLoteCajon.camaraCajon.barcoDescarga.barco.nombre}"></listcell>
+						            <listcell > 
+						               <checkbox checked="@{o.reubicarCoche}" > </checkbox> 
+						            </listcell>
+						      </listitem>
+				 </listbox> 
+	   
+	   </vbox>
+	   
+	   <grid width="99%"> 
+			<rows>
+				<row>
+					<label value="Destino"></label>
+				</row>
+			    <row>
+			    
+					<label value="Dia Produccion " style="color:blue"   />
+					
+					<hbox>
+					<listbox id="lbxProduccionFecha2" style="font-size:11px" mold="select" width="130px" > </listbox>					
+						<toolbar >
+							<toolbarbutton id="btnActulizarP2"  tooltiptext="Actualizar" image="/img/refrescar.gif"/>
+						</toolbar>					
+					</hbox>						
+					
+					
+			    </row>
+			    <row >
+					<label value="Turno Producción" ></label>
+					<listbox id="lbxTurnoProduccion2" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+				<row >
+					<label value="Lote" ></label>
+					
+					<hbox>
+						<listbox id="lbxLote2" style="font-size:11px" mold="select" > </listbox>	
+						<toolbar >
+							<toolbarbutton id="btnActulizar2"  tooltiptext="Actualizar" image="/img/refrescar.gif"/>
+						</toolbar>					
+					</hbox>					
+					
+				</row>
+			</rows>
+	   </grid>
+	   
+
+
+	   	<toolbar >
+			<toolbarbutton id="btnEstado2"  tooltiptext="Actualizar" image="/img/refrescar.gif"/>
+		</toolbar>	
+	
+	 	<separator></separator>		  
+	   <vbox width="99%"> 
+	   
+	         <toolbar >
+	           <toolbarbutton  id="btnRegresar" label="Regresar" ></toolbarbutton>
+	         </toolbar>
+
+	          <listbox id="lbxDestino" model="@{winCajonesTraslado.produccionDetalleLoteCajonEstadosDestino}" multiple="true"
+						checkmark="false" height="160px" width="99%">
+						<listhead style="font-size:9px" >
+							<listheader label="Orden" width="20px" />
+							<listheader label="Cajon" width="40px" />
+							<listheader label="Especie" width="50px" />
+							<listheader label="Talla" width="50px" />
+							<listheader label="Barco" width="50px" />
+							<listheader label="Regresar?" width="68px" />
+						</listhead>
+						  
+						     <listitem self="@{each=d}">
+						            <listcell label="@{d.numero}" ></listcell>
+									<listcell  label="@{d.produccionDetalleLoteCajon.camaraCajon.cajon.idcajon}"></listcell>
+									<listcell  label="@{d.produccionDetalleLoteCajon.camaraCajon.especieTalla.especie.nombre}"></listcell>
+									<listcell  label="@{d.produccionDetalleLoteCajon.camaraCajon.especieTalla.talla.nombre}"></listcell>
+									<listcell  label="@{d.produccionDetalleLoteCajon.camaraCajon.barcoDescarga.barco.nombre}"></listcell>
+						            <listcell > 
+						               <checkbox checked="@{d.reubicarCoche}" > </checkbox> 
+						            </listcell>
+						      </listitem>
+				 </listbox> 
+	   
+	   </vbox>
+		
+	</vbox>
+</window>
+</zk>

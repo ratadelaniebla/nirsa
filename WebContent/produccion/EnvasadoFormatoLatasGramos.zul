@@ -1,0 +1,84 @@
+<?page id = "pagCalidadPCC1Sensorial" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winEnvasadoFormatoLatas"
+		apply="com.nw.webui.produccion.EnvasadoFormatoLatasWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="MANTENIMIENTO FORMATO LATAS/GRAMOS"
+			style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain" width="40%">
+
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar"
+									tooltiptext="Grabar" image="/img/grabar.gif" />
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+
+
+			<grid width="99%">
+				<rows>
+
+					<row>
+						<label value="FORMATOS"></label>
+						<listbox id="lbxListaFormatos" mold="select"
+							width="99%">
+						</listbox>
+					</row>
+
+				</rows>
+			</grid>
+
+
+			<grid width="99%">
+				<rows>
+					<row>
+						<label value="Descripción"></label>
+						<textbox id="txtDescripcion" width="99%"
+							rows="2">
+						</textbox>
+					</row>
+
+				</rows>
+			</grid>
+
+
+			<grid width="99%">
+				<rows>
+
+
+					<row>
+						<label value="Peso en gramos"></label>
+						<doublebox id="InbxPesoGramos"></doublebox>
+					</row>
+
+
+					<row>
+						<hbox>
+							<label value="Confirmar" />
+							<checkbox id="ChkEliminar" width="99%"></checkbox>
+						</hbox>
+
+						<hbox>
+							<toolbar>
+								<toolbarbutton id="btnEliminar"
+									label="Eliminar" />
+							</toolbar>
+						</hbox>
+					</row>
+
+
+				</rows>
+			</grid>
+
+
+
+
+		</vbox>
+	</window>
+</zk>

@@ -1,0 +1,70 @@
+<?page id = "pagCalidadPCC1Quimico" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winDesperdicioConsultaPesoCajon" apply="com.nw.webui.produccion.DesperdicioHarinaDesperdicioConsultaPesoCajonWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="DESPERDICIO - Consulta Cajón" style="color:blue;font-size:12px;font-weight:bold" />
+		<label value="" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+		
+	
+		
+			<grid width="99%">  
+				<rows>
+				
+				
+					<row>
+						<label value="Producción" />
+						<listbox id="lbxProduccion" style="font-size:12px" mold="select" />
+					</row>				
+				
+				<!-- 
+					<row>
+						<label value="Fecha Producción"/>
+						<datebox id="dteFecha" width="110px" readonly="false"/>
+					</row>
+									
+					<row visible="false">
+						<label value="Día Julian" />
+						<textbox id="txtDiaJuliano" maxlength="4"  width="50px"  readonly="true" />
+					</row>									
+									
+					<row visible="false">
+						<label value="Turno" />
+						<listbox id="lbxTurno" style="font-size:12px" mold="select" width="98%" />
+					</row>
+ 				-->
+					<row>
+						<label value="Cajón" />
+						<hbox>
+							<listbox id="lbxCajon" style="font-size:12px" mold="select" width="80px" />												
+							Cerrado <checkbox id="chkCerrado" checked="false"/>
+						</hbox>
+					</row>
+					
+					<row>
+						<label value="Tara" />
+						<textbox id="txtTara" width="60px" readonly="true" />
+					</row>					
+					<row>
+						<label value="Peso N. Desperdicio" />
+						<textbox id="txtPeso" width="60px" readonly="true" />
+					</row>
+
+					<row>
+						<label value="Peso N. Harina" />
+						<textbox id="txtPesoh" width="60px" readonly="true" />
+					</row>
+											
+				</rows>									
+			</grid>	
+			
+		
+			<listbox id="lbxDesperdicio" width="99%" style="font-size:9px">
+				<listhead style="font-size:9px" >
+					<listheader label="Detalle de Desperdicio" style="font-size:5px"/>
+				</listhead>
+			</listbox>						
+
+		</vbox>
+	</window>
+</zk>

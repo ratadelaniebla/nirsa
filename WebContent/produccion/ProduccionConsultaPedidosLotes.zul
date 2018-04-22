@@ -1,0 +1,61 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<!--    -->
+<window id="winConsultaPedidos" apply="com.nw.webui.produccion.ProduccionConsultaPedidoLoteWindow" width="99%">
+	<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="CONSULTA PEDIDO LOTES" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="200px">
+		<grid >
+			<rows>
+				<row >
+					<label value="Fecha Producción " ></label>
+					<listbox id="lbxFechaActiva" style="font-size:11px" mold="select" width="130px" > </listbox> 
+				</row>
+				
+				<row >
+					<label value="Turno" ></label>
+					<listbox id="lbxTurno" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnBuscar" label="Buscar" tooltiptext="Buscar" />
+						</toolbar>
+					</vbox>
+				</row>
+				<row>
+					<label value="Fecha de Carga" ></label>
+					<textbox id="txtFecha" width="125px" style="font-size:11px" readonly="true" ></textbox>
+				</row>
+				
+			</rows>
+		</grid>
+		 
+		   <!-- model="@{winConsultaPedidos.barcosCubasEstados}"  -->    
+		     <listbox id="lbxCargaLotes"  multiple="true" checkmark="false" height="160px" width="300px" >
+										<listhead style="font-size:9px" >
+											<listheader label="PEDIDO" width="70px" />
+											<listheader label="ESPECIE" width="80px" />
+											<listheader label="LOTE" width="80px" />
+											<listheader label="BARCO" width="68px" />
+											<listheader label="REGISTRO" width="80px" />
+											
+											 
+										</listhead>
+										  
+										  <!--      <listitem self="@{each=b}">
+										          	<listcell label="@{b.barcoCuba.cuba.nombrecuba}" visible="true"></listcell>
+													<listcell  label="@{b.barcoCuba.cuba.especificacion}"></listcell>
+										            <listcell > 
+										               <checkbox checked="@{b.eliminarCuba}" > </checkbox> 
+										            </listcell>
+										      </listitem> -->
+										  
+										
+									</listbox>   
+					 
+		 						 
+		
+	</vbox>
+</window>
+</zk>

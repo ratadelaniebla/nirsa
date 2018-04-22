@@ -1,0 +1,94 @@
+<?page title="CONTROL BATCH LIMP MANT" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winCtrlBatchLimpiezaMant" border="none" apply="com.nw.webui.produccion.ControlBatchLimpiezaMantenimientoWindow">
+<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="BATCH MAQUINA MANT." style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="220px">
+		<grid >
+			<rows>
+				<row >
+					<label value="Día Producción " style="color:blue" />
+					<datebox id="dteFecha" width="110px" readonly="true" />
+				</row>
+				<row >
+					<label value="Turno Producción" ></label>
+					<listbox id="lbxTurnoProduccion" style="font-size:11px" mold="select" width="100px" > </listbox>
+				</row>
+				<row >
+					<label value="Batch de Cocina" ></label>
+					<listbox id="lbxBatch" style="font-size:11px" mold="select" width="100px" > </listbox>
+				</row>
+				<row>
+				    <label value="Tarjeta:" style="color:blue" />
+					<hbox>
+				    <textbox id="txtTarjeta" maxlength="14" style="font-size:11px"  width="130px" readonly="false" ></textbox>
+							<toolbarbutton  id="btnBuscar" label="Buscar" style="color:blue;font-size:11px;font-weight:bold"/>
+					</hbox>
+				</row>
+				<row>
+				</row>
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>
+		
+		<grid >
+			<rows >
+
+				<row>
+				    <label value="Fichas :" style="color:blue" />
+				    <listbox id="lbxFichas" style="font-size:11px" mold="select" width="120px" />
+				</row>
+
+				<row>
+				    <label value="Máquina :" style="color:blue" />
+				    <listbox id="lbxMaquina" style="font-size:11px" mold="select" width="120px" />
+				</row>
+
+				<row>
+				    <label value="Detector :" style="color:blue" />
+				    <listbox id="lbxDetector" style="font-size:11px" mold="select" width="120px" />
+				</row>
+
+				<row>
+					<label value="Ingreso a Máquina :" ></label>
+					<textbox id="txtHoraIngrMaquina" readonly="true" > </textbox>
+				</row>
+
+				<row>
+					<label value="Ingreso a Máquina :" ></label>
+					<datebox id="dteHoraIngrMaquina" width="120px" format="dd/MM/yyyy HH:mm" style="color:blue;font-size:11px;font-weight:bold" />	
+				</row>
+
+				<row>
+				    <label value="Batch :" style="color:blue" />
+				    <textbox id="txtBatch" style="font-size:11px"  width="120px" readonly="true" />
+				</row>
+				<row>
+				    <label value="Cocina :" style="color:blue" />
+				    <textbox id="txtCocina" style="font-size:11px"  width="120px" readonly="true" />
+				</row>
+				<row>
+				    <label value="Linea :" style="color:blue" />
+				    <textbox id="txtLinea" style="font-size:11px"  width="120px" readonly="true" />
+				</row>
+				<row>
+				    <label value="Fecha Despellejado :" style="color:blue" />
+				    <textbox id="txtFechaDesp" style="font-size:11px"  width="120px" readonly="true" />
+  				</row>
+			</rows>
+		</grid>
+		
+	</vbox>
+</window>
+</zk>

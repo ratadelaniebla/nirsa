@@ -1,0 +1,117 @@
+<?page title="Actualizacion Barco" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winBarcoDescarga" apply="com.nw.webui.produccion.BarcoDescargaWindow" width="99%">
+	<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="Actualizacion Barco " style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="200px">
+		<grid >
+			<rows>
+				<row>
+					<label value="Desde" ></label>
+					<datebox id="dteDesde" style="font-size:11px" width="130px" > </datebox>
+				</row>
+				<row>
+					<label value="Hasta" ></label>
+					<datebox id="dteHasta" style="font-size:11px" width="130px" > </datebox>
+				</row>
+				<row>
+					<label value="Buscar" ></label>
+					<toolbarbutton id="btnBuscar" tooltiptext="AgregarCuba" image="/img/buscar.gif"/>
+				</row>
+				</rows>
+		</grid >
+		<grid >
+			
+			<rows>
+				<row >
+					<label value="Barcos Aperturado" ></label>
+					<listbox id="lbxBarcoAperturado" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+				<row>
+					<label value="Registro" ></label>
+					<textbox id="txtRegistro" style="font-size:11px"  width="130px" > </textbox>
+				</row>
+				<row>
+					<label value="Fecha Descarga" ></label>
+					<textbox id="txtFechaDescarga" style="font-size:11px" readonly="true" width="130px" > </textbox >
+				</row>
+				<row>
+					<label value="Orden Fabricacion" ></label>
+					<longbox id="lngOrdenFab" style="font-size:11px" width="130px"> </longbox>
+				</row>
+				<row>
+					<label value="Viaje" ></label>
+					<intbox id="ibxViaje" style="font-size:11px"  width="130px" > </intbox>
+				</row>
+				<row>
+					<label value="Origen" ></label>
+					<hbox>
+					<checkbox id="chbOrigen" style="font-size:11px"  width="130px" ></checkbox> 
+					
+					<label id="conOrigen" value="C/O" visible="false"></label>
+					<label id="sinOrigen" value="S/O" visible="false"></label>
+					</hbox>
+				</row>
+				<row>
+					<label value="Fecha Cierre" ></label>
+					<textbox  id="txtFechaCierre" style="font-size:11px" width="130px" readonly="true" > </textbox >
+					
+				</row>
+			</rows>
+		</grid>
+		
+		
+		<grid width="99%">
+							<rows>
+								<row>
+									<vbox>
+										<toolbar>
+										    <label value="Cuba :" width="10%"   />
+											<listbox id="lbxBarcoCuba" style="font-size:11px"
+											 mold="select" width="100px" />
+											<toolbarbutton id="btnAgregarCuba" tooltiptext="AgregarCuba" image="/img/crear.gif"/>
+											<toolbarbutton id="btnEliminarCuba" tooltiptext="EliminarCuba" image="/img/eliminar.gif" /> 
+											 <!--  <toolbarbutton id="btnActualizar" tooltiptext="Actualizar" image="/img/refrescar.gif"/>
+											<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+											 <toolbarbutton id="btnNuevo" tooltiptext="Nuevo" image="/img/crear.gif" />
+											-->
+										</toolbar>
+									</vbox>
+								</row>
+							</rows>
+						</grid>
+						
+						
+					<groupbox width="240px" >
+					    <listbox id="lbxEstivaCubas" model="@{winBarcoDescarga.barcosCubasEstados}" multiple="true" checkmark="false" height="160px" width="100%">
+										<listhead style="font-size:9px" >
+											<listheader label="Nombre" width="80px" />
+											<listheader label="Especificacion"/>
+											<listheader label="Eliminar?" width="68px" />
+										</listhead>
+										  
+										      <listitem self="@{each=b}">
+										          	<listcell label="@{b.barcoCuba.cuba.nombrecuba}" visible="true"></listcell>
+													<listcell  label="@{b.barcoCuba.cuba.especificacion}"></listcell>
+										            <listcell > 
+										               <checkbox checked="@{b.eliminarCuba}" > </checkbox> 
+										            </listcell>
+										      </listitem>
+										  
+										
+									</listbox>   
+					</groupbox>
+						
+						
+						<grid width="99%" >
+							<rows >
+								<row align="center">
+								 	<toolbarbutton id="btnGrabarEstibaCuba" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif"/>	
+								</row>
+								
+								
+							</rows>
+						</grid>
+	</vbox>
+</window>
+</zk>

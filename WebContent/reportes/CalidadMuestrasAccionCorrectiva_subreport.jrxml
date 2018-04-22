@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CalidadMuestrasRecepcionMateriaPrima_subreport1" language="groovy" columnCount="2" pageWidth="533" pageHeight="350" columnWidth="266" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="new_style" mode="Transparent" forecolor="#000000" backcolor="#FF9933" fill="Solid">
+		<pen lineWidth="0.25" lineColor="#000000"/>
+		<box>
+			<pen lineColor="#000000"/>
+			<topPen lineWidth="0.25" lineColor="#000000"/>
+			<leftPen lineWidth="0.25" lineColor="#000000"/>
+			<bottomPen lineWidth="0.25" lineColor="#000000"/>
+			<rightPen lineWidth="0.25" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[($F{pintar} == 1)]]></conditionExpression>
+			<style mode="Opaque" backcolor="#9999FF"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[($F{pintar} == 0)]]></conditionExpression>
+			<style mode="Opaque" backcolor="#FFFF33"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[($F{pintar} == -1)]]></conditionExpression>
+			<style forecolor="#000000"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="IDCABECERA" class="java.lang.Long"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="idcalidadmuestracabeceradescargamotivo" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[SELECT * FROM
+(
+select
+cmad.pintar,
+cmad.idcalidadmuestraareacabecera,
+
+case when cmad.idcalidadmuestracabeceradescargamotivo is NULL THEN
+0
+else
+cmad.idcalidadmuestracabeceradescargamotivo
+end idcalidadmuestracabeceradescargamotivo,
+
+cma.descripcion,
+cmad.ordenregistro,
+
+case when cmta.idcalidadmuestratipoanalisis = 1 then
+''
+else
+cmta.descripcion
+end texto_grupo,
+
+
+cmta.texto_individual,
+
+case when cmad.histaminaporgrupo <= 0.0 then
+	NULL
+else
+	cmad.histaminaporgrupo
+end histaminaporgrupo,
+
+
+case when cmad.histaminaindividual <= 0.0 then
+	NULL
+else
+	cmad.histaminaindividual
+end histaminaindividual,
+
+
+
+
+
+cma.idcalidadmuestraarea,
+cmad.comentario,
+
+case when cmacc.numeropescados > 0 and (cmacc.idcalidadmuestraarea = 1 or cmacc.idcalidadmuestraarea = 4)  then
+	cmta.compositas
+	else
+		case when cmad.ordenregistro <= cmacc.numeropescados then
+			1
+		else
+			cmta.compositas
+		end
+end as grupo,
+
+cmad.grupo as gurpos_muestra
+
+FROM calidad_muestra_area_cabecera cmacc
+inner join calidad_muestra_area cma
+on cmacc.idcalidadmuestraarea = cma.idcalidadmuestraarea
+inner join calidad_muestra_tipo_analisis cmta
+on cmacc.idcalidadmuestratipoanalisis = cmta.idcalidadmuestratipoanalisis
+inner join calidad_muestra_area_detalle cmad
+on cmacc.idcalidadmuestraareacabecera=cmad.idcalidadmuestraareacabecera
+inner join camara_cajon cc
+on cc.idcamaracajon=cmacc.idcamaracajon
+WHERE cmad.idcalidadmuestraareacabecera = $P{IDCABECERA} and cmad.idcalidadmuestragrupoanalisis = 2
+) t1
+where t1.idcalidadmuestracabeceradescargamotivo = $P{idcalidadmuestracabeceradescargamotivo}
+ORDER BY t1.idcalidadmuestraarea, t1.ordenregistro]]>
+	</queryString>
+	<field name="pintar" class="java.lang.Integer"/>
+	<field name="idcalidadmuestraareacabecera" class="java.lang.Long"/>
+	<field name="idcalidadmuestracabeceradescargamotivo" class="java.lang.Long"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<field name="ordenregistro" class="java.lang.Integer"/>
+	<field name="texto_grupo" class="java.lang.String"/>
+	<field name="texto_individual" class="java.lang.String"/>
+	<field name="histaminaporgrupo" class="java.lang.Double"/>
+	<field name="histaminaindividual" class="java.lang.Double"/>
+	<field name="idcalidadmuestraarea" class="java.lang.Long"/>
+	<field name="comentario" class="java.lang.String"/>
+	<field name="grupo" class="java.lang.Integer"/>
+	<field name="gurpos_muestra" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="179" y="-1" width="87" height="20" backcolor="#CCCCFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Comentarios- Comments]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="-1" width="25" height="20" backcolor="#CCCCFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="5" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Piezas - Pieces #]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="116" y="-1" width="63" height="20" backcolor="#CCCCFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{texto_individual}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="25" y="-1" width="91" height="20" backcolor="#CCCCFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25" lineStyle="Solid"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="html">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{texto_grupo}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="19" width="266" height="1"/>
+				<graphicElement>
+					<pen lineWidth="1.25"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<rectangle>
+				<reportElement style="new_style" stretchType="RelativeToTallestObject" x="25" y="-1" width="91" height="16" isRemoveLineWhenBlank="true"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement style="new_style" stretchType="RelativeToBandHeight" x="179" y="-1" width="87" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{comentario}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="new_style" x="0" y="-1" width="25" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{ordenregistro}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###,###,##0.00" isBlankWhenNull="true">
+				<reportElement style="new_style" isPrintRepeatedValues="false" mode="Transparent" x="29" y="-1" width="81" height="16" isRemoveLineWhenBlank="true"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{histaminaporgrupo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###,###,##0.00" isBlankWhenNull="true">
+				<reportElement style="new_style" x="116" y="-1" width="63" height="16"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{histaminaindividual}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch">
+			<line>
+				<reportElement x="0" y="-1" width="266" height="1"/>
+				<graphicElement>
+					<pen lineWidth="1.25"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

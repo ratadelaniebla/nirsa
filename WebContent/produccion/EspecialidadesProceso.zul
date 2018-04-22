@@ -1,0 +1,114 @@
+<?page id = "pagCoccion" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winAsignacion" apply="com.wm.webui.produccion.AsignacionMWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="ESPECIALIDADES" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+			<grid width="99%">
+				<rows>
+					<row>
+						<label value="Fec.Prod." style="color:blue" />
+						<datebox id="dteFecPro" width="80px" />
+					</row>
+					<row>
+						Lote
+							<listbox id="lbxLote" style="font-size:9px" mold="select"
+								width="100px" />
+					</row>
+					<row>
+						Especialidad
+							<listbox id="lbxEspecialidad" style="font-size:9px" mold="select"
+								width="100px" />
+					</row>
+				</rows>
+			</grid>
+
+<!--  			<hbox style="color:blue" width="99%">
+				Orden
+				<toolbarbutton id="btnCargar" label="Cargar"/> 
+			</hbox>
+			<listbox id="lbxOrd" style="font-size:11px" mold="select"
+				width="99%" />-->
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+								<toolbarbutton id="btnBuscar" tooltiptext="Buscar" image="/img/buscar.gif"/>
+								<toolbarbutton id="btnNuevo" tooltiptext="Nuevo" image="/img/crear.gif" />
+								<toolbarbutton id="btnActualizar" tooltiptext="Actualizar" image="/img/refrescar.gif"/>
+								<toolbarbutton id="btnEliminar" tooltiptext="Eliminar" image="/img/eliminar.gif" />
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+			<tabbox id="tboxPrincipal" width="99%" >
+				<tabs >
+					<tab id="tabAsignacion" label="Especialidades" width="95px"/>
+<!--  					<tab id="tabRecursos" label="Recursos" width="80px"/>-->
+				</tabs >
+				<tabpanels>
+					<tabpanel id="tbpAsignacion">
+						<grid width="99%">
+							<rows>
+								<row>
+									Ingrediente
+										<listbox id="lbxIngrediente" style="font-size:9px" mold="select"
+											width="100px" />
+								</row>
+								<row>
+									Consumo
+									<decimalbox id="txtConsumo" format="###.##" value="000.00" maxlength="8" width="80px" />
+								</row>
+								<row>
+									# Paradas
+									<decimalbox id="txtPesoIni" format="###.##" maxlength="8" width="80px" readonly="true"/>
+								</row>
+							</rows>
+						</grid>
+
+
+					</tabpanel>
+<!--  					<tabpanel id="tbpRecursos" >
+						<hbox style="color:blue" width="99%">
+							<listbox id="lbxRecursos" style="font-size:9px" mold="select"
+							width="99%" />
+						</hbox>
+						<space/>
+						<grid width="99%">
+							<rows>
+								<row>
+									Recurso
+									<listbox id="lbxTipoRecursos" style="font-size:9px" mold="select"
+										width="100px" />
+								</row>
+								<row >Cantidad
+										<intbox id="txtUnidades" format="###" value="000" maxlength="8" width="98%" />
+								</row>
+								<row>Tiempo
+									<decimalbox id="txtCantidad" format="###.##" value="000.00" maxlength="8" width="98%" />
+								</row>
+							</rows> 
+						</grid>			
+						<label value="Observaciones Recurso:" style="color:blue" />
+						<textbox id="txtDescRecurso" style="font-size:10px" 
+						rows="4" width="98%" />
+					</tabpanel>-->
+					
+				</tabpanels>
+			</tabbox>	
+			<label value="Observaciones Proceso:" style="color:blue" />
+			<textbox id="txtObs" maxlength="255" rows="3" width="99%" />
+			<grid width="99%">
+				<rows>
+					<row>
+						<label value=" Cerrar Proceso " style="color:black" />
+						<checkbox checked="false" id="chkEst" />
+					</row>
+				</rows>
+			</grid>
+		</vbox>
+	</window>
+</zk>

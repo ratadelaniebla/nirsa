@@ -1,0 +1,162 @@
+<?page title="CONTROL BATCH LIMPIEZA " contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winControlBatchLimpieza" border="none" apply="com.nw.webui.produccion.ControlBatchLimpiezaWindow">
+<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="CONTROL BATCH LIMPIEZA" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="220px">
+		<grid >
+			<rows>
+<!--  			
+				<row>
+				    <label value="Fech.Prod. - Turno :" style="color:blue" />
+				    <listbox id="lbxProcesosActivos" style="font-size:11px" mold="select" width="120px" />
+				</row>
+				
+				
+				<row>
+				    <label value="Turno :" style="color:blue" />
+				    <textbox id="txtTurno"  style="font-size:11px"  width="130px" readonly="true" ></textbox>
+				</row>
+-->			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>
+		
+		<grid >
+			<rows >
+<!--  				<row>
+				    <label value="Tarjeta:" style="color:blue" />
+					<hbox>
+				    	<textbox id="txtTarjeta"  maxlength="14" style="font-size:11px"  width="80px" readonly="false" ></textbox>
+					</hbox>
+				</row>
+				<row>
+				 <toolbar>
+							<toolbarbutton id="btnBuscaTarjeta" label="Consultar" tooltiptext="Buscar" image="/img/buscar.gif"/>
+						</toolbar>  
+				</row>
+-->
+				<row>
+				    <label value="Batch :" style="color:blue" />
+<!--  				    <listbox id="lbxBatch" style="font-size:11px" mold="select" width="120px" />-->
+				    <textbox id="txtBatch" style="font-size:11px"  width="120px" readonly="true" />
+				</row>
+
+				<row>
+				    <label value="Fichas :" style="color:blue" />
+				    <listbox id="lbxFichas" style="font-size:11px" mold="select" width="120px" />
+				</row>
+
+				<row>
+				    <label value="Cocina :" style="color:blue" />
+				    <textbox id="txtCocina" style="font-size:11px"  width="120px" readonly="true" />
+				</row>
+				<row>
+				    <label value="Linea :" style="color:blue" />
+<!--  				    <listbox id="lbxLinea" style="font-size:11px" mold="select" width="120px" />-->
+				    <textbox id="txtLinea" style="font-size:11px"  width="120px" readonly="true" />
+				</row>
+				<row>
+				    <label value="Lote :" style="color:blue" />
+				    <textbox id="txtLote" style="font-size:11px"  width="120px" readonly="true" />
+				</row>
+				<row>
+					<label value="Especie-Talla: " style="color:blue" ></label>
+					<textbox id="txtEspecieTalla" style="font-size:11px" readonly="true" width="120px" ></textbox>
+				</row>
+				<row>
+					<label value="Destino: "  style="color:blue" ></label>
+					<textbox id="txtDestino" style="font-size:11px" readonly="true" rows="4" width="120px" ></textbox>
+				</row>
+				<row>
+				    <label value="Maquina :" style="color:blue" />
+				    <listbox id="lbxMaquina" style="font-size:11px" mold="select" width="120px" />
+				</row>
+
+				<row>
+				    <label value="Detector :" style="color:blue" />
+				    <listbox id="lbxDetector" style="font-size:11px" mold="select" width="120px" />
+				</row>
+
+				<row>
+				    <label value="ESTADO:" style="color:blue" />
+				    <textbox id="txtEstado" style="font-size:11px"  width="120px" readonly="true" />
+				</row>
+				<row>
+				    <label value="Fin Cocinada :" style="color:blue" />
+				    <textbox id="txtFinCocinada" style="font-size:11px"  width="120px" readonly="true" />
+				</row>
+
+				<row>
+				    <label value="Fecha Despellejado :" style="color:blue" />
+				    <textbox id="txtFechaDesp" style="font-size:11px"  width="120px" readonly="true" />
+				</row>
+
+				<row>
+				    <label value="Fecha Hoy :" style="color:blue" />
+				    <textbox id="txtFechaHoy" style="font-size:11px"  width="120px" readonly="true" />
+				</row>
+				<row>
+				    <label value="Tiempo Estimado :" style="color:blue" />
+				    <textbox id="txtEstimado" style="font-size:11px"  width="120px" readonly="true" />
+<!-- 1 hora -->
+				</row>
+				<row>
+				    <label value="Tiempo Límite PCC5:" style="color:blue" />
+				    <textbox id="txtLimite" style="font-size:11px"  width="120px" readonly="true" />
+<!-- despellejado + 3 horas -->
+				</row>
+<!--  				<row>
+				    <label value="T. Estimado PCC4:" style="color:blue" />
+				    <textbox id="txtEstimadoPcc4" style="font-size:11px"  width="120px" readonly="true" />
+				</row>-->
+				<row>
+				    <label value="T. Límite PCC4:" style="color:blue" />
+				    <textbox id="txtLimitePcc4" style="font-size:11px"  width="120px" readonly="true" />
+				</row>
+
+				
+<!--  				<row>
+				    <label value="Ubicación :" style="color:blue" />
+				    <textbox id="txtUbicacion" style="font-size:11px"  width="120px" readonly="true" />
+				</row>
+				
+				<row>
+						<hbox>
+						<label value="Empleado" width="100px" style="color:blue"></label>
+						</hbox>
+					
+						<hbox>
+						<textbox id="txtEmpleado" width="70px" > </textbox>
+						<toolbar>							
+							<toolbarbutton id="btnBuscarEmpleado" tooltiptext="Buscar Empleado" image="/img/buscar.gif" style="color:blue;font-size:12px;font-weight:bold" />
+						</toolbar>
+						</hbox>
+				</row>
+				<row>
+					<label value="Nombres :" style="color:blue" />
+					<vbox>
+					   <textbox id="txtNombre" disabled="false" width="120px" readonly="true" multiline="true" rows="3" > </textbox>
+					   <toolbar>							
+							<toolbarbutton id="btnLimpiar" tooltiptext="Limpiar" image="/img/crear.gif" style="color:blue;font-size:12px;font-weight:bold" />
+						</toolbar>
+					</vbox>
+					
+				</row>
+-->				
+			</rows>
+		</grid>
+		
+	</vbox>
+</window>
+</zk>

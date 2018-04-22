@@ -1,0 +1,66 @@
+<?page id = "pagCalidadPCC1Quimico" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winCerrarComprbantes" apply="com.nw.webui.produccion.HarinaCerrarComprobantesWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="Cerrar Comprobantes" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+		
+			<grid width="99%">
+				<rows>
+					<row>
+						<label value="Fecha Recepción"/>						
+						<toolbar>
+							<datebox id="dteFecha" width="50%"/>
+							<toolbarbutton id="btnBuscarComprobantes" tooltiptext="Grabar" image="/img/buscar.gif" />
+						</toolbar>
+					</row>
+				</rows>	
+			</grid>
+							
+		
+			<listbox id="lbxComprobantes" style="font-size:9px">
+				<listhead style="font-size:9px">
+					<listheader label="Comprobante" style="font-size:5px" width="30%"/>
+					<listheader label="Proveedor" style="font-size:4px" width="48%"/>
+					<listheader label="Estado" style="font-size:4px" width="21%" />
+				</listhead>
+			</listbox>		
+
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif" />
+							</toolbar>
+
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+
+			<grid width="99%">
+				<rows>
+
+					<row>
+						<label value="Comprobante" />
+						<textbox id="txtComprobante" width="99%" readonly="true"></textbox>
+					</row>
+
+					<row>
+						<label value="Estado" />
+						<textbox id="txtEstadoComprobante" width="99%" readonly="true"/>
+					</row>
+
+					<row>
+						<label value="Cerrar Comprobante" />
+						<checkbox id="ChkCerrarComprobante"></checkbox>
+					</row>
+
+				</rows>
+			</grid>
+
+
+		</vbox>
+	</window>
+</zk>

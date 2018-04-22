@@ -1,0 +1,42 @@
+<?page title="Cuba" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winCubaCreacion" apply="com.nw.webui.produccion.CubaCreacionWindow" width="99%">
+	<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="Consulta-Ingreso Cuba" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="200px">
+		<grid >
+			<rows>
+				<row >
+					<label value="Cubas" ></label>
+					<listbox id="lbxCuba" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+			</rows>
+		</grid >
+		<grid >
+			<rows>
+				<row>
+	 				<label value="Nombre" ></label>
+					<textbox id="txtNombre" style="font-size:11px"  width="130px" maxlength="4" > </textbox>
+				</row>
+				<row>
+					<label value="Especificación" ></label>
+					<textbox id="txtEspecificacion" style="font-size:11px"  width="130px" maxlength="20" > </textbox>
+				</row>
+				
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif"/> 
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>
+	</vbox>
+</window>
+</zk>

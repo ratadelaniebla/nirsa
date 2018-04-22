@@ -1,0 +1,57 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winPedidoProduccionArchivoReporte" apply="com.nw.webui.produccion.v2.PedidoProduccionArchivoReporteWindow">
+<label value="REPORTE PEDIDO PRODUCCION " style="color:blue;font-size:11px;font-weight:bold"/>
+		<vbox  id="vbxMain" width="99%">
+			<grid width="99%">
+				<rows>
+
+					<row>
+						<label value="Fecha :"/>
+						<hbox>
+						  <datebox id="dtbFecha" width="110px" format="dd/MM/yyyy" />
+						  <toolbar>
+							 <toolbarbutton id="btnConsultar" label="Consultar"/>
+					     </toolbar>
+						</hbox>
+						
+					</row> 
+					
+				</rows>
+			</grid>
+			<label value="Detalle" style="color:blue;font-size:12px;font-weight:bold" />
+			
+		   <listbox  id="lbxCabecera" model="@{winPedidoProduccionArchivoReporte.listaCabecera}"
+		       selectedItem="@{winPedidoProduccionArchivoReporte.itemCabecera}"  multiple="true" checkmark="false" height="350px" width="99%">
+				<listhead style="font-size:5px" >
+					<listheader label="Nombre Archivo" width="50%" />
+					<listheader label="Fecha Carga"    width="15%"  style="font-size:5px" />
+					<listheader label="Usuario" 	   width="10%" />
+					<listheader label="Exportar " 	   width="5%"   />
+				</listhead>
+
+		    </listbox>	
+			
+			<label value="Exportar" style="color:blue;font-size:12px;font-weight:bold"/>
+			<grid width="99%">
+				<rows>
+					<row>
+						<hbox>
+				 
+							<toolbar>
+								<toolbarbutton id="btnPdf" label="Pdf"/>
+							</toolbar>
+							<toolbar>
+								<toolbarbutton id="btnExcel" label="Excel"/>
+							</toolbar>
+							
+						</hbox>
+					</row>
+
+				</rows>
+			</grid>
+
+
+	</vbox> 
+</window>
+</zk>

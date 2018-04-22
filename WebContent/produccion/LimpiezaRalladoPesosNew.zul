@@ -1,0 +1,168 @@
+<?page id = "pagLimpiezaRalladoPesos" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winLimpiezaRalladoPesos" apply="com.nw.webui.produccion.LimpiezaRalladoPesosNewWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+
+		<vbox id="vbxMain" width="99%">
+				
+			<label value="NW - Limpieza Reg. Rallado New" style="color:blue;font-size:12px;font-weight:bold" />			
+			<grid >  
+				<rows>
+					<row>
+						<label value="Producción" />
+						<textbox id="txtDiaProduccion" readonly="true" style="font-size:12px" width="99%" />
+					</row>
+									
+				</rows>
+			</grid>	
+			
+	
+					
+			<grid>  
+				<rows>
+				
+					<row>
+						<label value="Rallado"/>
+						<listbox id="lbxTipoRallado" style="font-size:12px" mold="select" width="99%"/>
+					</row>
+
+					<row>
+						<label value="Linea"/>
+						<vbox>
+							<listbox id="lbxMesa" style="font-size:12px" mold="select" />
+						</vbox>
+					</row>		
+
+					<row>
+						<label value="Turno Prod:"></label>
+						<listbox id="lbxTurnoProduccion" style="font-size:11px" mold="select">
+						</listbox>
+					</row>	
+
+					<row>
+						<label value="Lote"/>
+						<vbox>
+							<hbox>
+								<listbox id="lbxLote" style="font-size:12px" mold="select" />
+								<toolbarbutton id="btnActualizarl" label="Actualizar"/>
+							</hbox>
+							<hbox>
+								<intbox id="IbxLote"  style="font-size:12px" readonly="true"/>
+								<toolbarbutton id="btnActualizar2" label="Act."/>
+							</hbox>
+							
+						</vbox>
+					</row>		
+
+					<row>
+						<label value="Ing.Ficha Batch"/>
+						<textbox id="txtFichaBatch"  style="font-size:11px"  width="70%" readonly="false" ></textbox>
+					</row>
+				
+				<row>
+					<label value="Cambiar Batch" ></label>
+					<listbox id="lbxCambiarBatch" style="font-size:11px" mold="select"> 
+						<listitem label="" > </listitem>
+						<listitem label="R. de linea" > </listitem>
+						<listitem label="R. Recuperable" > </listitem>
+					</listbox>
+				</row>
+				
+				
+					<row>
+						<label value="R.de Linea"/>
+						<hbox>
+							<textbox id="TxtBatchCoche"  style="font-size:12px" readonly="true" width="40%"></textbox>
+						</hbox>
+					</row>				
+
+
+					<row>
+						<label value="R. Recuperable"/>
+						<hbox>
+							<textbox id="TxtBatchGaveta"  style="font-size:12px" readonly="true" width="40%"></textbox>
+						</hbox>
+					</row>				
+
+
+				
+				
+					<row>
+						<toolbar>
+							<toolbarbutton  id="btnPeso" label="Peso/Fill" tooltiptext="Tomar Peso"
+							style="color:blue;font-size:12px;font-weight:bold"/>
+						</toolbar>
+						<hbox>						
+							<textbox id="txtPeso" maxlength="10" width="60px"  style="color:blue;font-size:12px;font-weight:bold" />
+							<label value="#Medios"/>
+							<textbox id="txtGavetas" maxlength="3" width="40%"  style="color:blue;font-size:12px;font-weight:bold" />
+						</hbox>
+					</row>
+					
+					
+					
+					<row>
+						<label value="Almacenar peso"/>
+						<hbox>
+							<checkbox id="ChkAlmacenar"></checkbox>
+							<toolbarbutton id="btnAlmacenar" label="Confirmar"/>
+						</hbox>						
+					</row>					
+					
+					
+					
+				</rows>
+			</grid>	
+
+			<grid> 
+				<rows>
+					<row>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar Peso" tooltiptext="Grabar" image="/img/grabar.gif" />
+						</toolbar>
+					</row>
+					
+					<row>
+						<label value="Cerrar R.de Linea"/>
+						<hbox>
+							<checkbox id="ChkCerrarBC"></checkbox>
+							<toolbarbutton id="btnCerrarBC" label="Cerrar"/>
+						</hbox>						
+					</row>
+					
+					<row>
+						<label value="Cerrar R.Recuperable"/>
+						<hbox>
+							<checkbox id="ChkCerrarBG"></checkbox>
+							<toolbarbutton id="btnCerrarBG" label="Cerrar"/>
+						</hbox>						
+					</row>
+					
+					
+					
+					<row>
+						<label value="."/>
+						<label value="."/>
+					</row>
+					<!-- 
+					<row>
+						<label value="Batch Cerrados"/>
+						<hbox>							
+							<listbox id="lbxBatchRalladoCerrado" style="font-size:12px" mold="select" />
+							<space width="15px"></space>
+							<label value="Opción"/>
+							<listbox id="lbxOpionc" style="font-size:11px" mold="select"> 
+								<listitem label="" > </listitem>
+								<listitem label="Reaperturar" > </listitem>
+								<listitem label="Anular" > </listitem> 
+							</listbox>
+							<toolbarbutton id="btnConfirmarc" label="Confirmar"/>
+						</hbox>						
+					</row>				
+					 -->
+				</rows>
+			</grid>						
+
+		</vbox>
+	</window>
+</zk> 

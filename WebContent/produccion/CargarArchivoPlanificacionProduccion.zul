@@ -1,0 +1,38 @@
+<?page id="pagCargarArchivoPlanificacionProduccion" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winCargarArchivoPlanificacionProduccion" apply="com.nw.webui.produccion.CargarArchivoPlanificacionProduccionWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="Cargar Planificación Producción" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+			<grid width="99%">  
+				<rows>
+					<row>
+						<label value="Archivo"/>
+						<button label="Cargar" id="btnCargar"/>
+					</row>
+					<row>
+						<label value="Resumen de la Carga:" style="color:blue;font-size:12px"/>
+					</row>
+					<row>
+						<label value="Nombre"/>
+						<textbox id="txtNombre" rows="3" readonly="true" width="120px" />
+					</row>
+					<row>
+						<label value="Fecha Producción"/>
+						<textbox id="txtProduccion" readonly="true" width="120px" />
+					</row>
+					<row>
+						<label value="Turno"/>
+						<intbox id="txtTurno" readonly="true" width="120px" />
+					</row>
+					<row>
+						<label/>
+						<button label="Procesar Archivo" id="btnProcesar"/>
+					</row>
+				</rows> 
+			</grid>
+			<label value="Novedades:" style="color:blue;font-size:12px"/>
+			<textbox id="txtNovedades" rows="15" readonly="true" width="260px" />
+		</vbox>
+	</window>
+</zk>

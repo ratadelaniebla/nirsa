@@ -1,0 +1,72 @@
+<?page id = "pagCoccion" title="" contentType="text/html;charset=UTF-8"?>
+<!--   -->
+<zk>
+	<window id="CalidadMuestraAreaReportesWindow" apply="com.nw.webui.produccion.CalidadMuestraAreaReportesWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="REPORTES DE MUESTRAS - CALIDAD" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain" width="99%">
+		<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar" tooltiptext="Grabar" label="Grabar" image="/img/grabar.gif"/>
+								
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+		
+			<grid width="99%">
+				<rows>
+					<row>
+						<label value="Fecha Inicio :" style="color:blue" />
+						<datebox id="dteFecInicio"  disabled="false" />
+					</row>
+					<row>
+						<label value="Fecha Fin :" style="color:blue" />
+						<hbox>
+						  <datebox id="dteFecFin"  disabled="false" />
+						    <toolbar>
+					   	      <toolbarbutton id="btnBuscarBarco" image="/img/buscar.gif" ></toolbarbutton>
+					   	   </toolbar>
+						</hbox>
+					
+					</row>
+				</rows>
+			</grid>
+						
+						<grid width="99%">
+							<rows>
+							
+							    <row>
+							       <label value="Registros Barcos :" style="color:blue" />
+							       <listbox id="lbxBarcoDescarga" style="font-size:11px" mold="select"
+									width="99%" />
+							    </row>
+							    
+								<row>
+									<label value="Lote Haccp" />
+									<listbox id="lbxLoteHccp" style="font-size:12px" mold="select" width="98%" />
+								</row> 
+								
+							</rows>
+						</grid>
+				<hbox width="100%" >
+					<toolbar width="100%" >
+					   <vbox>
+					     <toolbarbutton label="PCC1A" 					   id="btnSAP" ></toolbarbutton>
+					     <toolbarbutton label="PCC1A-ACCION CORRECTIVA"    id="btnPccAccionCorrectiva" ></toolbarbutton>
+					     <toolbarbutton label="PCC1B" 					   id="btnPCC1B"  visible="false" ></toolbarbutton>	
+					     <toolbarbutton label="EVALUACION SENSORIAL PCC1B" id="btnPROTOCOLO" ></toolbarbutton>
+					     <!--  EVALUACION DE PROTOCOLOS -->
+					   </vbox>
+					</toolbar>
+				</hbox>						
+			 
+			 
+			 
+		</vbox>
+	</window>
+</zk>

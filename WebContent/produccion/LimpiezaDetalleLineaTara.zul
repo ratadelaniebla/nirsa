@@ -1,0 +1,80 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winLimpiezaRegistroTara" apply="com.nw.webui.produccion.LimpiezaProcesoLineaTaraWindow" >
+<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="Limpieza - Registro Tara" style="color:blue;font-size:12px;font-weight:bold" />
+	
+	<vbox id="vbxMain" width="99%">
+	
+		<grid>
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>		
+	
+		<grid width="99%">
+			<rows>
+				<row>
+					<label value="Producción " style="color:blue" />
+					<textbox id="txtDiasProduccion" readonly="true" width="100%"></textbox>
+				</row>
+			
+				<row>
+					<label value="Linea" ></label>
+					<hbox>
+						<listbox id="lbxLinea" style="font-size:11px" mold="select" > </listbox>
+					</hbox>
+				</row>
+			</rows>
+								
+		</grid>
+
+	
+		
+		<grid>
+			<rows>
+			
+				<row>
+					<label value="Tara Lomo" ></label>
+					<hbox>
+						<listbox id="lbxTipo1" style="font-size:11px" mold="select" > </listbox>
+						<toolbarbutton id="btnActualizar1" image="/img/refrescar.gif"/>
+					</hbox>
+				</row>					
+
+				<row>
+					<label value="Tara Lomo" ></label>
+					<!-- 
+					<decimalbox id="txtTaraLomo" readonly="true"/>
+					 -->
+					<textbox id="txtTaraLomo" readonly="true" width="100%"></textbox>
+				</row>
+
+				<row>
+					<label value="Tara Rallado" ></label>
+					<hbox>
+						<listbox id="lbxTipo2" style="font-size:11px" mold="select" > </listbox>
+						<toolbarbutton id="btnActualizar2" image="/img/refrescar.gif"/>
+					</hbox>
+				</row>					
+	
+				<row>
+					<label value="Tara Rallado" ></label>
+					<!-- 
+					<decimalbox id="txtTaraRallado" readonly="true"/>
+					 -->
+					<textbox id="txtTaraRallado" readonly="true" width="100%"></textbox>
+				</row>	
+				
+			</rows>
+		</grid>
+
+	</vbox>
+</window>
+</zk>

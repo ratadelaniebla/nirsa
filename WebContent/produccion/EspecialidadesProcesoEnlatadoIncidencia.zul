@@ -1,0 +1,80 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winInicioLlenado" apply="com.nw.webui.produccion.EspecialidadesProcesoEnlatadoIncidencia" width="99%">
+	<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="Incidencias Llenado-Enlatado" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="200px">
+		<grid >
+			<rows>
+				<row >
+					<label value="Días Producción " ></label>
+					<listbox id="lbxDiaProduccion" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+				<row >
+					<label value="O/P" ></label>
+					<listbox id="lbxOP" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+				<row>
+					<label value="Producto" ></label>
+					<textbox id="txtProducto" style="font-size:11px"  width="130px" readonly="true"  ></textbox>
+				</row>
+				<row>
+					<label value="Nlatas" ></label>
+					<textbox id="txtnlatas" style="font-size:11px"  width="130px"  readonly="true"></textbox>
+				</row>
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+						</toolbar>
+					</vbox>
+					
+				</row>
+			</rows>
+		</grid>
+		<grid width="99%">
+			<rows>
+				<row >
+					<label value="Incidencia" ></label>
+					<listbox id="lbxIncidencia" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+				<row>
+					<label value="Detlle Incidencia" ></label>
+					<textbox id="txtDetlleIncidencia" multiline="true" rows="3" width="99%" readonly="true"   ></textbox>
+				</row>
+			</rows>
+		</grid>
+		<grid width="99%">
+			<rows>
+			
+				<row >
+					<hbox>
+						<label value="Fin Incidencia" ></label>
+						
+						<checkbox id="chbRevisado" label="Incidencia" ></checkbox>
+					</hbox>
+				</row>
+				
+			</rows>
+		</grid>
+		<grid width="99%">
+			<rows>
+				
+				<row>
+					<label value="Observación" ></label>
+					
+				</row>
+				<row>
+					<textbox id="txtDetlleObservacion" multiline="true" rows="5" width="99%" readonly="false"   ></textbox>
+				</row>
+				
+			</rows>
+		</grid>
+	</vbox>
+</window>
+</zk>

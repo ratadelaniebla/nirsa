@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CalidadMuestrasPCC1B" language="groovy" columnCount="2" pageWidth="595" pageHeight="842" columnWidth="277" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="73"/>
+	<parameter name="LOGO" class="java.lang.String"/>
+	<parameter name="idcabecera" class="java.lang.Long"/>
+	<parameter name="visto" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select (barco.nombre)as Barco,
+(bdes.registro) as registro,
+(cmacc.armador ) as Proveedor,
+(select to_char((cmacc.fecharegistro), 'YYYY-MM-DD'))::DATE as fecha,
+(cmacc.idturno) as Turnos,
+(select mescla_cubas_por_idproducciondetallelote((cmacc.idproducciondetallelote))) as cuba,
+(cmacc.lotehaccp) as lotehaccp,
+(select especie.codigoqm from especie where especie.idespecie=(select especie_talla.idespecie from especie_talla where especie_talla.idespecietalla::INTEGER=(cc.idmaterial)::INTEGER LIMIT 1 )),
+(cmacc.totalnetohaccp) as cantidad,
+row_number() OVER () as numero,
+(CASE when( cmadm.numerocaracteristicos=1 ) THEN 'Característico' ELSE '' END) as Olorc,
+(CASE when( cmadm.numeronocaracteristicos=1 ) THEN 'No Característico' ELSE '' END) as Olornc,
+(select csi.descripcion from calidad_muestra_grupo_subcaracteristicas csi  where csi.idcalidadmuestragruposubcaracteristicas=cmadm.idcalidadmuestragruposubcaracteristicas and cmadm.numerootros=1) as olorotros,
+cmadm.numeronocaracteristicos as  pescado_descompuesto,
+(cmadm.numeronocaracteristicos) as pp,
+cmadm.numerocaracteristicos,cmadm.numeronocaracteristicos,
+cmacc.aprobado, cmacc.rechazado,
+(select (usuario) from usuario where idusuario=(select idusuario from calidad_muestra_area_cabecera_aprobacion ca1 where ca1.idcalidadmuestraareacabecera=cmacc.idcalidadmuestraareacabecera ) limit 1) as responsable_cc
+FROM
+calidad_muestra_area_cabecera cmacc
+left join calidad_muestra_area_detalle_muestra cmadm
+on cmacc.idcalidadmuestraareacabecera=cmadm.idcalidadmuestraareacabecera
+inner join camara_cajon cc
+on cc.idcamaracajon=cmacc.idcamaracajon
+left join barco_descarga bdes
+on bdes.idbarcodescarga=cmacc.idbarcodescarga
+left join barco
+on barco.idbarco=bdes.idbarco
+WHERE cmacc.idcalidadmuestraareacabecera=$P{idcabecera} and cmacc.idcalidadmuestraarea=2
+
+ORDER BY numero]]>
+	</queryString>
+	<field name="barco" class="java.lang.String"/>
+	<field name="registro" class="java.lang.String"/>
+	<field name="proveedor" class="java.lang.String"/>
+	<field name="fecha" class="java.sql.Date"/>
+	<field name="turnos" class="java.lang.Integer"/>
+	<field name="cuba" class="java.lang.String"/>
+	<field name="lotehaccp" class="java.lang.String"/>
+	<field name="codigoqm" class="java.lang.String"/>
+	<field name="cantidad" class="java.lang.Double"/>
+	<field name="numero" class="java.lang.Long"/>
+	<field name="olorc" class="java.lang.String"/>
+	<field name="olornc" class="java.lang.String"/>
+	<field name="olorotros" class="java.lang.String"/>
+	<field name="pescado_descompuesto" class="java.lang.Integer"/>
+	<field name="pp" class="java.lang.Integer"/>
+	<field name="numerocaracteristicos" class="java.lang.Integer"/>
+	<field name="numeronocaracteristicos" class="java.lang.Integer"/>
+	<field name="aprobado" class="java.lang.Boolean"/>
+	<field name="rechazado" class="java.lang.Boolean"/>
+	<field name="responsable_cc" class="java.lang.String"/>
+	<variable name="pdes" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{pescado_descompuesto}]]></variableExpression>
+	</variable>
+	<variable name="sumaregistros" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{numero}]]></variableExpression>
+	</variable>
+	<variable name="procentaje" class="java.lang.Double">
+		<variableExpression><![CDATA[$V{pdes}/$V{sumaregistros}*100]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="106" splitType="Stretch">
+			<staticText>
+				<reportElement x="143" y="0" width="263" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[NEGOCIOS INDUSTRIALES REAL S. A.]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="100" height="50"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{LOGO}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="143" y="13" width="263" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Departamento de Control de Calidad- QC Department]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="143" y="28" width="263" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PCC1B - CCP1B]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="42" width="409" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ RECEPCION DE MATERIA PRIMA ATUN/INCOMING RAW MATERIAL- TUNA FISH    ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="56" width="409" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ANALISIS ORGANOLEPTICO- ORGANOLEPTIC ANALYSIS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="72" width="65" height="10"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Barco-Vessel:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="83" width="65" height="10"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cuba-Celler:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="94" width="65" height="10"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Especie- Specie:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="64" y="72" width="113" height="10"/>
+				<box leftPadding="5"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{barco}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="64" y="83" width="113" height="10" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box leftPadding="5"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cuba}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="64" y="94" width="113" height="10" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box leftPadding="5"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{codigoqm}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="176" y="94" width="89" height="10"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lote HACCP/HACCP Lot:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="176" y="72" width="89" height="10"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Registro-Register:]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="264" y="72" width="100" height="10" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box leftPadding="10"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{registro}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="264" y="94" width="100" height="10" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box leftPadding="10"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{lotehaccp}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="363" y="83" width="89" height="10"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Turnos-Shift:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="363" y="94" width="89" height="10"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad- Quantity Kg:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="363" y="72" width="89" height="10"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha-Date:]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="451" y="83" width="96" height="10" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box leftPadding="5"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{turnos}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="451" y="94" width="96" height="10" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box leftPadding="5"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yy" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="451" y="72" width="96" height="10" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box leftPadding="5"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="48" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Piezas - Pieces #]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="48" y="0" width="52" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Aceptable - Acceptable]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="207" y="0" width="70" height="20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Otros olores- Other odours]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="149" y="0" width="58" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[Comentarios- Comments]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="100" y="0" width="49" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box leftPadding="3">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="6" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<text><![CDATA[No Aceptable- Not Acceptable]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="10" splitType="Prevent">
+			<textField>
+				<reportElement x="0" y="0" width="48" height="10"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{numero}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="207" y="0" width="70" height="10" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="5" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{olorotros}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="48" y="0" width="52" height="10"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="149" y="0" width="58" height="10"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement/>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<image>
+				<reportElement x="48" y="0" width="52" height="10">
+					<printWhenExpression><![CDATA[$F{numerocaracteristicos}==1]]></printWhenExpression>
+				</reportElement>
+				<box leftPadding="20">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<imageExpression class="java.lang.String"><![CDATA[$P{visto}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="100" y="0" width="49" height="10"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="149" y="0" width="58" height="10">
+					<printWhenExpression><![CDATA[$F{numeronocaracteristicos}==1]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Descomposición]]></text>
+			</staticText>
+			<image>
+				<reportElement x="100" y="0" width="49" height="10">
+					<printWhenExpression><![CDATA[$F{numeronocaracteristicos}==1]]></printWhenExpression>
+				</reportElement>
+				<box leftPadding="20">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<imageExpression class="java.lang.String"><![CDATA[$P{visto}]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="81" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="11"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Pescado descompuesto /]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="282" y="0" width="81" height="22"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[% descompuesto / decomposed: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="31" y="23" width="100" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ACEPTADO-ACCEPTED]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="22" width="20" height="13"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="317" y="23" width="23" height="13"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="351" y="23" width="100" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RECHAZADO-REJECTED]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="196" height="13"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Criterio de aceptación/Acceptance criteria: < 2,5%
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="70" width="65" height="10"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Evaluado por:
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="208" y="69" width="63" height="10"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Aprobado por: ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="70" width="64" height="1"/>
+			</line>
+			<line>
+				<reportElement x="196" y="69" width="86" height="1"/>
+			</line>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="455" y="68" width="100" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="277" y="69" width="133" height="11"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="408" y="69" width="40" height="11"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="12" width="90" height="11"/>
+				<textElement>
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Decomposed fish:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="22" width="20" height="13">
+					<printWhenExpression><![CDATA[$F{aprobado}==true]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="318" y="23" width="20" height="13">
+					<printWhenExpression><![CDATA[$F{rechazado}==true]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[X]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="196" y="53" width="86" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{responsable_cc}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="100" y="0" width="49" height="10" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box leftPadding="0">
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{pdes}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="377" y="0" width="49" height="11" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{procentaje}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

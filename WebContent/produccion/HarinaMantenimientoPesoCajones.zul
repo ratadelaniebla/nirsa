@@ -1,0 +1,253 @@
+<?page id = "pagCalidadPCC1Quimico" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winMantPesosComprobantes" apply="com.nw.webui.produccion.HarinaMantenimientoPesoCajonesWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="Mant. Registro de Cajón" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+		
+			<grid width="99%">
+				<rows>
+					<row>
+						<label value="Fecha Recepción"/>						
+						<toolbar>
+							<datebox id="dteFecha" width="50%"/>
+							<toolbarbutton id="btnBuscarComprobantes" tooltiptext="Grabar" image="/img/buscar.gif" />
+						</toolbar>
+					</row>
+				</rows>	
+			</grid>
+							
+		<!-- 
+			<grid width="99%">
+				<rows>
+					
+					<row>
+						<label value="Imprimir"/>	
+						<toolbar>
+							<toolbarbutton id="btnNotaRecepcion" label="Nota Recepción"  style="color:blue;font-size:11px;font-weight:bold"/>
+							<space width="5px"></space>
+							<toolbarbutton id="btnDetallado" label="Detallado" style="color:blue;font-size:11px;font-weight:bold" />
+						</toolbar>
+					</row>
+				</rows>
+			</grid>		
+		 -->	
+			
+			<grid width="99%">
+				<rows>
+					
+					<row>
+						<label value="Imprimir"/>	
+						<toolbar>
+							<vbox>
+								<toolbarbutton id="btnNotaRecepcion" label="Nota Recepción"  style="color:blue;font-size:11px;font-weight:bold"/>
+								<toolbarbutton id="btnDetallado" label="Detallado Pesos" style="color:blue;font-size:11px;font-weight:bold" />
+								<toolbarbutton id="btnRecepcion" label="Recepción Pesca" style="color:blue;font-size:11px;font-weight:bold" />
+								<toolbarbutton id="btnRecepcionp" label="Recepción Pesca Proveedor" style="color:blue;font-size:11px;font-weight:bold" />
+							</vbox>
+						</toolbar>
+					</row>
+				</rows>
+			</grid>				
+		
+			<listbox id="lbxComprobantes" style="font-size:9px">
+				<listhead style="font-size:9px">
+					<listheader label="Comprobante" style="font-size:9px" width="30%" />
+					<listheader label="Proveedor" style="font-size:9px" width="48%" />
+					<listheader label="Estado" style="font-size:9px" width="21%" />
+				</listhead>
+			</listbox>		
+
+			<grid width="99%">
+				<rows>
+
+					<row>
+						<label value="Comprobante" />
+						<textbox id="txtComprobante" width="99%" readonly="true"></textbox>
+					</row>
+
+
+					<row>
+						<label value="Estado" />
+						<textbox id="txtEstadoComprobante" width="99%" readonly="true"/>
+					</row>
+
+					<row>
+						<label value="Cedula/RUC Proveedor" />
+						<textbox id="txtCedulaProveedor" width="99%" readonly="true"></textbox>
+					</row>
+
+					<row>
+						<label value="Proveedor" />
+						<textbox id="txtNombreProveedor" width="99%" height="45px" multiline="true" readonly="true"/>
+					</row>
+
+
+					<row>
+						<label value="Cedula Chofer" />
+						<textbox id="txtCedula" width="99%" readonly="true"></textbox>
+					</row>
+
+					<row>
+						<label value="Nombres Chofer" />
+						<textbox id="txtNombre" width="99%" height="99%" multiline="true"  readonly="true"/>
+					</row>
+
+					<row>						
+						<label value="Placa" />
+						<textbox id="txtPlaca" readonly="true" width="99%" />						
+					</row>
+					
+					<row>						
+						<label value="Origen Pesa" />
+						<textbox id="txtOrigen" readonly="true" width="99%" rows="2" />						
+					</row>					
+				</rows>
+			</grid>
+
+			<grid>
+				<rows>
+					<row>
+						<label value="Observación" />
+						<vbox>
+							<textbox id="txtObservacion" width="99%" height="45px" readonly="true" multiline="true"/>
+						</vbox>	
+					</row>
+				</rows>	
+			</grid>	
+
+			<listbox id="lbxCajones" style="font-size:9px">
+				<listhead style="font-size:9px">
+					<listheader label="Cajon" style="font-size:9px" width="21%" />
+					<listheader label="P.Bruto" style="font-size:9px" width="21%" />
+					<listheader label="Especies" style="font-size:9px" width="56%" />
+				</listhead>
+			</listbox>
+		
+
+			<grid width="99%">  
+				<rows>
+
+					<row>
+						<label value="Turno" />
+						<listbox id="lbxTurno" style="font-size:12px" mold="select" width="98%" />
+					</row>
+
+
+					<row>
+						<label value="Num. Cajón" />
+						<div>
+						
+							<hbox>
+								<div>
+								
+								 	
+									<decimalbox id="txtCajon" format="######"  maxlength="10" width="90%"/>										
+								</div>
+								
+							</hbox>
+						</div>	
+					</row>
+
+					<row>
+							<toolbar>
+								<toolbarbutton  id="btnPeso" label="Capturar Peso" tooltiptext="Tomar Peso"
+								style="color:blue;font-size:12px;font-weight:bold"/>
+							</toolbar>
+							<textbox id="txtPeso" maxlength="10" width="95%"  style="color:blue;font-size:12px;font-weight:bold" />
+					</row>									
+							
+															
+				</rows>
+			</grid>	
+			
+<!-- 			
+					<grid>
+							<rows>
+								<row>
+									<toolbar id="tbcontrol5">
+										<hbox>
+												<label value="Especie" />
+												<listbox id="lbxEspecie" style="font-size:12px" mold="select" width="98%"/>																																		
+												<toolbarbutton id="btnEspecie" tooltiptext="Agregar Especie" image="/img/crear.gif"/>
+												<toolbarbutton id="btnEliminarEspecie" tooltiptext="Eliminar Especie" image="/img/eliminar.gif"/>
+										</hbox>
+									</toolbar>
+								</row>
+							</rows>
+					</grid>	
+ -->					
+
+					<grid>
+							<rows>
+								<row>
+									<toolbar id="tbcontrol5">
+										<vbox>
+											<hbox>
+												<label value="Especie" />
+												<listbox id="lbxEspecie" style="font-size:12px" mold="select" width="98%"/>
+											</hbox>	
+												<!--
+												Nota.- Se debera cambiar la propiedad visibla a true
+													   cuando se quiera dar mantenimiento 																												
+												
+												-->
+												
+											<hbox>	
+												<label value="Clasificación" />
+												<listbox id="lbxClasificacion" style="font-size:12px" mold="select" width="98%"/>												
+												<toolbarbutton id="btnEspecie" tooltiptext="Agregar Especie" image="/img/crear.gif"/>
+												<toolbarbutton id="btnEliminarEspecie" tooltiptext="Eliminar Especie" image="/img/eliminar.gif"/>
+											</hbox>													 																						
+										</vbox>
+									</toolbar>
+								</row>
+							</rows>
+					</grid>	
+					
+										
+																						   
+					<listbox id="lbxEspeciesComprobante" model="@{winMantPesosComprobantes.harinaEspecieDetalleEstados}" multiple="true" checkmark="false"  height="125px">																  															    
+						<listhead style="font-size:9px" >
+							<listheader label="Especie" width="40%"/>
+							<listheader label="Clasificación" width="40%"/>
+							<listheader label="Eliminar" width="19%"/>
+						</listhead>
+																				
+						<listitem self="@{each=e}">
+							<listcell label="@{e.harinaEspecie.descripcionespecie}" tooltiptext="@{e.harinaEspecie.descripcionespecie}" style="font-size:9px"></listcell>
+							<listcell label="@{e.harinaClasificacionTipoPesca.descripcion}" tooltiptext="@{e.harinaClasificacionTipoPesca.descripcion}" style="font-size:9px"></listcell>													     
+							<listcell > 
+								<checkbox checked="@{e.eliminar}" style="font-size:9px"> </checkbox> 
+							</listcell>
+																				     														     
+						</listitem>
+					</listbox>
+													
+				
+			<grid>
+				<rows>	
+					<row>
+						<label value="Detalle" />
+						<textbox id="txtDetalle"  width="99%"  rows="2"/>
+					</row>
+				</rows>	
+			</grid>
+
+
+			<grid width="99%"> 
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>	
+			
+
+		</vbox>
+	</window>
+</zk>

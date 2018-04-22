@@ -1,0 +1,102 @@
+<?page title="LONJAS DETALLE PROCESO EMPAQUE" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window  apply="com.nw.webui.produccion.LonjasDetalleProcesoEmpaqueWindow">
+<label value="Proceso de llenado de Funda y Pesado" style="color:blue;font-size:11px;font-weight:bold"/>
+	 <vbox  id="vbxMain" width="99%">
+		    <grid width="98%">
+				<rows>
+					 <row>
+						<label value="Fecha Labor :"/>
+						<!--   <datebox id="dteFecha" width="110px" format="dd/MM/yyyy" /> -->
+					     <textbox id="txtFechaProduccion" readonly="true"  ></textbox>
+					</row> 
+					<row>
+					   <label value="Turno :" style="color:blue" />
+				       <textbox id="txtTurno" readonly="true"  ></textbox>
+					</row>
+				    <row>
+					  <label value="Reproceso ? :" style="color:blue" />
+					   <hbox>
+					    <checkbox id="chkTipo" ></checkbox>
+					    <label id="labelTipo" ></label>
+					   </hbox>
+					</row>	
+				    <row id="rowFechaProduccion" >
+					   <label value="Fecha Producción :" style="color:blue" />
+				       <datebox id="dtbxFechaProduccion" ></datebox>
+					</row>
+					<row id="rowTurno" >
+					   <label value="Turno :" style="color:blue" />
+				       <listbox id="lbxTurno" style="font-size:11px" mold="select" width="80%" />
+					</row>
+					<!--  <row id="rowProceso" >
+					   <label value="Proceso :" style="color:blue" />
+				       <listbox id="lbxProceso" style="font-size:11px" mold="select" width="80%" />
+					</row> -->
+					
+				    <row>
+					   <label value="Orden de Fabricacion :" style="color:blue" />
+				       <listbox id="lbxOrdenProduccion" style="font-size:11px" mold="select" width="80%" />
+					</row>
+					<row>
+					   <label value="Material :" style="color:blue" />
+				       <listbox id="lbxMaterial" style="font-size:11px" mold="select" width="80%" />
+					</row>
+				    <row>
+					   <label value="Lote :" style="color:blue" />
+				       <listbox id="lbxLote" style="font-size:11px" mold="select" width="80%" />
+					</row>
+					<row>
+					  <label value="Modo :" style="color:blue" />
+					   <hbox>
+					    <checkbox id="chkModo" ></checkbox>
+					    <label id="label" ></label>
+					   </hbox>
+					</row>
+					
+					<row>
+					   <label value="Codigo :" style="color:blue" />
+				       <textbox id="txtCodigo"   ></textbox>
+					</row>
+					
+				    <row>
+					   <label value="Linea :" style="color:blue" />
+				       <listbox id="lbxLinea" style="font-size:11px" mold="select" width="80%" />
+					</row>
+					<row>
+					   <label value="Ubicacion :" style="color:blue" />
+				       <intbox id="intbxUbicacion"   ></intbox>
+					</row>
+					<row>
+					  <label value=" " style="color:blue" />
+					  <label id="msj" style="color:blue" />
+					</row>
+
+			   </rows>
+			</grid>  	
+		 <grid width="99%">
+			<rows>
+				<row>
+					<toolbar>
+						<toolbarbutton id="btnPeso" label="PESO" width="320px" style="color:blue;font-size:11px;font-weight:bold" />
+					</toolbar>
+					<textbox id="txtPeso" > </textbox>
+				</row>
+			</rows>
+		  </grid>	
+			
+		   <grid width="99%">
+			<rows>
+				<row>
+					<vbox width="100%" >
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="GRABAR" width="320px" />
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		   </grid>	
+		 
+	</vbox> 
+</window>
+</zk>

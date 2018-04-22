@@ -1,0 +1,75 @@
+<?page id = "pagCalidadPCC1Quimicoc" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+				
+	<window id="winCalidadMuestraClasificacionCabecera" apply="com.nw.webui.produccion.CalidadMuestraClasificacionCabeceraLineaClasificacionWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="Calidad Muestra Clasificacion- Línea de Clasificación" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+
+			<grid width="99%">  
+				<rows>
+				
+						<row>
+						<label value="Turno" />
+  						<listbox id="lbxTurno" style="font-size:12px" mold="select" width="98%" />
+					</row>
+					<row>
+						<label value="Barco" />
+  						<listbox id="lbxBarco" style="font-size:12px" mold="select" width="98%" />
+					</row>
+					<row>
+						<label value="Registro" />
+  					<textbox id="txtRegistro" maxlength="13" width="120px" style="color:blue" readonly="true" />
+					</row>
+							
+					<row>
+						<label value="Todos"></label>
+						<hbox>
+							<checkbox id="chkTodos"></checkbox>
+						</hbox>
+					</row>			
+							
+									
+					<row>
+						<label value="Lote Haccp" />
+						<listbox id="lbxLoteHccp" style="font-size:12px" mold="select" width="98%" />
+					</row>
+					
+					<row>
+						<label value="Mezcla de Cubas" />
+  					<textbox id="txtMezcla"  width="100%" style="color:blue" rows="2" readonly="true" />
+					</row>
+					
+					<row>
+						<label value="Especie" />
+  					<textbox id="txtEspecie"  width="100%" style="color:blue" rows="2" readonly="true" />
+					</row>
+					
+							
+						<row>
+						<label value="Numero de pescados" style="font-size:14px;color:blue"/>
+					<textbox id="txtTotal" style="font-size:14px;background-color:yellow;color:red"  width="98%"  />
+				</row>			
+						<row>
+						<label value="Comentarios" />
+					<textbox id="txtComentarios" style="font-size:10px" rows="4" width="98%" />
+				</row>	
+															
+			</rows>	
+				</grid>
+			<grid>
+			<rows>	
+			<row>
+						<vbox >							
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif"/>	
+							</toolbar>	
+						</vbox>					
+					</row>	
+															
+			</rows>	
+			</grid>			
+								
+		</vbox>
+	</window>
+</zk>

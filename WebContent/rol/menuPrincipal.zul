@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?page id="pagMenPri"?>
+<window id="winMenPri" apply="com.nw.webui.rol.controlador.MenuPrincipal">
+	<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="Menú principal" style="color:blue;font-size:19px;font-weight:bold" />
+	<grid width="@{area.anchoInterno}">
+		<rows id="filas" />
+	</grid>
+</window>

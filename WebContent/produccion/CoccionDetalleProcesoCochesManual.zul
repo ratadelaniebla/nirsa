@@ -1,0 +1,189 @@
+<?page title="COCCION MANUAL" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winCocheCoccionManual" apply="com.nw.webui.produccion.CoccionDetalleProcesoCochesManualWindow" >
+<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="COCCION" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="99%">
+	
+		
+		<grid >
+			<rows>
+			
+				<row >
+					<label value="Turno Labor" ></label>
+					<listbox id="lbxTurnoLabor" style="font-size:11px" mold="select" width="99%" > </listbox>
+				</row>
+				
+				<row>
+					<label value="Area " ></label>
+					<listbox id="lbxArea" style="font-size:11px" mold="select" width="99%" > 
+						<listitem label="" > </listitem>
+						<listitem label="Cocción" > </listitem>
+  						<listitem label="Rociado" > </listitem> 
+					</listbox>
+				</row>
+				
+		    	<row >
+					<label value="Sin Area " id="lblDuchaRociado"  ></label>
+					<listbox id="lbxDuchaRociado" style="font-size:11px" mold="select" width="99%" > </listbox>
+				</row>	
+				
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>  
+		
+		<grid width="99%">
+			<rows>
+
+			
+				<row >
+					<label value="Coche "></label>
+					<hbox>
+						<textbox id="txtCoche" width="99%" > </textbox>
+						<toolbar>
+							<toolbarbutton label="Buscar" id="btnBuscaCoche"  tooltiptext="Buscar" disabled="false"/>
+						</toolbar>
+					</hbox>
+				</row>
+
+
+				<row>
+				    <toolbar>
+						<toolbarbutton  id="btnPeso" label="Capturar Peso" tooltiptext="Tomar Peso"
+						style="color:blue;font-size:11px;font-weight:bold" disabled="false" />
+					 </toolbar>
+					 <textbox id="txtPeso" width="50%" disabled="false" readonly="false" ></textbox>
+				</row>
+
+				<row>
+					Tmp.Ing.Chillroom 
+					<decimalbox id="txtTemperatura" format="###,##"  maxlength="8" width="70%" readonly="true"/>
+				</row>	
+
+			</rows>
+		</grid> 
+		
+	  	 
+		<grid width="99%" visible="true">
+		   <rows>
+		       
+				<row>
+					<label value="Fecha Producción " ></label>
+					<textbox id="txtFechaActiva" readonly="true" width="99%" > </textbox>
+				</row>
+				<row>
+					<label value="Turno Producción" ></label>
+					<textbox id="txtTurnoProduccion" readonly="true" width="99%"> </textbox>
+				</row>
+				
+				<row>
+					<label value="# Coche "></label>
+					<textbox id="txtNumCoche" readonly="true" width="99%" > </textbox>
+				</row>
+				<row>
+					<label value="# Coche Lote " ></label>
+					<textbox id="txtCocheLote" readonly="true" width="99%"> </textbox>
+				</row>
+				
+				<row>
+					<label value="Lote " ></label>
+					<textbox id="txtLote" readonly="true" width="99%"> </textbox>
+				</row>
+				<row>
+					<label value="Cocina " ></label>
+					<textbox id="txtCocina" readonly="true" width="99%"> </textbox>
+				</row>
+				<row>
+					<label value="# Canastillas " ></label>
+					<textbox id="txtCanastillas" readonly="true" width="99%"> </textbox>
+				</row>
+				<row>
+					<label value="Pescados x Lata " ></label>
+					<textbox id="txtPescadoLata" readonly="true" width="99%"> </textbox>
+				</row>
+		   </rows>		 
+		</grid>
+		
+		
+		
+		<label value="RESUMEN LOTE"></label>
+
+		<grid width="99%">
+			<rows>
+
+
+			    <row>
+					<label value="Producción " style="color:blue" />
+					<listbox id="lbxFechaActiva" style="font-size:11px" mold="select" width="99%" > </listbox>
+			    </row>
+
+				<row >
+					<label value="Lote "></label>
+					<hbox>
+						<textbox id="txtLoteu" width="70%" > </textbox>
+						
+						<toolbar>
+							<hbox>
+								<toolbarbutton id="btnBuscar" label="BUSCAR" />
+								<space width="7px"></space>
+								<toolbarbutton id="btnNuevo" label="NUEVO" />
+							</hbox>
+						</toolbar>
+						
+						
+					</hbox>
+				</row>
+			</rows>
+		</grid>		
+		
+		
+		
+		
+		
+			<label value="Inf. Cocina " ></label>
+			<textbox id="txtInfCocina" readonly="true" width="99%" rows="6"> </textbox>
+				
+			<grid width="99%">
+				<rows>
+
+				<row >
+					<label value="Produccion" ></label>
+					<textbox id="txProduccion" width="99%" readonly="true"> </textbox>
+				</row>
+
+
+				<row >
+					<label value="Total Coches en lote" ></label>
+					<textbox id="txtTotal" width="99%" readonly="true"> </textbox>
+				</row>
+
+				<row >
+					<label value="Ingresados ChillRoom" ></label>
+					<textbox id="txtReceptados" width="99%" readonly="true" > </textbox>
+				</row>
+
+				<row >
+					<label value="Pendientes ChillRoom" ></label>
+					<textbox id="txtPendientes" width="99%" readonly="true"> </textbox>
+				</row>
+				
+			</rows>
+		</grid>
+		
+		
+		
+		
+	</vbox>
+</window>
+</zk>

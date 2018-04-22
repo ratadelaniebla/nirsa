@@ -1,0 +1,15 @@
+<zk>
+  <window border="normal" title="hello">
+    <decimalbox id="amount" cols="25" maxlength="20" format="#,##0.00" xmlns:w="client">
+      <attribute w:name="onKeyDown">
+        zk.log(event.keyCode);
+        if(event.keyCode == 190){
+          event.stop();
+        } else if(event.keyCode == 188) {
+          zk.log(this.format);
+          event.stop();
+        }
+      </attribute>
+    </decimalbox>
+  </window>
+</zk>

@@ -1,0 +1,131 @@
+<?page id = "pagCalidadPCC1Quimico" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<!-- 
+
+ -->
+	<window id="winConsultasDinamicas" apply="com.nw.webui.produccion.ConsultasDinamicasWindow"
+	title="Consultas Dinámicas" mode="modal"
+	 border="normal" closable="true">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="" style="color:blue;font-size:12px;font-weight:bold" />
+
+		<!-- <vbox id="vbxMain">  -->
+			<grid width="99%">
+				<rows>
+					<row>
+						
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnEjecutar" label="EJECUTAR CONSULTA" tooltiptext="Grabar" image="/img/buscar.gif"/>
+							</toolbar>
+						</vbox>						
+					</row>
+				</rows>
+			</grid>			
+		
+			<grid width="99%">  
+				<rows>
+					<row>
+						<label value="Fecha Producción"/>
+						<datebox id="dteFecha" width="110px" readonly="false"/>
+						
+						<label value="Usuario" />
+						<vbox>
+													
+							<div>
+								<hbox>						
+									<textbox id="txtUsuario" width="300px"  readonly="false" />
+									<toolbar>
+										<toolbarbutton id="btnBuscarUsuario" label="BUSCAR" tooltiptext="Grabar" image="/img/buscar.gif"/>
+									</toolbar>
+								</hbox>
+							</div>
+							
+							<listbox id="lbxEmpleado" style="font-size:12px" mold="select" width="300px" />
+						</vbox>
+					</row>
+									
+					<row visible="false">
+						<label value="Día Julian" />
+						<textbox id="txtDiaJuliano" maxlength="4"  width="50px"  readonly="true" />
+					</row>									
+									
+
+
+					<row>
+						<label value="Turno" />
+						<listbox id="lbxTurno" style="font-size:12px" mold="select" width="80px" />
+						
+						<label value="Mesa" />
+						<listbox id="lbxMesa" style="font-size:12px" mold="select" width="80px" />												
+					</row>
+
+					<row>
+						<label value="Fecha/Hora Inicio"/>
+						
+						<div>
+							<datebox id="dteFecha1" width="110px" readonly="false"/>
+							<timebox id="tmbhora1" />
+						</div>
+						
+						<label value="Fecha/Hora Fin"/>
+						<div>
+							<datebox id="dteFecha2" width="110px" readonly="false"/>
+							<timebox id="tmbhora2" />
+						</div>						
+					</row>
+
+
+					
+					<row visible="false">
+						<label value="Observacion" />
+						<textbox id="txtObservacion" rows="4" width="200px" readonly="false"></textbox>
+					</row>
+											
+				</rows>									
+			</grid>	
+			
+		
+			<listbox id="lbxGestionTurnos" style="font-size:9px" rows="7">
+				<listhead style="font-size:9px" >
+					<listheader label="Turno" style="font-size:5px"/>
+					<listheader label="Mesa" style="font-size:5px"/>
+					<listheader label="Usuario" style="font-size:5px"/>
+					<listheader label="Fec. Registro" style="font-size:4px"/>
+					<listheader label="Cod. Empleado" style="font-size:4px"/>
+					<listheader label="Nombres" style="font-size:4px"/>
+					<listheader label="Lote" style="font-size:4px"/>
+					<listheader label="Peso Lote" style="font-size:4px"/>
+					<listheader label="Especie" style="font-size:4px"/>
+					<listheader label="Talla" style="font-size:4px"/>
+					<listheader label="P. Lomo" style="font-size:4px"/>
+					<listheader label="P. Rallado" style="font-size:4px"/>
+					<listheader label="P. Total" style="font-size:8px"/>
+					<listheader label="% Total" style="font-size:8px"/>
+				</listhead>
+			</listbox>	
+
+			<grid width="99%">  
+				<rows>
+					<row>
+						<label value="TOTALES" />
+
+						<div>
+							<label value="Total1" />
+							<textbox id="txtTotal1" width="80px" readonly="false"></textbox>
+						</div>
+
+						<div>
+							<label value="Total2" />
+							<textbox id="txtTotal2" width="80px" readonly="false"></textbox>
+						</div>
+
+						
+					</row>
+				</rows>
+			</grid>	
+
+
+	<!-- </vbox>  -->
+	</window>
+</zk>

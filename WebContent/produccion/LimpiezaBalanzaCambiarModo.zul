@@ -1,0 +1,37 @@
+<?page id = "pagLimpiezaAperturaCierre" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winLimpiezaAperturaCierre" apply="com.nw.webui.produccion.LimpiezaBalanzaCambioModoWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="CAMBIAR MODO-BALANZAS" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+		
+			<grid width="99%">  
+				<rows>
+					<row>
+						<label value="Balanzas" />
+						<listbox id="lbxBalanzas" style="font-size:12px" mold="select" width="120px" />
+					</row>
+					<row>
+						<label value="Modo" />
+						<listbox id="lbxModo" style="font-size:11px" mold="select"> 
+						<listitem label="" > </listitem>
+						<listitem label="Imprimir" > </listitem>
+						<listitem label="Continuo" > </listitem>
+						
+					</listbox>	</row>					
+						</rows>
+			</grid>				
+			
+			<grid width="99%"> 
+				<rows>
+					<row>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif" />
+						</toolbar>
+						<checkbox id="chkIngreso" label="Revisado" visible="false" />					
+					</row>
+				</rows>
+			</grid>		
+		</vbox>
+	</window>
+</zk>

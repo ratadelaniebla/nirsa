@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?page id="pagDescImpTemp"?>
+<window id="winDescongeladoImpresionTemperatura" apply="com.nw.webui.produccion.DescongeladoImpresionTemperaturaWindow">
+	<label value="REPORTE DE CAJONES" style="color:blue;font-size:11px;font-weight:bold"/>
+	<vbox  id="vbxMain">
+		
+			<grid width="99%">
+				<rows>
+					<row>
+						<label value="Desde"/>
+  						<datebox id="dteFecha1" width="110px" format="dd/MM/yyyy HH" />
+					</row>					
+					<row>
+						<label value="Hasta"/>
+						<datebox id="dteFecha2" width="110px" format="dd/MM/yyyy HH" />
+					</row>					
+				</rows>
+			</grid>
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<label value="Imprimir" style="color:blue;font-size:12px;font-weight:bold"/>
+<!--  							<textbox id="txtTipo" value="SC" readonly="true" visible="false"> </textbox>-->
+							<toolbar>
+								<vbox>
+								<toolbarbutton id="btnDescongeladoImpresionTemperatura" label="Registro de Cajones"/>
+<!--  								<toolbarbutton id="btnExcel1" label="Descargar a Excel" />-->								
+								</vbox>
+
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+
+			
+	</vbox> 
+</window>

@@ -1,0 +1,160 @@
+<?page id = "ANALISIS DE SAL" title="" contentType="text/html;charset=UTF-8" automaticTimeout="false"?>
+<zk>
+	<!-- com.nw.webui.produccion.CalidadPCC1QuimicoWindow -->
+	<window id="winCalidadPCC1QuimicoAnalisisSal" apply="com.nw.webui.produccion.CalidadPCCQuimicoAnalisisSalNormalWindow">
+	<vbox id="vbxMain" width="100%">
+		<groupbox width="98%" >
+			<label value="DEPARTAMENTO DE CONTROL DE CALIDAD"
+				style="color:blue;font-size:12px;font-weight:bold" />
+		</groupbox>
+		<groupbox>
+			<caption>
+				<label value="Opciones"></label>
+			</caption>
+ 			
+ 			<hbox >
+ 			   <grid width="99%">  
+				<rows>
+					<row>
+						<label value="Barco" />
+						<listbox id="lbxBarco" style="font-size:12px" mold="select" width="120px" />
+					</row>
+					<row>
+						<label value="Muestreo" />
+						<listbox id="lbxMuestreo" style="font-size:12px" mold="select" width="98%" />
+					</row>
+					<row>
+						<label value="Cuba" />
+						<listbox id="lbxBarcoEstibaCuba" style="font-size:12px" mold="select" width="98%" />
+					</row>
+					
+					<row>
+						<label value="Especie-Talla" />
+							<listbox id="lbxTalla" style="font-size:12px"
+								mold="select" width="120px" />
+					</row>
+ 			   </rows>
+			</grid>	
+			
+			   <grid width="99%">  
+			 <rows>
+				     <row id="RwBarcoMercante" visible="false">
+						<label value="Barco Mercante" />
+  						<textbox id="txtBarcoMercante" maxlength="20" width="120px" style="color:blue" readonly="true" />
+					</row>
+										
+				<!-- 	<row>
+						<label value="N° Formato" />
+						<textbox id="txtNumFormato" maxlength="20" width="120px" style="color:blue" readonly="true" />
+					</row>   -->		
+					<row>
+						<label value="Registro" />
+						<textbox id="txtRegistro" maxlength="8" width="120px" style="color:blue" readonly="true" />
+					</row>
+				<row>
+						<label value="N° Barco" />
+						<textbox id="txtNumBarco" maxlength="8" width="120px" style="color:blue" readonly="true" />
+					</row>
+				
+				</rows>
+			</grid>
+ 			</hbox>
+		</groupbox>
+      
+      
+        <groupbox height="700px" >
+			<caption>
+				<label value="Detalle"></label>
+			</caption>
+		
+		   <tabbox id="tb" height="700px">
+		    <tabs id="tabs">
+		        <tab id="Registrar" label="Registrar" />
+		        <tab id="VerInforme" label="Ver Informe" />
+		      
+		    </tabs>
+		    <tabpanels>
+		     <!-- INICIO PANEL Histamina -->
+		        <tabpanel>
+		            <div style="margin: 10px;">
+				        <vbox>
+				            <div height="10px" />
+				            <listbox id="lbxSales" model="@{winCalidadPCC1QuimicoAnalisisSal.calidadDetallePccEstados}" selectedItem="@{winCalidadPCC1QuimicoAnalisisSal.calidadDetalleEstado}" width="900px" >
+				               	<listhead style="font-size:9px"  >
+											<listheader label="# Muestra" width="58px" />
+											<listheader label="Sal " width="78px" />
+											<listheader label="Hist. mg/kg" width="78px" />
+											<listheader label="Hist. mg/100g " width="88px" />
+											<listheader label="Peso Muestra" width="80px" />
+											<listheader label="Consumo" width="100px"/>
+											<listheader label="Nitrógeno" width="80px" />
+											<listheader label="PH" width="100px" />
+											
+										</listhead>
+										  
+										  <listitem self="@{each=b}"  >
+										    <!--
+										    
+										     <listcell label="@{b.calidadDetallePcc.barcoEstibaCuba.barcoDescarga.barco.nombre}" visible="true"></listcell>
+											   <listcell label="@{b.calidadDetallePcc.especieTalla.especie.nombre}"></listcell>    
+											   <listcell >
+										           <textbox id="txtFluorometro" value="@{b.fluorometro}"  ></textbox> 
+										        </listcell>
+										        <listcell label="@{b.calidadDetallePcc.ph}"></listcell>
+											   -->   
+											   <listcell >
+										           <textbox id="txtOrden" value="@{b.calidadDetallePcc.nummuestra}" readonly="true" width="58px" ></textbox> 
+										        </listcell>
+										       <listcell  >  <!-- label="@{b.calidadDetallePcc.sal}" -->
+										          <textbox id="txtSal" value="@{b.sal}" width="78px"></textbox>
+										       </listcell>
+										       <listcell >
+										           <textbox id="txtHistamina" value="@{b.estamina}"  ></textbox> 
+										        </listcell>
+										         <listcell >
+										           <textbox id="txtfluorometro" value="@{b.fluorometro}" readonly="true" width="88px" ></textbox> 
+										        </listcell>
+										         
+										          <listcell >
+										           <textbox id="txtpesoMuestra" value="@{b.pesoMuestra}"  ></textbox> 
+										        </listcell>
+										         <listcell >
+										           <textbox id="txtConsumo" value="@{b.consumo}" width="100px" ></textbox> 
+										        </listcell>
+										        <listcell >
+										           <textbox id="txtNitrogeno" value="@{b.nitrogeno}" readonly="true" ></textbox> 
+										        </listcell>
+										         <listcell >
+										           <textbox id="txtPh" value="@{b.ph}" width="100px" ></textbox> 
+										        </listcell>
+										  </listitem>
+				            </listbox>
+				            <toolbar>
+				            	<toolbarbutton label="CALCULAR" id="btnCalcularTotales" image="/img/refrescar.gif" ></toolbarbutton>
+				               <toolbarbutton label="GRABAR" id="btnGrabar" image="/img/grabar.gif" ></toolbarbutton>
+				               <toolbarbutton label="NUEVO" id="btnLimpiar" image="/img/crear.gif" ></toolbarbutton>
+				            </toolbar>
+				           
+				            
+				        </vbox>
+			    	</div>
+		        </tabpanel>
+		     <!-- FIN PANEL SAL -->
+		     <!-- INICIO PANEL HISTAMINA -->
+		     <tabpanel  id="tabPanelConsulta">
+		     	<toolbar>
+				            	<toolbarbutton label="CONSULTAR" id="btnConsultaRep" image="/img/imprimir.gif"  ></toolbarbutton>
+				  </toolbar>
+		               <iframe id="report" height="100%" width="100%"  /> 
+					</tabpanel>
+		     <!-- FIN PANEL HISTAMINA -->
+		      
+		    </tabpanels>
+		    </tabbox>
+		
+		
+		
+		</groupbox>
+	</vbox>
+	</window>
+</zk>

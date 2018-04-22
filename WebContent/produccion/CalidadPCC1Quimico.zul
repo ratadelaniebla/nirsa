@@ -1,0 +1,182 @@
+<?page id = "pagCalidadPCC1Quimico" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winCalidadPCC1Quimico" apply="com.nw.webui.produccion.CalidadPCC1QuimicoWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="PCC1-" style="color:blue;font-size:12px;font-weight:bold" />
+		<label value="Análisis" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+
+
+			<grid width="99%">  
+				<rows>
+					<row>
+						<label value="Barco" />
+						<listbox id="lbxBarco" style="font-size:12px" mold="select" width="98%" />
+					</row>
+					
+					<row id="RwBarcoMercante" visible="false">
+						<label value="Barco Mercante" />
+  						<textbox id="txtBarcoMercante" maxlength="20" width="120px" style="color:blue" readonly="true" />
+					</row>
+										
+					<row>
+						<label value="N° Formato" />
+						<textbox id="txtNumFormato" maxlength="20" width="120px" style="color:blue" readonly="true" />
+					</row>
+					<row>
+						<label value="Registro" />
+						<textbox id="txtRegistro" maxlength="8" width="120px" style="color:blue" readonly="true" />
+					</row>
+					<row>
+						<label value="N° Barco" />
+						<textbox id="txtNumBarco" maxlength="8" width="120px" style="color:blue" readonly="true" />
+					</row>
+					
+  					<row>
+						<label value="Muestreo" />
+						<listbox id="lbxMuestreo" style="font-size:12px" mold="select" width="98%" />
+					</row>
+										
+  					<row>
+						<label value="Cuba" />
+						<listbox id="lbxCuba" style="font-size:12px" mold="select" width="98%" />
+					</row>
+<!--  					<row>
+						<label value="Cuba" />
+						<textbox id="txtCuba" maxlength="8" width="120px" style="color:blue" readonly="true" />
+					</row>-->
+
+<!--  					<row>
+						<label value="Muestreo" />
+						<textbox id="txtMuestreo" maxlength="8" width="120px" style="color:blue" readonly="true" />
+					</row>-->
+					
+  					<row>
+						Especie-Talla
+						<div>						
+							<div>
+								<label value="Especies Comunes" style="color:black" />						
+								<checkbox id="chkPred" checked="true" />
+							</div>
+							
+							<div>
+								<listbox id="lbxTalla" style="font-size:12px"
+								mold="select" width="120px" />
+							</div>
+						</div>
+						
+					</row>
+					
+					
+					
+<!--  					<row>
+						<label value="Especie-Talla" />
+						<textbox id="txtTalla" maxlength="8" width="120px" style="color:blue" readonly="true" />
+					</row>-->
+  					<row>
+						<label value="Num. Muestra" />
+						<listbox id="lbxNumMuestra" style="font-size:12px" mold="select" width="120px" >
+						<listitem>
+							<listcell label="${forEachStatus.index}" />
+							<listcell label="${each}" />
+						</listitem>
+						 </listbox>
+					</row>
+<!--  					<row>
+						<label value="Num. Muestra" />
+						<textbox id="txtNumMuestra" maxlength="8" width="120px" style="color:blue" readonly="true" />
+					</row>-->
+					</rows>
+			</grid>			
+			<grid width="99%"> 
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+						<grid width="99%">
+							<rows>
+<!--  								<row>
+									Especie-Talla
+									<textbox id="txtEspecie" maxlength="8" width="100px" style="color:blue" readonly="true" />
+								</row>-->
+								<row>
+									% Cl Na
+									
+									<vbox>									
+										<decimalbox id="txtSal" format="###.##"  maxlength="8"  width="100px" readonly="true"/>
+									</vbox>
+								</row>
+								<row>
+									Fluorómetro PPM
+									<decimalbox id="txtHistamina" format="###.##"  maxlength="8" width="100px" readonly="true"/>
+								</row>
+								<row>
+									PH
+									<decimalbox id="txtPh" format="###.##"  maxlength="8" width="100px" readonly="true"/>
+								</row>
+
+								<row>
+									Peso. Muestra
+									<decimalbox id="txtPmuestra" format="###.##"  maxlength="8" width="100px" readonly="true"/>
+								</row>
+
+
+								<row>
+									Consumo
+									<decimalbox id="txtConsumo" format="###.##"  maxlength="8" width="100px" readonly="true"/>
+								</row>
+															
+								<row>
+									Nitrógeno
+									<decimalbox id="txtNitrogeno" format="###.##"  maxlength="8" width="100px" readonly="true"/>
+								</row>
+								<row>
+									Temperatura
+									<decimalbox id="txtTemperatura" format="###.##"  maxlength="8" width="100px" style="color:blue" readonly="true" />
+								</row>
+								<row>
+									Temp. Salmuera
+									<decimalbox id="txtTempSalmuera" format="###.##"  maxlength="8" width="100px" style="color:blue" readonly="true" />
+								</row>
+								<row>
+									Agalla
+									<textbox id="txtAgalla" maxlength="8" width="100px" style="color:blue" readonly="true" />
+								</row>
+								<row>
+									Piel
+									<textbox id="txtPiel" maxlength="8" width="100px" style="color:blue" readonly="true" />
+								</row>
+								<row>
+									Daño Físico
+									<textbox id="txtDanoFisico" maxlength="8" width="100px" style="color:blue" readonly="true" />
+								</row>
+								<row>
+									Olor
+									<textbox id="txtOlor" maxlength="8" width="100px" style="color:blue" readonly="true" />
+								</row>
+								<row>
+									Sabor
+									<textbox id="txtSabor" maxlength="8" width="100px" style="color:blue" readonly="true" />
+								</row>
+							</rows>
+						</grid>
+						
+						<label value="Obs. Nitrogeno Histamina" style="color:blue" />
+						<textbox id="txtObsNitHis" style="font-size:10px" 
+							rows="4" width="98%" />						
+						 
+						<label value="Desviación:" style="color:blue" />
+						<textbox id="txtDesviacion" style="font-size:10px" 
+							rows="4" width="98%" />
+						<label value="Acción Correctiva:" style="color:blue" />
+						<textbox id="txtAccCorr" style="font-size:10px" 
+							rows="4" width="98%" />
+		</vbox>
+	</window>
+</zk>

@@ -1,0 +1,147 @@
+<?page id = "pagCalidadPCC1Quimico" title="" contentType="text/html;charset=UTF-8"?>
+<zk xmlns:w="http://www.zkoss.org/2005/zk/client">
+
+  <!-- Loading all the scripts necessary to apply the input masks to the fields -->
+  <?script type="text/javascript" src="/js/jquery.js"?>
+  <?script type="text/javascript" src="/js/jquery.maskedinput.js"?>
+  <?script type="text/javascript" src="/js/common.js"?>
+	
+	<window id="winPorcentaje" apply="com.nw.webui.produccion.HarinaPorcentajeGavetasWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="Registro % por Especies" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+		
+			<grid width="99%">
+				<rows>
+					<row>
+						<label value="Fecha Recepción"/>						
+						<toolbar>
+							<datebox id="dteFecha" width="50%"/>
+							<toolbarbutton id="btnBuscarComprobantes" tooltiptext="Grabar" image="/img/buscar.gif" />
+						</toolbar>
+					</row>
+				</rows>	
+			</grid>
+							
+			<listbox id="lbxComprobantes" style="font-size:9px">
+				<listhead style="font-size:9px">
+					<listheader label="Comprobante" style="font-size:5px" width="30%" />
+					<listheader label="Proveedor" style="font-size:4px" width="48%" />
+					<listheader label="Estado" style="font-size:4px" width="21%" />
+				</listhead>
+			</listbox>		
+
+			<grid width="99%">
+				<rows>
+
+					<row>
+						<label value="Comprobante" />
+						<textbox id="txtComprobante" width="99%" readonly="true"></textbox>
+					</row>
+
+
+					<row>
+						<label value="Estado" />
+						<textbox id="txtEstadoComprobante" width="99%" readonly="true"/>
+					</row>
+
+					<row>
+						<label value="Cedula/RUC Proveedor" />
+						<textbox id="txtCedulaProveedor" width="99%" readonly="true"></textbox>
+					</row>
+
+					<row>
+						<label value="Proveedor" />
+						<textbox id="txtNombreProveedor" width="99%" height="45px" multiline="true" readonly="true"/>
+					</row>
+
+
+					<row>
+						<label value="Cedula Chofer" />
+						<textbox id="txtCedula" width="99%" readonly="true"></textbox>
+					</row>
+
+					<row>
+						<label value="Nombres Chofer" />
+						<textbox id="txtNombre" width="99%" height="99%" multiline="true"  readonly="true"/>
+					</row>
+
+					<row>						
+						<label value="Placa" />
+						<textbox id="txtPlaca" readonly="true" width="99%" />						
+					</row>
+					
+					<row>						
+						<label value="Origen Pesa" />
+						<textbox id="txtOrigen" readonly="true" width="99%" rows="2" />						
+					</row>					
+				</rows>
+			</grid>
+
+			<grid>
+				<rows>
+					<row>
+						<label value="Observación" />
+						<vbox>
+							<textbox id="txtObservacion" width="99%" height="45px" readonly="true" multiline="true"/>
+						</vbox>	
+					</row>
+				</rows>	
+			</grid>	
+
+		
+
+					<grid>
+							<rows>
+								
+							</rows>
+					</grid>	
+								 												   
+					<listbox id="lbxEspeciesComprobante" model="@{winPorcentaje.harinaComprobanteDetalleGrupoEspecieEstados}" multiple="true" checkmark="false" >																  															    
+						<listhead style="font-size:9px" >
+							<listheader label="Grupo" width="20%"/>
+							<listheader label="Especie" width="37%"/>
+							<listheader label="Gabetas" width="19%"/>
+							<listheader label="%" width="14%"/>
+						</listhead>
+																				
+
+						<listitem self="@{each=e}">
+							<listcell label="@{e.harinaGrupo.decripcion}" style="font-size:9px"></listcell>
+							<listcell label="@{e.harinaEspecie.descripcionespecie}" style="font-size:9px"></listcell>
+							<listcell label="@{e.numerogabetas}" style="font-size:9px"></listcell>
+							
+							<listcell>
+							
+								<textbox value="@{e.porcentaje}" style="font-size:9px" width="99%" constraint="/[-0.0-9]*/ : Ingrese solo números">
+								</textbox>
+																						     
+							</listcell>																																									     														     
+						</listitem>
+					</listbox>
+
+					<toolbar>
+						<hbox>
+							<toolbarbutton id="btnTotal" label="Calcular Total %"/>					
+							<textbox id="txttotal" style="font-size:9px" readonly="true" width="50%">
+							</textbox>
+						</hbox>
+					</toolbar>
+					
+
+			<grid width="99%"> 
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>														
+
+
+		</vbox>
+	</window>
+</zk>

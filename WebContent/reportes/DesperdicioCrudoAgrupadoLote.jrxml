@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" orientation="Landscape" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="17"/>
+	<style name="Crosstab Data Text" hAlign="Center"/>
+	<parameter name="USUARIO" class="java.lang.String"/>
+	<parameter name="LOGO" class="java.lang.String"/>
+	<parameter name="PIDTURNO" class="java.lang.Integer"/>
+	<parameter name="PFECHA" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[select
+ddc.lote,
+d.idsubproducto,
+(select descripcion from subproducto where subproducto.idsubproducto = d.idsubproducto) subproducto,
+dch.idturnodesperdicio,
+dch.fechaproduccion,
+-- dch.idcajon,
+--(dch.tara) tara,
+sum(d.pesoneto) tolpesodesperdicio,
+sum(d.pesoneto) tolpesoneto,
+--(sum(d.pesoneto) - (dch.tara)) pesoneto,
+(sum(d.pesoneto)) pesoneto,
+NOW()as emision
+from desperdicio_cajon_crudo dch inner join desperdicio_detalle_crudo d
+on (dch.iddesperdiciocajoncrudo = d.iddesperdiciocajoncrudo)
+inner join detalle_lote_desperdicio_crudo ddc
+on (d.iddesperdiciodetalle = ddc.iddesperdiciodetalle)
+where dch.fechaproduccion = $P{PFECHA} and dch.idturnodesperdicio = $P{PIDTURNO} and dch.sello1desperdicio is not null group by ddc.lote, d.idsubproducto, dch.idturnodesperdicio, dch.fechaproduccion
+order by ddc.lote, d.idsubproducto]]>
+	</queryString>
+	<field name="lote" class="java.lang.String"/>
+	<field name="idsubproducto" class="java.lang.Integer"/>
+	<field name="subproducto" class="java.lang.String"/>
+	<field name="idturnodesperdicio" class="java.lang.Integer"/>
+	<field name="fechaproduccion" class="java.sql.Date"/>
+	<field name="tolpesodesperdicio" class="java.lang.Double"/>
+	<field name="tolpesoneto" class="java.lang.Double"/>
+	<field name="pesoneto" class="java.lang.Double"/>
+	<field name="emision" class="java.sql.Timestamp"/>
+	<variable name="pesoneto_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{pesoneto}]]></variableExpression>
+	</variable>
+	<variable name="sum" class="java.lang.Double" resetType="None" incrementType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{pesoneto}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="95" splitType="Stretch">
+			<line>
+				<reportElement x="1" y="91" width="554" height="1"/>
+			</line>
+			<image>
+				<reportElement x="0" y="12" width="154" height="38"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{LOGO}]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="0" y="0" width="554" height="1"/>
+			</line>
+			<line>
+				<reportElement x="1" y="66" width="554" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="155" y="12" width="313" height="34"/>
+				<textElement textAlignment="Center">
+					<font size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESPERDICIO CRUDO ENVIADO DE PLANTA ATUNERA A PLANTA DE HARINA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="188" y="69" width="52" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="54" y="69" width="100" height="15"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{idturnodesperdicio}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="240" y="69" width="144" height="15"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{fechaproduccion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="69" width="39" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Turno:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="29" splitType="Stretch">
+			<staticText>
+				<reportElement x="119" y="11" width="60" height="18"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cant. Registro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="179" y="11" width="48" height="18"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lote]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="357" y="11" width="48" height="18"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Peso Neto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="227" y="11" width="130" height="18"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Crudo]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField pattern="###,###,##0.00" isBlankWhenNull="true">
+				<reportElement x="357" y="0" width="48" height="15"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{pesoneto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="-115" y="-38" width="52" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{COLUMN_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="119" y="0" width="60" height="15"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="179" y="0" width="48" height="15"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{lote}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="227" y="0" width="130" height="15"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{subproducto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="33" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="529" y="5" width="16" height="14"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="554" height="1"/>
+			</line>
+			<textField>
+				<reportElement x="480" y="5" width="43" height="14"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Pag. "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="1" width="82" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{USUARIO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="1" width="48" height="11"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Usuario:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy H:mm a">
+				<reportElement x="262" y="1" width="120" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{emision}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="212" y="1" width="48" height="11"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="77" splitType="Prevent">
+			<line>
+				<reportElement x="10" y="55" width="152" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="387" y="56" width="146" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Jefe de Turno]]></text>
+			</staticText>
+			<line>
+				<reportElement x="197" y="55" width="152" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="200" y="56" width="146" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Revisado por]]></text>
+			</staticText>
+			<line>
+				<reportElement x="384" y="55" width="152" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="11" y="56" width="149" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recibido por]]></text>
+			</staticText>
+			<textField pattern="###,###,##0.00" isBlankWhenNull="true">
+				<reportElement x="357" y="1" width="48" height="15"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{pesoneto_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="122" y="1" width="235" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[TOTAL PESO CAJON]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

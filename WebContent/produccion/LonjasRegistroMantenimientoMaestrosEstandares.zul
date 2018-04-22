@@ -1,0 +1,46 @@
+<?page id = "pagLonjasRegistroMantenimientoMaestrosEstandares" title="" contentType="text/html;charset=UTF-8"?>
+<!-- R15 -->
+<zk>
+	<window id="winLonjasRegistroMantenimientoMaestrosEstandares"
+		apply="com.nw.webui.produccion.LonjasRegistroMantenimientoMaestrosEstandaresWindow" > 
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="Registro y Mantenimiento de Estandares en Lonjas"
+			style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain" width="99%">
+
+		    <grid width="99%">
+				<rows>
+					<row>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar"
+								tooltiptext="Grabar" image="/img/grabar.gif" />
+						</toolbar>
+					</row>
+				</rows>
+			</grid>
+
+			<grid width="99%">
+				<rows>
+
+					<row>
+						<label value="Talla"></label>
+						<listbox id="lbxTalla" mold="select" width="99%" >
+						     <listitem selected="true" label="" />
+								<listitem label="S" value="S" />
+								<listitem label="M" value="M" />
+								<listitem label="L" value="L" />
+						</listbox>
+					</row>
+					
+					<row>
+						<label value="Fundas por  Estandar/Hora"></label>
+						<intbox id="ibxFundasEstandar"  />
+					</row>
+				</rows>
+			</grid>
+
+
+
+		</vbox>
+	</window>
+</zk>

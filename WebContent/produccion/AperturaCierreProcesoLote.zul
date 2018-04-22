@@ -1,0 +1,60 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winAperturaCierreLote" apply="com.nw.webui.produccion.AperturaCierreProcesoLoteWindow" >
+<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="APERTURA-CIERRE LOTE" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="200px">
+		<grid >
+			<rows>
+			<!-- 
+				<row>
+					<label value="Días Producción " width="100px"></label>
+					<textbox id="txtDiasProduccion" disabled="true" width="100px" > </textbox>
+				</row>
+			 -->
+
+				<row>
+					<label value="Fec.Prod. " style="color:blue" />
+					<listbox id="lbxFechaActiva" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+						
+				<row>
+					<label value="Turno Producción" ></label>
+					<listbox id="lbxTurnoProduccion" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+											 	
+				<row>
+					<label value="Apertura/Cierre " ></label>
+					<listbox id="lbxAperturaCierre" style="font-size:11px" mold="select" width="100px" > 
+						<listitem label="" > </listitem>
+						<listitem label="Apertura" > </listitem>
+						<listitem label="Cierre" > </listitem>
+						<listitem label="Reapertura" > </listitem>  
+					</listbox>
+				</row>
+				
+				<row >
+					<label value="Lote " ></label>
+					<listbox id="lbxLote" style="font-size:11px" mold="select" width="100px" > </listbox>
+				</row>				
+				
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+						</toolbar>
+					</vbox>
+					<hbox>
+						<checkbox id="chbRevisado" label="Revisado" ></checkbox>
+					</hbox>
+				</row>
+			</rows>
+		</grid>
+	</vbox>
+</window>
+</zk>

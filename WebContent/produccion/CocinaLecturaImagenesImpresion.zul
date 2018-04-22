@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?page id="pagCalidadBPMDes"?>
+
+<!--  -->
+<window id="winCocinaEntradaSalidaImpresion" apply="com.nw.webui.produccion.CoccionLecturaImagenesImpresionWindow"> 
+	<label value="Lectura de Gráficas de Cocinas" style="color:blue;font-size:11px;font-weight:bold"/>
+	<vbox  id="vbxMain">
+		
+			<grid width="99%">
+				<rows>
+
+					<row>
+						<label value="Fecha :"/>
+						<datebox id="dteFecha" width="110px" format="dd/MM/yyyy" readonly="true"/>
+					</row>					
+                  	<row>
+					<label value="Cocinada" ></label>
+					<listbox id="lbxCocinada" style="font-size:11px" mold="select"> 
+						<listitem label="" > </listitem>
+						<listitem label="1" > </listitem>
+						<listitem label="2" > </listitem>
+						<listitem label="3" > </listitem>
+						<listitem label="4" > </listitem> 
+						<listitem label="5" > </listitem>
+						<listitem label="6" > </listitem> 
+						<listitem label="7" > </listitem>
+						<listitem label="8" > </listitem> 
+						<listitem label="9" > </listitem>
+						<listitem label="10" > </listitem> 
+						<listitem label="11" > </listitem>
+						<listitem label="12" > </listitem>
+						<listitem label="13" > </listitem>
+						<listitem label="14" > </listitem> 
+						<listitem label="15" > </listitem>
+						<listitem label="16" > </listitem> 
+						<listitem label="17" > </listitem>
+						<listitem label="18" > </listitem> 
+						<listitem label="19" > </listitem>
+						<listitem label="20" > </listitem> 
+						<listitem label="21" > </listitem>
+						<listitem label="22" > </listitem>
+						<listitem label="23" > </listitem>
+						<listitem label="24" > </listitem> 
+						<listitem label="25" > </listitem>
+						<listitem label="26" > </listitem> 
+						<listitem label="27" > </listitem>
+						<listitem label="28" > </listitem> 
+						<listitem label="29" > </listitem>
+						<listitem label="30" > </listitem> 
+					</listbox>
+				</row>
+					<row>
+						<label value="Cocina :"/>	
+						<listbox id="lbxCocina" style="font-size:11px"
+						 mold="select" width="100px" />
+					</row>	
+					
+				</rows>
+			</grid>
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<label value="Imprimir" style="color:blue;font-size:12px;font-weight:bold"/>
+							<toolbar>
+								<vbox>
+								<toolbarbutton id="btnGrafica" label="Visualizar Gráfica"/>
+							
+							
+								</vbox>
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+
+			
+	</vbox> 
+</window>

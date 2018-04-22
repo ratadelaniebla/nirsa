@@ -1,0 +1,184 @@
+<?page  id = "CoccionTempCoches" title="Coccion Muestreo Temperatura" contentType="text/html;charset=UTF-8"?>
+<zk>
+
+<window id="wincoccionTemperaturaCoches" apply="com.nw.webui.produccion.ContraloriaCoccionMuestreoTemperaturaMantenimientoWindow" width="99%">
+<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="MANTENIMIENTO -COCINA TEMPERATURA POR COCHES" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="99%">
+	
+	 	<grid width="99%"> 
+	 		<rows>
+	 		
+			 <!-- 	<row>
+				     <label value="Cocina " style="color:blue"/>
+				     <hbox>
+						<listbox id="lbxCocina1" style="font-size:11px" mold="select" width="105px" > </listbox>
+						 	  		<toolbar>
+										<toolbarbutton id="btnActualizarCocinas" tooltiptext="Actualizar" image="/img/refrescar.gif"/>
+						</toolbar>
+					</hbox>	
+				</row>	 		-->
+				<row>
+					<label value="Dia Produccion " style="color:blue" />
+					<datebox id="txtfProduccion" format="dd/MM/yyyy"  width="100px"> </datebox>
+			    </row>
+				<row >
+					<label value="Turno Labor" ></label>
+					<listbox id="lbxTurnoLabor" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>	 
+				
+				<row >
+					<label value="Coche " ></label>
+					<hbox>
+						<textbox id="txtCoche" width="80px" > </textbox>
+						<toolbar>
+							<toolbarbutton id="btnBuscaCoche" tooltiptext="Buscar" image="/img/buscar.gif"/>
+						</toolbar>
+					</hbox>
+				</row>
+			    <row>
+					<label value="Dia Produccion " style="color:blue" />
+					<textbox id="txtProduccion" readonly="true" width="100px"> </textbox>
+			    </row>
+			    <row>
+					<label value="Cocina " style="color:blue" />
+					<textbox id="txtCocina" readonly="true" width="140px"> </textbox>
+			    </row>
+			  
+			<!--    <row>
+					<label value="Dia Produccion " style="color:blue" />
+					<listbox id="lbxFechaActiva" style="font-size:11px" mold="select" width="130px" > </listbox>					
+			    </row>
+				
+	 		
+
+			    	 	
+				<row>
+					<label value="Dia Produccion " style="color:blue" />
+					<listbox id="lbxFechaActiva" style="font-size:11px" mold="select" width="130px" > </listbox>
+			    </row><
+			</rows>
+		</grid>
+		
+		
+		<grid >
+			<rows>-->
+			
+				<!-- 
+				<row>
+					<label value="Turno Produccion" ></label>
+					<listbox id="lbxTurnoProduccion" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+				
+				    -->
+					
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+							<toolbarbutton id="btnEliminar" tooltiptext="Eliminar" image="/img/eliminar.gif"/>
+							<toolbarbutton id="btnNuevo" tooltiptext="Nuevo" image="/img/crear.gif"/>
+							
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>
+
+		<!-- 
+		<grid >
+			<rows>
+				<row >
+					<label value="Lotes" ></label>
+					<listbox id="lbxLote" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+			</rows>
+		</grid>		
+ 		-->
+		
+		<grid width="99%">
+			<rows>
+			
+				<!-- 
+				<row >
+					<label value="Coche " ></label>
+					<hbox>
+						<textbox id="txtCoche" width="80px" > </textbox>
+				 <toolbar>
+							<toolbarbutton id="btnBuscaCoche" tooltiptext="Buscar" image="/img/buscar.gif"/>
+						</toolbar>  
+					</hbox>
+				</row>
+				 -->
+				
+				<!-- 
+				<row>
+					<label value="# Muestras x lote " ></label>
+					<textbox id="txtMuestrasxLote" readonly="true" width="100px"> </textbox>
+				</row>
+				 -->
+				<row>
+					<label value="# Muestras Prod." ></label>
+					<textbox id="txtMuestras" readonly="true" width="100px"> </textbox>
+				</row>
+			  
+			  
+				<row>
+					<label value="# Muestras Coc." ></label>
+					<textbox id="txtMuestrasCoc" readonly="true" width="100px"> </textbox>
+				</row>			  
+			  <!-- 
+				<row>
+					<label value="Lote " ></label>
+					<textbox id="txtLote" readonly="true" width="100px"> </textbox>
+				</row>
+				-->
+				
+				<!-- 
+				<row>
+					<label value="Cocina " ></label>
+					<textbox id="txtCocina" readonly="true" width="100px"> </textbox>
+				</row>
+				 -->
+				
+				<!-- 
+				<row>
+					<label value="# Canastillas " ></label>
+					<textbox id="txtCanastillas" readonly="true" width="100px"> </textbox>
+				</row>
+				<row>
+					<label value="Pescados x Lata " ></label>
+					<textbox id="txtPescadoLata" readonly="true" width="100px"> </textbox>
+				</row>
+				 -->
+				 <row>
+					<label value="Nivel " style="color:blue" />
+					<listbox id="lbxNivel" style="font-size:11px" mold="select" width="130px" > 
+					<listitem label="" > </listitem>
+						<listitem label="Superior" > </listitem>
+						<listitem label="Medio" > </listitem>
+						<listitem label="Inferior" > </listitem>
+						
+					</listbox>
+			    </row>
+			     <row>
+					<label value="Temperatura " style="color:blue" />
+					<listbox id="lbxTemperatura" style="font-size:11px" mold="select" width="130px" > </listbox>
+			    </row>
+				<row>
+					<label value="Temperatura" ></label>
+					<textbox id="txtTemperatura" width="100px"> </textbox>
+				</row>
+
+ 				
+			</rows>
+		</grid>
+	</vbox>
+</window>
+
+</zk>

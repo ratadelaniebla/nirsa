@@ -1,0 +1,138 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="reporteProcesosProduccion" apply="com.nw.webui.produccion.ProcesosReportesProduccionWindow">
+<label value="REPORTES DE PRODUCCION" style="color:blue;font-size:11px;font-weight:bold"/>
+		<vbox  id="vbxMain">
+		
+			<grid width="100%">
+				<rows>
+					<row>
+						<label value="Fecha :"/>
+						<datebox id="dteFecha" width="110px" format="dd/MM/yyyy" readonly="true"/>
+					</row> 
+					<row>
+						<label value="Turno :"/>	
+						<listbox id="lbxTurno" style="font-size:11px" mold="select" width="130px" > </listbox>
+					</row>	
+				</rows>
+			</grid>
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<label value="Reportes" style="color:blue;font-size:12px;font-weight:bold"/>
+							<toolbar>
+								<vbox>
+									<hbox>
+										<toolbarbutton id="btnPesosDescongeladoProduccion" label="Reporte de Pesos Descongelado"/>
+										<toolbarbutton id="btnExcelPesosDescongeladoProduccion" label="Excel" style="color:blue;font-size:11px;font-weight:bold"/>
+									</hbox>
+								</vbox>
+								
+								<vbox>
+									<hbox>
+										<toolbarbutton id="btnLotesTurno" label="Reporte Consolidado de Lotes"/>
+										<toolbarbutton id="btnExcelLotesTurno" label="Excel" style="color:blue;font-size:11px;font-weight:bold"/>
+									</hbox>	
+								</vbox>
+
+								<vbox>
+									<hbox>
+										<toolbarbutton id="btnTempPreproceso" label="Reporte Temperaturas Preproceso"/>
+										<toolbarbutton id="btnExcelTempPreproceso" label="Excel" style="color:blue;font-size:11px;font-weight:bold"/>
+									</hbox>	
+								</vbox>
+
+								<vbox>
+									<hbox>
+										<toolbarbutton id="btnTempxCocinada" label="Registros de Temperaturas x Cocinada"/>
+										<toolbarbutton id="btnExcelTempxCocinada" label="Excel" style="color:blue;font-size:11px;font-weight:bold"/>
+									</hbox>	
+								</vbox>
+
+
+								<vbox>
+									<hbox>
+										<toolbarbutton id="btnRepExpCoche" label="Reporte de Exposición x Coches"/>
+										<toolbarbutton id="btnExcelRepExpCoche" label="Excel" style="color:blue;font-size:11px;font-weight:bold"/>
+									</hbox>	
+								</vbox>
+
+								<vbox>
+									<hbox>
+										<toolbarbutton id="btnCochesEvisxProd" label="Reporte de Coches Eviscerados"/>
+										<toolbarbutton id="btnExcelCochesEvisxProd" label="Excel" style="color:blue;font-size:11px;font-weight:bold"/>
+									</hbox>	
+								</vbox>
+
+								<vbox>
+									<hbox>
+										<toolbarbutton id="btnCochesxCocinada" label="Reporte de Coches x Cocinada"/>
+										<toolbarbutton id="btnExcelCochesxCocinada" label="Excel" style="color:blue;font-size:11px;font-weight:bold"/>
+									</hbox>	
+								</vbox>
+
+								<vbox>
+									<hbox>
+										<toolbarbutton id="btnAsignacionCoches" label="Reporte de Asignación de Coches"/>
+										<toolbarbutton id="btnExcelAsignacionCoches" label="Excel" style="color:blue;font-size:11px;font-weight:bold"/>
+									</hbox>	
+								</vbox>
+								<vbox>
+									<hbox>
+										<toolbarbutton id="btnEvisclasifxPeso" label="Validación de Clasif. x Peso"/>
+										<toolbarbutton id="btnExcelEvisclasifxPeso" label="Excel" style="color:blue;font-size:11px;font-weight:bold"/>
+									</hbox>	
+								</vbox>
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+<label value="REPORTES DE PRODUCCION X FECHAS" style="color:blue;font-size:11px;font-weight:bold"/>
+			<grid width="99%">
+				<rows>
+
+					<row>
+						<label value="Desde"/>
+  						<datebox id="dteFecha1" width="110px" format="dd/MM/yyyy HH" />
+					</row>					
+
+					<row>
+						<label value="Hasta"/>
+						<datebox id="dteFecha2" width="110px" format="dd/MM/yyyy HH" />
+					</row>					
+
+				</rows>
+			</grid>
+
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<label value="Reportes" style="color:blue;font-size:12px;font-weight:bold"/>
+							<toolbar>
+								
+								<vbox>
+									<hbox>																
+										<toolbarbutton id="btnCajonesDescongelado" label="Reporte de Cajones Descongelado"/>
+										<toolbarbutton id="btnExcelCajonesDescongelado" label="Excel" style="color:blue;font-size:11px;font-weight:bold"/>
+									</hbox>
+								</vbox>
+								<vbox>
+									<hbox>																
+										<toolbarbutton id="btnCochesEviscerados" label="Reporte de Coches Eviscerados"/>
+										<toolbarbutton id="btnExcelCochesEviscerados" label="Excel" style="color:blue;font-size:11px;font-weight:bold"/>
+									</hbox>
+								</vbox>
+								
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+			
+			
+	</vbox> 
+</window>
+</zk>

@@ -1,0 +1,66 @@
+<?page id = "pagLimpiezaRalladoPesos" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winLimpiezaRalladoPesos" apply="com.nw.webui.produccion.LimpiezaRalladoPesosWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+
+		<vbox id="vbxMain" width="99%">
+				
+			<label value="Limpieza Reg. Rallado" style="color:blue;font-size:12px;font-weight:bold" />			
+			<grid >  
+				<rows>
+					<row>
+						<label value="Día Producción" />
+						<textbox id="txtDiaProduccion" readonly="true" style="font-size:12px" width="99%" />
+					</row>
+					
+					<row>
+						<label value="Turno"/>
+						<textbox id="txtTurno"  style="font-size:11px"  width="99%" readonly="true" ></textbox>
+						
+					</row>
+					
+				</rows>
+			</grid>	
+			
+	
+					
+			<grid>  
+				<rows>
+				
+					<row>
+						<label value="Linea"/>
+						<listbox id="lbxMesa" style="font-size:12px" mold="select" width="99%"/>
+					</row>
+
+
+					<row>
+						<label value="Tipo Rallado"/>
+						<listbox id="lbxTipoRallado" style="font-size:12px" mold="select" width="99%"/>
+					</row>
+		
+				
+					<row>
+						<toolbar>
+							<toolbarbutton  id="btnPeso" label="Capturar Peso" tooltiptext="Tomar Peso"
+							style="color:blue;font-size:12px;font-weight:bold"/>
+						</toolbar>
+						<textbox id="txtPeso" maxlength="10" width="99%" readonly="false" style="color:blue;font-size:12px;font-weight:bold" />
+					</row>
+					
+					
+				</rows>
+			</grid>	
+
+			<grid> 
+				<rows>
+					<row>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif" />
+						</toolbar>
+					</row>
+				</rows>
+			</grid>						
+
+		</vbox>
+	</window>
+</zk> 

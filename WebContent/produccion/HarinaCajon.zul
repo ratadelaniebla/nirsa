@@ -1,0 +1,126 @@
+<?page id = "pagCalidadPCC1Quimico" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winHarinaRecepcionCajon" apply="com.nw.webui.produccion.DesperdicioHarinaHarinaCajonWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="Harina -" style="color:blue;font-size:12px;font-weight:bold" />
+		<label value=" Recepción Cajón" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+		
+			<grid width="99%"> 
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>			
+		
+			<grid width="99%">  
+				<rows>
+
+					<row>
+						<label value="Fecha Producción"/>
+						<datebox id="dteFecha" width="110px" format="dd/MM/yyyy"/>
+					</row>									
+					
+					<!-- 				
+					<row>
+						<label value="Día Juliano" />
+						<textbox id="txtDiaJuliano" maxlength="4"  width="50px"  readonly="true" />
+					</row>
+					 -->									
+									
+					<row>
+						<label value="Turno Harina" />
+						<listbox id="lbxTurno" style="font-size:12px" mold="select" width="98%" />
+					</row>
+
+					<row>
+						<label value="Num. Cajón" />
+						<div>
+							<div>
+								<label value="Otra Area" style="color:black" />						
+								<checkbox id="chkArea" checked="false" />
+							</div>
+						
+						
+							<hbox>
+								<div>
+									<hbox>
+										<listbox id="lbxCajon" style="font-size:12px" mold="select" width="80px" />														
+										<toolbar>
+											<toolbarbutton id="btnRefrescar" tooltiptext="Grabar" image="/img/refrescar.gif"/>
+										</toolbar>
+									</hbox>
+									
+									<decimalbox id="txtCajon" format="######"  maxlength="10" width="80px" readonly="true" />										
+								</div>
+								
+							</hbox>
+						</div>	
+					</row>
+
+					<row>
+						<label value="Area" />
+						<listbox id="lbxAreaDesp" style="font-size:12px" mold="select" width="98%" disabled="true"/>
+					</row>
+
+					<row>
+						<label value="Desperdicio" />
+						<listbox id="lbxDesperdicio" style="font-size:12px" mold="select" width="98%" disabled="true"/>
+					</row>
+
+					<row>
+						<label value="Turno Desperdicio" />
+						<textbox id="txtTurnoDesperdicio" maxlength="4"  width="50px"  readonly="true" />
+					</row>
+															
+					<row>
+						<div>
+							<label value="Sello 1 Desp." />
+							<textbox id="txtSello1" maxlength="30" width="120px" style="color:blue" readonly="true"/>
+						</div>
+						<div>
+							<label value="Sello 1 Har." />
+							<textbox id="txtSello11" maxlength="30" width="120px" style="color:blue" readonly="false"/>
+						</div>
+						
+					</row>				
+
+					<row>
+						<div>
+							<label value="Sello 2 Desp." />
+							<textbox id="txtSello2" maxlength="30" width="120px" style="color:blue" readonly="true"/>
+						</div>
+						<div>
+							<label value="Sello 2 Har." />
+							<textbox id="txtSello22" maxlength="30" width="120px" style="color:blue" readonly="false"/>
+						</div>
+					</row>
+
+
+					<row>
+						Temperatura
+						<!-- 
+						<decimalbox id="txtTemperatura" format="####.##"  maxlength="7" width="100px" readonly="false" style="color:blue;font-size:12px;font-weight:bold"/>
+						 -->
+						 <textbox id="txtTemperatura" maxlength="10" width="100px" readonly="false" style="color:blue;font-size:12px;font-weight:bold" />					
+					</row>	
+
+					
+					<row>
+							<toolbar>
+								<toolbarbutton  id="btnPeso" label="Capturar Peso" tooltiptext="Tomar Peso"
+								style="color:blue;font-size:12px;font-weight:bold"/>
+							</toolbar>
+							<textbox id="txtPeso" maxlength="10" width="100px" readonly="true" style="color:blue;font-size:12px;font-weight:bold" />
+					</row>									
+										
+				</rows>
+			</grid>	
+		</vbox>
+	</window>
+</zk>

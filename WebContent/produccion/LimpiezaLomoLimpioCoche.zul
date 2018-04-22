@@ -1,0 +1,54 @@
+<?page title="LIMPIEZA LOMO LIMPIO" contentType="text/html;charset=UTF-8"?>
+<!-- R26 -->
+<zk>
+<window  apply="com.nw.webui.produccion.LimpiezaLomoLimpioCocheWindow">
+<label value="Registro de Salida de Coches de limpieza" style="color:blue;font-size:11px;font-weight:bold"/>
+	 <vbox  id="vbxMain" width="99%">
+		    <grid width="98%">
+				<rows>
+					<row>
+						<label value="Fecha :"/>
+						<!--   <datebox id="dteFecha" width="110px" format="dd/MM/yyyy" /> -->
+					     <textbox id="txtFechaProduccion" readonly="true"  ></textbox>
+					</row> 
+					<row>
+					   <label value="Turno :" style="color:blue" />
+				      <!--  <listbox id="lbxTurno" style="font-size:11px" mold="select" width="80%" />  -->
+				      <textbox id="txtTurno" readonly="true"  ></textbox>
+					</row>
+					<row>
+					   <label value="Secuencia :" style="color:blue" />
+				       <textbox id="txtSecuencia" readonly="true" ></textbox>
+					</row>
+					<row>
+					   <label value="Linea :" style="color:blue" />
+				       <listbox id="lbxLinea" style="font-size:11px" mold="select" width="80%" />
+					</row>
+				    <row>
+					   <label value="Lote :" style="color:blue" />
+				       <listbox id="lbxLote" style="font-size:11px" mold="select" width="80%" />
+					</row>
+					
+					<row>
+					   <label value="Destino :" style="color:blue" />
+				       <listbox id="lbxProceso" style="font-size:11px" mold="select" width="80%" />
+					</row>
+
+			   </rows>
+			</grid>  	
+			
+		  <grid width="99%">
+			<rows>
+				<row>
+					<vbox width="100%" >
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="GRABAR" width="320px" />
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		  </grid>	
+		 
+	</vbox> 
+</window>
+</zk>

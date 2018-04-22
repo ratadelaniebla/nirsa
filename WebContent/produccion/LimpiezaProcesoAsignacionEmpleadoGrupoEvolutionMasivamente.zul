@@ -1,0 +1,128 @@
+<?page title="LIMPIEZA ASIGNACION " contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winLimpiezaAsignacionEmpGrupoMasivamente" border="none" apply="com.nw.webui.produccion.LimpiezaProcesoAsignacionEmpleadoGrupoEvolutionMasivamenteWindow">
+<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="LIMPIEZA ASIGNACION EMPLEADOS MASIVAMENTE X LINEA" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="97%">
+		<grid width="97%">
+			<rows>
+			
+				<row>
+				    <label value="Fech.Prod/Turno Actual:" style="color:blue" />
+				    <listbox id="lbxProcesosActivos" style="font-size:11px" mold="select" width="80%" />
+				</row>
+				
+
+				<row>
+				    <label value="Turno :" style="color:blue" />
+				    <textbox id="txtTurno"  style="font-size:11px"  width="80%" readonly="true" ></textbox>
+				</row>
+			</rows>
+		</grid>
+
+		<grid width="97%">
+			<rows>
+				<row>
+				    <label value="Linea Buscar:" style="color:blue" />
+				    <listbox id="lbxLineaBuscar" style="font-size:11px" mold="select" width="80%" />
+				</row>
+			</rows>	
+		</grid>
+		
+
+		<grid width="97%">
+			<rows>
+
+				<row>
+				    <label value="Fech.Prod/Turno Anterior:" style="color:blue" />
+				    <hbox>
+					    <listbox id="lbxProcesosAnterior" style="font-size:11px" mold="select" width="80%" />
+					    <toolbarbutton id="btnActulizar" image = "/img/refrescar.gif" />
+				    </hbox>
+				</row>
+				
+			</rows>
+		</grid>		
+		
+
+
+
+
+		
+	    <listbox  id="lbxLista" model="@{winLimpiezaAsignacionEmpGrupoMasivamente.listaEmpleadosLinea}" multiple="true" checkmark="false" width="95%">
+			<listhead style="font-size:5px" >
+				<listheader label="Ubi." width="9%" />
+				<listheader label="Carg." width="8%" />
+				<listheader label="Empleado" width="65%"  style="font-size:5px" />
+				<listheader label="Disp." width="8%" />
+				<listheader label="(X)" width="7%" />
+				<listheader label="(M)" width="8%" />
+			</listhead>
+						  
+			<listitem self="@{each=d}">
+				<listcell label="@{d.ubicacion}" ></listcell>
+				<listcell  label="@{d.cargo}"></listcell>
+				<listcell  label="@{d.nombre}"></listcell>
+				<listcell  label="@{d.disponible}"></listcell>
+				<listcell > 
+					<checkbox checked="@{d.eliminar}"> </checkbox> 
+				</listcell>
+				<listcell  label="@{d.marco}"></listcell>
+			</listitem>
+			
+		</listbox>		
+
+		<grid width="90%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="GRABAR LISTA EMPLEADOS" />
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>		
+
+		<grid>
+			<rows>
+				<row>
+				    <label value="Tol.Fileteadores:" style="color:blue" />
+				    <textbox id="txtFileteadores"  style="font-size:11px"  width="80%" readonly="true" ></textbox>
+				</row>
+
+				<row>
+				    <label value="Tol.Despellejadores:" style="color:blue" />
+				    <textbox id="txtDespellejadores"  style="font-size:11px"  width="80%" readonly="true" ></textbox>
+				</row>
+				
+			</rows>
+		</grid>
+
+	<space width="10px"></space>
+
+	<label value="Eliminación masiva" style="color:blue;font-size:11px;font-weight:bold" />
+
+		<grid width="90%">
+			<rows>
+			
+				<row>
+				    <label value="Confirma eliminación" style="color:blue" />
+				    <checkbox id="chkConfirma" />
+				</row>			
+			
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnEliminar" label="ELIMINAR LISTA" />
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>
+
+Nota. - Si después de la eliminación se mantienen empleados en la lista esto quiere que estos empleados ya tienen registros de ponchadas o pesos por lo tanto no se pueden eliminar
+
+	</vbox>
+</window>
+</zk>

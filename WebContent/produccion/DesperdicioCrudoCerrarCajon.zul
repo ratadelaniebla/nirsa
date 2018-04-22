@@ -1,0 +1,67 @@
+<?page id = "pagCalidadPCC1Quimico" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winDesperdicioCerrarCajon" apply="com.nw.webui.produccion.DesperdicioCrudoCerrarCajonWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="DESPERDICIO - Sellar Cajón" style="color:blue;font-size:12px;font-weight:bold" />
+		<label value="" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+		
+	
+		
+			<grid width="99%">  
+				<rows>
+					<row>
+						<label value="Fecha Producción"/>
+						<datebox id="dteFecha" width="110px" readonly="false"/>
+					</row>
+									
+					<row>
+						<label value="Día Juliano" />
+						<textbox id="txtDiaJuliano" maxlength="4"  width="50px"  readonly="true" />
+					</row>									
+
+<!-- 									
+					<row>
+						<label value="Turno" />
+						<listbox id="lbxTurno" style="font-size:12px" mold="select" width="98%" />
+					</row>
+ -->
+					<row>
+						<label value="Num. Cajón" />
+						<listbox id="lbxCajon" style="font-size:12px" mold="select" width="80px" />
+					</row>
+
+					<row>
+						<label value="Turno Desperdicio" />
+						<textbox id="txtTurnoDesperdicio" maxlength="4"  width="50px"  readonly="true" />
+					</row>										
+										
+					<row>
+						<label value="Sello 1" />
+						<textbox id="txtSello1" value="NA" readonly="true" maxlength="30" width="120px" style="color:blue" />
+					</row>				
+
+					<row>
+						<label value="Sello 2" />
+						<textbox id="txtSello2" value="NA" readonly="true" maxlength="30" width="120px" style="color:blue" />
+					</row>				
+					
+				</rows>
+			</grid>	
+
+			<grid width="99%"> 
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar" tooltiptext="SELLAR CAJÓN" label="SELLAR CAJÓN" style="color:blue;font-size:12px;font-weight:bold"/>
+							</toolbar>
+							
+						</vbox>
+					</row>
+				</rows>
+			</grid>				
+					
+		</vbox>
+	</window>
+</zk>

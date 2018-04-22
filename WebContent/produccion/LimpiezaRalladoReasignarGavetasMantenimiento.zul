@@ -1,0 +1,178 @@
+<?page id = "pagRalladoReasignarGavetasMant" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winRalladoReasignarGavetasMant" apply="com.nw.webui.produccion.LimpiezaRalladoReasignarGavetasMantenimientoWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="RALLADO - Mantenimiento" style="color:blue;font-size:12px;font-weight:bold" />
+		<label value="" style="color:blue;font-size:12px;font-weight:bold" />
+		
+		<vbox id="vbxMain">
+			<grid width="99%">  
+				<rows>
+				
+				<!-- 
+					<row>
+						<label value="Producción" />
+						<listbox id="lbxProduccion" style="font-size:12px" mold="select" />
+					</row>				
+				 -->
+				 
+
+				
+				
+				   <row >
+						<label value="Producción " style="color:blue" />
+						<datebox id="dteFecha" width="110px" />
+					</row>							
+							
+					<row>
+						<label value="Turno :"></label>
+						<listbox id="lbxTurnoProduccion" style="font-size:11px" mold="select">
+						</listbox>
+					</row>				
+				
+				
+					<row>
+						<label value="Producción" />
+						<textbox id="txtDiaProduccion" readonly="true" style="font-size:12px" width="99%" />
+					</row>				
+				
+					<!-- 
+					<row>
+						<label value="Fecha Producción"/>
+						<datebox id="dteFecha" width="110px" readonly="false"/>
+					</row>
+									
+					<row visible="false">
+						<label value="Día Julian" />
+						<textbox id="txtDiaJuliano" maxlength="4"  width="50px"  readonly="true" />
+					</row>									
+									
+					<row visible="false">
+						<label value="Turno" />
+						<listbox id="lbxTurno" style="font-size:12px" mold="select" width="98%" />
+					</row>
+					 -->
+					 
+					<row>
+						<label value="Bach Origen" />
+						<hbox>
+							<listbox id="lbxBacthOrigen" style="font-size:12px" mold="select" />												
+							Cerrado <checkbox id="chkCerrado" checked="false"/>
+						</hbox>
+					</row>
+							
+							
+
+															
+					<row>
+						<label value="Pesos" />
+						<hbox>
+							<listbox id="lbxGaveta" style="font-size:12px" mold="select" width="140px"/>
+							<toolbarbutton id="btnActualizar" label="Actualizar"/>
+						</hbox>
+					</row>
+					
+					
+					<row>
+						<label value="Rallado" />
+						<textbox id="txtRallado" readonly="true" />
+					</row>
+
+					<row>
+						<label value="Rallado"/>
+						<listbox id="lbxTipoRallado" style="font-size:12px" mold="select" width="99%"/>
+					</row>										
+					
+					<row>
+						<label value="Linea" />
+						<textbox id="txtLinea" readonly="true" />
+					</row>					
+					
+					<row>
+						<label value="Linea"/>
+						<vbox>
+							<listbox id="lbxMesa" style="font-size:12px" mold="select" width="99%"/>
+						</vbox>
+					</row>	
+					
+					<row>
+						<label value="Lote"/>
+						<vbox>
+							<hbox>
+								<intbox id="IbxLote"  style="font-size:12px" readonly="true"/>
+								<!-- 
+								<toolbarbutton id="btnActualizar2" label="Actualizar"/>
+								 -->
+							</hbox>
+						
+							<hbox>
+								<listbox id="lbxLote" style="font-size:12px" mold="select" />
+								<toolbarbutton id="btnActualizarl" label="Actualizar"/>
+							</hbox>
+						</vbox>
+					</row>		
+					
+										
+					<row>
+						<label value="Peso Neto/Fill" />
+						<textbox id="txtPeso" width="60px" readonly="true" />
+					</row>
+
+
+					<row>
+						<label value="#Medios" />
+						<textbox id="txtGavetas" readonly="true" />
+					</row>
+																				
+					
+					<row>
+						<label value="Tara" />
+						<textbox id="txtTara" width="60px" readonly="true" />
+					</row>
+					<!-- 
+					<row>
+						<label value="Gavetas" />
+						<textbox id="txtGaveta" width="60px" readonly="true" />
+					</row>
+					 -->
+		            
+		            					
+					
+					
+					
+					<row>
+						<label value="Ficha Batch" />
+						<textbox id="txtFichaBatch" readonly="true" />
+					</row>						
+<!-- 																				
+					<row>
+						<label value="Num. Mover" />
+						<decimalbox id="txtGavetas" format="#####"  maxlength="10" width="60px" readonly="false" />
+					</row>	
+ -->					
+					<row>
+						<label value="Bach Destino" />
+						<hbox>
+							<listbox id="lbxBacthDestino" style="font-size:12px" mold="select" />
+							Cerrado <checkbox id="chkCerrado2" checked="false"/>
+						</hbox>
+					</row>
+				</rows>									
+			</grid>	
+
+			<grid width="99%"> 
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar"  label="GRABAR" style="color:blue;font-size:12px;font-weight:bold"/>
+							</toolbar>
+							
+						</vbox>
+					</row>
+				</rows>
+			</grid>				
+					
+		</vbox>
+	</window>
+</zk>

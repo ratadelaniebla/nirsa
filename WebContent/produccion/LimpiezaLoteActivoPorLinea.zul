@@ -1,0 +1,111 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winLimpiezaProcesoBandejaPilotoNuevaFicha" apply="com.nw.webui.produccion.LimpiezaLoteActivoPorLineaWindow" >
+<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="Limpieza - Lote Activo por Linea" style="color:blue;font-size:12px;font-weight:bold" />
+	
+	<vbox id="vbxMain"  width="99%">
+	
+	
+	
+		<grid width="99%">
+			<rows>
+							
+				<row>
+					<label value="Produccion Actual" ></label>
+					<textbox id="txtProduccionAct" width="99%" readonly="true"></textbox>
+				</row>
+			
+				<row>
+					<label value="Turno Actual" ></label>
+					<textbox id="txtTurnoAct" width="99%" readonly="true"></textbox>
+				</row>
+			</rows>
+		</grid>	
+			
+			
+			
+
+		<grid width="99%">
+			
+			<rows>
+  				<row>						
+					<label value="Ver Otras Prod." style="color:blue" /> 
+					<checkbox id="chkRevisado" checked="false"/>
+				</row>
+				
+				<row id="rowproduccion" visible="false">
+					<label value="Otras Prod." style="color:blue" />
+					<listbox id="lbxFechaActiva" style="font-size:11px" mold="select" width="130px" disabled="true" > </listbox>
+				</row>			
+			</rows>	
+		</grid>	
+
+
+		<grid width="99%">
+			<rows>
+							
+				<row>
+					<label value="Produccion Lote" ></label>
+					<textbox id="txtProduccion" width="99%" readonly="true"></textbox>
+				</row>
+			
+				<row>
+					<label value="Turno Lote" ></label>
+					<textbox id="txtTurno" width="99%" readonly="true"></textbox>
+				</row>
+			
+			
+			
+				<row>
+					<label value="Línea" ></label>
+					<listbox id="lbxLinea" style="font-size:11px" mold="select"> 
+					</listbox>
+				</row>
+
+				
+				<row>
+						<label value="Lote Activo" ></label>
+						<label value=" " id="LblLote" ></label>
+				</row>				
+<row>
+						<label value="Tipo de Limpieza" ></label>
+						<label value=" " id="lblTipo" ></label>
+				</row>		
+				<row>
+					<label value="Lote"></label>
+					<div>
+						<hbox>					
+							<listbox id="lbxLote" style="font-size:11px" mold="select" ></listbox>
+							<toolbar>
+								<toolbarbutton id="btnActualizar" tooltiptext="Actualizar" image="/img/refrescar.gif"/>
+							</toolbar>
+						</hbox>
+					</div>
+				</row>
+			<row>
+				    <label value="Tipo :" style="color:blue" />
+				    <listbox id="lbxTipo" style="font-size:11px" mold="select" width="120px" />
+				</row>
+
+
+				<row>
+					<vbox>
+						<toolbar>						
+							<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+						</toolbar>
+					</vbox>
+				</row>
+
+
+				
+			</rows>
+		</grid>		
+	
+	
+		
+
+		
+	</vbox>
+</window>
+</zk>

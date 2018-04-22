@@ -1,0 +1,245 @@
+<?page id = "pagCoccion" title="" contentType="text/html;charset=UTF-8"?>
+<!--   -->
+<zk>
+	<window id="winCamaraCajonBarcoDescargaMantenimiento" apply="com.nw.webui.produccion.CamaraCajonBarcoDescargaConsultaWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="CONSULTA DE ESTADO DE CAJONES" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+		
+		<!--
+			<grid width="99%">				
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar" tooltiptext="Grabar" label="Grabar" image="/img/grabar.gif"/>
+								
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+		 -->
+		 
+		 <!--
+			<grid width="99%">
+				<rows>
+					<row>
+						<label value="Fecha Inicio :" style="color:blue" />
+						<datebox id="dteFecInicio" width="80px" lenient="true" buttonVisible="false" readonly="true" />
+					</row>
+					<row>
+						<label value="Fecha Fin :" style="color:blue" />
+						<hbox>
+						  <datebox id="dteFecFin" width="80px" lenient="true" buttonVisible="false" readonly="true" />
+						  
+						    <toolbar>
+					   	      <toolbarbutton id="btnBuscarBarco" image="/img/buscar.gif" ></toolbarbutton>
+					   	   </toolbar>
+						</hbox>
+					
+					</row>
+				</rows>
+			</grid>
+			  -->			
+						<grid width="99%">
+							<rows>
+								<!-- 
+							    <row>
+							       <label value="Registros Barcos :" style="color:blue" />
+							       <listbox id="lbxBarcoDescarga" style="font-size:11px" mold="select"
+									width="99%" />
+							    </row>
+							     -->
+							     
+								<row>
+								    <label value="Cajon :" width="10%"  style="color:blue;font-size:12px;font-weight:bold"  />
+								         <textbox id="txtCajon"  cols="10" readonly="false"/>
+								</row>
+
+
+
+								<row>
+								    <label value="Registro :" width="10%" style="color:blue;font-size:12px;font-weight:bold"  />
+								    <hbox>  
+								         <textbox id="txtRegistro"  cols="10" readonly="false"/>
+								    </hbox>									 
+								</row>
+								
+								<row visible="false">
+								    <label value="Cuba :" width="10%"   />
+								    <hbox>  
+								         <textbox id="txtCuba"  cols="10" readonly="true"/>
+								    </hbox>									 
+								</row>
+
+
+								<row>
+									<label value="Buscar:" width="10%"   />
+									<toolbar>
+								   	      <toolbarbutton id="btnBuscarCajon" image="/img/buscar.gif" ></toolbarbutton>
+								   	</toolbar>
+								</row>
+								
+								<row>
+									<label value="Cajones Disponibles " style="color:blue" width="99%" />
+									<vbox>
+								    	<label value="Registro-Estado"/>
+										<listbox id="lbxCajonesDisponibles" style="font-size:10px" mold="select" width="99%" > </listbox>
+									</vbox>
+								</row>		
+
+								<row>
+								    <label value="Inf. Cajón :" width="10%"   />
+								     <label id="lbInfoCajon" width="10%"   />
+								</row>								
+								
+								<row>
+								    <label value="Estado:" width="99%"   />
+								   	<textbox id="txtEstado"  rows="16" readonly="true"/>
+								</row>
+<!-- 
+								<row>
+								    <label value="Cuba :" width="10%"   />
+									<listbox id="lbxCuba" style="font-size:11px"
+									 mold="select" width="100px" disabled="true"/>
+								</row>
+ -->								
+								
+								
+								
+								<row>
+								    <label value="Cuba:" width="99%"   />
+								   	<textbox id="txtCubaInfo"  readonly="true" rows="2"/>
+								</row>
+
+								<row>
+								    <label value="L.Camara:" width="10%"   />
+								   	<textbox id="txtLoteCamara"  cols="10" readonly="true"/>
+								</row>
+
+
+								<row>
+								    <label value="L.Haccp:" width="10%"   />
+								   	<textbox id="txtHaccp"  cols="10" readonly="true"/>
+								</row>
+								
+								
+								<!--  
+								
+								<row>
+								    <label value="Turno :" width="10%"   />
+									<listbox id="lbxTurno" style="font-size:11px"
+									 mold="select" width="100px"  />
+								</row> -->
+								
+								<row>
+								    <label value="P.Bruto Camara:" width="10%"   />
+								   	<doublebox id="dbbxPesoBruto"  cols="10" readonly="true"/>
+								</row>
+								<row>
+								    <label value="P.Neto:" width="10%"   />
+								   	<textbox id="txtPesoNeto"  cols="10" readonly="true"/>
+								</row>
+								<row>
+								    <label value="Tara:" width="10%"   />
+								   	<textbox id="txtTara"  cols="10" readonly="true"/>
+								</row>
+								<row>
+								    <label value="Ticket:" width="10%"   />
+								   	<textbox id="txtTicket"  cols="10" readonly="true"/>
+								</row>
+								<row>
+								    <label value="Lote Sap:" width="10%"   />
+								   	<textbox id="txtLoteCajonSap"  cols="12" readonly="true"/>
+								</row>
+								<row>
+								    <label value="Inf.Especie Talla :" width="10%"   />
+								     <label id="lbInfoEspecieTallaAnterior" width="10%"   />
+								</row>
+								<row>
+								    <label value="Especie/talla:" width="10%"   />
+								     <hbox>
+								   	  <textbox id="txtEspecieTalla"  cols="10" readonly="true"/>
+								   	   <toolbar>
+								   	      <toolbarbutton id="btnBuscarEspecieTalla" image="/img/buscar.gif" visible="false" ></toolbarbutton>
+								   	   </toolbar>
+								   	   
+								   	 </hbox>  
+								</row>
+								 <row>
+								    <label value="Inf.Especie Talla :" width="10%"   />
+								     <label id="lbInfoEspecieTallaActual" width="10%"   />
+								</row>
+								<row>
+								    <label value="Tipo Captura :" width="10%"   />
+									<listbox id="lbxTipoCaptura" style="font-size:11px"
+									 mold="select" width="100px" disabled="true" />
+								</row>
+								<row>
+								    <label value="Zona Fao:" width="10%"   />
+								   	<textbox id="txtZonaFao" maxlength="5" cols="12" readonly="true"/>
+								</row>
+								
+							<row >
+									<label value="Camara :"  />
+									<listbox id="lbxCamaras" style="font-size:11px"
+									 mold="select" width="100px" disabled="true" />
+								</row>
+								<row>
+								    <label value="Columna :" width="20%"  />
+								    <listbox id="lbxColumnas" style="font-size:11px"
+									 mold="select" width="99%" disabled="true"/>
+								</row>
+								<row>
+								   <label value="Fila :"    />
+								   <listbox id="lbxFilas" style="font-size:11px"
+									 mold="select" width="99%" disabled="true"/>
+								</row>
+							</rows>
+						</grid>
+						
+						<grid>
+							<rows>
+								<row>
+									<checkbox id="ChkConfirmar" label="Confirmar">  </checkbox>
+									<toolbar>
+										<vbox>
+											<toolbarbutton id="btnConfirmar" label="Habilitar Cajón Vendido" style="font-size:10px;font-weight:bold"/>
+											<space width="6px"></space>										
+											<toolbarbutton id="btnConfirmare" label="Habilitar Cajón Eliminado" style="font-size:10px;font-weight:bold"/>
+											<space width="10px"></space>
+											<toolbarbutton id="btnConfirmadp" label="Habilitar Cajón por Devolución al proveedor" style="font-size:10px;font-weight:bold"/>
+											 
+										</vbox>	
+									</toolbar>								
+								</row>
+							</rows>
+						</grid>
+						
+<!-- 						
+						<label value="PESOS PARA NUEVO CAJÓN"/>
+						<grid>
+							<rows>		
+								
+								<row>
+									<label value="Nuevo Cajón" />
+									<checkbox id="ChkNuevoCajon"></checkbox>
+								</row>		
+																		
+								<row>
+								    <label value="P.Bruto:" width="10%"   />
+								   	<doublebox id="dbbxPesoBrutod"  cols="10" readonly="false"/>
+								</row>
+								<row>
+								    <label value="P.Neto:" width="10%"   />
+								   	<textbox id="txtPesoNetod"  cols="10" readonly="true"/>
+								</row>
+							</rows>
+						</grid>		
+-->							
+								
+			 
+		</vbox>
+	</window>
+</zk>

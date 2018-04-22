@@ -1,0 +1,63 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="CONSULTA DE COCINADA" border="normal" id="winConsultaCocina" 
+apply="com.nw.webui.produccion.CocinaConsultaCocinadaxFechaWindow">
+<script src="/js/noBarra.js" type="text/javascript" />
+
+   <vbox id="vbxMain"  width="200px" >  
+    	   
+	  
+	   <grid width="99%"> 
+			<rows>
+<!--  			    <row>
+					<label value="Dia Produccion " style="color:blue"   />
+					<listbox id="lbxProduccionFecha2" style="font-size:11px" mold="select" width="130px" > </listbox>
+			    </row>-->
+			   <row >
+					<label value="Día Producción " style="color:blue" />
+					<datebox id="dteFecha" width="110px" />
+				</row>
+			</rows>
+	   </grid>
+	   <hbox width="99%"> <!--  -->
+	    	 <groupbox>
+	           <vbox>
+	         	
+	         	<hbox>
+	         	  <label value="Cocina : " style="color:blue"   />
+			 	  <listbox id="lbxCocina2" style="font-size:11px" mold="select" width="130px" > </listbox>
+			 	</hbox>  
+			 	 <hbox>
+			 		<label value="Cocinada" ></label>
+					<textbox id="txtCocinada2" style="font-size:11px"  width="130px"  readonly="true"> </textbox>		
+			 	 </hbox>
+			 </vbox>
+	  	   </groupbox>  	   
+	   </hbox>  
+	   <hbox>    
+	      <groupbox>
+	         <separator></separator>
+	          <listbox id="lbxDestino" model="@{winConsultaCocina.evisceradoDetalleProcesoCocheEstadosOrdenDestino}" multiple="true" checkmark="false" height="160px" width="250px">
+						<listhead style="font-size:9px" >
+							<listheader label="Orden" width="50px" />
+							<listheader label="Coche" width="50px" />
+							<listheader label="Clasific" width="50px" />
+							<listheader label="Corte" width="50px" />
+							<listheader label="Lote" width="50px" />
+						</listhead>
+						  
+						     <listitem self="@{each=d}">
+						            <listcell label="@{d.numero}" ></listcell>
+									<listcell  label="@{d.evisceradoDetalleProcesoCoche.codbarra}"></listcell>
+						            <listcell  label="@{d.evisceradoDetalleProcesoCoche.evisceradoPescadosLata.especificacion}"> </listcell>
+						            <listcell  label="@{d.evisceradoDetalleProcesoCoche.evisceradoCorte.descripcion}"> </listcell>
+						            <listcell  label="@{d.evisceradoDetalleProcesoCoche.evisceradoDetalleProceso.produccionDetalleLoteCajon.produccionDetalleLote.idlote}"> </listcell>
+						      </listitem>
+				 </listbox> 
+	      </groupbox>
+	   
+	   </hbox>
+		
+	</vbox>
+	</window>
+</zk>

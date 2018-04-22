@@ -1,0 +1,109 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="reporteRegistroCoches" apply="com.nw.webui.produccion.LimpiezaReportePonchadasWindow">
+<label value="REPORTES DE PONCHADAS" style="color:blue;font-size:11px;font-weight:bold"/>
+		<vbox  id="vbxMain" width="99%">
+		
+			<grid width="99%">
+				<rows>
+
+					<row>
+						<label value="Fecha :"/>
+						<datebox id="dteFecha" format="dd/MM/yyyy" readonly="true"/>
+					</row> 
+					
+					<row>
+						<label value="Turno :"/>	
+						<listbox id="lbxTurno" style="font-size:11px" mold="select"> </listbox>
+					</row>	
+					<row>
+						<label value="Linea :"/>	
+						<listbox id="lbxLinea" style="font-size:11px" mold="select"> </listbox>
+					</row>
+					<row>
+						<label value="Tipo :"/>	
+						<listbox id="lbxtipo" style="font-size:11px" mold="select"> 
+							<listitem ></listitem>
+							<listitem label="Despellejada"></listitem>
+							<listitem label="Fileteado"></listitem>
+						</listbox>
+					</row>
+					<row>
+						<label value="Empleados:"/>	
+						<listbox id="lbxEmpleado" style="font-size:11px" mold="select" width="130px" > </listbox>
+					</row>	
+				</rows>
+			</grid>
+			
+			
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<label value="Imprimir" style="color:blue;font-size:12px;font-weight:bold"/>
+							<toolbar>
+								<vbox>
+								
+								<toolbarbutton id="btnDespellejadas" label="Reporte de Ponchadas Despellejadas"/>
+								<toolbarbutton id="btnFiliteada" label="Reporte de Ponchadas Fileteada"/>
+								
+								<toolbarbutton id="btnExcelDespellejadas" label="Excel Reporte de Ponchadas Despellejadas"/>
+								<toolbarbutton id="btnExcelFiliteada" label="Excel Reporte de Ponchadas Fileteada"/>
+								
+								<toolbarbutton id="btnExcelPonchadasTvc" label="Excel Reporte de Ponchadas TVC"/>
+								
+								</vbox>
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+			
+			
+
+
+			<label value="REPORTE ENTRE FECHAS RRHH" style="color:blue;font-size:12px;font-weight:bold"/>
+			<grid width="99%">
+				<rows>
+
+					<row>
+						<label value="Desde :"/>
+						<datebox id="dteFecha1" format="dd/MM/yyyy" readonly="true"/>
+					</row>
+					
+					<row>
+						<label value="hasta :"/>
+						<datebox id="dteFecha2" format="dd/MM/yyyy" readonly="true"/>
+					</row> 
+					 
+	
+				</rows>
+			</grid>
+
+
+
+
+			<grid width="99%">
+				<rows>
+					<row>
+							<toolbar>
+								<vbox>
+									<!-- 
+									<toolbarbutton id="btnExcelPonchadasFechas" label="Excel Ponchadas Fileteado/Panzas"/>
+									<space width="1px"></space>
+									 -->
+									<toolbarbutton id="btnExcelPonchadasFechas" label="Excel PONCHADAS"/>
+								</vbox>
+							</toolbar>
+					</row>
+				</rows>
+			</grid>
+
+
+
+			
+			
+			
+	</vbox> 
+</window>
+</zk>

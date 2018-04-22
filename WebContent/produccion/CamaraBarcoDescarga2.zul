@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?page id="pagCamBarcoDes2"?>
+<window id="winCamaraBarcoDes2" use="com.nw.webui.produccion.CamaraBarcoDescarga2Window">
+	<label value="Registro Barco Descarga2" style="color:blue;font-size:12px;font-weight:bold"/>
+	<vbox width="@{area.anchoInterno}">
+		<grid width="99%">
+			<rows>
+<!--  				<row>Autoclave <label value="Origen" style="color:blue"/></row>-->
+<!--  				<row>Fecha Descarga
+					<datebox id="dteFecOri" onChange="winCamaraBarcoDes2.eventoFecha(self, true)" width="80px">
+						<attribute name="onCreate">
+							self.setFormat(com.nw.util.Sistema.FORMATO_FECHA_GUI);
+							self.setValue(new Date());
+						</attribute>
+					</datebox>
+				</row>-->
+					<row>
+						Barco
+							<listbox id="lbxBarco" style="font-size:9px" mold="select"
+								width="100px" />
+					</row>
+					<row>
+						Registro
+						<decimalbox id="txtRegistro" format="###.##" maxlength="8" width="98%" readonly="true" />
+					</row>
+<!--  				<row>
+					Ver cerrados
+					<hbox align="center">
+						<checkbox checked="false" id="chkEstOri"/>
+						<toolbarbutton label="Datos" onClick="winTras.cargarAutoclaves(true)"/>
+					</hbox>
+				</row>-->
+			</rows>
+		</grid>
+		<listbox id="lbxAutOri" onSelect="winTras.eventoListbox(true)" mold="select" width="100%"/>
+		<listbox id="lbxAsiOri" multiple="true" onSelect="winTras.disponiblesParaAsignar()" checkmark="true" height="130px" width="99%">
+			<listhead style="font-size:9px" >
+				<listheader label="Cuba"/>
+				<listheader label="C. Plantado"/>
+				<listheader label="C. Brisa"/>
+				<listheader label="Zona Fao"/>
+				<listheader label="Total"/>
+			</listhead>
+		</listbox>
+<!--  		<grid width="99%">
+			<rows>
+				<row>Autoclave <label value="Destino" style="color:blue"/></row>
+				<row>Fecha Producción
+					<datebox id="dteFecDes" onChange="winTras.eventoFecha(self, false)" width="80px">
+						<attribute name="onCreate">
+							self.setFormat(com.nw.util.Sistema.FORMATO_FECHA_GUI);
+							self.setValue(new Date());
+						</attribute>
+					</datebox>
+				</row>
+				<row>
+					Ver cerrados
+					<hbox align="center">
+						<checkbox checked="false" id="chkEstDes"/>
+						<toolbarbutton label="Datos" onClick="winTras.cargarAutoclaves(false)"/>
+					</hbox>
+				</row>
+			</rows>			
+		</grid>-->
+<!--  		<listbox id="lbxAutDes" onSelect="winTras.eventoListbox(false)" mold="select" width="100%"/>
+		<listbox id="lbxAsiDes" height="130px" width="99%">
+			<listhead style="font-size:9px" >
+				<listheader label="Cook"/>
+				<listheader label="Car"/>
+				<listheader label="Pri"/>
+				<listheader label="Sec"/>
+				<listheader label="Cant"/>
+			</listhead>
+		</listbox>-->
+		<toolbarbutton id="btnAsignar" label="Asignar carros seleccionados" onClick="winTras.asignar()"/>
+		<checkbox label="¿Grabar transacción?" checked="false" id="chkGra" />
+	</vbox> 
+</window>

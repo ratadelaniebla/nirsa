@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CalidadBarcoDescargadoAccionCorrectiva" language="groovy" pageWidth="1100" pageHeight="802" whenNoDataType="AllSectionsNoDetail" columnWidth="1100" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isIgnorePagination="true">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="570"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="lotehaccp" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[/* =========================================================*/
+   /* 01-02-2018 Tabla virtual:
+                    Se obtien el idcalidadmuestraareacabecera
+                     y el idcalidadmuestracabeceradescargamotivo
+                    segun el lote haccp */
+   /* ======================================================= */
+
+select u.* from
+
+(
+
+WITH consultaprincipal as (
+  select n.idcalidadmuestraareacabecera , n.idcalidadmuestracabeceradescargamotivo , n.mezclacuba, n.accion_correctiva from
+     (
+	select t1.idcalidadmuestraareacabecera::TEXT || ' ' || t1.idcalidadmuestracabeceradescargamotivo::TEXT area_motivo,
+	* from
+	(
+
+	select
+	cmacc.idcalidadmuestraareacabecera,
+	cmdm.idcalidadmuestracabeceradescargamotivo,
+	(select array_to_string(array_agg(t1.usuario), ' <br/> ')  from (
+	select DISTINCT u.usuario from calidad_muestra_area_detalle cmadu inner join usuario u
+	on cmadu.idusuario = u.idusuario
+	where cmadu.idcalidadmuestraareacabecera = cmacc.idcalidadmuestraareacabecera and idcalidadmuestragrupoanalisis = 2) t1) usuarios_histamina,
+
+	calidad_muestra_lista_de_usuarios_muestra(cmacc.idcalidadmuestraareacabecera) usuarios_muestra,
+
+	(select usu.usuario from usuario usu where usu.idusuario =  cmacap.idusuario and cmacap.accesoverificado = true ) usuarios_verificado,
+	(select usu.usuario from usuario usu where usu.idusuario =  cmacap.idusuario and cmacap.accesorevision    = true ) usuarios_revision,
+
+
+	(select barco.nombre from barco where barco.idbarco=(select barco_descarga.idbarco from barco_descarga where barco_descarga.idbarcodescarga=cmacc.idbarcodescarga ))as barco,
+	(select registro from barco_descarga where idbarcodescarga=cmacc.idbarcodescarga) as registro,
+	cmacc.armador as Proveedor,
+	--(select armador.descripcion from armador where armador.idarmador=(select barcd.idarmador from barco_descarga barcd where cc.idbarcodescarga=barcd.idbarcodescarga limit 1) ) as Proveedor,
+	(select to_char(cmacc.fecharegistro, 'YYYY-MM-DD'))::DATE as fecha,
+	(cmacc.idturno) as Turnos,
+	(select mescla_cubas_por_lotehaccp(cmacc.lotehaccp)) as cuba,
+	(cmacc.lotehaccp) as lotehaccp,
+	(select especie.codigoqm from especie where especie.idespecie=(select especie_talla.idespecie from especie_talla where especie_talla.idespecietalla::INTEGER=cc.idmaterial::INTEGER LIMIT 1 )),
+	totalnetohaccp as cantidad,
+	cmacc.totalnetohaccp as cantidad,
+	row_number() OVER () as numero,
+	cma.descripcion area,
+
+	cma.orden_area,
+	cma.idcalidadmuestraarea,
+	cma.texto_pie_pagina_accion_correctiva,
+	cma.area_referencia,
+
+	(select count(cmad1.idcalidadmuestraareadetalle) from calidad_muestra_area_detalle cmad1
+	where cmad1.idcalidadmuestraareacabecera = cmacc.idcalidadmuestraareacabecera and cmad1.idcalidadmuestragrupoanalisis = 2 and cmad1.pintar = -1)::TEXT problemas,
+
+	(select cmami.texto from calidad_muestra_cabecera_descarga_motivo cmcdi inner join calidad_muestra_area_motivo cmami
+	on cmcdi.idcalidadmuestraareamotivo = cmami.idcalidadmuestraareamotivo
+	where cmcdi.idcalidadmuestracabeceradescargamotivo = cmdm.idcalidadmuestracabeceradescargamotivo) accion_correctiva,
+
+
+	(select array_to_string(array_agg(DISTINCT(t.idturno)), ' / ')  from calidad_muestra_area_detalle cmadt inner join turno t
+	on cmadt.idturno = t.idturno
+	where cmadt.idcalidadmuestraareacabecera = cmacc.idcalidadmuestraareamotivo and idcalidadmuestragrupoanalisis = 2) turno,
+
+	(select array_to_string(array_agg(DISTINCT(to_char(cmadt.fecharegistro, 'DD/MM/YYYY')::TEXT)), '  ') from calidad_muestra_area_detalle cmadt
+	where cmadt.idcalidadmuestraareacabecera = cmacc.idcalidadmuestraareamotivo and idcalidadmuestragrupoanalisis = 2 ) fecha,
+
+	cmacc.mostrarvariable,
+	(select mescla_cubas_por_lotehaccp(cmacc.lotehaccp)) as mezclacuba,
+	cc.proposito
+
+
+	FROM calidad_muestra_area_cabecera cmacc
+	inner join calidad_muestra_area cma
+	on cmacc.idcalidadmuestraarea = cma.idcalidadmuestraarea
+	inner join camara_cajon cc
+	on cc.idcamaracajon=cmacc.idcamaracajon
+	inner join calidad_muestra_cabecera_descarga_motivo cmdm
+	on cmacc.idcalidadmuestraareacabecera = cmdm.idcalidadmuestraareacabecera
+	left join calidad_muestra_area_cabecera_aprobacion cmacap
+	on(cmacap.idcalidadmuestraareacabecera = cmacc.idcalidadmuestraareacabecera)
+
+	WHERE cmacc.lotehaccp = $P{lotehaccp} --107S001
+
+	   and  cmacc.idcalidadmuestraarea = 4
+	and (select count(cmad1.idcalidadmuestraareadetalle) from calidad_muestra_area_detalle cmad1
+	where cmad1.idcalidadmuestraareacabecera = cmacc.idcalidadmuestraareacabecera and cmad1.idcalidadmuestragrupoanalisis = 2) > 0
+	) t1
+
+	ORDER BY t1.orden_area, t1.idcalidadmuestraarea
+      )n
+    )
+
+
+   /* ======================================================= */
+   /* se cargan las muestras de histamina - accion correctiva */
+   /* ======================================================= */
+
+   select t1.fecharegistro ,t1.nombre barco , t1.registro,  t2.mezclacuba,  t1.lotehaccp ,t1.codigoqm , t1.histaminaporgrupo , (t1.histaminaporgrupo/10) histaminaporcentaje,
+t2.accion_correctiva
+  from (
+
+	select
+	cmacc.lotehaccp,
+	cmad.idcalidadmuestragrupoanalisis,
+	cmad.pintar,
+	cmad.idcalidadmuestraareacabecera,
+	e.codigoqm,
+	b.nombre,
+	cmad.fecharegistro,
+	bd.registro,
+
+	case when cmad.idcalidadmuestracabeceradescargamotivo is NULL THEN
+	0
+	else
+	cmad.idcalidadmuestracabeceradescargamotivo
+	end idcalidadmuestracabeceradescargamotivo,
+
+	cma.descripcion,
+	cmad.ordenregistro,
+
+	case when cmta.idcalidadmuestratipoanalisis = 1 then
+	''
+	else
+	cmta.descripcion
+	end texto_grupo,
+
+
+	cmta.texto_individual,
+
+	case when cmad.histaminaporgrupo <= 0.0 then
+		NULL
+	else
+		cmad.histaminaporgrupo
+	end histaminaporgrupo,
+
+
+	case when cmad.histaminaindividual <= 0.0 then
+		NULL
+	else
+		cmad.histaminaindividual
+	end histaminaindividual,
+
+
+
+
+
+	cma.idcalidadmuestraarea,
+	cmad.comentario,
+
+	case when cmacc.numeropescados > 0 and (cmacc.idcalidadmuestraarea = 1 or cmacc.idcalidadmuestraarea = 4)  then
+		cmta.compositas
+		else
+			case when cmad.ordenregistro <= cmacc.numeropescados then
+				1
+			else
+				cmta.compositas
+			end
+	end as grupo,
+
+	cmad.grupo as gurpos_muestra
+
+	FROM calidad_muestra_area_cabecera cmacc
+	inner join calidad_muestra_area cma
+	on cmacc.idcalidadmuestraarea = cma.idcalidadmuestraarea
+	inner join calidad_muestra_tipo_analisis cmta
+	on cmacc.idcalidadmuestratipoanalisis = cmta.idcalidadmuestratipoanalisis
+	inner join calidad_muestra_area_detalle cmad
+	on cmacc.idcalidadmuestraareacabecera=cmad.idcalidadmuestraareacabecera
+	inner join barco_descarga bd on (cmacc.idbarcodescarga = bd.idbarcodescarga)
+	inner join barco b on (bd.idbarco = b.idbarco)
+	inner join camara_cajon cc
+	on cc.idcamaracajon=cmacc.idcamaracajon
+          inner join especie_talla et on (cc.idmaterial = et.idespecietalla )
+	  inner join especie e on (et.idespecie = e.idespecie)
+
+       ) t1
+
+       left join consultaprincipal t2 on t1.idcalidadmuestraareacabecera = t2.idcalidadmuestraareacabecera
+
+	where
+	 t1.idcalidadmuestracabeceradescargamotivo = t2.idcalidadmuestracabeceradescargamotivo
+         and  t1.idcalidadmuestragrupoanalisis =  2
+         and  t1.histaminaporgrupo is not null
+	ORDER BY t1.idcalidadmuestraarea, t1.ordenregistro
+
+ )u order by u.lotehaccp asc]]>
+	</queryString>
+	<field name="fecharegistro" class="java.sql.Timestamp"/>
+	<field name="barco" class="java.lang.String"/>
+	<field name="registro" class="java.lang.String"/>
+	<field name="mezclacuba" class="java.lang.String"/>
+	<field name="lotehaccp" class="java.lang.String"/>
+	<field name="codigoqm" class="java.lang.String"/>
+	<field name="histaminaporgrupo" class="java.lang.Double"/>
+	<field name="histaminaporcentaje" class="java.lang.Double"/>
+	<field name="accion_correctiva" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField>
+				<reportElement x="264" y="0" width="80" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{lotehaccp}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="428" y="0" width="92" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{histaminaporgrupo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="344" y="0" width="84" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{codigoqm}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="520" y="0" width="74" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{histaminaporcentaje}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd-MMM-yy" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="58" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{fecharegistro}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="58" y="0" width="74" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{barco}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="132" y="0" width="60" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{registro}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="192" y="0" width="72" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{mezclacuba}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="594" y="0" width="506" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{accion_correctiva}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

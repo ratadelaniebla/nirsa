@@ -1,0 +1,107 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winRevolteoCajon" apply="com.nw.webui.produccion.DescongeladoDetalleRevolteoWindow" >
+	<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="REVOLTEO CAJON" style="color:blue;font-size:12px;font-weight:bold" />
+	
+	<vbox id="vbxMain" width="99%">
+		<grid >
+			<rows>
+				<row>
+					<label value="Fec.Prod. " style="color:blue" />
+					<listbox id="lbxFechaActiva" style="font-size:11px" mold="select" width="99%" > </listbox>
+				</row>
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+				<row >
+					<label value="Turno Producción" ></label>
+					<listbox id="lbxTurnoProduccion" style="font-size:11px" mold="select" width="99%" > </listbox>
+				</row>
+				<row >
+					<label value="Turno Labor" ></label>
+					<listbox id="lbxTurnoLabor" style="font-size:11px" mold="select" width="99%" > </listbox>
+				</row>
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>
+		
+		<grid>
+			<rows >
+				<row>
+					<label value="Cajon" ></label>
+
+					<hbox>						
+						<listbox id="lbxCajon" style="font-size:11px" mold="select" width="99%" ></listbox>
+						<toolbar >
+							<toolbarbutton id="btnActulizar"  tooltiptext="Actualizar" image="/img/refrescar.gif"/>
+						</toolbar>
+					</hbox>				
+					
+				</row>
+				<row>
+					<label value="Cajon Revolteo" ></label>
+					<textbox id="txtCajonRevolteo" maxlength="12" width="99%" ></textbox>
+				</row>
+				<row>
+					<label value="Num Ducha"></label>
+					<textbox id="txtNumDucha" maxlength="255" readonly="true" width="100px" ></textbox>
+				</row>
+				<row>
+					<label value="Lote"></label>
+					<textbox id="txtLote" maxlength="255" readonly="true" width="99%" ></textbox>
+				</row>
+				
+				
+				<row>
+				    <label value="Cuba:" width="99%"   />
+				   	<textbox id="txtCuba"  readonly="true" rows="2" width="99%"/>
+				</row>
+
+				<row>
+				    <label value="L.Camara:" width="99%"   />
+				   	<textbox id="txtLoteCamara"  cols="10" readonly="true"/>
+				</row>
+
+
+				<row>
+				    <label value="L.Haccp:" width="99%"   />
+				   	<textbox id="txtHaccp"  cols="10" readonly="true"/>
+				</row>				
+				
+				
+				<row>
+					<label value="Especie-Talla"></label>
+					<textbox id="txtEspecieTalla" maxlength="255" readonly="true" width="99%" ></textbox>
+				</row>
+				<row>
+					<label value="Barco" ></label>
+					<textbox id="txtBarcoDescarga" readonly="true" width="99%"> </textbox>
+				</row>
+				<row>
+					<label value="Origen"></label>
+					<textbox id="txtOrigen" maxlength="255" readonly="true" width="99%" ></textbox>
+				</row>
+				<row>
+					<label value="Pedido"></label>
+					<textbox id="txtPedido" maxlength="255" readonly="true" width="99%" ></textbox>
+				</row>
+			</rows>
+		</grid>
+		
+	</vbox>
+</window>
+</zk>

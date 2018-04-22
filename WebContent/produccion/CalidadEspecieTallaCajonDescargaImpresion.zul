@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?page id="pagCalidadBPMDes"?>
+<window id="winCamaraBarcoDescargaImpresion" apply="com.nw.webui.produccion.CalidadEspecieTallaCajonDescagaImpresionWindow">
+	<label value="Reporte Control Tallas en Clasificación" style="color:blue;font-size:11px;font-weight:bold"/>
+	<vbox  id="vbxMain">
+		
+			<grid width="99%">
+				<rows width="100%" >
+
+					<row>
+						<label value="Desde"/>
+						<datebox id="dteFecha1" width="110px" format="dd/MM/yyyy"/>
+					</row>					
+
+					<row>
+						<label value="Hasta"/>
+						<datebox id="dteFecha2" width="110px" format="dd/MM/yyyy"/>
+					</row>					
+
+					<row>
+						<label value=""/>
+						<toolbar>
+							<toolbarbutton id="btnBuscar" label="Buscar" image="/img/buscar.gif"/>
+						</toolbar>
+					</row>
+								
+					<row>
+						<label value="Registro" />
+  						<listbox id="lbxRegistro" style="font-size:12px" mold="select" width="98%" />
+					</row>
+				</rows>
+			</grid>
+			<grid width="99%">
+				<rows>
+					<row>
+							<toolbar>	
+							   <vbox>						
+								 <toolbarbutton id="btnCalidadEspecieTallaCajonDescarga" label="Clasificacion de Atun PDF"		/>
+								 <toolbarbutton id="btnClasificacionNuevo" 				label="Clasificacion de Atun PDF v2018" />
+								</vbox>
+							</toolbar>	
+					</row>
+				</rows>
+			</grid>
+
+			
+	</vbox> 
+</window>

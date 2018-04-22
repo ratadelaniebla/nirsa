@@ -1,0 +1,115 @@
+<?page title="LIMPIEZA ASIGNACION " contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winLimpiezaAsignacionEmpleado" border="none" apply="com.nw.webui.produccion.LimpiezaProcesoAsignacionEmpleadoEvolutionWindow">
+<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="LIMPIEZA ASIGNACION EMPLEADO POR CEDULA ok" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="99%">
+		<grid >
+			<rows>
+			
+				<!-- 
+				<row>
+				 -->
+					<!-- <label value="Fecha Produccion " style="color:blue" /> -->
+					<!-- <datebox id="dtxFechaActiva" style="font-size:11px"  width="130px" format="dd/mm/yyyy" ></datebox> -->
+					<!-- <textbox id="txtFechaActiva"  style="font-size:11px"  width="130px" readonly="true" ></textbox> -->
+				<!-- 
+				</row>
+				 -->
+				
+				<row>
+				    <label value="Fech.Prod. - Turno :" style="color:blue" />
+				    <listbox id="lbxProcesosActivos" style="font-size:11px" mold="select" width="120px" />
+				</row>
+				
+				
+				<row>
+				    <label value="Turno :" style="color:blue" />
+				    <textbox id="txtTurno"  style="font-size:11px"  width="130px" readonly="true" ></textbox>
+				</row>
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>
+		
+		<grid >
+			<rows >
+				<row>
+				    <label value="Tarjeta:" style="color:blue" />
+				    <textbox id="txtTarjeta"  style="font-size:11px"  width="130px" readonly="false" ></textbox>
+				</row>
+			<!-- <row>
+				    <label value="Linea :" style="color:blue" />
+				    <textbox id="txtLinea" style="font-size:11px" width="120px" />
+				</row>
+				<row>
+				    <label value="Cargo :" style="color:blue" />
+				    <textbox id="txtCargo" style="font-size:11px"  width="120px" />
+				</row>
+				 -->
+				<row>
+				    <label value="Linea :" style="color:blue" />
+				    <listbox id="lbxLinea" style="font-size:11px" mold="select" width="120px" />
+				</row>
+				
+				<row>
+				    <label value="Cargo :" style="color:blue" />
+				    <listbox id="lbxCargo" style="font-size:11px" mold="select" width="120px">
+				    	<listitem selected="true" label=""  />
+				    	<listitem label="Despellejador" value="1" />
+				    	<listitem label="Fileteador" value="2" />
+				    </listbox>
+				</row>
+				<row>
+				    <label value="Ubicación :" style="color:blue" />
+				    <textbox id="txtUbicacion" style="font-size:11px"  width="120px" readonly="true" />
+				</row>
+				
+				
+				
+<!--  
+				<row>
+				    <label value="Equipo :" style="color:blue" />
+				    <listbox id="lbxGrupo" style="font-size:11px" mold="select" width="120px" />
+				</row>				
+ -->				
+				
+				<row>
+						<hbox>
+						<label value="Cedula" width="100px" style="color:blue"></label>
+						</hbox>
+					
+						<hbox>
+						<textbox id="txtEmpleado" width="100px" > </textbox>
+						<toolbar>							
+							<toolbarbutton id="btnBuscarEmpleado" tooltiptext="Buscar Empleado" image="/img/buscar.gif" style="color:blue;font-size:12px;font-weight:bold" />
+						</toolbar>
+						</hbox>
+				</row>
+				<row>
+					<label value="Nombres :" style="color:blue" />
+					<vbox>
+					   <textbox id="txtNombre" disabled="false" width="120px" readonly="true" multiline="true" rows="3" > </textbox>
+					   <toolbar>							
+							<toolbarbutton id="btnLimpiar" tooltiptext="Limpiar" image="/img/crear.gif" style="color:blue;font-size:12px;font-weight:bold" />
+						</toolbar>
+					</vbox>
+					
+				</row>
+				
+			</rows>
+		</grid>
+		
+	</vbox>
+</window>
+</zk>

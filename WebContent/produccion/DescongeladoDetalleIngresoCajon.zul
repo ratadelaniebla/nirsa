@@ -1,0 +1,154 @@
+<?page title="INGRESO CAJON." contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winAsignacionCajon" apply="com.nw.webui.produccion.DescongeladoDetalleIngresoCajonWindow" width="99%">
+	<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="INGRESO CAJON" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="99%">
+	
+		<grid width="99%"> 
+			<rows>
+				<row>
+					<label value="Fec.Prod. " style="color:blue" />
+					<listbox id="lbxFechaActiva" style="font-size:11px" mold="select" width="80%" > </listbox>
+				</row>
+			</rows>
+		</grid>
+		
+		
+		<grid  width="280px">
+			<rows>
+				<row >
+					<label value="Turno Producción" ></label>
+					<listbox id="lbxTurnoProduccion" style="font-size:11px" mold="select" width="90%" > </listbox>
+				</row>
+				<row >
+					<label value="Turno Labor" ></label>
+					<listbox id="lbxTurnoLabor" style="font-size:11px" mold="select" width="90%" > </listbox>
+				</row>
+				
+				
+				
+				<row>
+					<label value="Lote " ></label>
+					
+					<hbox>
+					
+					<listbox id="lstLote" style="font-size:11px" mold="select" width="110px" > </listbox>
+						<toolbar >
+							<toolbarbutton id="btnActulizarDuchas"  tooltiptext="Actualizar" image="/img/refrescar.gif"/>
+						</toolbar>
+					</hbox>						
+					
+				</row>
+	
+				<row>
+					<label value="Especie-Talla "></label>
+					<textbox id="txtEspecieTallal" multiline="true" readonly="true" width="90%" rows="3" > </textbox>
+				</row>				
+				
+				
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+
+
+						<toolbar>
+							<toolbarbutton id="btnLiberar" tooltiptext="Liberar Cajones Pendientes en SAP" label="LIBERAR CAJONES EN SAP"/>
+						</toolbar>						
+
+						<space width="5px"></space>
+					
+						<toolbar>
+							<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+						</toolbar>
+						
+						
+					</vbox>
+				</row>
+			</rows>
+		</grid>
+		
+		<grid width="280px">
+			<rows>
+				<row >
+					<label value="Cajon " ></label>
+					
+					<hbox>
+						<textbox id="txtCajon" width="90%" > </textbox>
+				
+						<toolbar>
+								<toolbarbutton id="btnBuscar" tooltiptext="Buscar" image="/img/buscar.gif"/>
+						</toolbar>
+					
+					</hbox>
+				</row>
+				
+				<row>
+					<label value="Cajones Disponibles " style="color:blue" />
+					<listbox id="lbxCajonesDisponibles" style="font-size:11px" mold="select" width="110px" > </listbox>
+				</row>
+				
+			</rows>
+		</grid>
+
+
+		<grid width="99%">
+			<rows>
+  				<!--<row>
+				    <toolbar>
+						<toolbarbutton  id="btnPeso" label="Capturar Peso" tooltiptext="Tomar Peso"
+						style="color:blue;font-size:11px;font-weight:bold" width="100px"/>
+					 </toolbar>
+					 <textbox id="txtPeso" width="100px" readonly="false" ></textbox>
+				</row>-->				
+				
+				<row>
+					<label value="Especie-Talla "></label>
+					<textbox id="txtEspecieTalla" multiline="true" readonly="true" width="90%" rows="3" > </textbox>
+				</row>
+				
+				<row>
+					<label value="Barco" ></label>
+					<textbox id="txtBarcoDescarga" readonly="true" width="90%"> </textbox>
+				</row>
+				<row>
+					<label value="Origen " ></label>
+					<textbox id="txtOrigen" readonly="true" width="90%"> </textbox>
+				</row>
+				<row>
+				    <label value="Peso Cámara" ></label>
+				    <textbox id="txtPeso" readonly="true" width="90%" ></textbox>
+				</row>
+				<row>
+					<label value="Pedido " ></label>
+					<textbox id="txtPedido" readonly="true" width="90%"> </textbox>
+				</row>
+				
+				
+				<row>
+				    <label value="Cuba:"  />
+				   	<textbox id="txtCuba"  readonly="true" rows="2" width="90%"/>
+				</row>
+
+				<row>
+				    <label value="L.Camara:" />
+				   	<textbox id="txtLoteCamara"  cols="10" readonly="true" width="90%"   />
+				</row>
+
+
+				<row>
+				    <label value="L.Haccp:"    />
+				   	<textbox id="txtHaccp"  cols="10" readonly="true" width="90%"/>
+				</row>				
+				
+				
+			</rows>
+		</grid>
+		
+	</vbox>
+</window>
+</zk>

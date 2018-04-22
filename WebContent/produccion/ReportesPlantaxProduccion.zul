@@ -1,0 +1,101 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="reportePlantaxProd" apply="com.nw.webui.produccion.ReportesPlantaxProduccionWindow">
+<label value="REPORTES POR PRODUCCION " style="color:blue;font-size:11px;font-weight:bold"/>
+		<vbox  id="vbxMain">
+		
+			<grid width="99%">
+				<rows>
+
+					<row>
+						<label value="Fecha :"/>
+						<datebox id="dteFecha" width="110px" format="dd/MM/yyyy" />
+					</row> 
+					
+				<!-- <row >
+					<label value="Días Producción" ></label>
+					 <listbox id="lbxProduccion" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>	-->						
+					<row>
+						<label value="Turno :"/>	
+						<listbox id="lbxTurno" style="font-size:11px" mold="select" width="130px" > </listbox>
+					</row>	
+					
+				</rows>
+			</grid>
+<!--  			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<label value="Imprimir" style="color:blue;font-size:12px;font-weight:bold"/>
+							<toolbar>
+								<vbox>
+								<toolbarbutton id="btnMermasCorte" label="Reporte de Mermas x Coches"/>
+								<toolbarbutton id="btnExcelMermasCorte" label="Excel Reporte de Mermas x Coches"/>
+								</vbox>
+								<vbox>
+								<toolbarbutton id="btnLotesTurno" label="Consolidado de Lotes"/>
+								<toolbarbutton id="btnExcelLotesTurno" label="Excel Consolidado de Lotes"/>
+								</vbox>
+								<vbox>
+								<toolbarbutton id="btnLotesLinea" label="Consolidado de Lotes x Línea"/>
+								<toolbarbutton id="btnExcelLotesLinea" label="Excel Consolidado de Lotes x Línea"/>
+								</vbox>
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>-->
+
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnMermasCorte" label="Reporte de Mermas x Coches"/>
+							</toolbar>
+							<toolbar>
+								<toolbarbutton id="btnExcelMermasCorte" label="Excel Reporte de Mermas x Coches"/>
+							</toolbar>
+						</vbox>
+					</row>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnLotesTurno" label="Consolidado de Lotes"/>
+							</toolbar>
+							<toolbar>
+								<toolbarbutton id="btnExcelLotesTurno" label="Excel Consolidado de Lotes"/>
+							</toolbar>
+						</vbox>
+					</row>
+
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnRepTempCoche" label="Reporte de Exposición x Coches"/>
+							</toolbar>
+							<toolbar>
+								<toolbarbutton id="btnExcelRepTempCoche" label="Excel Reporte de Exposición x Coches"/>
+							</toolbar>
+						</vbox>
+					</row>
+					
+					
+<!--  					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnLotesLinea" label="Consolidado de Lotes x Línea"/>
+							</toolbar>
+							<toolbar>
+								<toolbarbutton id="btnExcelLotesLinea" label="Excel Consolidado de Lotes x Línea"/>
+							</toolbar>
+						</vbox>
+					</row>-->
+				</rows>
+			</grid>
+
+
+	</vbox> 
+</window>
+</zk>

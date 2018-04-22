@@ -1,0 +1,244 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winLimpiezaProcesoBandejaCalidad" apply="com.nw.webui.produccion.LimpiezaCalidadDetalleProcesoBandejaWindow" >
+<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="Limpieza - Controloria Control" style="color:blue;font-size:12px;font-weight:bold" />
+	
+	<vbox id="vbxMain"  width="99%">
+<!-- 	
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>							
+							<toolbarbutton id="btnGrabar1" label="GRABAR" tooltiptext="Grabar"/>
+							<space width="160px"></space>
+							<toolbarbutton id="btnLimpiar" tooltiptext="Limpiar" image="/img/crear.gif"/>
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>		
+ -->
+ 	
+<!--  	<label value="Día Producción " style="color:blue"  />
+		<grid width="99%">
+			<rows>
+				<row>
+				
+					<label value="Día Producción " style="color:blue" />
+					<textbox id="txtDiasProduccion" maxlength="255" width="110px" readonly="true"></textbox>
+				</row>
+			</rows>
+		</grid>
+-->
+
+<!-- 
+		<grid width="99%">
+			<rows>				
+				<row>
+					<hbox>
+					<checkbox id="chkAuto" label="Automático" checked="true" ></checkbox>					
+					<checkbox id="chkManual" label="Manual" checked="false" ></checkbox>
+					</hbox>
+				</row>
+			</rows>
+		</grid>
+-->
+				
+				
+		<grid id="grdLinea" width="99%" >
+			<rows>
+
+				<row>
+					<label value="Departamento" />
+					<textbox id="txtDepartamento" readonly="true" style="font-size:12px" width="99%" />
+				</row>
+							
+				<row>
+					<label value="Producción" />
+					<textbox id="txtDiaProduccion" readonly="true" style="font-size:12px" width="99%" />
+				</row>
+						
+			
+				<row>
+					<label value="Línea" ></label>
+					<listbox id="lbxLinea" style="font-size:12px" mold="select" width="80%"/>
+				</row>
+				
+				<row>
+				    <label value="Fileteador" style="color:blue" />
+				    
+				    <hbox>
+						<listbox id="lbxUbicacion" style="font-size:11px" mold="select" width="80%" />
+					
+						<toolbar>
+							<toolbarbutton id="btnActualizarLista"
+							tooltiptext="Actualizar Lotes" image="/img/refrescar.gif" />
+						</toolbar>
+					</hbox>
+				</row>
+			
+			<row>
+				    <label value="#Ubicación" style="color:blue" />
+					   <intbox id="txtUbicacion" maxlength="13" width="80%" readonly="true" ></intbox>
+			</row>
+			
+			
+			
+			<!-- 
+				<row>
+					Tipo
+					<hbox>
+					    <checkbox id="chkLomo" label="Lomo" checked="true" > </checkbox>
+					    <checkbox id="chkRallado" label="Rallado"></checkbox>
+					 </hbox>
+				</row>
+			 -->	
+								
+			</rows>
+		</grid>
+		
+
+		
+		<grid width="99%">
+			<rows width="99%">
+
+			
+<!-- 			
+				<row >
+					<label value="Grupo " ></label>
+					<listbox id="lbxGrupo" style="font-size:11px" mold="select" width="80px" > </listbox>
+				</row>
+ -->				
+				
+				
+<!-- 
+				<row >
+					<label value="Tipo de peso" ></label>
+					<listbox id="lbxTipo" style="font-size:11px" mold="select" width="85px" > </listbox>
+				</row>					
+ -->	
+<!-- 			
+				<row>
+					<label value="# Bandeja Lote" ></label>
+					<textbox id="txtBandejaLote" maxlength="255" readonly="true" width="80px" ></textbox>
+				</row>
+
+ 
+				<row >
+					<label value="Tipo de peso" ></label>
+					<listbox id="lbxTipo" style="font-size:11px" mold="select" width="85px" > </listbox>
+				</row>
+ -->
+ <!-- 	
+								<toolbar>
+									<toolbarbutton id="btnConsultar" tooltiptext="Buscar" image="/img/buscar.gif" />
+								</toolbar>
+ -->								
+				
+			
+
+<!-- 				
+				<row>
+					<label value="Mesa"></label>
+					<textbox id="txtMesa" maxlength="255" readonly="true" width="80px" ></textbox>
+					
+				</row>
+				<row>
+					<label value="Ubicacion"></label>
+					<textbox id="txtPersona" maxlength="255" readonly="true" width="80px" ></textbox>
+				</row>
+				<row>
+					<label value="Codigo Persona"></label>
+					<textbox id="txtCodpersona" maxlength="255" readonly="true" width="80px" ></textbox>
+				</row>
+ -->				
+<!-- 
+				<row>
+					<label value="Material"></label>
+					<listbox id="lbxMaterial" style="font-size:11px" mold="select" width="80px" ></listbox>
+				</row>
+ -->				
+ 
+ 				<row>
+				    <label value="Grupo" style="color:blue" />
+					<listbox id="lbxGrupo" style="font-size:11px" mold="select" width="80%" />
+				</row>
+
+ 				<row>
+				    <label value="Item" style="color:blue" />
+					<listbox id="lbxItem" style="font-size:11px" mold="select" width="80%" />
+				</row>
+ 
+ 					<row>
+					    <label value="Lote Activo"></label>
+						<checkbox id="chkLoteActivo"  ></checkbox>
+					</row>
+ 
+					<row>
+						<label value="Lote" />
+						<hbox>
+							<listbox id="lbxLote" style="font-size:12px"
+								mold="select" width="120px" />
+							<toolbar>
+								<toolbarbutton id="btnActualizarLotes"
+									tooltiptext="Actualizar Lotes" image="/img/refrescar.gif" />
+							</toolbar>
+						</hbox>
+					</row> 
+ 
+ 					<row>
+						<label value="Especie Talla" />
+						<textbox id="txtEspecieTalla" readonly="true" width="99%"
+							rows="2">
+						</textbox>
+					</row>
+					
+				<row>
+					<label id="lblPeso" value="Peso/Cant.Item"></label>
+					<hbox> 
+						<decimalbox id="txtCapturaPeso" format="#####"  maxlength="5" width="80%" readonly="false"/>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="GRABAR" tooltiptext="Grabar"/>
+						</toolbar>
+					</hbox>					
+				</row>
+
+
+				<row>
+					<label value="Peso T.Grande"></label>
+					<decimalbox id="txtTrozoGrande" format="#####"  maxlength="5" width="40%" readonly="true"/>
+				</row>
+				
+				<row>
+					<label value="Peso T.Pequeño"></label>
+					<decimalbox id="txtTrozoPequeno" format="#####"  maxlength="5" width="40%" readonly="true"/>
+				</row>
+				
+				
+ 				<row>
+					<label value="Observación" />
+					<textbox id="txtObservacion" width="99%" maxlength="400"
+							rows="3">
+					</textbox>
+				</row>				
+				
+				
+				<!-- 
+				<row>
+					<label value="Peso Bruto Bandeja"></label>
+					<hbox> 
+						<decimalbox id="txtCapturaPesoBandeja" format="#####"  maxlength="5" width="80%" readonly="false"/>
+					</hbox>					
+				</row>
+				 -->
+				
+				
+			</rows>
+		</grid>
+		
+		<label value="_______________" style="color:blue;font-size:12px;font-weight:bold" />
+	</vbox>
+</window>
+</zk>

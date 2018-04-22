@@ -1,0 +1,42 @@
+<?page id="pagEvisceradoDetalleProcesoCoche"  title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<!--  -->
+<window id="winCocheCerrar" apply="com.nw.webui.produccion.EvieceradoDetalleProcesoCoheCerrrarWindow" width="99%">
+	<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="EVISCERADO CERRAR COCHES" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="200px">
+	
+				
+		<grid >
+			<rows>
+				<row>
+					<label value="Coches" ></label>
+					<listbox id="lbxCoches" style="font-size:11px" mold="select" width="130px" > </listbox>
+								 
+				</row>
+				<row >
+					<label value="Cerrar Todos" ></label>
+					<checkbox id="chbCerrarTodo" style="font-size:11px"  width="130px" > </checkbox>
+				</row>	
+			
+				
+
+			</rows>
+		</grid>
+		
+		<grid >
+			<rows >
+				
+				<row>
+					Cerrar Coche
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+						</toolbar>
+					</vbox>
+				</row>
+		</rows>
+		</grid>
+	</vbox>
+</window>
+</zk>

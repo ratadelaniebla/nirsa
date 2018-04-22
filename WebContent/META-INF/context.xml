@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+	<!--
+		<Resource auth="Container" driverClassName="oracle.jdbc.OracleDriver"
+		maxActive="20" maxIdle="30" maxWait="10000" name="jdbc/AvanteOracleDS"
+		password="avadmin" type="javax.sql.DataSource"
+		url="jdbc:oracle:thin:@delljevm:1521:xe" username="avadmin"
+		defaultAutoCommit="false" timeBetweenEvictionRunsMillis="60000"/>
+	-->
+	<!--
+		<Resource auth="Container" driverClassName="oracle.jdbc.OracleDriver"
+		maxActive="20" maxIdle="30" maxWait="10000" name="jdbc/AvanteOracleDS"
+		password="avadmin" type="javax.sql.DataSource"
+		url="jdbc:oracle:thin:@delljevm:1521:xe" username="avadmin"
+		defaultAutoCommit="false" timeBetweenEvictionRunsMillis="60000"/>
+	-->
+
+	<!--
+		<Resource auth="Container" driverClassName="oracle.jdbc.OracleDriver"
+		maxActive="20" maxIdle="30" maxWait="10000" name="jdbc/AvanteOracleDS"
+		password="gth" type="javax.sql.DataSource"
+		url="jdbc:oracle:thin:@ecsuizaga.ecuasuiza.com:1521:ecsuiza1"
+		username="gth" defaultAutoCommit="false"
+		timeBetweenEvictionRunsMillis="60000"/>
+	-->
+	<!--
+		<Resource auth="Container" driverClassName="org.postgresql.Driver"
+		maxActive="20" maxIdle="30" maxWait="10000"
+		name="jdbc/AvantePostgresDS" password="avadmin"
+		type="javax.sql.DataSource"
+		url="jdbc:postgresql://localhost:5432/avante" username="avadmin"
+		defaultAutoCommit="false" timeBetweenEvictionRunsMillis="60000"/>
+	-->
+
+
+<!-- conexion a pruebas locales -->
+
+        
+	<Resource 
+			auth="Container" 
+			driverClassName="org.postgresql.Driver"
+			maxActive="150" 
+			maxIdle="30" 
+			maxWait="10000" 
+			name="jdbc/postgres"
+			password="Nirvana76:" 
+			type="javax.sql.DataSource" 						
+			autoReconnect="true"
+			url="jdbc:postgresql://localhost:5432/nw_des"		
+			removeAbandoned="true"
+			removeAbandonedTimeout="60"
+			username="haroldnav" 
+			defaultAutoCommit="false" 
+			timeBetweenEvictionRunsMillis="60000" />
+
+<!-- localhost -->
+<!-- conexion a producción -->
+
+<!--
+		url="jdbc:postgresql://192.198.20.134:5432/nw_des"		
+ -->
+   
+  
+<!--        
+url="jdbc:postgresql://localhost/nw_des"
+	<Resource 
+			auth="Container" 
+			driverClassName="org.postgresql.Driver"
+			maxActive="150" 
+			maxIdle="30" 
+			maxWait="10000" 
+			name="jdbc/postgres"
+			password="Nirvana76:" 
+			type="javax.sql.DataSource" 
+			url="jdbc:postgresql://192.198.20.134:5432/nw"
+			username="haroldnav" 
+			defaultAutoCommit="false" 
+			timeBetweenEvictionRunsMillis="60000" />
+-->
+
+</Context>
+  

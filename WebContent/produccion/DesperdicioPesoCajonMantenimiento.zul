@@ -1,0 +1,107 @@
+<?page id = "pagCalidadPCC1Quimico" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winDesperdicioPesoCajonMant" apply="com.nw.webui.produccion.DesperdicioHarinaDesperdicioPesoCajonMantenimientoWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="DESPERDICIO - Mant. Pesos Cajón" style="color:blue;font-size:12px;font-weight:bold" />
+		<label value="" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+		
+
+			<space height="10%"></space>
+							
+								<grid> 								
+									<rows>
+										<row> 
+											.
+											<toolbar>
+												<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif"/>												
+											</toolbar>	
+											
+										</row>	
+										
+										<row>											
+											<hbox>
+												<toolbar>												
+													<toolbarbutton id="btnEliminar"  label="Eliminar" tooltiptext="Eliminar" image="/img/eliminar.gif" />
+												</toolbar>
+												<checkbox label="¿Confirma?" id="ChkEliminar"></checkbox>
+											</hbox>
+											.					
+										</row>
+									</rows>									
+								</grid>
+								
+			<space height="10%"></space>	
+		
+			<grid width="99%">  
+				<rows>
+					<row>
+						<label value="Fecha Producción"/>
+						<datebox id="dteFecha" width="110px" readonly="false"/>
+					</row>
+									
+					<row visible="false">
+						<label value="Día Julian" />
+						<textbox id="txtDiaJuliano" maxlength="4"  width="50px"  readonly="true" />
+					</row>									
+									
+
+
+					<row>
+						<label value="Cajón" />
+						<hbox>
+							<listbox id="lbxCajon" style="font-size:12px" mold="select" width="80px" />												
+							Cerrado <checkbox id="chkCerrado" checked="false"/>
+						</hbox>
+					</row>
+					
+					<row>
+						<label value="Tara" />
+						<textbox id="txtTara" width="60px" readonly="true" />
+					</row>					
+					<row>
+						<label value="Peso N. Desperdicio" />
+						<textbox id="txtPeso" width="60px" readonly="true" />
+					</row>
+
+					<row>
+						<label value="Peso N. Harina" />
+						<textbox id="txtPesoh" width="60px" readonly="true" />
+					</row>
+											
+				</rows>									
+			</grid>	
+			
+			<label value="Detalle de Gavetas" />
+			<listbox id="lbxDesperdicio" mold="select"  width="99%" style="font-size:9px">
+			</listbox>						
+
+
+
+			<grid width="99%">  
+				<rows>
+
+					
+					<row>
+						<label value="Lote" />
+						<decimalbox id="txtLote" format="##########"  maxlength="10" width="60px" readonly="true" />
+					</row>
+
+					
+					<row>
+						<label value="Num. Gavetas" />
+						<decimalbox id="txtGaveta" format="####"  maxlength="4" readonly="true"  width="50px" style="color:blue;font-size:12px;font-weight:bold"/>
+					</row>
+
+					<row>
+						<label value="Peso Bruto" />
+						<textbox id="txtPesoBruto" maxlength="10" width="100px" readonly="true" style="color:blue;font-size:12px;font-weight:bold"/>
+					</row>
+											
+				</rows>									
+			</grid>	
+
+
+		</vbox>
+	</window>
+</zk>

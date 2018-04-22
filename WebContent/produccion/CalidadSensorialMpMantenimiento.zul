@@ -1,0 +1,187 @@
+<?page id = "pagCalidadSensorialMp" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winCalidadSensorialMpMantenimiento" apply="com.nw.webui.produccion.CalidadSensorialMpMantenimientoWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="Sensorial M.P - Mantenimiento" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain" width="99%">
+		
+			<space height="10%"></space>
+							
+								<grid> 								
+									<rows>
+										<row> 
+											.
+											<toolbar>
+												<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif"/>												
+											</toolbar>	
+											
+										</row>	
+										
+										<row>											
+											<hbox>
+												<toolbar>												
+													<toolbarbutton id="btnEliminar"  label="Eliminar" tooltiptext="Eliminar" image="/img/eliminar.gif" />
+												</toolbar>
+												<checkbox label="¿Confirma?" id="ChkEliminar"></checkbox>
+											</hbox>
+											.					
+										</row>
+									</rows>									
+								</grid>
+								
+			<space height="10%"></space>		
+		
+			<grid width="99%">
+				<columns><column width="40%" /></columns>	
+				<rows>
+				
+					<row>
+						<label value="Desde"/>
+						<datebox id="dteFecha1" width="110px" format="dd/MM/yyyy"/>
+					</row>					
+
+					<row>
+						<label value="Hasta"/>
+						<datebox id="dteFecha2" width="110px" format="dd/MM/yyyy"/>
+					</row>					
+
+					<row>
+						.
+						<toolbar>
+						<toolbarbutton id="btnBuscar" label="Buscar" image="/img/buscar.gif"/>
+						</toolbar>
+					</row>					
+				
+					<row>
+						<label value="Barco" />
+  						<listbox id="lbxBarco" style="font-size:12px" mold="select" width="98%" />
+					</row>
+
+					<row>
+						<label value="Registro" />
+  						<listbox id="lbxRegistro" style="font-size:12px" mold="select" width="98%" />
+					</row>
+
+					<row id="RwBarcoMercante" visible="false">
+						<label value="Barco Mercante" />
+  						<textbox id="txtBarcoMercante" maxlength="20" width="120px" style="color:blue" readonly="true" />
+					</row>						
+					
+					<row visible="false" >
+						<label value="N° Formato" />
+						<textbox id="txtNumFormato" maxlength="13" width="120px" style="color:blue" readonly="true" />
+					</row>
+					<row>
+						<label value="Registro" />
+						<textbox id="txtRegistro" maxlength="8" width="120px" style="color:blue" readonly="true" />
+					</row>
+					<row visible="false" >
+						<label value="N° Barco" />
+						<textbox id="txtNumBarco" maxlength="8" width="120px" style="color:blue" readonly="true" />
+					</row>
+					<row>
+						<label value="Cuba" />
+						<listbox id="lbxCuba" style="font-size:12px" mold="select" width="98%" />
+					</row>
+					<row>
+						<label value="Nivel Cuba" />
+						<listbox id="lbxNivelCuba" style="font-size:12px" mold="select" width="98%" />
+					</row>
+					<row>
+					
+						<label value="Catalogo especie qm"></label>
+						<div>
+							<!-- <div>
+								<label value="Especies Comunes" style="color:black" />						
+								<checkbox id="chkPred" checked="true" />
+							</div>  -->
+							
+							<div>
+								<listbox id="lbxTalla" style="font-size:12px"
+								mold="select" width="98%" />
+							</div>
+						</div>
+							
+					</row>
+				</rows>
+			</grid>
+
+<!--			
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar"
+									tooltiptext="Grabar" image="/img/grabar.gif" />
+  								<toolbarbutton id="btnBuscar"
+									tooltiptext="Buscar" image="/img/buscar.gif" />
+								<toolbarbutton id="btnNuevo"
+									tooltiptext="Nuevo" image="/img/crear.gif" />
+								<toolbarbutton id="btnActualizar"
+									tooltiptext="Actualizar" image="/img/refrescar.gif" />
+								<toolbarbutton id="btnEliminar"
+									tooltiptext="Eliminar" image="/img/eliminar.gif" />
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>-->
+			
+			<grid width="99%">
+				<rows>
+					
+					<row>
+						<label value="N° Muestra" />
+						<textbox id="txtNumMuestraCuba" maxlength="8" width="120px" style="color:blue" readonly="true" />
+					</row>
+
+					<row>
+						<label value="N° Muestra N" />
+						
+						<vbox>
+							<textbox id="txtNumMuestraNivel" maxlength="8" width="120px" style="color:blue" readonly="true" />
+							<listbox id="lbxNumMuestraNivel" style="font-size:12px" mold="select" width="98%" />
+						</vbox>
+					</row>
+
+					<row>
+						Obs. Apariencia
+						<vbox>
+							<textbox id="txtObsMuestra" maxlength="8" width="120px" style="color:blue" readonly="true" />
+							<listbox id="lbxObsMuestra" style="font-size:12px" mold="select" width="120px" />
+						</vbox>
+					</row>
+					<row>
+						Obs. Olor
+						<vbox>
+							<textbox id="txtObsOlo" maxlength="8" width="120px" style="color:blue" readonly="true" />
+							<listbox id="lbxObsOlor" style="font-size:12px" mold="select" width="120px" />
+						</vbox>
+					</row>
+					<row>
+						Obs. Sabor
+						<vbox>
+							<textbox id="txtObsSabor" maxlength="8" width="120px" style="color:blue" readonly="true" />
+							<listbox id="lbxObsSabor" style="font-size:12px" mold="select" width="120px" />
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+			<label value="Observaciones:" style="color:blue" />
+			<textbox id="txtObservaciones" style="font-size:10px" rows="4"
+				width="98%" />
+
+			<grid width="99%" visible="false">
+				<rows>
+					<row>Cerrar Proceso
+						<hbox align="center"> 
+							<toolbarbutton id="btnCerrarP" tooltiptext="Cerrar Proceso" image="/img/grabar.gif"/>
+						</hbox>
+					</row>
+				</rows>
+			</grid>
+
+		</vbox>
+	</window>
+</zk>

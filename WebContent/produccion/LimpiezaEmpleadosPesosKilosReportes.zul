@@ -1,0 +1,73 @@
+<?page id = "pagCalidadPCC1Quimico" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winEvolutionAprobacion" apply="com.nw.webui.produccion.LimpiezaEmpleadosPesosKilosReportesWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="" style="color:blue;font-size:12px;font-weight:bold" />
+		<label value="REPORTE DE PESOS " style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+		
+			<grid width="99%"> 
+				<rows>
+					<row>
+						
+							<toolbar>
+								<toolbarbutton id="btnReporteLomo" tooltiptext="Grabar" label="Ver Reporte Lomo Limpio" /> 
+							</toolbar>
+							</row>
+							<row>
+						
+							<toolbar>
+								<toolbarbutton id="btnReporte_LomoExcel" tooltiptext="Ver Reporte Kilos Lomo Limpio -Excel" label="Ver Reporte Lomo Limpio Excel" />
+							</toolbar>
+							</row>
+								<row>
+						
+							<toolbar>
+								<toolbarbutton id="btnReporte_Rallado" tooltiptext="Grabar" label="Ver Reporte de Rallado "/>
+								</toolbar>
+							</row>
+							<row>
+						
+							<toolbar>
+								<toolbarbutton id="btnReporte_Rallado_Excel" tooltiptext="Ver Reporte de Rallado Excel" label="Ver Reporte Rallado Excel" />
+								</toolbar>
+							</row>
+									
+								<row>
+						
+							<toolbar>
+								<toolbarbutton id="btnEficiencias" tooltiptext="Ver Eficiencias Excel" label="Ver Reporte Eficiencias Excel" />
+								</toolbar>
+							</row>
+								
+							
+						
+					
+				</rows>
+			</grid>		
+		
+			<grid width="99%">  
+				<rows>
+				<row>
+						<label value="Fecha desde:" />
+						<datebox id="dteFecha1" width="110px" format="dd/MM/yyyy" />
+				</row>
+				<row>
+						<label value="Fecha hasta:" />
+						<datebox id="dteFecha2" width="110px" format="dd/MM/yyyy" />
+				</row>
+				
+					
+				<!--	<row>
+					<hbox>
+						<toolbar>
+							<toolbarbutton id="btnImprimir" label="Descargar Reporte de Datos Subidos a Evolution" tooltiptext="Visualizar/Descargar  Archivo" />
+						</toolbar>
+					</hbox>
+					</row>-->	
+				</rows>
+			</grid>			
+
+		</vbox>
+	</window>
+</zk>

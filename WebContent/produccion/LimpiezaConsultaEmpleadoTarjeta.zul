@@ -1,0 +1,57 @@
+<?page title="CONSULTA EMPLEADO" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winLimpiezaConsultaEmpleadoTarjeta" border="none" apply="com.nw.webui.produccion.LimpiezaConsultaEmpleadoTarjetaWindow">
+<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="CONSULTA EMPLEADO x TARJETA" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="220px">
+		<grid >
+			<rows>
+				<row>
+				    <label value="Fech.Prod. - Turno :" style="color:blue" />
+				    <listbox id="lbxProcesosActivos" style="font-size:11px" mold="select" width="120px" />
+				</row>
+			</rows>
+		</grid>
+		<grid >
+			<rows >
+				<row>
+						<hbox>
+							 <label value="Tarjeta:" style="color:blue" />
+						</hbox>
+					
+						<hbox>
+							 <textbox id="txtTarjeta"  style="font-size:11px"  width="100px" readonly="false" ></textbox>
+						<toolbar>							
+							<toolbarbutton id="btnBuscarEmpleado" tooltiptext="Buscar Empleado" image="/img/buscar.gif" style="color:blue;font-size:12px;font-weight:bold" />
+						</toolbar>
+						</hbox>
+				</row>
+				
+			
+				<row>
+				    <label value="Empleado :" style="color:blue" />
+				    <listbox id="lbxEmpleado" style="font-size:11px" mold="select" width="120px" />
+				</row>
+				<row>
+					<label value="Nombres :" style="color:blue" />
+					<textbox id="txtNombre" disabled="false" width="120px" readonly="true" multiline="true" rows="3" > </textbox>
+				</row>
+				<row>
+					<label value="Linea" width="100px" style="color:blue"></label>
+					<textbox id="txtLinea" width="70px" readonly="true" > </textbox>
+				</row>
+				<row>
+					<label value="Ubicacion" width="100px" style="color:blue"></label>
+					<textbox id="txtUbicacion" width="70px" readonly="true" > </textbox>
+				</row>
+				
+				
+				
+				
+				
+			</rows>
+		</grid>
+		
+	</vbox>
+</window>
+</zk>

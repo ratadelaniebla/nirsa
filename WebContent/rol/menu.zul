@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?page id="pagMenu"?>
+<window id="winMenu" apply="com.nw.webui.rol.controlador.MenuWindow"
+	border="none">
+	<script src="/js/noBarra.js" type="text/javascript" />
+	<borderlayout width="@{area.ancho}" height="@{area.alto}">
+		<north>
+			<hbox align="center">
+				<toolbar>
+					<toolbarbutton label="MENÚ" style="font-size:20px;font-weight"
+						onClick='com.nw.util.Sistema.ejecutar(com.nw.util.Sistema.WIN_MENU);' />
+						<toolbarbutton id="btnEnviar" label="Enviar" visible="false"/> 
+					<!--<toolbarbutton label="Enviar" forward= "onClick='executeMenuOption(1)'" />-->
+					 
+					<toolbarbutton id="btnLimpiar" label="Limpiar" visible="false"/>
+					<toolbarbutton label="SALIR" style="font-size:20px;font-weight"
+						onClick='Clients.confirmClose("¿Desea salir del sistema?"); com.nw.util.Sistema.terminarSesion();' />
+				</toolbar>
+			</hbox>
+		</north>
+		<center id="blyCentro" autoscroll="true" />
+	</borderlayout>
+
+	<zscript deferred="true">
+		<![CDATA[//@DECLARE
+			void accion(int boton) {
+				if(blyCentro.getChildren().size() == 0)
+					Clients.evalJavaScript("alert('No ha seleccionado un formulario...')");
+				else{
+
+					//En este script funciona correctamente el metodo grabar, no asi en la clase "MenuWindow"
+					if (blyCentro.getChildren().get(0).getClass().getName()=="DessddscongeladoWindow" ){
+						this.blyCentro.getChildren().get(0).executeMenuOption(1);
+					}else{
+						
+						 //forward="onClick=w.onOK"
+
+						//winDescongelado.onSayHello();
+						
+					};
+				}
+			}
+		]]>
+	</zscript>
+</window>

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CalidadSensorialMP" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f348556c-9652-48e6-bc17-6dde28077426">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idcalidadsensorialmp" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[2]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select b.nombre as barco, b.numbarco ,det.idcalidadnumeromuestrasensorialmp, bd.registro, cu.nombrecuba, esp.nombre as especie,tal.nombre as talla,
+cnc.nivel, cnc.descripcion as descripcionNivel, omc.abreviatura, omc.descripcion as descripcionObservacion, mp.idcalidadsensorialmp
+from calidad_sensorial_mp as mp left join calidad_detalle_sensorial_mp as det on mp.idcalidadsensorialmp=det.idcalidadsensorialmp,
+barco_descarga as bd, barco as b, barco_estiba_cuba as bec, calidad_nivel_cuba as cnc, especie_talla as et, calidad_observaciones_muestra_cuba omc, cuba as cu, especie as esp,
+talla as tal
+where mp.idbarcodescarga=bd.idbarcodescarga and bd.idbarco=b.idbarco and det.idbarcoestibacuba=bec.idbarcoestibacuba and det.idcalidadnivelcuba=cnc.idcalidadnivelcuba
+and det.idespecietalla=et.idespecietalla and det.idobservacionmuestracuba=omc.idcalidadobservacion and bec.idcuba=cu.idcuba and et.idespecie=esp.idespecie and et.idtalla=tal.idtalla
+and mp.idcalidadsensorialmp = $P{idcalidadsensorialmp}
+order by det.idcalidadnumeromuestrasensorialmp]]>
+	</queryString>
+	<field name="barco" class="java.lang.String"/>
+	<field name="numbarco" class="java.lang.String"/>
+	<field name="idcalidadnumeromuestrasensorialmp" class="java.lang.Integer"/>
+	<field name="registro" class="java.lang.String"/>
+	<field name="nombrecuba" class="java.lang.String"/>
+	<field name="especie" class="java.lang.String"/>
+	<field name="talla" class="java.lang.String"/>
+	<field name="nivel" class="java.lang.String"/>
+	<field name="descripcionnivel" class="java.lang.String"/>
+	<field name="abreviatura" class="java.lang.String"/>
+	<field name="descripcionobservacion" class="java.lang.String"/>
+	<group name="GrupoCuba">
+		<groupExpression><![CDATA[$F{nombrecuba}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<textField>
+					<reportElement uuid="851a5c5a-beb5-400b-9387-93bd43a93db9" x="187" y="0" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{nombrecuba}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="d2321338-b703-4993-819a-91fb1c4e8c57" x="134" y="0" width="52" height="20"/>
+					<textElement textAlignment="Center">
+						<font isBold="true" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Cuba:]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="36"/>
+		</groupFooter>
+	</group>
+	<group name="GrupoNivel">
+		<groupExpression><![CDATA[$F{nivel}]]></groupExpression>
+		<groupHeader>
+			<band height="38">
+				<textField>
+					<reportElement uuid="1962cad1-f0f6-4c26-b431-671e086334eb" x="200" y="1" width="52" height="19"/>
+					<textElement textAlignment="Right">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nivel}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="739dd570-d9c0-4e8b-abc3-6ac8a4a83911" x="219" y="20" width="66" height="18"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Observación]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="8645355b-5eb2-40b5-9df7-6dbc52f33208" x="285" y="20" width="100" height="18"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Descripcion]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="cb9a6daa-522b-4866-bef2-01ed4e45e28e" x="252" y="0" width="100" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" (" + $F{descripcionnivel} + ")"
+]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="95957733-92bd-4183-88f1-2f59d81a1f84" x="63" y="0" width="100" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{especie}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="f1fc98d8-1525-4099-a429-f337a7fd9e1c" x="64" y="19" width="68" height="19"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{talla}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="739dd570-d9c0-4e8b-abc3-6ac8a4a83911" x="158" y="20" width="61" height="18"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[N° Muestra]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="739dd570-d9c0-4e8b-abc3-6ac8a4a83911" x="4" y="0" width="59" height="20"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Especie:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="739dd570-d9c0-4e8b-abc3-6ac8a4a83911" x="3" y="20" width="59" height="18"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Talla:]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="29"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement uuid="25cf21c7-feb8-45db-b87a-203b20c6804e" x="3" y="3" width="107" height="36"/>
+				<imageExpression><![CDATA["C:\\Users\\hnavarrete\\Pictures\\logo nirsa.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="d2321338-b703-4993-819a-91fb1c4e8c57" x="131" y="50" width="288" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[DEPARTAMENTO DE CONTROL DE CALIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e4bc5dfd-a9dc-4ed2-af4f-aee50e7ddf33" x="163" y="10" width="235" height="23"/>
+				<textElement textAlignment="Justified">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ANALISIS SENSORIAL DE MATERIA PRIMA]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement uuid="0f650811-a411-4aaa-a5c6-79a1bf871fa0" x="71" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{barco}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="fc0fb86b-6a37-49ea-9887-ba4093a5ed10" x="243" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{numbarco}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="eea23c08-3696-4085-b8df-55186faa6304" x="412" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{registro}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="d2321338-b703-4993-819a-91fb1c4e8c57" x="359" y="0" width="52" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Registro:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d2321338-b703-4993-819a-91fb1c4e8c57" x="190" y="0" width="52" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[N° Barco:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d2321338-b703-4993-819a-91fb1c4e8c57" x="18" y="0" width="52" height="20"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Barco:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="13" splitType="Stretch">
+			<textField>
+				<reportElement uuid="e6ab8890-6727-4a83-9689-22cea53aa280" x="219" y="0" width="66" height="13"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{abreviatura}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="33166a7b-ac02-47da-8476-d614e3e32089" x="285" y="0" width="100" height="13"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{descripcionobservacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="94057910-b578-4a42-aa78-85ec206e4adc" x="158" y="0" width="61" height="13"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{GrupoNivel_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="31" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="35" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="31" splitType="Stretch"/>
+	</summary>
+</jasperReport>

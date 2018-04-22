@@ -1,0 +1,202 @@
+<?page id = "pagCalidadPCC1Sensorial" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winCalidadPCC1Sensorial" apply="com.nw.webui.produccion.CalidadPCC1SensorialLoteCamaraWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="PCC1-RECEPCION ATUN" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+			<grid width="99%">
+				<columns><column width="40%" /></columns>	
+				<rows>
+					<row>
+						<label value="Barco" />
+						<listbox id="lbxBarco" style="font-size:12px" mold="select" width="98%" />
+					</row>
+					
+					<row id="RwBarcoMercante" visible="false">
+						<label value="Barco Mercante" />
+  						<textbox id="txtBarcoMercante" maxlength="20" width="120px" style="color:blue" readonly="true" />
+					</row>					
+					
+					<row>
+						<label value="N° Formato" />
+						<textbox id="txtNumFormato" maxlength="20" width="120px" style="color:blue" readonly="true" />
+					</row>
+					<row>
+						<label value="Registro" />
+						<textbox id="txtRegistro" maxlength="8" width="120px" style="color:blue" readonly="true" />
+					</row>
+					<row>
+						<label value="N° Barco" />
+						<textbox id="txtNumBarco" maxlength="8" width="120px" style="color:blue" readonly="true" />
+					</row>
+					<row>
+						<label value="Muestreo" />
+						<listbox id="lbxMuestreo" style="font-size:12px" mold="select" width="98%" />
+					</row>					
+					<row>
+						<label value="Cuba" />
+						<listbox id="lbxCuba" style="font-size:12px" mold="select" width="98%" />
+					</row>
+
+				</rows>
+			</grid>
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar"
+									tooltiptext="Grabar" image="/img/grabar.gif" />
+<!--  								<toolbarbutton id="btnBuscar"
+									tooltiptext="Buscar" image="/img/buscar.gif" />
+								<toolbarbutton id="btnNuevo"
+									tooltiptext="Nuevo" image="/img/crear.gif" />
+								<toolbarbutton id="btnActualizar"
+									tooltiptext="Actualizar" image="/img/refrescar.gif" />
+								<toolbarbutton id="btnEliminar"
+									tooltiptext="Eliminar" image="/img/eliminar.gif" />-->
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+			<grid width="99%">
+				<rows>
+					<row>
+						Especie-Talla
+						<div>
+						 <div>
+							<label value="Especies Comunes" style="color:black" />						
+							<checkbox id="chkPred" checked="true" />
+						 </div>
+						 
+						 <div>
+							<listbox id="lbxTalla" style="font-size:12px"
+							mold="select" width="120px" />
+						 </div>	
+						</div>	
+							
+							
+					</row>
+
+					<row>
+						<label value="# Muestreos "></label>
+						<textbox id="txtRemuestreo"
+							width="100px">
+						</textbox>
+					</row>
+
+					<row>
+						<label value="N° Muestra" />
+						<textbox id="txtNumMuestra" maxlength="8" width="120px" style="color:blue" readonly="true" />
+					</row>	
+					
+					
+  					<row>
+						Lote Camara
+						<decimalbox id="txtLoteCamara" format="###"
+							maxlength="4" />
+					</row>					
+					
+									
+<!--  					<row>
+						Temperatura
+						<decimalbox id="txtTemperatura" format="##.##"
+							maxlength="8" width="120px"/>
+					</row>-->
+					<row>
+						<label value="Temperatura1 "></label>
+						<textbox id="txtTemperatura" width="100px">
+						</textbox>
+					</row>
+
+					<row>
+						<label value="Temperatura2 "></label>
+						<textbox id="txtTemperatura2" width="100px">
+						</textbox>
+					</row>
+
+					<row>
+						<label value="Temperatura3 "></label>
+						<textbox id="txtTemperatura3" width="100px">
+						</textbox>
+					</row>
+
+					<row>
+						<label value="Temperatura4 "></label>
+						<textbox id="txtTemperatura4" width="100px">
+						</textbox>
+					</row>
+
+					<row>
+						Temp. Salm
+						<decimalbox id="txtTempSalmuera" format="##.##"
+							maxlength="8" width="120px"/>
+					</row>
+					<row>
+						Ojos
+						<listbox id="lbxOjos" style="font-size:12px"
+							mold="select" width="120px" />
+					</row>
+					<row>
+						Agalla
+						<listbox id="lbxAgalla" style="font-size:12px"
+							mold="select" width="120px" />
+					</row>
+					<row>
+						Piel
+						<listbox id="lbxPiel" style="font-size:12px"
+							mold="select" width="120px" />
+					</row>
+					<row>
+						Daño Físico
+						<listbox id="lbxDanoFisico"
+							style="font-size:12px" mold="select" width="120px" />
+					</row>
+					<row>
+						Olor
+						<listbox id="lbxOlor" style="font-size:12px"
+							mold="select" width="120px" />
+					</row>
+					<row>
+						Sabor
+						<listbox id="lbxSabor" style="font-size:12px"
+							mold="select" width="120px" />
+					</row>
+					<row>
+						% Cl Na
+						<decimalbox id="txtSal" format="###.##"
+							maxlength="8" width="120px" readonly="true" />
+					</row>
+					<row>
+						Histamina
+						<decimalbox id="txtHistamina" format="###.##"
+							maxlength="8" width="120px" readonly="true" />
+					</row>
+					<row>
+						PH
+						<decimalbox id="txtPh" format="###.##"
+							maxlength="8" width="120px" readonly="true" />
+					</row>
+				</rows>
+			</grid>
+			<label value="Desviación:" style="color:blue" />
+			<textbox id="txtDesviacion" style="font-size:10px" rows="4"
+				width="98%" />
+			<label value="Acción Correctiva:" style="color:blue" />
+			<textbox id="txtAccCorr" style="font-size:10px" rows="4"
+				width="98%" />
+
+			<grid width="99%" visible="false">
+				<rows>
+					<row>Cerrar Proceso
+						<hbox align="center"> 
+							<toolbarbutton id="btnCerrarP" tooltiptext="Cerrar Proceso" image="/img/grabar.gif"/>
+						</hbox>
+					</row>
+				</rows>
+			</grid>
+
+		</vbox>
+	</window>
+</zk>

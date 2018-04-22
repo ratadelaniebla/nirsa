@@ -1,0 +1,366 @@
+<?page id = "pagLimpiezaEficienciaPlantaCortesNumerosEmpleadosPorLineaWindow" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+
+	<window id="winLimpiezaEficienciaPlantaCortesNumerosEmpleadosPorLinea" apply="com.nw.webui.produccion.LimpiezaEficienciaPlantaCortesNumerosEmpleadosPorLineaWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+
+		<vbox id="vbxMain" width="99%">
+				
+			<label value="Empleados Por Linea/Cortes V2" style="color:blue;font-size:12px;font-weight:bold" />			
+			<grid width="99%">  
+				<rows>
+					<row>
+						<label value="Producción" />
+						<textbox id="txtDiaProduccion" readonly="true" style="font-size:12px" width="99%" />
+					</row>
+					
+					<row>
+						<label value="Turno"/>
+						<textbox id="txtTurno"  style="font-size:11px"  width="99%" readonly="true" ></textbox>						
+					</row>
+					
+					<row>
+						<label value="Línea" ></label>
+						<hbox>
+							<listbox id="lbxLinea" style="font-size:12px" mold="select"/>
+							<toolbar>
+									<toolbarbutton id="btnActualizar" tooltiptext="Actualizar Cortes" image="/img/refrescar.gif"/>
+							</toolbar>
+						</hbox>	
+					</row>					
+					
+				</rows>
+			</grid>	
+			
+			<grid width="99%"> 
+				<rows>
+					<row>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif" />
+						</toolbar>
+					</row>
+				</rows>
+			</grid>		
+					
+
+
+						
+
+
+<!-- CORTE 1 -->
+			<vbox>
+				<label value="CORTE 1" id="lblc1"/>			
+			</vbox>
+						
+
+			<grid id="g1" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Num. Empleados" ></label>
+							<decimalbox id="txtNumEmpleados1" format="###"  maxlength="3" width="90%"/>	
+						</hbox>
+				    </row>
+				</rows>
+			</grid>
+
+
+			<grid id="g11" width="99%">  
+				<rows>
+								
+				</rows>
+			</grid>
+<!-- FIN CORTE 1 -->
+
+
+
+<!-- CORTE 2 -->
+			<vbox>
+				<label value="CORTE 2" id="lblc2"/>			
+			</vbox>
+						
+
+			<grid id="g2" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Num. Empleados" ></label>
+							<decimalbox id="txtNumEmpleados2" format="###"  maxlength="3" width="90%"/>	
+						</hbox>
+				    </row>
+				</rows>
+			</grid>
+<!-- FIN CORTE 2 -->
+
+
+<!-- CORTE 3 -->
+			<vbox>
+				<label value="CORTE 3" id="lblc3"/>			
+			</vbox>
+						
+
+			<grid id="g3" width="99%">
+			  	<rows>				
+					<row>
+						<hbox>					
+							<label value="Num. Empleados" ></label>
+							<decimalbox id="txtNumEmpleados3" format="###"  maxlength="3" width="90%"/>	
+						</hbox>
+				    </row>
+				</rows>			  
+			</grid>
+
+<!-- FIN CORTE 3 -->
+
+
+<!-- CORTE 4 -->
+			<vbox>
+				<label value="CORTE 4"  id="lblc4"/>			
+			</vbox>
+						
+
+			<grid id="g4" width="99%">  
+			  	<rows>				
+					<row>
+						<hbox>					
+							<label value="Num. Empleados" ></label>
+							<decimalbox id="txtNumEmpleados4" format="###"  maxlength="3" width="90%"/>	
+						</hbox>
+				    </row>
+				</rows>			  				
+			</grid>
+<!-- FIN CORTE 4 -->
+
+
+<!-- CORTE 5 -->
+			<vbox>
+				<label value="CORTE 5"  id="lblc5"/>			
+			</vbox>
+						
+
+			<grid id="g5" width="99%">  
+			  	<rows>				
+					<row>
+						<hbox>					
+							<label value="Num. Empleados" ></label>
+							<decimalbox id="txtNumEmpleados5" format="###"  maxlength="3" width="90%"/>	
+						</hbox>
+				    </row>
+				</rows>			  				
+			</grid>
+<!-- FIN CORTE 5 -->
+
+
+<!-- CORTE 6 -->
+			<vbox>
+				<label value="CORTE 6"  id="lblc6"/>			
+			</vbox>
+						
+
+			<grid id="g6" width="99%">  
+			  	<rows>				
+					<row>
+						<hbox>					
+							<label value="Num. Empleados" ></label>
+							<decimalbox id="txtNumEmpleados6" format="###"  maxlength="3" width="90%"/>	
+						</hbox>
+				    </row>
+				</rows>			  				
+			</grid>
+<!-- FIN CORTE 6 -->
+
+
+<!-- CORTE 7 -->
+			<vbox>
+				<label value="CORTE 7"  id="lblc7"/>			
+			</vbox>
+						
+
+			<grid id="g7" width="99%">  
+			  	<rows>				
+					<row>
+						<hbox>					
+							<label value="Num. Empleados" ></label>
+							<decimalbox id="txtNumEmpleados7" format="###"  maxlength="3" width="90%"/>	
+						</hbox>
+				    </row>
+				</rows>			  				
+			</grid>
+<!-- FIN CORTE 7 -->
+
+
+
+<!-- CORTE 8 -->
+			<vbox>
+				<label value="CORTE 8"  id="lblc8"/>			
+			</vbox>
+						
+
+			<grid id="g8" width="99%">  
+			  	<rows>				
+					<row>
+						<hbox>					
+							<label value="Num. Empleados" ></label>
+							<decimalbox id="txtNumEmpleados8" format="###"  maxlength="3" width="90%"/>	
+						</hbox>
+				    </row>
+				</rows>			  				
+			</grid>
+<!-- FIN CORTE 8 -->
+
+
+<!-- CORTE 9 -->
+			<vbox>
+				<label value="CORTE 9"  id="lblc9"/>			
+			</vbox>
+						
+
+			<grid id="g9" width="99%">
+			  	<rows>				
+					<row>
+						<hbox>					
+							<label value="Num. Empleados" ></label>
+							<decimalbox id="txtNumEmpleados9" format="###"  maxlength="3" width="90%"/>	
+						</hbox>
+				    </row>
+				</rows>			  				
+			</grid>
+<!-- FIN CORTE 9 -->
+
+
+<!-- CORTE 10 -->
+			<vbox>
+				<label value="CORTE 10"  id="lblc10"/>			
+			</vbox>
+						
+
+			<grid id="g10" width="99%">  
+			  	<rows>				
+					<row>
+						<hbox>					
+							<label value="Num. Empleados" ></label>
+							<decimalbox id="txtNumEmpleados10" format="###"  maxlength="3" width="90%"/>	
+						</hbox>
+				    </row>
+				</rows>			  				
+			</grid>
+<!-- FIN CORTE 10 -->
+
+
+<!-- CORTE 11 -->
+			<vbox>
+				<label value="CORTE 11"  id="lblc11"/>			
+			</vbox>
+						
+
+			<grid id="g11111" width="99%">  
+			  	<rows>				
+					<row>
+						<hbox>					
+							<label value="Num. Empleados" ></label>
+							<decimalbox id="txtNumEmpleados11" format="###"  maxlength="3" width="90%"/>	
+						</hbox>
+				    </row>
+				</rows>			  				
+			</grid>
+<!-- FIN CORTE 11 -->
+			
+
+<!-- CORTE 12 -->
+			<vbox>
+				<label value="CORTE 12" id="lblc12"/>			
+			</vbox>
+						
+
+			<grid id="g12121" width="99%">  
+			  	<rows>				
+					<row>
+						<hbox>					
+							<label value="Num. Empleados" ></label>
+							<decimalbox id="txtNumEmpleados12" format="###"  maxlength="3" width="90%"/>	
+						</hbox>
+				    </row>
+				</rows>			  				
+			</grid>
+<!-- FIN CORTE 12 -->
+
+
+<!-- CORTE 13 -->
+			<vbox>
+				<label value="CORTE 13" id="lblc13"/>			
+			</vbox>
+						
+
+			<grid id="g13131" width="99%">  
+			  	<rows>				
+					<row>
+						<hbox>					
+							<label value="Num. Empleados" ></label>
+							<decimalbox id="txtNumEmpleados13" format="###"  maxlength="3" width="90%"/>	
+						</hbox>
+				    </row>
+				</rows>			  				
+			</grid>
+<!-- FIN CORTE 13 -->
+
+
+<!-- CORTE 14 -->
+			<vbox>
+				<label value="CORTE 14" id="lblc14"/>			
+			</vbox>
+						
+
+			<grid id="g14141" width="99%">  
+			  	<rows>				
+					<row>
+						<hbox>					
+							<label value="Num. Empleados" ></label>
+							<decimalbox id="txtNumEmpleados14" format="###"  maxlength="3" width="90%"/>	
+						</hbox>
+				    </row>
+				</rows>			  				
+			</grid>
+<!-- FIN CORTE 14 -->
+
+
+<!-- CORTE 15 -->
+			<vbox>
+				<label value="CORTE 15" id="lblc15"/>			
+			</vbox>
+						
+
+			<grid id="g15151" width="99%">  
+			  	<rows>				
+					<row>
+						<hbox>					
+							<label value="Num. Empleados" ></label>
+							<decimalbox id="txtNumEmpleados15" format="###"  maxlength="3" width="90%"/>	
+						</hbox>
+				    </row>
+				</rows>			  				
+			</grid>
+<!-- FIN CORTE 15 -->
+
+
+<!-- CORTE 16 -->
+			<vbox>
+				<label value="CORTE 16" id="lblc16"/>			
+			</vbox>
+						
+
+			<grid id="g16161" width="99%">  
+			  	<rows>				
+					<row>
+						<hbox>					
+							<label value="Num. Empleados" ></label>
+							<decimalbox id="txtNumEmpleados16" format="###"  maxlength="3" width="90%"/>	
+						</hbox>
+				    </row>
+				</rows>			  				
+			</grid>
+<!-- FIN CORTE 16 -->
+
+
+		</vbox>
+	</window>
+</zk> 

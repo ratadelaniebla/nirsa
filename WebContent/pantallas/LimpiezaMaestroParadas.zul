@@ -1,0 +1,103 @@
+<?page id = "pagCalidadPCC1Sensorial" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winLimpiezaMaestroParadas" >
+	<!-- apply="com.nw.webui.produccion.LimpiezaoMaestroParadasWindow" -->
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="LIMPIEZA MANT. PARADAS" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain" width="40%">
+
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar"
+									tooltiptext="Grabar" image="/img/grabar.gif" />
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+			
+
+			<grid width="99%">
+				<rows>
+					<row>
+						<label value="LISTA DE PARADAS"></label>
+						<listbox id="lbxListaParadas"  mold="select" width="99%">
+				    	</listbox>
+					</row>				
+				</rows>
+			</grid>
+			
+			
+			<grid width="99%">
+				<rows>
+					<row>
+						<label value="Descripción"></label>
+						<textbox id="txtDescripcion" width="99%" rows="2"></textbox>
+					</row>
+
+				</rows>
+			</grid>
+			
+
+
+			<label value="CLASES DE PARADAS"></label>
+			<grid width="99%">
+				<rows>
+	
+	
+					<row>
+						<label value="Tiempo muerto"></label>
+						<listbox id="lbxTiempoMuerto" style="font-size:11px" mold="select" width="99%">
+					    	<listitem selected="true" label=""  />
+					    	<listitem label="SI" value="1" />
+					    	<listitem label="NO" value="2" />
+				    	</listbox>
+					</row>		
+	
+				
+					<row>
+						<label value="Parada programada"></label>
+						<listbox id="lbxParadaProgramada" style="font-size:11px" mold="select" width="99%">
+					    	<listitem selected="true" label=""  />
+					    	<listitem label="SI" value="1" />
+					    	<listitem label="NO" value="2" />
+				    	</listbox>
+					</row>				
+				
+					<row>
+						<label value="Tipo de parada"></label>
+						<listbox id="lbxEquipoPersona" style="font-size:11px" mold="select" width="99%">
+					    	<listitem selected="true" label=""  />
+					    	<listitem label="Por equipo" value="1" />
+					    	<listitem label="Por Persona" value="2" />
+				    	</listbox>
+					</row>
+					
+					
+				<row>
+
+					<hbox>
+						<label value="Confirmar" />
+						<checkbox id="ChkEliminar" width="99%"></checkbox>
+					</hbox>		
+					
+					<hbox>
+						<toolbar>
+							<toolbarbutton id="btnEliminar" label="Eliminar"/>
+						</toolbar>
+					</hbox>
+				</row>					
+					
+					
+				</rows>
+			</grid>
+
+
+
+
+		</vbox>
+	</window>
+</zk>

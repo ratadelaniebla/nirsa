@@ -1,0 +1,68 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winAperturaCierreLonjas" apply="com.nw.webui.produccion.LonjasConteoWindow" width="99%">
+	<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="LONJAS-CONTEO" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="200px">
+		<grid >
+			<rows>
+				<row >
+					<label value="Días Producción " ></label>
+					<listbox id="lbxDiaProduccion" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+				<row >
+					<label value="Día Juliano" ></label>
+					<textbox id="txtdiaJuliano" style="font-size:11px" width="130px" readonly="true" ></textbox> 
+				</row>
+				<row >
+					<label value="Turno" ></label>
+					<listbox id="lbxTurno" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+				<row>
+					<label value="O. Fabricacion" ></label>
+					<listbox id="lbxOFabricacion" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+				
+				<row>
+					<label value="Lote" ></label>
+					<listbox id="lbxLote" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+				<row >
+					<label value="Cod. Lonjas" ></label>
+					<textbox id="txtCodLonjas" style="font-size:11px" width="130px" readonly="true" ></textbox> 
+				</row>
+				
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+						</toolbar>
+					</vbox>
+					
+				</row>
+			</rows>
+		</grid>
+		<grid width="99%">
+			<rows>
+				<row >
+					<label value="# Coche" ></label>
+					<textbox id="txtCoche" style="font-size:11px" width="130px" readonly="true" ></textbox> 
+				</row>
+				<row >
+					<label value="Fundas" ></label>
+					<textbox id="txtFundas" style="font-size:11px" width="130px"  ></textbox> 
+				</row>
+				<row>
+					<label value="Tunel" ></label>
+					<listbox id="lbxTunel" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+			</rows>
+		</grid>
+	</vbox>
+</window>
+</zk>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportOrdenTurnos" pageWidth="2680" pageHeight="595" orientation="Landscape" columnWidth="2680" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idproduccionarchivocargaorden" class="java.lang.Long"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select t.idturno from turno t,
+(select distinct idturno
+   from produccion_archivo_carga_orden_detalle
+  where idproduccionarchivocargaorden = $P{idproduccionarchivocargaorden}) d
+where t.idturno = d.idturno
+order by t.idturno asc]]>
+	</queryString>
+	<field name="idturno" class="java.lang.Integer"/>
+	<variable name="sumTon" class="java.lang.Double"/>
+	<variable name="ralladoempacado" class="java.lang.Double"/>
+	<detail>
+		<band height="41" splitType="Prevent">
+			<subreport>
+				<reportElement x="0" y="29" width="200" height="12"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="IDTURNO">
+					<subreportParameterExpression><![CDATA[$F{idturno}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="PSIDPRODUCCIONARCHIVOCARGAORDEN">
+					<subreportParameterExpression><![CDATA[$P{idproduccionarchivocargaorden}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="sumTon" toVariable="sumTon"/>
+				<returnValue subreportVariable="ralladoempacado" toVariable="ralladoempacado"/>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "reporteOrdenDetalle.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement x="0" y="0" width="62" height="29"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Turno ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="62" y="0" width="62" height="29"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{idturno}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="20">
+			<textField isStretchWithOverflow="true" pattern="###0.000" isBlankWhenNull="true">
+				<reportElement x="997" y="0" width="62" height="20"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{sumTon}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###0.###" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="2064" y="0" width="68" height="20"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{ralladoempacado}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

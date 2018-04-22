@@ -1,0 +1,21 @@
+<?page title="Auto Generated index.zul"?>
+<window title="Resetar Balanzas" border="normal" width="200px" apply="com.nw.webui.produccion.LimpiezaResetearBalanzasWindow">
+
+<label value=" "/>
+<grid width="99%">
+				<rows>
+					<row>
+						
+							<toolbar>
+							<vbox>
+								<toolbarbutton id="btnGrabar" label="Cerrar Puertos"
+									tooltiptext="Grabar" image="/img/grabar.gif" />
+									
+								<toolbarbutton id="btnGrabar1" label="Abrir Puertos"
+									tooltiptext="Grabar" image="/img/grabar.gif" />
+							</vbox>		
+							</toolbar>
+					</row>
+				</rows>
+			</grid>
+</window>

@@ -1,0 +1,132 @@
+<?page id = "pagCalidadPCC1Quimico" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winCalidadPCC1Quimico" apply="com.nw.webui.produccion.CalidadPCC1QuimicoWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="RECEPCION PCC1-" style="color:blue;font-size:12px;font-weight:bold" />
+		<label value="Análisis Quím" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+<!--  			<grid width="99%">
+				<rows>
+					<row>
+						<label value="Fec.Prod." style="color:blue" />
+						<datebox id="dteFecPro" width="80px" />
+					</row>
+				</rows>
+			</grid>-->
+
+<!--  			<hbox style="color:blue" width="99%">
+				Orden
+				<toolbarbutton id="btnCargar" label="Cargar"/> 
+			</hbox>
+			<listbox id="lbxOrd" style="font-size:11px" mold="select"
+				width="99%" />
+			</grid>			-->
+			<grid width="99%">  
+				<rows>
+					<row>
+						Barco
+							<listbox id="lbxBarco" style="font-size:9px" mold="select"
+								width="100px" />
+					</row>
+					<row>
+						Registro
+						<textbox id="txtRegistro" maxlength="8" width="98%" style="color:blue" readonly="true" />
+					</row>
+
+					<row>
+						N° Barco
+						<textbox id="txtNumBarco" maxlength="8" width="98%" style="color:blue" readonly="true" />
+					</row>
+					<row>
+						Cuba
+							<listbox id="lbxCuba" style="font-size:9px" mold="select"
+								width="100px" />
+					</row>
+					<row>
+						Muestreo
+							<listbox id="lbxMuestreo" style="font-size:9px" mold="select"
+								width="100px" />
+					</row>
+					<row>
+						Num. Muestra
+							<listbox id="lbxNumMuestra" style="font-size:9px" mold="select"
+								width="100px" />
+					</row>
+				</rows>
+			</grid>			
+			<grid width="99%"> 
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+								<toolbarbutton id="btnBuscar" tooltiptext="Buscar" image="/img/buscar.gif"/>
+								<toolbarbutton id="btnNuevo" tooltiptext="Nuevo" image="/img/crear.gif" />
+								<toolbarbutton id="btnActualizar" tooltiptext="Actualizar" image="/img/refrescar.gif"/>
+								<toolbarbutton id="btnEliminar" tooltiptext="Eliminar" image="/img/eliminar.gif" />
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+						<grid width="99%">
+							<rows>
+								<row>
+									Especie
+									<textbox id="txtEspecie" maxlength="8" width="100px" style="color:blue" readonly="true" />
+								</row>
+								<row>
+									Talla
+									<textbox id="txtTalla" maxlength="8" width="100px" style="color:blue" readonly="true" />
+								</row>
+								<row>
+									% Cl Na
+									<decimalbox id="txtSal" format="###.##"  maxlength="8" width="98%" />
+								</row>
+								<row>
+									Histamina
+									<decimalbox id="txtHistamina" format="###.##"  maxlength="8" width="98%" />
+								</row>
+								<row>
+									PH
+									<decimalbox id="txtPh" format="###.##"  maxlength="8" width="98%" />
+								</row>
+								<row>
+									Temperatura
+									<decimalbox id="txtTemperatura" format="###.##"  maxlength="8" width="98%" readonly="true" />
+								</row>
+								<row>
+									Temp. Salmuera
+									<decimalbox id="txtTempSalmuera" format="###.##"  maxlength="8" width="98%" readonly="true" />
+								</row>
+								<row>
+									Agalla
+									<textbox id="txtAgalla" maxlength="8" width="98%" style="color:blue" readonly="true" />
+								</row>
+								<row>
+									Piel
+									<textbox id="txtPiel" maxlength="8" width="98%" style="color:blue" readonly="true" />
+								</row>
+								<row>
+									Daño Físico
+									<textbox id="txtDanoFisico" maxlength="8" width="98%" style="color:blue" readonly="true" />
+								</row>
+								<row>
+									Olor
+									<textbox id="txtOlor" maxlength="8" width="98%" style="color:blue" readonly="true" />
+								</row>
+								<row>
+									Sabor
+									<textbox id="txtSabor" maxlength="8" width="98%" style="color:blue" readonly="true" />
+								</row>
+							</rows>
+						</grid> 
+						<label value="Desviación:" style="color:blue" />
+						<textbox id="txtDesviacion" style="font-size:10px" 
+							rows="4" width="98%" />
+						<label value="Acción Correctiva:" style="color:blue" />
+						<textbox id="txtAccCorr" style="font-size:10px" 
+							rows="4" width="98%" />
+		</vbox>
+	</window>
+</zk>

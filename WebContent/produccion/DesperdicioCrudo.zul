@@ -1,0 +1,144 @@
+<?page id = "pagCalidadPCC1Quimico" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+
+
+	<window id="winDesperdicioCrudo" apply="com.nw.webui.produccion.DesperdicioCrudoWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="DESPERDICIO CRUDO" style="color:blue;font-size:12px;font-weight:bold" />
+		<label value="" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+
+
+			<grid width="99%"> 
+				<rows>
+					<row>
+						<label value="Día Producción"/>
+						<datebox id="dteFecha" width="110px" format="dd/MM/yyyy"/>
+					</row>
+									
+					<row>
+						<label value="Día Juliano" />
+						<textbox id="txtDiaJuliano" maxlength="4"  width="50px"  readonly="true" />
+					</row>
+<!-- 					
+					<row>
+						<label value="Turno" />
+						<listbox id="lbxTurno" style="font-size:12px" mold="select" width="98%" />
+					</row>
+ -->					
+				</rows>
+			</grid>
+			
+			
+			<vbox id="vbxMainLote">
+				<div>		
+					<label value="Lote" />
+					<decimalbox id="txtLote1" format="##########"  maxlength="10" width="60px" readonly="false" />		
+					<!-- 
+					<button id="BtnAgregar" label="Agregar" />
+					<button id="BtnQuitar" label="Quitar" />
+					 -->
+				</div>
+			</vbox>			
+ 
+											
+			<grid width="99%">  
+				<rows>
+									
+					<row>
+						<label value="Area Desperdicio" />
+						<listbox id="lbxAreaDesperdicio" style="font-size:12px" mold="select" width="98%" />
+					</row>
+
+					<row>
+						<label value="Lugar Desperdicio" />
+						<vbox>
+							<listbox id="lbxLugarDesperdicio" style="font-size:12px" mold="select" width="98%" />
+							<hbox width="98%">							
+								<label value="Num." style="color:blue"/> 
+								<listbox id="lbxNumeroLugarDesperdicio" style="font-size:12px" mold="select" width="80px" />
+							</hbox>
+						</vbox>
+					</row>
+
+					<row>
+						<label value="Tipo Desperdicio" />
+						<vbox>
+							<listbox id="lbxTipoDesperdicio" style="font-size:12px" mold="select" width="98%" />
+							<hbox>							
+								<label value="Num. Gavetas" style="color:blue"/>
+								<decimalbox id="txtGaveta" format="####"  maxlength="4"  width="50px" />
+							</hbox>							
+						</vbox>
+					</row>
+
+					<row>
+						<label value="Num. Cajón" />
+						<listbox id="lbxCajon" style="font-size:12px" mold="select" width="80px" />
+					</row>
+
+
+<!-- 
+					<row>
+						<label value="Total Neto" style="color:blue;font-size:12px;font-weight:bold"/>
+						
+						<textbox id="txtPesoNetoTotal" maxlength="10" width="100px" readonly="true" style="color:blue;font-size:12px;font-weight:bold"/>
+					</row>
+ -->
+
+
+					<row>
+						<label value="Turno Desperdicio" />
+						<textbox id="txtTurnoDesperdicio" maxlength="4"  width="50px"  readonly="true" />
+					</row>
+															
+					<row>						
+						<label value="Peso Retenido" style="color:blue;font-size:12px;font-weight:bold" />
+						<label id="LblPesoRetenido" value="-" style="color:blue;font-size:12px;font-weight:bold" />					
+					</row>											
+										
+					<row>
+							<toolbar>
+								<toolbarbutton  id="btnPeso" label="Capturar Peso" tooltiptext="Tomar Peso"
+								style="color:blue;font-size:12px;font-weight:bold"/>
+							</toolbar>
+							<div>
+								<textbox id="txtPesoBruto" maxlength="10" width="100px" readonly="true" style="color:blue;font-size:12px;font-weight:bold"/>
+								<div>
+								Conservar <checkbox id="chkConservar" checked="false" disabled="false"/>
+								</div>							
+							</div>							
+					</row>
+					
+					<row>
+							<label value="Peso Neto" style="color:blue;font-size:12px;font-weight:bold"/>
+							<div>
+								<textbox id="txtPesoNeto" maxlength="10" width="100px" readonly="true" style="color:blue;font-size:12px;font-weight:bold"/>
+							</div>
+					</row>										
+					
+
+					<row visible="false">						
+						<label value="Peso Diferencia" style="color:blue;font-size:12px;font-weight:bold" />
+						<label id="LblPesoDiferencia" value="-" style="color:blue;font-size:12px;font-weight:bold" />					
+					</row>
+						
+				</rows>
+			</grid>
+
+			<grid width="99%"> 
+				<rows id="Rwgrabar">
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+							</toolbar>
+							
+						</vbox>
+					</row>
+				</rows>
+			</grid>			
+			
+		</vbox>
+	</window>
+</zk>

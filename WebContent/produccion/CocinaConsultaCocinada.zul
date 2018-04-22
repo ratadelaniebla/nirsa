@@ -1,0 +1,95 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="CONSULTA DE COCINADA" border="normal" id="winConsultaCocina" 
+apply="com.nw.webui.produccion.CocinaConsultaCocinadaWindow">
+<script src="/js/noBarra.js" type="text/javascript" />
+
+   <vbox id="vbxMain"  width="200px" >  
+    	   
+	  
+	   <grid width="99%"> 
+			<rows>
+			    <row>
+					<label value="Dia Produccion " style="color:blue"   />
+					
+					<hbox>
+						<listbox id="lbxProduccionFecha2" style="font-size:11px" mold="select"> </listbox>					
+						<toolbar>
+							<toolbarbutton id="btnActualizarFech" tooltiptext="Actualizar" image="/img/refrescar.gif"/>
+						</toolbar>
+					</hbox>					
+					
+					
+			    </row>
+			</rows>
+	   </grid>
+	   <hbox width="99%"> <!--  -->
+	    	 <groupbox>
+	           <vbox>
+	         	
+	         	<hbox>
+	         	  <label value="Cocina : " style="color:blue"   />
+	         	  
+	         	  <hbox>
+			 	  		<listbox id="lbxCocina2" style="font-size:11px" mold="select"> </listbox>
+						<toolbar>
+							<toolbarbutton id="btnActualizarCocina" tooltiptext="Actualizar" image="/img/refrescar.gif"/>
+						</toolbar>
+					</hbox>				 	  
+			 	  
+			 	  
+			 	  
+			 	</hbox>  
+			 	 <hbox>
+			 		<label value="Cocinada" ></label>
+					<textbox id="txtCocinada2" style="font-size:11px"  width="130px"  readonly="true"> </textbox>		
+			 	 </hbox>
+			 	 <hbox>
+			 		<label value="Corte" ></label>
+					<textbox id="txtCorte" style="font-size:11px"  width="130px"  readonly="true"> </textbox>		
+			 	 </hbox>
+			 	 <hbox>
+			 		<label value="Temp." ></label>
+					<textbox id="txtTemperatura" style="font-size:11px"  width="130px"  readonly="true"> </textbox>		
+			 	 </hbox>
+			 </vbox>
+	  	   </groupbox>  	   
+	   </hbox>  
+	   <hbox>    
+	      <groupbox>
+	      
+
+			<toolbar>
+				<toolbarbutton id="btnActualizarListaCoches" tooltiptext="Actualizar" image="/img/refrescar.gif"/>
+			</toolbar>
+						      
+	      
+	         <separator></separator>
+	          <listbox id="lbxDestino" model="@{winConsultaCocina.evisceradoDetalleProcesoCocheEstadosOrdenDestino}" multiple="true" checkmark="false" height="160px" width="240px">
+						<listhead style="font-size:9px" >
+							<listheader label="Orden" width="40px" />
+							<listheader label="Coche" width="40px" />
+							<listheader label="Clasific" width="40px" />
+							<listheader label="Corte" width="40px" />
+							<listheader label="Lote" width="40px" />
+							<listheader label="Esp." width="40px" />
+						</listhead>
+						  
+						     <listitem self="@{each=d}">
+						            <listcell label="@{d.numero}" ></listcell>
+									<listcell  label="@{d.evisceradoDetalleProcesoCoche.codbarra}"></listcell>
+						            <listcell  label="@{d.evisceradoDetalleProcesoCoche.evisceradoPescadosLata.especificacion}"> </listcell>
+						            <listcell  label="@{d.evisceradoDetalleProcesoCoche.evisceradoCorte.descripcion}"> </listcell>
+						            <listcell  label="@{d.evisceradoDetalleProcesoCoche.evisceradoDetalleProceso.produccionDetalleLoteCajon.produccionDetalleLote.idlote}"> </listcell>
+						            <listcell > 
+						               <checkbox checked="@{d.evisceradoDetalleProcesoCoche.estadoespecial}" disabled = "true" > </checkbox> 
+						            </listcell>
+						      </listitem>
+				 </listbox> 
+	      </groupbox>
+	   
+	   </hbox>
+		
+	</vbox>
+	</window>
+</zk>

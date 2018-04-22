@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?page id="pagCalidadBPMDes"?>
+<window id="winCamaraBarcoDescargaImpresion" apply="com.nw.webui.produccion.CalidadRemuestreoCajonImpresionWindow">
+	<label value="Reporte Control de Calidad Remuestreo " style="color:blue;font-size:11px;font-weight:bold"/>
+	<vbox  id="vbxMain">
+		
+	 <grid >
+			<rows>
+				<row>
+					<hbox>
+						<label value="Fec.Prod. " style="color:blue" />
+					</hbox>
+				<hbox>
+					<datebox id="dtxFechaInicio" style="font-size:11px"  width="100px" format="dd/MM/yyyy" ></datebox>
+				</hbox>				
+				</row>
+				<row>
+					<hbox>
+						<label value="Fec.Prod. " style="color:blue" />						
+					</hbox>
+				<hbox>
+					<datebox id="dtxFechaFin" style="font-size:11px"  width="100px" format="dd/MM/yyyy" ></datebox>
+					<toolbar>
+							<toolbarbutton id="btnBuscar" tooltiptext="Grabar" image="/img/buscar.gif"/>
+					</toolbar>
+				</hbox>
+				</row>
+				<row>
+				    <label value="Registro :" style="color:blue" />	
+				    <hbox>
+				        <textbox id="txtRegistro"  width="100px" > </textbox>
+				        <toolbar>
+							<toolbarbutton id="btnBuscarRegistro" tooltiptext="Grabar" image="/img/buscar.gif"/>
+					</toolbar>
+				        
+				    </hbox>
+				    
+				</row>
+				<row>
+				    <label value="Barco :" style="color:blue" />
+				    <listbox id="lbxBarco" style="font-size:11px" mold="select" width="120px" />
+				</row>
+			</rows>
+		</grid>
+			<grid width="99%">
+				<rows>
+<!--  					<row>
+						<vbox>
+							<label value="Imprimir" style="color:blue;font-size:12px;font-weight:bold"/> 
+							<toolbarbutton id="btnCalidadRemuestreo" label="Calidad Remuestreo Histamina" style="color:blue;font-size:12px;font-weight:bold"/>
+						</vbox>
+					</row>
+-->
+					<row>
+						<vbox>
+							<label value="Imprimir" style="color:blue;font-size:12px;font-weight:bold"/>
+							<toolbar>
+
+								<vbox>
+									<hbox>								
+										<toolbarbutton id="btnCalidadRemuestreo" label="Calidad Remuestreo PCC1"/>
+										<toolbarbutton id="btnExcelCalidadRemuestreo" label="Excel" style="color:blue;font-size:11px;font-weight:bold"/>
+									</hbox>
+								</vbox>
+								
+							</toolbar>
+						</vbox>
+					</row>
+
+
+				</rows>
+			</grid>
+
+			
+	</vbox> 
+</window>

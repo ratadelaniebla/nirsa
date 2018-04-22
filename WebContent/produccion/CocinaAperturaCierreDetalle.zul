@@ -1,0 +1,42 @@
+<?page title="Cocina" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winirAbrirCerrarCocina" apply="com.nw.webui.produccion.CocinaAperturaCierreDetalleWindow" width="99%">
+	<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="Abrir-Cerrar-Habilitar Cocina" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="200px">
+		<grid >
+			<rows>
+				<row>
+					<label value="Fecha Produccion " style="color:blue" />
+					<listbox id="lbxFechaActiva" style="font-size:11px" mold="select" width="130px" > </listbox>
+			    </row>
+			    <row>
+					<label value="Abrir/Cerrar/Reapertura/Finalizar"  />
+					<listbox id="lbxOpciones" style="font-size:11px" mold="select" width="130px" > </listbox>
+			    </row>
+			    
+				<row >
+					<label value="Cocina" ></label>
+					<listbox id="lbxCocina" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+				<row >
+					<label value="Cocinada" ></label>
+					<textbox id="txtCocinada" style="font-size:11px"  width="130px"  readonly="true"> </textbox>
+				</row>
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif"/>  
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>
+	</vbox>
+</window>
+</zk>

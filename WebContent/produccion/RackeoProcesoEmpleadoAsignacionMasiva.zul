@@ -1,0 +1,109 @@
+<?page title="RACKEO ASIGNACION " contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winRackeoAsignacionEmpleadoMasivamente" border="none" apply="com.nw.webui.produccion.v2.RackeoProcesoEmpleadoAsignacionMasivaWindow" >
+<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="RACKEO ASIGNACION EMPLEADOS MASIVAMENTE" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="97%">
+		<grid width="97%">
+			<rows>
+				<row>
+				    <label value="Fech.Prod/Turno Actual:" style="color:blue" />
+				    <textbox id="txtProduccionTurno"  style="font-size:11px"  width="80%" readonly="true" ></textbox>
+				</row>
+				
+
+				<row>
+				    <label value="Turno :" style="color:blue" />
+				    <textbox id="txtTurno"  style="font-size:11px"  width="80%" readonly="true" ></textbox>
+				</row>
+			</rows>
+		</grid>
+
+		<grid width="97%">
+			<rows>
+				<row>
+				    <label value="Mesa :" style="color:blue" />
+				    <listbox id="lbxMesa" style="font-size:11px" mold="select" width="120px" >
+				      <listitem selected="true" label=""  />
+				    	<listitem label="1"  value="1" />
+				    <!-- 	<listitem label="2"  value="2" />
+				    	<listitem label="3"  value="3" />
+				    	<listitem label="4"  value="4" />
+				    	<listitem label="5"  value="5" />
+				    	<listitem label="6"  value="6" />
+				    	<listitem label="7"  value="7" />
+				    	<listitem label="8"  value="8" />
+				    	<listitem label="9"  value="9" />
+				    	<listitem label="10" value="10" />  -->
+				    </listbox>
+				</row>
+			</rows>	
+		</grid>
+		
+
+		<grid width="97%">
+			<rows>
+
+				<row>
+				    <label value="Fech.Prod/Turno Anterior:" style="color:blue" />
+				    <listbox id="lbxProcesosAnterior" style="font-size:11px" mold="select" width="80%" />
+				</row>
+				
+			</rows>
+		</grid>		
+		
+		
+	    <listbox  id="lbxLista" model="@{winRackeoAsignacionEmpleadoMasivamente.rackeoProcesoEmpleadoEstados}" multiple="true" checkmark="false" width="95%">
+			<listhead style="font-size:5px" >
+				<listheader label="Ubi." width="10%" />
+				<listheader label="Empleado" width="60%"  style="font-size:5px" />
+				<listheader label="(X)" width="8%" />
+			</listhead>
+						  
+			<listitem self="@{each=d}">
+				<listcell label="@{d.rackeoProcesoEmpleado.ubicacion}" ></listcell>
+				<listcell  label="@{d.rackeoProcesoEmpleado.empleado.nombres}"></listcell>
+				<listcell > 
+					<checkbox checked="@{d.seleccionado}"> </checkbox> 
+				</listcell>
+			</listitem>
+			
+		</listbox>		
+
+		<grid width="90%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="GRABAR LISTA EMPLEADOS" />
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>		
+
+	<space width="10px"></space>
+
+	<label value="Eliminación masiva" style="color:blue;font-size:11px;font-weight:bold" />
+
+		<grid width="90%">
+			<rows>
+			
+				<row>
+				    <label value="Confirma eliminación" style="color:blue" />
+				    <checkbox id="chkConfirma" />
+				</row>			
+			
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnEliminar" label="ELIMINAR LISTA" />
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>
+
+	</vbox>
+</window>
+</zk>

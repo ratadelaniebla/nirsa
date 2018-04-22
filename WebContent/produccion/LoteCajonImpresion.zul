@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?page id="pagCalidadBPMDes"?>
+<!--  -->
+<window id="winCocinaEntradaSalidaImpresion" apply="com.nw.webui.produccion.LoteCajonImpresion"> 
+	<label value="•Lotes-Cajones" style="color:blue;font-size:11px;font-weight:bold"/>
+	<vbox  id="vbxMain">
+		
+			<grid width="99%">
+				<rows>
+
+					<row>
+						<label value="Fecha Producción:"/>
+						<listbox id="lbxProduccion" style="font-size:11px"
+						 mold="select" width="100px" />
+					</row>			
+					<row>
+						<label value="Turno :"/>	
+						<listbox id="lbxTurno" style="font-size:11px"
+						 mold="select" width="100px" />
+					</row>	
+					<row>
+					    <label value="Lotes :"/>
+					    <listbox id="lbxLote" style="font-size:11px" mold="select" width="130px" > </listbox>
+					</row>
+					<row>
+					    <label value="Buscar Cajones "/>	
+					    <toolbar>
+							<toolbarbutton id="btnBuscarCajones" label="Aceptar"  image="/img/buscar.gif" />					    
+					    </toolbar>
+					</row>
+					
+				</rows>
+			</grid>
+		  <hbox spacing="0" width="99%">
+		       <groupbox>
+		         <vbox>
+		             <hbox>
+		                <label value="Lote :"></label>
+		                <textbox id="txtLote"  cols="5" ></textbox>
+		             </hbox>
+		         	
+		         	<hbox>
+		         	 
+				 	  <listbox id="lbxResultadoLote" style="font-size:11px" height="160px"  width="100%"  >
+				 	    <listhead>
+				 	       <listheader label="Lote" width="40px" />
+				 	        <listheader label="Cajón" width="50px" />
+							<listheader label="Barco" width="80px" />
+							<listheader label="Especie" width="80px" />
+				 	    </listhead>
+				 	   </listbox>
+				 	</hbox>  
+				 	 
+				 </vbox>
+		   
+		  	   </groupbox>
+		   </hbox>
+			
+			
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<label value="Imprimir" id="lbImprimir" style="color:blue;font-size:12px;font-weight:bold"/>
+							<toolbar>
+								<vbox>
+								<toolbarbutton id="btnPdf" label="Pdf"/>
+								<!--   <toolbarbutton id="btnExcel" label="Excel "/> --> 
+								</vbox>
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+
+			
+	</vbox> 
+</window>

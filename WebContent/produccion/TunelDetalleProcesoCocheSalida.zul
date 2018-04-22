@@ -1,0 +1,77 @@
+<?page title=" TUNEL DETALLE PROCESO COCHE  " contentType="text/html;charset=UTF-8"?>
+<zk>
+<window  apply="com.nw.webui.produccion.TunelDetalleProcesoCocheSalidaWindow">
+<label value="Tunel Salida de Coche"  style="color:blue;font-size:11px;font-weight:bold"/>
+	 <vbox  id="vbxMain" width="99%">
+		    <grid width="98%">
+				<rows>
+				
+				    <row >
+					   <label value="Fecha Producción :" style="color:blue" />
+				       <datebox id="dtbxFechaProduccion" ></datebox>
+					</row>
+					<row >
+					   <label value="Turno :" style="color:blue" />
+				       <listbox id="lbxTurno" style="font-size:11px" mold="select" width="90%" />
+					</row>
+			 
+				    <row>
+					   <label value="Orden Fabricación:" style="color:blue" />
+				       <listbox id="lbxOrdenProduccion" style="font-size:11px" mold="select" width="90%" />
+					</row>
+				    <row>
+					   <label value="Coche :" style="color:blue" />
+				       <listbox id="lbxCoche" style="font-size:11px" mold="select" width="90%" />
+					</row>
+					
+					<row>
+					   <label value="Codigo :" style="color:blue" />
+				       <intbox id="inbxCodigo" readonly="true"  ></intbox>
+					</row>
+				    <row>
+					   <label value="Cliente:" style="color:blue" />
+				       <textbox id="txtCliente" readonly="true"  ></textbox>
+					</row>
+					
+				    <row>
+					   <label value="Producto:" style="color:blue" />
+				       <textbox id="txtProducto" readonly="true"  ></textbox>
+					</row>
+					
+				    <row>
+					   <label value="Cantidad Funda :" style="color:blue" />
+				       <intbox id="inbxCantidadFunda" readonly="true"   ></intbox>
+					</row>
+					
+					<row>
+					   <label value="Numero Coche :" style="color:blue" />
+				       <textbox id="txtNumeroCoche" readonly="true"  ></textbox>
+					</row>
+					
+			        <row>
+					   <label value="Tpesc :" style="color:blue" />
+				       <textbox id="txtTpesc" readonly="true"  ></textbox>
+					</row>
+					<row>
+					  <label value="Verificado :" style="color:blue" />
+					  <checkbox id="chkVerificado" ></checkbox>
+					  
+					</row>
+
+			   </rows>
+			</grid>  	
+		   <grid width="99%">
+			<rows>
+				<row>
+					<vbox width="100%" >
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="GRABAR" width="320px" />
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		   </grid>	
+		 
+	</vbox> 
+</window>
+</zk>

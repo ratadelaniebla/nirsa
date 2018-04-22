@@ -1,0 +1,29 @@
+<?page id="pagRegistroCajonesDescargaImpresion"  title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winRegistroCajonesDescargaImpresion" apply="com.nw.webui.produccion.RegistroCajonesDescargaImpresionWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="REGISTRO CAJONES" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+			<grid width="99%">  
+				<rows>
+					<row>
+						<label value="Barco"/>
+						<listbox id="lbxBarco" style="font-size:12px" mold="select" width="120px" />
+					</row>									
+				</rows>
+			</grid>	
+			
+			<grid width="99%"> 
+				<rows>
+					<row>
+						<toolbar>
+							<toolbarbutton id="btnImprimir" tooltiptext="Imprimir Reporte" label="Imprimir Reporte" style="color:blue;font-size:12px;font-weight:bold"/>
+						</toolbar>
+					</row>
+				</rows>
+			</grid>				
+		
+		</vbox>
+
+	</window>
+</zk>

@@ -1,0 +1,108 @@
+<?page title="PONCHADA DESPELLEJADO" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winCalidadRemuestreo" border="none" apply="com.nw.webui.produccion.CalidadRemuestreoPCC1CajonWindow">
+<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="REMUESTREO PCC1 CAJON" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="220px">
+		<grid >
+			<rows>
+				<row>
+					<hbox>
+						<label value="Fecha Inicio " style="color:blue" />
+					</hbox>
+				<hbox>
+					<datebox id="dtxFechaInicio" style="font-size:11px"  width="100px" format="dd/MM/yyyy" ></datebox>
+				</hbox>				
+				</row>
+				<row>
+					<hbox>
+						<label value="Fecha Fin " style="color:blue" />						
+					</hbox>
+				<hbox>
+					<datebox id="dtxFechaFin" style="font-size:11px"  width="100px" format="dd/MM/yyyy" ></datebox>
+					<toolbar>
+							<toolbarbutton id="btnBuscar" tooltiptext="Grabar" image="/img/buscar.gif"/>
+					</toolbar>
+				</hbox>
+				</row>
+				<row>
+				    <label value="Registro :" style="color:blue" />	
+				    <hbox>
+				        <textbox id="txtRegistro"  width="100px" > </textbox>
+				        <toolbar>
+							<toolbarbutton id="btnBuscarRegistro" tooltiptext="Grabar" image="/img/buscar.gif"/>
+					</toolbar>
+				        
+				    </hbox>
+				    
+				</row>
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>
+		
+		<grid >
+			<rows >
+				<row>
+				    <label value="Barcos :" style="color:blue" />
+				    <listbox id="lbxBarco" style="font-size:11px" mold="select" width="120px" />
+				</row>
+				<row>
+				    <label value="Cubas :" style="color:blue" />
+				    <listbox id="lbxCuba" style="font-size:11px" mold="select" width="120px" />
+				</row>
+				<row>
+					<label value="Especie-Talla" style="color:blue" />
+					 <!--  <textbox id="txtEspTalla" disabled="false" width="100px" readonly="true" > </textbox> -->
+					<hbox>
+						<vbox>
+							<hbox>
+							<label value="Esp Comunes:" style="color:blue" />
+								<checkbox id="chbEspecies" checked="true"></checkbox>
+							</hbox>
+							<listbox id="lbxEspTalla" style="font-size:11px" mold="select" width="99%"  />
+						</vbox>
+					 
+						</hbox>
+				</row>
+				<row>
+				    <label value="Cajones :" style="color:blue" />
+				    <listbox id="lbxCajon" style="font-size:11px" mold="select" width="120px" />
+				</row>				
+
+				<row>
+				    <label value="# Muestra:" style="color:blue" />
+					<textbox id="txtMuestra" disabled="false" width="100px" readonly="true" > </textbox>
+				</row>
+			</rows>
+		</grid>
+		<grid>
+			<rows>
+			<row>
+				<label value="Desviacion:" style="color:blue" />
+				
+			</row>
+				<row>
+						<textbox id="txtDesviacion" disabled="false" width="200px" multiline="true" rows="3" > </textbox>
+				</row>
+				<row>
+					<label value="Accion Correctiva" style="color:blue" />					
+				</row>
+				<row>
+					<textbox id="txtAccionCorrectiva" disabled="false" width="200px"  rows="5" multiline="true" > </textbox>
+				</row>
+			</rows>			
+		</grid>
+	</vbox>
+</window>
+</zk>

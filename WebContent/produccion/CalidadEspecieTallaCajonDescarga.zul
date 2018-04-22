@@ -1,0 +1,106 @@
+<?page id = "Calidad Temperatura" title="" contentType="text/html;charset=UTF-8"?>
+<!--   -->
+<zk>
+	<window id="winCalidadEspecieTallaCajonesDescarga" apply="com.nw.webui.produccion.CalidadEspecieTallaCajonDescargaWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="ESPECIE-TALLA CAJON EN DESCARGA" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+		<grid width="99%">
+				<rows>
+					<row>
+						<label value="Turno :" style="color:blue" />
+						<listbox id="lbxTurno" style="font-size:11px" mold="select"
+						width="99%" />
+					</row>
+					<row>
+						<label value="Barco Descarga :" style="color:blue" />
+						<listbox id="lbxBarcoDescarga" style="font-size:11px" mold="select"
+						width="99%" />
+					</row>
+					<row>
+						<label value="Nº Barco:" style="color:blue" />
+						<textbox id="txtNBarco" width="95%" disabled="false" readonly="true"> </textbox>
+					</row>
+					<row>
+						<label value="Registro:" style="color:blue" />
+						<textbox id="txtRegistro" width="95%" disabled="false" readonly="true"> </textbox>
+					</row>
+					<row>
+						<label value="Nº Viaje:" style="color:blue" />
+						<textbox id="txtNViaje" width="100px" disabled="false" readonly="true"> </textbox>
+					</row>
+					<row>
+						<label value="CO/SO :" style="color:blue" />
+						<checkbox id="chbOrigen" checked="false" disabled="true"></checkbox>
+					</row>
+					 <row>
+				      <label value="Barco Particular Externo:" style="color:blue" />
+				      <checkbox id="chbBarcoParticularExterno" checked="false"></checkbox>
+				    </row>
+					
+				</rows>
+			</grid>
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar" tooltiptext="Grabar" label="Grabar" image="/img/grabar.gif"/>
+								
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+				<grid width="99%">
+				<rows>
+				   
+					<row>
+						<label value="Nº Cajon:" style="color:blue" />
+						
+						<hbox>
+						   <textbox id="txtCajon" width="100px" disabled="false"> </textbox>
+						   <toolbar>
+								<toolbarbutton id="btnBuscarCajon" tooltiptext="Buscar" image="/img/buscar.gif"/>
+								
+							</toolbar>
+						</hbox>
+						
+					</row>
+					 
+					<row>
+						<hbox>
+							<label value="Especie-Talla:" style="color:blue" />
+						</hbox>
+						<hbox>
+						<vbox>
+							<hbox>
+							<label value="Esp Comunes:" style="color:blue" />
+								<checkbox id="chbEspecies" checked="false"></checkbox>
+							</hbox>
+							<listbox id="lbxEspTalla" style="font-size:11px" mold="select" width="99%"  />
+						</vbox>
+						<vbox>
+							
+						</vbox>
+						</hbox>
+						
+					</row>
+				 
+					<row>
+						<label value="Peso Libras:" style="color:blue" />
+						<textbox id="txtPeso" width="95%" disabled="false"> </textbox>
+					</row>
+					<row>
+						<label value="Longitud cm:" style="color:blue" />
+						<textbox id="txtLongitud" width="95%" disabled="false"> </textbox>
+					</row>
+					<row>
+						<label value="Nº Muestra x Cajón" style="color:blue" />
+						<textbox id="txtNmuestraCajon" width="95%" disabled="false" readonly="true"> </textbox>
+					</row>
+				</rows>
+			</grid>
+		</vbox>
+	</window>
+</zk>

@@ -1,0 +1,44 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winDescongeladoAperturaCierre" apply="com.nw.webui.produccion.DescongeladoAperturaCierreProcesoWindow" width="99%">
+	<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="APERTURA-CIERRE-DESCONGELADO" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="200px">
+		<grid >
+			<rows>
+			
+				<row>
+					<label value="Apertura/Cierre " ></label>
+					<listbox id="lbxAperturaCierre" style="font-size:11px" mold="select" width="130px" > 
+						<listitem label="" > </listitem>
+						<listitem label="Apertura" > </listitem>
+						<listitem label="Cierre" > </listitem> 
+					</listbox>
+				</row>
+
+			
+				<row >
+					<label value="Días Producción " ></label>
+					<listbox id="lbxDiaProduccion" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+				
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+						</toolbar>
+					</vbox>
+					<hbox>
+						<checkbox id="chbRevisado" label="Revisado" ></checkbox>
+					</hbox>
+				</row>
+			</rows>
+		</grid>
+	</vbox>
+</window>
+</zk>

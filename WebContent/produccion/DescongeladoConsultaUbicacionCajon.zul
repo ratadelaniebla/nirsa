@@ -1,0 +1,111 @@
+<?page title="UBICACION CAJON" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winUbicacionCajon" apply="com.nw.webui.produccion.DescongeladoConsultaUbicacionCajonWindow" width="99%">  <!--   -->
+	<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="CONSULTA UBICACION DE CAJONES" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="99%">
+	
+		<grid width="99%"> 
+			<rows>
+				<row>
+					<label value="Fec.Prod. " style="color:blue" />
+				   <!--  	<datebox id="dtbxFecha" format="dd/MM/YY"  ></datebox>  -->
+				   <listbox id="lbxFechaActiva" style="font-size:11px" mold="select" width="99%" > </listbox>
+				</row>
+			</rows>
+		</grid>
+		
+		
+		<grid  width="99%">
+			<rows>
+				<row >
+					<label value="Turno Producción" ></label>
+					<listbox id="lbxTurnoProduccion" style="font-size:11px" mold="select" width="99%" > </listbox>
+				</row>
+				
+			</rows>
+		</grid>
+		
+ 
+		
+		<grid width="99%">
+			<rows>
+			 
+				
+				<row>
+					<label value="Cajones " style="color:blue" />
+					<hbox>
+					  <listbox id="lbxCajones" style="font-size:11px" mold="select" width="99%" > </listbox>
+					  
+					  <toolbarbutton id="btnActualizar" tooltiptext="Actualizar" image="/img/refrescar.gif"/>
+					</hbox>
+					
+					
+				</row>
+				<row>
+					<label value="Ubicación " ></label>
+					<textbox id="txtUbicacion" readonly="true" width="99%"> </textbox>
+				</row>
+				<row>
+					<label value="Especie-Talla " width="100px"></label>
+					<textbox id="txtEspecieTalla" multiline="true" readonly="true" width="99%" > </textbox>
+				</row>
+				<row>
+					<label value="Barco" ></label>
+					<textbox id="txtBarcoDescarga" readonly="true" width="99%"> </textbox>
+				</row>
+				
+
+				<row>
+				    <label value="Cuba:" width="99%"   />
+				   	<textbox id="txtCuba"  readonly="true" rows="2" width="99%"/>
+				</row>
+
+				<row>
+				    <label value="L.Camara:" width="99%"   />
+				   	<textbox id="txtLoteCamara"  readonly="true"/>
+				</row>
+
+
+				<row>
+				    <label value="L.Haccp:" width="99%"   />
+				   	<textbox id="txtHaccp"  readonly="true"/>
+				</row>
+				
+				
+				
+				<row>
+					<label value="Lote " ></label>
+					<textbox id="txtLote" readonly="true" width="99%"> </textbox>
+				</row>
+				<row>
+					<label value="Pedido " ></label>
+					<textbox id="txtPedido" readonly="true" width="99%"> </textbox>
+				</row>
+				<row>
+					<label value="Ducha " ></label>
+					<textbox id="txtDucha" readonly="true" width="99%"> </textbox>
+				</row>
+				<row>
+					<label value="Hora Ing. Ducha " ></label>
+					<textbox id="txtIngDucha" readonly="true" width="99%"> </textbox>
+				</row>
+				<row>
+					<label value="P. Bruto " ></label>
+					<textbox id="txtPesoBruto" readonly="true" width="99%"> </textbox>
+				</row>
+				<row>
+					<label value="P. Tara " ></label>
+					<textbox id="txtPesoTara" readonly="true" width="99%"> </textbox>
+				</row>
+				<row>
+					<label value="P. Neto " ></label>
+					<textbox id="txtPesoNeto" readonly="true" width="99%"> </textbox>
+				</row>
+				
+			</rows>
+		</grid>
+		
+	</vbox>
+</window>
+</zk>

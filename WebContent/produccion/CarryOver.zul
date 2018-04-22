@@ -1,0 +1,90 @@
+<?page id = "pagLoteAperturaCierre" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winCArryOver" apply="com.nw.webui.produccion.CarryOverWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="TRASLADO - LOTES" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain" >
+
+			<grid width="99%"> 
+				<rows>
+					<row>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif" />
+						</toolbar>				
+					</row>
+				</rows>
+			</grid>			
+		
+			<grid width="99%">  
+				<rows>
+				
+				<row>
+				 	<label value="Origen" style="color:blue;font-size:12px;font-weight:bold" />
+				 </row>
+				
+					<row>
+						<label value="Día Producción" />
+						<!-- 
+						<textbox id="txtDiaProduccion" readonly="true" style="font-size:12px" width="120px" />
+						 -->
+						<listbox id="lbxDiaProducciono" style="font-size:11px" mold="select" width="130px" > </listbox>
+					</row>	
+						
+					<!-- 
+					<row>
+						<label value="Apertura/Cierre"/>
+						<listbox id="lbxAperturaCierre" style="font-size:12px" mold="select" width="120px">
+						
+							<listitem selected="true" label="Apertura" value="1" />
+					 -->		
+							<!-- 
+							<listitem label="Cierre" value="0" />
+							 -->
+					<!--		 
+						</listbox>
+					</row>	  
+					-->		
+					
+					<row>
+						<label value="Turno" />
+						<listbox id="lbxTurno" style="font-size:12px" mold="select" width="98%" />
+					</row>
+							
+					<row>
+						<label value="Lote"/>
+						<listbox id="lbxLote" style="font-size:12px" mold="select" width="120px"/>
+					</row>
+
+<!-- 
+					<row>
+						<label value="Tipo Limpieza"/>
+						<listbox id="lbxTipoLimpieza" style="font-size:12px" mold="select" width="120px"/>
+					</row>
+ -->
+ 
+				 <row>
+				 	<label value="Destino" style="color:blue;font-size:12px;font-weight:bold" />
+				 </row>
+				 
+				<row>
+					<label value="Días Producción " ></label>
+					<listbox id="lbxDiaProduccion" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+				 
+				<row>
+					<label value="Turno" />
+					<listbox id="lbxTurno2" style="font-size:12px" mold="select" width="98%" />
+				</row>				 
+				 
+				</rows>
+			</grid>				
+			
+			<listbox id="lbxDetalleLotes" width="250px" style="font-size:9px">
+				<listhead style="font-size:9px" >
+					<listheader label="Detalle de Lotes" style="font-size:5px"/>
+				</listhead>
+			</listbox>			
+	
+		</vbox>
+	</window>
+</zk>

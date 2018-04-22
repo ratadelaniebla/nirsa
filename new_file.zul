@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?init class="org.zkoss.zkplus.databind.AnnotateDataBinderInit" root="win"?>
+<?component name="divtab" macro-uri="divtab.zul"?>
+<?component name="divarrow" macro-uri="divarrow.zul"?>
+<?component name="create" macro-uri="createEvent.zul" inline="true"?>
+<?component name="edit" macro-uri="editEvent.zul" inline="true"?>
+
+<zk>
+<window id="win" border="none"  height="100%" width="100%">
+<style src="css/calendar.css"/>
+<zscript>
+<![CDATA[//@IMPORT
+import java.util.Calendar;
+import java.text.SimpleDateFormat;
+
+import java.text.DateFormat; 
+
+
+]]>
+</zscript>
+<zscript>
+<![CDATA[
+List dateTime = new LinkedList();
+
+Calendar calendar = Calendar.getInstance(); 
+SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+calendar.set(Calendar.HOUR_OF_DAY, 0);
+calendar.set(Calendar.MINUTE, 0);
+calendar.set(Calendar.SECOND, 0);
+
+for (int i = 0; i < 48; i++) {
+dateTime.add(sdf.format(calendar.getTime()));
+calendar.add(Calendar.MINUTE, 30);
+}
+
+
+Calendar calendar1 = Calendar.getInstance(); 
+DateFormat formatter = new SimpleDateFormat("dd/MM/yy");
+formatter.format(calendar1.getTime());
+
+
+
+
+
+
+]]>
+</zscript>
+<calendars firstDayOfWeek="Sunday" timeZone="AUS=UTC+10:30" model="@{win$composer.getCalendarModel}" 
+mold="default" id="cal">
+<toolbar sclass="calendar-toolbar">
+<div class="float-left">
+<hbox>
+<divarrow type="arrow-left" command='cal.previousPage();'/>
+<divarrow type="arrow-right" command='cal.nextPage();'/>
+<div>
+<button mold="os" label="today" onClick='cal.setCurrentDate(java.util.Calendar.getInstance(cal.getDefaultTimeZone()).getTime());'/>
+<span id="FDOW" onCreate='self.visible = "month".equals(cal.getMold()) || cal.days == 7'>
+First Day of Week:
+<listbox mold="select" onSelect="cal.setFirstDayOfWeek(self.getSelectedItem().getLabel());" onCreate="self.selectedIndex = 0">
+<listitem forEach="Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday" label="${each}" />
+</listbox>
+</span>
+<toolbarbutton label="Refresh" class="refresh" onClick='cal.invalidate();'/>
+
+Projects:
+<listbox id="project" mold="select" model="@{win$composer.getProjects}" onSelect="win.loadProjectEvents();" >
+</listbox>
+
+Clients:
+<listbox id="client" mold="select" model="@{win$composer.getClients}" onSelect="win.loadClientEvents();" >
+</listbox>
+
+</div>
+</hbox>
+</div>
+<div class="float-right">
+<hbox>
+<divtab command='cal.mold = "default";cal.days = 1;FDOW.visible=false;' text="Day"/>
+<divtab command='cal.mold = "default";cal.days = 7;FDOW.visible=true;' text="Week"/>
+<divtab command='cal.mold = "default";cal.days = 5;FDOW.visible=false;' text="5 Days"/>
+<divtab command='cal.mold = "month";FDOW.visible=true;' text="Month"/>
+</hbox>
+</div>
+</toolbar>
+</calendars>
+
+<create/>
+<edit/>
+<popup id="updateMsg" width="320px" action="onshow:anima.appear(#{self});">
+<image src="~./zk/img/progress2.gif"/>
+<label/>
+<timer id="timer" delay="1000" running="false">
+<attribute name="onTimer">
+updateMsg.close();
+</attribute>
+</timer>
+</popup>
+</window>
+</zk>

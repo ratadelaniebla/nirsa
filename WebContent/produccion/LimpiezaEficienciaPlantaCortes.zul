@@ -1,0 +1,1462 @@
+<?page id = "pagLimpiezaEficienciaPlantaCortesWindow" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+
+	<window id="winLimpiezaEficienciaPlataCortes" apply="com.nw.webui.produccion.LimpiezaEficienciaPlantaCortesWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+
+		<vbox id="vbxMain" width="99%">
+				
+			<label value="Limpieza Cortes Eficiencia Planta" style="color:blue;font-size:12px;font-weight:bold" />			
+			<grid width="99%">  
+				<rows>
+					<row>
+						<label value="Día Producción" />
+						<textbox id="txtDiaProduccion" readonly="true" style="font-size:12px" width="120px" />
+					</row>
+					
+					<row>
+						<label value="Turno"/>
+						<!--  <listbox id="lbxTurno" style="font-size:12px" mold="select" width="120px"/> -->
+						<textbox id="txtTurno"  style="font-size:11px"  width="130px" readonly="true" ></textbox>
+						
+					</row>
+					
+				</rows>
+			</grid>	
+			
+			<grid width="99%"> 
+				<rows>
+					<row>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif" />
+						</toolbar>
+					</row>
+				</rows>
+			</grid>		
+					
+
+
+			<vbox>
+				<label value="HORA INICIO 1ER CORTE"/>			
+			</vbox>
+						
+			<grid id="g0" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxM0" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxD0" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxH0" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMi0" mold="select"/>
+						</hbox>
+				    </row>
+				</rows>
+			</grid>
+
+
+
+			<grid width="99%">  
+				<rows>
+					<row>
+						<label value="Horas Planificadas" />
+						<hbox>
+							<listbox id="lbxHoras" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="1" value="1" />
+						    	<listitem label="2" value="2" />
+						    	<listitem label="3" value="3" />
+						    	<listitem label="4" value="4" />
+						    	<listitem label="5" value="5" />
+						    	<listitem label="6" value="6" />
+						    	<listitem label="7" value="7" />
+						    	<listitem label="8" value="8" />
+						    	<listitem label="9" value="9" />
+						    	<listitem label="10" value="10" />
+						    	<listitem label="11" value="11" />
+						    	<listitem label="12" value="12" />
+						   		<listitem label="13" value="13" />
+						    	<listitem label="14" value="14" />
+						    	<listitem label="15" value="15" />
+						    	<listitem label="16" value="16" />
+						   
+					    	</listbox>
+							
+							<toolbar>
+								<toolbarbutton  id="btnGenerar" label="Generar" style="color:blue;font-size:11px;font-weight:bold"/>
+							</toolbar>						
+						</hbox>
+					</row>
+					
+				</rows>
+			</grid>	
+<!-- CORTE 1 -->
+			<vbox>
+				<label value="CORTE 1"/>			
+			</vbox>
+						
+
+			<grid id="g1" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxM1" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxD1" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxH1" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMi1" mold="select"/>
+						</hbox>
+				    </row>
+				</rows>
+			</grid>
+
+
+			<grid id="g11" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxM11" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxD11" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxH11" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMi11" mold="select"/>
+						</hbox>
+				    </row>
+				    
+				    
+				<row>
+					<hbox>
+						<label value="#Empl. Panza"/>
+						<textbox id="txtNumPanza1" width="50%"></textbox>
+					</hbox>
+				</row>		
+				    
+				    
+				</rows>
+			</grid>
+<!-- FIN CORTE 1 -->
+
+
+
+<!-- CORTE 2 -->
+			<vbox>
+				<label value="CORTE 2"/>			
+			</vbox>
+						
+
+			<grid id="g2" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxM2" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxD2" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxH2" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMi2" mold="select"/>
+						</hbox>
+				    </row>
+				</rows>
+			</grid>
+
+
+			<grid id="g22" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxM22" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxD22" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxH22" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMi22" mold="select"/>
+						</hbox>
+				    </row>
+					<row>
+						<hbox>
+							<label value="#Empl. Panza"/>
+							<textbox id="txtNumPanza2" width="50%"></textbox>
+						</hbox>
+					</row>		
+				    
+				</rows>
+			</grid>
+<!-- FIN CORTE 2 -->
+
+
+<!-- CORTE 3 -->
+			<vbox>
+				<label value="CORTE 3"/>			
+			</vbox>
+						
+
+			<grid id="g3" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxM3" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxD3" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxH3" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMi3" mold="select"/>
+						</hbox>
+				    </row>
+				</rows>
+			</grid>
+
+
+			<grid id="g33" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxM33" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxD33" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxH33" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMi33" mold="select"/>
+						</hbox>
+				    </row>
+					<row>
+						<hbox>
+							<label value="#Empl. Panza"/>
+							<textbox id="txtNumPanza3" width="50%"></textbox>
+						</hbox>
+					</row>		
+				    
+				</rows>
+			</grid>
+<!-- FIN CORTE 3 -->
+
+
+<!-- CORTE 4 -->
+			<vbox>
+				<label value="CORTE 4"/>			
+			</vbox>
+						
+
+			<grid id="g4" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxM4" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxD4" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxH4" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMi4" mold="select"/>
+						</hbox>
+				    </row>
+				</rows>
+			</grid>
+
+
+			<grid id="g44" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxM44" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxD44" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxH44" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMi44" mold="select"/>
+						</hbox>
+				    </row>
+					<row>
+						<hbox>
+							<label value="#Empl. Panza"/>
+							<textbox id="txtNumPanza4" width="50%"></textbox>
+						</hbox>
+					</row>		
+				    
+				</rows>
+			</grid>
+<!-- FIN CORTE 4 -->
+
+<!-- CORTE 5 -->
+			<vbox>
+				<label value="CORTE 5"/>			
+			</vbox>
+						
+
+			<grid id="g5" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxM5" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxD5" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxH5" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMi5" mold="select"/>
+						</hbox>
+				    </row>
+				</rows>
+			</grid>
+
+
+			<grid id="g55" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxM55" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxD55" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxH55" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMi55" mold="select"/>
+						</hbox>
+				    </row>
+					<row>
+						<hbox>
+							<label value="#Empl. Panza"/>
+							<textbox id="txtNumPanza5" width="50%"></textbox>
+						</hbox>
+					</row>		
+				    
+				</rows>
+			</grid>
+<!-- FIN CORTE 5 -->
+
+
+<!-- CORTE 6 -->
+			<vbox>
+				<label value="CORTE 6"/>			
+			</vbox>
+						
+
+			<grid id="g6" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxM6" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxD6" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxH6" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMi6" mold="select"/>
+						</hbox>
+				    </row>
+				</rows>
+			</grid>
+
+
+			<grid id="g66" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxM66" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxD66" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxH66" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMi66" mold="select"/>
+						</hbox>
+				    </row>
+				    <row>
+						<hbox>
+							<label value="#Empl. Panza"/>
+							<textbox id="txtNumPanza6" width="50%"></textbox>
+						</hbox>
+					</row>		
+				    
+				</rows>
+			</grid>
+<!-- FIN CORTE 6 -->
+
+<!-- CORTE 7 -->
+			<vbox>
+				<label value="CORTE 7"/>			
+			</vbox>
+						
+
+			<grid id="g7" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxM7" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxD7" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxH7" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMi7" mold="select"/>
+						</hbox>
+				    </row>
+				</rows>
+			</grid>
+
+
+			<grid id="g77" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxM77" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxD77" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxH77" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMi77" mold="select"/>
+						</hbox>
+				    </row>
+					<row>
+						<hbox>
+							<label value="#Empl. Panza"/>
+							<textbox id="txtNumPanza7" width="50%"></textbox>
+						</hbox>
+					</row>		
+				    
+				</rows>
+			</grid>
+<!-- FIN CORTE 7 -->
+
+
+
+<!-- CORTE 8 -->
+			<vbox>
+				<label value="CORTE 8"/>			
+			</vbox>
+						
+
+			<grid id="g8" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxM8" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxD8" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxH8" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMi8" mold="select"/>
+						</hbox>
+				    </row>
+				</rows>
+			</grid>
+
+
+			<grid id="g88" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxM88" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxD88" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxH88" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMi88" mold="select"/>
+						</hbox>
+				    </row>
+					<row>
+						<hbox>
+							<label value="#Empl. Panza"/>
+							<textbox id="txtNumPanza8" width="50%"></textbox>
+						</hbox>
+					</row>		
+				    
+				</rows>
+			</grid>
+<!-- FIN CORTE 8 -->
+
+<!-- CORTE 9 -->
+			<vbox>
+				<label value="CORTE 9"/>			
+			</vbox>
+						
+
+			<grid id="g9" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxM9" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxD9" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxH9" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMi9" mold="select"/>
+						</hbox>
+				    </row>
+				</rows>
+			</grid>
+
+
+			<grid id="g99" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxM99" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxD99" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxH99" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMi99" mold="select"/>
+						</hbox>
+				    </row>
+					<row>
+						<hbox>
+							<label value="#Empl. Panza"/>
+							<textbox id="txtNumPanza9" width="50%"></textbox>
+						</hbox>
+					</row>		
+				    
+				</rows>
+			</grid>
+<!-- FIN CORTE 9 -->
+
+
+<!-- CORTE 10 -->
+			<vbox>
+				<label value="CORTE 10"/>			
+			</vbox>
+						
+
+			<grid id="g10" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxM10" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxD10" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxH10" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMi10" mold="select"/>
+						</hbox>
+				    </row>
+				</rows>
+			</grid>
+
+
+			<grid id="g1010" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxM1010" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxD1010" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxH1010" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMi1010" mold="select"/>
+						</hbox>
+				    </row>
+					<row>
+						<hbox>
+							<label value="#Empl. Panza"/>
+							<textbox id="txtNumPanza10" width="50%"></textbox>
+						</hbox>
+					</row>		
+				    
+				</rows>
+			</grid>
+<!-- FIN CORTE 10 -->
+
+
+<!-- CORTE 11 -->
+			<vbox>
+				<label value="CORTE 11"/>			
+			</vbox>
+						
+
+			<grid id="g11111" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxM11111" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxD11111" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxH11111" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMi11111" mold="select"/>
+						</hbox>
+				    </row>
+				</rows>
+			</grid>
+
+
+			<grid id="g111111" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxM111111" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxD111111" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxH111111" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMi111111" mold="select"/>
+						</hbox>
+				    </row>
+					<row>
+						<hbox>
+							<label value="#Empl. Panza"/>
+							<textbox id="txtNumPanza11" width="50%"></textbox>
+						</hbox>
+					</row>		
+				    
+				</rows>
+			</grid>
+<!-- FIN CORTE 11 -->
+			
+
+<!-- CORTE 12 -->
+			<vbox>
+				<label value="CORTE 12"/>			
+			</vbox>
+						
+
+			<grid id="g12121" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxM12121" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxD12121" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxH12121" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMi12121" mold="select"/>
+						</hbox>
+				    </row>
+				</rows>
+			</grid>
+
+
+			<grid id="g121212" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxM121212" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxD121212" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxH121212" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMi121212" mold="select"/>
+						</hbox>
+				    </row>
+					<row>
+						<hbox>
+							<label value="#Empl. Panza"/>
+							<textbox id="txtNumPanza12" width="50%"></textbox>
+						</hbox>
+					</row>		
+				    
+				</rows>
+			</grid>
+<!-- FIN CORTE 12 -->
+
+
+<!-- CORTE 13 -->
+			<vbox>
+				<label value="CORTE 13"/>			
+			</vbox>
+						
+
+			<grid id="g13131" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxM13131" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxD13131" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxH13131" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMi13131" mold="select"/>
+						</hbox>
+				    </row>
+				</rows>
+			</grid>
+
+
+			<grid id="g131313" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxM131313" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxD131313" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxH131313" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMi131313" mold="select"/>
+						</hbox>
+				    </row>
+					<row>
+						<hbox>
+							<label value="#Empl. Panza"/>
+							<textbox id="txtNumPanza13" width="50%"></textbox>
+						</hbox>
+					</row>		
+				    
+				</rows>
+			</grid>
+<!-- FIN CORTE 13 -->
+
+
+<!-- CORTE 14 -->
+			<vbox>
+				<label value="CORTE 14"/>			
+			</vbox>
+						
+
+			<grid id="g14141" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxM14141" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxD14141" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxH14141" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMi14141" mold="select"/>
+						</hbox>
+				    </row>
+				</rows>
+			</grid>
+
+
+			<grid id="g141414" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxM141414" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxD141414" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxH141414" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMi141414" mold="select"/>
+						</hbox>
+				    </row>
+					<row>
+						<hbox>
+							<label value="#Empl. Panza"/>
+							<textbox id="txtNumPanza14" width="50%"></textbox>
+						</hbox>
+					</row>		
+				    
+				</rows>
+			</grid>
+<!-- FIN CORTE 14 -->
+
+
+<!-- CORTE 15 -->
+			<vbox>
+				<label value="CORTE 15"/>			
+			</vbox>
+						
+
+			<grid id="g15151" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxM15151" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxD15151" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxH15151" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMi15151" mold="select"/>
+						</hbox>
+				    </row>
+				</rows>
+			</grid>
+
+
+			<grid id="g151515" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxM151515" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxD151515" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxH151515" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMi151515" mold="select"/>
+						</hbox>
+				    </row>
+					<row>
+						<hbox>
+							<label value="#Empl. Panza"/>
+							<textbox id="txtNumPanza15" width="50%"></textbox>
+						</hbox>
+					</row>		
+				    
+				</rows>
+			</grid>
+<!-- FIN CORTE 15 -->
+
+
+<!-- CORTE 16 -->
+			<vbox>
+				<label value="CORTE 16"/>			
+			</vbox>
+						
+
+			<grid id="g16161" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxM16161" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxD16161" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxH16161" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMi16161" mold="select"/>
+						</hbox>
+				    </row>
+				</rows>
+			</grid>
+
+
+			<grid id="g161616" width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxM161616" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxD161616" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxH161616" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMi161616" mold="select"/>
+						</hbox>
+				    </row>
+				    
+					<row>
+						<hbox>
+							<label value="#Empl. Panza"/>
+							<textbox id="txtNumPanza16" width="50%"></textbox>
+						</hbox>
+					</row>		
+				    
+				</rows>
+			</grid>
+<!-- FIN CORTE 16 -->
+
+
+		</vbox>
+	</window>
+</zk> 

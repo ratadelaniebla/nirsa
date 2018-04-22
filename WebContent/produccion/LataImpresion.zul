@@ -1,0 +1,37 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winAperturaCierreLonjas" apply="com.nw.webui.produccion.LataImpresionWindow" width="99%">
+	<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="REPORTE LONJAS" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="200px">
+		<grid >
+			<rows>
+				<row >
+					<label value="Días Producción" ></label>
+					 <datebox id="dteFecReg" width="110px" format="dd/MM/yyyy" readonly="true"/>
+				</row>
+				
+				<row >
+					<label value="Turno" ></label>
+					<listbox id="lbxTurno" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+				
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnImprimirLL" label="Reporte de Lata Cambios de Fill Weight" tooltiptext="Visualizar Archivo" />
+							<toolbarbutton id="btnImprimirLC" label="Reporte de Incidencias del proceso de Enlatado" tooltiptext="Visualizar Archivo" />
+							<toolbarbutton id="btnImprimirLT" label="Reporte de Fill Weight" tooltiptext="Visualizar Archivo" />
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>
+	</vbox>
+</window>
+</zk>

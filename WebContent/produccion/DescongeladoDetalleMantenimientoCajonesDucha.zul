@@ -1,0 +1,160 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winMantCajonesDuchaTraslado" apply="com.nw.webui.produccion.DescongeladoDetalleMantenimientoCajonesDuchaWindow" >
+  
+  <label value="Translado de Cajones entre Duchas" style="color:blue;font-size:12px;font-weight:bold" />
+   <vbox id="vbxMain" > <!--  width="70%" -->
+    	<grid width="99%">
+					<rows>
+						<row align="center">
+							<vbox align="center">
+								<toolbar >
+									<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+									 	 
+								</toolbar>
+							</vbox>
+						</row>
+					</rows>
+			</grid>
+	   <grid width="99%" > 
+			<rows>
+				<row>
+					<label value="Origen"></label>
+				</row>
+			    <row>
+			    
+					<label value="Dia Produccion " style="color:blue"   />
+					<listbox id="lbxProduccionFecha1" style="font-size:11px" mold="select" width="130px" > </listbox>
+			    </row>
+			    <!-- 
+			    <row >
+					<label value="Turno Producción" ></label>
+					<listbox id="lbxTurnoProduccion1" style="font-size:11px" mold="select"  width="130px"> </listbox>
+				</row>
+				 -->
+				
+				<row>
+					<label value="Num. Ducha"></label>
+					<listbox id="lbxNumDucha" style="font-size:11px" mold="select"  width="130px"></listbox>
+				</row>
+								
+				<!-- 
+				<row >
+					<label value="Lote" ></label>
+					<listbox id="lbxLote1" style="font-size:11px" mold="select"  width="130px"> </listbox>
+				</row>
+				 -->
+				 
+			</rows>
+	   </grid>
+	   
+	   
+	   <hbox spacing="0" width="99%">
+	   
+	   	<!-- 
+	      <groupbox width="96%">
+	     -->  
+		      	<!-- 
+		        <toolbar >
+		          <toolbarbutton id="btnMover" label="Mover" ></toolbarbutton>
+		       	</toolbar >
+		        -->
+		           
+	          <separator></separator>
+	          <listbox id="lbxOrigen" model="@{winMantCajonesDuchaTraslado.produccionDetalleLoteCajonEstadosOrigen}"
+	             multiple="true"   checkmark="false" width="99%" >
+						<listhead style="font-size:9px" >
+							<listheader label="Orden" width="7%" />
+							<listheader label="Cajon" width="23%" />
+							<listheader label="Especie" width="25%" />
+							<listheader label="Talla" width="20%" />
+							<listheader label="Lote" width="15%" />
+							<listheader label="Mover?" width="10%" />
+						</listhead>
+						      <listitem self="@{each=o}">
+						          	<listcell label="@{o.numero}" ></listcell>
+									<listcell  label="@{o.produccionDetalleLoteCajon.camaraCajon.cajon.idcajon}"></listcell>
+									<listcell  label="@{o.produccionDetalleLoteCajon.camaraCajon.especieTalla.especie.nombre}"></listcell>
+									<listcell  label="@{o.produccionDetalleLoteCajon.camaraCajon.especieTalla.talla.nombre}"></listcell>
+									<!-- 
+									<listcell  label="@{o.produccionDetalleLoteCajon.camaraCajon.barcoDescarga.barco.nombre}"></listcell>
+									 -->
+									 
+									<listcell  label="@{o.produccionDetalleLoteCajon.produccionDetalleLote.idlote}"></listcell>
+									
+						            <listcell > 
+						               <checkbox checked="@{o.reubicarCoche}" > </checkbox> 
+						            </listcell>
+						      </listitem>
+				 </listbox> 
+			<!-- 		 
+	      </groupbox>
+	       -->
+	   
+	   </hbox>
+	   <grid width="99%"> 
+			<rows>
+				<row>
+					<label value="Destino"></label>
+				</row>
+			    <row>
+					<label value="Dia Produccion " style="color:blue"   />
+					<listbox id="lbxProduccionFecha2" style="font-size:11px" mold="select" width="130px" > </listbox>
+			    </row>
+			    
+			    <!-- 
+			    <row >
+					<label value="Turno Producción" ></label>
+					<listbox id="lbxTurnoProduccion2" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+				 -->
+				
+				<row>
+					<label value="Num. Ducha"></label>
+					<listbox id="lbxNumDucha2" style="font-size:11px" mold="select"  width="130px"></listbox>
+				</row>				
+				<!--  
+				<row >
+					<label value="Lote" ></label>
+					<listbox id="lbxLote2" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+				-->
+			</rows>
+	   </grid>
+	   
+<!-- 	  
+	   <hbox width="95%">    
+	      <groupbox width="96%">
+	         <toolbar >
+	           <toolbarbutton  id="btnRegresar" label="Regresar" ></toolbarbutton>
+	         </toolbar>
+	         <separator></separator>
+	          <listbox id="lbxDestino" model="@{winMantCajonesDuchaTraslado.produccionDetalleLoteCajonEstadosDestino}" multiple="true"
+						checkmark="false" height="160px" width="90%">
+						<listhead style="font-size:9px" >
+							<listheader label="Orden" width="20px" />
+							<listheader label="Cajon" width="40px" />
+							<listheader label="Especie" width="50px" />
+							<listheader label="Talla" width="50px" />
+							<listheader label="Barco" width="50px" />
+							<listheader label="Regresar?" width="68px" />
+						</listhead>
+						  
+						     <listitem self="@{each=d}">
+						            <listcell label="@{d.numero}" ></listcell>
+									<listcell  label="@{d.produccionDetalleLoteCajon.camaraCajon.cajon.idcajon}"></listcell>
+									<listcell  label="@{d.produccionDetalleLoteCajon.camaraCajon.especieTalla.especie.nombre}"></listcell>
+									<listcell  label="@{d.produccionDetalleLoteCajon.camaraCajon.especieTalla.talla.nombre}"></listcell>
+									<listcell  label="@{d.produccionDetalleLoteCajon.camaraCajon.barcoDescarga.barco.nombre}"></listcell>
+						            <listcell > 
+						               <checkbox checked="@{d.reubicarCoche}" > </checkbox> 
+						            </listcell>
+						      </listitem>
+				 </listbox> 
+	      </groupbox>
+	   
+	   </hbox>
+ -->		
+	</vbox>
+</window>
+</zk>

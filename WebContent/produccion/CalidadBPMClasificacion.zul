@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?page id="pagCalidadBPMClasif"?>
+<window id="winCalidadBPMClasif" apply="com.nw.webui.produccion.CalidadBPMClasificacionWindow">
+	<label value="BPM Clasificacion" style="color:blue;font-size:12px;font-weight:bold"/>
+	<vbox  id="vbxMain">
+		
+			<grid width="99%">
+				<rows>
+					<row>
+						<label value="Barco" />
+  						<listbox id="lbxBarco" style="font-size:12px" mold="select" width="98%" />
+					</row>
+
+					<row id="RwBarcoMercante" visible="false">
+						<label value="Barco Mercante" />
+  						<textbox id="txtBarcoMercante" maxlength="20" width="120px" style="color:blue" readonly="true" />
+					</row>					
+					
+					<row>
+						<label value="N° Formato" />
+						<textbox id="txtNumFormato" maxlength="13" width="120px" style="color:blue" readonly="true" />
+					</row>
+					<row>
+						<label value="Registro" />
+						<textbox id="txtRegistro" maxlength="8" width="120px" style="color:blue" readonly="true" />
+					</row>
+					<row>
+						<label value="N° Barco" />
+						<textbox id="txtNumBarco" maxlength="8" width="120px" style="color:blue" readonly="true" />
+					</row>
+
+				</rows>
+			</grid>
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+<!--  								<toolbarbutton id="btnBuscar" tooltiptext="Buscar" image="/img/buscar.gif"/>
+								<toolbarbutton id="btnNuevo" tooltiptext="Nuevo" image="/img/crear.gif" />
+								<toolbarbutton id="btnActualizar" tooltiptext="Actualizar" image="/img/refrescar.gif"/>
+								<toolbarbutton id="btnEliminar" tooltiptext="Eliminar" image="/img/eliminar.gif" /> -->
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+			<grid width="99%">
+				<rows>
+					<row>
+						Grupo
+						<listbox id="lbxGrupoPreg" style="font-size:12px"
+							mold="select" width="120px" />
+					</row>
+					<row>
+						Pregunta
+						<listbox id="lbxPregunta" style="font-size:12px"
+							mold="select" width="120px" />
+					</row>
+				</rows>
+			</grid>
+			<grid width="99%">
+				<rows>
+					<row>
+						<label value="Detalle Pregunta:" />
+					</row>
+					<row>
+						<textbox id="txtDetPreg" maxlength="255" rows="3" width="98%" readonly="true"/>
+					</row>
+				</rows>
+			</grid>
+			<grid width="99%">
+				<rows>
+					<row>
+						<label value=" Cumple/No Cumple " style="color:black" />
+						<checkbox id="chkCump" checked="true"  />
+					</row>
+				</rows>
+			</grid>
+			<grid width="99%">
+				<rows>
+					<row>
+						<label value="Observación:" />
+					</row>
+					<row>
+						<textbox id="txtObs" maxlength="255" rows="4" width="98%" />
+					</row>
+				</rows>
+			</grid>
+			<grid width="99%">
+				<rows>
+					<row>
+						<label value="Observaciones Generales:" />
+					</row>
+					<row>
+						<textbox id="txtObsGen" maxlength="255" rows="6" width="98%" />
+					</row>
+				</rows>
+			</grid>
+			<grid width="99%" visible="false" >
+				<rows>
+					<row > Cerrar Proceso
+						<hbox align="center"> 
+<!--  							<listbox id="lbxCoc" mold="select" width="50px" />
+							<toolbarbutton id="btnConsultar" label="Consultar" onClick="winConAutCerr.mostrarRegistro(1)"/>-->
+<!--  							<button label="Enviar" onClick="winConAut.enviar()"/>--> 
+							<toolbarbutton id="btnCerrarP" tooltiptext="Cerrar Proceso" image="/img/grabar.gif"/>
+							 
+						</hbox>
+					</row>
+				</rows>
+			</grid>
+			
+	</vbox> 
+</window>

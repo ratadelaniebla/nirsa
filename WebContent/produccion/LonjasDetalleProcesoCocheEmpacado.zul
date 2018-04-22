@@ -1,0 +1,70 @@
+<?page title="LONJAS DETALLE PROCESO COCHE EMPACADO" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window  apply="com.nw.webui.produccion.LonjasDetalleProcesoCocheEmpacadoWindow">
+<label value="Proceso Lonja Empacado."  style="color:blue;font-size:11px;font-weight:bold"/>
+	 <vbox  id="vbxMain" width="99%">
+		    <grid width="98%">
+				<rows>
+					 <row>
+						<label value="Fecha Labor :"/>
+					     <textbox id="txtFechaProduccion" readonly="true"  ></textbox>
+					</row> 
+					<row>
+					   <label value="Turno :" style="color:blue" />
+				       <textbox id="txtTurno" readonly="true"  ></textbox>
+					</row>
+				    <row>
+					   <label value="Orden Produccion:" style="color:blue" />
+				       <listbox id="lbxOrdenProduccion" style="font-size:11px" mold="select" width="80%" />
+					</row>
+				    <row>
+					   <label value="Lote :" style="color:blue" />
+				       <listbox id="lbxLote" style="font-size:11px" mold="select" width="80%" />
+					</row>
+					
+					<row>
+					   <label value="Codigo :" style="color:blue" />
+				       <intbox id="inbxCodigo"   ></intbox>
+					</row>
+				    <row>
+					   <label value="Cliente:" style="color:blue" />
+				       <textbox id="txtCliente" readonly="true"  ></textbox>
+					</row>
+					
+				    <row>
+					   <label value="Cantidad Funda :" style="color:blue" />
+				       <intbox id="inbxCantidadFunda"   ></intbox>
+					</row>
+					
+					<row>
+					   <label value="Numero Coche :" style="color:blue" />
+				       <textbox id="txtNumeroCoche"   ></textbox>
+					</row>
+					
+			        <row>
+					   <label value="Tpesc :" style="color:blue" />
+				       <textbox id="txtTpesc"   ></textbox>
+					</row>
+					
+				    <row>
+					   <label value="Tunel :" style="color:blue" />
+				       <listbox id="lbxTunel" style="font-size:11px" mold="select" width="80%" />
+					</row>
+
+			   </rows>
+			</grid>  	
+		   <grid width="99%">
+			<rows>
+				<row>
+					<vbox width="100%" >
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="GRABAR" width="320px" />
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		   </grid>	
+		 
+	</vbox> 
+</window>
+</zk>

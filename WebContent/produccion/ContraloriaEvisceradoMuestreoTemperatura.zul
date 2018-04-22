@@ -1,0 +1,135 @@
+<?page  id = "EvisceradoTempCoches" title="Eviscerado Muestreo Temperatura" contentType="text/html;charset=UTF-8"?>
+<zk>
+
+<window id="winEvisceradoTemperaturaCoches" apply="com.nw.webui.produccion.ContraloriaEvisceradoMuestreoTemperaturaWindow" width="99%">
+<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="CONTRALORIA- EVISCERADO TEMPERATURA COCHES" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="99%">
+	
+	 	<grid width="99%"> 
+	 		<rows>
+<!--  			    <row>
+					<label value="Dia Produccion " style="color:blue" />
+					<listbox id="lbxFechaActiva" style="font-size:11px" mold="select" width="130px" > </listbox>
+			    </row>
+			    	 	
+				<row>
+					<label value="Turno Produccion" ></label>
+					<listbox id="lbxTurnoProduccion" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>-->   
+				<row >
+					<label value="Turno Labor" ></label>
+					<listbox id="lbxTurnoLabor" style="font-size:11px" mold="select" width="99%" > </listbox>
+				</row>		
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>
+
+		
+		<grid >
+			<rows>
+				<row >
+					<label value="Coche " ></label>
+					<hbox>
+						<textbox id="txtCoche" width="99%" > </textbox>
+						 <toolbar>
+							<toolbarbutton id="btnBuscaCoche" tooltiptext="Buscar" image="/img/buscar.gif"/>
+
+						</toolbar>  
+				</hbox>
+				</row>
+<!--  				<row >
+					<label value="Lotes" ></label>
+					<listbox id="lbxLote" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>-->
+			</rows>
+		</grid>		
+
+		
+		<grid width="99%">
+			<rows>
+			
+				<!-- 
+				<row >
+					<label value="Coche " ></label>
+					<hbox>
+						<textbox id="txtCoche" width="80px" > </textbox>
+				 <toolbar>
+							<toolbarbutton id="btnBuscaCoche" tooltiptext="Buscar" image="/img/buscar.gif"/>
+						</toolbar>  
+					</hbox>
+				</row>
+				 -->
+			   
+				<row>
+					<label value="Lote " ></label>
+					<textbox id="txtLote" readonly="true" width="99%"> </textbox>
+				</row>
+				
+				
+				<row>
+					<label value="# Muestras x lote " ></label>
+					<textbox id="txtMuestrasxLote" readonly="true" width="99%"> </textbox>
+				</row>
+				<row>
+					<label value="# Muestras " ></label>
+					<textbox id="txtMuestras" readonly="true" width="99%"> </textbox>
+				</row>
+				<row>
+					<label value="Cocina " ></label>
+					<textbox id="txtCocina" readonly="true" width="99%"> </textbox>
+				</row>
+				<row>
+					<label value="# Canastillas " ></label>
+					<textbox id="txtCanastillas" readonly="true" width="99%"> </textbox>
+				</row>
+				<row>
+					<label value="Pescados x Lata " ></label>
+					<textbox id="txtPescadoLata" readonly="true" width="99%"> </textbox>
+				</row>
+				<row>
+					<label value="Nivel Superior" ></label>
+					<textbox id="txtTemperatura" width="99%"> </textbox>
+				</row>
+
+			
+				
+				<row>
+					<label value="Nivel Medio" ></label>
+					<textbox id="txtTemperatura2" width="99%"> </textbox>
+				</row>
+
+				
+
+				<row>
+					<label value="Nivel Inferior" ></label>
+					<textbox id="txtTemperatura3" width="99%"> </textbox>
+				</row>
+
+			<row>
+					<label value="__" ></label>
+					<label value="__" ></label>
+				</row>
+
+				<row>
+					<label value="__" ></label>
+					<label value="__" ></label>
+				</row>
+				
+			</rows>
+		</grid>
+	</vbox>
+</window>
+
+</zk>

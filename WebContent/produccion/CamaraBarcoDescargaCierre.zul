@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?page id="pagCalidadBPMDes"?>
+<window id="winCamaraBarcoDescargaCierre" apply="com.nw.webui.produccion.CamaraBarcoDescargaCierreWindow">
+	<label value="Cierre de Barco en Descarga" style="color:blue;font-size:12px;font-weight:bold"/>
+	<vbox  id="vbxMain">
+		
+			<grid width="99%">
+				<rows>
+					<row>
+						<label value="Barco" />
+  						<listbox id="lbxBarco" style="font-size:12px" mold="select" width="98%" />
+					</row>
+					<row visible="false">
+						<label value="N° Formato" />
+						<textbox id="txtNumFormato" maxlength="13" width="120px" style="color:blue" readonly="true" />
+					</row>
+					<row>
+						<label value="Registro" />
+						<textbox id="txtRegistro" maxlength="8" width="120px" style="color:blue" readonly="true" />
+					</row>
+					<row>
+						<label value="N° Barco" />
+						<textbox id="txtNumBarco" maxlength="8" width="120px" style="color:blue" readonly="true" />
+					</row>
+
+				</rows>
+			</grid>
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar" label="Cerrar Descarga" tooltiptext="Cerrar Descarga"/>
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+
+			
+	</vbox> 
+</window>

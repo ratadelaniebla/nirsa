@@ -1,0 +1,55 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winLoteAperturaCierre" apply="com.nw.webui.produccion.MantenimientoAperturaLotesLimpiezaWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="MANTENIMIENTO LIMPIEZA LOTE" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+		
+			<grid width="99%">  
+				<rows>
+					<row>
+						<label value="Día Producción" />
+						<textbox id="txtDiaProduccion" readonly="true" style="font-size:12px" width="99%" />
+					</row>		
+					
+				<!-- 	<row>
+						<label value="Apertura">
+						<listbox id="lbxAperturaCierre" style="font-size:12px" mold="select" width="99%">
+							<listitem selected="true" label="Apertura" value="1" />
+							 
+							<listitem label="Cierre" value="0" />
+							
+						</listbox>
+					</row> -->
+
+					<row>
+						<label value="Turno" />
+						<listbox id="lbxTurno" style="font-size:12px" mold="select" width="99%" disabled="true" />
+					</row>
+							
+					<row>
+						<label value="Lote"/>
+						<listbox id="lbxLote" style="font-size:12px" mold="select" width="99%"/>
+					</row>
+
+					<row>
+						<label value="Tipo Limpieza"/>
+						<listbox id="lbxTipoLimpieza" style="font-size:12px" mold="select" width="99%"/>
+					</row>
+
+				</rows>
+			</grid>				
+			
+			<grid width="99%"> 
+				<rows>
+					<row>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif" />
+						</toolbar>
+						<checkbox id="chkRevisado" label="Revisado"/>					
+					</row>
+				</rows>
+			</grid>		
+		</vbox>
+	</window>
+</zk>

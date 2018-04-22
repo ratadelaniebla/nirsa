@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?page id="pagControlInterno"?>
+<window id="winControlInterno" apply="com.nw.webui.produccion.CalidadMuestraControlinternoWindow">
+	<label value="Reporte Calidad - Control Interno " style="color:blue;font-size:11px;font-weight:bold"/>
+	<vbox  id="vbxMain">
+		
+			<grid width="99%">
+				<rows>
+					<row>
+						<label value="Fecha Produccion:"/>
+						<datebox id="dteFecha1" width="110px" format="dd/MM/yyyy"/>
+					</row>			
+					<row>
+						<label value="Turno :" ></label>
+						<listbox id="lbxTurno" style="font-size:11px" mold="select" width="130px" > </listbox>
+					</row>		
+
+					<row>
+						<label value=" " ></label>
+						<toolbar>
+						<toolbarbutton id="btnBuscar" label="Buscar" image="/img/buscar.gif"/>
+						</toolbar>
+					</row>
+
+					<row>
+						<label value="Lote Planta" width="150px" ></label>
+				        <listbox id="lbxLote" style="font-size:11px" mold="select" width="100px" > </listbox>
+					</row>
+
+				</rows>
+			</grid>
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<label value="Imprimir" style="color:blue;font-size:12px;font-weight:bold"/>
+							<toolbar>
+								<vbox>
+								 <toolbarbutton id="btnPdf"                 label="Control Interno Pdf"/>	
+								</vbox>
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+
+			
+	</vbox> 
+</window>

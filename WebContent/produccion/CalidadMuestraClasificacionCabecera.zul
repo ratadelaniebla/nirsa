@@ -1,0 +1,134 @@
+<?page id = "pagCalidadPCC1Quimico" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+				
+	<window id="winCalidadMuestraClasificacionCabecera" apply="com.nw.webui.produccion.CalidadMuestraClasificacionCabeceraWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="Calidad Muestra Clasificacion- Rackeo" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+
+			<grid width="99%">  
+				<rows>
+				
+				
+				<row>
+					<label value="Dia Produccion " style="color:blue" />
+					<listbox id="lbxFechaActiva" style="font-size:11px" mold="select" width="130px" > </listbox>
+			    </row>
+			    <row>
+					<label value="Turno Producción" ></label>
+					<listbox id="lbxTurnoProduccion" style="font-size:11px" mold="select" width="130px" > </listbox>
+								 
+				</row>
+				<row>
+				<label value="Lote Planta" width="150px" ></label>
+				 <listbox id="lbxLote" style="font-size:11px" mold="select" width="100px" > </listbox>
+					  
+				</row>
+						
+					<row>
+						<label value="Barco" />
+  						<!--<listbox id="lbxBarco" style="font-size:12px" mold="select" width="98%" />-->
+  						<textbox id="txtBarco" readonly="true"></textbox>
+					</row>
+					<row>
+						<label value="Registro" />
+  					<textbox id="txtRegistro" maxlength="13" width="120px" style="color:blue" readonly="true" />
+					</row>
+									
+					<row>
+						<label value="Lote Haccp" />
+					<!--	<listbox id="lbxLoteHccp" style="font-size:12px" mold="select" width="98%" />-->
+							<textbox id="txtLoteH" readonly="true"></textbox>
+					</row>
+					
+					<row>
+						<label value="Mezcla de Cubas" />
+  					<textbox id="txtMezcla"  width="100%" style="color:blue" rows="2" readonly="true" />
+					</row>
+					
+					<row>
+						<label value="Especie" />
+  					<textbox id="txtEspecie"  width="100%" style="color:blue" rows="2" readonly="true" />
+					</row>
+					
+							<row>
+						<label value="Característicos" />
+					<textbox id="txtPiezas" maxlength="13" width="120px" style="color:blue" />
+				</row>		
+				
+					<row>
+						<label value="No Característicos" />
+					<textbox id="txtProblemas" maxlength="13" width="120px" style="color:blue" />
+				</row>		
+					
+				<row>
+						
+						<listbox id="lbxSubcaracteristica"  mold="select" rows="1" style="font-size:12px" width="98%" />
+					
+						<textbox id="txtOtros" disabled="true" maxlength="13" width="120px" style="color:blue" />
+			
+					</row>
+					<row>
+						<label value="Comentarios" />
+					<textbox id="txtComentarios" style="font-size:10px" rows="4" width="98%" />
+				</row>				
+						<row>
+						<label value="Total Muestras" style="font-size:14px;color:blue"/>
+					<textbox id="txtTotal" style="font-size:14px;background-color:yellow;color:red" readonly="true" width="98%"  />
+				</row>			
+						
+					<row>
+						
+						<label value="Evaluador Sensorial" style="font-size:14px;color:blue"/>
+				
+						<listbox id="lbxEvaluador"  mold="select" rows="1" style="font-size:12px" width="98%" />
+					
+						
+					</row>										
+			</rows>	
+				</grid>
+			<grid>
+			<rows>	
+			<row>
+						<vbox >							
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif"/>	
+							<!-- <toolbarbutton id="btnEliminar" label="Eliminar" tooltiptext="Eliminar" image="/img/eliminar.gif"/> -->	
+							<toolbarbutton id="btnNuevo" label="Nuevo" tooltiptext="Nuevo" image="/img/crear.gif"/>												
+						</toolbar>	
+						</vbox>					
+					</row>	
+															
+			</rows>	
+			</grid>			
+	      <!--  <listbox id="lbxMuestras" style="font-size:9px">
+				<listhead style="font-size:9px">
+					<listheader label="Característico" style="font-size:12px" />
+					<listheader label="No Característico" style="font-size:15px" />
+					<listheader label="Otros" style="font-size:6px" />
+				</listhead>
+			</listbox>  -->
+			
+		  <listbox id="lbxMuestras" model="@{winCalidadMuestraClasificacionCabecera.calidadMuestraAreaDetalleMuestraEstados}" 
+		        multiple="true"   width="95%">
+				<listhead style="font-size:5px" >
+					<listheader label="Descripcion " width="60%"  style="font-size:5px" />
+					<listheader label="Cant."  width="20%" tooltiptext="Cantidad" 		align="center" />
+					<listheader  width="20%" tooltiptext="Eliminar un item" align="center" />
+				</listhead>
+							  
+			 <!-- 	<listitem self="@{each=d}">
+					<listcell label="@{d.oeeEnvasadoDetalleVelocidadMaquinaCerradora.luthy.idluthy}" ></listcell>
+					<listcell > 
+						 <toolbar>
+							<toolbarbutton id="btnEliminar" label="Eliminar"
+								tooltiptext="Eliminar luthy" image="/img/eliminar.gif" />
+						</toolbar>
+					</listcell>
+				</listitem>  -->
+			</listbox>	
+			
+					
+		</vbox>
+	</window>
+</zk>

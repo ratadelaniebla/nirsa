@@ -1,0 +1,142 @@
+<?page id = "pagCalidadPCC1Quimico" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winMantComprbantes" apply="com.nw.webui.produccion.HarinaComprobantesConsultaWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="Consulta Comprobantes" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+		
+			<grid width="99%">
+				<rows>
+					<row>
+						<label value="Fecha Recepción"/>						
+						<toolbar>
+							<datebox id="dteFecha" width="50%"/>
+							<toolbarbutton id="btnBuscarComprobantes" tooltiptext="Grabar" image="/img/buscar.gif" />
+						</toolbar>
+					</row>
+				</rows>	
+			</grid>
+							
+		
+			<grid width="99%">
+				<rows>
+					
+					<row>
+						<label value="Imprimir"/>	
+						<toolbar>
+							<vbox>
+								<hbox>
+									<toolbarbutton id="btnNotaRecepcion" label="Nota Recepción"  style="color:blue;font-size:11px;font-weight:bold"/>
+									<toolbarbutton id="btnNotaRecepcionE" label="Excel"  style="color:blue;font-size:11px;font-weight:bold"/>
+								</hbox>
+								
+								<hbox>
+									<toolbarbutton id="btnDetallado" label="Detallado Pesos" style="color:blue;font-size:11px;font-weight:bold" />
+									<toolbarbutton id="btnDetalladoE" label="Excel" style="color:blue;font-size:11px;font-weight:bold" />
+								</hbox>
+								
+								<hbox>
+									<toolbarbutton id="btnRecepcion" label="Recepción Pesca" style="color:blue;font-size:11px;font-weight:bold" />
+									<toolbarbutton id="btnRecepcionE" label="Excel" style="color:blue;font-size:11px;font-weight:bold" />
+								</hbox>
+								
+								<hbox>
+									<toolbarbutton id="btnRecepcionp" label="Recepción Pesca Proveedor" style="color:blue;font-size:11px;font-weight:bold" />
+									<toolbarbutton id="btnRecepcionpE" label="Excel" style="color:blue;font-size:11px;font-weight:bold" />
+								</hbox>
+								
+							</vbox>
+						</toolbar>
+					</row>
+				</rows>
+			</grid>		
+		
+			<listbox id="lbxComprobantes" style="font-size:9px">
+				<listhead style="font-size:9px">
+					<listheader label="Comprobante" style="font-size:5px" width="30%"/>
+					<listheader label="Proveedor" style="font-size:4px" width="48%"/>
+					<listheader label="Estado" style="font-size:4px" width="21%"/>
+				</listhead>
+			</listbox>		
+
+			<grid width="99%">
+				<rows>
+
+					<row>
+						<label value="Comprobante" />
+						<textbox id="txtComprobante" width="99%" readonly="true"></textbox>
+					</row>
+
+
+					<row>
+						<label value="Estado" />
+						<textbox id="txtEstadoComprobante" width="99%" readonly="true"/>
+					</row>
+
+					<row>
+						<label value="Cedula/RUC Proveedor" />
+						<textbox id="txtCedulaProveedor" width="99%" readonly="true"></textbox>
+					</row>
+
+					<row>
+						<label value="Proveedor" />
+						<textbox id="txtNombreProveedor" width="99%" height="45px" multiline="true" readonly="true"/>
+					</row>
+
+
+					<row>
+						<label value="Cedula Chofer" />
+						<textbox id="txtCedula" width="99%" readonly="true"></textbox>
+					</row>
+
+					<row>
+						<label value="Nombres Chofer" />
+						<textbox id="txtNombre" width="99%" height="99%" multiline="true"  readonly="true"/>
+					</row>
+
+					<row>						
+						<label value="Placa" />
+						<textbox id="txtPlaca" readonly="true" width="99%" />						
+					</row>
+					
+					<row>						
+						<label value="Origen Pesa" />
+						<textbox id="txtOrigen" readonly="true" width="99%" rows="2" />						
+					</row>					
+				</rows>
+			</grid>
+
+<!-- 
+			<listbox id="lbxEspeciesComprobante" model="@{winMantComprbantes.harinaEspecieDetalleEstados}" multiple="true" checkmark="false"  height="125px">															    
+				<listhead style="font-size:9px" >
+					<listheader label="Especie" width="85%"/>
+				</listhead>
+																				
+				<listitem self="@{each=e}">
+					<listcell label="@{e.harinaEspecie.descripcionespecie}" tooltiptext="@{e.harinaEspecie.descripcionespecie}" style="font-size:11px"></listcell>																				    
+				</listitem>
+			</listbox>
+ -->
+
+			<grid>
+				<rows>
+					<row>
+						<label value="Observación" />
+						<vbox>
+							<textbox id="txtObservacion" width="99%" height="45px" readonly="true" multiline="true"/>
+						</vbox>	
+					</row>
+				</rows>	
+			</grid>	
+
+			<listbox id="lbxCajones" style="font-size:9px">
+				<listhead style="font-size:9px">
+					<listheader label="Cajon" style="font-size:4px"  width="21%" />
+					<listheader label="P.Bruto" style="font-size:4px"  width="21%" />
+					<listheader label="Especies" style="font-size:3px"  width="56%" />
+				</listhead>
+			</listbox>
+
+		</vbox>
+	</window>
+</zk>

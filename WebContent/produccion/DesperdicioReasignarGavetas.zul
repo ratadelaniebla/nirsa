@@ -1,0 +1,89 @@
+<?page id = "pagCalidadPCC1Quimico" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winDesperdicioCerrarCajon" apply="com.nw.webui.produccion.DesperdicioHarinaDesperdicioReasignarGavetasWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="DESPERDICIO - Reasignar Gavetas" style="color:blue;font-size:12px;font-weight:bold" />
+		<label value="" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+		
+	
+		
+			<grid width="99%">  
+				<rows>
+				
+					<row>
+						<label value="Producción" />
+						<listbox id="lbxProduccion" style="font-size:12px" mold="select" />
+					</row>				
+				
+					<!-- 
+					<row>
+						<label value="Fecha Producción"/>
+						<datebox id="dteFecha" width="110px" readonly="false"/>
+					</row>
+									
+					<row visible="false">
+						<label value="Día Julian" />
+						<textbox id="txtDiaJuliano" maxlength="4"  width="50px"  readonly="true" />
+					</row>									
+									
+					<row visible="false">
+						<label value="Turno" />
+						<listbox id="lbxTurno" style="font-size:12px" mold="select" width="98%" />
+					</row>
+					 -->
+					 
+					<row>
+						<label value="Cajón Origen" />
+						<hbox>
+							<listbox id="lbxCajon" style="font-size:12px" mold="select" width="80px" />												
+							Cerrado <checkbox id="chkCerrado" checked="false"/>
+						</hbox>
+					</row>
+										
+					<row>
+						<label value="Desperdicio" />
+						<listbox id="lbxDesperdicio" style="font-size:12px" mold="select" width="150px" />
+					</row>
+
+					<row>
+						<label value="Num. Gavetas" />
+						<textbox id="txtGavetasr" width="60px" readonly="true" />
+					</row>
+																				
+					<row>
+						<label value="Peso" />
+						<textbox id="txtPeso" width="60px" readonly="true" />
+					</row>	
+																				
+					<row>
+						<label value="Num. Mover" />
+						<decimalbox id="txtGavetas" format="#####"  maxlength="10" width="60px" readonly="false" />
+					</row>	
+					
+					<row>
+						<label value="Cajón Destino" />
+						<hbox>
+							<listbox id="lbxCajonDestino" style="font-size:12px" mold="select" width="80px" />
+							Cerrado <checkbox id="chkCerrado2" checked="false"/>
+						</hbox>
+					</row>
+				</rows>									
+			</grid>	
+
+			<grid width="99%"> 
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar"  label="MOVER GAVETA(S)" style="color:blue;font-size:12px;font-weight:bold"/>
+							</toolbar>
+							
+						</vbox>
+					</row>
+				</rows>
+			</grid>				
+					
+		</vbox>
+	</window>
+</zk>

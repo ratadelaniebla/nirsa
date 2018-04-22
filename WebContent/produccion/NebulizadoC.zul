@@ -1,0 +1,89 @@
+<?page id = "pagNebulizadoC" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winNebulizadoC" apply="com.wm.webui.produccion.NebulizadoCWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="Camaras -Procesos Nebulizado" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+			<grid width="99%">
+				<rows>
+					<row>
+						<label value="Fec.Prod." style="color:blue" />
+						<datebox id="dteFecPro" width="80px" />
+					</row>
+				</rows>
+			</grid>
+
+			<hbox style="color:blue" width="99%">
+				Orden
+				<toolbarbutton id="btnCargar" label="Cargar"/> 
+			</hbox>
+			<listbox id="lbxOrd" style="font-size:11px" mold="select"
+				width="99%" />
+			<grid width="99%"> 
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+								<toolbarbutton id="btnBuscar" tooltiptext="Buscar" image="/img/buscar.gif"/>
+								<toolbarbutton id="btnNuevo" tooltiptext="Nuevo" image="/img/crear.gif" />
+								<toolbarbutton id="btnActualizar" tooltiptext="Actualizar" image="/img/refrescar.gif"/>
+								<toolbarbutton id="btnEliminar" tooltiptext="Eliminar" image="/img/eliminar.gif" />
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+
+			<grid width="99%">
+				<rows>
+					<row>
+						Camara
+							<listbox id="lbxCamaras" style="font-size:11px" mold="select"
+								width="100px" />
+					</row>
+					<row>
+						Proceso Neb.
+							<listbox id="lbxProcesosNebulizado" style="font-size:11px" mold="select"
+								width="100px" />
+					</row>
+					<row>
+						Temp. Camara
+						<decimalbox id="txtTempInterna" format="###.##" value="000.00" maxlength="8" width="98%" />
+					</row>
+					<!--  
+					<row>
+						Presion. Vapor
+						<decimalbox id="txtPresionVapor" format="###.##" value="000.00" maxlength="8" width="98%" />
+					</row>
+					-->
+				</rows>
+			</grid>
+						<grid width="99%">
+				<rows>
+					<row id="rowInicioProceso">Ini. Proc
+						<vbox>
+							<datebox id="dteHoraInicioProceso" width="100px" /> 
+						</vbox>
+					</row>
+					<row id="rowCieVal">Fin Proc
+						<vbox>
+							<datebox id="dteHoraFinProceso" width="100px" />
+						</vbox>
+					</row>
+				</rows>
+			</grid>			
+				
+			<label value="Observaciones Proceso:" style="color:blue" />
+			<textbox id="txtObs" maxlength="255" rows="3" width="99%" />
+			<grid width="99%">
+				<rows>
+					<row>
+						<label value=" Cerrar Proceso " style="color:black" />
+						<checkbox checked="false" id="chkEst" />
+					</row>
+				</rows>
+			</grid>
+		</vbox>
+	</window>
+</zk>

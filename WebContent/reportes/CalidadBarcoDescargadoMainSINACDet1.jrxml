@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CalidadBarcoDescargadoMain" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\proyecto_neptali2\\nwl\\WebContent\\reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="lotehcacp" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select t1.idcalidadmuestraareacabecera::TEXT || ' ' || t1.idcalidadmuestracabeceradescargamotivo::TEXT area_motivo,
+* from
+(
+select
+cmacc.idcalidadmuestraareacabecera,
+(0::bigint ) idcalidadmuestracabeceradescargamotivo,
+(select array_to_string(array_agg(t1.usuario), ' <br/> ')  from (
+select DISTINCT u.usuario from calidad_muestra_area_detalle cmadu inner join usuario u
+on cmadu.idusuario = u.idusuario
+where cmadu.idcalidadmuestraareacabecera = cmacc.idcalidadmuestraareacabecera and idcalidadmuestragrupoanalisis = 2) t1) usuarios_histamina,
+
+calidad_muestra_lista_de_usuarios_muestra(cmacc.idcalidadmuestraareacabecera) usuarios_muestra,
+(select usu.usuario from usuario usu where usu.idusuario =  cmacap.idusuario and cmacap.accesoverificado = true ) usuarios_verificado,
+(select usu.usuario from usuario usu where usu.idusuario =  cmacap.idusuario and cmacap.accesorevision    = true ) usuarios_revision,
+
+
+(select barco.nombre from barco where barco.idbarco=(select barco_descarga.idbarco from barco_descarga where barco_descarga.idbarcodescarga=cmacc.idbarcodescarga ))as Barco,
+(select registro from barco_descarga where idbarcodescarga=cmacc.idbarcodescarga) as registro,
+cmacc.armador as Proveedor,
+--(select armador.descripcion from armador where armador.idarmador=(select barcd.idarmador from barco_descarga barcd where cc.idbarcodescarga=barcd.idbarcodescarga limit 1) ) as Proveedor,
+(select to_char(cmacc.fecharegistro, 'YYYY-MM-DD'))::DATE as fecha,
+(cmacc.idturno) as Turnos,
+(select mescla_cubas_por_lotehaccp(cmacc.lotehaccp)) as cuba,
+(cmacc.lotehaccp) as lotehaccp,
+(select especie.codigoqm from especie where especie.idespecie=(select especie_talla.idespecie from especie_talla where especie_talla.idespecietalla::INTEGER=cc.idmaterial::INTEGER LIMIT 1 )),
+totalnetohaccp as cantidad,
+cmacc.totalnetohaccp as cantidad,
+row_number() OVER () as numero,
+cma.descripcion area,
+
+cma.orden_area,
+cma.idcalidadmuestraarea,
+cma.texto_pie_pagina_accion_correctiva,
+cma.area_referencia,
+
+(select count(cmad1.idcalidadmuestraareadetalle) from calidad_muestra_area_detalle cmad1
+where cmad1.idcalidadmuestraareacabecera = cmacc.idcalidadmuestraareacabecera and cmad1.idcalidadmuestragrupoanalisis = 2 and cmad1.pintar = -1)::TEXT problemas,
+
+case when cmacc.idcalidadmuestraareamotivo is null then
+   cma.accion_correctiva
+else
+  (select cmam.texto from calidad_muestra_area_motivo cmam
+where cmam.idcalidadmuestraareamotivo = cmacc.idcalidadmuestraareamotivo)
+end accion_correctiva,
+
+(select array_to_string(array_agg(DISTINCT(t.idturno)), ' / ')  from calidad_muestra_area_detalle cmadt inner join turno t
+on cmadt.idturno = t.idturno
+where cmadt.idcalidadmuestraareacabecera = cmacc.idcalidadmuestraareamotivo and idcalidadmuestragrupoanalisis = 2) turno,
+
+(select array_to_string(array_agg(DISTINCT(to_char(cmadt.fecharegistro, 'DD/MM/YYYY')::TEXT)), '  ') from calidad_muestra_area_detalle cmadt
+where cmadt.idcalidadmuestraareacabecera = cmacc.idcalidadmuestraareamotivo and idcalidadmuestragrupoanalisis = 2 ) fecha,
+
+cmacc.mostrarvariable,
+cc.proposito
+
+
+FROM calidad_muestra_area_cabecera cmacc
+inner join calidad_muestra_area cma
+on cmacc.idcalidadmuestraarea = cma.idcalidadmuestraarea
+inner join camara_cajon cc
+on cc.idcamaracajon=cmacc.idcamaracajon
+left join calidad_muestra_area_cabecera_aprobacion cmacap
+on(cmacap.idcalidadmuestraareacabecera = cmacc.idcalidadmuestraareacabecera)
+
+
+WHERE cmacc.lotehaccp
+    in (
+	$P{lotehcacp}
+       )
+
+  and cmacc.idcalidadmuestraarea <> 4
+and (select count(cmad1.idcalidadmuestraareadetalle) from calidad_muestra_area_detalle cmad1
+where cmad1.idcalidadmuestraareacabecera = cmacc.idcalidadmuestraareacabecera and cmad1.idcalidadmuestragrupoanalisis = 2) > 0
+--ORDER BY cma.orden_area, cma.idcalidadmuestraarea
+
+
+
+) t1
+
+ORDER BY t1.orden_area, t1.idcalidadmuestraarea]]>
+	</queryString>
+	<field name="area_motivo" class="java.lang.String"/>
+	<field name="idcalidadmuestraareacabecera" class="java.lang.Long"/>
+	<field name="idcalidadmuestracabeceradescargamotivo" class="java.lang.Long"/>
+	<field name="usuarios_histamina" class="java.lang.String"/>
+	<field name="usuarios_muestra" class="java.lang.String"/>
+	<field name="usuarios_verificado" class="java.lang.String"/>
+	<field name="usuarios_revision" class="java.lang.String"/>
+	<field name="barco" class="java.lang.String"/>
+	<field name="registro" class="java.lang.String"/>
+	<field name="proveedor" class="java.lang.String"/>
+	<field name="fecha" class="java.sql.Date"/>
+	<field name="turnos" class="java.lang.Integer"/>
+	<field name="cuba" class="java.lang.String"/>
+	<field name="lotehaccp" class="java.lang.String"/>
+	<field name="codigoqm" class="java.lang.String"/>
+	<field name="cantidad" class="java.lang.Double"/>
+	<field name="numero" class="java.lang.Long"/>
+	<field name="area" class="java.lang.String"/>
+	<field name="orden_area" class="java.lang.Integer"/>
+	<field name="idcalidadmuestraarea" class="java.lang.Long"/>
+	<field name="texto_pie_pagina_accion_correctiva" class="java.lang.String"/>
+	<field name="area_referencia" class="java.lang.String"/>
+	<field name="problemas" class="java.lang.String"/>
+	<field name="accion_correctiva" class="java.lang.String"/>
+	<field name="turno" class="java.lang.String"/>
+	<field name="mostrarvariable" class="java.lang.Boolean"/>
+	<field name="proposito" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="31"/>
+	</title>
+	<columnHeader>
+		<band height="17">
+			<textField isBlankWhenNull="true">
+				<reportElement x="181" y="0" width="188" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{lotehaccp}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="43" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="43"/>
+				<subreportParameter name="IDCABECERA">
+					<subreportParameterExpression><![CDATA[$F{idcalidadmuestraareacabecera}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="idcalidadmuestracabeceradescargamotivo">
+					<subreportParameterExpression><![CDATA[$F{idcalidadmuestracabeceradescargamotivo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "CalidadBarcoDescargadoMainSINACDetMuestra.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<summary>
+		<band height="15"/>
+	</summary>
+</jasperReport>

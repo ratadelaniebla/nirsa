@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AccionCorrectiva" language="groovy" pageWidth="1100" pageHeight="802" columnWidth="1100" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" isIgnorePagination="true">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="15"/>
+	<parameter name="fechadesde" class="java.util.Date"/>
+	<parameter name="idcalidad" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="registro" class="java.lang.String"/>
+	<parameter name="LOGO" class="java.lang.String"/>
+	<parameter name="barco" class="java.lang.String"/>
+	<parameter name="fechahasta" class="java.util.Date"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\proyecto_neptali2\\nwl\\WebContent\\reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select h1.haccp2 from
+			     (
+			     select
+			  	  (select  array_to_string(array_agg(haccp ), ', ') haccp
+					from (select DISTINCT (cc.lotehaccp) haccp
+					from camara_cajon cc
+					inner join barco_estiba_cuba_detalle_mezcla becdm
+					on cc.idcamaracajon = becdm.idcamaracajon
+					inner join barco_estiba_cuba bec
+					on becdm.idbarcoestibacuba = bec.idbarcoestibacuba
+					inner join calidad_detalle_pcc cdpp
+					on becdm.idbarcoestibacuba = cdpp.idbarcoestibacuba
+					where cc.idbarcodescarga = bd.idbarcodescarga and cdpp.lotecamara = cc.lotecamara and  cc.lotecamara = det.lotecamara) t1) haccp2
+
+
+
+				from calidad_pcc as cp left join calidad_detalle_pcc as det on cp.idcalidadpcc = det.idcalidadpcc,
+				barco_descarga bd, barco b,calidad_numero_muestreo_pcc as mues,  barco_estiba_cuba bec,
+				barco_cuba bc, cuba cu, especie_talla et, especie as es, talla as tal
+				where cp.idbarcodescarga =  bd.idbarcodescarga and bd.idbarco = b.idbarco
+				and det.nummuestreo = mues.idcalidadnumeromuestreopcc
+				and det.idbarcoestibacuba = bec.idbarcoestibacuba and bec.idbarcocuba = bc.idbarcocuba
+				and bc.idcuba = cu.idcuba and det.idespecietalla = et.idespecietalla
+				and et.idespecie = es.idespecie and et.idtalla = tal.idtalla
+
+				 and cp.idcalidadpcc = $P{idcalidad}
+				order by cu.idcuba, mues.idcalidadnumeromuestreopcc, det.idespecietalla, det.iddetallecalidadpcc
+
+			     ) h1 group by h1.haccp2 order by h1.haccp2 asc]]>
+	</queryString>
+	<field name="haccp2" class="java.lang.String"/>
+	<variable name="accion" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="124">
+			<staticText>
+				<reportElement x="0" y="103" width="132" height="15">
+					<printWhenExpression><![CDATA[$P{fechadesde}!=null]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Desde:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="264" y="103" width="80" height="15">
+					<printWhenExpression><![CDATA[$P{fechahasta}!=null]]></printWhenExpression>
+				</reportElement>
+				<box rightPadding="5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hasta:]]></text>
+			</staticText>
+			<image scaleImage="RealHeight">
+				<reportElement x="0" y="10" width="132" height="62"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{LOGO}]]></imageExpression>
+			</image>
+			<textField pattern="dd-MMM-yyyy" isBlankWhenNull="true">
+				<reportElement x="132" y="103" width="132" height="15"/>
+				<box leftPadding="5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{fechadesde}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="132" y="10" width="968" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[NEGOCIOS INDUSTRIALES REAL S. A.]]></text>
+			</staticText>
+			<textField pattern="dd-MMM-yyyy" isBlankWhenNull="true">
+				<reportElement x="344" y="103" width="756" height="15"/>
+				<box leftPadding="3"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$P{fechahasta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="132" y="39" width="968" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Departamento de Control de Calidad- QC Department]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="132" y="84" width="968" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DESCARGA DE BARCO - ACCION CORRECTIVA]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="33">
+			<staticText>
+				<reportElement mode="Transparent" x="58" y="0" width="74" height="33" backcolor="#CCCCFF"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Barco]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="132" y="0" width="60" height="33" backcolor="#CCCCFF"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Registro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="520" y="0" width="74" height="33" backcolor="#CCCCFF"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Histamina mg/100]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="192" y="0" width="72" height="33" backcolor="#CCCCFF"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mezcla Cubas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="344" y="0" width="84" height="33" backcolor="#CCCCFF"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Especie qm]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="0" width="58" height="33" backcolor="#CCCCFF"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="428" y="0" width="92" height="33" backcolor="#CCCCFF"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Histamina ppm]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="264" y="0" width="80" height="33" backcolor="#CCCCFF"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lotehaccp]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="594" y="0" width="506" height="33" backcolor="#CCCCFF"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Descripcion Acción Correctiva]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="33" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="32"/>
+				<subreportParameter name="lotehaccp">
+					<subreportParameterExpression><![CDATA[$F{haccp2}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "CalidadBarcoDescargadoAccionCorrectiva.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<summary>
+		<band height="15"/>
+	</summary>
+</jasperReport>

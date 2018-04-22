@@ -1,0 +1,44 @@
+<?page id = "pagLimpiezaReporteParadasEntreFechas.zul" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winLimpiezaReporteParadasEntreFechas" apply="com.nw.webui.produccion.LimpiezaReporteParadasEntreFechasWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="" style="color:blue;font-size:12px;font-weight:bold" />
+		<label value="REPORTE DE PARADAS " style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+		
+		
+			<grid width="99%">  
+				<rows>
+					<row>
+							<label value="Fecha desde:" />
+							<datebox id="dteFecha1" width="110px" format="dd/MM/yyyy" />
+					</row>
+					<row>
+							<label value="Fecha hasta:" />
+							<datebox id="dteFecha2" width="110px" format="dd/MM/yyyy" />
+					</row>
+				</rows>
+			</grid>			
+
+
+			<grid width="99%"> 
+				<rows>
+					<row>
+					
+					
+								<vbox>
+									<hbox>
+										<toolbarbutton id="btnPdf" label="PDF- Reporte Paradas  "/>
+										<toolbarbutton id="btnExcel" label="Excel- Reporte Paradas" style="color:blue;font-size:11px;font-weight:bold"/>
+										<toolbarbutton id="btnPdfM" label="PDF- Reporte Movimiento de Personal  "/>
+										<toolbarbutton id="btnExcelM" label="Excel- Reporte Movimiento de Personal" style="color:blue;font-size:11px;font-weight:bold"/>
+									</hbox>	
+								</vbox>					
+					</row>
+				</rows>
+			</grid>		
+
+
+		</vbox>
+	</window>
+</zk>

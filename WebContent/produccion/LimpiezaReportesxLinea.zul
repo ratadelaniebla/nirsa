@@ -1,0 +1,101 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winLimpiezaReportesLinea" apply="com.nw.webui.produccion.LimpiezaReportesxLineaWindow" width="99%">
+	<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="REPORTES LIMPIEZA X LINEAS" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="200px">
+		<grid >
+			<rows>
+				<row >
+					<label value="Días Producción " ></label>
+					<datebox id="dteFecReg" width="80px" disabled="false" /> 
+				</row>
+				
+				<row >
+					<label value="Turno" ></label>
+					<listbox id="lbxTurno" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+				<row>
+					<label value="Linea" ></label>
+					<listbox id="lbxLinea" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+				
+			</rows>
+		</grid>
+		<label value="Limpieza" style="color:blue;font-size:12px;font-weight:bold" />
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnExcelLineas" label="Excel General Pesos Lomo limpio " tooltiptext="Excel Líneas" />
+<!--  							<space width="15px"></space>
+							<toolbarbutton id="btnImprimirExcel" label="     Excel" tooltiptext="Visualizar Archivo" />-->
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>
+		<label value="Eficiencias" style="color:blue;font-size:12px;font-weight:bold" />
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnImprimir" label="General de Empleados " tooltiptext="Visualizar Archivo" />
+							<space width="15px"></space>
+							<toolbarbutton id="btnImprimirExcel" label="     Excel" tooltiptext="Visualizar Archivo" />
+						</toolbar>
+					</vbox>
+				</row>
+				
+				
+				
+			<!-- 	
+				<row>
+					<vbox>
+						<toolbar>
+							
+							<toolbarbutton id="btnExcelLinea" label="Excel Lineas por Empleado" tooltiptext="Visualizar Totales" />
+						</toolbar>
+					</vbox>
+				</row>
+			 -->	
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnTotales" label="Consolidado de Empleados" tooltiptext="Visualizar Totales" />							
+						</toolbar>
+					</vbox>
+				</row>
+				
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnTotalesEspecieTalla" label="Consolidado de Empleados por Especie/Talla" tooltiptext="Visualizar Totales" />							
+						</toolbar>
+					</vbox>
+				</row>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnConsolTotalesTalla" label="Consolidado de Empleados por Talla (Pruebas)" tooltiptext="Visualizar Totales x Talla" />							
+						</toolbar>
+					</vbox>
+				</row>
+
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnTotalesxEquipo" label="Totales Kilos x Equipo" tooltiptext="Visualizar Totales x Equipo" />
+							<space width="15px"></space>
+							<toolbarbutton id="btnTotalesxEquipoExcel" label="     Excel" tooltiptext="Visualizar Totales Excel" />
+						</toolbar>
+					</vbox>
+				</row>
+								
+			</rows>
+		</grid>
+	</vbox>
+</window>
+</zk>

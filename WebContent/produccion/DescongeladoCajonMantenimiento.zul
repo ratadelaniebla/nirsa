@@ -1,0 +1,115 @@
+<?page id="pagDescongeladoCajonMant"  title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winDescCajonMant" apply="com.nw.webui.produccion.DescongeladoCajonMantenimientoWindow" width="99%">
+	<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="CAJON DESCONGELADO MANTENIMIENTO" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="200px">
+	
+		<grid width="99%"> 
+			<rows>
+				<row >
+					<label value="Día Producción " style="color:blue" />
+					<datebox id="dteFecha" width="110px" readonly="true" />
+				</row>
+				<row >
+					<label value="Turno Producción" ></label>
+					<listbox id="lbxTurnoProduccion" style="font-size:11px" mold="select" width="100px" > </listbox>
+				</row>
+				<row>
+					<label value="Cajon"></label>
+					<listbox id="lbxCajon" style="font-size:11px" mold="select" width="120px" > </listbox>
+				</row>
+
+			</rows>
+		</grid>  
+		
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+
+				<row>
+					<label value="Cajon Revolteo"></label>
+					<textbox id="txtCajonRevolteo" readonly="true" maxlength="255" ></textbox>
+				</row>
+				<row>
+					<label value="Pedido - Lote"></label>
+					<textbox id="txtLote" readonly="true" maxlength="255" ></textbox>
+				</row>
+				<row>
+					<label value="Especie-Talla"></label>
+					<textbox id="txtEspecieTalla" readonly="true" maxlength="255" ></textbox>
+				</row>
+				<row>
+					<label value="Origen"></label>
+					<textbox id="txtOrigen" readonly="true" maxlength="255" ></textbox>
+				</row>
+				<row>
+					<label value="Barco" ></label>
+					<textbox id="txtBarcoDescarga" readonly="true" > </textbox>
+				</row>
+				<row>
+					<label value="Cuba" ></label>
+					<textbox id="txtCuba" readonly="true" > </textbox>
+				</row>
+
+
+				<row>
+				   <label value="Ducha:" ></label>
+				   <listbox id="lbxDucha" style="font-size:11px" mold="select" width="90px" > </listbox>
+				</row>
+  				<row>
+					<label value="Peso " ></label>
+					<textbox id="txtPeso" width="90px"> </textbox>
+				</row>
+<!--  				<row>
+					<label value="Peso :" ></label>
+					<doublebox id="dbbPeso" readonly="false" width="90px"> </doublebox>
+				</row>-->
+
+				<row>
+					<label value="Hora Ingreso" ></label>
+					<textbox id="txtHoraIngreso" readonly="true" > </textbox>
+				</row>
+
+				<row>
+					<label value="Hora Ingreso :" ></label>
+					<datebox id="dteHoraIngreso" width="120px" format="dd/MM/yyyy HH:mm" style="color:blue;font-size:11px;font-weight:bold" />	
+				</row>
+ 
+				<row>
+					<label value="Hora Inicio Descongelado" ></label>
+					<textbox id="txtHoraInicio" readonly="true" > </textbox>
+				</row>
+
+				<row>
+					<label value="Hora Inicio  Descongelado:" ></label>
+					<datebox id="dteHoraInicio" width="120px" format="dd/MM/yyyy HH:mm" style="color:blue;font-size:11px;font-weight:bold" />	
+				</row>
+
+				<row>
+					<label value="Hora Volteo" ></label>
+					<textbox id="txtHoraFin" readonly="true" > </textbox>
+				</row>
+
+				<row>
+					<label value="Hora Volteo:" ></label>
+					<datebox id="dteHoraFin" width="120px" format="dd/MM/yyyy HH:mm" style="color:blue;font-size:11px;font-weight:bold" />	
+				</row>
+
+			</rows>
+		</grid>
+
+	</vbox>
+</window>
+</zk>

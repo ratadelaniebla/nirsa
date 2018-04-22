@@ -1,0 +1,40 @@
+<?page id="deta" title="Módulo de Gestión Académica" ?>
+<window id="WinMalDet" width="950px" mode="modal"  title="Módulo de Gestión Académica-Detalle de Malla" apply="controlador.MallaDetalleWindow" position="center,top" closable="true" sizable="false" contentStyle="overflow:auto" height="570px">
+<caption style="font-size:20px;font-weight:bold;"/>
+<zscript>
+import java.lang.*;
+Integer malid=arg.get("malid");
+</zscript>
+<hbox align="center">
+
+<space />
+</hbox>
+		<toolbar style="align=center" >	
+			<!-- BOTON NUEVO, USA EL METODO agregar() ATRAVEZ DE LA CLASE CONTROLADORA EntidadWindowd.java CUANDO SE HAGA CLICK EN EL BOTON -->
+			
+			<toolbarbutton id="update" label="Grabar" image="/IMG/PNG-24/Save.png" tooltiptext="Grabar" />
+
+		</toolbar>
+
+
+ 	<borderlayout height="480px">             
+ 	<west title="Materias" size="200px" flex="true" maxsize="200" splittable="true" collapsible="true" autoscroll="true">                 
+ 		<div style="background:#02A4D2">                     
+ 			<listbox id="lbxMat" selectedItem="@{WinMalDet.MallaDetalle}" 
+			onDrop="WinMalDet.move(event.dragged, self)" droppable="true" style="border:none"
+			fixedLayout="true"  height="450px" width="200px" onSelect=""/>			        
+ 		</div>             		 	
+ 	 </west>             	
+ 	
+ 	 
+ 	<center border="none" flex="true" autoscroll="true">                 
+ 		<div style="background:#A7DFFE" width="100px" id="div">                    
+ 			  <hbox id = "hbx1" /> 
+ 			  <hbox id = "hbx2"/>       
+ 		</div>              
+ 	</center>    
+ 	       
+ 	         
+ </borderlayout>             
+ 	
+</window> 

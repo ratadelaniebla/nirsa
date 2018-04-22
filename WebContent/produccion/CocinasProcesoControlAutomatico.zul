@@ -1,0 +1,811 @@
+<?page id = "pagCocinaProcControl" title="" contentType="text/html;charset=UTF-8" automaticTimeout="false"?>
+<!-- 
+<?page automaticTimeout="false"?>
+ -->
+<zk>
+
+ 
+	<window id="winConcinasProcesoControl" mode="modal" border="normal" closable="true"  title="CONTROL DE PROCESO DE COCINAS - AUTOMATICO"
+	apply="com.nw.webui.produccion.CocinasProcesoControlAutomaticoWindow" width="99%">
+	
+	<!--
+	height="99%" 
+	 -->
+		<script src="/js/noBarra.js" type="text/javascript" />
+
+		<!-- 
+		<vbox id="vbxMain">
+		 -->
+
+
+	<hbox>	
+		<div>
+			<hbox>
+			   <groupbox>
+			   		<label value="SELECCIÓN DE DATOS" style="color:blue;font-size:12px;font-weight:bold"/>
+			   		 	
+				   <grid> 
+						<rows>
+						    <row>
+								<label value="Dia Produccion " style="color:blue"   />
+								<hbox>
+									<listbox id="lbxProduccionFecha" style="font-size:11px" mold="select" width="130px" > </listbox>								
+						 	  		<toolbar>
+										<toolbarbutton id="btnActualizarProducciones" tooltiptext="Actualizar" image="/img/refrescar.gif"/>
+									</toolbar>								
+								</hbox>
+						    </row>
+						    
+						    <row>
+						    	<vbox>
+						         	  <label value="Cocina : " style="color:blue"/>
+						         	  <!-- <space width="3px"></space>  -->
+						         	  <toolbar>
+						         	  	<toolbarbutton id="btnMostrarTodo" tooltiptext="Muestra todas las cocinadas de la fecha de producción seleccionada" label="Mostrar Todas las cocinadas"/>
+						         	  </toolbar>
+				         	  	</vbox>
+				         	  	
+				         	  	<hbox>
+				         	  	
+				         	  	
+									<vbox>				         	  	
+							 	  		<listbox id="lbxCocina1" style="font-size:11px" mold="select" width="130px" > </listbox>							 	  		
+							 	  		<toolbar visible="false">
+											<toolbarbutton id="btnAnularCocinadas" tooltiptext="Anula todas las Cocinadas sin uso en todas las producciones" label="Anular totas las Cocinadas sin uso"/>
+										</toolbar>
+						 	  		</vbox>
+						 	  		
+						 	  		<toolbar>
+						 	  			<vbox>
+							 	  			<vbox>
+												<toolbarbutton id="btnActualizarCocinas" tooltiptext="Actualizar" image="/img/refrescar.gif"/>											</vbox>
+											
+											<vbox visible="false">																						
+												<toolbarbutton id="btnGenerarCocinada" tooltiptext="Generar Siguiente Cocinada" label="Generar"/>
+											</vbox>
+											
+										</vbox>											
+									</toolbar>
+								</hbox>	
+						    </row>
+						    
+						    <row visible="false">
+						 		<label value="Cocinada" ></label>
+								<textbox id="txtCocinada1" style="font-size:11px"  width="130px"  readonly="true"> </textbox>									
+						    </row>
+						</rows>
+				   </grid>
+
+
+				<groupbox mold="3d">
+					<div>				   
+					   <hbox>
+						<div>
+							<label value="Fecha Producción1:"/>								
+							<hbox>
+									<datebox id="dteFecha1" width="110px" format="dd/MM/yyyy" readonly="true"/>
+							</hbox>						   
+						</div>
+		
+						<div>
+							<label value="Fecha Producción2:"/>								
+							<hbox>
+									<datebox id="dteFecha2" width="110px" format="dd/MM/yyyy" readonly="true"/>
+							</hbox>
+						</div>
+					   </hbox>		
+					   					   
+						<toolbar id="tbcontrolExcel">
+							<vbox>
+								<toolbarbutton id="btnExcel" tooltiptext="Descagar Archivo en Formato Excel" label="DESCARGAR EXCEL ENTRE FECHAS" style="color:blue;font-size:12px;font-weight:bold"/>
+							</vbox>	
+						</toolbar>
+					</div>	
+				</groupbox>	
+
+				   
+				   
+				  
+				  
+				<grid width="100%" >
+					<rows >
+						<row align="center">
+							 	<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif"/>	
+						</row>
+					</rows>
+				</grid>				   
+				   
+			  	</groupbox>
+			  				   			
+				<vbox>
+				
+						<groupbox>
+						
+						
+						<hbox>						
+							<label value="INGRESO DATOS" style="color:blue;font-size:12px;font-weight:bold"/>
+							<space width="5px"></space>
+							<toolbar>						
+								<toolbarbutton id="btnActualizarTemperaturas" label="ACTUALIZAR TIEMPOS / TEMPERATURAS" style="color:green;font-size:11px;font-weight:bold"/>
+							</toolbar>
+						</hbox>		
+						
+						<hbox>	
+											
+							<grid >
+								<rows >
+									<row>
+										 <toolbarbutton id="btnInicarCocinada" label="Inicio Cocinada" tooltiptext="Inicio Cocinada" />
+										 <!-- 
+										 <textbox id="txtInicarCocinada"  rows="1" width="99%" readonly="true" style="color:blue;font-size:10px;font-weight:bold"/>
+										  -->
+										 <datebox id="txtInicarCocinada" width="75%" format="dd/MM/yyyy HH" style="color:blue;font-size:11px;font-weight:bold" lenient="true" buttonVisible="false" readonly="true"/>	
+									</row>
+									<row>
+										 <toolbarbutton id="btnFinalizarCocinada" label="Finalizar Cocinada" tooltiptext="Finalizar Cocinada" />
+										 <!-- 
+										 <textbox id="txtFinalizarCocinada"  rows="1" width="99%" readonly="true" style="color:blue;font-size:10px;font-weight:bold"/>
+										 -->
+										 <datebox  id="txtFinalizarCocinada" width="75%" format="dd/MM/yyyy HH" style="color:blue;font-size:11px;font-weight:bold"  lenient="true" buttonVisible="false" readonly="true"/>
+									</row>
+		
+									<row>
+										 <!-- 
+										 <toolbarbutton id="btnRtd" label="Tiempo RTD" tooltiptext="Tiempo RTD" />
+										 -->
+										 <label value="Tiempo RTD" style="color:blue"/>
+										 <!-- 
+										 <textbox id="txtRtd1"  rows="1" width="99%" readonly="true" style="color:blue;font-size:10px;font-weight:bold"/>
+										  -->
+										 <datebox id="txtRtd" width="75%" format="dd/MM/yyyy HH" style="color:blue;font-size:11px;font-weight:bold"  lenient="true" buttonVisible="false" readonly="true"/>
+									</row>
+																		
+									<row>
+										<hbox>
+										<label value="Corte " style="color:blue"   />
+										<textbox id="txtCorte" style="font-size:11px"  width="130px"  readonly="true"> </textbox>
+										</hbox>
+										
+										<hbox>
+								        <label value="Temperatura " style="color:blue"/>
+										<textbox id="txtTemperatura0" style="font-size:11px"  width="130px"  readonly="true"> </textbox>
+										</hbox>
+									</row>
+									
+
+									<row>
+										<hbox>
+										<label value="Curva " style="color:blue"   />
+										<listbox id="lbxCurva" style="font-size:11px" mold="select" width="100%" > </listbox>
+										</hbox>
+										
+										<hbox>
+								        <label value="Choque térmico  " style="color:blue"/>
+										<listbox id="lbxChoqueTermico" style="font-size:11px" mold="select" width="100%" > </listbox>
+										</hbox>
+									</row>
+									
+									
+									<row>
+										<hbox>
+											<label value="Graficado " style="color:blue"   />
+											<checkbox id="ChkGrafucado"></checkbox>
+										</hbox>
+										<hbox>
+											<label value="Fin Proceso " style="color:blue"   />
+											<checkbox id="ChkFinproceo"></checkbox>
+										</hbox>										
+									</row>
+																	
+																		
+																		
+								</rows>
+							</grid>
+
+			<vbox>
+							
+			<hbox>							
+									<vbox>
+									
+									<div>										
+										<grid>
+											<rows>
+												<row>
+													<vbox>
+														<toolbar id="tbcontrol" height="36px">
+															<vbox>
+																<label value="TEMP. INICIO" style="color:blue;font-size:11px;font-weight:bold"/>
+																	 															
+																	<hbox visible="false">
+																	    <label value="Espina:"  width="10%" visible="false" />
+																	      																						
+																		<listbox id="lbxEspina" width="50px" style="font-size:11px" mold="select"  visible="false" > </listbox>
+							
+																		<label value="Temp:"  visible="false" ></label>
+																		<textbox id="txtTemperatura" width="70px"   visible="false" > </textbox>
+																	
+																		<toolbarbutton id="btnAgregarEspina" tooltiptext="AgregarCuba" image="/img/crear.gif" visible="false" />
+																		<toolbarbutton id="btnActualizar" tooltiptext="Actualizar" image="/img/refrescar.gif" visible="false" />
+																	</hbox>
+																	
+															</vbox>	
+															
+															<!-- 
+																<vbox>
+																	<toolbar id="tbcontrol2" height="36px">
+																	    <label value="TEMP. CORTE" style="color:blue;font-size:11px;font-weight:bold"/>																					
+																	</toolbar>																	
+																</vbox>															
+															 -->
+															
+														</toolbar>
+														
+													</vbox>
+												</row>
+											</rows>
+										</grid>
+
+																											
+									    <listbox  id="lbxEspinasDetalles" model="@{winConcinasProcesoControl.cocinaProcesoControlEspinaDetalleEstados}" multiple="true" checkmark="false" height="105px">
+									    
+														<listhead style="font-size:9px" >
+															<listheader label="Espina" width="80px" />
+															<listheader label="Temperatura"/>
+														</listhead>
+														
+														<listitem self="@{each=b}" id="li">
+														     <listcell label="@{b.cocinaProcesoControlEspinaDetalle.cocinaProcesoControlEspina.numeroespina}"  ></listcell>
+														     
+														     <listcell >
+														     	<!-- 
+																<textbox value="@{b.cocinaProcesoControlEspinaDetalle.temperatura}" maxlength="8" width="100px" visible="true" constraint="/[-0.0-9]*/ : Ingrese solo números"></textbox>
+																 -->
+																<textbox  readonly="true"  value="@{b.cocinaProcesoControlEspinaDetalle.temperatura}" width="100px" visible="true" constraint="/[-0.0-9]*/ : Ingrese solo números"></textbox>
+														     </listcell>
+														     														     			
+														     	<!-- 
+																<zk when= "${2 > 3}">        																
+    																<label id="lbl" value="@{b.cocinaProcesoControlEspinaDetalle.temperatura}" visible="true"/>
+    															</zk>
+    															 -->
+    															<!-- 
+																<zk when="${2 > 3}">        																
+    																<decimalbox id="tbx" value="@{b.cocinaProcesoControlEspinaDetalle.temperatura}" maxlength="8" format="####,##" width="100px" visible="true"/>
+    															</zk>
+    															 -->														     														     			
+														     														     			
+														</listitem>
+										</listbox>
+									  </div>
+									</vbox>
+									
+									<vbox>
+									  <div>
+										<grid>
+											<rows>
+												<row>
+													<vbox>
+														<toolbar id="tbcontrol2" height="36px">
+														    <label value="TEMP. CORTE/FINAL" style="color:blue;font-size:11px;font-weight:bold"/>																					
+														</toolbar>
+														
+													</vbox>
+												</row>
+											</rows>
+										</grid>									
+																		
+									    <listbox id="lbxDetalles2" model="@{winConcinasProcesoControl.cocinaProcesoControlEspinaDetalleEstados2}" multiple="true" checkmark="false" height="105px">
+									    
+														<listhead style="font-size:9px" >
+															<listheader label="Espina" width="35%" />
+															<listheader label="Temp." width="65%"/>
+														</listhead>
+														
+														<listitem self="@{each=c}">
+														     <listcell> 
+														     	<label width="99%" value="@{c.cocinaProcesoControlEspinaDetalle.cocinaProcesoControlEspina.numeroespina}"></label>
+														     </listcell>
+														     
+														     <listcell >
+														     	<!-- 
+																<decimalbox width="90%" value="@{c.cocinaProcesoControlEspinaDetalle.temperatura}" maxlength="8" format="####,##" visible="true"/>
+																 -->
+																<textbox readonly="true" value="@{c.cocinaProcesoControlEspinaDetalle.temperatura}" width="100px" visible="true" constraint="/[-0.0-9]*/ : Ingrese solo números"></textbox>														     
+														     </listcell>			
+
+														</listitem>
+										</listbox>										
+									  </div>											
+									</vbox>	
+
+
+									<vbox>
+									  <div>
+										<grid >
+											<rows>
+												<row>
+													<vbox>
+														<toolbar id="tbcontrol3" height="36px">
+														    <label value="TEMP. MANUAL" style="color:blue;font-size:11px;font-weight:bold"/>  																						
+														</toolbar>
+														
+													</vbox>
+												</row>
+											</rows>
+										</grid>							
+										
+<!-- 										
+										<grid width="100%">
+											<rows>
+												<row>
+													<vbox>
+														<toolbar id="tbcontrol" height="36px">
+															<vbox>
+																<label value="TEMP. INICIO" style="color:blue;font-size:11px;font-weight:bold"/>															
+																	<hbox>
+																	    <label value="Espina:" width="10%" visible="false" />  																						
+																	</hbox>
+															</vbox>	
+														</toolbar>
+														
+													</vbox>
+												</row>
+											</rows>
+										</grid>										
+ -->										
+										
+										
+										
+										
+										
+										
+										
+												
+																		
+									    <listbox id="lbxDetalles3" model="@{winConcinasProcesoControl.cocinaProcesoControlEspinaDetalleEstados3}" multiple="true" checkmark="false" height="105px">
+									    
+														<listhead style="font-size:9px" >
+															<listheader label="Espina" width="35%" />
+															<listheader label="Temp." width="65%"/>
+														</listhead>
+														
+														<listitem self="@{each=d}" >
+														     <listcell> 														     
+														     	<label width="99%" value="@{d.cocinaProcesoControlEspinaDetalle.cocinaProcesoControlEspina.numeroespina}"> ></label>
+														     </listcell>
+														     
+														     <listcell >
+														     	<!--  
+																<decimalbox width="85%" value="@{d.cocinaProcesoControlEspinaDetalle.temperatura}" maxlength="8"  format="####,##" visible="true"/>
+																-->
+																<textbox readonly="true" value="@{d.cocinaProcesoControlEspinaDetalle.temperatura}" width="100px" visible="true" constraint="/[-0.0-9]*/ : Ingrese solo números"></textbox>														     
+														     </listcell>			
+
+														</listitem>
+										</listbox>										
+									  </div>											
+									</vbox>
+			</hbox>
+			</vbox>
+			
+									
+								</hbox>	
+								<label value="GUIA DE ESTADO DE COCINAS/COCINADAS:" style="color:black;font-size:11.5px;font-weight:bold"/>
+								<hbox>
+									<label value="ABIERTA" style="color:black;font-size:10px;font-weight:bold"/>
+									<space width="2px"></space>
+									<label value="INICIADA" style="color:blue;font-size:10px;font-weight:bold"/>
+									<space width="2px"></space>
+									<label value="FINALIZADA" style="color:red;font-size:10px;font-weight:bold"/>																											
+									<space width="2px"></space>
+									<label value="FIN PROCESO" style="color:green;font-size:10px;font-weight:bold"/>
+								</hbox>
+							</groupbox>
+	
+				   </vbox>
+				   
+				</hbox>   
+				   
+			</div>
+		</hbox>
+		
+		
+		<!-- 
+		<groupbox>
+		 -->										
+		<div>
+			<!-- 				                    					
+			<caption label="CICLOS DE LOTES" style="color:blue;font-size:12px;font-weight:bold" width="95%">
+			</caption>	
+			-->
+			<!-- 
+			<label value="CICLOS DE LOTES" style="color:blue;font-size:12px;font-weight:bold"/>
+			 -->				                										
+			<grid>
+					<rows>
+						<row>
+							<toolbar id="tbcontrol4">
+								<hbox>
+										<label value="LOTE" style="color:blue;font-size:12px;font-weight:bold"/>  																						
+										<listbox id="lbxLote" style="font-size:11px" mold="select"> </listbox>
+						
+										<label value="CICLO" style="color:blue;font-size:12px;font-weight:bold"></label>
+										<listbox id="lbxCiclo" style="font-size:13px" mold="select" width="99%"> </listbox>
+										
+										
+										<!--
+										Nota.- Se debera cambiar la propiedad visibla a true
+											   cuando se quiera dar mantenimiento 
+										-->																
+										<toolbarbutton id="btnEliminar" tooltiptext="Eliminar Ciclo" image="/img/eliminar.gif" visible="false"/>										
+										<toolbarbutton id="btnRociado" tooltiptext="Agregar CiClo" image="/img/crear.gif"/>
+								</hbox>
+							</toolbar>
+						</row>
+					</rows>
+			</grid>
+		</div>
+		<!-- 									
+		</groupbox>
+		-->								
+										
+		<!--
+		Nota.- Se debera cambiar la propiedad visibla a true
+				cuando se quiera dar mantenimiento 
+		 -->								
+		<groupbox mold="3d" visible="false">
+										
+							                <attribute name="onOpen">
+							                    <![CDATA[arrow1.setSclass("open-" + self.isOpen());]]>
+							                </attribute>
+							                    					
+							                <caption label="Detalle de ciclos" style="color:blue;font-size:12px;font-weight:bold" width="95%" sclass="customIcon">
+							                    <span id="arrow1" class="close-true" />
+							                </caption>							
+																														
+													    <listbox id="lbxLotesCiclos" model="@{winConcinasProcesoControl.rociadoCicloDetalleEstados}" multiple="true" checkmark="false"  height="125px">
+													    
+																		<listhead style="font-size:9px" >
+																			<listheader label="Lote" width="3%" />
+																			<listheader label="Ciclo" width="91%"/>
+																			<listheader label="Eliminar" width="5%" visible="false"/>
+																		</listhead>
+																		
+																		<listitem self="@{each=e}">
+																		     <listcell label="@{e.rociadoCicloDetalle.evisceradoDetalleProceso.produccionDetalleLoteCajon.produccionDetalleLote.idlote}"></listcell>
+																		     <listcell label="@{e.rociadoCicloDetalle.rociadoCiclo.descripcion}" tooltiptext="@{e.rociadoCicloDetalle.rociadoCiclo.descripcion}" style="font-size:11px"></listcell>
+																		     
+																            <listcell > 
+																               <checkbox checked="@{e.eliminar}" visible="false" > </checkbox> 
+																            </listcell>
+																		     														     
+																		</listitem>
+														</listbox>
+		</groupbox>											
+										
+										
+
+		<hbox width="99%">
+		
+			<vbox >
+				<!-- 
+				<groupbox id="grbxRociadores" width="250px">
+				 -->
+				<div width="500px">										
+					<!-- 				                    					
+					<caption label="ROCIADORES DE LOTES" style="color:blue;font-size:12px;font-weight:bold" >
+					</caption>	
+					 -->
+					 				                										
+					<grid>
+							<rows>
+								<row>
+									<toolbar id="tbcontrol5">
+										<hbox>
+												<label value="ROCIADORES DE LOTES" style="color:blue;font-size:12px;font-weight:bold"/>
+																						
+												<label value="Lote:"/>  																						
+												<listbox id="lbxLoteRociado" style="font-size:11px" mold="select"> </listbox>
+								
+												<label value="Rociado:"></label>
+												<listbox id="lbxRociado" style="font-size:13px" mold="select"> </listbox>
+												
+												
+												<!--
+												Nota.- Se debera cambiar la propiedad visibla a true
+													   cuando se quiera dar mantenimiento 																												
+												
+												-->
+												<toolbarbutton id="btnEliminarRociado" tooltiptext="Eliminar Rociado" image="/img/eliminar.gif" visible="false"/>										
+												<toolbarbutton id="btnRociadoRociado" tooltiptext="Agregar Rociado" image="/img/crear.gif"/>
+										</hbox>
+									</toolbar>
+								</row>
+							</rows>
+					</grid>
+				</div>	
+				<!-- 												
+				</groupbox>
+				-->
+
+
+				<!--
+				Nota.- Se debera cambiar la propiedad visibla a true
+						cuando se quiera dar mantenimiento 
+				 -->								
+				<groupbox mold="3d" visible="true">
+												
+									                <attribute name="onOpen">
+									                    <![CDATA[arrow2.setSclass("open-" + self.isOpen());]]>
+									                </attribute>
+									                    					
+									                <caption label="Detalle de rociados" style="color:blue;font-size:12px;font-weight:bold" sclass="customIcon">
+									                    <span id="arrow2" class="close-true" />
+									                </caption>							
+																																
+															    <listbox id="lbxLotesRociadores" model="@{winConcinasProcesoControl.rociadoCocinadaDetalleEstados}" multiple="true" checkmark="false"  height="125px">
+															    
+																				<listhead style="font-size:9px" >
+																					<listheader label="Lote" width="3%" />
+																					<listheader label="Rociado" width="91%"/>
+																					<listheader label="Eliminar" width="5%"/>
+																				</listhead>
+																				
+																				<listitem self="@{each=e}">
+																				
+																				
+																				     <listcell label="@{e.rociadoCocinadaDetalle.evisceradoDetalleProceso.produccionDetalleLoteCajon.produccionDetalleLote.idlote}"></listcell>
+																				     <listcell label="@{e.rociadoCocinadaDetalle.ducharociado.descripcion}" tooltiptext="@{e.rociadoCocinadaDetalle.ducharociado.descripcion}" style="font-size:11px"></listcell>
+																				     
+																		            <listcell > 
+																		               <checkbox checked="@{e.eliminar}" > </checkbox> 
+																		            </listcell>
+																				     														     
+																				</listitem>
+																</listbox>
+				</groupbox>				
+			</vbox>
+			
+			
+			
+			<vbox>		
+			
+				<!--  
+				<groupbox id="grbxCuartos"  width="370px">
+				-->		
+				<div width="370px" visible="false">								
+					<!--  				                    					
+					<caption label="CUARTOS DE LOTES" style="color:blue;font-size:12px;font-weight:bold">
+					</caption>	
+					-->				                										
+					<grid>
+							<rows>
+								<row>
+									<toolbar id="tbcontrol6">
+									
+										<hbox>
+												<label value="CHILLROOM DE LOTES" style="color:blue;font-size:12px;font-weight:bold"/>
+												<label value="Lote:"/>  																						
+												<listbox id="lbxLoteCuarto" style="font-size:11px" mold="select"> </listbox>
+								
+												<label value="Cuarto:"></label>
+												<listbox id="lbxCuarto" style="font-size:13px" mold="select"> </listbox>
+												
+												
+												<!--
+												Nota.- Se debera cambiar la propiedad visibla a true
+													   cuando se quiera dar mantenimiento 
+																												
+												<toolbarbutton id="btnEliminarCuarto" tooltiptext="Eliminar Cuarto" image="/img/eliminar.gif" visible="false"/>
+												-->										
+												<toolbarbutton id="btnCuarto" tooltiptext="Agregar Cuarto" image="/img/crear.gif"/>
+										</hbox>
+
+									</toolbar>
+								</row>
+							</rows>
+					</grid>
+				<!-- 												
+				</groupbox>		
+				-->
+				</div>
+				
+						
+				<!--
+				Nota.- Se debera cambiar la propiedad visibla a true
+						cuando se quiera dar mantenimiento 
+				 -->								
+				<groupbox mold="3d" visible="false">
+												
+									                <attribute name="onOpen">
+									                    <![CDATA[arrow3.setSclass("open-" + self.isOpen());]]>
+									                </attribute>
+									                    					
+									                <caption label="Detalle de cuartos" style="color:blue;font-size:12px;font-weight:bold" width="95%" sclass="customIcon">
+									                    <span id="arrow3" class="close-true" />
+									                </caption>							
+																																
+															    <listbox id="lbxLotesCuartos" model="@{winConcinasProcesoControl.cuartoChillroomCocinadaDetalleEstados}" multiple="true" checkmark="false"  height="125px">
+															    
+																				<listhead style="font-size:9px" >
+																					<listheader label="Lote" width="3%" />
+																					<listheader label="Chillroom" width="91%"/>
+																					<listheader label="Eliminar" width="5%"/>
+																				</listhead>
+																				
+																				<listitem self="@{each=e}">
+																				
+																				
+																				     <listcell label="@{e.cuartoChillroomCocinadaDetalle.evisceradoDetalleProceso.produccionDetalleLoteCajon.produccionDetalleLote.idlote}"></listcell>
+																				     <listcell label="@{e.cuartoChillroomCocinadaDetalle.cuartochillroom.descripcion}" tooltiptext="@{e.cuartoChillroomCocinadaDetalle.cuartochillroom.descripcion}" style="font-size:11px"></listcell>
+																				     
+																		            <listcell > 
+																		               <checkbox checked="@{e.eliminar}" > </checkbox> 
+																		            </listcell>
+																				     														     
+																				</listitem>
+																</listbox>
+				</groupbox>
+			</vbox>
+									
+		</hbox>
+
+
+		
+
+	
+	
+	
+	
+	
+												
+
+				
+				<groupbox  mold="3d">
+						<!-- 
+						<groupbox  mold="3d" style="background:cian">	
+							<hbox>
+							 	<label value="INFORMATIVO DE COCINADA" style="color:blue;font-size:13px;font-weight:bold"></label>
+							 				 
+								<toolbar id="tbcontrolExcel1" visible="false">
+									<vbox>
+										<toolbarbutton id="btnExcel1" tooltiptext="Descagar Archivo en Formato Excel" label="[DESCARGAR EXCEL]"  style="color:blue;font-size:12px;font-weight:bold"/>
+									</vbox>	
+								</toolbar>				 
+							</hbox>
+						</groupbox>				
+    					-->
+    					<label value="INFORMATIVO DE COCINADA" style="color:blue;font-size:12px;font-weight:bold"/>
+								    <listbox fixedLayout="true" vflex="true" id="lbxDetalles" model="@{winConcinasProcesoControl.detallesCocinas}" rows="12">
+													<listhead style="font-size:9px" sizable="true" >
+													
+														<listheader label="Coc.Gral" width="70px"/>
+														<listheader label="Cocina"  width="50px"/>
+														<listheader label="Ped.Camara" width="80px"/>
+														<listheader label="Lote" width="45px"/>
+														<listheader label="Observaciones" width="200px"/>
+														<listheader label="Origen" width="70px"/>
+														<listheader label="Barco" width="145px" />
+														<listheader label="Registro"  width="75px"/>
+														<listheader label="Destino"  width="420px"/>
+														<listheader label="Especie"  width="75px"/>
+														<listheader label="Talla" width="100px"/>
+														
+														<listheader label="Clasf. (Cantidad_Coche Corte)"  width="600px"/>
+														
+														<listheader label="EI 1" width="80px"/>
+														<listheader label="EI 2" width="80px"/>
+														<listheader label="EI 3" width="80px"/>
+														<listheader label="EI 4" width="80px"/>
+
+														<listheader label="EC 1" width="80px"/>
+														<listheader label="EC 2" width="80px"/>
+														<listheader label="EC 3" width="80px"/>
+														<listheader label="EC 4" width="80px"/>
+														
+
+														<listheader label="EF 1" width="80px"/>
+														<listheader label="EF 2" width="80px"/>
+														<listheader label="EF 3" width="80px"/>
+														<listheader label="EF 4" width="80px"/>
+
+	
+														<listheader label="Corte" width="80px"/>
+														<listheader label="Temperatura" width="85px"/>
+
+
+														<listheader label="Curva" width="85px"/>
+														<listheader label="Hora Inicio" width="170px"/>
+														<listheader label="Hora Fin" width="170px"/>
+														<listheader label="Hora RTD" width="170px"/>
+
+			
+
+														
+														<listheader label="Rociadores"  width="190px"/>
+														
+														<listheader label="Choque Térmico"  width="120px"/>
+														
+														
+														<listheader label="Ciclos" width="1260px"/>
+														
+														<!--
+														Nota.- Se debera cambiar la propiedad visibla a true
+																cuando se quiera dar mantenimiento 
+														 -->
+														<listheader label="Quitar Ciclo" width="80px" align="center" style="color:red;font-size:11px;font-weight:bold" visible="true"/>
+
+
+														<listheader label="Chillroom" width="350px"/>
+														<listheader label="Grafico" width="100px"/>
+														
+													</listhead>
+ 
+													<listitem self="@{each=c}" tooltiptext="@{c.ciclo}">
+														<listcell label="@{c.numerococinadageneral}"></listcell>
+														<listcell label="@{c.idcocina}"></listcell>
+														<listcell label="@{c.pedidocamara}"></listcell>
+													    <listcell label="@{c.idlote}"></listcell>
+														<listcell label="@{c.observaciones}"></listcell>
+														<listcell label="@{c.origen}"></listcell>
+														<listcell label="@{c.nombrebarco}"></listcell>
+													    <listcell label="@{c.registro}"></listcell>	
+													    <listcell label="@{c.destinos}"></listcell>													     
+														<listcell label="@{c.especie}"></listcell>
+													    <listcell label="@{c.talla}"></listcell>													     
+													    <listcell label="@{c.clasificacion}"></listcell>
+													    
+													    
+													    <listcell label="@{c.temp_inicio_espina1}"></listcell>
+													    <listcell label="@{c.temp_inicio_espina2}"></listcell>
+													    <listcell label="@{c.temp_inicio_espina3}"></listcell>
+													    <listcell label="@{c.temp_inicio_espina4}"></listcell>
+													    
+													    <listcell label="@{c.temp_corte_espina1}"></listcell>
+													    <listcell label="@{c.temp_corte_espina2}"></listcell>
+													    <listcell label="@{c.temp_corte_espina3}"></listcell>
+													    <listcell label="@{c.temp_corte_espina4}"></listcell>
+													    													    
+													    <listcell label="@{c.temp_final_espina1}"></listcell>
+													    <listcell label="@{c.temp_final_espina2}"></listcell>
+													    <listcell label="@{c.temp_final_espina3}"></listcell>
+													    <listcell label="@{c.temp_final_espina4}"></listcell>
+
+													    <listcell label="@{c.Corte}"></listcell>
+													    <listcell label="@{c.Temperatura}"></listcell>
+
+																		
+													    <listcell label="@{c.Curva}"></listcell>
+													    <listcell label="@{c.Hora_Inicio}"></listcell>
+													    <listcell label="@{c.Hora_Fin}"></listcell>
+													    <listcell label="@{c.Hora_RTD}"></listcell>
+
+																																	    													    
+													    <listcell label="@{c.rociado}"></listcell>
+													    														<!--
+														Nota.- La eliminación de reciados es por la lista donde rociados donde se agregan/eliminan, 
+															   ya que es 1 a uno,y en el detalle se muestran concatenados varios rociacos 
+														 -->	
+														 <listcell label="@{c.choque_termico}"></listcell>
+														 
+
+													    <listcell label="@{c.ciclo}"></listcell>													    
+														<!--
+														Nota.- Se debera cambiar la propiedad visibla a true
+																cuando se quiera dar mantenimiento 
+														 -->
+									 																																		    
+												        <listcell id="btnQutarCiclo" visible="true"> 
+												            			<label value="Eliminar" style="color:red;font-size:12px;font-weight:bold"></label>																	
+												        </listcell>
+										
+												        
+												        <listcell label="@{c.chillroom}"></listcell>
+												        <listcell label="@{c.grafico}"></listcell>
+												        													    													    													    
+													</listitem>
+									</listbox>
+				</groupbox>
+
+	</window>
+</zk>

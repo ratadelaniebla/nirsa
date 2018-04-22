@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?page id="pagRep"?>
+<window id="winRep" use="com.marbelize.mw.produccion.controlador.ReporteWindow">
+	<?component name="factor" macroURI="/produccion/factor.zul"?>
+	<script src="/js/noBarra.js" type="text/javascript"/>
+	<label value="Reportes" style="color:blue;font-size:12px;font-weight:bold"/>
+	<vbox width="@{area.anchoInterno}">
+		<grid width="98%">
+			<rows>
+				<row>Reporte<textbox id="txtRep" rows="2" readonly="true" width="96%"/></row>
+				<row>
+					<label value="Fecha Producción" style="color:blue"/>
+					<datebox id="dteFecPro" width="80px"/>
+				</row>
+				<row>
+					<label value="Orden del cliente" style="color:blue"/>
+					<toolbarbutton id="btnDat" label="Datos" onClick="winRep.cargarOrdenes2()"/>
+				</row>
+			</rows>
+		</grid>
+		<listbox id="lbxOrd" style="font-size:9px" mold="select" width="99%"/>
+		<toolbarbutton label="Generar" onClick="winRep.generar()"/>
+	</vbox>
+	<jasperreport id="jasRep" height="600px" visible="false"/>
+	<iframe id="ifrVistaPrevia" height="600px"/>
+</window>

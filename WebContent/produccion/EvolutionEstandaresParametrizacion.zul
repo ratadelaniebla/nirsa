@@ -1,0 +1,71 @@
+<?page id = "pagCalidadPCC1Quimico" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winEvolutionAprobacionParametrizacion" apply="com.nw.webui.produccion.EvolutionEstandaresParametrizacionWindow"   >
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="" style="color:blue;font-size:12px;font-weight:bold" />
+		<label value="EVOLUTION- PARAMETRIZACIÓN" style="color:blue;font-size:12px;font-weight:bold" />
+		<grid width="99%"> 
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+								<toolbarbutton id="btnNuevo" tooltiptext="Nuevo" image="/img/crear.gif"/>
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>		
+		
+		<grid>
+		<rows>
+		<row>
+		<label value="Descripción"></label>
+		<textbox id="txtDescripcion" ></textbox>
+		</row>
+		<row>
+		<label value="Valor"></label>
+		<intbox id="txtValor" maxlength="3"></intbox>
+		</row>
+		<row>
+		<label value="Estado"></label>
+			<listbox id="lbxEstado" style="font-size:11px" mold="select"> 
+						<listitem label="Seleccione" > </listitem>
+						<listitem label="Inactivo" > </listitem>
+						<listitem label="Activo" > </listitem>
+			</listbox>
+		</row>
+		<row>
+		<label value="Incremento"></label>
+		<intbox id="txtIncremento" ></intbox>
+		</row>
+		<row>
+		<label value="Rango desde:" />
+		<decimalbox id="txtDesde"></decimalbox>		
+		</row>
+				<row>
+				<label value="Rango hasta:" />
+			<decimalbox id="txtHasta"></decimalbox>	</row>
+		
+		
+		</rows>
+		
+		
+		
+		
+		</grid>
+		
+		
+		<listbox id="lbxEstandar">
+			<listhead style="font-size:8px">
+					<listheader label="Desc." style="font-size:4px" width="35%" />
+					<listheader label="Valor" style="font-size:4px" width="15%"  />
+					<listheader label="Est." style="font-size:4px" width="10%" />
+					<listheader label="(%)" style="font-size:4px" width="15%"  />
+					<listheader label="FI" style="font-size:4px" width="20%"  />
+					<listheader label="FF" style="font-size:4px" width="20%"  />
+				</listhead>
+				
+		</listbox>
+	</window>
+</zk>

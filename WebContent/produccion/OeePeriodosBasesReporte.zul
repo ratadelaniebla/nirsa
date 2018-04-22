@@ -1,0 +1,33 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winOeePeriodosBasesReporte" width="99%"
+		apply="com.nw.webui.produccion.OeePeriodosBasesReporteWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="REPORTE DE PARAMETROS OEE "
+			style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain" width="99%">
+
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnImprimirPdf"
+									label="Imprimir PDF" tooltiptext="Imprimir en formato PDF" />
+							</toolbar>
+
+							<toolbar>
+								<toolbarbutton id="btnImprimirExcel"
+									label="Descargar Excel"
+									tooltiptext="Descargar en formato Excel" />
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+
+
+
+		</vbox>
+	</window>
+</zk>

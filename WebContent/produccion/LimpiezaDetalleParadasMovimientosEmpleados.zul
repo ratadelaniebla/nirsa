@@ -1,0 +1,369 @@
+<?page id = "pagLimpiezaAperturaCierre" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winLimpiezaDetalleParadasMovimientosEmpleados" apply="com.nw.webui.produccion.LimpiezaDetalleParadasMovimientosEmpleadosWindow"> 
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="REG. PARADAS DE LINEA/EMPLEADO" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain"  width="99%">
+		
+			<grid>  
+				<rows>
+				
+					<row>
+						<label value="Linea"/>
+						<listbox id="lbxLinea" style="font-size:12px" mold="select" width="99%" />
+					</row>				
+				
+				
+					<row>
+							<label value="Tipo Parada" ></label>
+							<listbox id="lbxTipoParada" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Por Persona" value="1" />
+						    	<listitem label="Linea" value="2" />
+					    	</listbox>				
+				</row>
+				
+				
+				
+					<row>
+						<label value="Paradas" />
+						<listbox id="lbxParadas" style="font-size:12px" mold="select" width="99%" />
+					</row>		
+					
+					
+					<row>
+						<label value="Ubicación"/>
+						
+						<hbox>
+							<intbox id="txtUbicacion" maxlength="13" width="80%" ></intbox>
+							
+							<toolbar>
+								<toolbarbutton id="btnBuscar" label="Buscar"/>
+							</toolbar>
+
+						</hbox>
+						
+						
+					</row>
+					
+					<row>
+						<label value="Empleado"/>
+						<textbox id="txtEmpleado" readonly="true" width="99%" rows="2"></textbox>
+					</row>										
+					
+				</rows>
+			</grid>	
+			
+
+						
+			<vbox>
+				<label value="INICIO PARADA"/>			
+			</vbox>
+			
+			<grid width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxMi" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxDi" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxHi" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMin" mold="select"/>
+
+							
+						</hbox>
+				    </row>
+				</rows>
+			</grid>
+					
+
+			<vbox>
+				<label value="FIN PARADA"/>			
+			</vbox>
+			<grid width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxMr" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxDir" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxHir" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMinr" mold="select"/>
+
+							
+						</hbox>
+				    </row>
+				</rows>
+			</grid>
+
+
+			<grid width="99%">  
+				<rows>
+				
+					<!-- 
+					<row>
+						<label value="Tiempo total Para"/>
+						<textbox id="txtTotalTiempo" readonly="true"></textbox>
+					</row>
+					 -->
+					
+					<row>
+						<label value="Observación"/>
+						<textbox id="txtObservacion" rows="4" width="99%" ></textbox>
+					</row>
+					
+				</rows>
+			</grid>			
+			
+			<grid width="99%"> 
+				<rows>
+					<row>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="GRABAR PARADA" tooltiptext="Grabar" image="/img/grabar.gif" />
+						</toolbar>
+					</row>
+
+					<row>
+	
+						<!-- 
+						<hbox>
+							<label value="Confirmar" />
+							<checkbox id="ChkEliminar" width="99%"></checkbox>
+						</hbox>		
+						
+						<hbox>
+							<toolbar>
+								<toolbarbutton id="btnEliminar" label="Eliminar"/>
+							</toolbar>
+						</hbox>
+						 -->
+					</row>					
+					
+					
+				</rows>
+			</grid>		
+			
+			
+			<!-- INGRESO REUBICACION EMPLEADOS -->
+			<label value="REG. MOVIMIENTOS EMPLEADOS" style="color:blue;font-size:12px;font-weight:bold" />
+				<grid >
+					<rows>
+					
+						<!-- 
+						<row>
+						 -->
+							<!-- <label value="Fecha Produccion " style="color:blue" /> -->
+							<!-- <datebox id="dtxFechaActiva" style="font-size:11px"  width="130px" format="dd/mm/yyyy" ></datebox> -->
+							<!-- <textbox id="txtFechaActiva"  style="font-size:11px"  width="130px" readonly="true" ></textbox> -->
+						<!-- 
+						</row>
+						 -->
+						
+						<row>
+						    <label value="Fech.Prod. - Turno :" style="color:blue" />
+						    <listbox id="lbxProcesosActivos" style="font-size:11px" mold="select" width="120px" />
+						</row>
+						
+						
+						<row>
+						    <label value="Turno :" style="color:blue" />
+						    <textbox id="txtTurno"  style="font-size:11px"  width="130px" readonly="true" ></textbox>
+						</row>
+					</rows>
+				</grid>
+				
+				<grid width="99%">
+					<rows>
+
+					</rows>
+				</grid>
+				
+				<grid >
+					<rows >
+							
+							<row>
+							<label value="" style="color:blue" />
+							<checkbox id="chkRetirados" label="Retirados" ></checkbox>
+							</row>
+						<row>
+						
+						    <label value="Linea :" style="color:blue" />
+						    <listbox id="lbxLinea1" style="font-size:11px" mold="select" width="120px" />
+						</row>
+						
+						<row>
+						    <label value="Cargo :" style="color:blue" />
+						    <listbox id="lbxCargo" style="font-size:11px" mold="select" width="120px">
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Despellejador" value="1" />
+						    	<listitem label="Fileteador" value="2" />
+						    </listbox>
+						</row>
+						
+						
+						<row>
+						    <label value="Ubicación :" style="color:blue" />
+							<listbox id="lbxUbicacion" style="font-size:11px" mold="select" width="120px" />
+						</row>
+						
+						<row>
+						    <label value="Equipo:" style="color:blue" />
+						    <label id="lblEquipo" style="color:blue" />							
+						</row>
+
+					
+					<row>
+						 
+						    <label value="Acción :" style="color:blue" />
+							 <vbox>
+							<checkbox id="chkRetirar" label="Retirar" ></checkbox>
+							<checkbox id="chkReubicar" label="Reubicar" ></checkbox>
+						
+								</vbox>			   
+					</row>
+					
+					<row>
+						<label value="Motivo Retiro" />
+						<listbox id="lbxMotivo" style="font-size:12px" mold="select" width="99%" />
+					</row>					
+						
+					</rows>
+				</grid>
+				
+				
+				
+					<vbox>
+						<label value="Fecha/Hora de Retiro/Reubicación" style="color:blue;font-size:12px;font-weight:bold" />			
+					</vbox>
+					<grid width="99%">  
+						<rows>				
+							<row>
+								<hbox>					
+									<label value="Mes" ></label>
+									<listbox id="lbxMr1" mold="select"> 
+								    	<listitem selected="true" label=""  />
+								    	<listitem label="Ene" value="1" />
+								    	<listitem label="Feb" value="2" />
+								    	<listitem label="Mar" value="3" />
+								    	<listitem label="Abr" value="4" />
+								    	<listitem label="May" value="5" />
+								    	<listitem label="Juno" value="6" />
+								    	<listitem label="Jul" value="7" />
+								    	<listitem label="Ago" value="8" />
+								    	<listitem label="Sep" value="9" />
+								    	<listitem label="Oct" value="10" />
+								    	<listitem label="Nov" value="11" />
+								    	<listitem label="Dic" value="12" />
+							    	</listbox>
+			
+									<label value="Día"/>
+									<listbox id="lbxDir1" mold="select"/>
+		
+									<label value="Hora"/>
+									<listbox id="lbxHir1" mold="select"/>
+		
+									<label value="Min"/>
+									<listbox id="lbxMinr1" mold="select"/>
+		
+									
+								</hbox>
+						    </row>
+						    
+						    
+						    
+						<row>
+							<vbox>
+								<toolbar>
+									<toolbarbutton id="btnGrabar1" tooltiptext="Grabar" label="GRABAR MOVIMIENTO" image="/img/grabar.gif"/>
+								</toolbar>
+							</vbox>
+						</row>						    
+						    
+						    
+						</rows>
+					</grid>		
+				
+				
+				
+				<grid id="grdReubicar" visible="false">
+				<rows>
+				
+						<row>
+						    <label value="Linea a Asignar:" style="color:blue" />
+						    <listbox id="lbxLinea2" style="font-size:11px" mold="select" width="120px" />
+						</row>
+						<row>
+						    <label value="Cargo a Asignar :" style="color:blue" />
+						    <listbox id="lbxCargo2" style="font-size:11px" mold="select" width="120px">
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Despellejador" value="1" />
+						    	<listitem label="Fileteador" value="2" />
+						    </listbox>
+						</row>
+						
+										
+						<row>
+						    <label value="Ubicación a Asignar :" style="color:blue" />
+							    <listbox id="lbxUbicacion2" style="font-size:11px" mold="select" width="120px" />
+						</row>
+						
+				
+						<row>
+						    <label value="Equipo :" style="color:blue" />
+						    <listbox id="lbxGrupo" style="font-size:11px" mold="select" width="120px" />
+						</row>
+				
+
+						
+				</rows>
+				
+				
+				</grid>
+			
+			<!-- FIN INGRESO REUBICACION EMPLEADOS -->
+			
+			
+			
+		</vbox>
+	</window>
+</zk>

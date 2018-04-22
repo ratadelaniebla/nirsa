@@ -1,0 +1,1246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ProcesoPcc2" language="groovy" pageWidth="1690" pageHeight="595" orientation="Landscape" columnWidth="1650" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="1464"/>
+	<property name="ireport.y" value="47"/>
+	<style name="new_style" mode="Transparent" forecolor="#000000" backcolor="#FF9933" fill="Solid">
+		<pen lineWidth="0.25" lineColor="#000000"/>
+		<box>
+			<pen lineColor="#000000"/>
+			<topPen lineWidth="0.25" lineColor="#000000"/>
+			<leftPen lineWidth="0.25" lineColor="#000000"/>
+			<bottomPen lineWidth="0.25" lineColor="#000000"/>
+			<rightPen lineWidth="0.25" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[(($V{porcentaje}) < 80)]]></conditionExpression>
+			<style mode="Opaque"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[(($V{porcentaje}) > 80)]]></conditionExpression>
+			<style mode="Opaque" backcolor="#99FF99"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="IDPRODUCCION" class="java.lang.Long"/>
+	<parameter name="TURNO" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="USUARIO" class="java.lang.String"/>
+	<parameter name="LOGO" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select distinct (pdl.idlote) idlote,
+
+(
+select min (ddp1.horaingreso)
+from descongelado_detalle_proceso ddp1,
+produccion_detalle_lote_cajon pdlc1, produccion_detalle_lote pdl1
+where
+ddp1.idproducciondetallelotecajon = pdlc1.idproducciondetallelotecajon
+and pdlc1.idproducciondetallelote = pdl1.idproducciondetallelote
+and pdl1.idproducciondetallelote = pdl.idproducciondetallelote
+) desc_ingreso_area,
+
+(
+select max (ddp1.horafin)
+from descongelado_detalle_proceso ddp1,
+produccion_detalle_lote_cajon pdlc1, produccion_detalle_lote pdl1
+where
+ddp1.idproducciondetallelotecajon = pdlc1.idproducciondetallelotecajon
+and pdlc1.idproducciondetallelote = pdl1.idproducciondetallelote
+and pdl1.idproducciondetallelote = pdl.idproducciondetallelote
+) desc_fin,
+
+mescla_haccp_por_idproducciondetallelote(pdl.idproducciondetallelote) lotehaccp,
+b.nombre barco,
+(
+select
+(array_to_string(array_agg(especietalla), '  ' )) especie_talla
+from
+(
+select (e1.codigoqm || ' ' || t1.nombre) especietalla
+from produccion_detalle_lote_cajon pdlc1, produccion_detalle_lote pdl1,camara_cajon cc1, especie_talla et1, especie e1, talla t1
+where
+pdlc1.idproducciondetallelote = pdl1.idproducciondetallelote
+and pdlc1.idcamaracajon = cc1.idcamaracajon
+and cc1.idmaterial = et1.idespecietalla
+and et1.idespecie = e1.idespecie
+and et1.idtalla = t1.idtalla
+and pdl1.idproducciondetallelote = pdl.idproducciondetallelote
+group by et1.idespecietalla, e1.codigoqm, t1.nombre)
+ t1
+) especie_talla,
+
+pdl.idproducciondetallelote, p.fechaproduccion,
+(
+select max (ddpt1.fechareg)
+from descongelado_detalle_proceso_temp_ing ddpt1, descongelado_detalle_proceso ddp1,
+produccion_detalle_lote_cajon pdlc1, produccion_detalle_lote pdl1
+where
+ddpt1.iddescongeladodetalleproceso = ddp1.iddescongeladodetalleproceso
+and ddp1.idproducciondetallelotecajon = pdlc1.idproducciondetallelotecajon
+and pdlc1.idproducciondetallelote = pdl1.idproducciondetallelote
+and pdl1.idproducciondetallelote = pdl.idproducciondetallelote
+and ddpt1.fechareg between ((ddp1.horainicio + (0::text||' hour')::interval)/*monitoreohfin*/ - (2::text||' hour')::interval) and
+(ddp1.horainicio + (0::text||' hour')::interval)
+) horamon1,
+(
+select max (ddpt1.fechareg)
+from descongelado_detalle_proceso_temp_ing ddpt1, descongelado_detalle_proceso ddp1,
+produccion_detalle_lote_cajon pdlc1, produccion_detalle_lote pdl1
+where
+ddpt1.iddescongeladodetalleproceso = ddp1.iddescongeladodetalleproceso
+and ddp1.idproducciondetallelotecajon = pdlc1.idproducciondetallelotecajon
+and pdlc1.idproducciondetallelote = pdl1.idproducciondetallelote
+and pdl1.idproducciondetallelote = pdl.idproducciondetallelote
+and ddpt1.fechareg between ((ddp1.horainicio + (2::text||' hour')::interval)/*monitoreohfin*/ - (2::text||' hour')::interval) and
+(ddp1.horainicio + (2::text||' hour')::interval)
+) horamon2,
+(
+select max (ddpt1.fechareg)
+from descongelado_detalle_proceso_temp_ing ddpt1, descongelado_detalle_proceso ddp1,
+produccion_detalle_lote_cajon pdlc1, produccion_detalle_lote pdl1
+where
+ddpt1.iddescongeladodetalleproceso = ddp1.iddescongeladodetalleproceso
+and ddp1.idproducciondetallelotecajon = pdlc1.idproducciondetallelotecajon
+and pdlc1.idproducciondetallelote = pdl1.idproducciondetallelote
+and pdl1.idproducciondetallelote = pdl.idproducciondetallelote
+and ddpt1.fechareg between ((ddp1.horainicio + (4::text||' hour')::interval)/*monitoreohfin*/ - (2::text||' hour')::interval) and
+(ddp1.horainicio + (4::text||' hour')::interval)
+) horamon3,
+(
+select max (ddpt1.fechareg)
+from descongelado_detalle_proceso_temp_ing ddpt1, descongelado_detalle_proceso ddp1,
+produccion_detalle_lote_cajon pdlc1, produccion_detalle_lote pdl1
+where
+ddpt1.iddescongeladodetalleproceso = ddp1.iddescongeladodetalleproceso
+and ddp1.idproducciondetallelotecajon = pdlc1.idproducciondetallelotecajon
+and pdlc1.idproducciondetallelote = pdl1.idproducciondetallelote
+and pdl1.idproducciondetallelote = pdl.idproducciondetallelote
+and ddpt1.fechareg between ((ddp1.horainicio + (6::text||' hour')::interval)/*monitoreohfin*/ - (2::text||' hour')::interval) and
+(ddp1.horainicio + (6::text||' hour')::interval)
+) horamon4,
+
+(
+select max (ddpt1.fechareg)
+from descongelado_detalle_proceso_temp_ing ddpt1, descongelado_detalle_proceso ddp1,
+produccion_detalle_lote_cajon pdlc1, produccion_detalle_lote pdl1
+where
+ddpt1.iddescongeladodetalleproceso = ddp1.iddescongeladodetalleproceso
+and ddp1.idproducciondetallelotecajon = pdlc1.idproducciondetallelotecajon
+and pdlc1.idproducciondetallelote = pdl1.idproducciondetallelote
+and pdl1.idproducciondetallelote = pdl.idproducciondetallelote
+and ddpt1.fechareg between ((ddp1.horainicio + (8::text||' hour')::interval)/*monitoreohfin*/ - (2::text||' hour')::interval) and
+(ddp1.horainicio + (8::text||' hour')::interval)
+) horamon5,
+(
+select max (ddpt1.fechareg)
+from descongelado_detalle_proceso_temp_ing ddpt1, descongelado_detalle_proceso ddp1,
+produccion_detalle_lote_cajon pdlc1, produccion_detalle_lote pdl1
+where
+ddpt1.iddescongeladodetalleproceso = ddp1.iddescongeladodetalleproceso
+and ddp1.idproducciondetallelotecajon = pdlc1.idproducciondetallelotecajon
+and pdlc1.idproducciondetallelote = pdl1.idproducciondetallelote
+and pdl1.idproducciondetallelote = pdl.idproducciondetallelote
+and ddpt1.fechareg between ((ddp1.horainicio + (10::text||' hour')::interval)/*monitoreohfin*/ - (2::text||' hour')::interval) and
+(ddp1.horainicio + (10::text||' hour')::interval)
+) horamon6,
+(
+select max (ddpt1.fechareg)
+from descongelado_detalle_proceso_temp_ing ddpt1, descongelado_detalle_proceso ddp1,
+produccion_detalle_lote_cajon pdlc1, produccion_detalle_lote pdl1
+where
+ddpt1.iddescongeladodetalleproceso = ddp1.iddescongeladodetalleproceso
+and ddp1.idproducciondetallelotecajon = pdlc1.idproducciondetallelotecajon
+and pdlc1.idproducciondetallelote = pdl1.idproducciondetallelote
+and pdl1.idproducciondetallelote = pdl.idproducciondetallelote
+and ddpt1.fechareg between ((ddp1.horainicio + (12::text||' hour')::interval)/*monitoreohfin*/ - (2::text||' hour')::interval) and
+(ddp1.horainicio + (12::text||' hour')::interval)
+) horamon7,
+
+(
+select max(ddpt1.fechareg)
+from descongelado_detalle_proceso_temperatura ddpt1, descongelado_detalle_proceso ddp1,
+produccion_detalle_lote_cajon pdlc1, produccion_detalle_lote pdl1
+where
+ddpt1.iddescongeladodetalleproceso = ddp1.iddescongeladodetalleproceso
+and ddp1.idproducciondetallelotecajon = pdlc1.idproducciondetallelotecajon
+and pdlc1.idproducciondetallelote = pdl1.idproducciondetallelote
+and pdl1.idproducciondetallelote = pdl.idproducciondetallelote
+) horatempvolteo,
+
+(
+select max(edmtc1.fechareg)
+from eviscerado_detalle_muestreo_temp_coche edmtc1,  eviscerado_detalle_proceso_coche edpc1,
+eviscerado_detalle_proceso edp1, produccion_detalle_lote_cajon pdlc1, produccion_detalle_lote pdl1
+where
+edmtc1.idevisceradodetalleprocesocoche = edpc1.idevisceradodetalleprocesocoche
+and edpc1.idevisceradodetalleproceso = edp1.idevisceradodetalleproceso
+and edp1.idproducciondetallelotecajon = pdlc1.idproducciondetallelotecajon
+and pdlc1.idproducciondetallelote = pdl1.idproducciondetallelote
+and pdl1.idproducciondetallelote = pdl.idproducciondetallelote
+)horatempevisc,
+
+(
+select max(edmtc1.fechareg)
+from coccion_detalle_muestreo_temp_coche_ingreso edmtc1,  eviscerado_detalle_proceso_coche edpc1,
+eviscerado_detalle_proceso edp1, produccion_detalle_lote_cajon pdlc1, produccion_detalle_lote pdl1
+where
+edmtc1.idevisceradodetalleprocesocoche = edpc1.idevisceradodetalleprocesocoche
+and edpc1.idevisceradodetalleproceso = edp1.idevisceradodetalleproceso
+and edp1.idproducciondetallelotecajon = pdlc1.idproducciondetallelotecajon
+and pdlc1.idproducciondetallelote = pdl1.idproducciondetallelote
+and pdl1.idproducciondetallelote = pdl.idproducciondetallelote
+)horatempingcoc,
+
+(
+select max(edmtc1.fechareg)
+from coccion_detalle_muestreo_temp_coche_ingreso edmtc1,  eviscerado_detalle_proceso_coche edpc1, cocina_apertura_cierre_detalle cacd1
+where
+edmtc1.idevisceradodetalleprocesocoche = edpc1.idevisceradodetalleprocesocoche
+and edpc1.idcocinaaperturacierredetalle = cacd1.idcocinaaperturacierredetalle
+and cacd1.idcocinaaperturacierredetalle =
+(
+select t1.idcocinaaperturacierredetalle
+from
+(
+select cacd1.idcocinaaperturacierredetalle,
+(
+select count (edpc2.idevisceradodetalleprocesocoche)
+from eviscerado_detalle_proceso_coche edpc2, cocina_apertura_cierre_detalle cacd2
+where
+edpc2.idcocinaaperturacierredetalle = cacd2.idcocinaaperturacierredetalle
+and cacd2.idcocinaaperturacierredetalle = cacd1.idcocinaaperturacierredetalle
+) conteo
+from eviscerado_detalle_proceso_coche edpc1, cocina_apertura_cierre_detalle cacd1,
+eviscerado_detalle_proceso edp1, produccion_detalle_lote_cajon pdlc1, produccion_detalle_lote pdl1
+where
+edpc1.idcocinaaperturacierredetalle = cacd1.idcocinaaperturacierredetalle
+and edpc1.idevisceradodetalleproceso = edp1.idevisceradodetalleproceso
+and edp1.idproducciondetallelotecajon = pdlc1.idproducciondetallelotecajon
+and pdlc1.idproducciondetallelote = pdl1.idproducciondetallelote
+and pdl1.idproducciondetallelote = pdl.idproducciondetallelote
+)
+t1
+order by conteo desc
+limit 1
+)
+)horatempingcoc
+
+
+from descongelado_detalle_proceso ddp, produccion_detalle_lote_cajon pdlc, camara_cajon cc, produccion_detalle_lote pdl, produccion p,
+especie_talla et, especie e, talla t, barco_descarga bd, barco b
+where
+ddp.idproducciondetallelotecajon = pdlc.idproducciondetallelotecajon
+and pdlc.idcamaracajon = cc.idcamaracajon
+and pdlc.idproducciondetallelote = pdl.idproducciondetallelote
+and pdl.idproduccion = p.idproduccion
+and cc.idmaterial = et.idespecietalla
+and et.idespecie = e.idespecie
+and et.idtalla = t.idtalla
+and cc.idbarcodescarga = bd.idbarcodescarga
+and bd.idbarco = b.idbarco
+and p.idproduccion = $P{IDPRODUCCION}
+order by pdl.idlote]]>
+	</queryString>
+	<field name="idlote" class="java.lang.Integer"/>
+	<field name="desc_ingreso_area" class="java.sql.Timestamp"/>
+	<field name="desc_fin" class="java.sql.Timestamp"/>
+	<field name="lotehaccp" class="java.lang.String"/>
+	<field name="barco" class="java.lang.String"/>
+	<field name="especie_talla" class="java.lang.String"/>
+	<field name="idproducciondetallelote" class="java.lang.Long"/>
+	<field name="fechaproduccion" class="java.sql.Timestamp"/>
+	<field name="horamon1" class="java.sql.Timestamp"/>
+	<field name="horamon2" class="java.sql.Timestamp"/>
+	<field name="horamon3" class="java.sql.Timestamp"/>
+	<field name="horamon4" class="java.sql.Timestamp"/>
+	<field name="horamon5" class="java.sql.Timestamp"/>
+	<field name="horamon6" class="java.sql.Timestamp"/>
+	<field name="horamon7" class="java.sql.Timestamp"/>
+	<field name="horatempvolteo" class="java.sql.Timestamp"/>
+	<field name="horatempevisc" class="java.sql.Timestamp"/>
+	<field name="horatempingcoc" class="java.sql.Timestamp"/>
+	<group name="lote">
+		<groupExpression><![CDATA[$F{idproducciondetallelote}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="73" splitType="Stretch">
+			<staticText>
+				<reportElement x="637" y="0" width="300" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="13" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[REPORTE PCC2/CCP2 REPORT]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="156" height="43"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{LOGO}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="43" width="102" height="30"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Production Date:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="102" y="43" width="177" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{fechaproduccion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="587" y="20" width="400" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[MONITOREO DE TIEMPOS DE DESCONGELE / THAWING LAG TIME MONITORING]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="43" width="721" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0" lineColor="#000000"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Paso 1. Descongelado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1000" y="43" width="120" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Paso 2. Eviscerado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1120" y="43" width="530" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Paso 3. Cocinada]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1120" y="58" width="530" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Step 3 Cooking]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1000" y="58" width="120" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Step 2 Butchering]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="58" width="721" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Step 1 Thawing]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="32" height="25"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lote Lot#]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1180" y="0" width="50" height="25"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[      Cocina      Cooker #]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="700" y="0" width="50" height="25"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[   Cajones     # Bins]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="32" y="0" width="70" height="25"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Especie/Talla Specie/Size]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1230" y="0" width="50" height="25"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cocinada Cook #]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1280" y="0" width="50" height="25"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[N° Coches   # Racks]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1330" y="0" width="60" height="25"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Clasificación Fish x Basket]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1390" y="0" width="100" height="25"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[         Inicio Cocinada        Time Steam On]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1490" y="0" width="80" height="25"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tiempo Exposición Lag Time]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="750" y="0" width="50" height="25"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Línea desc. Thawing]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="800" y="0" width="100" height="25"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[       Inicio Descongele         Start Thaw]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="900" y="0" width="100" height="25"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[                Fin Descongele                  End thaw]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="172" y="0" width="107" height="25"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[              Lote Haccp         Haccp Lot]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="102" y="0" width="70" height="25"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[      Buque       Vessel]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="339" y="0" width="61" height="25"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monitoreo 1 Monitoring 1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="0" width="60" height="25"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monitoreo 2 Monitoring 2]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="0" width="60" height="25"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monitoreo 3 Monitoring 3]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="520" y="0" width="60" height="25"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monitoreo 4 Monitoring 4]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="580" y="0" width="60" height="25"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monitoreo 5 Monitoring 5]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="640" y="0" width="60" height="25"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Monitoreo 6 Monitoring 6]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1000" y="0" width="60" height="25"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[T° Eviscerado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1060" y="0" width="60" height="25"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[T° Rackeo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1120" y="0" width="60" height="25"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[T° Ingreso Cocina]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="279" y="0" width="60" height="25"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cámara      Camera]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1570" y="0" width="80" height="25"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tiempo Exposición Cámara Lag Time]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="45" splitType="Stretch">
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="460" y="0" width="60" height="45" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textField pattern="dd/MM/yy HH:mm:ss" isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="60" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{horamon4}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="900" y="0" width="100" height="45" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textField pattern="dd/MM/yy HH:mm:ss" isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="100" height="45"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{desc_fin}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="700" y="0" width="200" height="45" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</frame>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="1000" y="0" width="60" height="45" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textField pattern="dd/MM/yy HH:mm:ss" isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="60" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{horatempvolteo}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="1060" y="0" width="60" height="45" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textField pattern="dd/MM/yy HH:mm:ss" isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="60" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{horatempevisc}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="1120" y="0" width="60" height="45" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textField pattern="dd/MM/yy HH:mm:ss" isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="60" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{horatempingcoc}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="520" y="0" width="60" height="45" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textField pattern="dd/MM/yy HH:mm:ss" isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="60" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{horamon5}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="580" y="0" width="60" height="45" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textField pattern="dd/MM/yy HH:mm:ss" isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="60" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{horamon6}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="640" y="0" width="60" height="45" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textField pattern="dd/MM/yy HH:mm:ss" isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="60" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{horamon7}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="339" y="0" width="61" height="45" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textField pattern="dd/MM/yy HH:mm:ss" isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="61" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{horamon2}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="400" y="0" width="60" height="45" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textField pattern="dd/MM/yy HH:mm:ss" isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="60" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7"/>
+					</textElement>
+					<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{horamon3}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement stretchType="RelativeToTallestObject" x="1180" y="0" width="470" height="45" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+			</frame>
+			<subreport>
+				<reportElement x="460" y="15" width="60" height="30"/>
+				<subreportParameter name="idproducciondetallelote">
+					<subreportParameterExpression><![CDATA[$F{idproducciondetallelote}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="intervalo">
+					<subreportParameterExpression><![CDATA[6]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "Proceso_Reporte_PCC2_SubReporteMonitTemp.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="520" y="15" width="60" height="30"/>
+				<subreportParameter name="idproducciondetallelote">
+					<subreportParameterExpression><![CDATA[$F{idproducciondetallelote}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="intervalo">
+					<subreportParameterExpression><![CDATA[8]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "Proceso_Reporte_PCC2_SubReporteMonitTemp.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="580" y="15" width="60" height="30"/>
+				<subreportParameter name="idproducciondetallelote">
+					<subreportParameterExpression><![CDATA[$F{idproducciondetallelote}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="intervalo">
+					<subreportParameterExpression><![CDATA[10]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "Proceso_Reporte_PCC2_SubReporteMonitTemp.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="640" y="15" width="60" height="30"/>
+				<subreportParameter name="idproducciondetallelote">
+					<subreportParameterExpression><![CDATA[$F{idproducciondetallelote}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="intervalo">
+					<subreportParameterExpression><![CDATA[12]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "Proceso_Reporte_PCC2_SubReporteMonitTemp.jasper"]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" x="32" y="0" width="70" height="45"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{especie_talla}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="1000" y="15" width="60" height="30"/>
+				<subreportParameter name="idproducciondetallelote">
+					<subreportParameterExpression><![CDATA[$F{idproducciondetallelote}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "Proceso_Reporte_PCC2_SubReporteTempVolteo.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="1060" y="15" width="60" height="30"/>
+				<subreportParameter name="idproducciondetallelote">
+					<subreportParameterExpression><![CDATA[$F{idproducciondetallelote}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "Proceso_Reporte_PCC2_SubReporteTempEvis.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="1120" y="15" width="60" height="30"/>
+				<subreportParameter name="idproducciondetallelote">
+					<subreportParameterExpression><![CDATA[$F{idproducciondetallelote}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "Proceso_Reporte_PCC2_SubReporteTempIngCoc.jasper"]]></subreportExpression>
+			</subreport>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="172" y="0" width="107" height="45"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{lotehaccp}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" x="102" y="0" width="70" height="45"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{barco}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="32" height="45"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{idlote}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="700" y="0" width="200" height="45"/>
+				<subreportParameter name="idproducciondetallelote">
+					<subreportParameterExpression><![CDATA[$F{idproducciondetallelote}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "Proceso_Reporte_PCC2_SubReporteLineaDesc.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="340" y="15" width="60" height="30"/>
+				<subreportParameter name="idproducciondetallelote">
+					<subreportParameterExpression><![CDATA[$F{idproducciondetallelote}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="intervalo">
+					<subreportParameterExpression><![CDATA[2]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "Proceso_Reporte_PCC2_SubReporteMonitTemp.jasper"]]></subreportExpression>
+			</subreport>
+			<textField pattern="dd/MM/yyyy hh:mm:ss" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="279" y="0" width="60" height="45"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{desc_ingreso_area}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="1180" y="0" width="470" height="45"/>
+				<subreportParameter name="idproducciondetallelote">
+					<subreportParameterExpression><![CDATA[$F{idproducciondetallelote}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "Proceso_Reporte_PCC2_SubReporteCocinada.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="400" y="15" width="60" height="30"/>
+				<subreportParameter name="idproducciondetallelote">
+					<subreportParameterExpression><![CDATA[$F{idproducciondetallelote}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="intervalo">
+					<subreportParameterExpression><![CDATA[4]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "Proceso_Reporte_PCC2_SubReporteMonitTemp.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="53" height="21"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Usuario:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="520" y="0" width="60" height="21"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Pag. "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement x="279" y="0" width="241" height="21"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="580" y="0" width="60" height="21"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="53" y="0" width="119" height="21"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{USUARIO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="172" y="0" width="107" height="21"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Fecha Emisión:]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="50">
+			<staticText>
+				<reportElement x="1100" y="35" width="142" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Jefe de Preproceso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="354" y="35" width="146" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Supervisor Preproceso]]></text>
+			</staticText>
+			<line>
+				<reportElement x="1100" y="34" width="145" height="1"/>
+			</line>
+			<line>
+				<reportElement x="351" y="34" width="152" height="1"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>

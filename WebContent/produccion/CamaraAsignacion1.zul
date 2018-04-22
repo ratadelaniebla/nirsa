@@ -1,0 +1,78 @@
+<?page id = "pagCoccion" title="" contentType="text/html;charset=UTF-8"?>
+<!-- com.wm.webui.produccion.AsignacionMWindow  -->
+<zk>
+	<window id="winAsignacionCamara" apply="com.nw.webui.produccion.CamaraAsignacionWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="ASIGNACION CAMARA" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+			<grid width="99%">
+				<rows>
+					<row>
+						<label value="Fecha :" style="color:blue" />
+						<datebox id="dteFecReg" width="80px" disabled="true" />
+					</row>
+				</rows>
+			</grid>
+
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+								<toolbarbutton id="btnActualizar" tooltiptext="Actualizar" image="/img/refrescar.gif"/>
+								<!--  <toolbarbutton id="btnNuevo" tooltiptext="Nuevo" image="/img/crear.gif" />
+								<toolbarbutton id="btnEliminar" tooltiptext="Eliminar" image="/img/eliminar.gif" /> -->
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+					 <label value="Barco Descarga" style="color:blue" />
+						<listbox id="lbxBarcoDescarga" style="font-size:11px" mold="select"
+							width="99%" />
+						<grid width="99%">
+							<rows>
+								<row>
+								    <label value="Cajon :" width="10%"   />
+									<listbox id="lbxCajones" style="font-size:11px"
+									 mold="select" width="100px" />
+								</row>
+								
+							</rows>
+						</grid>
+						<grid width="99%">
+							<rows>
+								<row>
+								   <!--  	<label value="Datos Orden:" /> -->
+								</row>
+								<row>
+									<textbox id="txtDatosOrden" maxlength="255" rows="2" width="99%" readonly="true"/>
+								</row>
+							</rows>
+						</grid>
+						<grid width="99%">
+							<rows>
+								<row >
+									<label value="Camara :"  />
+									<listbox id="lbxCamaras" style="font-size:11px"
+									 mold="select" width="100px"  />
+								</row>
+								<row>
+								   <label value="Fila :"    />
+								   <listbox id="lbxFilas" style="font-size:11px"
+									 mold="select" width="99%" />
+								</row>
+								<row>
+								    <label value="Columna :" width="20%"  />
+								    <listbox id="lbxColumnas" style="font-size:11px"
+									 mold="select" width="99%" />
+								</row>
+							</rows>
+						</grid>
+
+			<label value="Observaciones Proceso:" style="color:blue" />
+			<textbox id="txtObs" maxlength="255" rows="3" width="99%" />
+		</vbox>
+	</window>
+</zk>

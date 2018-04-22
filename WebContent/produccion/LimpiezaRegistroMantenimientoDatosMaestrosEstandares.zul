@@ -1,0 +1,58 @@
+<?page id = "pagLimpiezaRegistroMantenimientoDatosMaestrosEstandares" title="" contentType="text/html;charset=UTF-8"?>
+<!-- R13 -->
+<zk>
+	<window id="winLimpiezaRegistroMantenimientoDatosMaestrosEstandares"
+		apply="com.nw.webui.produccion.LimpiezaRegistroMantenimientoDatosMaestrosEstandaresWindow" > 
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="Registro y Mantenimiento de Estandares en Limpieza"
+			style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain" width="99%">
+
+		    <grid width="99%">
+				<rows>
+					<row>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar"
+								tooltiptext="Grabar" image="/img/grabar.gif" />
+						</toolbar>
+					</row>
+				</rows>
+			</grid>
+
+
+			<grid width="99%">
+				<rows>
+
+					<row>
+						<label value="Talla"></label>
+						<listbox id="lbxBiEstandarClasificacionTalla" mold="select"
+							width="99%">
+						</listbox>
+					</row>
+
+					<row>
+						<label value="Nueva Talla"></label>
+						<listbox id="lbxTalla" mold="select"
+							width="99%">
+						</listbox>
+					</row>
+					
+					 <row>
+						<label value="Tipo Limpieza"></label>
+						<listbox id="lbxTipoLimpieza" mold="select"
+							width="99%">
+						</listbox>
+					</row>
+					
+					<row>
+						<label value="Tiempo Estandar"></label>
+						<doublebox id="dbxTiempoEstandar"  />
+					</row>
+				</rows>
+			</grid>
+
+
+
+		</vbox>
+	</window>
+</zk>

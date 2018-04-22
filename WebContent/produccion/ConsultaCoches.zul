@@ -1,0 +1,161 @@
+<?page title="COCCION" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winCocheCoccion" apply="com.nw.webui.produccion.ConsultaCocheWindow" >
+<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="Consulta de Coches" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="99%">
+		<grid width="99%">
+			<rows>
+				<row >
+					<label value="Coche "></label>
+					<hbox>
+						<textbox id="txtCoche" width="80%" > </textbox>
+						<toolbar>
+							<toolbarbutton label="" id="btnBuscaCoche"  tooltiptext="Buscar" disabled="false" image="/img/buscar.gif" />
+						</toolbar>
+					</hbox>
+				</row>
+				<row>
+					<label value="Secuencia Coche"></label>
+					<textbox id="txtSecuencia" readonly="true" width="99%" > </textbox>
+				</row>
+				
+				
+				<row>
+					<label value="Id Coche TI"></label>
+					<textbox id="txtNumCoche" readonly="true" width="99%" > </textbox>
+				</row>				
+				
+				<row>
+					<label value="Eviscerado P Bruto" ></label>
+					<textbox id="txtEvisceradoBruto" readonly="true" width="99%"> </textbox>
+				</row>				
+				<row>
+					<label value="Eviscerado P Tara" ></label>
+					<textbox id="txtEvisceradoTara" readonly="true" width="99%"> </textbox>
+				</row>				
+				<row>
+					<label value="Eviscerado P Neto" ></label>
+					<textbox id="txtEvisceradoNeto" readonly="true" width="99%"> </textbox>
+				</row>
+								
+				
+				
+				<row>
+					<label value="# Coche Lote " ></label>
+					<textbox id="txtCocheLote" readonly="true" width="99%"> </textbox>
+				</row>
+				<row>
+					<label value="Fecha Producción " ></label>
+					<textbox id="txtFechaActiva" readonly="true" width="99%" > </textbox>
+				</row>
+				<row>
+					<label value="Turno Producción" ></label>
+					<textbox id="txtTurnoProduccion" readonly="true" width="99%"> </textbox>
+				</row>
+				<row>
+					<label value="Lote " ></label>
+					<textbox id="txtLote" readonly="true" width="99%"> </textbox>
+				</row>
+				<row>
+					<label value="Especie-Talla" ></label>
+					<textbox id="txtEspecieTalla" readonly="true" rows="2" width="99%"> </textbox>
+				</row>
+				<row>
+					<label value="Cocina" ></label>
+					<textbox id="txtCocina" readonly="true" width="99%"> </textbox>
+				</row>
+				
+				<row>
+					<label value="Cocinada" ></label>
+					<textbox id="txtCocinada" readonly="true" width="99%"> </textbox>
+				</row>
+
+				<row>
+					<label value="Destino" ></label>
+					<textbox id="txtDestino" readonly="true" rows="2" width="99%"> </textbox>
+				</row>
+				<row>
+					<label value="Barco" ></label>
+					<textbox id="txtBarco" readonly="true" width="99%"> </textbox>
+				</row>
+				<row>
+					<label value="Cuba" ></label>
+					<textbox id="txtCuba" readonly="true"  rows="2"  width="99%"> </textbox>
+				</row>
+				<row>
+					<label value="Origen" ></label>
+					<textbox id="txtOrigen" readonly="true"   width="99%"> </textbox>
+				</row>
+				<row>
+					<label value="# Canastillas " ></label>
+					<textbox id="txtCanastillas" readonly="true" width="99%"> </textbox>
+				</row>
+				<row>
+					<label value="Pescados x Lata " ></label>
+					<textbox id="txtPescadoLata" readonly="true" width="99%"> </textbox>
+				</row>
+				
+				
+				<row>
+					<label value="Rociado " ></label>
+					<textbox id="txtRociado" readonly="true" width="99%"> </textbox>
+				</row>
+				<row>
+					<label value="Rociado P Bruto" ></label>
+					<textbox id="txtRociadoBruto" readonly="true" width="99%"> </textbox>
+				</row>
+				
+				
+				<row>
+					<label value="ChillRoom " ></label>
+					<textbox id="txtChillRoom" readonly="true" width="99%"> </textbox>
+				</row>
+				
+				<row>
+					<label value="Hora Ing. ChillRoom " ></label>
+					<textbox id="txtHoraChillRoom" readonly="true" width="99%"> </textbox>
+				</row>
+								
+				<row>
+					<label value="ChillRoom P Bruto" ></label>
+					<textbox id="txtChillRoomBruto" readonly="true" width="99%"> </textbox>
+				</row>
+				
+
+				<row>
+					<label value="Usuario ChillRoom" ></label>
+					<textbox id="txtUsuarioChillRoom" readonly="true" width="99%"> </textbox>
+				</row>
+				
+				
+				
+				
+				
+							
+				<row>
+					<label value="Linea " ></label>
+					<textbox id="txtLinea" readonly="true" width="99%"> </textbox>
+				</row>
+				<row>
+					<label value="Linea P Bruto" ></label>
+					<textbox id="txtLineaBruto" readonly="true" width="99%"> </textbox>
+				</row>				
+				<row>
+					<label value="Linea P Tara" ></label>
+					<textbox id="txtLineaTara" readonly="true" width="99%"> </textbox>
+				</row>				
+				<row>
+					<label value="Linea P Neto" ></label>
+					<textbox id="txtLineaNeto" readonly="true" width="99%"> </textbox>
+				</row>				
+				
+				
+		   </rows>
+		 
+		</grid>
+		
+		
+	</vbox>
+</window>
+</zk>

@@ -1,0 +1,71 @@
+<?page id = "pagLimRalladoMezclaMant1" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winLimpiezaRalladoGabetaMezclaBatch" apply="com.nw.webui.produccion.LimpiezaRalladoGabetaMezclaBatchMantenimientoWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="Mant. Gavetas Mezcla - Ficha Batch " style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+		
+			<grid width="99%"> 
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>			
+
+					<grid>
+							<rows>
+							
+
+								
+					<row>
+						<label value="Producción" />
+						<textbox id="txtDiaProduccion" readonly="true" style="font-size:12px" width="99%" />
+					</row>								
+								
+							</rows>
+					</grid>	
+					
+					<grid>
+						<rows>
+							<row>
+								<label value="B.Mezclados Origen" />
+								<hbox>
+									<listbox id="lbxMezclaBatch" style="font-size:12px" mold="select" width="98%"/>
+									<toolbarbutton id="btnActualizarl" label="Actualizar"/>
+								</hbox>
+							</row>	
+							
+							
+							<row>
+								<label value="Ficha Batch"/>
+								<textbox id="txtFichaBatch"  style="font-size:11px"  width="70%" readonly="true" ></textbox>
+							</row>																						
+							
+							
+							<row>
+								<label value="B.Mezclados Destino" />
+								<hbox>
+									<listbox id="lbxMezclaBatchd" style="font-size:12px" mold="select" width="98%"/>
+									<toolbarbutton id="btnActualizarld" label="Actualizar"/>
+								</hbox>
+							</row>							
+							
+
+							<row>
+								<label value="Nueva Ficha Batch"/>
+								<textbox id="txtFichaBatch2"  style="font-size:11px"  width="70%" readonly="false" ></textbox>
+							</row>							
+							
+						</rows>
+					</grid>
+					
+
+
+		</vbox>
+	</window>
+</zk>

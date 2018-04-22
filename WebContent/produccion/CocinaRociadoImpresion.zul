@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?page id="pagCalidadBPMDes"?>
+<!--  -->
+<window id="winCocinaEntradaSalidaImpresion" apply="com.nw.webui.produccion.CocinaRociadoImpresionWindow"> 
+	<label value="•Cocina-Rociado" style="color:blue;font-size:11px;font-weight:bold"/>
+	<vbox  id="vbxMain">
+		
+			<grid width="99%">
+				<rows>
+
+					<row>
+						<label value="Fecha :"/>
+						<datebox id="dteFecha1" width="110px" format="dd/MM/yyyy" readonly="true"/>
+					</row>					
+                  	
+					<row>
+						<label value="Turno :"/>	
+						<listbox id="lbxTurno" style="font-size:11px"
+						 mold="select" width="100px" />
+					</row>	
+					
+				</rows>
+			</grid>
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<label value="Imprimir" style="color:blue;font-size:12px;font-weight:bold"/>
+							<toolbar>
+								<vbox>
+								<toolbarbutton id="btnEntradaSalidaCocina" label="Entrada Salida Cocina"/>
+							<!--  -->	<toolbarbutton id="btnMermaCocinaRociado" label="Merma Cocina Rociado"/>
+								<toolbarbutton id="btnExcelMermaCocinaRociado" label="Excel Merma Cocina Rociado"/> -->
+								</vbox>
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+
+			
+	</vbox> 
+</window>

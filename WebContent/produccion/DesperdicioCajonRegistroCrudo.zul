@@ -1,0 +1,62 @@
+<?page id = "pagCalidadPCC1Quimico" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winDesperdicioRegistroCrudo" apply="com.nw.webui.produccion.DesperdicioCajonRegistroCrudoWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="Registro - " style="color:blue;font-size:12px;font-weight:bold" />
+		<label value="Cajón" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+		
+			<grid width="99%"> 
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+							</toolbar>
+							
+						</vbox>
+					</row>
+				</rows>
+			</grid>		
+		
+			<grid width="99%">  
+				<rows>
+				
+					<row>
+						<label value="Turno" />
+						<listbox id="lbxTurno" style="font-size:12px" mold="select" width="98%" />
+					</row>				
+				
+					<row>
+						<label value="Día Producción"/>
+						<datebox id="dteFecha" width="110px" readonly="false"/>
+					</row>
+									
+					<row>
+						<label value="Día Juliano" />
+						<textbox id="txtDiaJuliano" maxlength="4"  width="50px"  readonly="true" />
+					</row>									
+
+					<row>
+						<label value="Num. Cajón" />
+							<div>
+								 <div>
+									<label value="Cajon Temporal" style="color:black" />						
+									<checkbox id="chkCajones" checked="false" />
+								 </div>
+								<listbox id="lbxCajon" style="font-size:12px" mold="select" width="80px" />
+							</div>	
+					</row>
+ 
+					<row>
+						<label value="Num. Cajón.Temp" />
+						<decimalbox id="txtCajon" format="######"  maxlength="10" width="80px" readonly="true" />	
+					</row>
+					
+				</rows>
+			</grid>			
+
+						
+		</vbox>
+	</window>
+</zk>

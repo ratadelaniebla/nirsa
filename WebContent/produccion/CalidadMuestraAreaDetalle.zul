@@ -1,0 +1,155 @@
+<?page id = "REGISRO DE RESULTADOS DE MUESTRAS" title="" contentType="text/html;charset=UTF-8" automaticTimeout="false"?>
+<zk>
+	<!-- com.nw.webui.produccion.CalidadPCC1QuimicoWindow -->
+	<window id="winCalidadMuestraAreaDetalle" apply="com.nw.webui.produccion.CalidadMuestraAreaDetalleWindow" 
+	mode="modal" border="normal" closable="true"  title="CONTROL DE CALIDAD - REGISTRO DE RESULTADOS DE SAL/HISTAMINA" width="95%" height="99%">
+	
+	<vbox id="vbxMain" width="100%">
+
+		<groupbox>
+			<caption>
+				<label value="Parámetros"></label>
+			</caption>
+ 			
+ 			<hbox >
+
+			<vbox>
+ 			
+ 			   <grid width="440px">  
+				<rows>
+
+
+					<row>
+						<label value="Area" />
+						<listbox id="lbxArea" style="font-size:12px" mold="select" width="99%" />
+					</row>
+
+					<row>
+						<label value="Barco /Lote Haccp /Lote Planta" />
+						<listbox id="lbxHaccp" style="font-size:12px" mold="select" width="99%" />
+					</row>
+
+
+					<row id="RowGrupoAnalisis">
+						<label value="Grupo Analisis" />
+						<listbox id="lbxGrupoAnalisis" style="font-size:12px" mold="select" width="99%" />
+					</row>
+
+					<row>
+						<label value="Tipo Analisis" />
+						<listbox id="lbxMuestraCompuesta" style="font-size:12px" mold="select" width="99%" />
+					</row>
+
+					<row id="RowMotivoDescarga" visible="false">
+						<label value="Motivo Descarga" />
+						<listbox id="lbxMotivo" style="font-size:12px" mold="select" width="99%" />
+					</row>
+
+
+					<row>
+						<label value="Turno labor" />
+						<listbox id="lbxTurnoLabor" style="font-size:12px" mold="select" width="99%" />
+					</row>
+										
+ 			   </rows>
+			</grid>	
+			
+				<toolbar>
+				     <toolbarbutton label="GRABAR" id="btnGrabar" image="/img/grabar.gif" ></toolbarbutton>
+				</toolbar>
+				
+				
+			</vbox>
+			
+			 <grid width="99%">
+			   
+			 	<rows>
+			 
+			 		<!-- 
+				     <row id="RwBarcoMercante" visible="false">
+						<label value="Barco Mercante" />
+  						<textbox id="txtBarcoMercante"  width="120px" style="color:blue" readonly="true" />
+					</row>
+					 -->
+
+
+					<row>
+						<label value="Barco" />
+						<textbox id="txtBarco" width="99%" style="color:blue" readonly="true" />
+					</row>										
+						
+					<row>
+						<label value="Registro" />
+						<textbox id="txtRegistro" width="99%" style="color:blue" readonly="true" />
+					</row>
+
+
+					<row>
+						<label value="Cubas" />
+						<textbox id="txtCubas" width="99%" rows="2" style="color:blue" readonly="true" />
+					</row>
+					
+					
+					<row>
+						<label value="Especie" />
+						<textbox id="txtEspecie" width="99%" style="color:blue" readonly="true" />
+					</row>
+					
+					
+					<row id="RowMotivo">
+						<label value="Motivo" />
+						<textbox id="txtMotivo" width="99%" style="color:blue" readonly="true" />
+					</row>
+					
+					
+					<row visible="false">
+						<label value="Piezas" />
+						<textbox id="txtPiezas" width="99%" style="color:blue" readonly="true" />
+					</row>					
+
+				
+				</rows>
+			</grid>
+			
+			 <grid width="99%">
+			   
+			 	<rows>
+			 
+			 		
+
+
+					<row>
+						<checkbox id="chkRevisado" label="Revisado" ></checkbox>
+					</row>										
+								
+
+				
+				</rows>
+			</grid>
+			
+ 			</hbox>
+		</groupbox>
+	</vbox>      
+
+
+<!--  
+		<div  id="div">
+	       <hbox id = "hbx1" >
+-->	        
+				<listbox id="lbxComprobantes" style="font-size:9px" fixedLayout="true" vflex="true" rows="22" width="98%">
+					<listhead style="font-size:9px">
+						<listheader label="#Pieza" width="5%" />
+						<listheader label="Resultados" width="12%" />						
+						<listheader label="Resultados individual ppm" width="12%" />
+						<listheader label="Comentarios" width="50%"/>											
+					</listhead>
+				</listbox>
+<!-- 				
+			</hbox>	
+		</div>
+ -->		
+			
+
+
+	</window>
+</zk>

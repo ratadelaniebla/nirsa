@@ -1,0 +1,42 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winAperturaCierreEviscerado" apply="com.nw.webui.produccion.AperturaCierreProcesoEvisceradoWindow" width="99%">
+	<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="FIN LLENADO" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="200px">
+		<grid >
+			<rows>
+				<row >
+					<label value="Día Producción " ></label>
+					<listbox id="lbxDiaProduccion" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+				<row >
+					<label value="O/P " ></label>
+					<listbox id="lbxProducto" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+				<row>
+					<label value="Producto" ></label>
+					<intbox id="ibxOrdenProduccion" disabled="true" width="100px"> </intbox>
+				</row>
+				<row>
+					<label value="# Latas" ></label>
+					<intbox id="ibxLatas" disabled="false" width="100px"> </intbox>
+				</row>
+				
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>
+	</vbox>
+</window>
+</zk>

@@ -1,0 +1,250 @@
+<?page title="PONCHADA DESPELLEJADO" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winLimpiezaCedula" border="none" apply="com.nw.webui.produccion.LimpiezaPonchadaCodigoEvolutionWindow">
+<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="LIMPIEZA PONCHADA FILETEADO/DESPELLEJADO POR CEDULA" style="color:green;font-size:15px;font-weight:bold" />
+	<vbox id="vbxMain" width="99%">
+	
+	
+		<grid >
+			<rows>
+				<row>
+					<label value="Tipo Busqueda" width="99%"></label>
+				    <listbox id="LbxtTipoBusqueda" width="99%"  mold="select"> 
+				    	<listitem selected="true" label=""  />
+				    	<listitem label="Puesto de trabajo" value="1" />
+				    	<listitem label="Cedula" value="2" />
+				    </listbox>
+				    
+				</row>
+			</rows>		
+		</grid>	
+	
+	
+
+		
+
+
+			
+	
+		<grid >
+			<rows>
+			
+				<row>
+						<hbox>
+						<label value="Ced. Empleado" width="99%"></label>
+						</hbox>
+					
+						<hbox>
+						<textbox id="txtEmpleado" width="99%" readonly="true" > </textbox>
+						
+						
+						<toolbar>
+							
+							<toolbarbutton id="btnBuscarEmpleado" tooltiptext="Buscar Empleado" label="BUSCAR" style="color:blue;font-size:12px;font-weight:bold" />
+						</toolbar>
+						</hbox>
+					
+					</row>
+					
+
+
+
+			</rows>
+		</grid>
+		
+
+		<grid >
+			<rows>
+				<row>
+					<label value="Linea" width="99%"></label>
+				    <listbox id="LbxtLineaLista" width="99%"  mold="select"> </listbox>
+				</row>
+
+				<row>
+					<label value="Puesto" width="99%"></label>
+					
+					<hbox>
+				    	<listbox id="LbxLineaPuesto" width="99%"  mold="select"> </listbox>
+				    
+					   <toolbar>
+							<toolbarbutton id="btnActualizarPuestos" tooltiptext="Actualizar Puestos de trabajo" image="/img/refrescar.gif"/>
+						 </toolbar>
+					</hbox>				    
+				    
+				</row>
+			</rows>		
+		</grid>
+		
+	
+		<grid>	
+			<rows>
+				<row>
+					<label value="Fec.Prod. " style="color:blue" />
+					<textbox id="dtxFechaActiva"  style="font-size:11px"  width="90px" readonly="true" ></textbox>
+				</row>
+				
+				<row>					
+					<label value="Cargo" width="100px"></label>						
+					<textbox id="txtCargo" width="90px" readonly="true"> </textbox>
+				</row>				
+			</rows>
+		</grid>		
+	
+		<grid >
+			<rows >
+				<row>
+				    <label value="Turno :" style="color:red;font-size:14px;font-weight:bold" />
+				    <textbox id="txtTurno" style="font-size:11px"  width="70px" readonly="true" />
+				</row>	
+				<row>
+				    <label value="Linea :" style="color:green;font-size:14px;font-weight:bold" />
+				    	<textbox id="txtLinea" width="70px" readonly="true" > </textbox>
+					
+				</row>
+				<row>
+					<label value="Nombres :" style="color:blue" />
+					<textbox id="txtNombre" disabled="false" width="120px" readonly="true" multiline="true" rows="3" > </textbox>
+				</row>
+				<row>
+				    <label value="Ubicación :" style="color:blue" />
+				    <textbox id="txtUbicacion" style="font-size:11px"  width="70px" readonly="true" />
+				</row>	
+				<row>
+				    <label value="Tipo :" style="color:blue" />
+				    <listbox id="lbxTipo" style="font-size:11px" mold="select" width="120px" />
+				</row>
+
+				<row>
+				    <label value="Pescado por Lata :" style="color:blue" />
+				    <listbox id="lbxPescadoxLata" style="font-size:11px" mold="select" width="120px" />
+				</row>
+				<row>
+				    <label value="Corte :" style="color:blue" />
+				    <hbox>
+				    <listbox id="lbxCorte" style="font-size:11px" mold="select" width="80px" />
+				    <vbox>
+				    <label value="#Ponchada" style="color:blue" />
+					<intbox id="txtPonchada" disabled="false" width="40px" readonly="true" cols="3" > </intbox>
+				</vbox>
+				    </hbox>
+				    
+				</row>
+				<row>
+					</row>
+
+				<row>
+					<label value="Conteo Ponchadas" ></label>
+					<listbox id="lbxPonchada" style="font-size:11px" mold="select"> 
+						<listitem label="" > </listitem>
+						<listitem label="0" > </listitem>
+						<listitem label="1" > </listitem>
+						<listitem label="2" > </listitem>
+						<listitem label="3" > </listitem> 
+						<listitem label="4" > </listitem> 
+						<listitem label="5" > </listitem> 
+						<listitem label="6" > </listitem> 
+						<listitem label="7" > </listitem> 
+						<listitem label="8" > </listitem> 
+						<listitem label="9" > </listitem> 
+						<listitem label="10" > </listitem> 
+					</listbox>
+				</row>
+			</rows>
+		</grid>
+		
+		<grid>
+			<rows>
+				<row>
+					<label value="." ></label>
+					<label value="." ></label>
+				</row>
+			</rows>
+		</grid>		
+
+		
+		<grid>
+			<rows>
+				<row>
+					<label value="Espinas Arrastre" ></label>
+					<listbox id="lbxArrastre" style="font-size:11px" mold="select"> 
+						<listitem label="" > </listitem>
+						<listitem label="1" > </listitem>
+						<listitem label="2" > </listitem>
+						<listitem label="3" > </listitem> 
+						<listitem label="4" > </listitem> 
+						<listitem label="5" > </listitem> 
+						<listitem label="6" > </listitem> 
+						<listitem label="7" > </listitem> 
+						<listitem label="8" > </listitem> 
+						<listitem label="9" > </listitem> 
+						<listitem label="10" > </listitem> 
+						<listitem label="11" > </listitem>
+						<listitem label="12" > </listitem>
+						<listitem label="13" > </listitem> 
+						<listitem label="14" > </listitem> 
+						<listitem label="15" > </listitem> 
+						<listitem label="16" > </listitem> 
+						<listitem label="17" > </listitem> 
+						<listitem label="18" > </listitem> 
+						<listitem label="19" > </listitem> 
+						<listitem label="20" > </listitem>
+					</listbox>
+				</row>
+				
+				<row>
+					<label value="Hora Extra" ></label>
+					<checkbox id="chkHorasExtras"></checkbox>
+				</row>
+			</rows>	
+		</grid>		
+	
+	
+
+		<grid width="99%">
+			<rows>
+				<row>
+					<hbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" tooltiptext="Grabar" label="GRABAR" style="font-size:12px;font-weight:bold"/>
+						</toolbar>						
+					</hbox>
+				</row>
+			</rows>
+		</grid>
+		<grid >
+			<rows >
+				<row>
+				    <label value="Total Arrastre :" style="color:blue" />
+				    <textbox id="txtTotalArrastre" width="70px" readonly="true" > </textbox>
+				</row>
+				<row>
+				    <label value="Ponchada Persona:" style="color:blue" />					
+				    <intbox id="inbxPonchadaPersona" width="70px"  readonly="true" > </intbox>
+				</row>
+				<row>
+				    <label value="Total Línea Clasif:" style="color:blue" />					
+				    <intbox id="inbxTotalLineaClasi" width="70px"  readonly="true" > </intbox>
+				</row>
+				<row>
+					<hbox>
+				    <label value="Total Ponchadas :" style="color:blue" />					
+				    </hbox>
+				    <hbox>					
+				    <textbox id="txtTotalPonchada" width="70px" readonly="true" > </textbox>
+				    <toolbar>
+							<toolbarbutton id="btnRefrescar" tooltiptext="Buscar Empleado" image="/img/refrescar.gif" style="color:blue;font-size:12px;font-weight:bold" />
+					</toolbar>
+					</hbox>
+				</row>
+				<row>
+				    <label value="Total Despellejado Clasif :" style="color:blue" />					
+				    <intbox id="ibxTotalDesClasif" width="70px" readonly="true" > </intbox>
+				</row>
+			</rows>
+		</grid>
+
+		
+	</vbox>
+</window>
+</zk>

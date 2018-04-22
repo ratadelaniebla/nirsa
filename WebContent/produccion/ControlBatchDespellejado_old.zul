@@ -1,0 +1,79 @@
+<?page title="CONTROL BATCH DESPELLEJADO " contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winControlBatchDspellejado" border="none" apply="com.nw.webui.produccion.ControlBatchDespellejado_oldWindow">
+<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="CONTROL BATCH DESPELLEJADO" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="220px">
+		<grid >
+			<rows>
+			
+				<row>
+				    <label value="Fech.Prod. - Turno :" style="color:blue" />
+				    <listbox id="lbxProcesosActivos" style="font-size:11px" mold="select" width="120px" />
+				</row>
+				
+				
+				<row>
+				    <label value="Turno :" style="color:blue" />
+				    <textbox id="txtTurno"  style="font-size:11px"  width="130px" readonly="true" ></textbox>
+				</row>
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>
+		
+		<grid >
+			<rows >
+				<row>
+				    <label value="Tarjeta:" style="color:blue" />
+				    <textbox id="txtTarjeta" maxlength="14" style="font-size:11px"  width="130px" readonly="false" ></textbox>
+				</row>
+				<row>
+				    <label value="Batch :" style="color:blue" />
+				    <listbox id="lbxBatch" style="font-size:11px" mold="select" width="120px" />
+				</row>
+<!--  				<row>
+				    <label value="Linea :" style="color:blue" />
+				    <listbox id="lbxLinea" style="font-size:11px" mold="select" width="120px" />
+				</row>
+-->
+				<row>
+				    <label value="Coches :" style="color:blue" />
+				    <listbox id="lbxCoches" style="font-size:11px" mold="select" width="120px" />
+				</row>
+
+				<row>
+				    <label value="Fecha Despellejado :" style="color:blue" />
+				    <textbox id="txtFechaDesp" style="font-size:11px"  width="120px" readonly="true" />
+				</row>
+				
+				<row>
+				    <label value="Lote :" style="color:blue" />
+				    <textbox id="txtLote" style="font-size:11px"  width="120px" readonly="true" />
+				</row>
+
+				<row>
+					<label value="Especie-Talla: " style="color:blue" ></label>
+					<textbox id="txtEspecieTalla" style="font-size:11px" readonly="true" width="120px" ></textbox>
+				</row>
+				<row>
+					<label value="Destino: "  style="color:blue" ></label>
+					<textbox id="txtDestino" style="font-size:11px" readonly="true" rows="4" width="120px" ></textbox>
+				</row>
+			
+			</rows>
+		</grid>
+		
+	</vbox>
+</window>
+</zk>

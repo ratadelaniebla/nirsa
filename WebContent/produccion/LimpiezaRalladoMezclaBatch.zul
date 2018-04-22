@@ -1,0 +1,104 @@
+<?page id = "pagLimRalladoMezcla" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winLimpiezaRalladoMezclaBatch" apply="com.nw.webui.produccion.LimpiezaRalladoMezclaBatchWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="Registro Mezcla Batch Rallado" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+		
+			<grid width="99%"> 
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>			
+
+					<grid>
+							<rows>
+							
+
+								
+					<row>
+						<label value="Producción" />
+						<textbox id="txtDiaProduccion" readonly="true" style="font-size:12px" width="99%" />
+					</row>
+					
+					<row>
+						<toolbarbutton id="btnActualizarl" label="Actualizar"/>
+					</row>								
+								
+				</rows>
+			</grid>	
+					
+					<grid>
+						<rows>
+							<row>
+								<hbox>
+									<label value="Batch Linea" />
+									<listbox id="lbxBatchLinea" style="font-size:12px" mold="select" width="98%"/>										
+								</hbox>
+								
+								<hbox>
+									<label value="Batch Recuperable" />
+									<listbox id="lbxBatchRecuperable" style="font-size:12px" mold="select" width="98%"/>
+								</hbox>
+																	
+							</row>																
+						</rows>
+					</grid>
+					
+					<grid>
+						<rows>
+								<row>
+									<toolbar id="tbcontrol5">
+										<hbox>
+											<toolbarbutton id="btnEspecie" tooltiptext="Agregar Especie" image="/img/crear.gif"/>
+											<toolbarbutton id="btnEliminarEspecie" tooltiptext="Eliminar Especie" image="/img/eliminar.gif"/>
+										</hbox>
+									</toolbar>
+								</row>
+						</rows>		
+					</grid>
+					
+					
+								 												   
+					<listbox id="lbxMezclas" model="@{winLimpiezaRalladoMezclaBatch.limpiezaRalladoMezclaBatchEstados}" multiple="true" checkmark="false" >
+																																								  															    
+						<listhead style="font-size:9px" >
+							<listheader label="Bacth" width="43%"/>
+							<listheader label="X" width="3%"/>
+						</listhead>
+																				
+
+						<listitem self="@{each=e}">
+							<listcell label="@{e.limpiezaRalladoMezclaBatchEstado.tipo}" style="font-size:9px"></listcell>
+												
+							<listcell > 
+								<checkbox checked="@{e.eliminar}" > </checkbox> 
+							</listcell>																				     														     
+						</listitem>
+					</listbox>
+
+
+							<!-- 
+							<listheader label="Batch R." width="25%"/>
+							 -->
+							<!-- 
+							<listheader label="F. Batch" width="19%"/>
+							 -->
+
+
+							<!-- 
+							<listcell label="@{e.limpiezaRalladoBatchCabecera.batch}" style="font-size:9px"></listcell>
+							-->														<!-- 
+							<listcell label="@{e.limpiezaRalladoBatchCabecera.tipo}" style="font-size:9px"></listcell>
+							 -->													
+
+
+		</vbox>
+	</window>
+</zk>

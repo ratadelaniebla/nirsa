@@ -1,0 +1,145 @@
+<?page id = "pagCalidadPCC1Quimico" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winMantComprbantes" apply="com.nw.webui.produccion.HarinaMantenimientoHarinaComprobantesWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="Mant. Recepción de Camión" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+		
+			<grid width="99%">
+				<rows>
+					<row>
+						<label value="Fecha Recepción"/>						
+						<toolbar>
+							<datebox id="dteFecha" width="50%"/>
+							<toolbarbutton id="btnBuscarComprobantes" tooltiptext="Grabar" image="/img/buscar.gif" />
+						</toolbar>
+					</row>
+				</rows>	
+			</grid>
+							
+		
+			<listbox id="lbxComprobantes" style="font-size:9px">
+				<listhead style="font-size:9px">
+					<listheader label="Comprobante" style="font-size:5px" width="30%"/>
+					<listheader label="Proveedor" style="font-size:4px" width="48%"/>
+					<listheader label="Estado" style="font-size:4px" width="21%" />
+				</listhead>
+			</listbox>		
+
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar" tooltiptext="Grabar"
+									image="/img/grabar.gif" />
+								<!-- 	
+								<toolbarbutton id="btnNuevo" tooltiptext="Nuevo"
+									image="/img/crear.gif" />
+								 -->	
+
+							</toolbar>
+
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+
+			<grid width="99%">
+				<rows>
+
+					<row>
+						<label value="Comprobante" />
+						<textbox id="txtComprobante" width="99%" readonly="true"></textbox>
+					</row>
+
+					<row>
+						<label value="Estado" />
+						<vbox>
+							<textbox id="txtEstadoComprobante" width="99%" readonly="true"/>
+							
+							<listbox id="lbxEstadoComprobanteAct" style="font-size:12px" mold="select" width="98%">							
+								<listitem>
+									<listcell label="" />
+								</listitem>
+							
+								<listitem>
+									<listcell label="Creada" />
+								</listitem>
+								<listitem>
+									<listcell label="Pesando" />
+								</listitem>
+								<listitem>
+									<listcell label="Cerrada" />
+								</listitem>
+								<listitem>
+									<listcell label="Anulada" />
+								</listitem>								
+							</listbox>
+
+						</vbox>
+					</row>
+
+					<row>
+						<label value="Cedula/RUC Proveedor" />
+						<textbox id="txtCedulaProveedor" width="99%" readonly="true"></textbox>
+					</row>
+
+					<row>
+						<label value="Proveedor" />
+						<vbox>
+							<textbox id="txtNombreProveedor" width="99%" height="45px" multiline="true" readonly="true"/>
+							<listbox id="lbxProveedorAct" style="font-size:12px" mold="select" width="98%"/>
+						</vbox>	
+					</row>
+
+
+					<row>
+						<label value="Cedula Chofer" />
+						<textbox id="txtCedula" width="99%" readonly="true"></textbox>
+					</row>
+
+					<row>
+						<label value="Nombres Chofer" />
+						<vbox>
+								<textbox id="txtNombre" width="99%" height="99%" multiline="true"  readonly="true"/>
+								<hbox>	
+								<textbox id="txtCedulaChoferAct" width="130px" />
+								<toolbar>
+										<toolbarbutton id="btnBuscarChofer" tooltiptext="Grabar" image="/img/buscar.gif" />
+								</toolbar>								
+							</hbox>
+							<textbox id="txtNombreAct" width="99%" height="99%" readonly="true" multiline="true"/>								
+						</vbox>						
+						
+						
+					</row>
+
+					<row>						
+						<label value="Placa" />
+						<vbox>
+							<textbox id="txtPlaca" readonly="true" width="99%" />						
+							<textbox id="txtPlacaAct" onChange="self.setValue(self.getValue().toUpperCase().trim());" width="90px" />
+						</vbox>
+					</row>
+
+				</rows>
+			</grid>
+
+
+
+			<grid>
+				<rows>
+					<row>
+						<label value="Observación" />
+						<vbox>
+							<textbox id="txtObservacion" width="99%" height="45px" multiline="true"/>
+						</vbox>	
+					</row>
+				</rows>	
+			</grid>	
+
+
+		</vbox>
+	</window>
+</zk>

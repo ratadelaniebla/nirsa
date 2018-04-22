@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?page id="pagCalidadBPMDes"?>
+<window id="winCalidadMuestrasClasificacionResultado" apply="com.nw.webui.produccion.CalidadMuestraAsignacionEspecieResultadoWindow">
+	<label value="Reporte Asignacion Muestras Especies-Tallas" style="color:blue;font-size:11px;font-weight:bold"/>
+	<vbox  id="vbxMain">
+		
+			<grid width="99%">
+				<rows width="100%" >
+
+				  	<row>
+						<label value="Desde"/>
+						<datebox id="dteFecha1" width="110px" format="dd/MM/yyyy"/>
+					</row>					
+
+					<row>
+						<label value="Hasta"/>
+						<datebox id="dteFecha2" width="110px" format="dd/MM/yyyy"/>
+					</row>					
+
+					<row>
+						<label value=""/>
+						<toolbar>
+							<toolbarbutton id="btnBuscar" label="Buscar" image="/img/buscar.gif"/>
+						</toolbar>
+					</row> 
+								
+ 					<row>
+						<label value="Barco Descarga :" style="color:blue" />
+						<listbox id="lbxBarcoDescarga" style="font-size:11px" mold="select"
+						width="99%" />
+					</row>
+					<row>
+						<label value="Registro:" style="color:blue" />
+						<textbox id="txtRegistro" width="95%" disabled="false" readonly="true"> </textbox>
+					</row>
+				</rows>
+			</grid>
+	  	   <grid width="99%">
+				<rows>
+					<row>
+							<toolbar>	
+							   <vbox>						
+								 <toolbarbutton id="btnPdf" 			label="Reporte PDF"		/>
+								</vbox>
+							</toolbar>	
+					</row>
+				</rows>
+			</grid>  
+ 
+			
+			
+  
+
+			
+	</vbox> 
+</window>

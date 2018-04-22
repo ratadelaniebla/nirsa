@@ -1,0 +1,68 @@
+<?page title="Actualizacion Barco" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winBarcoDescarga" apply="com.nw.webui.produccion.BarcoDescargaReaperturaCierreWindow" width="99%">
+	<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="Reapertura / Cierre Barco " style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="200px">
+		
+		<grid >
+			<rows>
+				
+				<row align="center">
+				<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif"/>	
+				</row>
+				</rows>
+		</grid >
+		
+		<grid >
+			<rows>
+				<row>
+					<label value="Desde" ></label>
+					<datebox id="dteDesde" style="font-size:11px" width="130px" > </datebox>
+				</row>
+				<row>
+					<label value="Hasta" ></label>
+					<datebox id="dteHasta" style="font-size:11px" width="130px" > </datebox>
+				</row>
+				<row>
+					<label value="Buscar" ></label>
+					<toolbarbutton id="btnBuscar" tooltiptext="AgregarCuba" image="/img/buscar.gif"/>
+				</row>
+				</rows>
+		</grid >
+		<grid >
+			
+			<rows>
+				<row >
+					<label value="Barcos Aperturado" ></label>
+					<listbox id="lbxBarcoAperturado" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+				<row>
+					<label value="Registro" ></label>
+					<textbox id="txtRegistro"  readonly="true"  style="font-size:11px"  width="130px" > </textbox>
+				</row>
+				<row>
+					<label value="Fecha Descarga" ></label>
+					<textbox id="txtFechaDescarga"   style="font-size:11px" readonly="true" width="130px" > </textbox >
+				</row>
+				<row>
+					<label value="Orden Fabricacion" ></label>
+					<longbox id="lngOrdenFab" readonly="true"   style="font-size:11px" width="130px"> </longbox>
+				</row>
+				<row>
+					<label value="Viaje" ></label>
+					<intbox id="ibxViaje" readonly="true"  style="font-size:11px"  width="130px" > </intbox>
+				</row>
+				
+				
+					
+				<row>
+					<checkbox id="chkApertura" label=""></checkbox>
+					<label id="lblc" value="" ></label>
+				</row>
+			</rows>
+		</grid>
+		
+	</vbox>
+</window>
+</zk>

@@ -1,0 +1,33 @@
+<?page id = "pagCalidadPCC1Quimico" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winDescongeladoRegistro" apply="com.nw.webui.produccion.DescongeladoHabilitarIngresoManualWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="Descongelado -  " style="color:blue;font-size:12px;font-weight:bold" />
+		<label value="Habilitar Ing. Manual" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+		
+			<grid width="99%"> 
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>		
+		
+			<grid width="99%">  
+				<rows>
+				
+					<row>
+						<label value="Habilitar Ing. Manual" />
+						<checkbox id="chkIngreso" checked="false" />
+					</row>
+				</rows>
+			</grid>			
+
+		</vbox>
+	</window>
+</zk>

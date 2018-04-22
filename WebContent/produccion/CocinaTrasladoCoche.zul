@@ -1,0 +1,127 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winCocinaTraslado" apply="com.nw.webui.produccion.CocinaTrasladoCocheWindow">
+  
+  <label value="Cocina Traslado Coche" style="color:blue;font-size:12px;font-weight:bold" />
+   <vbox id="vbxMain" width="70%"> <!--  width="70%" -->
+    	<grid width="99%">
+					<rows>
+						<row align="center">
+							<vbox align="center">
+								<toolbar >
+									<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+									 	 
+								</toolbar>
+							</vbox>
+						</row>
+					</rows>
+			</grid>
+	   <grid width="99%"> 
+			<rows>
+			    <row>
+					<label value="Dia Produccion " style="color:blue"   />
+					<listbox id="lbxProduccionFecha" style="font-size:11px" mold="select" width="130px" > </listbox>
+			    </row>
+			</rows>
+	   </grid>
+	   
+	   <hbox spacing="0" width="99%">
+	       <groupbox>
+	         <vbox>
+	         	<label value="Origen"></label>
+	         	<hbox>
+	         	  <label value="Cocina : " style="color:blue"   />
+			 	  <listbox id="lbxCocina1" style="font-size:11px" mold="select" width="130px" > </listbox>
+			 	</hbox>  
+			 	 <hbox>
+			 		<label value="Cocinada" ></label>
+					<textbox id="txtCocinada1" style="font-size:11px"  width="130px"  readonly="true"> </textbox>
+				
+			 	 </hbox>
+			 </vbox>
+	   
+	  	   </groupbox>
+	  	   
+	  	 
+	   </hbox>
+	   <hbox spacing="0" width="99%">
+	   
+	      <groupbox >
+	        <toolbar >
+	          <toolbarbutton id="btnMover" label="Mover" ></toolbarbutton>
+	       </toolbar>   
+	          <separator></separator>
+	          <listbox id="lbxOrigen" model="@{winCocinaTraslado.evisceradoDetalleProcesoCocheEstadosOrdenOrigen}"
+	             multiple="true"   checkmark="false" height="160px" width="100%">
+						<listhead style="font-size:9px" >
+							<listheader label="Orden" width="80px" />
+							<listheader label="Coche" width="80px" />
+							<listheader label="Mover?" width="68px" />
+						</listhead>
+						  
+						      <listitem self="@{each=o}">
+						          	<listcell label="@{o.numero}" ></listcell>
+									<listcell  label="@{o.evisceradoDetalleProcesoCoche.codbarra}"></listcell>
+						            <listcell > 
+						               <checkbox checked="@{o.reubicarCoche}" > </checkbox> 
+						            </listcell>
+						      </listitem>
+				 </listbox>   
+	          
+	      </groupbox>
+	   
+	   </hbox>
+	   <grid width="99%"> 
+			<rows>
+			    <row>
+					<label value="Dia Produccion " style="color:blue"   />
+					<listbox id="lbxProduccionFecha2" style="font-size:11px" mold="select" width="130px" > </listbox>
+			    </row>
+			</rows>
+	   </grid>
+	   <hbox width="99%"> <!--  -->
+	    	 <groupbox>
+	           <vbox>
+	         	<label value="Destino"></label>
+	         	<hbox>
+	         	  <label value="Cocina : " style="color:blue"   />
+			 	  <listbox id="lbxCocina2" style="font-size:11px" mold="select" width="130px" > </listbox>
+			 	</hbox>  
+			 	 <hbox>
+			 		<label value="Cocinada" ></label>
+					<textbox id="txtCocinada2" style="font-size:11px"  width="130px"  readonly="true"> </textbox>
+				
+			 	 </hbox>
+			 </vbox>
+	  	   </groupbox>
+	  	   
+	   </hbox>
+	  
+	   <hbox>    
+	      <groupbox>
+	         <toolbar >
+	           <toolbarbutton  id="btnRegresar" label="Regresar" ></toolbarbutton>
+	         </toolbar>
+	         <separator></separator>
+	          <listbox id="lbxDestino" model="@{winCocinaTraslado.evisceradoDetalleProcesoCocheEstadosOrdenDestino}" multiple="true" checkmark="false" height="160px" width="100%">
+						<listhead style="font-size:9px" >
+							<listheader label="Orden" width="80px" />
+							<listheader label="Coche" width="80px" />
+							<listheader label="Regresar?" width="68px" />
+						</listhead>
+						  
+						     <listitem self="@{each=d}">
+						            <listcell label="@{d.numero}" ></listcell>
+									<listcell  label="@{d.evisceradoDetalleProcesoCoche.codbarra}"></listcell>
+						            <listcell > 
+						               <checkbox checked="@{d.reubicarCoche}" > </checkbox> 
+						            </listcell>
+						      </listitem>
+				 </listbox> 
+	      </groupbox>
+	   
+	   </hbox>
+		
+	</vbox>
+</window>
+</zk>

@@ -1,0 +1,44 @@
+<?page title="Auto Generated index.zul"?>
+<window title="Parametrización de Cambio de Fichas en Líneas" border="normal" width="200px" apply="com.nw.webui.produccion.LimpiezaParametrizacionFichasWindow">
+
+<label value=" "/>
+<grid width="99%">
+				<rows>
+					<row>
+						
+							<toolbar>
+							<vbox>
+								<toolbarbutton id="btnGrabar" label="Guardar Cambios"
+									tooltiptext="Grabar" image="/img/grabar.gif" />
+								
+							</vbox>		
+							</toolbar>
+					</row>
+				</rows>
+			</grid>
+			
+			<grid width="99%">
+			<rows>
+					<row>
+						<label value="Permiso"></label>
+					<listbox id="lbxPermiso" style="font-size:11px" mold="select"> 
+						<listitem label="" > </listitem>
+						<listitem label="Activo" > </listitem>
+						<listitem label="Inactivo" > </listitem>
+							</listbox>
+					</row>
+						<row>
+						<label value="# Línea de Ficha"></label>
+						<textbox id="txtValor1" width="120px" > </textbox>
+					</row>
+					<row>
+						<label value="# Línea a Asignar"></label>
+						<textbox id="txtValor2" width="120px" > </textbox>
+					</row>
+				</rows>
+			
+			
+			
+			
+			</grid>
+</window>

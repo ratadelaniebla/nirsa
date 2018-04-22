@@ -1,0 +1,100 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window  id="winCalidadTemperaturaCoccion" 
+	apply="com.nw.webui.produccion.CalidadTemperaturaCoccionContingenciaWindow" width="99%">
+
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="MANTENIMIENTO CALIDAD TEMPERATURA COCCION."
+			style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain" width="200px">
+
+			<grid width="99%">
+				<rows>
+				<row>
+						<label value="Fecha de Producción:"></label>
+						<listbox id="lbxFechaActiva"
+							style="font-size:11px" mold="select" width="130px">
+						</listbox>
+					</row>
+					<row>
+						<label value="Turno:"></label>
+						<listbox id="lbxTurnoProduccion"
+							style="font-size:11px" mold="select" width="130px">
+						</listbox>
+					</row>
+				</rows>
+			</grid>
+
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar"
+									tooltiptext="Grabar" image="/img/grabar.gif" />
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+			<grid width="99%">
+				<rows>
+				<row>
+						<label value="Lote:"></label>
+						<listbox id="lbxLote"
+							style="font-size:11px" mold="select" width="130px">
+						</listbox>
+					</row>
+					<row>
+						<label value="Muestra:"></label>
+						<listbox id="lbxCoche"
+							style="font-size:11px" mold="select" width="130px">
+						</listbox>
+					</row>
+					
+				</rows>
+			</grid>
+			<grid width="99%">
+				<rows>
+						<row>
+						<label value="Temperatura "></label>
+						<textbox id="txtTemperatura" readonly="false"
+							width="100px">
+						</textbox>
+					</row>
+					
+					<row>
+						<label value="# Muestreos  x lote "></label>
+						<textbox id="txtMuestreosxLote" readonly="true"
+							width="100px">
+						</textbox>
+					</row>
+					<row>
+						<label value="# Muestreos"></label>
+						<textbox id="txtMuestreos" readonly="true"
+							width="100px">
+						</textbox>
+					</row>
+					
+					
+					
+					<row>
+						<label value="# Coche " width="100px"></label>
+						<textbox id="txtNumCoche" readonly="true"
+							width="100px">
+						</textbox>
+					</row>
+					<row>
+						<label value="Lote "></label>
+						<textbox id="txtLote" readonly="true"
+							width="100px">
+						</textbox>
+					</row>
+					
+
+				</rows>
+			</grid>
+
+		</vbox>
+	</window>
+</zk>

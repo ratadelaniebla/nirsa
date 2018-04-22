@@ -1,0 +1,80 @@
+<?page title="ProduccionCargaLote" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="produccionCargaLote" apply="com.nw.webui.produccion.ProduccionCargaLoteWindow" width="90%" >
+	<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="Cargar Archivo Lote de Produccion" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+			<grid width="99%">
+				<rows>
+					<row>
+						<label value="Fecha Produccion:" style="color:blue" />
+						<datebox id="dteFecReg" width="80px" disabled="false" />
+					</row>
+					<row>
+					    <label value="Turno :" style="color:blue" />
+					    <listbox id="lbxTurno" style="font-size:11px"
+							  mold="select" width="60px" />
+					</row>
+				</rows>
+			</grid>
+
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+							    <textbox id="txtExaminar" width="80px"  readonly="true" />
+								<button id="btnExaminar" label="Examinar..." tooltiptext="Examinar"  />
+								  
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+			 <groupbox mold="3d"> 
+			   <!--   <label value="aki toy"></label> -->
+                <vbox id="flist" width="220px" />
+             </groupbox>	
+			
+					 <label value="Resumen de Carga" style="color:blue" />
+						 
+						<grid width="99%">
+							<rows>
+								<row>
+								    <label value="Nombre Archivo :" width="60px"  />
+									 <textbox id="txtNomArchivo" style="font-size:11px" readonly="true" width="100px" />
+								</row>
+								<row>
+								    <label value="Dia de Produccion :"   />
+									 <textbox id="txtDiaProd" style="font-size:11px" readonly="true" width="100px" />
+								</row>
+								<row>
+								    <label value="Turno:"   />
+									 <textbox id="txtTurno" style="font-size:11px" readonly="true" width="100px" />
+								</row>
+							</rows>
+						</grid>
+						<grid width="99%">
+							<rows>
+								<row>
+									<vbox>
+										<toolbar>
+											<button id="btnCargarGrabar" label="Cargar" tooltiptext="Cargar" image="/img/grabar.gif"/>
+											
+										</toolbar>
+									</vbox>
+								</row>
+							</rows>
+						</grid>
+						<label value="Novedades:" style="color:blue" />
+						<grid width="99%">
+							<rows>
+								<row >
+									<textbox id="txtNovedad"   multiline="true" rows="10" width="99%" readonly="true" />
+								</row>
+								 
+							</rows>
+						</grid>
+		</vbox>
+	</window> 
+</zk>

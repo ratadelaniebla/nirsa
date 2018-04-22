@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?page id="pagCamaraBarcoDes"?>
+<window id="winCamaraBarcoDes" apply="com.nw.webui.produccion.CamaraRegistroBarcoDescargaWindow">
+	<label value="Registro Descarga Cubas" style="color:blue;font-size:12px;font-weight:bold"/>
+	<vbox  id="vbxMain">
+		
+			<grid width="99%">
+				<rows>
+					<row>
+						<label value="Barco" />
+  						<listbox id="lbxBarco" style="font-size:12px" mold="select" width="120px" />
+					</row>
+					
+					<row id="RwBarcoMercante" visible="false">
+						<label value="Barco Mercante" />
+  						<textbox id="txtBarcoMercante" maxlength="20" width="120px" style="color:blue" readonly="true" />
+					</row>					
+					
+					<row>
+						<label value="N° Barco" />
+						<textbox id="txtNumBarco" maxlength="8" width="120px" style="color:blue" readonly="true" />
+					</row>
+					<row>
+						<label value="Registro" />
+						<textbox id="txtRegistro" maxlength="8" width="120px" readonly="true" />
+					</row>
+					<row>
+						<label value="N° Viaje" />
+						<textbox id="txtNumViaje" maxlength="8" width="120px" readonly="true" />
+					</row>
+					<row>
+						<label value=" CO/SO " style="color:black" />
+						<checkbox checked="true" id="chkCoSo" disabled="true"/>
+					</row>
+				</rows>
+			</grid>
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+			<grid width="99%">
+				<rows>
+
+					<row>
+						Volqueta
+						<listbox id="lbxVolqueta" style="font-size:12px"
+							mold="select" width="120px" />
+					</row>
+									
+					<row>
+						<label value="Sig. N° Descarga" />
+						<textbox id="txtNumDescarga" maxlength="8" width="120px" readonly="true" />
+					</row>
+
+				</rows>
+			</grid>
+			<grid width="99%">
+				<rows>
+					<row>
+						<label value="Cubas x Descargar:" />
+					</row>
+
+				</rows>
+			</grid>
+		<listbox id="lbxCubas" multiple="true" checkmark="true" height="130px" width="220px">
+		
+				<listhead style="font-size:9px" >
+					<listheader label="Cuba"  align="left"/>
+			</listhead>
+		</listbox>
+	</vbox> 
+</window>

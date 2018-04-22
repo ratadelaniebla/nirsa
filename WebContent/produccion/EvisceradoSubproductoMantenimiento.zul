@@ -1,0 +1,68 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winEvisceradoPesoCoche" apply="com.nw.webui.produccion.EvisceradoSubproductoMantenimientoWindow" width="99%">
+	<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="MANTENIMIENTO SUBPRODUCTO" style="color:blue;font-size:12px;font-weight:bold" />
+	
+	<vbox id="vbxMain" width="200px">
+	
+	<grid width="99%"> 
+			<rows>
+			    <row>
+					<label value="Dia Produccion " style="color:blue" />
+					<listbox id="lbxFechaActiva" style="font-size:11px" mold="select" width="130px" > </listbox>
+			    </row>
+			</rows>
+		</grid>
+	
+	<grid>
+			<rows>
+			  
+			    <row>
+					<label value="Lote " width="150px" ></label>
+					<listbox id="lbxLoteSub" style="font-size:11px" mold="select" width="100px" > </listbox>
+				</row>
+				
+				<row>
+					<label value="Pesos Resultado " width="150px" ></label>
+					<listbox id="lbxPesosResultado" style="font-size:11px" mold="select" width="100px" > </listbox>
+				</row>
+				<row>
+				   <label value="SubProducto:" ></label>
+				   <listbox id="lbxSubProducto" style="font-size:11px" mold="select" width="90px" > </listbox>
+				</row>
+				<row>
+				 <!--     <toolbar>
+						<toolbarbutton  id="btnPeso1" label="Peso" tooltiptext="Tomar Peso"
+						style="color:blue;font-size:11px;font-weight:bold" width="100px"/>
+					 </toolbar>   -->
+					 <label value="Peso" ></label>
+					 <textbox id="txtPeso1" width="90px" readonly="false" ></textbox>
+				</row>
+				
+				<row>
+					<label value="# Gavetas"></label> 
+					<intbox id="ibxGavetas" width="90px" readonly="false" ></intbox>
+				</row>
+				 <row> 
+				   <label value="Con Coche : " width="180px"/>
+				   <checkbox id="chkConCoche" ></checkbox>
+			    </row>
+				<row>
+					<label value="Cajón:"></label> 
+					<textbox id="txtCajon" width="90px" readonly="false" ></textbox>
+				</row>
+				
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabarS" tooltiptext="Grabar" image="/img/grabar.gif"/>
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>
+	
+	</vbox>
+</window>
+</zk>

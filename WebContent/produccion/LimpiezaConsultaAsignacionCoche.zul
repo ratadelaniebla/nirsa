@@ -1,0 +1,135 @@
+<?page id = "pagLimpiezaAsignacionCoche" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winLimpiezaConsultaCoche"
+		apply="com.nw.webui.produccion.LimpiezaConsultaAsignacionCocheWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<timer id="timer" delay="10000" repeats="true">
+			<attribute name="onTimer">
+			Executions.sendRedirect("/produccion/LimpiezaConsultaAsignacionCoche.zul");
+		</attribute>
+		</timer>
+		<style>
+			.mylistbox tr.z-listitem-seld { background-image:none;
+			background-color:lightgreen;}
+		</style>
+		<vbox id="vbxMain">
+			<label value="Limpieza Asignación coches"
+				style="color:blue;font-size:12px;font-weight:bold" />
+			<grid width="99%">
+				<rows>
+					<row>
+						<label value="Día Producción" />
+						<textbox id="txtDiaProduccion" readonly="true"
+							style="font-size:12px" width="120px" />
+					</row>
+					<row>
+						<label value="Turno" />
+						<!--  <listbox id="lbxTurno" style="font-size:12px" mold="select" width="120px"/> -->
+						<textbox id="txtTurno" style="font-size:11px"
+							width="130px" readonly="true">
+						</textbox>
+					</row>
+				</rows>
+			</grid>
+			<groupbox width="99%">
+				<tabbox id="tb" height="700px">
+					<tabs id="tabs">
+						<tab id="Ingresos" label="Ingresos" />
+						<tab id="Consulta" label="Consulta" />
+					</tabs>
+					<tabpanels>
+						<!-- INICIO PANEL Histamina -->
+						<tabpanel>
+							<div style="margin: 10px;">
+								<vbox>
+
+									<listbox id="lbxLimpieza"
+										
+										multiple="true" checkmark="false" height="450px" width="100%"
+										sclass="mylistbox">
+										<listhead
+											style="font-size:9px">
+											<listheader
+												label="Cod Barra" />
+											<listheader label="Lote" />
+											<listheader label="Fecha" />
+											<listheader
+												label="Especie-Talla" />
+											<listheader label="Peso" />
+											<listheader
+												label="Peso Crudo" />
+											<listheader label="Linea " />
+										</listhead>
+									</listbox>
+								</vbox>
+							</div>
+						</tabpanel>
+						<tabpanel id="tabPanelConsulta">
+							<toolbar>
+								<toolbarbutton label="CONSULTAR"
+									id="btnConsultaRep" image="/img/buscar.gif">
+								</toolbarbutton>
+							</toolbar>
+							<listbox id="lbxTotalLimpieza"
+								model="@{winLimpiezaConsultaCoche.listaLimpezaCoche}"
+								multiple="true" checkmark="false" height="450px" width="100%"
+								sclass="mylistbox">
+								<listhead style="font-size:9px">
+									<listheader label="Cod Barra" />
+									<listheader label="Lote" />
+									<listheader label="Fecha" />
+									<listheader label="Especie-Talla" />
+									<listheader label="Peso" />
+									<listheader label="Peso Crudo" />
+									<listheader label="Linea " />
+								</listhead>
+								<listitem self="@{each=b}">
+									<listcell>
+										<label id="txtOrden"
+											value="@{b.evisceradoDetalleProcesoCoche.codbarra}"
+											width="58px">
+										</label>
+									</listcell>
+									<listcell>
+										<label id="txtSal"
+											value="@{b.evisceradoDetalleProcesoCoche.idcochelote}"
+											width="78px">
+										</label>
+									</listcell>
+									<listcell>
+										<label id="txtHistamina"
+											value="@{b.fechareg}">
+										</label>
+									</listcell>
+									<listcell>
+										<label id="txtespcie"
+											value="@{b.evisceradoDetalleProcesoCoche.evisceradoDetalleProceso.produccionDetalleLoteCajon.produccionDetalleLote.especieTalla.especie.nombre}"
+											width="88px">
+										</label>
+									</listcell>
+									<listcell>
+										<label id="txtTalla"
+											value="@{b.evisceradoDetalleProcesoCoche.evisceradoDetalleProcesoCoche.evisceradoDetalleProceso.produccionDetalleLoteCajon.produccionDetalleLote.especieTalla.talla.nombre}"
+											width="88px">
+										</label>
+									</listcell>
+									<listcell>
+										<label id="txtpcrudo"
+											value="@{b.evisceradoDetalleProcesoCoche.peso}"
+											width="88px">
+										</label>
+									</listcell>
+									<listcell>
+										<label id="txtfluorometro"
+											value="@{b.limpiezaLinea.idlimpiezalinea}" width="88px">
+										</label>
+									</listcell>
+								</listitem>
+							</listbox>
+						</tabpanel>
+					</tabpanels>
+				</tabbox>
+			</groupbox>
+		</vbox>
+	</window>
+</zk>

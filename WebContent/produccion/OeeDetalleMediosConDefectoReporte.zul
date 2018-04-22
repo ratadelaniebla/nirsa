@@ -1,0 +1,67 @@
+<?page title="REPORTES DE MEDIOS CON DEFECTO" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="reporteOeeDetalleMediosConDefecto" apply="com.nw.webui.produccion.OeeDetalleMediosConDefectoReporteWindow">
+<label value="REPORTES DE MEDIOS CON DEFECTO" style="color:blue;font-size:11px;font-weight:bold"/>
+	 <vbox  id="vbxMain" width="99%">
+		    <grid width="98%">
+				<rows>
+					<row>
+						<label value="Fecha :"/>
+						<datebox id="dteFechaInicial" width="110px" format="dd/MM/yyyy" />
+					</row> 
+					<!-- 
+					<row>
+					   <label value="Turno :" style="color:blue" />
+				       <listbox id="lbxTurno" style="font-size:11px" mold="select" width="80%" />
+					</row>  -->
+					<row>
+					   <label value="Proceso :" style="color:blue" />
+				       <listbox id="lbxProceso" style="font-size:11px" mold="select" width="80%" />
+					</row>
+					
+					<!--  
+					<row visible="false" >
+					  <label value="Tipo Parada :" style="color:blue" />
+				        <listbox id="lbxTipoParada" style="font-size:11px" mold="select" width="120px" >
+				        <listitem selected="true" label=""  />
+				    	<listitem label="Programada"     value="True" />
+				     	<listitem label="No Programada"  value="False" />
+				      </listbox>
+					</row>
+					
+					<row visible="false" >
+					  <label value="Tipo Equipo-Persona :" style="color:blue" />
+				        <listbox id="lbxTipoEquipoPersona" style="font-size:11px" mold="select" width="120px" >
+				        <listitem selected="true" label=""  />
+				    	<listitem label="Por Equipo"     value="True" />
+				     	<listitem label="Por Persona"    value="False" />
+				      </listbox>
+					</row>
+					<row visible="false" >
+					   <label value="Parada:" style="color:blue" />
+				       <listbox id="lbxParadas" style="font-size:11px" mold="select" width="80%" />
+					</row>
+					  --> 
+
+			   </rows>
+			</grid>  	
+			
+		  <grid width="99%">
+			<rows>
+				<row>
+					<vbox width="100%" >
+						<toolbar>
+							<toolbarbutton id="btnPdf" label="DESCARGA PDF" width="320px" />
+						</toolbar>
+						
+						<toolbar>
+							<toolbarbutton id="btnExcel" label="DESCARGA EXCEL" />
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		  </grid>	
+		 
+	</vbox> 
+</window>
+</zk>

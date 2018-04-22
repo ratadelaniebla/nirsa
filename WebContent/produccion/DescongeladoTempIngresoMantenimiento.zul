@@ -1,0 +1,141 @@
+<?page title="DescTempIngMant" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winTempIngresoDescongeladoMant" apply="com.nw.webui.produccion.DescongeladoTempIngresoMantenimientoWindow" >
+	<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="MANT. DESCONGELADO TEMP. INGRESO" style="color:blue;font-size:12px;font-weight:bold" />
+	
+	<vbox id="vbxMain" width="280px">
+		<grid width="99%">
+			<rows>
+				<row>
+					<label value="Fec.Prod. " style="color:blue" />
+					<listbox id="lbxFechaActiva" style="font-size:11px" mold="select" width="99%" > </listbox>
+				</row>
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+				<row >
+					<label value="Turno Producción" ></label>
+					<listbox id="lbxTurnoProduccion" style="font-size:11px" mold="select" width="99%" > </listbox>
+				</row>
+				<!--
+				<row >
+					<label value="Turno Labor" ></label>
+					<listbox id="lbxTurnoLabor" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+				-->
+			</rows>
+		</grid>
+		
+		<grid  width="280px">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>
+		
+		<grid  width="280px">
+			<rows>
+				<row>
+					<label value="Cajon"></label>
+					
+					<hbox>
+						<listbox id="lbxCajon" style="font-size:11px" mold="select" width="99%" > </listbox>					
+					
+						<toolbar >
+							<toolbarbutton id="btnActualizar"  tooltiptext="Actualizar" image="/img/refrescar.gif"/>
+						</toolbar>					
+					</hbox>					
+					
+				</row>
+
+				<row>
+					<label value="Temperatura"></label>
+					
+					<hbox>
+						<listbox id="lbxTemperatura" style="font-size:11px" mold="select" width="99%" > </listbox>					
+						<toolbar >
+							<toolbarbutton id="btnActualizart"  tooltiptext="Actualizar" image="/img/refrescar.gif"/>
+						</toolbar>					
+					</hbox>					
+					
+				</row>
+
+
+     				
+
+				
+				<row>
+					<label value="Cajon Revolteo" ></label>
+					<textbox id="txtCajonRevolteo" readonly="true"  maxlength="255" width="99%" ></textbox>
+				</row>
+								
+				<row>
+					<label value="Lote"></label>
+					<textbox id="txtLote" maxlength="255" readonly="true" width="99%" ></textbox>
+				</row>
+				<row>
+					<label value="Num. Ducha"></label>
+					<textbox id="txtNumDucha" maxlength="255" readonly="true" width="99%" ></textbox>
+				</row>
+			</rows>
+		</grid>
+		
+		<grid  width="280px">
+			<rows>
+				<row>
+					<label value="Temperatura"></label>
+					 <textbox id="txtTemperatura"  maxlength="255" width="99%"  ></textbox> 
+					<!--<doublebox id="doubxTemperatura" maxlength="10" width="100px"  > </doublebox>  -->
+				</row>
+				
+
+				
+				
+				<row>
+					<label value="Num. Muestra"></label>
+					<textbox id="txtNumMuestra" maxlength="255" readonly="true" width="99%" ></textbox>
+				</row>
+				<row>
+					<label value="Promedio"></label>
+					<textbox id="txtPromedio" maxlength="255" readonly="true" width="99%" ></textbox>
+				</row>
+			</rows>
+		</grid>
+		
+		
+		
+		<grid  width="280px">
+			<rows>
+
+	
+				<row>
+
+					<hbox>
+						<label value="Confirmar" />
+						<checkbox id="ChkEliminar" width="99%"></checkbox>
+					</hbox>		
+					
+					<hbox>
+						<toolbar>
+							<toolbarbutton id="btnEliminar" label="Eliminar"/>
+						</toolbar>
+					</hbox>
+				</row>
+				
+			</rows>
+		</grid>
+		
+		
+		
+		
+	</vbox>
+</window>
+</zk>

@@ -1,0 +1,142 @@
+<?page id = "pagLimpiezaAperturaCierre" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winEEvisceradoDetalleParadas" >
+	<!-- apply="com.nw.webui.produccion.EvisceradoDetalleParadasWindow" -->
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="REG. PARADAS EN BANDA DE RACKEO" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+		
+			<grid width="99%">  
+				<rows>
+					<row>
+						<label value="Paradas" />
+						<listbox id="lbxParadas" style="font-size:12px" mold="select" width="120px" />
+					</row>					
+					<row>
+						<label value="Paradas en Curso"/>
+						<listbox id="lbxParadasCurso" style="font-size:12px" mold="select" width="120px" />
+					</row>
+
+
+					<row>
+						<label value="Cajón Propuesto"/>
+						<listbox id="lbxCajoPropuesto" style="font-size:12px" mold="select" width="120px" />
+					</row>
+
+					
+					<row>
+						<label value="Cajón volteado"/>
+						<textbox id="txtCajon" readonly="true"></textbox>
+					</row>
+
+
+					<row>
+						<label value="Fecha Hora Volteo"/>
+						<textbox id="txtFechaHoraVolteo" readonly="true"></textbox>
+					</row>
+
+					<row>
+						<label value="Lote"/>
+						<textbox id="txtlote" readonly="true"></textbox>
+					</row>
+
+					<row>
+						<label value="Especie Talla"/>
+						<textbox id="txtEspecieTalla" readonly="true" rows="2"></textbox>
+					</row>
+
+				</rows>
+			</grid>	
+			
+
+			<label value="INICIO PARADA"/>			
+			<grid width="99%">  
+				<rows>
+					<row>
+						<hbox>
+						
+							<label value="Mes"/>
+							<listbox id="Mesi" mold="select"/>
+
+						
+							<label value="Día"/>
+							<listbox id="lbxDii" mold="select"/>
+							
+							<label value="Hora"/>
+							<listbox id="lbxHio" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMii" mold="select"/>							
+						</hbox>
+				    </row>
+				</rows>
+			</grid>			
+			
+
+			<label value="FIN PARADA"/>			
+			<grid width="99%">  
+				<rows>
+					<row>
+						<hbox>
+
+							<label value="Mes"/>
+							<listbox id="Mesf" mold="select"/>
+						
+							<label value="Día"/>
+							<listbox id="lbxDif" mold="select"/>
+							
+							<label value="Hora"/>
+							<listbox id="lbxHif" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMif" mold="select"/>							
+						</hbox>
+				    </row>
+				</rows>
+			</grid>			
+
+
+			<grid width="99%">  
+				<rows>
+				
+					<row>
+						<label value="Tiempo total Para"/>
+						<textbox id="txtTotalTiempo" readonly="true"></textbox>
+					</row>
+					
+					<row>
+						<label value="Observación"/>
+						<textbox id="txtObservacion" rows="4"></textbox>
+					</row>
+					
+				</rows>
+			</grid>			
+			
+			<grid width="99%"> 
+				<rows>
+					<row>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif" />
+						</toolbar>
+					</row>
+
+					<row>
+	
+						<hbox>
+							<label value="Confirmar" />
+							<checkbox id="ChkEliminar" width="99%"></checkbox>
+						</hbox>		
+						
+						<hbox>
+							<toolbar>
+								<toolbarbutton id="btnEliminar" label="Eliminar"/>
+							</toolbar>
+						</hbox>
+					</row>					
+					
+					
+				</rows>
+			</grid>		
+		</vbox>
+	</window>
+</zk>

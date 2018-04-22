@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<!--
+	Created by ZK Studio
+-->
+
+<zk>
+
+	<preference>
+		<name>JpaUtil.PersistenceUnitName</name>
+		<value>NW</value>
+	</preference>
+
+	<device-config>
+		<device-type>ajax</device-type>
+		<timeout-uri>/index.zul</timeout-uri>
+		<!--
+			An empty URL can cause the browser to reload the same URL
+		-->
+	</device-config>
+</zk>

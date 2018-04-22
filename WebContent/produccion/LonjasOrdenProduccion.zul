@@ -1,0 +1,66 @@
+<?page title="LONJAS ORDEN DE PRODUCCION" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window  apply="com.nw.webui.produccion.LonjasOrdenProduccionWindow">
+<label value="Orden de Produccion de lonjas" style="color:blue;font-size:11px;font-weight:bold"/>
+	 <vbox  id="vbxMain" width="99%">
+		    <grid width="98%">
+				<rows>
+					<row>
+						<label value="Fecha Labor :"/>
+						<!--   <datebox id="dteFecha" width="110px" format="dd/MM/yyyy" /> -->
+					     <textbox id="txtFechaProduccion" readonly="true"  ></textbox>
+					</row> 
+					<row>
+					   <label value="Turno :" style="color:blue" />
+				       <textbox id="txtTurno" readonly="true"  ></textbox>
+					</row>
+					
+				    <row>
+					   <label value="Orden Produccion :" style="color:blue" />
+				       <textbox id="txtOrdenProduccion"   ></textbox>
+					</row>
+					
+				  <!--   <row>
+					   <label value="Orden Fabricacion Funda :" style="color:blue" />
+				       <textbox id="txtOrdenFabricacionFunda"   ></textbox>
+					</row>  -->
+					
+				    <row>
+					   <label value="Cliente:" style="color:blue" />
+				       <textbox id="txtCliente"   ></textbox>
+				    </row>
+				    
+				    <row>
+					   <label value="Producto:" style="color:blue" />
+				       <textbox id="txtProducto"   ></textbox>
+				    </row>
+ 
+					<row>
+					   <label value="Peso Funda :" style="color:blue" />
+				       <textbox id="txtPeso"   ></textbox>
+					</row>
+					
+					<row>
+					   <label value="Tipo Empaque:" style="color:blue" />
+				       <textbox id="txtEmpaque"   ></textbox>
+					</row>
+					
+				   
+			   </rows>
+			</grid>  	
+			
+		   <grid width="99%">
+			<rows>
+				<row>
+					<vbox width="100%" >
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="GRABAR" width="320px" />
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		   </grid>	
+		 
+	</vbox> 
+</window>
+</zk>

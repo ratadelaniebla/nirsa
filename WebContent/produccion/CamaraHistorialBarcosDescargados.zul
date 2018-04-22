@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?page id="pagCalidadBPMDes"?>
+<window id="winCamaraImpresionHistorialBarcosDescargados" apply="com.nw.webui.produccion.CamaraImpresionHistorialBarcosDescargadosWindow">
+	<label value="Historial Barcos Descargados" style="color:blue;font-size:11px;font-weight:bold"/>
+	<vbox  id="vbxMain">
+		
+			<grid width="99%">
+				<rows>
+
+					<row>
+						<label value="Desde"/>
+						<datebox id="dteFecha1" width="110px" format="dd/MM/yyyy"/>
+					</row>					
+
+					<row>
+						<label value="Hasta"/>
+						<datebox id="dteFecha2" width="110px" format="dd/MM/yyyy"/>
+					</row>					
+
+				</rows>
+			</grid>
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<label value="Imprimir" style="color:blue;font-size:12px;font-weight:bold"/>
+							<textbox id="txtTipo" value="SC" readonly="true" visible="false"> </textbox>
+							<toolbar>
+								<vbox>
+								<toolbarbutton id="btnCamaraHistorialBarcosDescargados" label="Historial Barcos Descargados"/>
+								</vbox>
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+
+			
+	</vbox> 
+</window>

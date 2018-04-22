@@ -1,0 +1,65 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winAperturaCierreLonjas" apply="com.nw.webui.produccion.ProduccionReporteArchivoWindow" width="99%">
+	<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="REPORTE CARGA DE ARCHIVO" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="99%">
+		<grid >
+			<rows>
+				<row >
+					<label value="Días Producción " ></label>
+					<datebox id="dteFecReg" disabled="false" /> 
+				</row>
+				
+				<row >
+					<label value="Turno" ></label>
+					<listbox id="lbxTurno" style="font-size:11px" mold="select" > </listbox>
+				</row>
+				<row>
+					<label value="Cargas" ></label>
+					<hbox>
+						<listbox id="lbxCargas" style="font-size:11px" mold="select" width="170px" > </listbox>
+						<toolbar >
+							<toolbarbutton id="btnActulizar"  tooltiptext="Actualizar" image="/img/refrescar.gif"/>
+						</toolbar>					
+					</hbox>	
+				</row>
+				
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnImprimir" label="Visualizar Archivo" tooltiptext="Visualizar Archivo" />
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>
+		
+		
+		<label value="REPORTE DESGLOSE" style="color:blue;font-size:12px;font-weight:bold" />
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnImprimirDesglosePdf" label="Desglose de Lotes PDF" tooltiptext="Visualizar Archivo Desglose de Lotes" />
+						</toolbar>
+						
+						<toolbar>	
+							<toolbarbutton id="btnImprimirDesgloseExcel" label="Desglose de Lotes Excel" tooltiptext="Descargar Archivo Desglose de Lotes" />
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>		
+		
+		
+		
+	</vbox>
+</window>
+</zk>

@@ -1,0 +1,66 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+
+<?page id="pagCalidadBPMDes"?>
+<window id="winCamaraBarcoDescargaImpresion" apply="com.nw.webui.produccion.CalidadTemperaturaCajonbandaImpresionWindow">
+	<label value="Reporte Temperatura Cajon Banda " style="color:blue;font-size:11px;font-weight:bold"/>
+	<vbox  id="vbxMain">
+		
+			<grid width="99%">
+				<rows>
+					<row>
+						<label value="Fecha Inicio" style="color:blue"/>
+						<datebox id="dteFecha1" style="font-size:11px"  width="100px" format="dd/MM/yyyy"/>
+					</row>					
+
+					<row>
+					<hbox>
+						<label value="Fecha Fin" style="color:blue"/>
+					</hbox>
+						<hbox>
+						<datebox id="dteFecha2" style="font-size:11px"  width="100px" format="dd/MM/yyyy"/>
+					
+							<toolbar>
+								<toolbarbutton id="btnBuscar" image="/img/buscar.gif"/>
+							</toolbar>
+						</hbox>
+					</row>					
+
+					<row>
+						
+						
+					</row>
+								
+					<row>
+				    <label value="Registro :" style="color:blue" />	
+				    <hbox>
+				        <textbox id="txtRegistro"  width="100px" > </textbox>
+				        <toolbar>
+							<toolbarbutton id="btnBuscarRegistro" tooltiptext="Grabar" image="/img/buscar.gif"/>
+					</toolbar>
+				        
+				    </hbox>
+				    
+				</row>
+				</rows>
+			</grid>
+			
+			<grid >
+			<rows >
+				<row>
+				    <label value="Barcos :" style="color:blue" />
+				    <listbox id="lbxBarcos" style="font-size:11px" mold="select" width="120px" />
+				</row>
+				</rows>
+			</grid>
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<label value="Imprimir" style="color:blue;font-size:12px;font-weight:bold"/> 
+							<toolbarbutton id="btnCalidadRemuestreo" label="Reporte Temperatura Cajon Banda" style="color:blue;font-size:12px;font-weight:bold"/>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+	</vbox> 
+</window>

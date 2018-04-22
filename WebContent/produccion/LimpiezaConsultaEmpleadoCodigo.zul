@@ -1,0 +1,65 @@
+<?page title="CONSULTA EMPLEADO CODIGO" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winLimpiezaConsultaEmpleadoCodigo" border="none" apply="com.nw.webui.produccion.LimpiezaConsultaEmpleadoCodigoWindow">
+<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="CONSULTA EMPLEADO x CODIGO" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="220px">
+		<grid >
+			<rows>
+				<row>
+				    <label value="Fech.Prod. - Turno :" style="color:blue" />
+				    <listbox id="lbxProcesosActivos" style="font-size:11px" mold="select" width="120px" />
+				</row>
+<!--  				<row>
+					<label value="Fecha Produccion " style="color:blue" />
+					<textbox id="txtFechaActiva"  style="font-size:11px"  width="130px" readonly="true" ></textbox>
+				</row>
+				<row>
+				    <label value="Turno :" style="color:blue" />
+				    <textbox id="txtTurno"  style="font-size:11px"  width="130px" readonly="true" ></textbox>
+				</row>-->
+			</rows>
+		</grid>
+		<grid >
+			<rows >
+				<row>
+						<hbox>
+							 <label value="Empleado" style="color:blue" />
+						</hbox>
+					
+						<hbox>
+							 <textbox id="txtEmpleado"  style="font-size:11px"  width="100px" readonly="false" ></textbox>
+						<toolbar>							
+							<toolbarbutton id="btnBuscarEmpleado" tooltiptext="Buscar Empleado" image="/img/buscar.gif" style="color:blue;font-size:12px;font-weight:bold" />
+						</toolbar>
+						</hbox>
+				</row>
+				<row>
+					<label value="Nombres :" style="color:blue" />
+					<textbox id="txtNombre" disabled="false" width="120px" readonly="true" multiline="true" rows="3" > </textbox>
+				</row>
+			
+				<row>
+				    <label value="Tarjeta :" style="color:blue" />
+				    <listbox id="lbxTarjeta" style="font-size:11px" mold="select" width="120px" />
+				</row>
+				
+				<row>
+					<label value="Linea" width="100px" style="color:blue"></label>
+					<textbox id="txtLinea" width="70px" readonly="true" > </textbox>
+				</row>
+				<row>
+					<label value="Ubicacion" width="100px" style="color:blue"></label>
+					<textbox id="txtUbicacion" width="70px" readonly="true" > </textbox>
+				</row>
+				
+				
+				
+				
+				
+			</rows>
+		</grid>
+		
+	</vbox>
+</window>
+</zk>

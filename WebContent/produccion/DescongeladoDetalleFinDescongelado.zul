@@ -1,0 +1,194 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winFinDescongelado" apply="com.nw.webui.produccion.DescongeladoDetalleFinDescongeladoWindow">
+	<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="FIN FORZADO X CAJÓN" style="color:blue;font-size:12px;font-weight:bold" />
+	
+	<vbox id="vbxMain"  width="99%">
+
+		<grid width="99%">
+			<rows>
+				<row>
+					<label value="Fec.Prod. " style="color:blue" />
+					<listbox id="lbxFechaActiva" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+				<row >
+					<label value="Turno Producción" ></label>
+					<listbox id="lbxTurnoProduccion" style="font-size:11px" mold="select" width="99%" > </listbox>
+				</row>
+				<row >
+					<label value="Turno Labor" ></label>
+					<listbox id="lbxTurnoLabor" style="font-size:11px" mold="select" width="99%" > </listbox>
+				</row>
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>
+		
+		<grid  width="99%">
+			<rows >
+
+				<row>
+					<label value="Num. Ducha"></label>
+					<listbox id="lbxNumDucha" style="font-size:11px" mold="select"  width="99%"></listbox>
+				</row>			
+
+				<row>
+					<label value="Cajon" ></label>
+					<listbox id="lbxCajon" style="font-size:11px" mold="select" width="99%" ></listbox>
+				</row>
+				
+				<row>
+					<label value="Cajon Revolteo" ></label>
+					<textbox id="txtCajonRevolteo" readonly="true"  maxlength="255" width="99%" ></textbox>
+				</row>
+				<row>
+					<label value="Num Ducha"></label>
+					<textbox id="txtNumDucha" readonly="true"  maxlength="255" width="99%" ></textbox>
+				</row>
+								
+
+													
+				<row>
+					<label value="Lote"></label>
+					<textbox id="txtLote" readonly="true"  maxlength="255" width="99%" ></textbox>
+				</row>
+				
+				
+				<row>
+				    <label value="Cuba:" width="99%"   />
+				   	<textbox id="txtCuba"  readonly="true" rows="2" width="99%"/>
+				</row>
+
+				<row>
+				    <label value="L.Camara:" width="99%"   />
+				   	<textbox id="txtLoteCamara"  readonly="true"/>
+				</row>
+
+
+				<row>
+				    <label value="L.Haccp:" width="99%"   />
+				   	<textbox id="txtHaccp"  readonly="true"/>
+				</row>				
+				
+				
+				<row>
+					<label value="Especie-Talla"></label>
+					<textbox id="txtEspecieTalla" readonly="true"  maxlength="255" width="99%" ></textbox>
+				</row>
+				<row>
+					<label value="Barco" ></label>
+					<textbox id="txtBarcoDescarga" readonly="true" width="99%"> </textbox>
+				</row>
+				<row>
+					<label value="Origen"></label>
+					<textbox id="txtOrigen" readonly="true"  maxlength="255" width="99%" ></textbox>
+				</row>
+				<row>
+					<label value="Pedido"></label>
+					<textbox id="txtPedido" readonly="true"  maxlength="255" width="99%" ></textbox>
+				</row>
+			</rows>
+		</grid>
+
+
+		<!-- 
+		<label value="PARADA DE BANDA" style="color:blue;font-size:12px;font-weight:bold" />	
+
+		<grid width="99%">
+			<rows>
+				<row>
+					<label value="Lote en Curso"></label>
+					<textbox id="txtLoteCurso" readonly="true"  maxlength="255" width="100px" ></textbox>
+				</row>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabarParada" tooltiptext="Grabar Parada" image="/img/grabar.gif"/>
+						</toolbar>
+					</vbox>
+					<vbox>
+					<label value="Parada de Banda"></label>
+					</vbox>
+				
+				</row>
+			</rows>
+		</grid>
+		 -->
+
+		<!-- 
+		<label value="SALIDA OTRA AREA" style="color:blue;font-size:12px;font-weight:bold" />	
+		
+		<grid width="99%">
+			<rows>
+
+				<row >
+					<label value="Cajon " ></label>
+					
+					<hbox>
+						<textbox id="txtCajon" width="80px" > </textbox>
+				
+						<toolbar>
+								<toolbarbutton id="btnBuscar" tooltiptext="Buscar" image="/img/buscar.gif"/>
+						</toolbar>
+					
+					</hbox>
+				</row>
+				
+				<row>
+					<label value="Cajones Disponibles " style="color:blue" />
+					<listbox id="lbxCajonesDisponibles" style="font-size:11px" mold="select" width="120px" > </listbox>
+				</row>
+
+				<row>
+					<label value="Especie-Talla " width="100px"></label>
+					<textbox id="txtEspecieTalla1" multiline="true" readonly="true" width="100px" > </textbox>
+				</row>
+				<row>
+					<label value="Barco" ></label>
+					<textbox id="txtBarcoDescarga1" readonly="true" width="100px"> </textbox>
+				</row>
+				<row>
+					<label value="Origen " ></label>
+					<textbox id="txtOrigen1" readonly="true" width="100px"> </textbox>
+				</row>
+				<row>
+					<label value="Cuba " ></label>
+					<textbox id="txtCuba" readonly="true" width="100px"> </textbox>
+				</row>
+				
+			</rows>
+		</grid>	
+		<grid>
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabarEstado" tooltiptext="GrabarEstado" image="/img/grabar.gif"/>
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>	
+		 -->
+		
+		
+		
+		</vbox>
+</window>
+</zk>

@@ -1,0 +1,105 @@
+<?page title="LimpPesDetDesper" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winLimpiezaDetPesajeDesperdicio" apply="com.nw.webui.produccion.LimpiezaDetallePesajeDesperdicioWindow" >
+<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="Limpieza - Registro Desperdicio" style="color:blue;font-size:12px;font-weight:bold" />
+	
+	<vbox id="vbxMain">
+	
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+						
+							<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+							<space width="160px"></space>
+							<toolbarbutton id="btnLimpiar" tooltiptext="Limpiar" image="/img/crear.gif"/>
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>		
+	
+		<grid width="99%">
+			<rows>
+				<row>
+					<label value="Línea" ></label>
+					<listbox id="lbxLinea" style="font-size:11px" mold="select"> 
+						<listitem label="" > </listitem>
+						<listitem label="1" > </listitem>
+						<listitem label="2" > </listitem>
+						<listitem label="3" > </listitem>
+						<listitem label="4" > </listitem> 
+						<listitem label="5" > </listitem>
+						<listitem label="6" > </listitem> 
+						<listitem label="7" > </listitem>
+						<listitem label="8" > </listitem> 
+						<listitem label="9" > </listitem>
+						<listitem label="10" > </listitem> 
+						<listitem label="11" > </listitem>
+						<listitem label="12" > </listitem> 
+						<listitem label="13" > </listitem>
+						<listitem label="14" > </listitem> 
+						<listitem label="15" > </listitem> 
+					</listbox>
+				</row>
+				
+							
+			</rows>
+		</grid>
+		
+
+		
+		<grid>
+			<rows >
+				<row>
+					<label value="Lote"></label>
+					<div>
+						<hbox>					
+							<listbox id="lbxLote" style="font-size:11px" mold="select" width="80px" ></listbox>
+							<toolbar>
+								<toolbarbutton id="btnActualizar" tooltiptext="Grabar" image="/img/refrescar.gif"/>
+							</toolbar>
+						</hbox>
+					</div>
+				</row>
+  			
+				<row >
+					<label value="Tipo " ></label>
+					<listbox id="lbxTipoDesperdicio" style="font-size:11px" mold="select" width="80px" > </listbox>
+				</row>
+
+ 				 				
+				<row>
+					<label value="Tarjeta" ></label>
+					
+						<div>
+							<hbox>
+								<textbox id="txtTarjeta" maxlength="13" width="85px" readonly="false"></textbox>
+							</hbox>
+						</div>
+					
+				</row>
+				
+			
+
+				<row>
+					<toolbar>
+							<toolbarbutton id="btnCapturaPeso" tooltiptext="Capturar Peso" label="Peso (Gramo)" style="color:blue;font-size:11px;font-weight:bold" />
+					</toolbar>
+
+					<decimalbox id="txtCapturaPeso" format="####"  maxlength="4" width="80px" readonly="false"/>
+				</row>
+
+				<row>
+
+					<decimalbox id="txtCapturaPesoLomo" format="####"  maxlength="4" width="1px" readonly="false"/>
+				</row>				
+				
+			</rows>
+		</grid>
+		<label value="NO USE PUNTOS(.) NI COMAS(,)" style="color:blue;font-size:12px;font-weight:bold" />
+	</vbox>
+</window>
+</zk>

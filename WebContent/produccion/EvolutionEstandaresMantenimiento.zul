@@ -1,0 +1,62 @@
+<?page id = "pagCalidadPCC1Quimico" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window mode="modal" border="normal" closable="true"  title="Parametrización de Estándares para Pago" id="winEvolutionAprobacionParametrizacion" apply="com.nw.webui.produccion.EvolutionEstandaresMantenimientoWindow"   >
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="" style="color:blue;font-size:12px;font-weight:bold" />
+		<label value="Parametrización de Estándares para Pago" style="color:blue;font-size:12px;font-weight:bold" />
+		<grid width="99%"> 
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>		
+		
+		<grid>
+		<rows>
+		<row>
+		<label value="Tipo Estándar"></label>
+			<listbox id="lbxEstandarV" style="font-size:12px" mold="select" width="95%" />
+		</row>	
+		<row>
+		<label value="Talla"></label>
+			<listbox id="lbxTalla" style="font-size:12px" mold="select" width="95%" />
+		</row>	
+			<row>
+		<label value="Tipo de Limpieza"></label>
+			<listbox id="lbxLimpieza" style="font-size:12px" mold="select" width="95%" />
+		</row>	
+		<row>
+		<label value="Estándar"></label>
+		<decimalbox id="txtEstandar" ></decimalbox>
+		</row>
+		<row>
+		<label value="Costo Kg"></label>
+		<decimalbox id="txtCosto" maxlength="3"></decimalbox>
+		</row>
+		
+		</rows>
+		
+		
+		
+		
+		</grid>
+		
+		
+		<listbox id="lbxEstandar">
+			<listhead style="font-size:8px">
+					<listheader label="Eficiencia" style="font-size:4px" width="25%" />
+					<listheader label="Talla(Kg)" style="font-size:4px" width="25%" />
+					<listheader label="Talla(lbs)" style="font-size:4px" width="25%" />
+					<listheader label="Limpieza" style="font-size:4px" width="5%"  />
+					<listheader label="Estándar" style="font-size:4px" width="10%" />
+					<listheader label="Costo Kg" style="font-size:4px" width="10%"  />
+						</listhead>
+				
+		</listbox>
+	</window>
+</zk>

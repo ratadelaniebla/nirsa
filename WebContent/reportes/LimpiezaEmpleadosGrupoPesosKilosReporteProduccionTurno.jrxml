@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="LimpiezaReporteLomoLimpio" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="LOGO" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
+	<parameter name="IDPRODUCCION" class="java.lang.Long"/>
+	<parameter name="IDTURNO" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[select --n.*
+   n.fecha_produccion,
+   n.turno,
+   n.idlinea,
+   --n.ubicacionpersona,
+   n.cod_evolution,
+   n.cedula,
+   n.nombres,
+   sum(n.peso_neto) peso_neto,
+   sum(n.tara) tara,
+   sum(n.peso_bruto) peso_bruto,
+   --n.tipo_limpieza ,
+   min(n.fecha_registro) fecha_peso_primer,
+   max(n.fecha_registro) fecha_peso_ultima
+
+
+  from
+   (
+
+	select
+	fecha_produccion,
+	turno, idlinea, ubicacionpersona,
+	cod_evolution,cedula,nombres,
+	lote,
+
+	(select e.nombre
+	from limpieza_proceso_lote_activo lplaa
+	inner join limpieza_detalle_proceso_lote ldpl
+	on lplaa.idlimpiezadetalleprocesolote = ldpl.idlimpiezadetalleprocesolote
+	inner join produccion_detalle_lote pdl
+	on ldpl.idproducciondetallelote = pdl.idproducciondetallelote
+	inner join especie_talla et
+	on pdl.idespecietalla =  et.idespecietalla
+	inner join especie e
+	on et.idespecie =  e.idespecie
+	where lplaa.idlimpiezaprocesoloteactivo = t1.idlimpiezaprocesoloteactivo) despecie,
+
+
+	(select nombre from talla t where t.idtalla = t1.idtalla) talla,
+	(select talla_kilos from talla t where t.idtalla = t1.idtalla) talla_kilos,
+	talla_ajustada,
+	kilos_ajustados,
+	peso_neto,
+	tara,
+	peso_bruto,
+	material,
+	tipo_limpieza,
+	fecha_registro,
+	hora,
+	tipo_captura,
+	dispositivo,
+	idlimpiezaprocesoloteactivo,
+	idtalla
+	from
+	(
+	select
+
+	(select DATE(fechaproduccion) from produccion where idproduccion=lp.idproduccion) fecha_produccion,
+	lp.idturno turno,lpe.idlinea, ldpb.ubicacionpersona,
+	emp.codigoevolution cod_evolution,(emp.cedula) cedula,(emp.nombres) nombres,
+	pdl.idlote lote,ep.nombre despecie,
+	tl.nombre talla_ajustada,
+	tl.talla_kilos kilos_ajustados,
+
+	(ldpb.peso) peso_neto,
+	(ldpb.tara) tara,
+	(ldpb.peso + ldpb.tara) peso_bruto,
+
+	(CASE WHEN ldpb.idlimpiezamaterial=1
+	THEN 'LOMO'
+	ELSE 'RALLADO' END) material,
+
+	(select lti.descripcion from limpieza_tipo lti
+	where lti.idlimpiezatipo =  (select idlimpiezatipo from limpieza_proceso_lote_activo where idlimpiezaprocesoloteactivo = ldpb.idlimpiezaprocesoloteactivo)
+	) tipo_limpieza,
+
+
+	(ldpb.fechareg) fecha_registro,
+	to_char(ldpb.fechareg, 'HH24') hora,
+	(CASE when dispositivo='B'
+	then 'Scanner'
+	else 'Handheld'  END)
+	dispositivo,
+	(CASE WHEN automatico=true
+	then 'Automático'
+	else
+	'Manual'
+	END)tipo_captura,
+
+	ldpb.idlimpiezaprocesoloteactivo,
+
+	(CASE WHEN
+	(select idtalla_ajustada from limpieza_detalle_proceso_coche ldpc
+	where ldpc.idlimpiezadetalleprocesolote=ldpb.idlimpiezadetalleprocesolote  and ldpc.idlinea=lpe.idlinea limit 1) ISNULL
+
+	THEN
+	(select idtalla from especie_talla et where et.idespecietalla=(select pdl.idespecietalla from produccion_detalle_lote pdl where pdl.idproducciondetallelote=
+	(select ldpl.idproducciondetallelote from limpieza_detalle_proceso_lote ldpl where ldpl.idlimpiezadetalleprocesolote=ldpb.idlimpiezadetalleprocesolote)))
+	ELSE
+	(select idtalla_ajustada from limpieza_detalle_proceso_coche ldpc
+	where ldpc.idlimpiezadetalleprocesolote=ldpb.idlimpiezadetalleprocesolote  and ldpc.idlinea=lpe.idlinea limit 1)
+	END) idtalla
+
+
+	from limpieza_detalle_proceso_bandeja ldpb
+	inner join limpieza_proceso_empleado lpe on lpe.idlimpiezaprocesoempleado=ldpb.idlimpiezaprocesoempleado
+	inner join limpieza_proceso lp on lp.idlimpiezaproceso=lpe.idlimpiezaproceso
+	inner join produccion p on p.idproduccion=lp.idproduccion
+	inner join limpieza_detalle_proceso_lote ldpl on ldpl.idlimpiezadetalleprocesolote=ldpb.idlimpiezadetalleprocesolote
+	inner join limpieza_tipo lt on lt.idlimpiezatipo=ldpl.idlimpiezatipo
+	inner join empleado emp on emp.idempleado=lpe.idempleado
+	inner join produccion_detalle_lote pdl on pdl.idproducciondetallelote=ldpl.idproducciondetallelote
+	INNER JOIN especie_talla et on et.idespecietalla=pdl.idespecietalla
+	inner join especie ep on ep.idespecie=et.idespecie
+	inner join talla tl on tl.idtalla=et.idtalla
+
+	where p.idproduccion = $P{IDPRODUCCION} and ldpb.idturno = $P{IDTURNO}
+
+	and ldpb.idlinea<>99
+	order by ldpb.idlinea, ldpb.fechareg
+	) t1
+
+   ) n
+
+
+   group by  n.fecha_produccion,
+   n.turno,
+   n.idlinea,
+   n.cod_evolution,
+   n.cedula,
+   n.nombres
+
+  order by n.nombres asc]]>
+	</queryString>
+	<field name="fecha_produccion" class="java.sql.Date"/>
+	<field name="turno" class="java.lang.Integer"/>
+	<field name="idlinea" class="java.lang.Integer"/>
+	<field name="cod_evolution" class="java.lang.String"/>
+	<field name="cedula" class="java.lang.String"/>
+	<field name="nombres" class="java.lang.String"/>
+	<field name="peso_neto" class="java.lang.Double"/>
+	<field name="tara" class="java.lang.Double"/>
+	<field name="peso_bruto" class="java.lang.Double"/>
+	<field name="fecha_peso_primer" class="java.sql.Timestamp"/>
+	<field name="fecha_peso_ultima" class="java.sql.Timestamp"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="134" y="0" width="668" height="18"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE AGRUPADO DE PESOS EN PLANTA ATUNERA POR PRODUCCION Y TURNO]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="134" height="42"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<imageExpression class="java.lang.String"><![CDATA[$P{LOGO}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="134" y="26" width="116" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[PRODUCCION:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="465" y="26" width="75" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[TURNO :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="540" y="26" width="80" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$P{IDTURNO}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="250" y="26" width="189" height="16"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{fecha_produccion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="8" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="15" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="50" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[F. PROD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="167" y="0" width="59" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CÉDULA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="226" y="0" width="189" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="415" y="0" width="59" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PESO NETO(G)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="85" y="0" width="35" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LÍNEA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="0" width="35" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TURNO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="0" width="47" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COD. EVO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="474" y="0" width="59" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TARA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="533" y="0" width="59" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PESO BRUTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="592" y="0" width="87" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FEC. REG. PRIMERA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="679" y="0" width="87" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FEC. REG. ULTIMA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="0" width="50" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="false"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[$F{fecha_produccion}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="50" y="0" width="35" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{turno}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="167" y="0" width="59" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cedula}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="226" y="0" width="189" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nombres}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="415" y="0" width="59" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{peso_neto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="85" y="0" width="35" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{idlinea}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="0" width="47" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cod_evolution}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="474" y="0" width="59" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{tara}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00;-###0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="533" y="0" width="59" height="15" forecolor="#000000" backcolor="#FFFFFF"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" lineSpacing="Single" markup="none">
+					<font fontName="SansSerif" size="7" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfFontName="Helvetica" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{peso_bruto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement x="592" y="0" width="87" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{fecha_peso_primer}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement x="679" y="0" width="87" height="15"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{fecha_peso_ultima}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="9" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="9" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="9" splitType="Stretch"/>
+	</summary>
+</jasperReport>

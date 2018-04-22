@@ -1,0 +1,58 @@
+
+<?page title="ProduccionCargaLote" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="EmpleadoCargaExcel"
+		apply="com.nw.webui.produccion.EmpleadoCargaExcelWindow"
+		width="90%">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="Cargar Archivo de Empleados"
+			style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<textbox id="txtExaminar" width="80px"
+									readonly="true" />
+								<button id="btnExaminar"
+									label="Examinar..." tooltiptext="Examinar" />
+
+							</toolbar>
+						</vbox>
+					</row>
+
+				</rows>
+			</grid>
+			<label value="Resumen de Carga" style="color:blue" />
+			<grid width="99%">
+				<rows>
+					<row>
+						<label value="Nombre Archivo :" width="60px" />
+						<textbox id="txtNomArchivo"
+							style="font-size:11px" readonly="true" width="100px" />
+					</row>
+					<row>
+						<vbox>
+							<toolbar>
+								<button id="btnCargarGrabar"
+									label="Cargar" tooltiptext="Cargar" image="/img/grabar.gif" />
+
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+			<label value="Novedades:" style="color:blue" />
+			<grid width="99%">
+				<rows>
+					<row>
+						<textbox id="txtNovedad" multiline="true"
+							rows="10" width="99%" readonly="true" />
+					</row>
+
+				</rows>
+			</grid>
+		</vbox>
+	</window>
+</zk>

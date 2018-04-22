@@ -1,0 +1,86 @@
+<?page title="COCCION" contentType="text/html;charset=UTF-8"?>
+<zk>
+ <!--   -->
+ 
+<window id="winCocheCoccion" apply="com.nw.webui.produccion.CoccionRociadoCocheMantenimientoWindow" >
+<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="COCCION" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="99%">
+		
+		<grid >
+			<rows>
+		 
+				
+				<row>
+					<label value="Area Salida" ></label>
+					<listbox id="lbxArea" style="font-size:11px" mold="select" width="99%" > 
+						<listitem label="" > </listitem>
+						<listitem label="Cocción" > </listitem>
+						<listitem label="Rociado" > </listitem> 
+					</listbox>
+				</row>
+				
+		    	
+				
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+			
+				<row >
+					<label value="Coche " width="99%"></label>
+					<hbox>
+						<textbox id="txtCoche" width="80%" > </textbox>
+						<toolbar>
+							<toolbarbutton label="Buscar" id="btnBuscarCoche"  tooltiptext="Buscar" disabled="false"/>
+						</toolbar>
+					</hbox>
+				</row>
+				<row>
+					<label value="Sin Area " id="lblDuchaRociado"  ></label>
+					<listbox id="lbxDuchaRociado" style="font-size:11px" mold="select" width="99%" > </listbox>
+				</row>	
+
+				<row>
+				     <label value="Peso" ></label>
+					 <textbox id="txtPeso" width="99%" disabled="false" readonly="false" ></textbox>
+				</row>
+
+				<row>
+					<label value="Hora Ingresso Chillroom :" ></label>
+					<datebox id="dteHoraIngreso" width="80%" format="dd/MM/yyyy HH:mm" style="color:blue;font-size:11px;font-weight:bold" readonly="true" />	
+				</row>
+
+				<row>
+					Tmp.Ing.Chillroom 
+					<decimalbox id="txtTemperatura" format="###,##"  maxlength="8" width="70%" readonly="true"/>
+				</row>	
+
+			</rows>
+			
+			
+		</grid> 
+		
+		
+		
+		
+		
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>  
+		
+	  	 
+
+		
+	</vbox>
+</window>
+</zk>

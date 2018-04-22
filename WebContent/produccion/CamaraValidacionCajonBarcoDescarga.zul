@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?page id="pagCamaraBarcoDes"?>
+<window id="winCamaraValidacionBarcoDescarga" apply="com.nw.webui.produccion.CamaraValidacionCajonBarcoDescargaWindow">
+	<label value="Validación Cajon Barco Descarga" style="color:blue;font-size:12px;font-weight:bold"/>
+	<vbox  id="vbxMain">
+		
+			<grid width="99%">
+				<rows>
+					<row>
+						<label value="Barco" />
+  						<listbox id="lbxBarco" style="font-size:12px" mold="select" width="120px" />
+					</row>
+					
+					<row id="RwBarcoMercante" visible="false">
+						<label value="Barco Mercante" />
+  						<textbox id="txtBarcoMercante" maxlength="20" width="120px" style="color:blue" readonly="true" />
+					</row>
+										
+					<row>
+						<label value="N° Barco" />
+						<textbox id="txtNumBarco" maxlength="8" width="120px" style="color:blue" readonly="true" />
+					</row>
+					<row>
+						<label value="Registro" />
+						<textbox id="txtRegistro" maxlength="8" width="120px" readonly="true" />
+					</row>
+					<row>
+						<label value="N° Viaje" />
+						<textbox id="txtNumViaje" maxlength="8" width="120px" readonly="true" />
+					</row>
+					<row>
+						<label value=" CO/SO " style="color:black" />
+						<checkbox checked="true" id="chkCoSo" disabled="true"/>
+					</row>
+				</rows>
+			</grid>
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+			<grid width="99%">
+				<rows>
+					<row>
+						N° Banda
+						<listbox id="lbxTolva" style="font-size:12px"
+							mold="select" width="120px" />
+					</row>
+					<row>
+						N° Cajón
+						<listbox id="lbxCajon" style="font-size:12px"
+							mold="select" width="120px" />
+					</row>
+					<row>
+						<label value="Especie-Talla" />
+						<textbox id="txtEspecieTalla" width="120px" readonly="true" />
+					</row>
+					<row>
+						<label value="Peso" />
+						<decimalbox id="txtPeso" format="###.##"  maxlength="8" width="100px" readonly="true"/>
+					</row>
+
+					<row>
+						<label value="Num. Muestra" />
+						<textbox id="txtNumMuestra"  width="100px" readonly="true" style="color:blue;font-size:9px;font-weight:bold" />
+					</row>
+
+				</rows>
+			</grid>
+			<grid width="99%" visible="false" >
+				<rows>
+					<row >
+						<hbox align="center"> 
+  							<button label="Leer Peso" onClick="winConAut.enviar()"/> 
+						</hbox>
+					</row>
+				</rows>
+			</grid>
+			
+	</vbox> 
+</window>

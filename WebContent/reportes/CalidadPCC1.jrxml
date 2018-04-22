@@ -1,0 +1,1093 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CalidadPCC1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="54"/>
+	<style name="new_style" mode="Transparent" forecolor="#000000" backcolor="#FF9933" fill="Solid">
+		<pen lineWidth="0.25" lineColor="#000000"/>
+		<box>
+			<pen lineColor="#000000"/>
+			<topPen lineWidth="0.25" lineColor="#000000"/>
+			<leftPen lineWidth="0.25" lineColor="#000000"/>
+			<bottomPen lineWidth="0.25" lineColor="#000000"/>
+			<rightPen lineWidth="0.25" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[($F{salida}.equals('X') == true && $P{VTIPO}.equals('CC'))]]></conditionExpression>
+			<style mode="Opaque"/>
+		</conditionalStyle>
+	</style>
+	<style name="new_style_sal" mode="Transparent" forecolor="#000000" backcolor="#FF9933" fill="Solid">
+		<pen lineWidth="0.25" lineColor="#000000"/>
+		<box>
+			<pen lineColor="#000000"/>
+			<topPen lineWidth="0.25" lineColor="#000000"/>
+			<leftPen lineWidth="0.25" lineColor="#000000"/>
+			<bottomPen lineWidth="0.25" lineColor="#000000"/>
+			<rightPen lineWidth="0.25" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[($F{salidasal}.equals('X') == true && $P{VTIPO}.equals('CC'))]]></conditionExpression>
+			<style mode="Opaque"/>
+		</conditionalStyle>
+	</style>
+	<style name="new_style_histamina" mode="Transparent" forecolor="#000000" backcolor="#FF9933" fill="Solid">
+		<pen lineWidth="0.25" lineColor="#000000"/>
+		<box>
+			<pen lineColor="#000000"/>
+			<topPen lineWidth="0.25" lineColor="#000000"/>
+			<leftPen lineWidth="0.25" lineColor="#000000"/>
+			<bottomPen lineWidth="0.25" lineColor="#000000"/>
+			<rightPen lineWidth="0.25" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[($F{salidahistamina}.equals('X') == true && $P{VTIPO}.equals('CC'))]]></conditionExpression>
+			<style mode="Opaque"/>
+		</conditionalStyle>
+	</style>
+	<style name="new_style_ph" mode="Transparent" forecolor="#000000" backcolor="#FF9933" fill="Solid">
+		<pen lineWidth="0.25" lineColor="#000000"/>
+		<box>
+			<pen lineColor="#000000"/>
+			<topPen lineWidth="0.25" lineColor="#000000"/>
+			<leftPen lineWidth="0.25" lineColor="#000000"/>
+			<bottomPen lineWidth="0.25" lineColor="#000000"/>
+			<rightPen lineWidth="0.25" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[($F{salidaph}.equals('X') == true && $P{VTIPO}.equals('CC'))]]></conditionExpression>
+			<style mode="Opaque"/>
+		</conditionalStyle>
+	</style>
+	<style name="new_style_nitrogeno" mode="Transparent" forecolor="#000000" backcolor="#FF9933" fill="Solid">
+		<pen lineWidth="0.25" lineColor="#000000"/>
+		<box>
+			<pen lineColor="#000000"/>
+			<topPen lineWidth="0.25" lineColor="#000000"/>
+			<leftPen lineWidth="0.25" lineColor="#000000"/>
+			<bottomPen lineWidth="0.25" lineColor="#000000"/>
+			<rightPen lineWidth="0.25" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[($F{salidanitrogeno}.equals('X') == true && $P{VTIPO}.equals('CC'))]]></conditionExpression>
+			<style mode="Opaque"/>
+		</conditionalStyle>
+	</style>
+	<style name="new_style_ojos" mode="Transparent" forecolor="#000000" backcolor="#FF9933" fill="Solid">
+		<pen lineWidth="0.25" lineColor="#000000"/>
+		<box>
+			<pen lineColor="#000000"/>
+			<topPen lineWidth="0.25" lineColor="#000000"/>
+			<leftPen lineWidth="0.25" lineColor="#000000"/>
+			<bottomPen lineWidth="0.25" lineColor="#000000"/>
+			<rightPen lineWidth="0.25" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[($F{salidaojos}.equals('X') == true && $P{VTIPO}.equals('CC'))]]></conditionExpression>
+			<style mode="Opaque"/>
+		</conditionalStyle>
+	</style>
+	<style name="new_style_agallas" mode="Transparent" forecolor="#000000" backcolor="#FF9933" fill="Solid">
+		<pen lineWidth="0.25" lineColor="#000000"/>
+		<box>
+			<pen lineColor="#000000"/>
+			<topPen lineWidth="0.25" lineColor="#000000"/>
+			<leftPen lineWidth="0.25" lineColor="#000000"/>
+			<bottomPen lineWidth="0.25" lineColor="#000000"/>
+			<rightPen lineWidth="0.25" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[($F{salidaagalla}.equals('X') == true && $P{VTIPO}.equals('CC'))]]></conditionExpression>
+			<style mode="Opaque"/>
+		</conditionalStyle>
+	</style>
+	<style name="new_style_piel" mode="Transparent" forecolor="#000000" backcolor="#FF9933" fill="Solid">
+		<pen lineWidth="0.25" lineColor="#000000"/>
+		<box>
+			<pen lineColor="#000000"/>
+			<topPen lineWidth="0.25" lineColor="#000000"/>
+			<leftPen lineWidth="0.25" lineColor="#000000"/>
+			<bottomPen lineWidth="0.25" lineColor="#000000"/>
+			<rightPen lineWidth="0.25" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[($F{salidapiel}.equals('X') == true && $P{VTIPO}.equals('CC'))]]></conditionExpression>
+			<style mode="Opaque"/>
+		</conditionalStyle>
+	</style>
+	<style name="new_style_dano" mode="Transparent" forecolor="#000000" backcolor="#FF9933" fill="Solid">
+		<pen lineWidth="0.25" lineColor="#000000"/>
+		<box>
+			<pen lineColor="#000000"/>
+			<topPen lineWidth="0.25" lineColor="#000000"/>
+			<leftPen lineWidth="0.25" lineColor="#000000"/>
+			<bottomPen lineWidth="0.25" lineColor="#000000"/>
+			<rightPen lineWidth="0.25" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[($F{salidadano}.equals('X') == true && $P{VTIPO}.equals('CC'))]]></conditionExpression>
+			<style mode="Opaque"/>
+		</conditionalStyle>
+	</style>
+	<style name="new_style_olor" mode="Transparent" forecolor="#000000" backcolor="#FF9933" fill="Solid">
+		<pen lineWidth="0.25" lineColor="#000000"/>
+		<box>
+			<pen lineColor="#000000"/>
+			<topPen lineWidth="0.25" lineColor="#000000"/>
+			<leftPen lineWidth="0.25" lineColor="#000000"/>
+			<bottomPen lineWidth="0.25" lineColor="#000000"/>
+			<rightPen lineWidth="0.25" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[($F{salidaolor}.equals('X') == true && $P{VTIPO}.equals('CC'))]]></conditionExpression>
+			<style mode="Opaque"/>
+		</conditionalStyle>
+	</style>
+	<style name="new_style_sabor" mode="Transparent" forecolor="#000000" backcolor="#FF9933" fill="Solid">
+		<pen lineWidth="0.25" lineColor="#000000"/>
+		<box>
+			<pen lineColor="#000000"/>
+			<topPen lineWidth="0.25" lineColor="#000000"/>
+			<leftPen lineWidth="0.25" lineColor="#000000"/>
+			<bottomPen lineWidth="0.25" lineColor="#000000"/>
+			<rightPen lineWidth="0.25" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[($F{salidasabor}.equals('X') == true && $P{VTIPO}.equals('CC'))]]></conditionExpression>
+			<style mode="Opaque"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="idcalidadpcc" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+	</parameter>
+	<parameter name="LOGO" class="java.lang.String"/>
+	<parameter name="USUARIO" class="java.lang.String"/>
+	<parameter name="VTIPO" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select
+
+(
+select array_to_string(array_agg(t1.lotecamara ), ', ') lotecamara
+from (
+select DISTINCT (lotecamara)::INTEGER lc,
+cdpp1.lotecamara from calidad_pcc pcc1
+inner join  calidad_detalle_pcc cdpp1
+on pcc1.idcalidadpcc = cdpp1.idcalidadpcc
+inner join calidad_numero_muestreo_pcc cnmp
+on cdpp1.nummuestreo = cnmp.idcalidadnumeromuestreopcc
+where  pcc1.idcalidadpcc = cp.idcalidadpcc and cdpp1.lotecamara is not null and cdpp1.nummuestreo = det.nummuestreo and cdpp1.idespecietalla = et.idespecietalla
+order by (lotecamara)::INTEGER) t1
+) lote_camara,
+
+(case when b.idpropiedad = 5 then
+b.nombre || ' (' || (select descripcionmercante from  mercante where idmercante = (select idmercante from barco_descarga where idbarcodescarga = bd.idbarcodescarga)) || ')'
+else
+b.nombre
+end) as barco,
+b.numbarco, det.nummuestreo, mues.descripcion as muestreo,
+
+det.lotecamara,
+
+(
+select min(cdpcc1.fechareg)
+from calidad_detalle_pcc as cdpcc1, barco_estiba_cuba as barec
+where cdpcc1.idbarcoestibacuba = barec.idbarcoestibacuba
+and cdpcc1.idcalidadpcc = cp.idcalidadpcc
+and barec.idbarcoestibacuba = bec.idbarcoestibacuba
+) as fecha_inicio_descarga,
+
+
+/*det.fechareg as fecha_inicio_descarga,*/
+
+bd.fechadescarga fecha,
+
+
+NOW() as emision,
+bd.registro, cp.idcalidadpcc, cu.nombrecuba, es.nombre as especie, tal.nombre as talla,
+
+(CASE WHEN det.temperatura isnull or det.temperatura = -1999.91 THEN ' - '
+ELSE round(det.temperatura::numeric,1)::text
+END) temperatura,
+
+(CASE WHEN det.histamina isnull or det.histamina = -1999.91 THEN ' - '
+ELSE round(det.histamina::numeric,2)::text
+END) histamina,
+
+(CASE WHEN det.sal isnull or det.sal = -1999.91 THEN  ' - '
+ELSE round(det.sal::numeric,2)::text
+END) sal,
+
+(CASE WHEN det.nitrogeno isnull  or det.nitrogeno = -1999.91 THEN ' - '
+ELSE round(det.nitrogeno::numeric,2)::text
+END) nitrogeno,
+(CASE WHEN det.histamina isnull or det.histamina = -1999.91 THEN ' - '
+ELSE
+ round((det.histamina/10)::numeric,2)::text
+END) histamina2,
+(CASE WHEN det.ph isnull or det.ph = -1999.91 THEN ' - '
+ELSE round(det.ph::numeric,2)::text
+END) ph,
+det.idespecietalla,
+bd.viaje,
+(
+  select cm.abreviatura from calidad_observaciones_muestra_cuba cm
+  where cm.idcalidadobservacion = det.ojos
+) as ojos,
+(
+  select cm.abreviatura from calidad_observaciones_muestra_cuba cm
+  where cm.idcalidadobservacion = det.agalla
+) as Agallas,
+(
+  select cm.abreviatura from calidad_observaciones_muestra_cuba cm
+  where cm.idcalidadobservacion = det.piel
+) as Piel,
+(
+  select cm.abreviatura from calidad_observaciones_muestra_cuba cm
+  where cm.idcalidadobservacion = det.danofisico
+) as Dano,
+(
+  select cm.abreviatura from calidad_observaciones_muestra_cuba cm
+  where cm.idcalidadobservacion = det.idcalidadolormuestra
+) as olor,
+(
+  select cm.abreviatura from calidad_observaciones_muestra_cuba cm
+  where cm.idcalidadobservacion = det.idcalidadsabormuestra
+) as sabor,
+
+(select	case when cobmc.idcalidadtipoobservacion = 1 then
+		case when cobmc.calificacion = 1 then
+			'X'
+			else
+			'OK'
+		end
+	else
+		case when det.temperatura <= cobmc.valordesde or det.temperatura = -1999.91 then
+			'OK'
+			else
+			'X'
+		end
+	end salida
+from calidad_observaciones_muestra_cuba  cobmc
+where cobmc.idcalidadobservacion = 57) salida,
+
+(select	case when cobmc.idcalidadtipoobservacion = 1 then
+		case when cobmc.calificacion = 1 then
+			'X'
+			else
+			'OK'
+		end
+	else
+		case when det.sal = -1999.91 or (det.sal >= cobmc.valordesde and det.sal <= cobmc.valorhasta) then
+			'OK'
+			else
+			'X'
+		end
+	end salida
+from calidad_observaciones_muestra_cuba  cobmc
+where cobmc.idcalidadobservacion = 53) salidasal,
+
+(select	case when cobmc.idcalidadtipoobservacion = 1 then
+		case when cobmc.calificacion = 1 then
+			'X'
+			else
+			'OK'
+		end
+	else
+		case when det.histamina = -1999.91 or (round((det.histamina/10)::numeric,3) >= cobmc.valordesde and round((det.histamina/10)::numeric,3) <= cobmc.valorhasta) then
+			'OK'
+			else
+			'X'
+		end
+	end salida
+from calidad_observaciones_muestra_cuba  cobmc
+where cobmc.idcalidadobservacion = 54) salidahistamina,
+
+(select	case when cobmc.idcalidadtipoobservacion = 1 then
+		case when cobmc.calificacion = 1 then
+			'X'
+			else
+			'OK'
+		end
+	else
+		case when det.ph = -1999.91 or (det.ph >= cobmc.valordesde and det.ph <= cobmc.valorhasta) then
+			'OK'
+			else
+			'X'
+		end
+	end salida
+from calidad_observaciones_muestra_cuba  cobmc
+where cobmc.idcalidadobservacion = 55) salidaph,
+
+(select	case when cobmc.idcalidadtipoobservacion = 1 then
+		case when cobmc.calificacion = 1 then
+			'X'
+			else
+			'OK'
+		end
+	else
+		case when round(det.nitrogeno::numeric,2) = -1999.91 or (round(det.nitrogeno::numeric,2) <= cobmc.valordesde) then
+			'OK'
+			else
+			'X'
+		end
+	end salida
+from calidad_observaciones_muestra_cuba  cobmc
+where cobmc.idcalidadobservacion = 56) salidanitrogeno,
+
+
+(select	case when cobmc.idcalidadtipoobservacion = 1 then
+		case when cobmc.calificacion = 1 then
+			'OK'
+			else
+			'X'
+		end
+	else
+			'N/A'
+	end salida
+from calidad_observaciones_muestra_cuba  cobmc
+where cobmc.idcalidadobservacion = det.ojos) salidaojos,
+
+(select	case when cobmc.idcalidadtipoobservacion = 1 then
+		case when cobmc.calificacion = 1 then
+			'OK'
+			else
+			'X'
+		end
+	else
+			'N/A'
+	end salida
+from calidad_observaciones_muestra_cuba  cobmc
+where cobmc.idcalidadobservacion = det.agalla) salidaagalla,
+
+(select	case when cobmc.idcalidadtipoobservacion = 1 then
+		case when cobmc.calificacion = 1 then
+			'OK'
+			else
+			'X'
+		end
+	else
+			'N/A'
+	end salida
+from calidad_observaciones_muestra_cuba  cobmc
+where cobmc.idcalidadobservacion = det.piel) salidapiel,
+
+
+(select	case when cobmc.idcalidadtipoobservacion = 1 then
+		case when cobmc.calificacion = 1 then
+			'OK'
+			else
+			'X'
+		end
+	else
+			'N/A'
+	end salida
+from calidad_observaciones_muestra_cuba  cobmc
+where cobmc.idcalidadobservacion = det.danofisico) salidadano,
+
+(select	case when cobmc.idcalidadtipoobservacion = 1 then
+		case when cobmc.calificacion = 1 then
+			'OK'
+			else
+			'X'
+		end
+	else
+			'N/A'
+	end salida
+from calidad_observaciones_muestra_cuba  cobmc
+where cobmc.idcalidadobservacion = det.idcalidadolormuestra) salidaolor,
+
+(select	case when cobmc.idcalidadtipoobservacion = 1 then
+		case when cobmc.calificacion = 1 then
+			'OK'
+			else
+			'X'
+		end
+	else
+			'N/A'
+	end salida
+from calidad_observaciones_muestra_cuba  cobmc
+where cobmc.idcalidadobservacion = det.idcalidadsabormuestra) salidasabor
+
+
+from calidad_pcc as cp left join calidad_detalle_pcc as det on cp.idcalidadpcc = det.idcalidadpcc,
+barco_descarga bd, barco b,calidad_numero_muestreo_pcc as mues,  barco_estiba_cuba bec,
+barco_cuba bc, cuba cu, especie_talla et, especie as es, talla as tal
+where cp.idbarcodescarga =  bd.idbarcodescarga and bd.idbarco = b.idbarco
+and det.nummuestreo = mues.idcalidadnumeromuestreopcc
+and det.idbarcoestibacuba = bec.idbarcoestibacuba and bec.idbarcocuba = bc.idbarcocuba
+and bc.idcuba = cu.idcuba and det.idespecietalla = et.idespecietalla
+and et.idespecie = es.idespecie and et.idtalla = tal.idtalla
+and cp.idcalidadpcc = $P{idcalidadpcc}
+order by fecha_inicio_descarga, mues.idcalidadnumeromuestreopcc, det.idespecietalla, det.iddetallecalidadpcc, det.fechareg]]>
+	</queryString>
+	<field name="lote_camara" class="java.lang.String"/>
+	<field name="barco" class="java.lang.String"/>
+	<field name="numbarco" class="java.lang.String"/>
+	<field name="nummuestreo" class="java.lang.Integer"/>
+	<field name="muestreo" class="java.lang.String"/>
+	<field name="lotecamara" class="java.lang.String"/>
+	<field name="fecha_inicio_descarga" class="java.sql.Timestamp"/>
+	<field name="fecha" class="java.sql.Timestamp"/>
+	<field name="emision" class="java.sql.Timestamp"/>
+	<field name="registro" class="java.lang.String"/>
+	<field name="idcalidadpcc" class="java.lang.Long"/>
+	<field name="nombrecuba" class="java.lang.String"/>
+	<field name="especie" class="java.lang.String"/>
+	<field name="talla" class="java.lang.String"/>
+	<field name="temperatura" class="java.lang.String"/>
+	<field name="histamina" class="java.lang.String"/>
+	<field name="sal" class="java.lang.String"/>
+	<field name="nitrogeno" class="java.lang.String"/>
+	<field name="histamina2" class="java.lang.String"/>
+	<field name="ph" class="java.lang.String"/>
+	<field name="idespecietalla" class="java.lang.Integer"/>
+	<field name="viaje" class="java.lang.Integer"/>
+	<field name="ojos" class="java.lang.String"/>
+	<field name="agallas" class="java.lang.String"/>
+	<field name="piel" class="java.lang.String"/>
+	<field name="dano" class="java.lang.String"/>
+	<field name="olor" class="java.lang.String"/>
+	<field name="sabor" class="java.lang.String"/>
+	<field name="salida" class="java.lang.String"/>
+	<field name="salidasal" class="java.lang.String"/>
+	<field name="salidahistamina" class="java.lang.String"/>
+	<field name="salidaph" class="java.lang.String"/>
+	<field name="salidanitrogeno" class="java.lang.String"/>
+	<field name="salidaojos" class="java.lang.String"/>
+	<field name="salidaagalla" class="java.lang.String"/>
+	<field name="salidapiel" class="java.lang.String"/>
+	<field name="salidadano" class="java.lang.String"/>
+	<field name="salidaolor" class="java.lang.String"/>
+	<field name="salidasabor" class="java.lang.String"/>
+	<variable name="ANTECEDENTES" class="java.lang.Integer"/>
+	<group name="Cuba" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{nombrecuba}]]></groupExpression>
+		<groupHeader>
+			<band height="14">
+				<textField>
+					<reportElement x="56" y="0" width="34" height="14"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{nombrecuba}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="1" y="0" width="40" height="14"/>
+					<textElement>
+						<font isBold="true" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Cuba:]]></text>
+				</staticText>
+				<textField pattern="dd/MM/yyyy H:MM a">
+					<reportElement x="254" y="0" width="138" height="14"/>
+					<textElement/>
+					<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{fecha_inicio_descarga}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="141" y="0" width="113" height="14"/>
+					<textElement>
+						<font isBold="true" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Fecha Inicio descarga:]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Muestreo">
+		<groupExpression><![CDATA[$F{nummuestreo}]]></groupExpression>
+		<groupHeader>
+			<band height="14">
+				<staticText>
+					<reportElement x="1" y="0" width="52" height="13"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Muestreo:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="58" y="0" width="61" height="13"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{muestreo}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="EspecieTalla">
+		<groupExpression><![CDATA[$F{idespecietalla}]]></groupExpression>
+		<groupHeader>
+			<band height="51">
+				<textField>
+					<reportElement x="68" y="18" width="88" height="16"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{especie}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="68" y="34" width="88" height="16"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{talla} + " Kg."]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="156" y="32" width="44" height="18"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Temp °C]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="200" y="32" width="38" height="18"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[%Sal]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="238" y="32" width="46" height="18"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Histamina mg/100g]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="284" y="32" width="38" height="18"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Ph]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="354" y="32" width="36" height="18"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Ojos]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="424" y="32" width="32" height="18"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Piel]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="456" y="32" width="36" height="18"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Daño]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="390" y="32" width="34" height="18"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Agalla]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="18" width="67" height="17"/>
+					<box>
+						<pen lineWidth="0.0"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Especie:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="156" y="18" width="198" height="14"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Análisis Químico]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="354" y="18" width="200" height="14"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Evaluación Sensorial]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="492" y="32" width="31" height="18"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Olor]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="523" y="32" width="31" height="18"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[sabor]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="322" y="32" width="32" height="18"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[N.B.V. mg/100g]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="34" width="67" height="16"/>
+					<box>
+						<pen lineWidth="0.0"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Talla:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="5" width="67" height="13"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true" isUnderline="false"/>
+					</textElement>
+					<text><![CDATA[Lote Cámara:]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="68" y="5" width="486" height="13"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{lote_camara}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement x="508" y="28" width="16" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[N°:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="336" y="43" width="52" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[N° Barco:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="336" y="56" width="52" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Registro:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="58" y="56" width="278" height="13"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{barco}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="388" y="43" width="100" height="13"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{numbarco}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="388" y="56" width="100" height="13"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{registro}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="6" y="56" width="52" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Barco:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="43" width="89" height="13"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Fecha descarga:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="159" y="24" width="250" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[DEPARTAMENTO DE CONTROL DE CALIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="159" y="1" width="250" height="23"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RECEPCION DE ATUN PCC1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="456" y="17" width="99" height="12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[LA-EF-AT.PCC.01-REV.3]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="524" y="28" width="30" height="12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{idcalidadpcc}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="554" height="1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="69" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement x="1" y="42" width="554" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="489" y="43" width="25" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Viaje:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="514" y="43" width="41" height="13"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{viaje}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="1" y="1" width="158" height="40"/>
+				<imageExpression class="java.lang.String"><![CDATA[$P{LOGO}]]></imageExpression>
+			</image>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="95" y="43" width="149" height="13"/>
+				<textElement/>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<rectangle>
+				<reportElement x="523" y="0" width="31" height="11"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="492" y="0" width="31" height="11"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="456" y="0" width="36" height="11"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="424" y="0" width="32" height="11"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="390" y="0" width="34" height="11"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="354" y="0" width="36" height="11"/>
+				<graphicElement>
+					<pen lineWidth="0.25"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="119" y="0" width="37" height="11"/>
+				<box>
+					<pen lineWidth="0.25" lineStyle="Solid"/>
+					<topPen lineWidth="0.25" lineStyle="Solid"/>
+					<leftPen lineWidth="0.25" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.25" lineStyle="Solid"/>
+					<rightPen lineWidth="0.25" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{EspecieTalla_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="new_style" x="156" y="0" width="44" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{temperatura}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="new_style_sal" x="200" y="0" width="38" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{sal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="new_style_histamina" x="238" y="0" width="46" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{histamina2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="new_style_ph" x="284" y="0" width="38" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ph}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="new_style_nitrogeno" x="322" y="0" width="32" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nitrogeno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="new_style_ojos" x="354" y="0" width="36" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ojos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="new_style_sabor" x="523" y="0" width="31" height="11"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{sabor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="new_style_piel" x="424" y="0" width="32" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{piel}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="new_style_dano" x="456" y="0" width="36" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{dano}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="new_style_olor" x="492" y="0" width="31" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{olor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="new_style_agallas" x="390" y="0" width="34" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{agallas}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="34" splitType="Stretch">
+			<staticText>
+				<reportElement x="470" y="11" width="14" height="11"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[el:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="484" y="11" width="71" height="11"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{emision}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="436" y="0" width="48" height="11"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Emitido por:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="484" y="0" width="71" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{USUARIO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="497" y="23" width="42" height="11"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Pag. "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="539" y="23" width="16" height="11"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="66" splitType="Stretch">
+			<line>
+				<reportElement x="36" y="51" width="152" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="39" y="52" width="146" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Inspector Control de Calidad]]></text>
+			</staticText>
+			<line>
+				<reportElement x="358" y="51" width="152" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="361" y="52" width="146" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gerente Control de Calidad]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

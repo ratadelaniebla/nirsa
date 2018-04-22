@@ -1,0 +1,263 @@
+<?page id = "pagLimpiezaMantenimientoDetalleDefectos" title="" contentType="text/html;charset=UTF-8"?>
+<!-- 10.2 -->
+<zk>
+	<window id="winLimpiezaMantenimientoDetalleDefectos" apply="com.nw.webui.produccion.LimpiezaMantenimientoDetalleDefectosWindow" >
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="MANT. DEFECTOS EN LIMPIEZA" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+		
+			<grid width="99%">  
+				<rows>
+
+					<row>
+						<label value="Produccion" />
+						<datebox id="dteProduccion" width="85%" readonly="true" ></datebox>						
+					</row>				
+
+					<row>
+						<label value="Turno" />
+						<listbox id="lbxTurno" style="font-size:12px" mold="select" width="120px" />
+					</row>				
+
+
+					<row>
+						<label value="Linea" />
+						<listbox id="lbxLinea" style="font-size:12px" mold="select" width="120px" />
+					</row>
+				
+
+					<row>
+						<label value="Hora - Empleado -Defectos" />
+						<listbox id="lbxDefectos" style="font-size:12px" mold="select" width="99%" />
+					</row>
+
+					<row>
+						<label value="Turno Mant."/>
+						<listbox id="lbxTurnoProdMant" style="font-size:12px" mold="select" width="80%" />
+						
+					</row>				
+					
+					<row>
+						<label value="#Bandejas"></label>
+						<intbox id="ibxBandejas" ></intbox> <!--  format="###" -->
+					</row>
+					
+					<row>
+						<label value="Area devolución" />
+						<listbox id="lbxListaProcesos" style="font-size:12px"
+							mold="select" width="99%" />
+					</row>
+										
+				    <row>
+						<label value="Tipo" />
+						<listbox id="lbxTipo" style="font-size:12px"
+							mold="select" width="120px" >
+							<listitem selected="true" label="" />
+							<listitem label="Despellejador" value="1" />
+							<listitem label="Fileteador"    value="2" />	
+					    </listbox>
+					</row>
+															
+					<row>
+						<label value="Ubicación"/>
+						
+						<hbox>
+							<intbox id="txtUbicacion" maxlength="20" width="80%" ></intbox>
+							<toolbar>
+								<toolbarbutton id="btnBuscar" label="Buscar"/>
+							</toolbar>
+
+						</hbox>
+						
+					</row>
+					
+					<row>
+						<label value="Empleado"/>
+						<textbox id="txtEmpleado" readonly="true" width="99%" rows="2"></textbox>
+					</row>		
+					
+					<row>
+						<label value="Observacion" />
+						<textbox id="txtObservacion" 
+							rows="2">
+						</textbox>
+					</row>
+					
+				    <row>
+						<label value="Lote" />
+						<hbox>
+						<listbox id="lbxLote" style="font-size:12px" mold="select" width="120px" />
+						     <toolbar>
+								<toolbarbutton id="btnActualizarLotes" tooltiptext="Actualizar Lotes" image="/img/refrescar.gif"/>
+							 </toolbar>
+						 </hbox>						
+					</row>					
+
+					<row>
+						<label value="Especie Talla"/>
+						<textbox id="txtEspecieTalla" readonly="true" rows="2"></textbox>
+					</row>								
+					
+					
+				</rows>
+			</grid>	
+			
+			<hbox>			
+				<label value="HORA REG. DEFECTO"/>						
+				<toolbar>
+					<toolbarbutton id="btnTomarTiempoi" label="Tomar Tiempo Actual" />
+				</toolbar>
+						
+			</hbox>
+			
+			<grid width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxMi" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxDi" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxHi" mold="select" >
+							    <listitem selected="true" label="" />
+								<listitem label="00" value="00" />
+								<listitem label="01" value="01" />
+								<listitem label="02" value="02" />
+								<listitem label="03" value="03" />
+								<listitem label="04" value="04" />
+								<listitem label="05" value="05" />
+								<listitem label="06" value="06" />
+								<listitem label="07" value="07" />
+								<listitem label="08" value="08" />
+								<listitem label="09" value="09" />
+								<listitem label="10" value="10" />
+								<listitem label="11" value="11" />
+								<listitem label="12" value="12" />
+								<listitem label="13" value="13" />
+								<listitem label="14" value="14" />
+								<listitem label="15" value="15" />
+								<listitem label="16" value="16" />
+								<listitem label="17" value="17" />
+								<listitem label="18" value="18" />
+								<listitem label="19" value="19" />
+								<listitem label="20" value="20" />
+								<listitem label="21" value="21" />
+								<listitem label="22" value="22" />
+								<listitem label="23" value="23" />
+							</listbox>
+
+							<label value="Min"/>
+							<listbox id="lbxMin" mold="select" >
+							    <listitem label="00" value="00" />
+								<listitem label="01" value="01" />
+								<listitem label="02" value="02" />
+								<listitem label="03" value="03" />
+								<listitem label="04" value="04" />
+								<listitem label="05" value="05" />
+								<listitem label="06" value="06" />
+								<listitem label="07" value="07" />
+								<listitem label="08" value="08" />
+								<listitem label="09" value="09" />
+								<listitem label="10" value="10" />
+								<listitem label="11" value="11" />
+								<listitem label="12" value="12" />
+								<listitem label="13" value="13" />
+								<listitem label="14" value="14" />
+								<listitem label="15" value="15" />
+								<listitem label="16" value="16" />
+								<listitem label="17" value="17" />
+								<listitem label="18" value="18" />
+								<listitem label="19" value="19" />
+								<listitem label="20" value="20" />
+								<listitem label="21" value="21" />
+								<listitem label="22" value="22" />
+								<listitem label="23" value="23" />
+								<listitem label="24" value="24" />
+								<listitem label="25" value="25" />
+								<listitem label="26" value="26" />
+								<listitem label="27" value="27" />
+								<listitem label="28" value="28" />
+								<listitem label="29" value="29" />
+								<listitem label="30" value="30" />
+								<listitem label="31" value="31" />
+								<listitem label="32" value="32" />
+								<listitem label="33" value="33" />
+								<listitem label="34" value="34" />
+								<listitem label="35" value="35" />
+								<listitem label="36" value="36" />
+								<listitem label="37" value="37" />
+								<listitem label="38" value="38" />
+								<listitem label="39" value="39" />
+								<listitem label="40" value="40" />
+								<listitem label="41" value="41" />
+								<listitem label="42" value="42" />
+								<listitem label="43" value="43" />
+								<listitem label="44" value="44" />
+								<listitem label="45" value="45" />
+								<listitem label="46" value="46" />
+								<listitem label="47" value="47" />
+								<listitem label="48" value="48" />
+								<listitem label="49" value="49" />
+								<listitem label="50" value="50" />
+								<listitem label="51" value="51" />
+								<listitem label="52" value="52" />
+								<listitem label="53" value="53" />
+								<listitem label="54" value="54" />
+								<listitem label="55" value="55" />
+								<listitem label="56" value="56" />
+								<listitem label="57" value="57" />
+								<listitem label="58" value="58" />
+								<listitem label="59" value="59" />
+							</listbox>
+
+							
+						</hbox>
+				    </row>
+				</rows>
+			</grid>
+			
+			<grid width="99%"> 
+				<rows>
+					<row>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif" />
+						</toolbar>
+					</row>
+
+					<row>
+	
+						<hbox>
+							<label value="Confirmar" />
+							<checkbox id="ChkEliminar" width="99%"></checkbox>
+						</hbox>		
+						
+						<hbox>
+							<toolbar>
+								<toolbarbutton id="btnEliminar" label="Eliminar"/>
+							</toolbar>
+						</hbox>
+					</row>						
+
+					
+				</rows>
+			</grid>		
+		</vbox>
+	</window>
+</zk>

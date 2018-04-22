@@ -1,0 +1,51 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="reporteRegistroCoches" apply="com.nw.webui.produccion.ProduccionTrazabilidadReporteWindow">
+<label value="REPORTES DE TRAZABILIDAD" style="color:blue;font-size:11px;font-weight:bold"/>
+		<vbox  id="vbxMain" width="99%">
+		
+			<grid width="99%">
+				<rows>
+
+					<row>
+						<label value="Fecha Desde :"/>
+						<datebox id="dteFecha" format="dd/MM/yyyy" readonly="true"/>
+					</row> 
+					<row>
+						<label value="Fecha Hasta:"/>
+						<datebox id="dteFecha1" format="dd/MM/yyyy" readonly="true"/>
+					</row> 
+					
+				</rows>
+			</grid>
+			
+			
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<label value="Imprimir" style="color:blue;font-size:12px;font-weight:bold"/>
+							<toolbar>
+								<vbox>
+								
+								<toolbarbutton id="btnTotalxHora" label="Reporte de Trazabilidad"/>
+								<toolbarbutton id="btnTotalxHoraExcel" label="Reporte de Trazabilidad - Excel"/>
+								
+										
+								</vbox>
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+			
+			
+
+
+
+			
+			
+			
+	</vbox> 
+</window>
+</zk>

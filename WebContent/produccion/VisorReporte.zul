@@ -1,0 +1,16 @@
+<?page title="VISOR DE REPORTE - MARBELIZE S.A" ?>
+
+<window id="winVisorReporte" title="VISOR DE REPORTE" border="normal" mode="modal" maximizable="true" minimizable="false" closable="true" width="50%" height="65%">
+<caption style="font-size:20px;font-weight:bold;"/>
+
+<iframe id="report" height="100%" width="100%" onCreate='showReport()' /> 
+	<zscript><![CDATA[
+		import org.zkoss.util.media.AMedia;
+	
+		void showReport() 
+		{
+		 AMedia reporteejecutado = winVisorReporte.getAttribute("reporteejecutado");
+		 report.setContent(reporteejecutado);
+		} 		
+	]]></zscript> 
+</window>

@@ -1,0 +1,200 @@
+<?page id = "pagCalidadPCC1Quimico" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+				
+	<window id="winCalidadMuestraClasificacionCabecera" apply="com.nw.webui.produccion.CalidadMuestraClasificacionCabeceraProtocoloWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="Calidad Muestra Clasificacion- Protocolo" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+
+			<grid width="99%">  
+				<rows>
+				<row>
+					<label value="Dia Produccion " style="color:blue" />
+					<listbox id="lbxFechaActiva" style="font-size:11px" mold="select" width="130px" > </listbox>
+			    </row>
+			    <row>
+					<label value="Turno Producción" ></label>
+					<listbox id="lbxTurnoProduccion" style="font-size:11px" mold="select" width="130px" > </listbox>
+								 
+				</row>
+				<row>
+				<label value="Lote Planta" width="150px" ></label>
+				 <listbox id="lbxLote" style="font-size:11px" mold="select" width="100px" > </listbox>
+					  
+				</row>
+				
+					
+					<row>
+						<label value="Barco" />
+  					<!--<listbox id="lbxBarco" style="font-size:12px" mold="select" width="98%" />-->
+  						<textbox id="txtBarco" readonly="true"></textbox>
+  					</row>
+					<row>
+						<label value="Registro" />
+  					<textbox id="txtRegistro" maxlength="13" width="120px" style="color:blue" readonly="true" />
+					</row>
+									
+					<row>
+						<label value="Lote Haccp" />
+				<!--	<listbox id="lbxLoteHccp" style="font-size:12px" mold="select" width="98%" />-->
+							<textbox id="txtLoteH" readonly="true"></textbox>
+					</row>
+					
+					<row>
+						<label value="Mezcla de Cubas" />
+  					<textbox id="txtMezcla"  width="100%" style="color:blue" rows="2" readonly="true" />
+					</row>
+					
+					<row>
+						<label value="Especie" />
+  					<textbox id="txtEspecie"  width="100%" style="color:blue" rows="2" readonly="true" />
+					</row>
+					
+							
+					<row>
+						<label value="Comentarios" />
+					<textbox id="txtComentarios" style="font-size:10px" rows="4" width="98%" />
+				</row>				
+					
+					<row>
+						<label value="Total Piezas" />
+					<intbox id="txtTPiezas" style="font-size:14px;background-color:yellow;color:red"  readonly="true"  width="98%" />
+				</row>										
+			</rows>	
+			
+				</grid>
+			
+	<grid >
+			<rows>	
+			<row>
+			<label value="OLOR" style="color:red;font-size:14px;font-style:bold"></label>
+			</row>			
+			<row>
+			<label value="CARACTERÍSTICO"></label>
+					<intbox id="txtOCaracteristico"  style="font-size:10px"  width="98%"  ></intbox>
+					</row>	
+					<row>
+						
+						<listbox id="lbxOSubcaracteristica"  mold="select" rows="1" style="font-size:12px" width="98%" />
+					
+						<intbox id="txtONoCaracteristico" maxlength="13" width="120px" style="color:blue" />
+			
+					</row>
+															
+			</rows>	
+			</grid>			
+			<grid >
+			<rows>	
+			<row>
+			<label value="COLOR" style="color:red;font-size:14px;font-style:bold"></label>
+			</row>			
+			<row>
+			<label value="CARACTERÍSTICO"></label>
+					<intbox id="txtCCaracteristico"  style="font-size:10px"  width="98%"  ></intbox>
+					</row>	
+					<row>
+						
+						<listbox id="lbxCSubcaracteristica"  mold="select" rows="1" style="font-size:12px" width="98%" />
+					
+						<intbox id="txtCNoCaracteristico" maxlength="13" width="120px" style="color:blue" />
+			
+					</row>
+															
+			</rows>	
+			</grid>	
+			<grid >
+			<rows>	
+			<row>
+			<label value="SABOR" style="color:red;font-size:14px;font-style:bold"></label>
+			</row>			
+			<row>
+			<label value="CARACTERÍSTICO"></label>
+					<intbox id="txtSCaracteristico"  style="font-size:10px"  width="98%"  ></intbox>
+					</row>	
+					<row>
+						
+						<listbox id="lbxSSubcaracteristica"  mold="select" rows="1" style="font-size:12px" width="98%" />
+					
+						<intbox id="txtSNoCaracteristico" maxlength="13" width="120px" style="color:blue" />
+			
+					</row>
+					<row>
+					    <vbox>
+					       <!--  <checkbox id="chkRemuestreoSal" label="Aplica Remuestreo por Sal"></checkbox>  -->
+					         <label value="Remuestreo Sal" />
+							<!-- <listbox id="lbxRemuestreo" mold="select" width="98%" >
+								<listitem selected="true" label="" />
+								<listitem label="Remuestreo Sal"           value="1" />
+								<listitem label="Muestras control interno" value="2" />
+							</listbox>	 -->
+					    </vbox>
+						<intbox id="txtSal" disabled="false"></intbox>
+					</row>
+					<row>
+					    <label value="Muestras control interno" />
+					    <intbox id="txtControlInterno" disabled="false"></intbox>
+					</row>
+			</rows>	
+			</grid>	
+			
+			<grid >
+			<rows>	
+			<row>
+			   <label value="TEXTURA" style="color:red;font-size:14px;font-style:bold"></label>
+			</row>			
+			<row>
+			        <label value="FIRME"></label>
+					<intbox id="txtFirme"  style="font-size:10px"  width="98%"  ></intbox>
+					</row>	
+		    <row>
+			<label value="SUAVE"></label>
+					<intbox id="txtSuave"  style="font-size:10px"  width="98%"  ></intbox>
+					</row>
+						<row>
+			<label value="PASTOSO"></label>
+					<intbox id="txtPastoso"  style="font-size:10px"  width="98%"  ></intbox>
+					</row>		
+					<row>
+			<label value="Peso Kg Pzas Pastoso"></label>
+					<decimalbox id="txtPPPastoso" disabled="true" style="font-size:10px"  width="98%"  ></decimalbox>
+					</row>
+					<row>
+			<label value="Peso Kg Pzas "></label>
+					<decimalbox id="txtPPastoso" disabled="true" style="font-size:10px"  width="98%"  ></decimalbox>
+					</row>
+												
+			</rows>	
+			</grid>	
+			
+			<grid >
+			<rows>	
+			<row>
+			<label value="PROTEÍNA DEGRADADA" style="color:red;font-size:14px;font-style:bold"></label>
+			</row>			
+			<row>
+			<label value="N° PIEZAS"></label>
+					<intbox id="txtPiezas"  style="font-size:10px"  width="98%"  ></intbox>
+					</row>	
+											
+			</rows>	
+			</grid>	
+			
+			
+			<grid>
+			<rows>	
+			<row>
+						<vbox >							
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif"/>	
+							</toolbar>	
+						</vbox>					
+					</row>	
+															
+			</rows>	
+			</grid>			
+	
+			
+								
+		</vbox>
+	</window>
+</zk>

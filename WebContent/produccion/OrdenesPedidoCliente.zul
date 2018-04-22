@@ -1,0 +1,107 @@
+<?page id = "pagCalidadPCC1Sensorial" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<!-- apply="com.nw.webui.produccion.CalidadPCC1SensorialWindow"  -->
+	<window id="winCOrdenesPedidoCliente" mode="modal" width="99%"  
+	border="normal" position="center,center">
+	
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="REG. ORDENES DE CLIENTES" style="color:blue;font-size:12px;font-weight:bold" />
+
+			<grid>
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar"
+									tooltiptext="Grabar" image="/img/grabar.gif" />
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+			
+			<grid width="30%">
+				<rows>
+					<row>
+						<label value="Fecha Produccion:" style="color:blue" />
+						<datebox id="dteFecReg" width="80px" disabled="false" />
+					</row>
+					<row>
+					    <label value="Turno :" style="color:blue" />
+					    <listbox id="lbxTurno" style="font-size:11px"
+							  mold="select" width="60px" />
+					</row>
+				</rows>
+			</grid>
+			
+
+
+
+			<grid >	
+				<rows>
+
+					<row>
+						<label value="Orden" />
+						<decimalbox id="txtOrden" format="##################" maxlength="50" width="180px"/>
+						
+						<label value="Ps" />
+						<decimalbox id="txtPs" format="############" maxlength="24" width="180px"/>						
+					</row>
+					
+					<row>
+						<label value="Cliente" />
+						<textbox id="txtCliente" width="180px" style="color:blue" />
+						
+						<label value="Marca" />
+						<textbox id="txtMarca" width="180px" style="color:blue" />
+						
+					</row>
+
+
+					<row>
+						<label value="Destino" />
+						<textbox id="txtDestino" width="180px" style="color:blue" />
+						
+						<label value="Producto" />
+						<textbox id="txtProducto" width="180px" style="color:blue" />
+					</row>
+
+					<row>
+						<label value="Video" />
+						<textbox id="txtVideo" width="180px" style="color:blue" />
+						
+						<label value="luthi" />
+						<textbox id="txtluthi" width="180px" style="color:blue" />						
+					</row>
+
+					<row>
+						<label value="Cerradora" />
+						<decimalbox id="txtCerradora" format="#####" maxlength="5" width="180px"/>
+
+						<label value="Envase" />
+						<textbox id="txtEnvase" width="180px" style="color:blue" />						
+					</row>										
+				</rows>
+			</grid>
+
+			<listbox id="lbxGridEstudiante" style="font-size:9px" height="220px" width="100%" context="editPopup">
+				<listhead style="font-size:9px" >
+					<listheader label="Orden"  align="left"/>														
+					<listheader label="Ps"  align="left"/>
+					<listheader label="Cliente"  align="left"/>					
+					<listheader label="Marca"  align="left"/>
+					
+					
+					<listheader label="Destino"  align="left"/>														
+					<listheader label="Producto"  align="left"/>
+					<listheader label="Video"  align="left"/>					
+					<listheader label="luthi"  align="left"/>
+					
+					<listheader label="Cerradora"  align="left"/>					
+					<listheader label="Envase"  align="left"/>
+															
+				</listhead>        						
+			</listbox>	
+
+	</window>
+</zk>

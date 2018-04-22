@@ -1,0 +1,48 @@
+<?page id="pagCargarArchivoPedidoProduccion" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winCargarArchivoPedidoProduccion" apply="com.nw.webui.produccion.v2.archivocarga.PedidoProduccionCargarArchivoWindow" 
+	    >
+	   <!--  width="60%" mode="modal"  closable="true"  title="CARGA ARCHIVO" -->
+	   
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="Cargar Pedido Producción" style="color:blue;font-size:12px;font-weight:bold" />
+		 
+		 <vbox id="vbxMain">   
+			<grid width="99%">  
+				<rows>
+					<row>
+						<label value="Archivo"/>
+						<hbox>
+						  <button label="Cargar" id="btnCargar"/>
+						  <button label="Nuevo" id="btnLimpiar"/>
+						</hbox>
+					 
+					</row>
+					<row>
+						<label value="Resumen de la Carga:" style="color:blue;font-size:12px"/>
+					</row>
+					<row>
+						<label value="Nombre"/>
+						<textbox id="txtNombre" rows="3" readonly="true" width="120px" />
+					</row>
+					<row>
+						<label value="Fecha Producción"/>
+						<textbox id="txtProduccion" readonly="true" width="120px" />
+					</row>
+					<row>
+						<label value="Turno"/>
+						<intbox id="txtTurno" readonly="true" width="120px" />
+					</row>
+					<row>
+						<label/>
+						<button label="Procesar Archivo" id="btnProcesar"/>
+					</row>
+				</rows> 
+			</grid>
+			<label value="Novedades:" style="color:blue;font-size:12px"/>
+			<textbox id="txtNovedades" rows="15" readonly="true" width="260px" />
+		 </vbox>   
+		 
+		 
+	</window>
+</zk>

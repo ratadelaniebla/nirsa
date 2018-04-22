@@ -1,0 +1,42 @@
+<?page title="Cocina" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winirAbrirCerrarDucha" apply="com.nw.webui.produccion.DescongeladoDuchaaAperturaCierreDetalleWindow" width="99%">
+	<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="Abrir/Cerrar Ducha Descng." style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="99%">
+		<grid >
+			<rows>
+				<row>
+					<label value="Fecha Produccion " style="color:blue" />
+					<listbox id="lbxFechaActiva" style="font-size:11px" mold="select" > </listbox>
+			    </row>
+			    <row>
+					<label value="Operación"  />
+					<listbox id="lbxOpciones" style="font-size:11px" mold="select" > </listbox>
+			    </row>
+			    
+				<row >
+					<label value="Ducha" ></label>
+					<listbox id="lbxDucha" style="font-size:11px" mold="select"> </listbox>
+				</row>
+				<row >
+					<label value="Duchada" ></label>
+					<textbox id="txtDuchada" style="font-size:11px"  readonly="true"> </textbox>
+				</row>
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif"/>  
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>
+	</vbox>
+</window>
+</zk>

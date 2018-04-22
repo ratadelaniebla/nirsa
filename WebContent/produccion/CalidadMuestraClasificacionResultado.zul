@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?page id="pagCalidadBPMDes"?>
+<window id="winCalidadMuestrasClasificacionResultado" apply="com.nw.webui.produccion.CalidadMuestraClasificacionResultadoWindow">
+	<label value="Reporte Clasificación Muestras-Resultados" style="color:blue;font-size:11px;font-weight:bold"/>
+	<vbox  id="vbxMain">
+		
+			<grid width="99%">
+				<rows width="100%" >
+
+				  	<row>
+						<label value="Desde"/>
+						<datebox id="dteFecha1" width="110px" format="dd/MM/yyyy"/>
+					</row>					
+
+					<row>
+						<label value="Hasta"/>
+						<datebox id="dteFecha2" width="110px" format="dd/MM/yyyy"/>
+					</row>					
+
+					<row>
+						<label value=""/>
+						<toolbar>
+							<toolbarbutton id="btnBuscar" label="Buscar" image="/img/buscar.gif"/>
+						</toolbar>
+					</row> 
+								
+ 					<row>
+						<label value="Barco Descarga :" style="color:blue" />
+						<listbox id="lbxBarcoDescarga" style="font-size:11px" mold="select"
+						width="99%" />
+					</row>
+					<row>
+						<label value="Registro:" style="color:blue" />
+						<textbox id="txtRegistro" width="95%" disabled="false" readonly="true"> </textbox>
+					</row>
+				</rows>
+			</grid>
+		 <!--	<grid width="99%">
+				<rows>
+					<row>
+							<toolbar>	
+							   <vbox>						
+								 <toolbarbutton id="btnPdf" 			label="Reporte PDF"		/>
+								</vbox>
+							</toolbar>	
+					</row>
+				</rows>
+			</grid>  -->
+			<tabbox>
+		      <tabs>
+		        <tab label="Clasificacion"  ></tab>
+		        <tab label="Accion Correctiva" ></tab>
+		      </tabs>	  
+		      <tabpanels>
+		        <tabpanel>
+		           	 <listbox id="lbxMuestras" model="@{winCalidadMuestrasClasificacionResultado.calidadMuestraClasificacionResultados}" 
+				        multiple="true"   width="270px">
+						<listhead style="font-size:5px" >
+							<listheader label="Lote haccp" 		width="80px"  style="font-size:5px" 				align="center" />
+							<listheader label="Especie"    		width="60px" tooltiptext="Especie" 					align="center" />
+							<listheader label="Peso Kg."    	width="62px" tooltiptext="Peso" 				    align="center" />
+							<listheader label="Cant.Muest."     width="60px" tooltiptext="Cantidad Muestra" 		align="center" />
+							<listheader label="Result."    		width="60px" tooltiptext="Resultados" 		        align="center" />
+						</listhead>
+									  
+						<listitem self="@{each=d}">
+							<listcell label="@{d.lotehaccp}" ></listcell>
+							<listcell label="@{d.especieqm}" ></listcell>
+							<listcell label="@{d.peso}" 	 ></listcell>
+							<listcell label="@{d.muestra}" 	 ></listcell>
+							<listcell label="@{d.resultado}" ></listcell>
+						</listitem>  
+						<listfoot>
+							<listfooter label="" 					  width="80px"></listfooter>
+							<listfooter label="Total Kg.:"		      width="60px"></listfooter>
+							<listfooter label="@{winCalidadMuestrasClasificacionResultado.total}"  width="60px"></listfooter>
+							<listfooter label="" 			  		  width="60px" ></listfooter>
+							<listfooter label="" 			  		  width="60px" ></listfooter>
+						 </listfoot>
+					</listbox>	
+		        </tabpanel>
+		        <tabpanel>
+		            <listbox id="lbxAccionCorrectiva" model="@{winCalidadMuestrasClasificacionResultado.calidadMuestraAccionCorrectivaResultados}" 
+				        multiple="true"   width="270px">
+						<listhead style="font-size:5px" >
+							<listheader label="Lote haccp" 		width="80px"  style="font-size:5px" 				align="center" />
+							<listheader label="Especie"    		width="60px" tooltiptext="Especie" 					align="center" />
+							<listheader label="Peso"    		width="40px" tooltiptext="Peso" 				    align="center" />
+							<listheader label="Cant.Muest."     width="60px" tooltiptext="Cantidad Muestra" 		align="center" />
+							<listheader label="Result."    		width="60px" tooltiptext="Resultados" 		        align="center" />
+						</listhead>
+									  
+						<listitem self="@{each=d}">
+							<listcell label="@{d.lotehaccp}" ></listcell>
+							<listcell label="@{d.especieqm}" ></listcell>
+							<listcell label="@{d.peso}" 	 ></listcell>
+							<listcell label="@{d.muestra}"   ></listcell>
+							<listcell label="@{d.resultado}" ></listcell>
+						</listitem>  
+						
+					</listbox>	
+		        
+		        </tabpanel>
+		      </tabpanels>
+			
+			</tabbox>
+			
+			
+  
+
+			
+	</vbox> 
+</window>

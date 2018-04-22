@@ -1,0 +1,179 @@
+<?page title=".DESCONGELADO INGRESO." contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winIngresoDescongelado" apply="com.nw.webui.produccion.DescongeladoDetalleIngresoDescongeladoWindow" >
+<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="INGRESO DESCONGELADO" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain">
+	
+		<grid width="99%">
+			<rows>
+				<row>
+					<label value="Fec.Prod. " style="color:blue" />
+					<listbox id="lbxFechaActiva" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+				<row >
+					<label value="Turno Producción" ></label>
+					<listbox id="lbxTurnoProduccion" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+				<row >
+					<label value="Turno Labor" ></label>
+					<listbox id="lbxTurnoLabor" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>
+		
+		<grid>
+			<rows>
+			
+			
+				<row>
+					<label value="Cierre Forzado" />
+					<checkbox id="ChkFinForzado"></checkbox>
+				</row>			
+			
+<!-- 
+				<row >
+					<label value="Cajon " ></label>
+					
+					<hbox>
+						<textbox id="txtCajon" width="80px" > </textbox>
+				
+						<toolbar>
+								<toolbarbutton id="btnBuscar" tooltiptext="Buscar" image="/img/buscar.gif"/>
+						</toolbar>
+					
+					</hbox>
+				</row>
+ -->			
+			
+				<row>
+					<label value="Lista Cajon" width="10%"></label>
+					
+					<hbox>
+					
+						<listbox id="lbxCajon" style="font-size:11px" mold="select" width="140px" ></listbox>
+						
+						<toolbar >
+							<toolbarbutton id="btnActulizar"  tooltiptext="Actualizar" image="/img/refrescar.gif"/>
+						</toolbar>					
+					
+					</hbox>
+					
+				</row>
+				
+				
+				<row>
+				    <label value="Dividir Peso" width="10%" visible="false"></label>
+				    <checkbox  id="chbDividirPeso" visible="false" ></checkbox>
+				</row>
+				
+				<row >
+					<label value="Cajon Real" ></label>
+					<textbox id="txtCajonReal" width="80px" > </textbox>
+				</row>
+				
+				<row>
+				    <label value="Peso Total" width="10%"></label>
+				    <textbox id="txtPesoTotal" width="50px" readonly="true" ></textbox>
+				</row>
+				
+				
+				<row>
+				    <toolbar>
+						<toolbarbutton  id="btnPeso" label="Capturar Peso" tooltiptext="Tomar Peso"
+						style="color:blue;font-size:11px;font-weight:bold" width="100px"/>
+					 </toolbar>
+					 <hbox>
+					 <textbox id="txtPeso" width="50px" readonly="true" ></textbox>
+ 					<checkbox  id="chbRevisado" label="Peso Cámara" ></checkbox>
+					</hbox>
+				</row>	
+
+			
+							
+				<row>
+					<label value="Num. Ducha"></label>
+					
+					<hbox>
+						<listbox id="lbxNumDucha" style="font-size:11px" mold="select" width="140px"></listbox>
+						
+						<toolbar >
+							<toolbarbutton id="btnActulizarDuchas"  tooltiptext="Actualizar" image="/img/refrescar.gif"/>
+						</toolbar>
+					</hbox>	
+					
+					
+				</row>
+				<row>
+					<label value="Cajon Revolteo"></label>
+					<textbox id="txtCajonRevolteo" readonly="true" maxlength="255" ></textbox>
+				</row>
+				<row>
+					<label value="Pedido - Lote"></label>
+					<textbox id="txtLote" readonly="true" maxlength="255" ></textbox>
+				</row>
+				<row>
+					<label value="Especie-Talla"></label>
+					<textbox id="txtEspecieTalla" readonly="true" maxlength="255" ></textbox>
+				</row>
+				<row>
+					<label value="Origen"></label>
+					<textbox id="txtOrigen" readonly="true" maxlength="255" ></textbox>
+				</row>
+				<row>
+					<label value="Barco" ></label>
+					<textbox id="txtBarcoDescarga" readonly="true" width="100px"> </textbox>
+				</row>
+				
+				<row>
+				    <label value="Cuba:" width="99%"   />
+				   	<textbox id="txtCuba"  readonly="true" rows="2" width="99%"/>
+				</row>				
+				
+				
+				<row>
+					<label value="L.Camara:" width="10%"   />
+					<textbox id="txtLoteCamara"  cols="10" readonly="true"/>
+				</row>
+
+
+				<row>
+					<label value="L.Haccp:" width="10%"   />
+					<textbox id="txtHaccp"  cols="10" readonly="true"/>
+				</row>
+				
+
+			</rows>
+		</grid>
+		<grid>
+		   <rows>
+		      <row>
+				  <label value="Permitir Peso" ></label>
+				  <checkbox  id="chkPermitirPesoDiferencia" ></checkbox>		   
+			  </row>
+		   </rows>
+		</grid>
+		
+		<label value="Observaciones:" style="color:blue" />
+		<textbox id="txtObservacion" rows="3" width="250px" />
+		
+	</vbox>
+</window>
+</zk>

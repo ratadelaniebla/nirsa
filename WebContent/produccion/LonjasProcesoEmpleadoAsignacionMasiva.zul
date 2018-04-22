@@ -1,0 +1,95 @@
+<?page title="LONJAS ASIGNACION " contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winLonjasAsignacionEmpleadoMasivamente" border="none" apply="com.nw.webui.produccion.v2.LonjasProcesoEmpleadoAsignacionMasivaWindow" >
+<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="LONJAS ASIGNACION EMPLEADOS MASIVAMENTE" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="97%">
+		<grid width="97%">
+			<rows>
+				<row>
+				    <label value="Fech.Prod/Turno Actual:" style="color:blue" />
+				    <textbox id="txtProduccionTurno"  style="font-size:11px"  width="80%" readonly="true" ></textbox>
+				</row>
+
+				<row>
+				    <label value="Turno :" style="color:blue" />
+				    <textbox id="txtTurno"  style="font-size:11px"  width="80%" readonly="true" ></textbox>
+				</row>
+			</rows>
+		</grid>
+
+		<grid width="97%">
+			<rows>
+				<row>
+				    <label value="Linea :" style="color:blue" />
+				    <listbox id="lbxLinea" style="font-size:11px" mold="select" width="120px"  />
+				</row>
+			</rows>	
+		</grid>
+		
+
+		<grid width="97%">
+			<rows>
+
+				<row>
+				    <label value="Fech.Prod/Turno Anterior:" style="color:blue" />
+				    <listbox id="lbxProcesosAnterior" style="font-size:11px" mold="select" width="80%" />
+				</row>
+				
+			</rows>
+		</grid>		
+		
+		
+	    <listbox  id="lbxLista" model="@{winLonjasAsignacionEmpleadoMasivamente.lonjasProcesoEmpleadoEstados}" multiple="true" checkmark="false" width="95%">
+			<listhead style="font-size:5px" >
+				<listheader label="Ubi." width="10%" />
+				<listheader label="Empleado" width="60%"  style="font-size:5px" />
+				<listheader label="(X)" width="8%" />
+			</listhead>
+						  
+			<listitem self="@{each=d}">
+				<listcell label="@{d.lonjasProcesoEmpleado.ubicacion}" ></listcell>
+				<listcell  label="@{d.lonjasProcesoEmpleado.empleado.nombres}"></listcell>
+				<listcell > 
+					<checkbox checked="@{d.seleccionado}"> </checkbox> 
+				</listcell>
+			</listitem>
+			
+		</listbox>		
+
+		<grid width="90%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="GRABAR LISTA EMPLEADOS" />
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>		
+
+	<space width="10px"></space>
+
+	<label value="Eliminación masiva" style="color:blue;font-size:11px;font-weight:bold" />
+
+		<grid width="90%">
+			<rows>
+				<row>
+				    <label value="Confirma eliminación" style="color:blue" />
+				    <checkbox id="chkConfirma" />
+				</row>			
+			
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnEliminar" label="ELIMINAR LISTA" />
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>
+
+	</vbox>
+</window>
+</zk>

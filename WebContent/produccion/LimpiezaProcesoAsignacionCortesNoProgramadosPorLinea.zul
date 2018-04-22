@@ -1,0 +1,265 @@
+<?page id = "pagLimpiezaAsignacionCortes" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winLimpiezaAsignacionCortesNoProgramados" apply="com.nw.webui.produccion.LimpiezaProcesoAsignacionCortesNoProgramadosPorLineaWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+
+		<vbox id="vbxMain" width="99%">
+				
+			<label value="Limpieza Asignación Cortes No programados" style="color:blue;font-size:12px;font-weight:bold" />			
+			<grid width="99%">  
+				<rows>
+					<row>
+						<label value="Día Producción" />
+						<textbox id="txtDiaProduccion" readonly="true" style="font-size:12px" width="90%" />
+					</row>
+					
+					<row>
+						<label value="Turno"/>
+						<textbox id="txtTurno"  style="font-size:11px"  width="90%" readonly="true" ></textbox>
+					</row>
+					
+				</rows>
+			</grid>	
+
+			
+			<grid width="99%"> 
+				<rows>
+					<row>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif" />
+						</toolbar>
+					</row>
+				</rows>
+			</grid>		
+					
+			<grid width="99%">  
+				<rows>
+				
+					<row>
+						<label value="Linea"/>
+						<listbox id="lbxMesa" style="font-size:12px" mold="select"  width="150px" />
+					</row>
+					
+					
+					<row>
+						<label value="Motivo Para"/>
+						<listbox id="lbxParas" style="font-size:12px" mold="select"  width="170px" />
+					</row>
+					
+					<!-- 
+					<row>	
+						<label value="Hora Inicio" ></label>
+						<datebox id="dteHoraInicioPara" width="130px" format="dd/MM/yyyy HH:mm" style="color:blue;font-size:11px;font-weight:bold" />							
+					</row>	
+					<row>
+						<label value="Hora Fin" ></label>
+						<datebox id="dteHoraFinPara" width="130px" format="dd/MM/yyyy HH:mm" style="color:blue;font-size:11px;font-weight:bold" />
+					</row>
+					 -->					
+					
+					
+				</rows>
+			</grid>	
+
+
+			<label value="Hora Inicio" ></label>
+			<grid width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="LbxtM" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Juno" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxD" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxH" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMi" mold="select"/>
+
+							
+						</hbox>
+				    </row>
+				</rows>
+			</grid>					
+
+
+
+
+			<label value="Hora Fin" ></label>
+			<grid width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="LbxtMf" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Juno" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxDf" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxHf" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMif" mold="select"/>
+
+							
+						</hbox>
+				    </row>
+				</rows>
+			</grid>					
+
+				
+
+
+
+
+		<grid width="99%"> 
+			<rows>
+				<row>
+					<toolbar>
+						<toolbarbutton id="btnEliminar" label="ELIMIMAR" style="color:blue;font-size:12px;font-weight:bold"/>
+					</toolbar>
+				</row>
+			</rows>
+		</grid>	
+
+
+		<listbox id="lbxListaParas" model="@{winLimpiezaAsignacionCortesNoProgramados.limpiezaDetalleTipoParaEstados}" multiple="true" checkmark="false" width="93%">
+			<listhead style="font-size:7px" >
+				<listheader label="Para"/>
+				<listheader label="H.Inicio"/>
+				<listheader label="H.Fin"/>
+				<listheader label="(X)"/>
+			</listhead>
+										  
+			<listitem self="@{each=b}">
+				<listcell label="@{b.limpiezaDetalleTipoParaEstado.descripcion}" style="size:6px;" ></listcell>
+				<listcell label="@{b.limpiezaDetalleTipoParaEstado.horainicio}" style="size:6px;" ></listcell>				
+				<listcell label="@{b.limpiezaDetalleTipoParaEstado.horafin}" style="size:6px;" ></listcell>
+				
+				<listcell > 
+					<checkbox checked="@{b.eliminar}" > </checkbox> 
+				</listcell>	
+								
+			</listitem>
+		</listbox> 
+
+
+<!-- 
+			<label value="Pesca Caliente" style="color:blue;font-size:13px;font-weight:bold" />			
+			<grid width="99%">  
+				<rows>
+						<row>	
+							<label value="Hora Inicio" ></label>
+							<datebox id="dteHoraInicioPescaCaliente" width="90%" format="dd/MM/yyyy HH:mm" style="color:blue;font-size:11px;font-weight:bold" />							
+						</row>	
+				
+						<row>
+							<label value="Hora Fin" ></label>
+							<datebox id="dteHoraFinPescaCaliente" width="90%" format="dd/MM/yyyy HH:mm" style="color:blue;font-size:11px;font-weight:bold" />
+						</row>	
+				</rows>
+			</grid>				
+
+			<label value="Acumulación en Banda" style="color:blue;font-size:13px;font-weight:bold" />			
+			<grid width="99%">  
+				<rows>
+						<row>	
+							<label value="Hora Inicio" ></label>
+							<datebox id="dteHoraInicioAcumulacionenBanda" width="90%" format="dd/MM/yyyy HH:mm" style="color:blue;font-size:11px;font-weight:bold" />							
+						</row>	
+				
+						<row>
+							<label value="Hora Fin" ></label>
+							<datebox id="dteHoraFinAcumulacionenBanda" width="90%" format="dd/MM/yyyy HH:mm" style="color:blue;font-size:11px;font-weight:bold" />
+						</row>	
+				</rows>
+			</grid>	
+
+
+			<label value="Acumulación en Maquina" style="color:blue;font-size:13px;font-weight:bold" />			
+			<grid width="99%">  
+				<rows>
+						<row>	
+							<label value="Hora Inicio" ></label>
+							<datebox id="dteHoraInicioAcumulacionenMaquina" width="90%" format="dd/MM/yyyy HH:mm" style="color:blue;font-size:11px;font-weight:bold" />							
+						</row>	
+				
+						<row>
+							<label value="Hora Fin" ></label>
+							<datebox id="dteHoraFinAcumulacionenMaquina" width="90%" format="dd/MM/yyyy HH:mm" style="color:blue;font-size:11px;font-weight:bold" />
+						</row>	
+				</rows>
+			</grid>	
+
+ 
+				
+			<label value="Falta de Pesca" style="color:blue;font-size:13px;font-weight:bold" />			
+			<grid width="99%">  
+				<rows>
+						<row>	
+							<label value="Hora Inicio" ></label>
+							<datebox id="dteHoraInicioFaltadePesca" width="90%" format="dd/MM/yyyy HH:mm" style="color:blue;font-size:11px;font-weight:bold" />							
+						</row>	
+				
+						<row>
+							<label value="Hora Fin" ></label>
+							<datebox id="dteHoraFinFaltadePesca" width="90%" format="dd/MM/yyyy HH:mm" style="color:blue;font-size:11px;font-weight:bold" />
+						</row>	
+				</rows>
+			</grid>	
+
+
+			<label value="Otro" style="color:blue;font-size:13px;font-weight:bold" />			
+			<grid width="99%">  
+				<rows>
+						<row>	
+							<label value="Hora Inicio" ></label>
+							<datebox id="dteHoraInicioOtro" width="90%" format="dd/MM/yyyy HH:mm" style="color:blue;font-size:11px;font-weight:bold" />							
+						</row>	
+				
+						<row>
+							<label value="Hora Fin" ></label>
+							<datebox id="dteHoraFinOtro" width="90%" format="dd/MM/yyyy HH:mm" style="color:blue;font-size:11px;font-weight:bold" />
+						</row>	
+				</rows>
+			</grid>	
+ -->
+
+
+
+
+		</vbox>
+	</window>
+</zk> 

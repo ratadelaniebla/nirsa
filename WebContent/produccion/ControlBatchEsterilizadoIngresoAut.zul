@@ -1,0 +1,120 @@
+<?page title="BATCH INGRESO AUTOCLAVE " contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winControlBatchIngresoAut" border="none" apply="com.nw.webui.produccion.ControlBatchEsterilizadoIngresoAutWindow">
+<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="BATCH INGRESO AUTOCLAVE" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="220px">
+		<grid >
+			<rows>
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>
+		
+		<grid >
+			<rows >
+
+				<row>
+				    <label value="Fichas :" style="color:blue" />
+				    <listbox id="lbxFichas" style="font-size:11px" mold="select" width="120px" />
+				</row>
+
+				<row>
+				    <label value="Batch :" style="color:blue" />
+				    <textbox id="txtBatch" style="font-size:11px"  width="120px" readonly="true" />
+				</row>
+				<row>
+				    <label value="Cocina :" style="color:blue" />
+				    <textbox id="txtCocina" style="font-size:11px"  width="120px" readonly="true" />
+				</row>
+				<row>
+				    <label value="Linea :" style="color:blue" />
+				    <textbox id="txtLinea" style="font-size:11px"  width="120px" readonly="true" />
+				</row>
+				<row>
+				    <label value="Lote :" style="color:blue" />
+				    <textbox id="txtLote" style="font-size:11px"  width="120px" readonly="true" />
+				</row>
+				<row>
+					<label value="Especie-Talla: " style="color:blue" ></label>
+					<textbox id="txtEspecieTalla" style="font-size:11px" readonly="true" width="120px" ></textbox>
+				</row>
+				<row>
+					<label value="Destino: "  style="color:blue" ></label>
+					<textbox id="txtDestino" style="font-size:11px" readonly="true" rows="4" width="120px" ></textbox>
+				</row>
+				<row>
+				    <label value="ESTADO:" style="color:blue" />
+				    <textbox id="txtEstado" style="font-size:11px"  width="120px" readonly="true" />
+				</row>
+				<row>
+				    <label value="Fin Cocinada :" style="color:blue" />
+				    <textbox id="txtFinCocinada" style="font-size:11px"  width="120px" readonly="true" />
+				</row>
+				<row>
+				    <label value="Fecha Despellejado :" style="color:blue" />
+				    <textbox id="txtFechaDesp" style="font-size:11px"  width="120px" readonly="true" />
+				</row>
+				<row>
+				    <label value="Fecha Hoy :" style="color:blue" />
+				    <textbox id="txtFechaHoy" style="font-size:11px"  width="120px" readonly="true" />
+				</row>
+				<row>
+				    <label value="Tiempo Estimado :" style="color:blue" />
+				    <textbox id="txtEstimado" style="font-size:11px"  width="120px" readonly="true" />
+<!-- 1 hora -->
+				</row>
+				<row>
+				    <label value="Tiempo Límite PCC5:" style="color:blue" />
+				    <textbox id="txtLimite" style="font-size:11px"  width="120px" readonly="true" />
+<!-- despellejado + 3 horas -->
+				</row>
+				<row>
+				    <label value="T. Límite PCC4:" style="color:blue" />
+				    <textbox id="txtLimitePcc4" style="font-size:11px"  width="120px" readonly="true" />
+				</row>
+				<row>
+				    <label value="Cod Producto :" style="color:blue" />
+				    <textbox id="txtCodigo" style="font-size:11px"  width="120px" readonly="true" />
+				</row>
+				<row>
+				    <label value="Producto :" style="color:blue" />
+				    <textbox id="txtCodProducto" style="font-size:11px"  width="120px" readonly="true" />
+				</row>
+				<row>
+				    <label value="Cerradora :" style="color:blue" />
+				    <textbox id="txtCerradora" style="font-size:11px"  width="120px" readonly="true" />
+				</row>
+				<row>
+				    <label value="Fecha Llenado :" style="color:blue" />
+				    <textbox id="txtFechaLlenado" style="font-size:11px"  width="120px" readonly="true" />
+				</row>
+				<row>
+				    <label value="Parada Aut :" style="color:blue" />
+				    <textbox id="txtParadaAut" style="font-size:11px"  width="120px" readonly="true" />
+				</row>
+				<row>
+				    <label value="Autoclave :" style="color:blue" />
+				    <textbox id="txtAutoclave" style="font-size:11px"  width="120px" readonly="true" />
+				</row>
+				<row>
+				    <label value="CocheAut :" style="color:blue" />
+				    <textbox id="txtCocheAut" style="font-size:11px"  width="120px" readonly="true" />
+				</row>
+				
+			</rows>
+		</grid>
+		
+	</vbox>
+</window>
+</zk>

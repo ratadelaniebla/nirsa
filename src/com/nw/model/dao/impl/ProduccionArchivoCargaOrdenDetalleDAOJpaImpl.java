@@ -1,0 +1,56 @@
+package com.nw.model.dao.impl;
+
+import java.io.Serializable;
+import java.util.List;
+
+import com.nw.model.ProduccionArchivoCargaOrden;
+import com.nw.model.ProduccionArchivoCargaOrdenDetalle;
+import com.nw.model.dao.ProduccionArchivoCargaOrdenDetalleDAO;
+
+public class ProduccionArchivoCargaOrdenDetalleDAOJpaImpl extends BaseDaoJpaImpl implements ProduccionArchivoCargaOrdenDetalleDAO{
+
+	@Override
+	public List getObjects(Class clazz) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object getObject(Class clazz, Serializable id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void removeObject(Class clazz, Serializable id) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+
+	@Override
+	public boolean existeArchivoCargaOrdenDetalle(Integer idturno, Integer item, String orden, Long idproduccion) {
+		if (archivoCargaOrdenDetalles(idturno, item, orden, idproduccion).isEmpty())
+			return false;
+		return true;
+	}
+	/**
+	 * verifica si que el turno, item, orden, produccion sean unicos
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ProduccionArchivoCargaOrdenDetalle> archivoCargaOrdenDetalles(Integer idturno, Integer item, String orden, Long idproduccion) {
+		
+		String sql = "SELECT a FROM ProduccionArchivoCargaOrdenDetalle a " +
+				"where a.idturno	= :turno " +
+				"and a.item 		= :item " +
+				"and a.orden 		= :orden "+
+				"and a.produccionArchivoCargaOrden.idproduccion = :idproduccion ";
+		return (List<ProduccionArchivoCargaOrdenDetalle>) em.createQuery(sql)
+				.setParameter("turno", idturno)
+				.setParameter("item", item)
+				.setParameter("orden", orden)
+				.setParameter("idproduccion", idproduccion).getResultList();
+	}
+}

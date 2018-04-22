@@ -1,0 +1,106 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winLatasRegistroIncidenciasEnlatado" apply="com.nw.webui.produccion.LataIncidenciaDetalleProcesoWindow" width="99%">
+	<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="Registro de Incidencias en Enlatado" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="200px">
+		<grid >
+			<rows>
+				<row >
+					<label value="Día Producción " ></label>
+					<listbox id="lbxDiaProduccion" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+				
+				<row >
+					<label value="Turno Producción " ></label>
+					<listbox id="lbxTurnoProduccion" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+				<row >
+					<label value="Turno Labor" ></label>
+					<listbox id="lbxTurnoLabor" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+							
+				
+				
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+						</toolbar>
+					</vbox>
+					
+				</row>
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+				<row>
+					<label value="Incidencia" ></label>
+					<listbox id="lbxIncidenciaSuperior" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+				<row>
+					<label value="Item" ></label>
+					<listbox id="lbxItemSuperior" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+				<row >
+					<label value="Detalle Incidencia" ></label>
+					<textbox id="txtDetalleIncidenciaSuperior" style="font-size:11px" width="130px"  ></textbox> 
+				</row>
+							
+			</rows>
+		</grid>
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabarInferior" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+						</toolbar>
+					</vbox>
+					
+				</row>
+			</rows>
+		</grid>
+		
+		<grid>
+			<rows>
+				<row>
+					<label value="Item" ></label>
+					<listbox id="lbxItemInferior" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+				<row>
+					<label value="Incidencia" ></label>
+					<listbox id="lbxIncidenciaInferior" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>
+				
+				<row >
+					<label value="Detalle Incidencia" ></label>
+					<textbox id="txtDetalleIncidenciaInferior" style="font-size:11px" width="130px"  ></textbox> 
+				</row>
+						
+				
+			</rows>
+		</grid>
+		<grid>
+		<rows>
+		
+		<row>
+			 <checkbox id="chbFinIncidencia"
+				label="Fin Incidencia">
+			</checkbox>
+		</row>
+		</rows>
+		
+		</grid>
+		
+	</vbox>
+	
+	
+</window>
+</zk>

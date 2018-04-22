@@ -1,0 +1,141 @@
+<?page id = "pagCalidadSensorialMp" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winCalidadSensorialMp" apply="com.nw.webui.produccion.CalidadSensorialMpWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="Calidad- Sensorial MP" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+			<grid width="99%">
+				<columns><column width="40%" /></columns>	
+				<rows>
+					<row>
+						<label value="Barco" />
+  						<listbox id="lbxBarco" style="font-size:12px" mold="select" width="98%" />
+					</row>
+					
+					<row id="RwBarcoMercante" visible="false">
+						<label value="Barco Mercante" />
+  						<textbox id="txtBarcoMercante" maxlength="20" width="120px" style="color:blue" readonly="true" />
+					</row>
+										
+					<row visible="false" >
+						<label value="N° Formato" />
+						<textbox id="txtNumFormato" maxlength="13" width="120px" style="color:blue" readonly="true" />
+					</row>
+					
+					<row>
+						<label value="Registro" />
+						<textbox id="txtRegistro" maxlength="8" width="120px" style="color:blue" readonly="true" />
+					</row>
+					<row  visible="false" >
+						<label value="N° Barco" />
+						<textbox id="txtNumBarco" maxlength="8" width="120px" style="color:blue" readonly="true" />
+					</row>
+					<row>
+						<label value="Cuba" />
+						<listbox id="lbxCuba" style="font-size:12px" mold="select" width="98%" />
+					</row>
+					<row>
+						<label value="Catalogo especie qm"></label>
+						<div>
+							<!-- <div>
+								<label value="Especies Comunes" style="color:black" />						
+								<checkbox id="chkPred" checked="true" />
+							</div>  -->
+							
+							<div>
+								<listbox id="lbxTalla" style="font-size:12px"
+								mold="select" width="98%" />
+							</div>
+						</div>						
+					</row>
+					<row>
+						<label value="Nivel Cuba" />
+						<listbox id="lbxNivelCuba" style="font-size:12px" mold="select" width="98%" />
+					</row>
+				</rows>
+			</grid>
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar"
+									tooltiptext="Grabar" image="/img/grabar.gif" />
+<!--  								<toolbarbutton id="btnBuscar"
+									tooltiptext="Buscar" image="/img/buscar.gif" />
+								<toolbarbutton id="btnNuevo"
+									tooltiptext="Nuevo" image="/img/crear.gif" />
+								<toolbarbutton id="btnActualizar"
+									tooltiptext="Actualizar" image="/img/refrescar.gif" />
+								<toolbarbutton id="btnEliminar"
+									tooltiptext="Eliminar" image="/img/eliminar.gif" />-->
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+			<grid width="99%">
+				<rows>
+<!--  					<row>
+						N° Muestra
+						<listbox id="lbxNumMuestra" style="font-size:12px"
+							mold="select" width="120px" />
+					</row>
+-->
+
+					<row>
+						<label value="# Muestreos "></label>
+						<textbox id="txtRemuestreo"
+							width="100px">
+						</textbox>
+					</row>
+					
+					<row>
+						<label value="N° Muestras" />
+						<textbox id="txtNumMuestraCuba" maxlength="8" width="120px" style="color:blue" readonly="true" />
+					</row>
+
+					<row>
+						<label value="N° Muestra Esp" />
+						<textbox id="txtNumMuestraNivel" maxlength="8" width="120px" style="color:blue" readonly="true" />
+					</row>
+
+					<row>
+						<label value="N° Muestra N" />
+						<textbox id="txtNumMuestraEspecieNivel" maxlength="8" width="120px" style="color:blue" readonly="true" />
+					</row>
+
+					<row>
+						Obs. Apariencia
+						<listbox id="lbxObsMuestra" style="font-size:12px"
+							mold="select" width="120px" />
+					</row>
+					<row>
+						Obs. Olor
+						<listbox id="lbxObsOlor" style="font-size:12px"
+							mold="select" width="120px" />
+					</row>
+					<row>
+						Obs. Sabor
+						<listbox id="lbxObsSabor" style="font-size:12px"
+							mold="select" width="120px" />
+					</row>
+				</rows>
+			</grid>
+			<label value="Observaciones:" style="color:blue" />
+			<textbox id="txtObservaciones" style="font-size:10px" rows="4"
+				width="98%" />
+
+			<grid width="99%" visible="false">
+				<rows>
+					<row>Cerrar Proceso
+						<hbox align="center"> 
+							<toolbarbutton id="btnCerrarP" tooltiptext="Cerrar Proceso" image="/img/grabar.gif"/>
+						</hbox>
+					</row>
+				</rows>
+			</grid>
+
+		</vbox>
+	</window>
+</zk>

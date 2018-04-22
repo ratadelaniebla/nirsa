@@ -1,0 +1,222 @@
+<?page id = "pagLimpiezaAperturaCierre" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winLimpiezaParadasMantenimiento" apply="com.nw.webui.produccion.LimpiezaParadasMantenimientoWindow"> 
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="MAT. PARADAS EN LIMPIEZA" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain"  width="99%">
+
+
+			<grid>  
+				<rows>
+				   <row>						
+						<label value="Fecha Producción " style="color:blue" />
+						<datebox id="dteFecha" width="85%" />					    
+					</row>
+					
+				<row>
+					<label value="Turno Labor" ></label>
+					<listbox id="lbxTurnoLabor" style="color:blue" mold="select" width="99%" > </listbox>
+				</row>	
+									
+				</rows>	
+			</grid>
+			
+		
+			<grid>  
+				<rows>
+									
+					<row>
+						<label value="Linea"/>
+						<listbox id="lbxLinea" style="font-size:12px" mold="select" width="99%" />
+					</row>				
+				
+				
+					<row>
+						<label value="Todas las Paradas"/>
+						<listbox id="lbxParadasCurso" style="font-size:10px" mold="select" width="99%" />
+					</row>
+				
+				
+					<row>
+							<label value="Tipo Parada" ></label>
+							<listbox id="lbxTipoParada" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Por Persona" value="1" />
+						    	<listitem label="Linea" value="2" />
+					    	</listbox>				
+				</row>
+				
+				
+				
+					<row>
+						<label value="Paradas" />
+						<listbox id="lbxParadas" style="font-size:12px" mold="select" width="99%" />
+					</row>		
+					
+					
+					<row>
+						<label value="Ubicación"/>
+						
+						<hbox>
+							<intbox id="txtUbicacion" maxlength="13" width="80%" ></intbox>
+							
+							<toolbar>
+								<toolbarbutton id="btnBuscar" label="Buscar"/>
+							</toolbar>
+
+						</hbox>
+						
+						
+					</row>
+					
+					<row>
+						<label value="Empleado"/>
+						<textbox id="txtEmpleado" readonly="true" width="99%" rows="2"></textbox>
+					</row>										
+					
+				</rows>
+			</grid>	
+			
+
+						
+			<hbox>			
+				<label value="INICIO PARADA"/>						
+				<toolbar>
+					<toolbarbutton id="btnTomarTiempoi" label="Tomar Tiempo Actual" />
+				</toolbar>
+						
+			</hbox>
+			
+			<grid width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxMi" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxDi" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxHi" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMin" mold="select"/>
+
+							
+						</hbox>
+				    </row>
+				</rows>
+			</grid>
+					
+
+			<hbox>
+				<label value="FIN PARADA"/>		
+				
+				<toolbar>
+					<toolbarbutton id="btnSinTiempo" label="Sin Tiempo" />
+				</toolbar>
+
+
+				<toolbar>
+					<toolbarbutton id="btnTomarTiempo" label="Tomar Tiempo Actual" />
+				</toolbar>				
+			</hbox>
+			
+			<grid width="99%">  
+				<rows>				
+					<row>
+						<hbox>					
+							<label value="Mes" ></label>
+							<listbox id="lbxMr" mold="select"> 
+						    	<listitem selected="true" label=""  />
+						    	<listitem label="Ene" value="1" />
+						    	<listitem label="Feb" value="2" />
+						    	<listitem label="Mar" value="3" />
+						    	<listitem label="Abr" value="4" />
+						    	<listitem label="May" value="5" />
+						    	<listitem label="Junio" value="6" />
+						    	<listitem label="Jul" value="7" />
+						    	<listitem label="Ago" value="8" />
+						    	<listitem label="Sep" value="9" />
+						    	<listitem label="Oct" value="10" />
+						    	<listitem label="Nov" value="11" />
+						    	<listitem label="Dic" value="12" />
+					    	</listbox>
+	
+							<label value="Día"/>
+							<listbox id="lbxDir" mold="select"/>
+
+							<label value="Hora"/>
+							<listbox id="lbxHir" mold="select"/>
+
+							<label value="Min"/>
+							<listbox id="lbxMinr" mold="select"/>
+
+							
+						</hbox>
+				    </row>
+				</rows>
+			</grid>
+
+
+			<grid width="99%">  
+				<rows>
+				
+					<!-- 
+					<row>
+						<label value="Tiempo total Para"/>
+						<textbox id="txtTotalTiempo" readonly="true"></textbox>
+					</row>
+					 -->
+					
+					<row>
+						<label value="Observación"/>
+						<textbox id="txtObservacion" rows="4" width="99%" ></textbox>
+					</row>
+					
+				</rows>
+			</grid>			
+			
+			<grid width="99%"> 
+				<rows>
+					<row>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif" />
+						</toolbar>
+					</row>
+
+					<row>
+	
+						<hbox>
+							<label value="Confirmar" />
+							<checkbox id="ChkEliminar" width="99%"></checkbox>
+						</hbox>		
+						
+						<hbox>
+							<toolbar>
+								<toolbarbutton id="btnEliminar" label="Eliminar"/>
+							</toolbar>
+						</hbox>
+					</row>					
+					
+					
+				</rows>
+			</grid>		
+		</vbox>
+	</window>
+</zk>

@@ -1,0 +1,33 @@
+<?page id = "pagLimpiezaRalladoHabilitarReubicacion" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winLimpiezaRalladoHabilitarContingencia" apply="com.nw.webui.produccion.LimpiezaHabilitarReubicacionWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="Rallado - " style="color:blue;font-size:12px;font-weight:bold" />
+		<label value="Habilitar Reubicación" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain" width="99%">
+		
+			<grid > 
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>		
+		
+			<grid width="99%">  
+				<rows>
+				
+					<row>
+						<label value="Habilitar Reubicación" />
+						<checkbox id="chkIngreso" checked="false" />
+					</row>
+				</rows>
+			</grid>			
+
+		</vbox>
+	</window>
+</zk>

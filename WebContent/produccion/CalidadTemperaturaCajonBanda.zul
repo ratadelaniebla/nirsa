@@ -1,0 +1,139 @@
+<?page id = "Calidad Temperatura" title="" contentType="text/html;charset=UTF-8"?>
+<!--   -->
+<zk>
+	<window id="winTemperaturaCajonesDescarga" apply="com.nw.webui.produccion.CalidadTemperaturaCajonWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="TEMPERATURA CAJON EN DESCARGA" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+		<grid width="99%">
+				<rows>
+					<row>
+						<label value="Barco Descarga :" style="color:blue" />
+						<listbox id="lbxBarcoDescarga" style="font-size:11px" mold="select"
+						width="99%" />
+					</row>
+					<row>
+						<label value="Nº Barco:" style="color:blue" />
+						<textbox id="txtNBarco" width="95%" disabled="false" readonly="true"> </textbox>
+					</row>
+					<row>
+						<label value="Registro:" style="color:blue" />
+						<textbox id="txtRegistro" width="95%" disabled="false" readonly="true"> </textbox>
+					</row>
+					<row>
+						<label value="Nº Viaje:" style="color:blue" />
+						<textbox id="txtNViaje" width="100px" disabled="false" readonly="true"> </textbox>
+					</row>
+					<row>
+						<label value="CO/SO :" style="color:blue" />
+						<checkbox id="chbOrigen" checked="false" disabled="true"></checkbox>
+					</row>
+				  <!-- 	<row>
+						<label value="Cuba :" style="color:blue" />
+						<listbox id="lbxCuba" style="font-size:11px" mold="select"
+						width="99%" />
+					</row>  -->
+				</rows>
+			</grid>
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar" tooltiptext="Grabar" label="Grabar" image="/img/grabar.gif"/>
+								
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+				<grid width="99%">
+				<rows>
+				    <row >
+					  <label value="Turno Labor" ></label>
+					  <listbox id="lbxTurnoLabor" style="font-size:11px" mold="select" width="90%" > </listbox>
+				    </row>
+					<row>
+						<label value="Nº Cajon:" style="color:blue" />
+						<hbox>
+						<textbox id="txtCajon" width="95%" disabled="false"> </textbox>
+						  	<toolbar>
+								<toolbarbutton id="btnBuscar" tooltiptext="Buscar" image="/img/buscar.gif"/>
+						    </toolbar>
+						</hbox>
+						
+					</row>
+					<row>
+						<label value="Cajones Disponibles :" style="color:blue" />
+						<listbox id="lbxCajonesDisponibles" style="font-size:11px" mold="select"
+						width="99%" />
+					</row>
+					<row>
+						<label value="Mezcla de Cubas :" style="color:blue" />
+						<hbox>
+						  <textbox id="txtMesclaCubas" width="100px" disabled="false" readonly="true" multiline="true" > </textbox>
+						   <!--  <toolbar>
+								<toolbarbutton id="btnBuscarMezclaCuba" tooltiptext="Buscar Mezcla de Cubas" image="/img/buscar.gif"/>
+							</toolbar>  -->
+						</hbox>  
+					</row>
+					<row>
+						<hbox>
+							<label value="Especie-Talla:" style="color:blue" />
+						</hbox>
+						<hbox>
+						<vbox>
+							<hbox>
+							<label value="Esp Comunes:" style="color:blue" />
+								<checkbox id="chbEspecies" checked="false"></checkbox>
+							</hbox>
+							<listbox id="lbxEspTalla" style="font-size:11px" mold="select" width="99%"  />
+						</vbox>
+						<vbox>
+							
+						</vbox>
+						</hbox>
+						
+					</row>
+					<row>
+						<label value="Estado :" style="color:blue" />
+						<listbox id="lbxEstado" style="font-size:11px" mold="select"
+						width="99%"> 
+						<listitem label="" > </listitem>
+						<listitem label="Limpio" > </listitem>
+						<listitem label="Sucio" > </listitem>
+						</listbox>
+						
+					</row>
+					<row>
+						<label value="Requerimiento Limpieza :" style="color:blue" />
+						<checkbox id="chbRLimpieza" checked="false"></checkbox>
+					</row>
+					<row>
+						<label value="Temperatura:" style="color:blue" />
+						<textbox id="txtTemperatura" width="95%" disabled="false"> </textbox>
+					</row>
+					
+				</rows>
+			</grid>
+			 <grid width="99%">
+				<rows>
+					<row>
+					
+						<label value="Desviacion" style="color:blue" />
+					
+					</row>
+					<row>
+							<textbox id="txtDesviacion" width="95%" disabled="false" rows="3"> </textbox>
+					</row>
+					<row>
+							<label value="Accion Correctiva:" style="color:blue" />
+					</row>
+					<row>
+							<textbox id="txtAccionCorrectiva" width="95%" disabled="false" rows="3"> </textbox>
+					</row>
+				</rows>
+			</grid>
+		</vbox>
+	</window>
+</zk>

@@ -1,0 +1,139 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="reporteLineasxProd" apply="com.nw.webui.produccion.ReportesLineasxProduccionWindow">
+<label value="REPORTES LIMPIEZA X PRODUCCION " style="color:blue;font-size:11px;font-weight:bold"/>
+		<vbox  id="vbxMain" width="99%">
+		
+			<grid width="99%">
+				<rows>
+
+					<row>
+						<label value="Fecha :"/>
+						<datebox id="dteFecha" width="110px" format="dd/MM/yyyy" />
+					</row> 
+					
+				<!-- <row >
+					<label value="Días Producción" ></label>
+					 <listbox id="lbxProduccion" style="font-size:11px" mold="select" width="130px" > </listbox>
+				</row>	-->						
+					<row>
+						<label value="Turno :"/>	
+						<listbox id="lbxTurno" style="font-size:11px" mold="select" width="130px" > </listbox>
+					</row>	
+					
+				</rows>
+			</grid>
+			<label value="Coches" style="color:blue;font-size:12px;font-weight:bold"/>
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnDestinoLotes" label="Destino Lotes"/>
+<!--  								<toolbarbutton id="btnExcelLotesTurno" label="Excel Destino Lotes"/>-->
+							</toolbar>
+							<toolbar>
+								<toolbarbutton id="btnCochesAsignados" label="Asignación de Coches"/>
+							</toolbar>
+							<toolbar>
+								<toolbarbutton id="btnExcelCochesAsignados" label="Excel Asignación de Coches"/>
+							</toolbar>
+							<toolbar>
+								<toolbarbutton id="btnRepTempCoche" label="Reporte de Exposición x Coches"/>
+							</toolbar>
+							<toolbar>
+								<toolbarbutton id="btnRepCochexCocinada" label="Reporte de Coches x Cocinada"/>
+							</toolbar>
+							
+							
+							
+							<toolbar>
+								<toolbarbutton id="btnFileteadoTVC" label="Ponchadas Retro"/>
+							</toolbar>
+							<toolbar>
+								<toolbarbutton id="btnFileteadoTVCExcel" label="Kilos Limpios Retro"/>
+							</toolbar>							
+							
+							
+						</vbox>
+					</row>
+
+				</rows>
+			</grid>
+		<label value="Limpieza" style="color:blue;font-size:12px;font-weight:bold" />
+		<grid width="99%">
+			<rows>
+<!--  				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnExcelPesosLomosLimpio" label="Excel Pesos Lomo Limpio" tooltiptext="Visualizar Archivo" />
+						</toolbar>
+					</vbox>
+				</row>-->
+				
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnLimpiezaEficienciaPlanta" label="Limpieza Eficiencia Planta" tooltiptext="Visualizar Archivo" />
+							<toolbarbutton id="btnLimpiezaEficienciaPlantaExcel" label=" Excel" tooltiptext="Descargar Archivo" />
+						</toolbar>
+					</vbox>
+				</row>				
+
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnLimpiezaEficienciaPlantav2" label="Limpieza Eficiencia Planta V2" tooltiptext="Visualizar Archivo" />
+							<toolbarbutton id="btnLimpiezaEficienciaPlantaExcelv2" label=" Excel" tooltiptext="Descargar Archivo" />
+						</toolbar>
+					</vbox>
+				</row>
+				
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnLimpiezaEmpleadoLote" label="Limpieza Empleados x Lote" tooltiptext="Visualizar Archivo" />
+						</toolbar>
+					</vbox>
+				</row>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnLimpiezaEmpleado" label="Limpieza x Empleados" tooltiptext="Visualizar Archivo" />
+						</toolbar>
+					</vbox>
+				</row>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnLimpiezaLote" label="Limpieza x Lote" tooltiptext="Visualizar Archivo" />
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>
+
+		<label value="Preproceso" style="color:blue;font-size:12px;font-weight:bold" />
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnCochesEvisxProd" label="Coches Eviscerados" tooltiptext="Visualizar Archivo" />
+						</toolbar>
+					</vbox>
+				</row>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnExcelCochesEvisxProd" label="Excel Coches Eviscerados" tooltiptext="Visualizar Archivo" />
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>
+
+
+	</vbox> 
+</window>
+</zk>

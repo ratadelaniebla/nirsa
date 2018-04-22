@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ContraloriaTemperaturaPreprocesoEspinaT1" language="groovy" pageWidth="39" pageHeight="802" columnWidth="39" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="pidcocinaaperturacierredetalle" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[select cpced.idcocinaprocesotipotemperatura, cpce.numeroespina, cpced.temperatura
+from cocina_proceso_control_espina_detalle cpced inner join cocina_proceso_control_espina cpce
+on cpced.idcocinaprocesocontrolespina = cpce.idcocinaprocesocontrolespina
+where cpced.idcocinaaperturacierredetalle = $P{pidcocinaaperturacierredetalle} and cpced.idcocinaprocesotipotemperatura = 2
+order by cpced.idcocinaprocesotipotemperatura asc, cpce.numeroespina asc
+LIMIT 4]]>
+	</queryString>
+	<field name="idcocinaprocesotipotemperatura" class="java.lang.Integer"/>
+	<field name="numeroespina" class="java.lang.Integer"/>
+	<field name="temperatura" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="10" splitType="Stretch">
+			<textField pattern="###.##">
+				<reportElement x="0" y="0" width="39" height="10"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{temperatura}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

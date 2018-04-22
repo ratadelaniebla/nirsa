@@ -1,0 +1,42 @@
+<?page id = "pagCalidadPCC1Quimico" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winMantEspeciesHarina" apply="com.nw.webui.produccion.HarinaEspecieMantenimientoWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="Mant. Especie Pelágica" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+
+			<grid width="99%">
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar" tooltiptext="Grabar"
+									image="/img/grabar.gif" />
+								<toolbarbutton id="btnNuevo" tooltiptext="Nuevo"
+									image="/img/crear.gif" />
+
+							</toolbar>
+
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+
+			<grid width="99%">
+				<rows>
+					<row>
+						<label value="Especie" />
+						<textbox id="txtNombre" width="99%" height="45px" multiline="true" />
+					</row>
+				</rows>
+			</grid>
+			
+			<listbox id="lbxEspecies" style="font-size:9px">
+				<listhead style="font-size:9px">
+					<listheader label="Especie" style="font-size:4px" />
+				</listhead>
+			</listbox>
+
+		</vbox>
+	</window>
+</zk>

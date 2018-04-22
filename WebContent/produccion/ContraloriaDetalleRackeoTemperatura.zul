@@ -1,0 +1,166 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winTempRackeo" apply="com.nw.webui.produccion.ContraloriaDetalleRackeoTemperaturaWindow" >
+	<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="TEMP.RACKEO X CAJON" style="color:blue;font-size:12px;font-weight:bold" />
+	
+	<vbox id="vbxMain" width="99%">
+		<grid width="99%">
+			<rows>
+				<row>
+					<label value="Fec.Prod. " style="color:blue" />
+					<listbox id="lbxFechaActiva" style="font-size:11px" mold="select" width="90%" > </listbox>
+				</row>
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+			<!-- 
+				<row >
+					<label value="Turno Producción" ></label>
+					<listbox id="lbxTurnoProduccion" style="font-size:11px" mold="select" width="99%" > </listbox>
+				</row>
+			 -->	
+				<row >
+					<label value="Turno Labor" ></label>
+					<listbox id="lbxTurnoLabor" style="font-size:11px" mold="select" width="70%" > </listbox>
+				</row>
+				
+			</rows>
+		</grid>
+		
+		
+		<grid width="99%">
+			<rows>
+				<row>
+					<label value="Cajon"></label>
+					
+					<hbox>
+						<listbox id="lbxCajon" style="font-size:11px" mold="select" width="90%" > </listbox>
+						
+						<toolbar>
+							<toolbarbutton id="btnActualizar" tooltiptext="Grabar" image="/img/refrescar.gif"/>
+						</toolbar>
+					</hbox>
+					
+				</row>
+				
+				<row>
+					<label value="Cajon Revolteo" ></label>
+					<textbox id="txtCajonRevolteo" readonly="true"  maxlength="255" width="90%" ></textbox>
+				</row>
+								
+				<row>
+					<label value="Lote"></label>
+					<textbox id="txtLote" maxlength="255" readonly="true" width="90%" ></textbox>
+				</row>
+				
+				<row>
+					<label value="Especie Talla"></label>
+					<textbox id="txtEspecieTalla" readonly="true" width="90%" rows="3"></textbox>
+				</row>
+
+				
+				<row>
+				    <label value="Cuba:" width="99%"   />
+				   	<textbox id="txtCuba"  readonly="true" rows="2" width="80%"/>
+				</row>
+
+				<row>
+				    <label value="L.Camara:" width="70%"   />
+				   	<textbox id="txtLoteCamara"  readonly="true"/>
+				</row>
+
+
+				<row>
+				    <label value="L.Haccp:" width="99%"   />
+				   	<textbox id="txtHaccp"  readonly="true"/>
+				</row>				
+				
+				
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+			
+			
+				<row >
+					<label value="Nivel" ></label>
+						<listbox id="lbxNivel" style="font-size:11px" mold="select" width="60%"> 
+							<listitem label="" > </listitem>
+							<listitem label="Superior" > </listitem>
+							<listitem label="Medio" > </listitem>
+							<listitem label="Inferior" > </listitem>
+					</listbox>
+					
+				</row>			
+
+				<row>
+					<label value="Temperatura1"></label>
+					 <textbox id="txtTemperatura1"  maxlength="10" width="60%"  ></textbox> 
+					<!--<doublebox id="doubxTemperatura" maxlength="10" width="99%"  > </doublebox>  -->
+				</row>
+				
+
+				<row>
+					<label value="Temperatura2"></label>
+					 <textbox id="txtTemperatura2"  maxlength="10" width="60%"  ></textbox> 
+				</row>
+
+
+				<row>
+					<label value="Temperatura3"></label>
+					 <textbox id="txtTemperatura3"  maxlength="10" width="60%"  ></textbox> 
+				</row>
+
+
+				<row>
+					<label value="Temperatura4"></label>
+					 <textbox id="txtTemperatura4"  maxlength="10" width="60%"  ></textbox> 
+				</row>
+
+
+				<row>
+					<label value="Temperatura5"></label>
+					 <textbox id="txtTemperatura5"  maxlength="10" width="60%"  ></textbox> 
+				</row>
+
+
+				<row>
+					<label value="Temperatura6"></label>
+					 <textbox id="txtTemperatura6"  maxlength="10" width="60%"  ></textbox> 
+				</row>
+
+
+			</rows>
+		</grid>
+	
+	
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+						</toolbar>
+					</vbox>
+				</row>
+				<row>
+					<label value="__" ></label>
+					<label value="__" ></label>
+				</row>
+
+				<row>
+					<label value="__" ></label>
+					<label value="__" ></label>
+				</row>
+				
+			</rows>
+		</grid>
+	
+		
+	</vbox>
+</window>
+</zk>

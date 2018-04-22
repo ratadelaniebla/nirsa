@@ -1,0 +1,58 @@
+<?page id = "pagCalidadPCC1Quimico" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winDesperdicioImprimir" apply="com.nw.webui.produccion.DesperdicioImpresionWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="DESPERDICIO - Informe" style="color:blue;font-size:12px;font-weight:bold" />
+		<label value="" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+		
+	
+		
+			<grid width="99%">  
+				<rows>
+					<row>
+						<label value="Fecha Producción"/>
+						<datebox id="dteFecha" width="110px" readonly="true"/>
+					</row>
+					
+					<!-- 				
+					<row>
+						<label value="Día Julian" />
+						<textbox id="txtDiaJuliano" maxlength="4"  width="50px"  readonly="true" />
+					</row>
+					 -->									
+									
+					<row>
+						<label value="Turno Desperdicio" />
+						<listbox id="lbxTurno" style="font-size:12px" mold="select" width="98%" />
+					</row>
+			
+					
+				</rows>
+			</grid>	
+
+			<grid width="99%"> 
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<vbox>
+								<toolbarbutton id="btnImprimir" tooltiptext="Imprimir Reporte" label="Reporte General" style="color:blue;font-size:12px;font-weight:bold"/>
+								<toolbarbutton id="btnImprimirG" tooltiptext="Imprimir Reporte" label="Reporte de Pesos por Cajón" style="color:blue;font-size:12px;font-weight:bold"/>
+								
+								<hbox>
+									<toolbarbutton id="btnImprimirGP" tooltiptext="Imprimir Reporte" label="Reporte General Producción" style="color:blue;font-size:12px;font-weight:bold"/>
+									<space width="3px"></space>
+									<toolbarbutton id="btnExcel" tooltiptext="Descargar reporte a Excel" label="EXCEL" style="color:blue;font-size:12px;font-weight:bold"/>
+								</hbox>
+																
+								</vbox>
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>				
+					
+		</vbox>
+	</window>
+</zk>

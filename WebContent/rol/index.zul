@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?page title="Ingreso al sistema"?>
+<!--  <?component name="titulo" macroURI="/titulo.zul"?>-->
+<window id="indexWindow" apply="com.nw.webui.rol.controlador.IndexWindow">
+	<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="INGRESO AL SISTEMA NW" style="color:blue;font-size:20px;font-weight:bold" />
+	<grid width="@{area.anchoInterno}">
+		<rows>
+			<row>
+				<vbox>
+					<label value="USUARIO" style="font-size:18px;font-weight"/>
+					<textbox id="txtUsuario" constraint="no empty:Ingrese el usuario" maxlength="15" width="230px" style="color:blue;font-size:18px;font-weight"/>
+				</vbox>	
+			</row>
+			<row>
+				<vbox>
+					<label value="CLAVE" style="font-size:18px;font-weight"/> 
+					<textbox id="txtClave"  type="password" maxlength="20" width="230px" style="color:blue;font-size:18px;font-weight"/>
+				</vbox>
+			</row>
+		</rows>
+	</grid>
+	<toolbarbutton label="INGRESAR" forward="onOK"  style="font-size:20px;font-weight"/>
+</window>

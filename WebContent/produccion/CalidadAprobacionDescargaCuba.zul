@@ -1,0 +1,81 @@
+<?page id = "pagCalidadPCC1Quimico" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winCalidadAprobacionDescargaCuba" apply="com.nw.webui.produccion.CalidadAprobacionDescargaCubaWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="CALIDAD APROBACIÓN " style="color:blue;font-size:12px;font-weight:bold" />
+		<label value="DESCARGA CUBA" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+
+			<grid width="99%">  
+				<rows>
+					<row>
+						<label value="Barco" />
+						<listbox id="lbxBarco" style="font-size:12px" mold="select" width="98%" />
+					</row>
+					
+					<row id="RwBarcoMercante" visible="false">
+						<label value="Barco Mercante" />
+  						<textbox id="txtBarcoMercante" maxlength="20" width="120px" style="color:blue" readonly="true" />
+					</row>
+										
+					<row>
+						<label value="N° Formato" />
+						<textbox id="txtNumFormato" maxlength="20" width="120px" style="color:blue" readonly="true" />
+					</row>
+					<row>
+						<label value="Registro" />
+						<textbox id="txtRegistro" maxlength="8" width="120px" style="color:blue" readonly="true" />
+					</row>
+					<row>
+						<label value="N° Barco" />
+						<textbox id="txtNumBarco" maxlength="8" width="120px" style="color:blue" readonly="true" />
+					</row>
+
+  					<row>
+						<label value="Cuba" />
+						<listbox id="lbxCuba" style="font-size:12px" mold="select" width="98%" />
+					</row>
+
+					</rows>
+			</grid>		
+			
+			
+			<grid width="99%"> 
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<vbox>
+								<toolbarbutton id="btnImprimir" label="Imprimir" image="/img/imprimir.gif" />
+								</vbox>
+							</toolbar>
+						</vbox>
+						<hbox>
+						Revisado <checkbox id="chkRevisado" checked="false" disabled="true"/>
+						</hbox>
+					</row>
+				</rows>
+			</grid>
+				
+			<grid width="99%"> 
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<vbox>
+								<toolbarbutton id="btnAprobar" label="Aprobar" image="/img/grabar.gif" disabled="true"/>
+								<toolbarbutton id="btnObservacion" label="En Observación" image="/img/grabar.gif" visible="false"/>
+								</vbox>
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+						
+			<label value="Observación" style="color:blue" />
+			<textbox id="txtObservacion" style="font-size:10px" 
+			rows="4" width="98%" />						
+
+		</vbox>
+	</window>
+</zk>

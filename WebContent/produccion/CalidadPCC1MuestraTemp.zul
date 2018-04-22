@@ -1,0 +1,83 @@
+<?page id = "pagCalidadPCC1MuestraTemp" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winCalidadPCC1MuestraTemp" apply="com.nw.webui.produccion.CalidadPCC1MuestraTempWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="MUESTRA TEMPERATURA" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+<!--  			<grid width="99%">
+				<rows>
+					<row>
+						<label value="Fec.Prod." style="color:blue" />
+						<datebox id="dteFecPro" width="80px" />
+					</row>
+				</rows>
+			</grid>-->
+
+<!--  			<hbox style="color:blue" width="99%">
+				Orden
+				<toolbarbutton id="btnCargar" label="Cargar"/> 
+			</hbox>
+			<listbox id="lbxOrd" style="font-size:11px" mold="select"
+				width="99%" />
+			</grid>			-->
+			<grid width="99%">  
+				<rows>
+					<row>
+						Barco
+							<listbox id="lbxBarco" style="font-size:9px" mold="select"
+								width="120px" />
+					</row>
+					<row>
+						<label value="Registro" />
+						<textbox id="txtRegistro" maxlength="8" width="98%" style="color:blue" readonly="true" />
+					</row>
+					<row>
+						<label value="N° Barco" />
+						<textbox id="txtNumBarco" maxlength="8" width="98%" style="color:blue" readonly="true" />
+					</row>
+					<row>
+						Cuba
+							<listbox id="lbxCuba" style="font-size:9px" mold="select"
+								width="100px" />
+					</row>
+				</rows>
+			</grid>			
+			<grid width="99%"> 
+				<rows>
+					<row>
+						<vbox>
+							<toolbar>
+								<toolbarbutton id="btnGrabar" tooltiptext="Grabar" image="/img/grabar.gif"/>
+<!--  								<toolbarbutton id="btnBuscar" tooltiptext="Buscar" image="/img/buscar.gif"/>
+								<toolbarbutton id="btnNuevo" tooltiptext="Nuevo" image="/img/crear.gif" />
+								<toolbarbutton id="btnActualizar" tooltiptext="Actualizar" image="/img/refrescar.gif"/>
+								<toolbarbutton id="btnEliminar" tooltiptext="Eliminar" image="/img/eliminar.gif" /> -->
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+						<grid width="99%">
+							<rows>
+								<row>
+									Especie
+										<listbox id="lbxEspecie" style="font-size:9px" mold="select"
+											width="100px" />
+								</row>
+								<row>
+									Talla
+										<listbox id="lbxTalla" style="font-size:9px" mold="select"
+											width="100px" />
+								</row>
+								<row>
+									Temperatura
+									<decimalbox id="txtTemperatura" format="###.##"  maxlength="8" width="98%" />
+								</row>
+							</rows>
+						</grid> 
+						<label value="Observaciones:" style="color:blue" />
+						<textbox id="txtDesviacion" style="font-size:10px" 
+							rows="4" width="98%" />
+		</vbox>
+	</window>
+</zk>

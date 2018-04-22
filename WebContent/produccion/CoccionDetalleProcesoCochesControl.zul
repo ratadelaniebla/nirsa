@@ -1,0 +1,130 @@
+<?page title="COCCION" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window id="winCocheControl" apply="com.nw.webui.produccion.CoccionDetalleProcesoCochesControlWindow" >
+<script src="/js/noBarra.js" type="text/javascript" />
+	<label value="COCCION CONTROL COCHES" style="color:blue;font-size:12px;font-weight:bold" />
+	<vbox id="vbxMain" width="99%">
+	
+		<grid >
+			<rows>
+			
+				   <row >
+						
+						<label value="Fecha Producción " style="color:blue" />
+						<datebox id="dteFecha"/>
+					    
+					</row>				
+				
+			</rows>
+		</grid>
+		
+		
+
+
+
+		<label value="RESUMEN LOTE"></label>
+
+		<grid width="99%">
+			<rows>
+				<row >
+					<label value="Lote "></label>
+					<hbox>
+						<textbox id="txtLoteu" width="70%" > </textbox>
+						
+						<toolbar>
+							<hbox>
+								<toolbarbutton id="btnBuscar" label="BUSCAR" />
+								<space width="7px"></space>
+								<toolbarbutton id="btnNuevo" label="NUEVO" />
+							</hbox>
+						</toolbar>
+					</hbox>
+				</row>
+			</rows>
+		</grid>
+				
+				
+			<label value="Inf. Cocina " ></label>
+			<textbox id="txtInfCocina" readonly="true" width="99%" rows="6"> </textbox>
+				
+			<grid width="99%">
+				<rows>
+
+				<row >
+					<label value="Produccion" ></label>
+					<textbox id="txProduccion" width="99%" readonly="true"> </textbox>
+				</row>
+
+
+				<row >
+					<label value="Total Coches en lote" ></label>
+					<textbox id="txtTotal" width="99%" readonly="true"> </textbox>
+				</row>
+
+				<row >
+					<label value="Ingresados ChillRoom" ></label>
+					<textbox id="txtReceptados" width="99%" readonly="true" > </textbox>
+				</row>
+
+				<row >
+					<label value="Pendientes ChillRoom" ></label>
+					<textbox id="txtPendientes" width="99%" readonly="true"> </textbox>
+				</row>
+				
+			</rows>
+		</grid>
+		
+		
+		<grid >
+			<rows>
+				   <row >
+						<label value="Fecha Producción " style="color:blue" />
+						
+						<hbox>
+						<datebox id="dteFecha1"/>
+							<toolbar>
+								<hbox>
+									<toolbarbutton id="btnBuscar1" label="BUSCAR" />
+									<space width="7px"></space>
+									<toolbarbutton id="btnNuevo1" label="NUEVO" />
+								</hbox>
+							</toolbar>
+						</hbox>
+						
+						
+					</row>				
+			</rows>
+		</grid>
+		
+		
+
+		<label value="RESUMEN GENERAL DE LOTES"></label>		
+		
+		
+	    <listbox  id="lbxLista" model="@{winCocheControl.listaLotesProduccion}" width="95%">
+			<listhead style="font-size:5px" >
+				<listheader label="Lote." width="10%" />
+				<listheader label="Total" width="10%" />
+				<listheader label="Ingr." width="60%"  style="font-size:5px" />
+				<listheader label="Pendt." width="8%" />
+				<listheader label="Estado" width="8%" />
+			</listhead>
+						  
+			<listitem self="@{each=d}">
+				<listcell label="@{d.lote}" ></listcell>
+				<listcell  label="@{d.total}"></listcell>
+				<listcell  label="@{d.ingresado}"></listcell>
+				<listcell  label="@{d.pendiente}"></listcell>
+				<listcell  label="@{d.estado}"></listcell>
+			</listitem>
+			
+		</listbox>		
+		
+		
+		
+		
+		
+	</vbox>
+	
+</window>
+</zk>
