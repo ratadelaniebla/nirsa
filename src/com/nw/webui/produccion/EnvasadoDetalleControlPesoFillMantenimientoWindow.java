@@ -52,6 +52,7 @@ import com.nw.util.Sistema;
  * @since 18/04/2018
  */
 public class EnvasadoDetalleControlPesoFillMantenimientoWindow extends GenericForwardComposer {
+private static final String NUEVO = "- NUEVO -";
 //	private static Log logger = LogFactory.getLog(EnvasadoDetalleControlPesoFillMantenimientoWindow.class);
 	/**
 	 * 
@@ -130,10 +131,15 @@ public class EnvasadoDetalleControlPesoFillMantenimientoWindow extends GenericFo
 		List<EnvasadoControlPesoFillCabecera> listaEcpfc = ecpfcDAO.getByProduccion(ep.getIdenvasadoproceso());
 		ProduccionDetalleOrden pdo;
 		lbxItemOrdenCliente.getItems().clear();
+		
 		Listitem li = new Listitem();
 		li.setValue(new Compuesto(new EnvasadoControlPesoFillCabecera(), new EnvasadoControlPesoFillDetalle()));
 		li.setParent(lbxItemOrdenCliente);
-
+		
+		li = new Listitem(NUEVO);
+		li.setValue(new Compuesto(new EnvasadoControlPesoFillCabecera(), new EnvasadoControlPesoFillDetalle()));
+		li.setParent(lbxItemOrdenCliente);
+		
 		/**
 		 * fragmento de codigo para ordenar la lista por orden
 		 */
@@ -391,6 +397,13 @@ public class EnvasadoDetalleControlPesoFillMantenimientoWindow extends GenericFo
 		}
 	}
 	
+	/**
+	 * carga los dias que contiene el mes seleccionado.
+	 */
+	public void onSelect$lbxMes(){
+		cargaDiasMesSeleccionado();
+	}
+	
 	private static int obtieneFechaCambio(Timestamp fechaCambio, int typeCalendar){
 		Calendar c = Calendar.getInstance();
 		c.setTime(new Date(fechaCambio.getTime()));
@@ -477,12 +490,16 @@ public class EnvasadoDetalleControlPesoFillMantenimientoWindow extends GenericFo
 		EnvasadoControlPesoFillCabecera ecpfc = compuesto.envasadoControlPesoFillCabecera;
 		EnvasadoControlPesoFillDetalle ecpfd = compuesto.envasadoControlPesoFillDetalle;
 		
+		if (NUEVO.equals(lbxItemOrdenCliente.getSelectedItem().getLabel())) {
+			ecpfc.setEnvasadoControlPesoFillDetalles(new ArrayList<EnvasadoControlPesoFillDetalle>());
+		}
+			
 		
 		if(!validaCampos())
 			return;
 		ProduccionDetalleOrden pdo = (ProduccionDetalleOrden)lbxItemOrden.getSelectedItem().getValue();
 		System.out.println(ecpfc.getEnvasadoControlPesoFillDetalles().size());
-		
+		ecpfc.setIdenvasadoproceso(((EnvasadoProceso)lbxTurnoProduccion.getSelectedItem().getValue()).getIdenvasadoproceso());
 		ecpfc.setEnvasadoControlPesoFillDetalles(Arrays.asList(ecpfd));
 		ecpfc.setIdturnolabor(((Turno)lbxTurnoLabor.getSelectedItem().getValue()).getIdturno());
 		ecpfc.setProduccionDetalleOrden(pdo);
@@ -520,16 +537,18 @@ public class EnvasadoDetalleControlPesoFillMantenimientoWindow extends GenericFo
 		ecpfd.setEnvasadoControlPesoFillCabecera(ecpfc);
 		ecpfc.setEnvasadoControlPesoFillDetalles(Arrays.asList(ecpfd));
 		EnvasadoControlPesoFillCabeceraDAO ecpfcDAO = new EnvasadoControlPesoFillCabeceraDAOJpaImpl();
+		
 		if(ecpfcDAO.updateEnvasadoControlPesoFillCabecera(ecpfc)==null) {
 			Sistema.mensaje("Error al guardar la informacion.");
 			return;
 		}
 		
 		EnvasadoControlPesoFillDetalleDAO ecpfdDAO = new EnvasadoControlPesoFillDetalleDAOJpaImpl();
-		if(ecpfdDAO.updateEnvasadoControlPesoFillDetalle(ecpfd)==null) {
-			Sistema.mensaje("Error al guardar el detalle de la informacion.");
-			return;
-		}
+		if (!NUEVO.equalsIgnoreCase(lbxItemOrdenCliente.getSelectedItem().getLabel()))
+			if(ecpfdDAO.updateEnvasadoControlPesoFillDetalle(ecpfd)==null) {
+				Sistema.mensaje("Error al guardar el detalle de la informacion.");
+				return;
+			}
 		Sistema.mensaje("Cambios guardados exitosamente.");
 		
 		onSelect$lbxTurnoProduccion();
@@ -548,11 +567,11 @@ public class EnvasadoDetalleControlPesoFillMantenimientoWindow extends GenericFo
 		}
 		
 		Compuesto c = (Compuesto)lbxItemOrdenCliente.getSelectedItem().getValue();
+		
 		if(c.envasadoControlPesoFillCabecera.getIdenvasadocontrolpesofillcabecera()==null) {
 			Sistema.mensaje("Debe seleccionar un valor "+lbItemOrdenCliente.getValue()+" para eliminar.");
 			return;
 		}
-		
 		EnvasadoControlPesoFillCabeceraDAO ecpfcDAO = new EnvasadoControlPesoFillCabeceraDAOJpaImpl();
 		
 		EnvasadoControlPesoFillDetalleDAO ecpfdDAO = new  EnvasadoControlPesoFillDetalleDAOJpaImpl();
@@ -562,16 +581,46 @@ public class EnvasadoDetalleControlPesoFillMantenimientoWindow extends GenericFo
 			Sistema.mensaje("Registro en uso");
 			return;
 		}
-			
 		
-		if (ecpfcDAO.eliminaEnvasadoControlPesoFillCabecera(c.envasadoControlPesoFillCabecera)) {
-			Sistema.mensaje("Formato Eliminado");
-//			limpiarFormulario();
-		} else {
-			Sistema.mensaje("Registro en uso");
-			return;
+		List<EnvasadoControlPesoFillDetalle> obtieneByIdEnvasadoControlPesoFillDetalle = ecpfdDAO.obtieneByIdEnvasadoControlPesoFillDetalle
+				(c.envasadoControlPesoFillCabecera.getIdenvasadocontrolpesofillcabecera());
+		if (obtieneByIdEnvasadoControlPesoFillDetalle.size()==0 || obtieneByIdEnvasadoControlPesoFillDetalle.isEmpty()) {
+			c.envasadoControlPesoFillCabecera.setEnvasadoControlPesoFillDetalles(obtieneByIdEnvasadoControlPesoFillDetalle);
+			if (ecpfcDAO.eliminaEnvasadoControlPesoFillCabecera(c.envasadoControlPesoFillCabecera)) {
+				Sistema.mensaje("Formato Eliminado");
+	//			limpiarFormulario();
+			} else {
+				Sistema.mensaje("Registro en uso");
+				return;
+			}
 		}
-			
+		limpiarFormulario();
+	}
+	
+	private void limpiarFormulario() {
+		
+		cargaTurno();
+		onSelect$lbxTurnoProduccion();
+		cargaLineaCerradora();
+		lbxItemOrden.setSelectedIndex(0);
+		onSelect$lbxItemOrden();
+		txtPesoEnvase.setValue(null);
+		txtPLomos.setValue(null);
+		txtTrozos.setValue(null);
+		txtRallado.setValue(null);
+		txtAgua.setValue(null);
+		txtAceite.setValue(null);
+		cargaCVPROT();
+		txtprot.setValue(null);
+		txtcv.setValue(null);
+		txtPesofill.setValue(null);
+		txtObservacion.setValue(null);
+		lbxMes.setSelectedIndex(0);
+		lbxDias.getItems().clear();
+		lbxHoras.setSelectedIndex(0);
+		lbxMinutos.setSelectedIndex(0);
+		ChkEliminar.setChecked(false);
+		
 	}
 	
 	private Timestamp obtieneFechaRegistro() {

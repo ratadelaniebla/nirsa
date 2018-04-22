@@ -1,7 +1,12 @@
 package com.nw.model.dao.impl;
 
-import javax.persistence.EntityTransaction;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
+
+import com.nw.model.EnvasadoControlPesoFillCabecera;
 import com.nw.model.EnvasadoControlPesoFillDetalle;
 import com.nw.model.dao.EnvasadoControlPesoFillDetalleDAO;
 
@@ -49,9 +54,23 @@ public class EnvasadoControlPesoFillDetalleDAOJpaImpl extends BaseDaoJpaImpl imp
 		} finally {
 //			em.close();
 		}
+	}
 	
-	
-	
+	@SuppressWarnings("unchecked")
+	public List<EnvasadoControlPesoFillDetalle> obtieneByIdEnvasadoControlPesoFillDetalle(Long idenvasadocontrolpesofillcabecera) {
+		try {
+			String sql = "SELECT e FROM EnvasadoControlPesoFillDetalle e "
+					+ "WHERE e.envasadoControlPesoFillCabecera.idenvasadocontrolpesofillcabecera = :idenvasadocontrolpesofillcabecera ";
+			return em
+					.createQuery(sql)
+					.setParameter("idenvasadocontrolpesofillcabecera", idenvasadocontrolpesofillcabecera)
+					.getResultList();
+		} catch( NoResultException e) {
+			return new ArrayList<EnvasadoControlPesoFillDetalle>();
+		} catch( Exception e) {
+			e.printStackTrace();
+			return new ArrayList<EnvasadoControlPesoFillDetalle>();
+		}
 	}
 
 }

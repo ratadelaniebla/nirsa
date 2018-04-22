@@ -25,7 +25,7 @@
 				
 					<row>
 						<label id="lbFechaProduccion" value="Fecha Producción"/>
-						<datebox id="dteFechaProduccion" width="110px" readonly="false"/>
+						<datebox id="dteFechaProduccion" width="110px" readonly="false" format="dd/MM/yyyy"/>
 					</row>		
 					
 					
@@ -175,7 +175,7 @@
 								<listitem label="Dic" value="12" />
 							</listbox>
 
-							<label value="Día" />
+							<label value="D." />
 							<listbox id="lbxDias" mold="select" />
 
 							<label value="Hora" />
