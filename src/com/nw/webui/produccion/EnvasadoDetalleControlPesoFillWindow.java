@@ -191,7 +191,8 @@ public class EnvasadoDetalleControlPesoFillWindow extends GenericForwardComposer
 			txtCliente.setValue(pdo.getCliente());
 			
 			for(Listitem li : (List<Listitem>)lbxLineaCerradora.getItems()) {
-				if(li.getValue().equals(ecpfc.getEnvasadoLineaCerradora())){
+				if(ecpfc.getEnvasadoLineaCerradora().getIdenvasadolineacerradora()
+						.equals(((EnvasadoLineaCerradora)li.getValue()).getIdenvasadolineacerradora())){
 					lbxLineaCerradora.setSelectedItem(li);
 					break;
 				}
@@ -205,7 +206,8 @@ public class EnvasadoDetalleControlPesoFillWindow extends GenericForwardComposer
 			txtAceite.setValue(String.valueOf(ecpfc.getAceite()));
 			
 			for(Listitem li : (List<Listitem>)lbxcvprot.getItems()) {
-				if(li.getValue().equals(ecpfc.getEnvasadoCaldoVegetalProteina())){
+				if(ecpfc.getEnvasadoCaldoVegetalProteina().getIdenvasadocaldovegetalproteina()
+						.equals(((EnvasadoCaldoVegetalProteina)li.getValue()).getIdenvasadocaldovegetalproteina())){
 					lbxcvprot.setSelectedItem(li);
 					break;
 				}

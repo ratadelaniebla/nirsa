@@ -459,6 +459,8 @@
       	<class>com.nw.model.EnvasadoControlPesoFillCabecera</class>
       	<class>com.nw.model.EnvasadoControlPesoFillDetalle</class>
       	<class>com.nw.model.EnvasadoLineaCerradora</class>
+      	<class>com.nw.model.EnvasadoControlFillCorteCabecera</class>
+      	<class>com.nw.model.EnvasadoControlFillCorteDetalle</class>
       	
 		<properties>
 
