@@ -198,7 +198,16 @@
       	<class>com.nw.model.Ducharociado</class>
       	<class>com.nw.model.Empleado</class>
       	<class>com.nw.model.Empresa</class>
+      	<class>com.nw.model.EnvasadoCaldoVegetalProteina</class>
+      	<class>com.nw.model.EnvasadoControlFillCorteCabecera</class>
+      	<class>com.nw.model.EnvasadoControlFillCorteDetalle</class>
+      	<class>com.nw.model.EnvasadoControlPesoFillCabecera</class>
+      	<class>com.nw.model.EnvasadoControlPesoFillDetalle</class>
+      	<class>com.nw.model.EnvasadoDetalleProcesoCambio</class>
+      	<class>com.nw.model.EnvasadoDetalleProcesoCambiosLuthy</class>
+      	<class>com.nw.model.EnvasadoLineaCerradora</class>
       	<class>com.nw.model.EnvasadoProceso</class>
+      	<class>com.nw.model.EnvasadoTipoProteina</class>
       	<class>com.nw.model.EspecialidadesIncidencia</class>
       	<class>com.nw.model.EspecialidadesIncidenciaEnlatado</class>
       	<class>com.nw.model.EspecialidadesIngrediente</class>
@@ -409,12 +418,15 @@
       	<class>com.nw.model.ProcesosCargaEvolution</class>
       	<class>com.nw.model.Produccion</class>
       	<class>com.nw.model.ProduccionArchivoCargaLote</class>
+      	<class>com.nw.model.ProduccionArchivoCargaOrden</class>
+      	<class>com.nw.model.ProduccionArchivoCargaOrdenDetalle</class>
       	<class>com.nw.model.ProduccionCargaArchivoPedido</class>
       	<class>com.nw.model.ProduccionCargaLote</class>
       	<class>com.nw.model.ProduccionDetalleArchivoPedido</class>
       	<class>com.nw.model.ProduccionDetalleLote</class>
       	<class>com.nw.model.ProduccionDetalleLoteCajon</class>
       	<class>com.nw.model.ProduccionDetalleLoteCarryover</class>
+      	<class>com.nw.model.ProduccionDetalleOrden</class>
       	<class>com.nw.model.ProduccionLotesTemporal</class>
       	<class>com.nw.model.ProduccionOrdenPedido</class>
       	<class>com.nw.model.Proveedor</class>
@@ -448,20 +460,7 @@
       	<class>com.nw.model.Usuario</class>
       	<class>com.nw.model.UsuariosAprobacion</class>
       	<class>com.nw.model.Volqueta</class>
-      	<class>com.nw.model.Zonafao</class>
-      	<class>com.nw.model.ProduccionArchivoCargaOrden</class>
-      	<class>com.nw.model.ProduccionArchivoCargaOrdenDetalle</class>
-      	<class>com.nw.model.ProduccionDetalleOrden</class>
-      	<class>com.nw.model.EnvasadoDetalleProcesoCambio</class>
-      	<class>com.nw.model.EnvasadoDetalleProcesoCambiosLuthy</class>
-      	<class>com.nw.model.EnvasadoTipoProteina</class>
-      	<class>com.nw.model.EnvasadoCaldoVegetalProteina</class>
-      	<class>com.nw.model.EnvasadoControlPesoFillCabecera</class>
-      	<class>com.nw.model.EnvasadoControlPesoFillDetalle</class>
-      	<class>com.nw.model.EnvasadoLineaCerradora</class>
-      	<class>com.nw.model.EnvasadoControlFillCorteCabecera</class>
-      	<class>com.nw.model.EnvasadoControlFillCorteDetalle</class>
-      	
+      	<class>com.nw.model.Zonafao</class>      	
 		<properties>
 
 			<property name="eclipselink.logging.level" value="FINEST"/>

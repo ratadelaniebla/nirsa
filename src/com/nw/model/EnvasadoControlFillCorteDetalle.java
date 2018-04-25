@@ -18,6 +18,8 @@ public class EnvasadoControlFillCorteDetalle implements Serializable {
 	private Integer corte;
 	private Timestamp fechaCorte;
 	private Timestamp fechaFinCorteAnterior;
+	private Long hora;
+	private Long minuto;
 	private EnvasadoControlFillCorteCabecera envasadoControlFillCorteCabecera;
 
 	public EnvasadoControlFillCorteDetalle() {
@@ -61,6 +63,24 @@ public class EnvasadoControlFillCorteDetalle implements Serializable {
 
 	public void setFechaFinCorteAnterior(Timestamp fechaFinCorteAnterior) {
 		this.fechaFinCorteAnterior = fechaFinCorteAnterior;
+	}
+
+
+	public Long getHora() {
+		return this.hora;
+	}
+
+	public void setHora(Long hora) {
+		this.hora = hora;
+	}
+
+
+	public Long getMinuto() {
+		return this.minuto;
+	}
+
+	public void setMinuto(Long minuto) {
+		this.minuto = minuto;
 	}
 
 

@@ -11,6 +11,7 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="envasado_control_peso_fill_detalle")
+@NamedQuery(name="EnvasadoControlPesoFillDetalle.findAll", query="SELECT e FROM EnvasadoControlPesoFillDetalle e")
 public class EnvasadoControlPesoFillDetalle implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Long idenvasadocontrolpesofilldetalle;
@@ -69,7 +70,6 @@ public class EnvasadoControlPesoFillDetalle implements Serializable {
 	public void setPesofill(double pesofill) {
 		this.pesofill = pesofill;
 	}
-
 
 	//bi-directional many-to-one association to EnvasadoControlPesoFillCabecera
 	@ManyToOne

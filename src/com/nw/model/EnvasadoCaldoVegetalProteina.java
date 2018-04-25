@@ -11,6 +11,7 @@ import java.util.List;
  */
 @Entity
 @Table(name="envasado_caldo_vegetal_proteina")
+@NamedQuery(name="EnvasadoCaldoVegetalProteina.findAll", query="SELECT e FROM EnvasadoCaldoVegetalProteina e")
 public class EnvasadoCaldoVegetalProteina implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer idenvasadocaldovegetalproteina;
@@ -49,6 +50,20 @@ public class EnvasadoCaldoVegetalProteina implements Serializable {
 
 	public void setEnvasadoControlPesoFillCabeceras(List<EnvasadoControlPesoFillCabecera> envasadoControlPesoFillCabeceras) {
 		this.envasadoControlPesoFillCabeceras = envasadoControlPesoFillCabeceras;
+	}
+
+	public EnvasadoControlPesoFillCabecera addEnvasadoControlPesoFillCabecera(EnvasadoControlPesoFillCabecera envasadoControlPesoFillCabecera) {
+		getEnvasadoControlPesoFillCabeceras().add(envasadoControlPesoFillCabecera);
+		envasadoControlPesoFillCabecera.setEnvasadoCaldoVegetalProteina(this);
+
+		return envasadoControlPesoFillCabecera;
+	}
+
+	public EnvasadoControlPesoFillCabecera removeEnvasadoControlPesoFillCabecera(EnvasadoControlPesoFillCabecera envasadoControlPesoFillCabecera) {
+		getEnvasadoControlPesoFillCabeceras().remove(envasadoControlPesoFillCabecera);
+		envasadoControlPesoFillCabecera.setEnvasadoCaldoVegetalProteina(null);
+
+		return envasadoControlPesoFillCabecera;
 	}
 
 }

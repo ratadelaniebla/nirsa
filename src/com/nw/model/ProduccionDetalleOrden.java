@@ -11,6 +11,7 @@ import java.util.List;
  */
 @Entity
 @Table(name="produccion_detalle_orden")
+@NamedQuery(name="ProduccionDetalleOrden.findAll", query="SELECT p FROM ProduccionDetalleOrden p")
 public class ProduccionDetalleOrden implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Long idproducciondetalleorden;
@@ -30,7 +31,7 @@ public class ProduccionDetalleOrden implements Serializable {
 	private Integer idturno;
 	private String idusuario;
 	private Integer item;
-	private Double latas;
+	private double latas;
 	private double lomolimpio;
 	private String marca;
 	private Integer materialfer;
@@ -57,8 +58,7 @@ public class ProduccionDetalleOrden implements Serializable {
 
 
 	@Id
-	@SequenceGenerator(name="PRODUCCION_DETALLE_ORDEN_IDPRODUCCIONDETALLEORDEN_GENERATOR", sequenceName="PRODUCCION_DETALLE_ORDEN_IDPRODUCCIONDETALLEORDEN_SEQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PRODUCCION_DETALLE_ORDEN_IDPRODUCCIONDETALLEORDEN_GENERATOR")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdproducciondetalleorden() {
 		return this.idproducciondetalleorden;
 	}
@@ -212,11 +212,11 @@ public class ProduccionDetalleOrden implements Serializable {
 	}
 
 
-	public Double getLatas() {
+	public double getLatas() {
 		return this.latas;
 	}
 
-	public void setLatas(Double latas) {
+	public void setLatas(double latas) {
 		this.latas = latas;
 	}
 
@@ -400,6 +400,20 @@ public class ProduccionDetalleOrden implements Serializable {
 
 	public void setEnvasadoControlPesoFillCabeceras(List<EnvasadoControlPesoFillCabecera> envasadoControlPesoFillCabeceras) {
 		this.envasadoControlPesoFillCabeceras = envasadoControlPesoFillCabeceras;
+	}
+
+	public EnvasadoControlPesoFillCabecera addEnvasadoControlPesoFillCabecera(EnvasadoControlPesoFillCabecera envasadoControlPesoFillCabecera) {
+		getEnvasadoControlPesoFillCabeceras().add(envasadoControlPesoFillCabecera);
+		envasadoControlPesoFillCabecera.setProduccionDetalleOrden(this);
+
+		return envasadoControlPesoFillCabecera;
+	}
+
+	public EnvasadoControlPesoFillCabecera removeEnvasadoControlPesoFillCabecera(EnvasadoControlPesoFillCabecera envasadoControlPesoFillCabecera) {
+		getEnvasadoControlPesoFillCabeceras().remove(envasadoControlPesoFillCabecera);
+		envasadoControlPesoFillCabecera.setProduccionDetalleOrden(null);
+
+		return envasadoControlPesoFillCabecera;
 	}
 
 }
