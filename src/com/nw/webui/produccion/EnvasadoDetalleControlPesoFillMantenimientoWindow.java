@@ -498,8 +498,8 @@ private static final String NUEVO = "- NUEVO -";
 		if(!validaCampos())
 			return;
 		ProduccionDetalleOrden pdo = (ProduccionDetalleOrden)lbxItemOrden.getSelectedItem().getValue();
-		System.out.println(ecpfc.getEnvasadoControlPesoFillDetalles().size());
-		ecpfc.setIdenvasadoproceso(((EnvasadoProceso)lbxTurnoProduccion.getSelectedItem().getValue()).getIdenvasadoproceso());
+
+		ecpfc.setEnvasadoProceso((EnvasadoProceso)lbxTurnoProduccion.getSelectedItem().getValue());
 		ecpfc.setEnvasadoControlPesoFillDetalles(Arrays.asList(ecpfd));
 		ecpfc.setIdturnolabor(((Turno)lbxTurnoLabor.getSelectedItem().getValue()).getIdturno());
 		ecpfc.setProduccionDetalleOrden(pdo);

@@ -19,6 +19,7 @@ public class EnvasadoControlPesoFillDetalle implements Serializable {
 	private Timestamp fecharegusuario;
 	private String idusuario;
 	private double pesofill;
+	private EnvasadoControlFillCorteDetalle envasadoControlFillCorteDetalle;
 	private EnvasadoControlPesoFillCabecera envasadoControlPesoFillCabecera;
 
 	public EnvasadoControlPesoFillDetalle() {
@@ -70,6 +71,19 @@ public class EnvasadoControlPesoFillDetalle implements Serializable {
 	public void setPesofill(double pesofill) {
 		this.pesofill = pesofill;
 	}
+
+
+	//bi-directional many-to-one association to EnvasadoControlFillCorteDetalle
+	@ManyToOne
+	@JoinColumn(name="idenvasadocontrolfillcortedetalle")
+	public EnvasadoControlFillCorteDetalle getEnvasadoControlFillCorteDetalle() {
+		return this.envasadoControlFillCorteDetalle;
+	}
+
+	public void setEnvasadoControlFillCorteDetalle(EnvasadoControlFillCorteDetalle envasadoControlFillCorteDetalle) {
+		this.envasadoControlFillCorteDetalle = envasadoControlFillCorteDetalle;
+	}
+
 
 	//bi-directional many-to-one association to EnvasadoControlPesoFillCabecera
 	@ManyToOne

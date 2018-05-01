@@ -17,9 +17,9 @@ public class EnvasadoControlFillCorteCabecera implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Long idenvasadocontrolfillcortecabecera;
 	private Timestamp fechareg;
-	private Long idenvasadoproceso;
 	private String idusuario;
 	private List<EnvasadoControlFillCorteDetalle> envasadoControlFillCorteDetalles;
+	private Long idenvasadoproceso;
 
 	public EnvasadoControlFillCorteCabecera() {
 	}
@@ -45,15 +45,6 @@ public class EnvasadoControlFillCorteCabecera implements Serializable {
 	}
 
 
-	public Long getIdenvasadoproceso() {
-		return this.idenvasadoproceso;
-	}
-
-	public void setIdenvasadoproceso(Long idenvasadoproceso) {
-		this.idenvasadoproceso = idenvasadoproceso;
-	}
-
-
 	public String getIdusuario() {
 		return this.idusuario;
 	}
@@ -73,18 +64,30 @@ public class EnvasadoControlFillCorteCabecera implements Serializable {
 		this.envasadoControlFillCorteDetalles = envasadoControlFillCorteDetalles;
 	}
 
-	public EnvasadoControlFillCorteDetalle addEnvasadoControlFillCorteDetalle(EnvasadoControlFillCorteDetalle envasadoControlFillCorteDetalle) {
-		getEnvasadoControlFillCorteDetalles().add(envasadoControlFillCorteDetalle);
-		envasadoControlFillCorteDetalle.setEnvasadoControlFillCorteCabecera(this);
 
-		return envasadoControlFillCorteDetalle;
+	public Long getIdenvasadoproceso() {
+		return idenvasadoproceso;
 	}
 
-	public EnvasadoControlFillCorteDetalle removeEnvasadoControlFillCorteDetalle(EnvasadoControlFillCorteDetalle envasadoControlFillCorteDetalle) {
-		getEnvasadoControlFillCorteDetalles().remove(envasadoControlFillCorteDetalle);
-		envasadoControlFillCorteDetalle.setEnvasadoControlFillCorteCabecera(null);
 
-		return envasadoControlFillCorteDetalle;
+	public void setIdenvasadoproceso(Long idenvasadoproceso) {
+		this.idenvasadoproceso = idenvasadoproceso;
 	}
+
+//	public EnvasadoControlFillCorteDetalle addEnvasadoControlFillCorteDetalle(EnvasadoControlFillCorteDetalle envasadoControlFillCorteDetalle) {
+//		getEnvasadoControlFillCorteDetalles().add(envasadoControlFillCorteDetalle);
+//		envasadoControlFillCorteDetalle.setEnvasadoControlFillCorteCabecera(this);
+//
+//		return envasadoControlFillCorteDetalle;
+//	}
+//
+//	public EnvasadoControlFillCorteDetalle removeEnvasadoControlFillCorteDetalle(EnvasadoControlFillCorteDetalle envasadoControlFillCorteDetalle) {
+//		getEnvasadoControlFillCorteDetalles().remove(envasadoControlFillCorteDetalle);
+//		envasadoControlFillCorteDetalle.setEnvasadoControlFillCorteCabecera(null);
+//
+//		return envasadoControlFillCorteDetalle;
+//	}
+
+
 
 }

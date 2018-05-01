@@ -20,7 +20,7 @@ public class EnvasadoControlPesoFillCabecera implements Serializable {
 	private double agua;
 	private double caldovegetal;
 	private Timestamp fechareg;
-	private Long idenvasadoproceso;
+	private Long idproducciondetalleorden;
 	private Integer idturnolabor;
 	private String idusuario;
 	private String observacion;
@@ -31,8 +31,9 @@ public class EnvasadoControlPesoFillCabecera implements Serializable {
 	private double proteina;
 	private EnvasadoCaldoVegetalProteina envasadoCaldoVegetalProteina;
 	private EnvasadoLineaCerradora envasadoLineaCerradora;
-	private ProduccionDetalleOrden produccionDetalleOrden;
 	private List<EnvasadoControlPesoFillDetalle> envasadoControlPesoFillDetalles;
+	private EnvasadoProceso envasadoProceso;
+	private ProduccionDetalleOrden produccionDetalleOrden;
 
 	public EnvasadoControlPesoFillCabecera() {
 	}
@@ -85,12 +86,12 @@ public class EnvasadoControlPesoFillCabecera implements Serializable {
 	}
 
 
-	public Long getIdenvasadoproceso() {
-		return this.idenvasadoproceso;
+	public Long getIdproducciondetalleorden() {
+		return this.idproducciondetalleorden;
 	}
 
-	public void setIdenvasadoproceso(Long idenvasadoproceso) {
-		this.idenvasadoproceso = idenvasadoproceso;
+	public void setIdproducciondetalleorden(Long idproducciondetalleorden) {
+		this.idproducciondetalleorden = idproducciondetalleorden;
 	}
 
 
@@ -190,18 +191,6 @@ public class EnvasadoControlPesoFillCabecera implements Serializable {
 	}
 
 
-	//bi-directional many-to-one association to ProduccionDetalleOrden
-	@ManyToOne
-	@JoinColumn(name="idproducciondetalleorden")
-	public ProduccionDetalleOrden getProduccionDetalleOrden() {
-		return this.produccionDetalleOrden;
-	}
-
-	public void setProduccionDetalleOrden(ProduccionDetalleOrden produccionDetalleOrden) {
-		this.produccionDetalleOrden = produccionDetalleOrden;
-	}
-
-
 	//bi-directional many-to-one association to EnvasadoControlPesoFillDetalle
 	@OneToMany(mappedBy="envasadoControlPesoFillCabecera")
 	public List<EnvasadoControlPesoFillDetalle> getEnvasadoControlPesoFillDetalles() {
@@ -225,5 +214,31 @@ public class EnvasadoControlPesoFillCabecera implements Serializable {
 
 		return envasadoControlPesoFillDetalle;
 	}
+
+
+	//bi-directional many-to-one association to EnvasadoProceso
+	@ManyToOne
+	@JoinColumn(name="idenvasadoproceso")
+	public EnvasadoProceso getEnvasadoProceso() {
+		return this.envasadoProceso;
+	}
+
+	public void setEnvasadoProceso(EnvasadoProceso envasadoProceso) {
+		this.envasadoProceso = envasadoProceso;
+	}
+
+
+	@ManyToOne
+	@JoinColumn(name="idproducciondetalleorden")
+	public ProduccionDetalleOrden getProduccionDetalleOrden() {
+		return produccionDetalleOrden;
+	}
+
+	public void setProduccionDetalleOrden(ProduccionDetalleOrden produccionDetalleOrden) {
+		this.produccionDetalleOrden = produccionDetalleOrden;
+	}
+	
+	
+	
 
 }

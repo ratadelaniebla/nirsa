@@ -307,8 +307,7 @@ public class EnvasadoDetalleControlPesoFillWindow extends GenericForwardComposer
 		
 		if (idenvasadocontrolpesofillcabecera!=null)
 			ecpfc.setIdenvasadocontrolpesofillcabecera(idenvasadocontrolpesofillcabecera);
-		
-		ecpfc.setIdenvasadoproceso(envasadoProceso.getIdenvasadoproceso());
+		ecpfc.setEnvasadoProceso(envasadoProceso);
 		ecpfc.setIdturnolabor(((Turno)lbxTurnoLabor.getSelectedItem().getValue()).getIdturno());
 		ecpfc.setProduccionDetalleOrden((ProduccionDetalleOrden)lbxItemOrden.getSelectedItem().getValue());
 		

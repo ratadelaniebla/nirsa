@@ -273,17 +273,20 @@ public class EnavasadoControlFillCorteWindow extends GenericForwardComposer {
 			return;
 		}
 		
+		//elimina el detalle anterior
+		if (ecfcc.getIdenvasadocontrolfillcortecabecera()!=null) {
+			if (!ecfcdDAO.eliminaTodos(ecfcc.getEnvasadoControlFillCorteDetalles())) {
+				Sistema.mensaje("Registro en uso");
+				return;
+			}
+			ecfcc.setEnvasadoControlFillCorteDetalles(new ArrayList<EnvasadoControlFillCorteDetalle>());
+		}
+		
 		//setean el detalle en la cabecera
 		ecfcc.setEnvasadoControlFillCorteDetalles(procesaEnvasadoControlFillCorteDetalle(ecfcc));
 		if (ecfcc.getEnvasadoControlFillCorteDetalles()==null)
 			return;
 
-		//elimina el detalle anterior
-		if (ecfcc.getIdenvasadocontrolfillcortecabecera()!=null)
-			if (!ecfcdDAO.eliminaTodos(ecfcc.getEnvasadoControlFillCorteDetalles())) {
-				Sistema.mensaje("Registro en uso");
-				return;
-			}
 		//inserta la cabecera
 		if (ecfccDAO.updateEnvasadoControlFillCorteCabecera(ecfcc)==null) {
 			Sistema.mensaje("Error al intentar guardar la informacion.");

@@ -3,6 +3,7 @@ package com.nw.model;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 
 /**
@@ -21,6 +22,7 @@ public class EnvasadoControlFillCorteDetalle implements Serializable {
 	private Long hora;
 	private Long minuto;
 	private EnvasadoControlFillCorteCabecera envasadoControlFillCorteCabecera;
+	private List<EnvasadoControlPesoFillDetalle> envasadoControlPesoFillDetalles;
 
 	public EnvasadoControlFillCorteDetalle() {
 	}
@@ -93,6 +95,31 @@ public class EnvasadoControlFillCorteDetalle implements Serializable {
 
 	public void setEnvasadoControlFillCorteCabecera(EnvasadoControlFillCorteCabecera envasadoControlFillCorteCabecera) {
 		this.envasadoControlFillCorteCabecera = envasadoControlFillCorteCabecera;
+	}
+
+
+	//bi-directional many-to-one association to EnvasadoControlPesoFillDetalle
+	@OneToMany(mappedBy="envasadoControlFillCorteDetalle")
+	public List<EnvasadoControlPesoFillDetalle> getEnvasadoControlPesoFillDetalles() {
+		return this.envasadoControlPesoFillDetalles;
+	}
+
+	public void setEnvasadoControlPesoFillDetalles(List<EnvasadoControlPesoFillDetalle> envasadoControlPesoFillDetalles) {
+		this.envasadoControlPesoFillDetalles = envasadoControlPesoFillDetalles;
+	}
+
+	public EnvasadoControlPesoFillDetalle addEnvasadoControlPesoFillDetalle(EnvasadoControlPesoFillDetalle envasadoControlPesoFillDetalle) {
+		getEnvasadoControlPesoFillDetalles().add(envasadoControlPesoFillDetalle);
+		envasadoControlPesoFillDetalle.setEnvasadoControlFillCorteDetalle(this);
+
+		return envasadoControlPesoFillDetalle;
+	}
+
+	public EnvasadoControlPesoFillDetalle removeEnvasadoControlPesoFillDetalle(EnvasadoControlPesoFillDetalle envasadoControlPesoFillDetalle) {
+		getEnvasadoControlPesoFillDetalles().remove(envasadoControlPesoFillDetalle);
+		envasadoControlPesoFillDetalle.setEnvasadoControlFillCorteDetalle(null);
+
+		return envasadoControlPesoFillDetalle;
 	}
 
 }
