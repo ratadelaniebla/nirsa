@@ -4,7 +4,6 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 
 import com.nw.model.EnvasadoControlFillCorteCabecera;
-import com.nw.model.EnvasadoControlPesoFillCabecera;
 import com.nw.model.dao.EnvasadoControlFillCorteCabeceraDAO;
 
 public class EnvasadoControlFillCorteCabeceraDAOJpaImpl extends BaseDaoJpaImpl

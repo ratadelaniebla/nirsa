@@ -24,6 +24,7 @@ import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Textbox;
 
 import com.nw.model.EnvasadoCaldoVegetalProteina;
+import com.nw.model.EnvasadoControlFillCorteDetalle;
 import com.nw.model.EnvasadoControlPesoFillCabecera;
 import com.nw.model.EnvasadoControlPesoFillDetalle;
 import com.nw.model.EnvasadoLineaCerradora;
@@ -32,11 +33,13 @@ import com.nw.model.Produccion;
 import com.nw.model.ProduccionDetalleOrden;
 import com.nw.model.Turno;
 import com.nw.model.dao.EnvasadoCaldoVegetalProteinaDAO;
+import com.nw.model.dao.EnvasadoControlFillCorteCabeceraDAO;
 import com.nw.model.dao.EnvasadoControlPesoFillCabeceraDAO;
 import com.nw.model.dao.EnvasadoControlPesoFillDetalleDAO;
 import com.nw.model.dao.EnvasadoLineaCerradoraDAO;
 import com.nw.model.dao.ProduccionDetalleOrdenDAO;
 import com.nw.model.dao.impl.EnvasadoCaldoVegetalProteinaDAOJpaImpl;
+import com.nw.model.dao.impl.EnvasadoControlFillCorteCabeceraDAOJpaImpl;
 import com.nw.model.dao.impl.EnvasadoControlPesoFillCabeceraDAOJpaImpl;
 import com.nw.model.dao.impl.EnvasadoControlPesoFillDetalleDAOJpaImpl;
 import com.nw.model.dao.impl.EnvasadoLineaCerradoraDAOJpaImpl;
@@ -63,8 +66,8 @@ private static final String NUEVO = "- NUEVO -";
 	Label   lbFechaProduccion;
 	Datebox dteFechaProduccion;
 	
-	Label   lbTurnoProduccion,  lbTurnoLabor,  lbItemOrdenCliente,  lbItemOrden,  lbLineaCerradora,  lbcvprot;
-	Listbox lbxTurnoProduccion, lbxTurnoLabor, lbxItemOrdenCliente, lbxItemOrden, lbxLineaCerradora, lbxcvprot; 
+	Label   lbTurnoProduccion,  lbTurnoLabor,  lbItemOrdenCliente,  lbItemOrden,  lbLineaCerradora,  lbcvprot,  lbCorte;
+	Listbox lbxTurnoProduccion, lbxTurnoLabor, lbxItemOrdenCliente, lbxItemOrden, lbxLineaCerradora, lbxcvprot, lbxCorte; 
 	
 	Label   lbOrden,  lbProducto,  lbCliente,  lbPesoEnvase,  lbPLomos,  lbTrozos,  lbRallado,  lbAgua,  lbAceite,  lbprot,  lbcv,  lbPesofill,  lbObservacion;
 	Textbox txtOrden, txtProducto, txtCliente, txtPesoEnvase, txtPLomos, txtTrozos, txtRallado, txtAgua, txtAceite, txtprot, txtcv, txtPesofill, txtObservacion;
@@ -104,7 +107,7 @@ private static final String NUEVO = "- NUEVO -";
 		
 	}
 	
-	private  void cargaTurno(List<EnvasadoProceso> listEProceso) {
+	private void cargaTurno(List<EnvasadoProceso> listEProceso) {
 		
 		lbxTurnoProduccion.getItems().clear();
 		Listitem li = new Listitem();
@@ -206,6 +209,7 @@ private static final String NUEVO = "- NUEVO -";
 		}
 		
 		lbxItemOrdenCliente.setSelectedIndex(0);
+		
 	}
 	
 	private void cargaTurno(){
@@ -233,7 +237,7 @@ private static final String NUEVO = "- NUEVO -";
 		
 		cargaItemOrden();
 		cargaInformacionFormulario() ;
-		
+		cargaCorte();
 	}
 	
 	public void onSelect$lbxItemOrden() {
@@ -271,6 +275,60 @@ private static final String NUEVO = "- NUEVO -";
 				 lbxItemOrden.setSelectedItem(li);
 		}
 		
+	}
+	
+	private void cargaCorte() {
+		
+		Compuesto compuesto = (Compuesto)lbxItemOrdenCliente.getSelectedItem().getValue();
+		
+		EnvasadoControlFillCorteCabeceraDAO ecfccDAO = new EnvasadoControlFillCorteCabeceraDAOJpaImpl();
+		
+		EnvasadoProceso envasadoProceso = (EnvasadoProceso)lbxTurnoProduccion.getSelectedItem().getValue();
+		List<EnvasadoControlFillCorteDetalle> listaEcfcd = ecfccDAO
+				.obtieneByIdEnvasadoProceso(envasadoProceso.getIdenvasadoproceso())
+				.getEnvasadoControlFillCorteDetalles();
+		
+		if (listaEcfcd != null)
+			if (listaEcfcd.isEmpty()) {
+				Sistema.mensaje("No se encuentra configurado informacion para la configuracion de cortes.");
+				return;
+			}
+		
+		lbxCorte.getItems().clear();
+		Listitem li = new Listitem();
+		li.setValue(new EnvasadoControlFillCorteDetalle());
+		li.setParent(lbxCorte);
+		
+		
+		Collections.sort(listaEcfcd, new Comparator<EnvasadoControlFillCorteDetalle>() 		
+		{
+			@Override
+			public int compare(EnvasadoControlFillCorteDetalle o1, EnvasadoControlFillCorteDetalle o2) {
+				return new Integer(o1.getCorte()).compareTo(o2.getCorte());
+			}
+		});
+		
+		
+		String hora, minuto;
+		for (EnvasadoControlFillCorteDetalle ecfcd : listaEcfcd) {
+			li = new Listitem();
+			li.setValue(ecfcd);
+
+			hora = ecfcd.getHora()<=9?"0"+ecfcd.getHora():ecfcd.getHora().toString();
+			minuto = ecfcd.getMinuto()<=9?"0"+ecfcd.getMinuto():ecfcd.getMinuto().toString();
+			
+			new Listcell(ecfcd.getCorte()+" -> "+hora+":"+minuto)
+				.setParent(li);
+			li.setParent(lbxCorte);
+			
+			if (compuesto.envasadoControlPesoFillDetalle.getIdenvasadocontrolpesofilldetalle()!=null)
+				if (compuesto.envasadoControlPesoFillDetalle.getEnvasadoControlFillCorteDetalle().getIdenvasadocontrolfillcortedetalle()!=null)
+					if (ecfcd.getIdenvasadocontrolfillcortedetalle().equals(compuesto.envasadoControlPesoFillDetalle
+							.getEnvasadoControlFillCorteDetalle().getIdenvasadocontrolfillcortedetalle())) 
+						lbxCorte.setSelectedItem(li);
+		}
+		if (lbxCorte.getSelectedIndex()<0)
+			lbxCorte.setSelectedIndex(0);
 	}
 	
 	private void cargaLineaCerradora() {
@@ -532,6 +590,8 @@ private static final String NUEVO = "- NUEVO -";
 		ecpfc.setIdusuario(idUsurio);
 		ecpfc.getEnvasadoControlPesoFillDetalles().get(0).setIdusuario(idUsurio);
 		
+		EnvasadoControlFillCorteDetalle envasadoControlFillCorteDetalle = (EnvasadoControlFillCorteDetalle)lbxCorte.getSelectedItem().getValue();
+		ecpfc.getEnvasadoControlPesoFillDetalles().get(0).setEnvasadoControlFillCorteDetalle(envasadoControlFillCorteDetalle);
 		
 		ecpfc.setObservacion(txtObservacion.getValue());
 		ecpfd.setEnvasadoControlPesoFillCabecera(ecpfc);
@@ -613,6 +673,7 @@ private static final String NUEVO = "- NUEVO -";
 		cargaCVPROT();
 		txtprot.setValue(null);
 		txtcv.setValue(null);
+		lbxCorte.getItems().clear();
 		txtPesofill.setValue(null);
 		txtObservacion.setValue(null);
 		lbxMes.setSelectedIndex(0);
@@ -743,6 +804,11 @@ private static final String NUEVO = "- NUEVO -";
 		listaEtiquetas = new ArrayList<Object>(); 
 		listaEtiquetas.add(lbcv);
 		listaEtiquetas.add(txtcv);
+		camposNumericos.add(listaEtiquetas);
+		
+		listaEtiquetas = new ArrayList<Object>(); 
+		listaEtiquetas.add(lbCorte);
+		listaEtiquetas.add(lbxCorte);
 		camposNumericos.add(listaEtiquetas);
 		
 		listaEtiquetas = new ArrayList<Object>(); 

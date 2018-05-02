@@ -20,7 +20,6 @@ public class EnvasadoControlPesoFillCabecera implements Serializable {
 	private double agua;
 	private double caldovegetal;
 	private Timestamp fechareg;
-	private Long idproducciondetalleorden;
 	private Integer idturnolabor;
 	private String idusuario;
 	private String observacion;
@@ -83,15 +82,6 @@ public class EnvasadoControlPesoFillCabecera implements Serializable {
 
 	public void setFechareg(Timestamp fechareg) {
 		this.fechareg = fechareg;
-	}
-
-
-	public Long getIdproducciondetalleorden() {
-		return this.idproducciondetalleorden;
-	}
-
-	public void setIdproducciondetalleorden(Long idproducciondetalleorden) {
-		this.idproducciondetalleorden = idproducciondetalleorden;
 	}
 
 

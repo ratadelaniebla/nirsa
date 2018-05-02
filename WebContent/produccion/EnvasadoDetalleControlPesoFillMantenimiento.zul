@@ -144,6 +144,12 @@
 			<grid width="99%">
 				<rows>
 					<row>
+						<label id="lbCorte" value="Corte"></label>
+						<listbox id="lbxCorte" style="font-size:12px" mold="select" width="120px">
+							<listitem></listitem>
+						</listbox>
+					</row>
+					<row>
 						<label id="lbPesofill" value="Peso fill" />
 						<textbox id="txtPesofill"></textbox>
 					</row>

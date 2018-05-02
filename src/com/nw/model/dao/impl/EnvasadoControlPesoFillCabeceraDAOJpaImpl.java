@@ -36,7 +36,7 @@ public class EnvasadoControlPesoFillCabeceraDAOJpaImpl extends BaseDaoJpaImpl im
 	public EnvasadoControlPesoFillCabecera getByProduccionTurnoOrden(Long idenvasadoproceso, Long idproducciondetalleorden) {
 		try {
 			String sql = "SELECT e FROM EnvasadoControlPesoFillCabecera e "
-					+ "WHERE e.idenvasadoproceso = :idenvasadoproceso "
+					+ "WHERE e.envasadoProceso.idenvasadoproceso = :idenvasadoproceso "
 					+ "AND e.produccionDetalleOrden.idproducciondetalleorden= :idproducciondetalleorden	";
 			return (EnvasadoControlPesoFillCabecera) em
 					.createQuery(sql)
@@ -55,7 +55,7 @@ public class EnvasadoControlPesoFillCabeceraDAOJpaImpl extends BaseDaoJpaImpl im
 	public List<EnvasadoControlPesoFillCabecera> getByProduccion(Long idenvasadoproceso) {
 		try {
 			String sql = "SELECT e FROM EnvasadoControlPesoFillCabecera e "
-					+ "WHERE e.idenvasadoproceso = :idenvasadoproceso ";
+					+ "WHERE e.envasadoProceso.idenvasadoproceso = :idenvasadoproceso ";
 			return em
 					.createQuery(sql)
 					.setParameter("idenvasadoproceso", idenvasadoproceso)

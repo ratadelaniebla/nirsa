@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -20,6 +22,7 @@ import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Textbox;
 
 import com.nw.model.EnvasadoCaldoVegetalProteina;
+import com.nw.model.EnvasadoControlFillCorteDetalle;
 import com.nw.model.EnvasadoControlPesoFillCabecera;
 import com.nw.model.EnvasadoControlPesoFillDetalle;
 import com.nw.model.EnvasadoLineaCerradora;
@@ -28,10 +31,12 @@ import com.nw.model.Produccion;
 import com.nw.model.ProduccionDetalleOrden;
 import com.nw.model.Turno;
 import com.nw.model.dao.EnvasadoCaldoVegetalProteinaDAO;
+import com.nw.model.dao.EnvasadoControlFillCorteCabeceraDAO;
 import com.nw.model.dao.EnvasadoControlPesoFillCabeceraDAO;
 import com.nw.model.dao.EnvasadoLineaCerradoraDAO;
 import com.nw.model.dao.ProduccionDetalleOrdenDAO;
 import com.nw.model.dao.impl.EnvasadoCaldoVegetalProteinaDAOJpaImpl;
+import com.nw.model.dao.impl.EnvasadoControlFillCorteCabeceraDAOJpaImpl;
 import com.nw.model.dao.impl.EnvasadoControlPesoFillCabeceraDAOJpaImpl;
 import com.nw.model.dao.impl.EnvasadoLineaCerradoraDAOJpaImpl;
 import com.nw.model.dao.impl.EnvasadoProcesoDAOJpaImpl;
@@ -60,10 +65,10 @@ public class EnvasadoDetalleControlPesoFillWindow extends GenericForwardComposer
 	Turno turno;
 	
 	Textbox txtProduccionTurno, txtOrden, txtProducto, txtCliente, txtObservacion;
-	Listbox lbxTurnoLabor, lbxItemOrden, lbxLineaCerradora, lbxcvprot;
+	Listbox lbxTurnoLabor, lbxItemOrden, lbxLineaCerradora, lbxcvprot, lbxCorte;
 	Listbox lbxMes, lbxDias, lbxHoras, lbxMinutos;
 	Textbox txtPesoEnvase, txtPLomos, txtTrozos, txtRallado, txtAgua, txtAceite, txtprot, txtcv, txtPesofill;
-	Label lbTurnoLabor, lbItemOrden, lbLineaCerradora, lbcvprot, lbPesoEnvase, lbPLomos, lbTrozos, lbRallado, lbAgua, lbAceite, lbprot, lbcv, lbPesofill;
+	Label lbTurnoLabor, lbItemOrden, lbLineaCerradora, lbcvprot, lbPesoEnvase, lbPLomos, lbTrozos, lbRallado, lbAgua, lbAceite, lbprot, lbcv, lbCorte, lbPesofill;
 	
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
@@ -80,6 +85,7 @@ public class EnvasadoDetalleControlPesoFillWindow extends GenericForwardComposer
 		cargaItemOrden(turno.getIdturno(), produccion.getIdproduccion());
 		cargaLineaCerradora();
 		cargaCVPROT();
+		cargaCorte();
 	}
 	/**
 	 * se encarga de realizar las primeras validaciones en el zul y Carga&Valida
@@ -297,6 +303,50 @@ public class EnvasadoDetalleControlPesoFillWindow extends GenericForwardComposer
 		lbxcvprot.setSelectedIndex(0);
 	}
 	
+	private void cargaCorte() {
+		EnvasadoControlFillCorteCabeceraDAO ecfccDAO = new EnvasadoControlFillCorteCabeceraDAOJpaImpl();
+		
+		List<EnvasadoControlFillCorteDetalle> listaEcfcd = ecfccDAO
+				.obtieneByIdEnvasadoProceso(envasadoProceso.getIdenvasadoproceso())
+				.getEnvasadoControlFillCorteDetalles();
+		
+		if (listaEcfcd != null)
+			if (listaEcfcd.isEmpty()) {
+				Sistema.mensaje("No se encuentra configurado informacion para la configuracion de cortes.");
+				return;
+			}
+		
+		lbxCorte.getItems().clear();
+		Listitem li = new Listitem();
+		li.setValue(new EnvasadoControlFillCorteDetalle());
+		li.setParent(lbxCorte);
+		
+		
+		Collections.sort(listaEcfcd, new Comparator<EnvasadoControlFillCorteDetalle>() 		
+		{
+			@Override
+			public int compare(EnvasadoControlFillCorteDetalle o1, EnvasadoControlFillCorteDetalle o2) {
+				return new Integer(o1.getCorte()).compareTo(o2.getCorte());
+			}
+		});
+		
+		
+		String hora, minuto;
+		for (EnvasadoControlFillCorteDetalle ecfcd : listaEcfcd) {
+			li = new Listitem();
+			li.setValue(ecfcd);
+			System.out.println(ecfcd.getCorte());
+			hora = ecfcd.getHora()<=9?"0"+ecfcd.getHora():ecfcd.getHora().toString();
+			minuto = ecfcd.getMinuto()<=9?"0"+ecfcd.getMinuto():ecfcd.getMinuto().toString();
+			
+			new Listcell(ecfcd.getCorte()+" -> "+hora+":"+minuto)
+				.setParent(li);
+			li.setParent(lbxCorte);
+		}
+		
+		lbxCorte.setSelectedIndex(0);
+	}
+	
 	public void onClick$btnGrabar() {
 		
 		EnvasadoControlPesoFillCabeceraDAO ecpfcDAO = new EnvasadoControlPesoFillCabeceraDAOJpaImpl();
@@ -341,6 +391,9 @@ public class EnvasadoDetalleControlPesoFillWindow extends GenericForwardComposer
 		}
 		
 		ecpfc.getEnvasadoControlPesoFillDetalles().get(0).setFecharegusuario(fechaRegistro);
+		
+		EnvasadoControlFillCorteDetalle envasadoControlFillCorteDetalle = (EnvasadoControlFillCorteDetalle)lbxCorte.getSelectedItem().getValue();
+		ecpfc.getEnvasadoControlPesoFillDetalles().get(0).setEnvasadoControlFillCorteDetalle(envasadoControlFillCorteDetalle);
 		
 		if (!isEnvasadoProcesoActivo()) {
 			Sistema.mensaje("El registro de envasado proceso se ha cerrado durante su modificacion.");
@@ -470,6 +523,11 @@ public class EnvasadoDetalleControlPesoFillWindow extends GenericForwardComposer
 		listaEtiquetas = new ArrayList<Object>(); 
 		listaEtiquetas.add(lbcv);
 		listaEtiquetas.add(txtcv);
+		camposNumericos.add(listaEtiquetas);
+		
+		listaEtiquetas = new ArrayList<Object>(); 
+		listaEtiquetas.add(lbCorte);
+		listaEtiquetas.add(lbxCorte);
 		camposNumericos.add(listaEtiquetas);
 		
 		listaEtiquetas = new ArrayList<Object>(); 
