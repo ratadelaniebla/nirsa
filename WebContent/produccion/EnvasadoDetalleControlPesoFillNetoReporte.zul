@@ -1,0 +1,45 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winEnvasadoDetalleControlPesoFillNetoReporteWindow"
+		apply="com.nw.webui.produccion.EnvasadoDetalleControlPesoFillNetoReporteWindow">
+		
+	<label value="Reporte Control Peso" style="color:blue;font-size:11px;font-weight:bold"/>
+	
+	<vbox  id="vbxMain">
+		<grid width="99%">
+			<rows>
+				<row>
+					<label value="Producción:"/>
+					<datebox id="dteFecha1" width="110px" format="dd/MM/yyyy " readonly="true"/>
+				</row>
+				<row>
+					<label value="Turno:"/>
+					<listbox id="lbxTurno" style="font-size:12px" mold="select" width="120px"> </listbox>
+				</row>
+				<row>
+					<label id="lbItemOrdenCliente" value="Item-Orden-Peso-FechaReg-Cliente" />
+					 <listbox id="lbxItemOrdenCliente" style="font-size:12px"
+					mold="select" width="120px" />
+				</row>
+
+			</rows>
+		</grid>
+		
+		<grid width="99%">
+			<rows>
+				<row>
+					<vbox>
+						<label value="Imprimir" style="color:blue;font-size:12px;font-weight:bold"/>
+						<toolbar>
+							<hbox>
+								<toolbarbutton id="btnPdf" label="Descarga Reporte PDF"/>
+								<toolbarbutton id="btnExcel" label="Descarga Reporte Excel"/>
+							</hbox>
+						</toolbar>
+					</vbox>
+				</row>
+			</rows>
+		</grid>
+	</vbox>
+	</window>	
+</zk>

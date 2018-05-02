@@ -23,7 +23,7 @@ import com.nw.webui.produccion.impresion.ProgamaProduccionImpresion;
 public class ProduccionCargaOrdenesReporteWindow extends GenericForwardComposer{
 
 	private static final long serialVersionUID = 1L;
-	private static Log logger = LogFactory.getLog(CamaraBarcoDescargaImpresionWindow.class);
+	private static Log logger = LogFactory.getLog(ProduccionCargaOrdenesReporteWindow.class);
 	Datebox dteFecha1;
 	public ProduccionCargaOrdenesReporteWindow() {
 		super();

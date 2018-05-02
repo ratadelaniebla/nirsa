@@ -36,4 +36,27 @@ public class EnvasadoControlFillCorteDetalleDAOJpaImpl extends BaseDaoJpaImpl im
 		}
 	}
 	
+	public boolean elimina(EnvasadoControlFillCorteDetalle ecfcd) {
+		
+		try {
+			t.begin();
+			
+			if (!em.contains(ecfcd))
+				em.remove(em.merge(ecfcd));
+			else
+				em.remove(ecfcd);
+			
+			t.commit();			
+			return true;
+		} catch (RuntimeException e) {
+			if (t.isActive())
+				t.rollback();
+			e.printStackTrace();
+			return false;
+		} finally {
+//			em.close();
+		}
+		
+	}
+	
 }

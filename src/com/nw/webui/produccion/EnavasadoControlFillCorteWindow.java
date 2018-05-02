@@ -12,12 +12,12 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
+import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Textbox;
-import org.zkoss.zul.Toolbarbutton;
 
 import com.nw.model.EnvasadoControlFillCorteCabecera;
 import com.nw.model.EnvasadoControlFillCorteDetalle;
@@ -162,17 +162,20 @@ public class EnavasadoControlFillCorteWindow extends GenericForwardComposer {
 			
 			
 			lc = new Listcell();
-				Toolbarbutton tbb = new Toolbarbutton();
-				tbb.setId("Elimina"+lbxLista.getItems().size());
-				tbb.setTooltiptext("Elimina Corte");
-				tbb.setImage("/img/eliminar.gif");
-			lc.appendChild(tbb);
+//				Toolbarbutton tbb = new Toolbarbutton();
+//				tbb.setId("Elimina"+lbxLista.getItems().size());
+//				tbb.setTooltiptext("Elimina Corte");
+//				tbb.setImage("/img/eliminar.gif");
+				Checkbox cbx = new Checkbox();
+				cbx.setChecked(false);
+			lc.appendChild(cbx);
 			lc.setParent(li);
-			
+		
+		li.setValue(ecfcd);
 		li.setParent(lbxLista);
 		}
 	}
-
+	
 	public void onClick$btnAgregarItem() {
 		
 		Listitem li;
@@ -198,20 +201,6 @@ public class EnavasadoControlFillCorteWindow extends GenericForwardComposer {
 			lc.setParent(li);
 		
 			
-//			lc = new Listcell();
-//			lc.appendChild(new Label("D."));
-//			lc.setParent(li);
-//			
-//			lc = new Listcell();
-//				Listbox lbxDias = new Listbox();
-//				lbxDias.setMold(SELECT);
-//				lbxDias.setId("lbxDias"+lbxLista.getItems().size());
-//					Listitem liDias = new Listitem("    ");
-//				liDias.setParent(lbxDias);			
-//			lc.appendChild(lbxDias);
-//			lc.setParent(li);
-			
-			
 			lc = new Listcell();
 			lc.appendChild(new Label("Hora"));
 			lc.setParent(li);
@@ -231,18 +220,47 @@ public class EnavasadoControlFillCorteWindow extends GenericForwardComposer {
 			
 			
 			lc = new Listcell();
-				Toolbarbutton tbb = new Toolbarbutton();
-				tbb.setId("Elimina"+lbxLista.getItems().size());
-				tbb.setTooltiptext("Elimina Corte");
-				tbb.setImage("/img/eliminar.gif");
-			lc.appendChild(tbb);
+//				Toolbarbutton tbb = new Toolbarbutton();
+//				tbb.setId("Elimina"+lbxLista.getItems().size());
+//				tbb.setTooltiptext("Elimina Corte");
+//				tbb.setImage("/img/eliminar.gif");
+				Checkbox cbx = new Checkbox();
+				cbx.setChecked(false);
+			lc.appendChild(cbx);
 			lc.setParent(li);
 			
+		li.setValue(null);
 		li.setParent(lbxLista);
 	}
 	
 	public void onClick$btnEliminarItem() {
-		lbxLista.getItems().clear();
+		@SuppressWarnings({ "unchecked" })
+		List<Listitem> listaLI = (List<Listitem>)lbxLista.getItems();
+		List<Listitem> listaLIEliminados = new ArrayList<Listitem>();
+
+		for (Listitem li : listaLI) {
+			System.out.println(listaLI.size());
+			Listcell liCell = (Listcell)li.getChildren().get(6);
+			Checkbox cbx = (Checkbox)liCell.getChildren().get(0);
+			if (cbx.isChecked())
+				listaLIEliminados.add(li);
+		}
+		
+		EnvasadoControlFillCorteDetalleDAO ecfcdDAO = new EnvasadoControlFillCorteDetalleDAOJpaImpl();
+		EnvasadoControlFillCorteDetalle ecfcd;
+		for (Listitem li : listaLIEliminados) {
+			
+			ecfcd = (EnvasadoControlFillCorteDetalle)li.getValue();
+			
+			if ( ecfcdDAO.elimina( ecfcd ) )
+				lbxLista.getItems().remove(li);
+			else {
+				Sistema.mensaje("El detalle del corte "+ecfcd.getCorte()+" se encuentra en uso.");
+				return;
+			}
+		}
+		
+		binder.loadComponent(lbxLista);
 	}
 	
 	public void onClick$btnGrabar() {
@@ -252,8 +270,6 @@ public class EnavasadoControlFillCorteWindow extends GenericForwardComposer {
 		}
 		
 		EnvasadoControlFillCorteCabeceraDAO ecfccDAO = new  EnvasadoControlFillCorteCabeceraDAOJpaImpl();
-		EnvasadoControlFillCorteDetalleDAO ecfcdDAO = new  EnvasadoControlFillCorteDetalleDAOJpaImpl();
-			
 		
 		if (this.ecfcc.getIdenvasadocontrolfillcortecabecera()==null)
 			this.ecfcc = new EnvasadoControlFillCorteCabecera();
@@ -273,20 +289,12 @@ public class EnavasadoControlFillCorteWindow extends GenericForwardComposer {
 			return;
 		}
 		
-		//elimina el detalle anterior
-		if (ecfcc.getIdenvasadocontrolfillcortecabecera()!=null) {
-			if (!ecfcdDAO.eliminaTodos(ecfcc.getEnvasadoControlFillCorteDetalles())) {
-				Sistema.mensaje("Registro en uso");
-				return;
-			}
-			ecfcc.setEnvasadoControlFillCorteDetalles(new ArrayList<EnvasadoControlFillCorteDetalle>());
-		}
-		
 		//setean el detalle en la cabecera
 		ecfcc.setEnvasadoControlFillCorteDetalles(procesaEnvasadoControlFillCorteDetalle(ecfcc));
-		if (ecfcc.getEnvasadoControlFillCorteDetalles()==null)
+		if (ecfcc.getEnvasadoControlFillCorteDetalles().isEmpty()) {
+			Sistema.mensaje("No existen cortes ingresados.");
 			return;
-
+		}
 		//inserta la cabecera
 		if (ecfccDAO.updateEnvasadoControlFillCorteCabecera(ecfcc)==null) {
 			Sistema.mensaje("Error al intentar guardar la informacion.");
@@ -314,7 +322,7 @@ public class EnavasadoControlFillCorteWindow extends GenericForwardComposer {
 			
 			EnvasadoControlFillCorteDetalle ecfcd;
 			List<EnvasadoControlFillCorteDetalle> listaECFCD = new ArrayList<EnvasadoControlFillCorteDetalle>();
-			ecfcc.setEnvasadoControlFillCorteDetalles(null);
+			ecfcc.setEnvasadoControlFillCorteDetalles(new ArrayList<EnvasadoControlFillCorteDetalle>());
 			for(Listitem li : listaDetalle) {
 				lcCorte = (Listcell)li.getChildren().get(1);//textbox
 				lcHora = (Listcell)li.getChildren().get(3);//hora
@@ -325,6 +333,9 @@ public class EnavasadoControlFillCorteWindow extends GenericForwardComposer {
 				lbxMinuto = (Listbox)lcMinuto.getChildren().get(0);
 				
 				ecfcd = new EnvasadoControlFillCorteDetalle();
+				
+				if (li.getValue()!=null)
+					ecfcd.setIdenvasadocontrolfillcortedetalle(((EnvasadoControlFillCorteDetalle)li.getValue()).getIdenvasadocontrolfillcortedetalle());
 				
 				ecfcd.setCorte(Integer.valueOf(txtCorte.getValue()));
 				if (lbxHora.getSelectedItem().getValue()==null) {
@@ -355,60 +366,6 @@ public class EnavasadoControlFillCorteWindow extends GenericForwardComposer {
 			
 		}
 	}
-	
-//	private Listbox cargaListaMes() {
-//		try {
-//			Listbox lbxMes = new Listbox();
-//			Listitem liMes = new Listitem();
-//			lbxMes.setId("lbxMes"+lbxLista.getItems().size());
-//			lbxMes.setMold(SELECT);
-//			
-//			liMes.setLabel(null);liMes.setValue(null);
-//			liMes.setParent(lbxMes);
-//			liMes = new Listitem();
-//			
-//			liMes.setLabel("Ene");liMes.setValue("1");
-//			liMes.setParent(lbxMes);
-//			liMes = new Listitem();
-//			liMes.setLabel("Feb");liMes.setValue("2");
-//			liMes.setParent(lbxMes);
-//			liMes = new Listitem();
-//			liMes.setLabel("Mar");liMes.setValue("3");
-//			liMes.setParent(lbxMes);
-//			liMes = new Listitem();
-//			liMes.setLabel("Abr");liMes.setValue("4");
-//			liMes.setParent(lbxMes);
-//			liMes = new Listitem();
-//			liMes.setLabel("May");liMes.setValue("5");
-//			liMes.setParent(lbxMes);
-//			liMes = new Listitem();
-//			liMes.setLabel("Jun");liMes.setValue("6");
-//			liMes.setParent(lbxMes);
-//			liMes = new Listitem();
-//			liMes.setLabel("Jul");liMes.setValue("7");
-//			liMes.setParent(lbxMes);
-//			liMes = new Listitem();
-//			liMes.setLabel("Ago");liMes.setValue("8");
-//			liMes.setParent(lbxMes);
-//			liMes = new Listitem();
-//			liMes.setLabel("Sep");liMes.setValue("9");
-//			liMes.setParent(lbxMes);
-//			liMes = new Listitem();
-//			liMes.setLabel("Oct");liMes.setValue("10");
-//			liMes.setParent(lbxMes);
-//			liMes = new Listitem();
-//			liMes.setLabel("Nov");liMes.setValue("11");
-//			liMes.setParent(lbxMes);
-//			liMes = new Listitem();
-//			liMes.setLabel("Dic");liMes.setValue("12");
-//			liMes.setParent(lbxMes);
-//			
-//			return lbxMes;
-//		} catch (Exception e) {
-//			return new Listbox();
-//		}
-//	}
-	
 	
 	private Listbox cargaHora(String valorSeleccionado) {
 		try {

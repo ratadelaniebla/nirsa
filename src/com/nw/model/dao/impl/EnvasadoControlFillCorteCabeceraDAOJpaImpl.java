@@ -1,9 +1,13 @@
 package com.nw.model.dao.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 
 import com.nw.model.EnvasadoControlFillCorteCabecera;
+import com.nw.model.EnvasadoControlFillCorteDetalle;
 import com.nw.model.dao.EnvasadoControlFillCorteCabeceraDAO;
 
 public class EnvasadoControlFillCorteCabeceraDAOJpaImpl extends BaseDaoJpaImpl
@@ -19,8 +23,15 @@ public class EnvasadoControlFillCorteCabeceraDAOJpaImpl extends BaseDaoJpaImpl
 			EnvasadoControlFillCorteCabecera envasadoControlFillCorteCabecera) {
 		EnvasadoControlFillCorteCabecera ecfcc = null;
 		try {
-
+			List<EnvasadoControlFillCorteDetalle> listaEcfcd = new ArrayList<EnvasadoControlFillCorteDetalle>();
 			t.begin();
+			for (EnvasadoControlFillCorteDetalle ecfcd: envasadoControlFillCorteCabecera.getEnvasadoControlFillCorteDetalles()) {
+				listaEcfcd.add(em.merge(ecfcd));
+			}
+			if (!listaEcfcd.isEmpty()) {
+				envasadoControlFillCorteCabecera.getEnvasadoControlFillCorteDetalles().clear();
+				envasadoControlFillCorteCabecera.setEnvasadoControlFillCorteDetalles(listaEcfcd);
+			}
 			ecfcc = em.merge(envasadoControlFillCorteCabecera);
 			t.commit();
 
