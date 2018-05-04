@@ -10,24 +10,20 @@ import java.util.List;
  * 
  */
 @Entity
+@NamedQuery(name="Cuba.findAll", query="SELECT c FROM Cuba c")
 public class Cuba implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idcuba;
-
 	private String especificacion;
-
 	private String nombrecuba;
-
-	//bi-directional many-to-one association to BarcoCuba
-	@OneToMany(mappedBy="cuba")
 	private List<BarcoCuba> barcoCubas;
 
 	public Cuba() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdcuba() {
 		return this.idcuba;
 	}
@@ -35,6 +31,7 @@ public class Cuba implements Serializable {
 	public void setIdcuba(Integer idcuba) {
 		this.idcuba = idcuba;
 	}
+
 
 	public String getEspecificacion() {
 		return this.especificacion;
@@ -44,6 +41,7 @@ public class Cuba implements Serializable {
 		this.especificacion = especificacion;
 	}
 
+
 	public String getNombrecuba() {
 		return this.nombrecuba;
 	}
@@ -52,12 +50,29 @@ public class Cuba implements Serializable {
 		this.nombrecuba = nombrecuba;
 	}
 
+
+	//bi-directional many-to-one association to BarcoCuba
+	@OneToMany(mappedBy="cuba")
 	public List<BarcoCuba> getBarcoCubas() {
 		return this.barcoCubas;
 	}
 
 	public void setBarcoCubas(List<BarcoCuba> barcoCubas) {
 		this.barcoCubas = barcoCubas;
+	}
+
+	public BarcoCuba addBarcoCuba(BarcoCuba barcoCuba) {
+		getBarcoCubas().add(barcoCuba);
+		barcoCuba.setCuba(this);
+
+		return barcoCuba;
+	}
+
+	public BarcoCuba removeBarcoCuba(BarcoCuba barcoCuba) {
+		getBarcoCubas().remove(barcoCuba);
+		barcoCuba.setCuba(null);
+
+		return barcoCuba;
 	}
 
 }

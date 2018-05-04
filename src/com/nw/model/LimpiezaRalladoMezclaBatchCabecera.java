@@ -12,31 +12,21 @@ import java.util.List;
  */
 @Entity
 @Table(name="limpieza_rallado_mezcla_batch_cabecera")
+@NamedQuery(name="LimpiezaRalladoMezclaBatchCabecera.findAll", query="SELECT l FROM LimpiezaRalladoMezclaBatchCabecera l")
 public class LimpiezaRalladoMezclaBatchCabecera implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idlimpiezaralladomezclabatchcabecera;
-
 	private Timestamp fechareg;
-
-	//bi-directional many-to-one association to LimpiezaRalladoGabetaMezclaBatch
-	@OneToMany(mappedBy="limpiezaRalladoMezclaBatchCabecera")
 	private List<LimpiezaRalladoGabetaMezclaBatch> limpiezaRalladoGabetaMezclaBatches;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
-
-	//bi-directional many-to-one association to LimpiezaRalladoMezclaBatchDetalle
-	@OneToMany(mappedBy="limpiezaRalladoMezclaBatchCabecera")
 	private List<LimpiezaRalladoMezclaBatchDetalle> limpiezaRalladoMezclaBatchDetalles;
 
 	public LimpiezaRalladoMezclaBatchCabecera() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdlimpiezaralladomezclabatchcabecera() {
 		return this.idlimpiezaralladomezclabatchcabecera;
 	}
@@ -44,6 +34,7 @@ public class LimpiezaRalladoMezclaBatchCabecera implements Serializable {
 	public void setIdlimpiezaralladomezclabatchcabecera(Long idlimpiezaralladomezclabatchcabecera) {
 		this.idlimpiezaralladomezclabatchcabecera = idlimpiezaralladomezclabatchcabecera;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -53,6 +44,9 @@ public class LimpiezaRalladoMezclaBatchCabecera implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaRalladoGabetaMezclaBatch
+	@OneToMany(mappedBy="limpiezaRalladoMezclaBatchCabecera")
 	public List<LimpiezaRalladoGabetaMezclaBatch> getLimpiezaRalladoGabetaMezclaBatches() {
 		return this.limpiezaRalladoGabetaMezclaBatches;
 	}
@@ -61,6 +55,24 @@ public class LimpiezaRalladoMezclaBatchCabecera implements Serializable {
 		this.limpiezaRalladoGabetaMezclaBatches = limpiezaRalladoGabetaMezclaBatches;
 	}
 
+	public LimpiezaRalladoGabetaMezclaBatch addLimpiezaRalladoGabetaMezclaBatch(LimpiezaRalladoGabetaMezclaBatch limpiezaRalladoGabetaMezclaBatch) {
+		getLimpiezaRalladoGabetaMezclaBatches().add(limpiezaRalladoGabetaMezclaBatch);
+		limpiezaRalladoGabetaMezclaBatch.setLimpiezaRalladoMezclaBatchCabecera(this);
+
+		return limpiezaRalladoGabetaMezclaBatch;
+	}
+
+	public LimpiezaRalladoGabetaMezclaBatch removeLimpiezaRalladoGabetaMezclaBatch(LimpiezaRalladoGabetaMezclaBatch limpiezaRalladoGabetaMezclaBatch) {
+		getLimpiezaRalladoGabetaMezclaBatches().remove(limpiezaRalladoGabetaMezclaBatch);
+		limpiezaRalladoGabetaMezclaBatch.setLimpiezaRalladoMezclaBatchCabecera(null);
+
+		return limpiezaRalladoGabetaMezclaBatch;
+	}
+
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}
@@ -69,12 +81,29 @@ public class LimpiezaRalladoMezclaBatchCabecera implements Serializable {
 		this.usuario = usuario;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaRalladoMezclaBatchDetalle
+	@OneToMany(mappedBy="limpiezaRalladoMezclaBatchCabecera")
 	public List<LimpiezaRalladoMezclaBatchDetalle> getLimpiezaRalladoMezclaBatchDetalles() {
 		return this.limpiezaRalladoMezclaBatchDetalles;
 	}
 
 	public void setLimpiezaRalladoMezclaBatchDetalles(List<LimpiezaRalladoMezclaBatchDetalle> limpiezaRalladoMezclaBatchDetalles) {
 		this.limpiezaRalladoMezclaBatchDetalles = limpiezaRalladoMezclaBatchDetalles;
+	}
+
+	public LimpiezaRalladoMezclaBatchDetalle addLimpiezaRalladoMezclaBatchDetalle(LimpiezaRalladoMezclaBatchDetalle limpiezaRalladoMezclaBatchDetalle) {
+		getLimpiezaRalladoMezclaBatchDetalles().add(limpiezaRalladoMezclaBatchDetalle);
+		limpiezaRalladoMezclaBatchDetalle.setLimpiezaRalladoMezclaBatchCabecera(this);
+
+		return limpiezaRalladoMezclaBatchDetalle;
+	}
+
+	public LimpiezaRalladoMezclaBatchDetalle removeLimpiezaRalladoMezclaBatchDetalle(LimpiezaRalladoMezclaBatchDetalle limpiezaRalladoMezclaBatchDetalle) {
+		getLimpiezaRalladoMezclaBatchDetalles().remove(limpiezaRalladoMezclaBatchDetalle);
+		limpiezaRalladoMezclaBatchDetalle.setLimpiezaRalladoMezclaBatchCabecera(null);
+
+		return limpiezaRalladoMezclaBatchDetalle;
 	}
 
 }

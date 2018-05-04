@@ -10,26 +10,19 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="grupo_balanza")
+@NamedQuery(name="GrupoBalanza.findAll", query="SELECT g FROM GrupoBalanza g")
 public class GrupoBalanza implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idgrupobalanza;
-
-	//bi-directional many-to-one association to Balanza
-	@ManyToOne
-	@JoinColumn(name="idbalanza")
 	private Balanza balanza;
-
-	//bi-directional many-to-one association to Grupo
-	@ManyToOne
-	@JoinColumn(name="idgrupo")
 	private Grupo grupo;
 
 	public GrupoBalanza() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdgrupobalanza() {
 		return this.idgrupobalanza;
 	}
@@ -38,6 +31,10 @@ public class GrupoBalanza implements Serializable {
 		this.idgrupobalanza = idgrupobalanza;
 	}
 
+
+	//bi-directional many-to-one association to Balanza
+	@ManyToOne
+	@JoinColumn(name="idbalanza")
 	public Balanza getBalanza() {
 		return this.balanza;
 	}
@@ -46,6 +43,10 @@ public class GrupoBalanza implements Serializable {
 		this.balanza = balanza;
 	}
 
+
+	//bi-directional many-to-one association to Grupo
+	@ManyToOne
+	@JoinColumn(name="idgrupo")
 	public Grupo getGrupo() {
 		return this.grupo;
 	}

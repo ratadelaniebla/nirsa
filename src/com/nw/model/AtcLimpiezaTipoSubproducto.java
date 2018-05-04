@@ -11,26 +11,21 @@ import java.util.List;
  */
 @Entity
 @Table(name="atc_limpieza_tipo_subproducto")
+@NamedQuery(name="AtcLimpiezaTipoSubproducto.findAll", query="SELECT a FROM AtcLimpiezaTipoSubproducto a")
 public class AtcLimpiezaTipoSubproducto implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idatclimpiezatiposubproducto;
-
 	private String nombre;
-
 	private double taracoche;
-
 	private double taramedio;
-
-	//bi-directional many-to-one association to AtcLimpiezaSubproductoCrudo
-	@OneToMany(mappedBy="atcLimpiezaTipoSubproducto")
 	private List<AtcLimpiezaSubproductoCrudo> atcLimpiezaSubproductoCrudos;
 
 	public AtcLimpiezaTipoSubproducto() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdatclimpiezatiposubproducto() {
 		return this.idatclimpiezatiposubproducto;
 	}
@@ -38,6 +33,7 @@ public class AtcLimpiezaTipoSubproducto implements Serializable {
 	public void setIdatclimpiezatiposubproducto(Integer idatclimpiezatiposubproducto) {
 		this.idatclimpiezatiposubproducto = idatclimpiezatiposubproducto;
 	}
+
 
 	public String getNombre() {
 		return this.nombre;
@@ -47,6 +43,7 @@ public class AtcLimpiezaTipoSubproducto implements Serializable {
 		this.nombre = nombre;
 	}
 
+
 	public double getTaracoche() {
 		return this.taracoche;
 	}
@@ -54,6 +51,7 @@ public class AtcLimpiezaTipoSubproducto implements Serializable {
 	public void setTaracoche(double taracoche) {
 		this.taracoche = taracoche;
 	}
+
 
 	public double getTaramedio() {
 		return this.taramedio;
@@ -63,12 +61,29 @@ public class AtcLimpiezaTipoSubproducto implements Serializable {
 		this.taramedio = taramedio;
 	}
 
+
+	//bi-directional many-to-one association to AtcLimpiezaSubproductoCrudo
+	@OneToMany(mappedBy="atcLimpiezaTipoSubproducto")
 	public List<AtcLimpiezaSubproductoCrudo> getAtcLimpiezaSubproductoCrudos() {
 		return this.atcLimpiezaSubproductoCrudos;
 	}
 
 	public void setAtcLimpiezaSubproductoCrudos(List<AtcLimpiezaSubproductoCrudo> atcLimpiezaSubproductoCrudos) {
 		this.atcLimpiezaSubproductoCrudos = atcLimpiezaSubproductoCrudos;
+	}
+
+	public AtcLimpiezaSubproductoCrudo addAtcLimpiezaSubproductoCrudo(AtcLimpiezaSubproductoCrudo atcLimpiezaSubproductoCrudo) {
+		getAtcLimpiezaSubproductoCrudos().add(atcLimpiezaSubproductoCrudo);
+		atcLimpiezaSubproductoCrudo.setAtcLimpiezaTipoSubproducto(this);
+
+		return atcLimpiezaSubproductoCrudo;
+	}
+
+	public AtcLimpiezaSubproductoCrudo removeAtcLimpiezaSubproductoCrudo(AtcLimpiezaSubproductoCrudo atcLimpiezaSubproductoCrudo) {
+		getAtcLimpiezaSubproductoCrudos().remove(atcLimpiezaSubproductoCrudo);
+		atcLimpiezaSubproductoCrudo.setAtcLimpiezaTipoSubproducto(null);
+
+		return atcLimpiezaSubproductoCrudo;
 	}
 
 }

@@ -12,70 +12,43 @@ import java.util.List;
  */
 @Entity
 @Table(name="camara_cajon_registro_sap")
+@NamedQuery(name="CamaraCajonRegistroSap.findAll", query="SELECT c FROM CamaraCajonRegistroSap c")
 public class CamaraCajonRegistroSap implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcajonregistro;
-
 	private String calidadapariencia;
-
 	private String calidadcontaminante;
-
 	private String calidadolor;
-
 	private Timestamp fechacreacion;
-
 	private String idbarco;
-
 	private String idcajon;
-
 	private String idcuba;
-
 	private String idcuba2;
-
 	private String idmaterial;
-
 	private String idmaterialanterior;
-
 	private String idorigen;
-
 	private String idtipocaptura;
-
 	private String idviaje;
-
 	private String lotecajonsap;
-
 	private String lotecamara;
-
 	private String lotehaccp;
-
 	private String numregistro;
-
 	private double pesobruto;
-
 	private double pesoneto;
-
 	private String proposito;
-
 	private String referencia;
-
 	private double tara;
-
 	private String temperatura;
-
 	private String ticket;
-
 	private String zonafao;
-
-	//bi-directional many-to-one association to CamaraCajon
-	@OneToMany(mappedBy="camaraCajonRegistroSap")
 	private List<CamaraCajon> camaraCajons;
 
 	public CamaraCajonRegistroSap() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcajonregistro() {
 		return this.idcajonregistro;
 	}
@@ -83,6 +56,7 @@ public class CamaraCajonRegistroSap implements Serializable {
 	public void setIdcajonregistro(Long idcajonregistro) {
 		this.idcajonregistro = idcajonregistro;
 	}
+
 
 	public String getCalidadapariencia() {
 		return this.calidadapariencia;
@@ -92,6 +66,7 @@ public class CamaraCajonRegistroSap implements Serializable {
 		this.calidadapariencia = calidadapariencia;
 	}
 
+
 	public String getCalidadcontaminante() {
 		return this.calidadcontaminante;
 	}
@@ -99,6 +74,7 @@ public class CamaraCajonRegistroSap implements Serializable {
 	public void setCalidadcontaminante(String calidadcontaminante) {
 		this.calidadcontaminante = calidadcontaminante;
 	}
+
 
 	public String getCalidadolor() {
 		return this.calidadolor;
@@ -108,6 +84,7 @@ public class CamaraCajonRegistroSap implements Serializable {
 		this.calidadolor = calidadolor;
 	}
 
+
 	public Timestamp getFechacreacion() {
 		return this.fechacreacion;
 	}
@@ -115,6 +92,7 @@ public class CamaraCajonRegistroSap implements Serializable {
 	public void setFechacreacion(Timestamp fechacreacion) {
 		this.fechacreacion = fechacreacion;
 	}
+
 
 	public String getIdbarco() {
 		return this.idbarco;
@@ -124,6 +102,7 @@ public class CamaraCajonRegistroSap implements Serializable {
 		this.idbarco = idbarco;
 	}
 
+
 	public String getIdcajon() {
 		return this.idcajon;
 	}
@@ -131,6 +110,7 @@ public class CamaraCajonRegistroSap implements Serializable {
 	public void setIdcajon(String idcajon) {
 		this.idcajon = idcajon;
 	}
+
 
 	public String getIdcuba() {
 		return this.idcuba;
@@ -140,6 +120,7 @@ public class CamaraCajonRegistroSap implements Serializable {
 		this.idcuba = idcuba;
 	}
 
+
 	public String getIdcuba2() {
 		return this.idcuba2;
 	}
@@ -147,6 +128,7 @@ public class CamaraCajonRegistroSap implements Serializable {
 	public void setIdcuba2(String idcuba2) {
 		this.idcuba2 = idcuba2;
 	}
+
 
 	public String getIdmaterial() {
 		return this.idmaterial;
@@ -156,6 +138,7 @@ public class CamaraCajonRegistroSap implements Serializable {
 		this.idmaterial = idmaterial;
 	}
 
+
 	public String getIdmaterialanterior() {
 		return this.idmaterialanterior;
 	}
@@ -163,6 +146,7 @@ public class CamaraCajonRegistroSap implements Serializable {
 	public void setIdmaterialanterior(String idmaterialanterior) {
 		this.idmaterialanterior = idmaterialanterior;
 	}
+
 
 	public String getIdorigen() {
 		return this.idorigen;
@@ -172,6 +156,7 @@ public class CamaraCajonRegistroSap implements Serializable {
 		this.idorigen = idorigen;
 	}
 
+
 	public String getIdtipocaptura() {
 		return this.idtipocaptura;
 	}
@@ -179,6 +164,7 @@ public class CamaraCajonRegistroSap implements Serializable {
 	public void setIdtipocaptura(String idtipocaptura) {
 		this.idtipocaptura = idtipocaptura;
 	}
+
 
 	public String getIdviaje() {
 		return this.idviaje;
@@ -188,6 +174,7 @@ public class CamaraCajonRegistroSap implements Serializable {
 		this.idviaje = idviaje;
 	}
 
+
 	public String getLotecajonsap() {
 		return this.lotecajonsap;
 	}
@@ -195,6 +182,7 @@ public class CamaraCajonRegistroSap implements Serializable {
 	public void setLotecajonsap(String lotecajonsap) {
 		this.lotecajonsap = lotecajonsap;
 	}
+
 
 	public String getLotecamara() {
 		return this.lotecamara;
@@ -204,6 +192,7 @@ public class CamaraCajonRegistroSap implements Serializable {
 		this.lotecamara = lotecamara;
 	}
 
+
 	public String getLotehaccp() {
 		return this.lotehaccp;
 	}
@@ -211,6 +200,7 @@ public class CamaraCajonRegistroSap implements Serializable {
 	public void setLotehaccp(String lotehaccp) {
 		this.lotehaccp = lotehaccp;
 	}
+
 
 	public String getNumregistro() {
 		return this.numregistro;
@@ -220,6 +210,7 @@ public class CamaraCajonRegistroSap implements Serializable {
 		this.numregistro = numregistro;
 	}
 
+
 	public double getPesobruto() {
 		return this.pesobruto;
 	}
@@ -227,6 +218,7 @@ public class CamaraCajonRegistroSap implements Serializable {
 	public void setPesobruto(double pesobruto) {
 		this.pesobruto = pesobruto;
 	}
+
 
 	public double getPesoneto() {
 		return this.pesoneto;
@@ -236,6 +228,7 @@ public class CamaraCajonRegistroSap implements Serializable {
 		this.pesoneto = pesoneto;
 	}
 
+
 	public String getProposito() {
 		return this.proposito;
 	}
@@ -243,6 +236,7 @@ public class CamaraCajonRegistroSap implements Serializable {
 	public void setProposito(String proposito) {
 		this.proposito = proposito;
 	}
+
 
 	public String getReferencia() {
 		return this.referencia;
@@ -252,6 +246,7 @@ public class CamaraCajonRegistroSap implements Serializable {
 		this.referencia = referencia;
 	}
 
+
 	public double getTara() {
 		return this.tara;
 	}
@@ -259,6 +254,7 @@ public class CamaraCajonRegistroSap implements Serializable {
 	public void setTara(double tara) {
 		this.tara = tara;
 	}
+
 
 	public String getTemperatura() {
 		return this.temperatura;
@@ -268,6 +264,7 @@ public class CamaraCajonRegistroSap implements Serializable {
 		this.temperatura = temperatura;
 	}
 
+
 	public String getTicket() {
 		return this.ticket;
 	}
@@ -275,6 +272,7 @@ public class CamaraCajonRegistroSap implements Serializable {
 	public void setTicket(String ticket) {
 		this.ticket = ticket;
 	}
+
 
 	public String getZonafao() {
 		return this.zonafao;
@@ -284,12 +282,29 @@ public class CamaraCajonRegistroSap implements Serializable {
 		this.zonafao = zonafao;
 	}
 
+
+	//bi-directional many-to-one association to CamaraCajon
+	@OneToMany(mappedBy="camaraCajonRegistroSap")
 	public List<CamaraCajon> getCamaraCajons() {
 		return this.camaraCajons;
 	}
 
 	public void setCamaraCajons(List<CamaraCajon> camaraCajons) {
 		this.camaraCajons = camaraCajons;
+	}
+
+	public CamaraCajon addCamaraCajon(CamaraCajon camaraCajon) {
+		getCamaraCajons().add(camaraCajon);
+		camaraCajon.setCamaraCajonRegistroSap(this);
+
+		return camaraCajon;
+	}
+
+	public CamaraCajon removeCamaraCajon(CamaraCajon camaraCajon) {
+		getCamaraCajons().remove(camaraCajon);
+		camaraCajon.setCamaraCajonRegistroSap(null);
+
+		return camaraCajon;
 	}
 
 }

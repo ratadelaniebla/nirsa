@@ -11,22 +11,19 @@ import java.util.List;
  */
 @Entity
 @Table(name="limpieza_tipo_para")
+@NamedQuery(name="LimpiezaTipoPara.findAll", query="SELECT l FROM LimpiezaTipoPara l")
 public class LimpiezaTipoPara implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idlimpiezatipopara;
-
 	private String descripcion;
-
-	//bi-directional many-to-one association to LimpiezaDetalleTipoPara
-	@OneToMany(mappedBy="limpiezaTipoPara")
 	private List<LimpiezaDetalleTipoPara> limpiezaDetalleTipoParas;
 
 	public LimpiezaTipoPara() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdlimpiezatipopara() {
 		return this.idlimpiezatipopara;
 	}
@@ -34,6 +31,7 @@ public class LimpiezaTipoPara implements Serializable {
 	public void setIdlimpiezatipopara(Integer idlimpiezatipopara) {
 		this.idlimpiezatipopara = idlimpiezatipopara;
 	}
+
 
 	public String getDescripcion() {
 		return this.descripcion;
@@ -43,12 +41,29 @@ public class LimpiezaTipoPara implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaDetalleTipoPara
+	@OneToMany(mappedBy="limpiezaTipoPara")
 	public List<LimpiezaDetalleTipoPara> getLimpiezaDetalleTipoParas() {
 		return this.limpiezaDetalleTipoParas;
 	}
 
 	public void setLimpiezaDetalleTipoParas(List<LimpiezaDetalleTipoPara> limpiezaDetalleTipoParas) {
 		this.limpiezaDetalleTipoParas = limpiezaDetalleTipoParas;
+	}
+
+	public LimpiezaDetalleTipoPara addLimpiezaDetalleTipoPara(LimpiezaDetalleTipoPara limpiezaDetalleTipoPara) {
+		getLimpiezaDetalleTipoParas().add(limpiezaDetalleTipoPara);
+		limpiezaDetalleTipoPara.setLimpiezaTipoPara(this);
+
+		return limpiezaDetalleTipoPara;
+	}
+
+	public LimpiezaDetalleTipoPara removeLimpiezaDetalleTipoPara(LimpiezaDetalleTipoPara limpiezaDetalleTipoPara) {
+		getLimpiezaDetalleTipoParas().remove(limpiezaDetalleTipoPara);
+		limpiezaDetalleTipoPara.setLimpiezaTipoPara(null);
+
+		return limpiezaDetalleTipoPara;
 	}
 
 }

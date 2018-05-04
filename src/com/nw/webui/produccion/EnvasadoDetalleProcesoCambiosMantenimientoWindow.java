@@ -41,6 +41,7 @@ import com.nw.model.dao.impl.MaquinaCerradoraDAOJpaImpl;
 import com.nw.model.dao.impl.ProduccionDAOJpaImpl;
 import com.nw.model.dao.impl.ProduccionDetalleOrdenDAOJpaImpl;
 import com.nw.model.dao.impl.TurnoDAOJpaImpl;
+import com.nw.model.dao.impl.UsuarioDAOJpaImpl;
 import com.nw.util.Sistema;
 
 
@@ -148,14 +149,14 @@ public class EnvasadoDetalleProcesoCambiosMantenimientoWindow extends GenericFor
 		for (EnvasadoDetalleProcesoCambio edpc : listEdpCambio) {
 			li = new Listitem(); 
 			li.setValue(edpc);
-			pdo = pdoDAO.obtieneDetalleOrdenById(edpc.getIdproducciondetalleorden());
+			pdo = pdoDAO.obtieneDetalleOrdenById(edpc.getProduccionDetalleOrden().getIdproducciondetalleorden());
 			label = new StringBuilder();
 			label.append(pdo.getItem()).append(" - ").append(pdo.getOrden()).append(" - ").append(edpc.getFill()).append(" - ").append(pdo.getProducto()); 
 			new Listcell(label.toString()).setParent(li);
 			li.setParent(lbxItemOrdenFillPresentacion);
 		}
-		
-		lbxItemOrdenFillPresentacion.setSelectedIndex(0);
+		if (!lbxItemOrdenFillPresentacion.getItems().isEmpty())
+			lbxItemOrdenFillPresentacion.setSelectedIndex(0);
 	}
 
 	public void onSelect$lbxItemOrdenFillPresentacion() {
@@ -189,14 +190,14 @@ public class EnvasadoDetalleProcesoCambiosMantenimientoWindow extends GenericFor
 			label.append(pdo.getItem()).append(" - ").append(pdo.getOrden());
 			new Listcell(label.toString()).setParent(li);
 			li.setParent(lbxItemOrden);
-			if(edpc.getIdproducciondetalleorden().equals(pdo.getIdproducciondetalleorden()))
+			if(edpc.getProduccionDetalleOrden().getIdproducciondetalleorden().equals(pdo.getIdproducciondetalleorden()))
 				index=cont;
 			cont++;
 		}
 		cont=1;
 		lbxItemOrden.setSelectedIndex(index);
 		
-		lbxTurnoLabor.setSelectedIndex(edpc.getIdturno());
+		lbxTurnoLabor.setSelectedIndex(edpc.getTurno().getIdturno());
 		
 		cargaInfoDefecto();
 	}
@@ -228,7 +229,7 @@ public class EnvasadoDetalleProcesoCambiosMantenimientoWindow extends GenericFor
  		
 		txtOrden.setValue(pdo.getOrden());
 		txtProducto.setValue(pdo.getProducto());
-		seleccionaMCerradora(edpc.getIdmaquinacerradora());
+		seleccionaMCerradora(edpc.getMaquinaCerradora().getIdmaquinacerradora());
 		cargaLuthyConfigurado(edpc.getEnvasadoDetalleProcesoCambiosLuthies());
 		dcbFill.setValue(String.valueOf(edpc.getFill()));
 		dcbH2O.setValue(String.valueOf(edpc.getAg()));
@@ -417,7 +418,7 @@ public class EnvasadoDetalleProcesoCambiosMantenimientoWindow extends GenericFor
 		
 		for (EnvasadoDetalleProcesoCambiosLuthy eDPCL : lsitaEdpcL) {
 			Listitem li = new Listitem();
-			luthy = luthyDAO.getLuthyById(eDPCL.getIdluthy());
+			luthy = luthyDAO.getLuthyById(eDPCL.getLuthy().getIdluthy());
 			Listcell listcellLuthy = new Listcell( luthy.getNumeroluthy().toString() );
 			listcellLuthy.setId(luthy.getIdluthy().toString());
 			listcellLuthy.setValue(luthy);
@@ -659,7 +660,7 @@ public class EnvasadoDetalleProcesoCambiosMantenimientoWindow extends GenericFor
 			
 			//carga la informacion de EnvasadoProceso para enlazar con EnvasadoDetalleProcesoCambio
 			EnvasadoProceso envasadoProceso = (EnvasadoProceso)lbxTurnoProduccion.getSelectedItem().getValue();
-			edpc.setIdenvasadoproceso(envasadoProceso.getIdenvasadoproceso());
+			edpc.setEnvasadoProceso(envasadoProceso);
 			
 			//se extrae ProduccionDetalleOrden para enlazar el id con EnvasadoDetalleProcesoCambio
 			ProduccionDetalleOrden produccionDetalleOrden = (ProduccionDetalleOrden) lbxItemOrden
@@ -669,29 +670,29 @@ public class EnvasadoDetalleProcesoCambiosMantenimientoWindow extends GenericFor
 				return;
 			}
 			//prepara la informacion de la cabecera
-			edpc.setIdproducciondetalleorden(produccionDetalleOrden.getIdproducciondetalleorden());
+			edpc.setProduccionDetalleOrden(produccionDetalleOrden);
 			
 			Turno turno = (Turno)lbxTurnoLabor.getSelectedItem().getValue();
 			if (turno.getIdturno()==null) {
 				Sistema.mensaje("Debe seleccionar un valor para el campo Turno Labor.");
 				return;
 			}
-			edpc.setIdturno(turno.getIdturno());
+			edpc.setTurno(turno);
 			
 			MaquinaCerradora maquinaCerradora = (MaquinaCerradora) lbxMSelladora.getSelectedItem().getValue();
 			if (maquinaCerradora.getIdmaquinacerradora()==null) {
 				Sistema.mensaje("Debe seleccionar un valor para el campo M. Cerradora");
 				return;
 			}
-			edpc.setIdmaquinacerradora(maquinaCerradora.getIdmaquinacerradora());
+			edpc.setMaquinaCerradora(maquinaCerradora);
 			
 			//valida la informacion del usuario logueado
-			String idUsurio = (String) Sessions.getCurrent().getAttribute("usuario");
-			if (idUsurio==null) {
+			String idUsuario = (String) Sessions.getCurrent().getAttribute("usuario");
+			if (idUsuario==null) {
 				Sistema.mensaje("Error. Usuario no logueado.");
 				return;
 			}
-			edpc.setIdusuario(idUsurio);
+			edpc.setUsuario(new UsuarioDAOJpaImpl().getUser(idUsuario));
 			
 			//prepara la informacion del detalle
 			if (lbxLista.getItems().isEmpty()) {
@@ -705,7 +706,7 @@ public class EnvasadoDetalleProcesoCambiosMantenimientoWindow extends GenericFor
 				Listcell cellCheck = (Listcell)listitem.getChildren().get(0);
 				if (cellCheck.getId()!=null) {
 					edpcL = (EnvasadoDetalleProcesoCambiosLuthy)listitem.getValue();
-					edpcL.setIdluthy(Integer.valueOf(cellCheck.getId()));
+					edpcL.setLuthy((Luthy)cellCheck.getValue());
 					edpcL.setEnvasadoDetalleProcesoCambio(edpc);
 					listaEdpcL.add(edpcL);
 				}
@@ -901,8 +902,8 @@ public class EnvasadoDetalleProcesoCambiosMantenimientoWindow extends GenericFor
 		int index=0;
 		for(Listitem li : listaLI) {
 			EnvasadoDetalleProcesoCambio edpc = (EnvasadoDetalleProcesoCambio) li.getValue();
-			if(edpc.getIdproducciondetalleorden()!=null)
-				if (edpc.getIdproducciondetalleorden().equals(pdo.getIdproducciondetalleorden()))
+			if(edpc.getProduccionDetalleOrden()!=null)
+				if (edpc.getProduccionDetalleOrden().getIdproducciondetalleorden().equals(pdo.getIdproducciondetalleorden()))
 					break;
 			index++;
 		}
@@ -984,7 +985,8 @@ public class EnvasadoDetalleProcesoCambiosMantenimientoWindow extends GenericFor
 		}else {
 			cargaItemOdenFillPresentacion();
 			binder.loadComponent(lbxItemOrdenFillPresentacion);
-			lbxItemOrden.setSelectedIndex(0);
+			if (!lbxItemOrden.getItems().isEmpty())
+				lbxItemOrden.setSelectedIndex(0);
 		}
 			
 		lbxTurnoLabor.setSelectedIndex(0);
@@ -1013,35 +1015,6 @@ public class EnvasadoDetalleProcesoCambiosMantenimientoWindow extends GenericFor
 		txtObservacion.setValue(null);
 		chkEliminar.setChecked(false);
 	}
-	
-	
-	/*********************************************************************************/
-	/***********************************valida Doubles********************************/
-	/*********************************************************************************/
-	
-//	public void onChange$dcbLatas(InputEvent event) throws InterruptedException, IOException {
-//		dcbLatas.setValue(parseDouble(event.getValue()));
-//	}
-//	
-//	public void onChange$dcbFill(InputEvent event) throws InterruptedException, IOException {
-//		dcbFill.setValue(parseDouble(event.getValue()));
-//	}
-//	
-//	public void onChange$dcbAceite(InputEvent event) throws InterruptedException, IOException {
-//		dcbAceite.setValue(parseDouble(event.getValue()));
-//	}
-//	
-//	public void onChange$dcbProteina(InputEvent event) throws InterruptedException, IOException {
-//		dcbProteina.setValue(parseDouble(event.getValue()));
-//	}
-//	
-//	public void onChange$dcbDrenado(InputEvent event) throws InterruptedException, IOException {
-//		dcbDrenado.setValue(parseDouble(event.getValue()));
-//	}
-//	
-//	public void onChange$dcbFlakes(InputEvent event) throws InterruptedException, IOException {
-//		dcbFlakes.setValue(parseDouble(event.getValue()));
-//	}
 	
 	/**
 	 * valida el valor del punto o la coma para el tipo de dato Double

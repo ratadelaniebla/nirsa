@@ -11,35 +11,24 @@ import java.util.List;
  */
 @Entity
 @Table(name="usuarios_aprobacion")
+@NamedQuery(name="UsuariosAprobacion.findAll", query="SELECT u FROM UsuariosAprobacion u")
 public class UsuariosAprobacion implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idaprobacionusuario;
-
 	private Boolean accesoaprobacion;
-
 	private Boolean accesorevision;
-
 	private Boolean accesoverificado;
-
 	private Integer estado;
-
 	private Integer idarea;
-
-	//bi-directional many-to-one association to CalidadMuestraAreaCabeceraAprobacion
-	@OneToMany(mappedBy="usuariosAprobacion")
 	private List<CalidadMuestraAreaCabeceraAprobacion> calidadMuestraAreaCabeceraAprobacions;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public UsuariosAprobacion() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdaprobacionusuario() {
 		return this.idaprobacionusuario;
 	}
@@ -47,6 +36,7 @@ public class UsuariosAprobacion implements Serializable {
 	public void setIdaprobacionusuario(Integer idaprobacionusuario) {
 		this.idaprobacionusuario = idaprobacionusuario;
 	}
+
 
 	public Boolean getAccesoaprobacion() {
 		return this.accesoaprobacion;
@@ -56,6 +46,7 @@ public class UsuariosAprobacion implements Serializable {
 		this.accesoaprobacion = accesoaprobacion;
 	}
 
+
 	public Boolean getAccesorevision() {
 		return this.accesorevision;
 	}
@@ -63,6 +54,7 @@ public class UsuariosAprobacion implements Serializable {
 	public void setAccesorevision(Boolean accesorevision) {
 		this.accesorevision = accesorevision;
 	}
+
 
 	public Boolean getAccesoverificado() {
 		return this.accesoverificado;
@@ -72,6 +64,7 @@ public class UsuariosAprobacion implements Serializable {
 		this.accesoverificado = accesoverificado;
 	}
 
+
 	public Integer getEstado() {
 		return this.estado;
 	}
@@ -79,6 +72,7 @@ public class UsuariosAprobacion implements Serializable {
 	public void setEstado(Integer estado) {
 		this.estado = estado;
 	}
+
 
 	public Integer getIdarea() {
 		return this.idarea;
@@ -88,6 +82,9 @@ public class UsuariosAprobacion implements Serializable {
 		this.idarea = idarea;
 	}
 
+
+	//bi-directional many-to-one association to CalidadMuestraAreaCabeceraAprobacion
+	@OneToMany(mappedBy="usuariosAprobacion")
 	public List<CalidadMuestraAreaCabeceraAprobacion> getCalidadMuestraAreaCabeceraAprobacions() {
 		return this.calidadMuestraAreaCabeceraAprobacions;
 	}
@@ -96,6 +93,24 @@ public class UsuariosAprobacion implements Serializable {
 		this.calidadMuestraAreaCabeceraAprobacions = calidadMuestraAreaCabeceraAprobacions;
 	}
 
+	public CalidadMuestraAreaCabeceraAprobacion addCalidadMuestraAreaCabeceraAprobacion(CalidadMuestraAreaCabeceraAprobacion calidadMuestraAreaCabeceraAprobacion) {
+		getCalidadMuestraAreaCabeceraAprobacions().add(calidadMuestraAreaCabeceraAprobacion);
+		calidadMuestraAreaCabeceraAprobacion.setUsuariosAprobacion(this);
+
+		return calidadMuestraAreaCabeceraAprobacion;
+	}
+
+	public CalidadMuestraAreaCabeceraAprobacion removeCalidadMuestraAreaCabeceraAprobacion(CalidadMuestraAreaCabeceraAprobacion calidadMuestraAreaCabeceraAprobacion) {
+		getCalidadMuestraAreaCabeceraAprobacions().remove(calidadMuestraAreaCabeceraAprobacion);
+		calidadMuestraAreaCabeceraAprobacion.setUsuariosAprobacion(null);
+
+		return calidadMuestraAreaCabeceraAprobacion;
+	}
+
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

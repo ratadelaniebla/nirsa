@@ -11,27 +11,21 @@ import java.util.List;
  */
 @Entity
 @Table(name="limpieza_secuencia_orden")
+@NamedQuery(name="LimpiezaSecuenciaOrden.findAll", query="SELECT l FROM LimpiezaSecuenciaOrden l")
 public class LimpiezaSecuenciaOrden implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idsecuenciaorden;
-
 	private String codpersona;
-
 	private Integer contador;
-
-	@Column(name="orden_bandeja")
 	private Long ordenBandeja;
-
-	//bi-directional many-to-one association to LimpiezaDetalleProcesoBandeja
-	@OneToMany(mappedBy="limpiezaSecuenciaOrden")
 	private List<LimpiezaDetalleProcesoBandeja> limpiezaDetalleProcesoBandejas;
 
 	public LimpiezaSecuenciaOrden() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdsecuenciaorden() {
 		return this.idsecuenciaorden;
 	}
@@ -39,6 +33,7 @@ public class LimpiezaSecuenciaOrden implements Serializable {
 	public void setIdsecuenciaorden(Long idsecuenciaorden) {
 		this.idsecuenciaorden = idsecuenciaorden;
 	}
+
 
 	public String getCodpersona() {
 		return this.codpersona;
@@ -48,6 +43,7 @@ public class LimpiezaSecuenciaOrden implements Serializable {
 		this.codpersona = codpersona;
 	}
 
+
 	public Integer getContador() {
 		return this.contador;
 	}
@@ -56,6 +52,8 @@ public class LimpiezaSecuenciaOrden implements Serializable {
 		this.contador = contador;
 	}
 
+
+	@Column(name="orden_bandeja")
 	public Long getOrdenBandeja() {
 		return this.ordenBandeja;
 	}
@@ -64,12 +62,29 @@ public class LimpiezaSecuenciaOrden implements Serializable {
 		this.ordenBandeja = ordenBandeja;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaDetalleProcesoBandeja
+	@OneToMany(mappedBy="limpiezaSecuenciaOrden")
 	public List<LimpiezaDetalleProcesoBandeja> getLimpiezaDetalleProcesoBandejas() {
 		return this.limpiezaDetalleProcesoBandejas;
 	}
 
 	public void setLimpiezaDetalleProcesoBandejas(List<LimpiezaDetalleProcesoBandeja> limpiezaDetalleProcesoBandejas) {
 		this.limpiezaDetalleProcesoBandejas = limpiezaDetalleProcesoBandejas;
+	}
+
+	public LimpiezaDetalleProcesoBandeja addLimpiezaDetalleProcesoBandeja(LimpiezaDetalleProcesoBandeja limpiezaDetalleProcesoBandeja) {
+		getLimpiezaDetalleProcesoBandejas().add(limpiezaDetalleProcesoBandeja);
+		limpiezaDetalleProcesoBandeja.setLimpiezaSecuenciaOrden(this);
+
+		return limpiezaDetalleProcesoBandeja;
+	}
+
+	public LimpiezaDetalleProcesoBandeja removeLimpiezaDetalleProcesoBandeja(LimpiezaDetalleProcesoBandeja limpiezaDetalleProcesoBandeja) {
+		getLimpiezaDetalleProcesoBandejas().remove(limpiezaDetalleProcesoBandeja);
+		limpiezaDetalleProcesoBandeja.setLimpiezaSecuenciaOrden(null);
+
+		return limpiezaDetalleProcesoBandeja;
 	}
 
 }

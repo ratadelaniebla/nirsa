@@ -11,49 +11,28 @@ import java.util.List;
  */
 @Entity
 @Table(name="calidad_muestra_area")
+@NamedQuery(name="CalidadMuestraArea.findAll", query="SELECT c FROM CalidadMuestraArea c")
 public class CalidadMuestraArea implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcalidadmuestraarea;
-
-	@Column(name="accion_correctiva")
 	private String accionCorrectiva;
-
-	@Column(name="area_referencia")
 	private String areaReferencia;
-
 	private String descripcion;
-
 	private Integer estado;
-
-	@Column(name="identificacion_area")
 	private String identificacionArea;
-
-	@Column(name="orden_area")
 	private Integer ordenArea;
-
 	private Integer pescadosporarea;
-
-	@Column(name="texto_pie_pagina_accion_correctiva")
 	private String textoPiePaginaAccionCorrectiva;
-
-	//bi-directional many-to-one association to CalidadMuestraAreaCabecera
-	@OneToMany(mappedBy="calidadMuestraArea")
 	private List<CalidadMuestraAreaCabecera> calidadMuestraAreaCabeceras;
-
-	//bi-directional many-to-one association to CalidadMuestraAreaCabeceraAprobacion
-	@OneToMany(mappedBy="calidadMuestraArea")
 	private List<CalidadMuestraAreaCabeceraAprobacion> calidadMuestraAreaCabeceraAprobacions;
-
-	//bi-directional many-to-one association to CalidadVariable
-	@OneToMany(mappedBy="calidadMuestraArea")
 	private List<CalidadVariable> calidadVariables;
 
 	public CalidadMuestraArea() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcalidadmuestraarea() {
 		return this.idcalidadmuestraarea;
 	}
@@ -62,6 +41,8 @@ public class CalidadMuestraArea implements Serializable {
 		this.idcalidadmuestraarea = idcalidadmuestraarea;
 	}
 
+
+	@Column(name="accion_correctiva")
 	public String getAccionCorrectiva() {
 		return this.accionCorrectiva;
 	}
@@ -70,6 +51,8 @@ public class CalidadMuestraArea implements Serializable {
 		this.accionCorrectiva = accionCorrectiva;
 	}
 
+
+	@Column(name="area_referencia")
 	public String getAreaReferencia() {
 		return this.areaReferencia;
 	}
@@ -77,6 +60,7 @@ public class CalidadMuestraArea implements Serializable {
 	public void setAreaReferencia(String areaReferencia) {
 		this.areaReferencia = areaReferencia;
 	}
+
 
 	public String getDescripcion() {
 		return this.descripcion;
@@ -86,6 +70,7 @@ public class CalidadMuestraArea implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+
 	public Integer getEstado() {
 		return this.estado;
 	}
@@ -94,6 +79,8 @@ public class CalidadMuestraArea implements Serializable {
 		this.estado = estado;
 	}
 
+
+	@Column(name="identificacion_area")
 	public String getIdentificacionArea() {
 		return this.identificacionArea;
 	}
@@ -102,6 +89,8 @@ public class CalidadMuestraArea implements Serializable {
 		this.identificacionArea = identificacionArea;
 	}
 
+
+	@Column(name="orden_area")
 	public Integer getOrdenArea() {
 		return this.ordenArea;
 	}
@@ -109,6 +98,7 @@ public class CalidadMuestraArea implements Serializable {
 	public void setOrdenArea(Integer ordenArea) {
 		this.ordenArea = ordenArea;
 	}
+
 
 	public Integer getPescadosporarea() {
 		return this.pescadosporarea;
@@ -118,6 +108,8 @@ public class CalidadMuestraArea implements Serializable {
 		this.pescadosporarea = pescadosporarea;
 	}
 
+
+	@Column(name="texto_pie_pagina_accion_correctiva")
 	public String getTextoPiePaginaAccionCorrectiva() {
 		return this.textoPiePaginaAccionCorrectiva;
 	}
@@ -126,6 +118,9 @@ public class CalidadMuestraArea implements Serializable {
 		this.textoPiePaginaAccionCorrectiva = textoPiePaginaAccionCorrectiva;
 	}
 
+
+	//bi-directional many-to-one association to CalidadMuestraAreaCabecera
+	@OneToMany(mappedBy="calidadMuestraArea")
 	public List<CalidadMuestraAreaCabecera> getCalidadMuestraAreaCabeceras() {
 		return this.calidadMuestraAreaCabeceras;
 	}
@@ -134,6 +129,23 @@ public class CalidadMuestraArea implements Serializable {
 		this.calidadMuestraAreaCabeceras = calidadMuestraAreaCabeceras;
 	}
 
+	public CalidadMuestraAreaCabecera addCalidadMuestraAreaCabecera(CalidadMuestraAreaCabecera calidadMuestraAreaCabecera) {
+		getCalidadMuestraAreaCabeceras().add(calidadMuestraAreaCabecera);
+		calidadMuestraAreaCabecera.setCalidadMuestraArea(this);
+
+		return calidadMuestraAreaCabecera;
+	}
+
+	public CalidadMuestraAreaCabecera removeCalidadMuestraAreaCabecera(CalidadMuestraAreaCabecera calidadMuestraAreaCabecera) {
+		getCalidadMuestraAreaCabeceras().remove(calidadMuestraAreaCabecera);
+		calidadMuestraAreaCabecera.setCalidadMuestraArea(null);
+
+		return calidadMuestraAreaCabecera;
+	}
+
+
+	//bi-directional many-to-one association to CalidadMuestraAreaCabeceraAprobacion
+	@OneToMany(mappedBy="calidadMuestraArea")
 	public List<CalidadMuestraAreaCabeceraAprobacion> getCalidadMuestraAreaCabeceraAprobacions() {
 		return this.calidadMuestraAreaCabeceraAprobacions;
 	}
@@ -142,12 +154,43 @@ public class CalidadMuestraArea implements Serializable {
 		this.calidadMuestraAreaCabeceraAprobacions = calidadMuestraAreaCabeceraAprobacions;
 	}
 
+	public CalidadMuestraAreaCabeceraAprobacion addCalidadMuestraAreaCabeceraAprobacion(CalidadMuestraAreaCabeceraAprobacion calidadMuestraAreaCabeceraAprobacion) {
+		getCalidadMuestraAreaCabeceraAprobacions().add(calidadMuestraAreaCabeceraAprobacion);
+		calidadMuestraAreaCabeceraAprobacion.setCalidadMuestraArea(this);
+
+		return calidadMuestraAreaCabeceraAprobacion;
+	}
+
+	public CalidadMuestraAreaCabeceraAprobacion removeCalidadMuestraAreaCabeceraAprobacion(CalidadMuestraAreaCabeceraAprobacion calidadMuestraAreaCabeceraAprobacion) {
+		getCalidadMuestraAreaCabeceraAprobacions().remove(calidadMuestraAreaCabeceraAprobacion);
+		calidadMuestraAreaCabeceraAprobacion.setCalidadMuestraArea(null);
+
+		return calidadMuestraAreaCabeceraAprobacion;
+	}
+
+
+	//bi-directional many-to-one association to CalidadVariable
+	@OneToMany(mappedBy="calidadMuestraArea")
 	public List<CalidadVariable> getCalidadVariables() {
 		return this.calidadVariables;
 	}
 
 	public void setCalidadVariables(List<CalidadVariable> calidadVariables) {
 		this.calidadVariables = calidadVariables;
+	}
+
+	public CalidadVariable addCalidadVariable(CalidadVariable calidadVariable) {
+		getCalidadVariables().add(calidadVariable);
+		calidadVariable.setCalidadMuestraArea(this);
+
+		return calidadVariable;
+	}
+
+	public CalidadVariable removeCalidadVariable(CalidadVariable calidadVariable) {
+		getCalidadVariables().remove(calidadVariable);
+		calidadVariable.setCalidadMuestraArea(null);
+
+		return calidadVariable;
 	}
 
 }

@@ -11,28 +11,20 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="eviscerado_auditoria_reimpresion")
+@NamedQuery(name="EvisceradoAuditoriaReimpresion.findAll", query="SELECT e FROM EvisceradoAuditoriaReimpresion e")
 public class EvisceradoAuditoriaReimpresion implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idevisceradoauditoriareimpresion;
-
 	private Timestamp fechareg;
-
-	//bi-directional many-to-one association to EvisceradoDetalleProcesoCoche
-	@ManyToOne
-	@JoinColumn(name="idevisceradodetalleprocesocoche")
 	private EvisceradoDetalleProcesoCoche evisceradoDetalleProcesoCoche;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public EvisceradoAuditoriaReimpresion() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdevisceradoauditoriareimpresion() {
 		return this.idevisceradoauditoriareimpresion;
 	}
@@ -40,6 +32,7 @@ public class EvisceradoAuditoriaReimpresion implements Serializable {
 	public void setIdevisceradoauditoriareimpresion(Long idevisceradoauditoriareimpresion) {
 		this.idevisceradoauditoriareimpresion = idevisceradoauditoriareimpresion;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -49,6 +42,10 @@ public class EvisceradoAuditoriaReimpresion implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
+	//bi-directional many-to-one association to EvisceradoDetalleProcesoCoche
+	@ManyToOne
+	@JoinColumn(name="idevisceradodetalleprocesocoche")
 	public EvisceradoDetalleProcesoCoche getEvisceradoDetalleProcesoCoche() {
 		return this.evisceradoDetalleProcesoCoche;
 	}
@@ -57,6 +54,10 @@ public class EvisceradoAuditoriaReimpresion implements Serializable {
 		this.evisceradoDetalleProcesoCoche = evisceradoDetalleProcesoCoche;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

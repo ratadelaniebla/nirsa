@@ -11,37 +11,23 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="calidad_respuesta_pregunta_bpmclasificacion")
+@NamedQuery(name="CalidadRespuestaPreguntaBpmclasificacion.findAll", query="SELECT c FROM CalidadRespuestaPreguntaBpmclasificacion c")
 public class CalidadRespuestaPreguntaBpmclasificacion implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcalidadresppregbpmclasificacion;
-
 	private Integer cumplimiento;
-
 	private Timestamp fechareg;
-
 	private String observaciones;
-
-	//bi-directional many-to-one association to CalidadBpmClasificacion
-	@ManyToOne
-	@JoinColumn(name="idcalidadbpmclasificacion")
 	private CalidadBpmClasificacion calidadBpmClasificacion;
-
-	//bi-directional many-to-one association to CalidadPreguntaBpmclasificacion
-	@ManyToOne
-	@JoinColumn(name="idpreguntacalidadbpmclasificacion")
 	private CalidadPreguntaBpmclasificacion calidadPreguntaBpmclasificacion;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public CalidadRespuestaPreguntaBpmclasificacion() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcalidadresppregbpmclasificacion() {
 		return this.idcalidadresppregbpmclasificacion;
 	}
@@ -49,6 +35,7 @@ public class CalidadRespuestaPreguntaBpmclasificacion implements Serializable {
 	public void setIdcalidadresppregbpmclasificacion(Long idcalidadresppregbpmclasificacion) {
 		this.idcalidadresppregbpmclasificacion = idcalidadresppregbpmclasificacion;
 	}
+
 
 	public Integer getCumplimiento() {
 		return this.cumplimiento;
@@ -58,6 +45,7 @@ public class CalidadRespuestaPreguntaBpmclasificacion implements Serializable {
 		this.cumplimiento = cumplimiento;
 	}
 
+
 	public Timestamp getFechareg() {
 		return this.fechareg;
 	}
@@ -65,6 +53,7 @@ public class CalidadRespuestaPreguntaBpmclasificacion implements Serializable {
 	public void setFechareg(Timestamp fechareg) {
 		this.fechareg = fechareg;
 	}
+
 
 	public String getObservaciones() {
 		return this.observaciones;
@@ -74,6 +63,10 @@ public class CalidadRespuestaPreguntaBpmclasificacion implements Serializable {
 		this.observaciones = observaciones;
 	}
 
+
+	//bi-directional many-to-one association to CalidadBpmClasificacion
+	@ManyToOne
+	@JoinColumn(name="idcalidadbpmclasificacion")
 	public CalidadBpmClasificacion getCalidadBpmClasificacion() {
 		return this.calidadBpmClasificacion;
 	}
@@ -82,6 +75,10 @@ public class CalidadRespuestaPreguntaBpmclasificacion implements Serializable {
 		this.calidadBpmClasificacion = calidadBpmClasificacion;
 	}
 
+
+	//bi-directional many-to-one association to CalidadPreguntaBpmclasificacion
+	@ManyToOne
+	@JoinColumn(name="idpreguntacalidadbpmclasificacion")
 	public CalidadPreguntaBpmclasificacion getCalidadPreguntaBpmclasificacion() {
 		return this.calidadPreguntaBpmclasificacion;
 	}
@@ -90,6 +87,10 @@ public class CalidadRespuestaPreguntaBpmclasificacion implements Serializable {
 		this.calidadPreguntaBpmclasificacion = calidadPreguntaBpmclasificacion;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

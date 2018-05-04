@@ -12,47 +12,26 @@ import java.util.List;
  */
 @Entity
 @Table(name="atc_eviscerado_detalle_proceso_lote")
+@NamedQuery(name="AtcEvisceradoDetalleProcesoLote.findAll", query="SELECT a FROM AtcEvisceradoDetalleProcesoLote a")
 public class AtcEvisceradoDetalleProcesoLote implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idatcevisceradodetalleprocesolote;
-
 	private Integer estado;
-
 	private Timestamp fechafin;
-
 	private Timestamp fechainicio;
-
 	private Timestamp fechareg;
-
-	//bi-directional many-to-one association to AtcEvisceradoProceso
-	@ManyToOne
-	@JoinColumn(name="idatcevisceradoproceso")
 	private AtcEvisceradoProceso atcEvisceradoProceso;
-
-	//bi-directional many-to-one association to AtcProduccionDetalleLoteCajon
-	@ManyToOne
-	@JoinColumn(name="idatcproducciondetallelotecajon")
 	private AtcProduccionDetalleLoteCajon atcProduccionDetalleLoteCajon;
-
-	//bi-directional many-to-one association to AtcUsuario
-	@ManyToOne
-	@JoinColumn(name="idatcusuario")
 	private AtcUsuario atcUsuario;
-
-	//bi-directional many-to-one association to AtcEvisceradoDetalleTempPanza
-	@OneToMany(mappedBy="atcEvisceradoDetalleProcesoLote")
 	private List<AtcEvisceradoDetalleTempPanza> atcEvisceradoDetalleTempPanzas;
-
-	//bi-directional many-to-one association to AtcEvisceradoSubproductoCrudo
-	@OneToMany(mappedBy="atcEvisceradoDetalleProcesoLote")
 	private List<AtcEvisceradoSubproductoCrudo> atcEvisceradoSubproductoCrudos;
 
 	public AtcEvisceradoDetalleProcesoLote() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdatcevisceradodetalleprocesolote() {
 		return this.idatcevisceradodetalleprocesolote;
 	}
@@ -60,6 +39,7 @@ public class AtcEvisceradoDetalleProcesoLote implements Serializable {
 	public void setIdatcevisceradodetalleprocesolote(Long idatcevisceradodetalleprocesolote) {
 		this.idatcevisceradodetalleprocesolote = idatcevisceradodetalleprocesolote;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -69,6 +49,7 @@ public class AtcEvisceradoDetalleProcesoLote implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Timestamp getFechafin() {
 		return this.fechafin;
 	}
@@ -76,6 +57,7 @@ public class AtcEvisceradoDetalleProcesoLote implements Serializable {
 	public void setFechafin(Timestamp fechafin) {
 		this.fechafin = fechafin;
 	}
+
 
 	public Timestamp getFechainicio() {
 		return this.fechainicio;
@@ -85,6 +67,7 @@ public class AtcEvisceradoDetalleProcesoLote implements Serializable {
 		this.fechainicio = fechainicio;
 	}
 
+
 	public Timestamp getFechareg() {
 		return this.fechareg;
 	}
@@ -93,6 +76,10 @@ public class AtcEvisceradoDetalleProcesoLote implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
+	//bi-directional many-to-one association to AtcEvisceradoProceso
+	@ManyToOne
+	@JoinColumn(name="idatcevisceradoproceso")
 	public AtcEvisceradoProceso getAtcEvisceradoProceso() {
 		return this.atcEvisceradoProceso;
 	}
@@ -101,6 +88,10 @@ public class AtcEvisceradoDetalleProcesoLote implements Serializable {
 		this.atcEvisceradoProceso = atcEvisceradoProceso;
 	}
 
+
+	//bi-directional many-to-one association to AtcProduccionDetalleLoteCajon
+	@ManyToOne
+	@JoinColumn(name="idatcproducciondetallelotecajon")
 	public AtcProduccionDetalleLoteCajon getAtcProduccionDetalleLoteCajon() {
 		return this.atcProduccionDetalleLoteCajon;
 	}
@@ -109,6 +100,10 @@ public class AtcEvisceradoDetalleProcesoLote implements Serializable {
 		this.atcProduccionDetalleLoteCajon = atcProduccionDetalleLoteCajon;
 	}
 
+
+	//bi-directional many-to-one association to AtcUsuario
+	@ManyToOne
+	@JoinColumn(name="idatcusuario")
 	public AtcUsuario getAtcUsuario() {
 		return this.atcUsuario;
 	}
@@ -117,6 +112,9 @@ public class AtcEvisceradoDetalleProcesoLote implements Serializable {
 		this.atcUsuario = atcUsuario;
 	}
 
+
+	//bi-directional many-to-one association to AtcEvisceradoDetalleTempPanza
+	@OneToMany(mappedBy="atcEvisceradoDetalleProcesoLote")
 	public List<AtcEvisceradoDetalleTempPanza> getAtcEvisceradoDetalleTempPanzas() {
 		return this.atcEvisceradoDetalleTempPanzas;
 	}
@@ -125,12 +123,43 @@ public class AtcEvisceradoDetalleProcesoLote implements Serializable {
 		this.atcEvisceradoDetalleTempPanzas = atcEvisceradoDetalleTempPanzas;
 	}
 
+	public AtcEvisceradoDetalleTempPanza addAtcEvisceradoDetalleTempPanza(AtcEvisceradoDetalleTempPanza atcEvisceradoDetalleTempPanza) {
+		getAtcEvisceradoDetalleTempPanzas().add(atcEvisceradoDetalleTempPanza);
+		atcEvisceradoDetalleTempPanza.setAtcEvisceradoDetalleProcesoLote(this);
+
+		return atcEvisceradoDetalleTempPanza;
+	}
+
+	public AtcEvisceradoDetalleTempPanza removeAtcEvisceradoDetalleTempPanza(AtcEvisceradoDetalleTempPanza atcEvisceradoDetalleTempPanza) {
+		getAtcEvisceradoDetalleTempPanzas().remove(atcEvisceradoDetalleTempPanza);
+		atcEvisceradoDetalleTempPanza.setAtcEvisceradoDetalleProcesoLote(null);
+
+		return atcEvisceradoDetalleTempPanza;
+	}
+
+
+	//bi-directional many-to-one association to AtcEvisceradoSubproductoCrudo
+	@OneToMany(mappedBy="atcEvisceradoDetalleProcesoLote")
 	public List<AtcEvisceradoSubproductoCrudo> getAtcEvisceradoSubproductoCrudos() {
 		return this.atcEvisceradoSubproductoCrudos;
 	}
 
 	public void setAtcEvisceradoSubproductoCrudos(List<AtcEvisceradoSubproductoCrudo> atcEvisceradoSubproductoCrudos) {
 		this.atcEvisceradoSubproductoCrudos = atcEvisceradoSubproductoCrudos;
+	}
+
+	public AtcEvisceradoSubproductoCrudo addAtcEvisceradoSubproductoCrudo(AtcEvisceradoSubproductoCrudo atcEvisceradoSubproductoCrudo) {
+		getAtcEvisceradoSubproductoCrudos().add(atcEvisceradoSubproductoCrudo);
+		atcEvisceradoSubproductoCrudo.setAtcEvisceradoDetalleProcesoLote(this);
+
+		return atcEvisceradoSubproductoCrudo;
+	}
+
+	public AtcEvisceradoSubproductoCrudo removeAtcEvisceradoSubproductoCrudo(AtcEvisceradoSubproductoCrudo atcEvisceradoSubproductoCrudo) {
+		getAtcEvisceradoSubproductoCrudos().remove(atcEvisceradoSubproductoCrudo);
+		atcEvisceradoSubproductoCrudo.setAtcEvisceradoDetalleProcesoLote(null);
+
+		return atcEvisceradoSubproductoCrudo;
 	}
 
 }

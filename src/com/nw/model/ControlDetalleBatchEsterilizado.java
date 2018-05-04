@@ -11,55 +11,32 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="control_detalle_batch_esterilizado")
+@NamedQuery(name="ControlDetalleBatchEsterilizado.findAll", query="SELECT c FROM ControlDetalleBatchEsterilizado c")
 public class ControlDetalleBatchEsterilizado implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcontroldetallebatchesterilizado;
-
 	private Integer cocheautoclave;
-
 	private String codigoproducto;
-
 	private Integer estado;
-
 	private Timestamp fechaactualizacion;
-
 	private Timestamp fechaesterilizado;
-
 	private Timestamp fechafin;
-
 	private Timestamp fechainicio;
-
 	private Integer idautoclave;
-
 	private Integer idparadaautoclave;
-
 	private String idusuarioactualizacion;
-
 	private String idusuariofin;
-
 	private String observaciones;
-
-	//bi-directional many-to-one association to ControlFichaBatch
-	@ManyToOne
-	@JoinColumn(name="idcontrolfichabatch")
 	private ControlFichaBatch controlFichaBatch;
-
-	//bi-directional many-to-one association to MaquinaCerradora
-	@ManyToOne
-	@JoinColumn(name="idmaquinacerradora")
 	private MaquinaCerradora maquinaCerradora;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuarioinicio")
 	private Usuario usuario;
 
 	public ControlDetalleBatchEsterilizado() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcontroldetallebatchesterilizado() {
 		return this.idcontroldetallebatchesterilizado;
 	}
@@ -67,6 +44,7 @@ public class ControlDetalleBatchEsterilizado implements Serializable {
 	public void setIdcontroldetallebatchesterilizado(Long idcontroldetallebatchesterilizado) {
 		this.idcontroldetallebatchesterilizado = idcontroldetallebatchesterilizado;
 	}
+
 
 	public Integer getCocheautoclave() {
 		return this.cocheautoclave;
@@ -76,6 +54,7 @@ public class ControlDetalleBatchEsterilizado implements Serializable {
 		this.cocheautoclave = cocheautoclave;
 	}
 
+
 	public String getCodigoproducto() {
 		return this.codigoproducto;
 	}
@@ -83,6 +62,7 @@ public class ControlDetalleBatchEsterilizado implements Serializable {
 	public void setCodigoproducto(String codigoproducto) {
 		this.codigoproducto = codigoproducto;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -92,6 +72,7 @@ public class ControlDetalleBatchEsterilizado implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Timestamp getFechaactualizacion() {
 		return this.fechaactualizacion;
 	}
@@ -99,6 +80,7 @@ public class ControlDetalleBatchEsterilizado implements Serializable {
 	public void setFechaactualizacion(Timestamp fechaactualizacion) {
 		this.fechaactualizacion = fechaactualizacion;
 	}
+
 
 	public Timestamp getFechaesterilizado() {
 		return this.fechaesterilizado;
@@ -108,6 +90,7 @@ public class ControlDetalleBatchEsterilizado implements Serializable {
 		this.fechaesterilizado = fechaesterilizado;
 	}
 
+
 	public Timestamp getFechafin() {
 		return this.fechafin;
 	}
@@ -115,6 +98,7 @@ public class ControlDetalleBatchEsterilizado implements Serializable {
 	public void setFechafin(Timestamp fechafin) {
 		this.fechafin = fechafin;
 	}
+
 
 	public Timestamp getFechainicio() {
 		return this.fechainicio;
@@ -124,6 +108,7 @@ public class ControlDetalleBatchEsterilizado implements Serializable {
 		this.fechainicio = fechainicio;
 	}
 
+
 	public Integer getIdautoclave() {
 		return this.idautoclave;
 	}
@@ -131,6 +116,7 @@ public class ControlDetalleBatchEsterilizado implements Serializable {
 	public void setIdautoclave(Integer idautoclave) {
 		this.idautoclave = idautoclave;
 	}
+
 
 	public Integer getIdparadaautoclave() {
 		return this.idparadaautoclave;
@@ -140,6 +126,7 @@ public class ControlDetalleBatchEsterilizado implements Serializable {
 		this.idparadaautoclave = idparadaautoclave;
 	}
 
+
 	public String getIdusuarioactualizacion() {
 		return this.idusuarioactualizacion;
 	}
@@ -147,6 +134,7 @@ public class ControlDetalleBatchEsterilizado implements Serializable {
 	public void setIdusuarioactualizacion(String idusuarioactualizacion) {
 		this.idusuarioactualizacion = idusuarioactualizacion;
 	}
+
 
 	public String getIdusuariofin() {
 		return this.idusuariofin;
@@ -156,6 +144,7 @@ public class ControlDetalleBatchEsterilizado implements Serializable {
 		this.idusuariofin = idusuariofin;
 	}
 
+
 	public String getObservaciones() {
 		return this.observaciones;
 	}
@@ -164,6 +153,10 @@ public class ControlDetalleBatchEsterilizado implements Serializable {
 		this.observaciones = observaciones;
 	}
 
+
+	//bi-directional many-to-one association to ControlFichaBatch
+	@ManyToOne
+	@JoinColumn(name="idcontrolfichabatch")
 	public ControlFichaBatch getControlFichaBatch() {
 		return this.controlFichaBatch;
 	}
@@ -172,6 +165,10 @@ public class ControlDetalleBatchEsterilizado implements Serializable {
 		this.controlFichaBatch = controlFichaBatch;
 	}
 
+
+	//bi-directional many-to-one association to MaquinaCerradora
+	@ManyToOne
+	@JoinColumn(name="idmaquinacerradora")
 	public MaquinaCerradora getMaquinaCerradora() {
 		return this.maquinaCerradora;
 	}
@@ -180,6 +177,10 @@ public class ControlDetalleBatchEsterilizado implements Serializable {
 		this.maquinaCerradora = maquinaCerradora;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuarioinicio")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

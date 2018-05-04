@@ -10,26 +10,20 @@ import java.util.List;
  * 
  */
 @Entity
+@NamedQuery(name="Banda.findAll", query="SELECT b FROM Banda b")
 public class Banda implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idbanda;
-
 	private String descripcionbanda;
-
-	//bi-directional many-to-one association to CajonDetalleBarcoDescarga
-	@OneToMany(mappedBy="banda")
 	private List<CajonDetalleBarcoDescarga> cajonDetalleBarcoDescargas;
-
-	//bi-directional many-to-one association to CamaraDetalleBanda
-	@OneToMany(mappedBy="banda")
 	private List<CamaraDetalleBanda> camaraDetalleBandas;
 
 	public Banda() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdbanda() {
 		return this.idbanda;
 	}
@@ -37,6 +31,7 @@ public class Banda implements Serializable {
 	public void setIdbanda(Long idbanda) {
 		this.idbanda = idbanda;
 	}
+
 
 	public String getDescripcionbanda() {
 		return this.descripcionbanda;
@@ -46,6 +41,9 @@ public class Banda implements Serializable {
 		this.descripcionbanda = descripcionbanda;
 	}
 
+
+	//bi-directional many-to-one association to CajonDetalleBarcoDescarga
+	@OneToMany(mappedBy="banda")
 	public List<CajonDetalleBarcoDescarga> getCajonDetalleBarcoDescargas() {
 		return this.cajonDetalleBarcoDescargas;
 	}
@@ -54,12 +52,43 @@ public class Banda implements Serializable {
 		this.cajonDetalleBarcoDescargas = cajonDetalleBarcoDescargas;
 	}
 
+	public CajonDetalleBarcoDescarga addCajonDetalleBarcoDescarga(CajonDetalleBarcoDescarga cajonDetalleBarcoDescarga) {
+		getCajonDetalleBarcoDescargas().add(cajonDetalleBarcoDescarga);
+		cajonDetalleBarcoDescarga.setBanda(this);
+
+		return cajonDetalleBarcoDescarga;
+	}
+
+	public CajonDetalleBarcoDescarga removeCajonDetalleBarcoDescarga(CajonDetalleBarcoDescarga cajonDetalleBarcoDescarga) {
+		getCajonDetalleBarcoDescargas().remove(cajonDetalleBarcoDescarga);
+		cajonDetalleBarcoDescarga.setBanda(null);
+
+		return cajonDetalleBarcoDescarga;
+	}
+
+
+	//bi-directional many-to-one association to CamaraDetalleBanda
+	@OneToMany(mappedBy="banda")
 	public List<CamaraDetalleBanda> getCamaraDetalleBandas() {
 		return this.camaraDetalleBandas;
 	}
 
 	public void setCamaraDetalleBandas(List<CamaraDetalleBanda> camaraDetalleBandas) {
 		this.camaraDetalleBandas = camaraDetalleBandas;
+	}
+
+	public CamaraDetalleBanda addCamaraDetalleBanda(CamaraDetalleBanda camaraDetalleBanda) {
+		getCamaraDetalleBandas().add(camaraDetalleBanda);
+		camaraDetalleBanda.setBanda(this);
+
+		return camaraDetalleBanda;
+	}
+
+	public CamaraDetalleBanda removeCamaraDetalleBanda(CamaraDetalleBanda camaraDetalleBanda) {
+		getCamaraDetalleBandas().remove(camaraDetalleBanda);
+		camaraDetalleBanda.setBanda(null);
+
+		return camaraDetalleBanda;
 	}
 
 }

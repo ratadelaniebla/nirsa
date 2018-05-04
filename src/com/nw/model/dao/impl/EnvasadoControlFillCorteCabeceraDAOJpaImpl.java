@@ -45,7 +45,7 @@ public class EnvasadoControlFillCorteCabeceraDAOJpaImpl extends BaseDaoJpaImpl
 	
 	public EnvasadoControlFillCorteCabecera obtieneByIdEnvasadoProceso(Long idenvasadoproceso) {
 		try {
-			String sql = "SELECT a FROM EnvasadoControlFillCorteCabecera a WHERE a.idenvasadoproceso = :idenvasadoproceso ";
+			String sql = "SELECT a FROM EnvasadoControlFillCorteCabecera a WHERE a.envasadoProceso.idenvasadoproceso = :idenvasadoproceso ";
 			
 			return (EnvasadoControlFillCorteCabecera) em
 					.createQuery(sql)

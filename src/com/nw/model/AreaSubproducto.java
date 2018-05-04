@@ -10,35 +10,22 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="area_subproducto")
+@NamedQuery(name="AreaSubproducto.findAll", query="SELECT a FROM AreaSubproducto a")
 public class AreaSubproducto implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idareasubproducto;
-
 	private Integer iddesperdicioclasificacion;
-
 	private Integer tipolote;
-
-	//bi-directional many-to-one association to Area
-	@ManyToOne
-	@JoinColumn(name="idarea")
 	private Area area;
-
-	//bi-directional many-to-one association to Lugar
-	@ManyToOne
-	@JoinColumn(name="idlugar")
 	private Lugar lugar;
-
-	//bi-directional many-to-one association to Subproducto
-	@ManyToOne
-	@JoinColumn(name="idsubproducto")
 	private Subproducto subproducto;
 
 	public AreaSubproducto() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdareasubproducto() {
 		return this.idareasubproducto;
 	}
@@ -46,6 +33,7 @@ public class AreaSubproducto implements Serializable {
 	public void setIdareasubproducto(Integer idareasubproducto) {
 		this.idareasubproducto = idareasubproducto;
 	}
+
 
 	public Integer getIddesperdicioclasificacion() {
 		return this.iddesperdicioclasificacion;
@@ -55,6 +43,7 @@ public class AreaSubproducto implements Serializable {
 		this.iddesperdicioclasificacion = iddesperdicioclasificacion;
 	}
 
+
 	public Integer getTipolote() {
 		return this.tipolote;
 	}
@@ -63,6 +52,10 @@ public class AreaSubproducto implements Serializable {
 		this.tipolote = tipolote;
 	}
 
+
+	//bi-directional many-to-one association to Area
+	@ManyToOne
+	@JoinColumn(name="idarea")
 	public Area getArea() {
 		return this.area;
 	}
@@ -71,6 +64,10 @@ public class AreaSubproducto implements Serializable {
 		this.area = area;
 	}
 
+
+	//bi-directional many-to-one association to Lugar
+	@ManyToOne
+	@JoinColumn(name="idlugar")
 	public Lugar getLugar() {
 		return this.lugar;
 	}
@@ -79,6 +76,10 @@ public class AreaSubproducto implements Serializable {
 		this.lugar = lugar;
 	}
 
+
+	//bi-directional many-to-one association to Subproducto
+	@ManyToOne
+	@JoinColumn(name="idsubproducto")
 	public Subproducto getSubproducto() {
 		return this.subproducto;
 	}

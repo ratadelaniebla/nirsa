@@ -10,23 +10,19 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="estandar_desperdicio_atun")
+@NamedQuery(name="EstandarDesperdicioAtun.findAll", query="SELECT e FROM EstandarDesperdicioAtun e")
 public class EstandarDesperdicioAtun implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idestandardesperdicioatun;
-
 	private double valor;
-
-	//bi-directional many-to-one association to EspecieTalla
-	@ManyToOne
-	@JoinColumn(name="idespecietalla")
 	private EspecieTalla especieTalla;
 
 	public EstandarDesperdicioAtun() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdestandardesperdicioatun() {
 		return this.idestandardesperdicioatun;
 	}
@@ -34,6 +30,7 @@ public class EstandarDesperdicioAtun implements Serializable {
 	public void setIdestandardesperdicioatun(Integer idestandardesperdicioatun) {
 		this.idestandardesperdicioatun = idestandardesperdicioatun;
 	}
+
 
 	public double getValor() {
 		return this.valor;
@@ -43,6 +40,10 @@ public class EstandarDesperdicioAtun implements Serializable {
 		this.valor = valor;
 	}
 
+
+	//bi-directional many-to-one association to EspecieTalla
+	@ManyToOne
+	@JoinColumn(name="idespecietalla")
 	public EspecieTalla getEspecieTalla() {
 		return this.especieTalla;
 	}

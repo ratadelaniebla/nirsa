@@ -11,69 +11,34 @@ import java.util.List;
  */
 @Entity
 @Table(name="barco_estiba_cuba")
+@NamedQuery(name="BarcoEstibaCuba.findAll", query="SELECT b FROM BarcoEstibaCuba b")
 public class BarcoEstibaCuba implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idbarcoestibacuba;
-
 	private double capacidad;
-
 	private double cardumenbrisa;
-
 	private double cardumenplantado;
-
 	private Integer estadocombobox;
-
 	private Integer estadodescargacuba;
-
-	private Long idbarcocuba;
-
 	private Long idbarcocubacombinada;
-
 	private Integer zonafao;
-
-	//bi-directional many-to-one association to AtcProduccionDetalleLote
-	@OneToMany(mappedBy="barcoEstibaCuba")
 	private List<AtcProduccionDetalleLote> atcProduccionDetalleLotes;
-
-	//bi-directional many-to-one association to BarcoDescarga
-	@ManyToOne
-	@JoinColumn(name="idbarcodescarga")
+	private BarcoCuba barcoCuba;
 	private BarcoDescarga barcoDescarga;
-
-	//bi-directional many-to-one association to BarcoEstibaCubaDetalleMezcla
-	@OneToMany(mappedBy="barcoEstibaCuba")
 	private List<BarcoEstibaCubaDetalleMezcla> barcoEstibaCubaDetalleMezclas;
-
-	//bi-directional many-to-one association to CalidadAprobacionDescargaCuba
-	@OneToMany(mappedBy="barcoEstibaCuba")
 	private List<CalidadAprobacionDescargaCuba> calidadAprobacionDescargaCubas;
-
-	//bi-directional many-to-one association to CalidadDetallePcc
-	@OneToMany(mappedBy="barcoEstibaCuba")
 	private List<CalidadDetallePcc> calidadDetallePccs;
-
-	//bi-directional many-to-one association to CalidadDetalleSensorialMp
-	@OneToMany(mappedBy="barcoEstibaCuba")
 	private List<CalidadDetalleSensorialMp> calidadDetalleSensorialMps;
-
-	//bi-directional many-to-one association to CamaraCajon
-	@OneToMany(mappedBy="barcoEstibaCuba")
 	private List<CamaraCajon> camaraCajons;
-
-	//bi-directional many-to-one association to CamaraDetalleBanda
-	@OneToMany(mappedBy="barcoEstibaCuba")
 	private List<CamaraDetalleBanda> camaraDetalleBandas;
-
-	//bi-directional many-to-one association to ProduccionDetalleLote
-	@OneToMany(mappedBy="barcoEstibaCuba")
 	private List<ProduccionDetalleLote> produccionDetalleLotes;
 
 	public BarcoEstibaCuba() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdbarcoestibacuba() {
 		return this.idbarcoestibacuba;
 	}
@@ -81,6 +46,7 @@ public class BarcoEstibaCuba implements Serializable {
 	public void setIdbarcoestibacuba(Long idbarcoestibacuba) {
 		this.idbarcoestibacuba = idbarcoestibacuba;
 	}
+
 
 	public double getCapacidad() {
 		return this.capacidad;
@@ -90,6 +56,7 @@ public class BarcoEstibaCuba implements Serializable {
 		this.capacidad = capacidad;
 	}
 
+
 	public double getCardumenbrisa() {
 		return this.cardumenbrisa;
 	}
@@ -97,6 +64,7 @@ public class BarcoEstibaCuba implements Serializable {
 	public void setCardumenbrisa(double cardumenbrisa) {
 		this.cardumenbrisa = cardumenbrisa;
 	}
+
 
 	public double getCardumenplantado() {
 		return this.cardumenplantado;
@@ -106,6 +74,7 @@ public class BarcoEstibaCuba implements Serializable {
 		this.cardumenplantado = cardumenplantado;
 	}
 
+
 	public Integer getEstadocombobox() {
 		return this.estadocombobox;
 	}
@@ -113,6 +82,7 @@ public class BarcoEstibaCuba implements Serializable {
 	public void setEstadocombobox(Integer estadocombobox) {
 		this.estadocombobox = estadocombobox;
 	}
+
 
 	public Integer getEstadodescargacuba() {
 		return this.estadodescargacuba;
@@ -122,13 +92,6 @@ public class BarcoEstibaCuba implements Serializable {
 		this.estadodescargacuba = estadodescargacuba;
 	}
 
-	public Long getIdbarcocuba() {
-		return this.idbarcocuba;
-	}
-
-	public void setIdbarcocuba(Long idbarcocuba) {
-		this.idbarcocuba = idbarcocuba;
-	}
 
 	public Long getIdbarcocubacombinada() {
 		return this.idbarcocubacombinada;
@@ -138,6 +101,7 @@ public class BarcoEstibaCuba implements Serializable {
 		this.idbarcocubacombinada = idbarcocubacombinada;
 	}
 
+
 	public Integer getZonafao() {
 		return this.zonafao;
 	}
@@ -146,6 +110,9 @@ public class BarcoEstibaCuba implements Serializable {
 		this.zonafao = zonafao;
 	}
 
+
+	//bi-directional many-to-one association to AtcProduccionDetalleLote
+	@OneToMany(mappedBy="barcoEstibaCuba")
 	public List<AtcProduccionDetalleLote> getAtcProduccionDetalleLotes() {
 		return this.atcProduccionDetalleLotes;
 	}
@@ -154,6 +121,36 @@ public class BarcoEstibaCuba implements Serializable {
 		this.atcProduccionDetalleLotes = atcProduccionDetalleLotes;
 	}
 
+	public AtcProduccionDetalleLote addAtcProduccionDetalleLote(AtcProduccionDetalleLote atcProduccionDetalleLote) {
+		getAtcProduccionDetalleLotes().add(atcProduccionDetalleLote);
+		atcProduccionDetalleLote.setBarcoEstibaCuba(this);
+
+		return atcProduccionDetalleLote;
+	}
+
+	public AtcProduccionDetalleLote removeAtcProduccionDetalleLote(AtcProduccionDetalleLote atcProduccionDetalleLote) {
+		getAtcProduccionDetalleLotes().remove(atcProduccionDetalleLote);
+		atcProduccionDetalleLote.setBarcoEstibaCuba(null);
+
+		return atcProduccionDetalleLote;
+	}
+
+
+	//bi-directional many-to-one association to BarcoCuba
+	@ManyToOne
+	@JoinColumn(name="idbarcocuba")
+	public BarcoCuba getBarcoCuba() {
+		return this.barcoCuba;
+	}
+
+	public void setBarcoCuba(BarcoCuba barcoCuba) {
+		this.barcoCuba = barcoCuba;
+	}
+
+
+	//bi-directional many-to-one association to BarcoDescarga
+	@ManyToOne
+	@JoinColumn(name="idbarcodescarga")
 	public BarcoDescarga getBarcoDescarga() {
 		return this.barcoDescarga;
 	}
@@ -162,6 +159,9 @@ public class BarcoEstibaCuba implements Serializable {
 		this.barcoDescarga = barcoDescarga;
 	}
 
+
+	//bi-directional many-to-one association to BarcoEstibaCubaDetalleMezcla
+	@OneToMany(mappedBy="barcoEstibaCuba")
 	public List<BarcoEstibaCubaDetalleMezcla> getBarcoEstibaCubaDetalleMezclas() {
 		return this.barcoEstibaCubaDetalleMezclas;
 	}
@@ -170,6 +170,23 @@ public class BarcoEstibaCuba implements Serializable {
 		this.barcoEstibaCubaDetalleMezclas = barcoEstibaCubaDetalleMezclas;
 	}
 
+	public BarcoEstibaCubaDetalleMezcla addBarcoEstibaCubaDetalleMezcla(BarcoEstibaCubaDetalleMezcla barcoEstibaCubaDetalleMezcla) {
+		getBarcoEstibaCubaDetalleMezclas().add(barcoEstibaCubaDetalleMezcla);
+		barcoEstibaCubaDetalleMezcla.setBarcoEstibaCuba(this);
+
+		return barcoEstibaCubaDetalleMezcla;
+	}
+
+	public BarcoEstibaCubaDetalleMezcla removeBarcoEstibaCubaDetalleMezcla(BarcoEstibaCubaDetalleMezcla barcoEstibaCubaDetalleMezcla) {
+		getBarcoEstibaCubaDetalleMezclas().remove(barcoEstibaCubaDetalleMezcla);
+		barcoEstibaCubaDetalleMezcla.setBarcoEstibaCuba(null);
+
+		return barcoEstibaCubaDetalleMezcla;
+	}
+
+
+	//bi-directional many-to-one association to CalidadAprobacionDescargaCuba
+	@OneToMany(mappedBy="barcoEstibaCuba")
 	public List<CalidadAprobacionDescargaCuba> getCalidadAprobacionDescargaCubas() {
 		return this.calidadAprobacionDescargaCubas;
 	}
@@ -178,6 +195,23 @@ public class BarcoEstibaCuba implements Serializable {
 		this.calidadAprobacionDescargaCubas = calidadAprobacionDescargaCubas;
 	}
 
+	public CalidadAprobacionDescargaCuba addCalidadAprobacionDescargaCuba(CalidadAprobacionDescargaCuba calidadAprobacionDescargaCuba) {
+		getCalidadAprobacionDescargaCubas().add(calidadAprobacionDescargaCuba);
+		calidadAprobacionDescargaCuba.setBarcoEstibaCuba(this);
+
+		return calidadAprobacionDescargaCuba;
+	}
+
+	public CalidadAprobacionDescargaCuba removeCalidadAprobacionDescargaCuba(CalidadAprobacionDescargaCuba calidadAprobacionDescargaCuba) {
+		getCalidadAprobacionDescargaCubas().remove(calidadAprobacionDescargaCuba);
+		calidadAprobacionDescargaCuba.setBarcoEstibaCuba(null);
+
+		return calidadAprobacionDescargaCuba;
+	}
+
+
+	//bi-directional many-to-one association to CalidadDetallePcc
+	@OneToMany(mappedBy="barcoEstibaCuba")
 	public List<CalidadDetallePcc> getCalidadDetallePccs() {
 		return this.calidadDetallePccs;
 	}
@@ -186,6 +220,23 @@ public class BarcoEstibaCuba implements Serializable {
 		this.calidadDetallePccs = calidadDetallePccs;
 	}
 
+	public CalidadDetallePcc addCalidadDetallePcc(CalidadDetallePcc calidadDetallePcc) {
+		getCalidadDetallePccs().add(calidadDetallePcc);
+		calidadDetallePcc.setBarcoEstibaCuba(this);
+
+		return calidadDetallePcc;
+	}
+
+	public CalidadDetallePcc removeCalidadDetallePcc(CalidadDetallePcc calidadDetallePcc) {
+		getCalidadDetallePccs().remove(calidadDetallePcc);
+		calidadDetallePcc.setBarcoEstibaCuba(null);
+
+		return calidadDetallePcc;
+	}
+
+
+	//bi-directional many-to-one association to CalidadDetalleSensorialMp
+	@OneToMany(mappedBy="barcoEstibaCuba")
 	public List<CalidadDetalleSensorialMp> getCalidadDetalleSensorialMps() {
 		return this.calidadDetalleSensorialMps;
 	}
@@ -194,6 +245,23 @@ public class BarcoEstibaCuba implements Serializable {
 		this.calidadDetalleSensorialMps = calidadDetalleSensorialMps;
 	}
 
+	public CalidadDetalleSensorialMp addCalidadDetalleSensorialMp(CalidadDetalleSensorialMp calidadDetalleSensorialMp) {
+		getCalidadDetalleSensorialMps().add(calidadDetalleSensorialMp);
+		calidadDetalleSensorialMp.setBarcoEstibaCuba(this);
+
+		return calidadDetalleSensorialMp;
+	}
+
+	public CalidadDetalleSensorialMp removeCalidadDetalleSensorialMp(CalidadDetalleSensorialMp calidadDetalleSensorialMp) {
+		getCalidadDetalleSensorialMps().remove(calidadDetalleSensorialMp);
+		calidadDetalleSensorialMp.setBarcoEstibaCuba(null);
+
+		return calidadDetalleSensorialMp;
+	}
+
+
+	//bi-directional many-to-one association to CamaraCajon
+	@OneToMany(mappedBy="barcoEstibaCuba")
 	public List<CamaraCajon> getCamaraCajons() {
 		return this.camaraCajons;
 	}
@@ -202,6 +270,23 @@ public class BarcoEstibaCuba implements Serializable {
 		this.camaraCajons = camaraCajons;
 	}
 
+	public CamaraCajon addCamaraCajon(CamaraCajon camaraCajon) {
+		getCamaraCajons().add(camaraCajon);
+		camaraCajon.setBarcoEstibaCuba(this);
+
+		return camaraCajon;
+	}
+
+	public CamaraCajon removeCamaraCajon(CamaraCajon camaraCajon) {
+		getCamaraCajons().remove(camaraCajon);
+		camaraCajon.setBarcoEstibaCuba(null);
+
+		return camaraCajon;
+	}
+
+
+	//bi-directional many-to-one association to CamaraDetalleBanda
+	@OneToMany(mappedBy="barcoEstibaCuba")
 	public List<CamaraDetalleBanda> getCamaraDetalleBandas() {
 		return this.camaraDetalleBandas;
 	}
@@ -210,12 +295,43 @@ public class BarcoEstibaCuba implements Serializable {
 		this.camaraDetalleBandas = camaraDetalleBandas;
 	}
 
+	public CamaraDetalleBanda addCamaraDetalleBanda(CamaraDetalleBanda camaraDetalleBanda) {
+		getCamaraDetalleBandas().add(camaraDetalleBanda);
+		camaraDetalleBanda.setBarcoEstibaCuba(this);
+
+		return camaraDetalleBanda;
+	}
+
+	public CamaraDetalleBanda removeCamaraDetalleBanda(CamaraDetalleBanda camaraDetalleBanda) {
+		getCamaraDetalleBandas().remove(camaraDetalleBanda);
+		camaraDetalleBanda.setBarcoEstibaCuba(null);
+
+		return camaraDetalleBanda;
+	}
+
+
+	//bi-directional many-to-one association to ProduccionDetalleLote
+	@OneToMany(mappedBy="barcoEstibaCuba")
 	public List<ProduccionDetalleLote> getProduccionDetalleLotes() {
 		return this.produccionDetalleLotes;
 	}
 
 	public void setProduccionDetalleLotes(List<ProduccionDetalleLote> produccionDetalleLotes) {
 		this.produccionDetalleLotes = produccionDetalleLotes;
+	}
+
+	public ProduccionDetalleLote addProduccionDetalleLote(ProduccionDetalleLote produccionDetalleLote) {
+		getProduccionDetalleLotes().add(produccionDetalleLote);
+		produccionDetalleLote.setBarcoEstibaCuba(this);
+
+		return produccionDetalleLote;
+	}
+
+	public ProduccionDetalleLote removeProduccionDetalleLote(ProduccionDetalleLote produccionDetalleLote) {
+		getProduccionDetalleLotes().remove(produccionDetalleLote);
+		produccionDetalleLote.setBarcoEstibaCuba(null);
+
+		return produccionDetalleLote;
 	}
 
 }

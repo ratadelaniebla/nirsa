@@ -11,36 +11,23 @@ import java.util.List;
  */
 @Entity
 @Table(name="calidad_variable")
+@NamedQuery(name="CalidadVariable.findAll", query="SELECT c FROM CalidadVariable c")
 public class CalidadVariable implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcalidadvariable;
-
 	private Integer estado;
-
 	private Integer numerovariable;
-
 	private Integer ordentexto;
-
-	//bi-directional many-to-one association to CalidadMuestraAreaCabecera
-	@OneToMany(mappedBy="calidadVariable")
 	private List<CalidadMuestraAreaCabecera> calidadMuestraAreaCabeceras;
-
-	//bi-directional many-to-one association to CalidadAccionCorrectivaTexto
-	@ManyToOne
-	@JoinColumn(name="idcalidadaccioncorrectivatexto")
 	private CalidadAccionCorrectivaTexto calidadAccionCorrectivaTexto;
-
-	//bi-directional many-to-one association to CalidadMuestraArea
-	@ManyToOne
-	@JoinColumn(name="idcalidadmuestraarea")
 	private CalidadMuestraArea calidadMuestraArea;
 
 	public CalidadVariable() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcalidadvariable() {
 		return this.idcalidadvariable;
 	}
@@ -48,6 +35,7 @@ public class CalidadVariable implements Serializable {
 	public void setIdcalidadvariable(Long idcalidadvariable) {
 		this.idcalidadvariable = idcalidadvariable;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -57,6 +45,7 @@ public class CalidadVariable implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Integer getNumerovariable() {
 		return this.numerovariable;
 	}
@@ -64,6 +53,7 @@ public class CalidadVariable implements Serializable {
 	public void setNumerovariable(Integer numerovariable) {
 		this.numerovariable = numerovariable;
 	}
+
 
 	public Integer getOrdentexto() {
 		return this.ordentexto;
@@ -73,6 +63,9 @@ public class CalidadVariable implements Serializable {
 		this.ordentexto = ordentexto;
 	}
 
+
+	//bi-directional many-to-one association to CalidadMuestraAreaCabecera
+	@OneToMany(mappedBy="calidadVariable")
 	public List<CalidadMuestraAreaCabecera> getCalidadMuestraAreaCabeceras() {
 		return this.calidadMuestraAreaCabeceras;
 	}
@@ -81,6 +74,24 @@ public class CalidadVariable implements Serializable {
 		this.calidadMuestraAreaCabeceras = calidadMuestraAreaCabeceras;
 	}
 
+	public CalidadMuestraAreaCabecera addCalidadMuestraAreaCabecera(CalidadMuestraAreaCabecera calidadMuestraAreaCabecera) {
+		getCalidadMuestraAreaCabeceras().add(calidadMuestraAreaCabecera);
+		calidadMuestraAreaCabecera.setCalidadVariable(this);
+
+		return calidadMuestraAreaCabecera;
+	}
+
+	public CalidadMuestraAreaCabecera removeCalidadMuestraAreaCabecera(CalidadMuestraAreaCabecera calidadMuestraAreaCabecera) {
+		getCalidadMuestraAreaCabeceras().remove(calidadMuestraAreaCabecera);
+		calidadMuestraAreaCabecera.setCalidadVariable(null);
+
+		return calidadMuestraAreaCabecera;
+	}
+
+
+	//bi-directional many-to-one association to CalidadAccionCorrectivaTexto
+	@ManyToOne
+	@JoinColumn(name="idcalidadaccioncorrectivatexto")
 	public CalidadAccionCorrectivaTexto getCalidadAccionCorrectivaTexto() {
 		return this.calidadAccionCorrectivaTexto;
 	}
@@ -89,6 +100,10 @@ public class CalidadVariable implements Serializable {
 		this.calidadAccionCorrectivaTexto = calidadAccionCorrectivaTexto;
 	}
 
+
+	//bi-directional many-to-one association to CalidadMuestraArea
+	@ManyToOne
+	@JoinColumn(name="idcalidadmuestraarea")
 	public CalidadMuestraArea getCalidadMuestraArea() {
 		return this.calidadMuestraArea;
 	}

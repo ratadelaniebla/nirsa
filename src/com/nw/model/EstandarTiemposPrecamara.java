@@ -10,23 +10,19 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="estandar_tiempos_precamara")
+@NamedQuery(name="EstandarTiemposPrecamara.findAll", query="SELECT e FROM EstandarTiemposPrecamara e")
 public class EstandarTiemposPrecamara implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idestandartiemposprecamara;
-
 	private Integer tiempo;
-
-	//bi-directional many-to-one association to Talla
-	@ManyToOne
-	@JoinColumn(name="idtalla")
 	private Talla talla;
 
 	public EstandarTiemposPrecamara() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdestandartiemposprecamara() {
 		return this.idestandartiemposprecamara;
 	}
@@ -34,6 +30,7 @@ public class EstandarTiemposPrecamara implements Serializable {
 	public void setIdestandartiemposprecamara(Integer idestandartiemposprecamara) {
 		this.idestandartiemposprecamara = idestandartiemposprecamara;
 	}
+
 
 	public Integer getTiempo() {
 		return this.tiempo;
@@ -43,6 +40,10 @@ public class EstandarTiemposPrecamara implements Serializable {
 		this.tiempo = tiempo;
 	}
 
+
+	//bi-directional many-to-one association to Talla
+	@ManyToOne
+	@JoinColumn(name="idtalla")
 	public Talla getTalla() {
 		return this.talla;
 	}

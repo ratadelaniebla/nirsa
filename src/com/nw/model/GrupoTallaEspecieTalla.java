@@ -10,26 +10,19 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="grupo_talla_especie_talla")
+@NamedQuery(name="GrupoTallaEspecieTalla.findAll", query="SELECT g FROM GrupoTallaEspecieTalla g")
 public class GrupoTallaEspecieTalla implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idgrupotallaespecietalla;
-
-	//bi-directional many-to-one association to EspecieTalla
-	@ManyToOne
-	@JoinColumn(name="idespecietalla")
 	private EspecieTalla especieTalla;
-
-	//bi-directional many-to-one association to GrupoTalla
-	@ManyToOne
-	@JoinColumn(name="idgrupotalla")
 	private GrupoTalla grupoTalla;
 
 	public GrupoTallaEspecieTalla() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdgrupotallaespecietalla() {
 		return this.idgrupotallaespecietalla;
 	}
@@ -38,6 +31,10 @@ public class GrupoTallaEspecieTalla implements Serializable {
 		this.idgrupotallaespecietalla = idgrupotallaespecietalla;
 	}
 
+
+	//bi-directional many-to-one association to EspecieTalla
+	@ManyToOne
+	@JoinColumn(name="idespecietalla")
 	public EspecieTalla getEspecieTalla() {
 		return this.especieTalla;
 	}
@@ -46,6 +43,10 @@ public class GrupoTallaEspecieTalla implements Serializable {
 		this.especieTalla = especieTalla;
 	}
 
+
+	//bi-directional many-to-one association to GrupoTalla
+	@ManyToOne
+	@JoinColumn(name="idgrupotalla")
 	public GrupoTalla getGrupoTalla() {
 		return this.grupoTalla;
 	}

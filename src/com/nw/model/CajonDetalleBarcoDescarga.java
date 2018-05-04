@@ -11,42 +11,23 @@ import java.util.List;
  */
 @Entity
 @Table(name="cajon_detalle_barco_descarga")
+@NamedQuery(name="CajonDetalleBarcoDescarga.findAll", query="SELECT c FROM CajonDetalleBarcoDescarga c")
 public class CajonDetalleBarcoDescarga implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcajondetallebarcodescarga;
-
 	private Integer estadorevolteo;
-
-	//bi-directional many-to-one association to Banda
-	@ManyToOne
-	@JoinColumn(name="idbanda")
 	private Banda banda;
-
-	//bi-directional many-to-one association to BarcoDescarga
-	@ManyToOne
-	@JoinColumn(name="idbarcodescarga")
 	private BarcoDescarga barcoDescarga;
-
-	//bi-directional many-to-one association to Cajon
-	@ManyToOne
-	@JoinColumn(name="idcajon")
 	private Cajon cajon;
-
-	//bi-directional many-to-one association to EspecieTalla
-	@ManyToOne
-	@JoinColumn(name="idespecietalla")
 	private EspecieTalla especieTalla;
-
-	//bi-directional many-to-one association to CajonDetalleMuestreo
-	@OneToMany(mappedBy="cajonDetalleBarcoDescarga")
 	private List<CajonDetalleMuestreo> cajonDetalleMuestreos;
 
 	public CajonDetalleBarcoDescarga() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcajondetallebarcodescarga() {
 		return this.idcajondetallebarcodescarga;
 	}
@@ -54,6 +35,7 @@ public class CajonDetalleBarcoDescarga implements Serializable {
 	public void setIdcajondetallebarcodescarga(Long idcajondetallebarcodescarga) {
 		this.idcajondetallebarcodescarga = idcajondetallebarcodescarga;
 	}
+
 
 	public Integer getEstadorevolteo() {
 		return this.estadorevolteo;
@@ -63,6 +45,10 @@ public class CajonDetalleBarcoDescarga implements Serializable {
 		this.estadorevolteo = estadorevolteo;
 	}
 
+
+	//bi-directional many-to-one association to Banda
+	@ManyToOne
+	@JoinColumn(name="idbanda")
 	public Banda getBanda() {
 		return this.banda;
 	}
@@ -71,6 +57,10 @@ public class CajonDetalleBarcoDescarga implements Serializable {
 		this.banda = banda;
 	}
 
+
+	//bi-directional many-to-one association to BarcoDescarga
+	@ManyToOne
+	@JoinColumn(name="idbarcodescarga")
 	public BarcoDescarga getBarcoDescarga() {
 		return this.barcoDescarga;
 	}
@@ -79,6 +69,10 @@ public class CajonDetalleBarcoDescarga implements Serializable {
 		this.barcoDescarga = barcoDescarga;
 	}
 
+
+	//bi-directional many-to-one association to Cajon
+	@ManyToOne
+	@JoinColumn(name="idcajon")
 	public Cajon getCajon() {
 		return this.cajon;
 	}
@@ -87,6 +81,10 @@ public class CajonDetalleBarcoDescarga implements Serializable {
 		this.cajon = cajon;
 	}
 
+
+	//bi-directional many-to-one association to EspecieTalla
+	@ManyToOne
+	@JoinColumn(name="idespecietalla")
 	public EspecieTalla getEspecieTalla() {
 		return this.especieTalla;
 	}
@@ -95,12 +93,29 @@ public class CajonDetalleBarcoDescarga implements Serializable {
 		this.especieTalla = especieTalla;
 	}
 
+
+	//bi-directional many-to-one association to CajonDetalleMuestreo
+	@OneToMany(mappedBy="cajonDetalleBarcoDescarga")
 	public List<CajonDetalleMuestreo> getCajonDetalleMuestreos() {
 		return this.cajonDetalleMuestreos;
 	}
 
 	public void setCajonDetalleMuestreos(List<CajonDetalleMuestreo> cajonDetalleMuestreos) {
 		this.cajonDetalleMuestreos = cajonDetalleMuestreos;
+	}
+
+	public CajonDetalleMuestreo addCajonDetalleMuestreo(CajonDetalleMuestreo cajonDetalleMuestreo) {
+		getCajonDetalleMuestreos().add(cajonDetalleMuestreo);
+		cajonDetalleMuestreo.setCajonDetalleBarcoDescarga(this);
+
+		return cajonDetalleMuestreo;
+	}
+
+	public CajonDetalleMuestreo removeCajonDetalleMuestreo(CajonDetalleMuestreo cajonDetalleMuestreo) {
+		getCajonDetalleMuestreos().remove(cajonDetalleMuestreo);
+		cajonDetalleMuestreo.setCajonDetalleBarcoDescarga(null);
+
+		return cajonDetalleMuestreo;
 	}
 
 }

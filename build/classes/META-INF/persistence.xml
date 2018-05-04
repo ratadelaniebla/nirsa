@@ -201,8 +201,12 @@
       	<class>com.nw.model.EnvasadoCaldoVegetalProteina</class>
       	<class>com.nw.model.EnvasadoControlFillCorteCabecera</class>
       	<class>com.nw.model.EnvasadoControlFillCorteDetalle</class>
+      	<class>com.nw.model.EnvasadoControlNetoCorteCabecera</class>
+      	<class>com.nw.model.EnvasadoControlNetoCorteDetalle</class>
       	<class>com.nw.model.EnvasadoControlPesoFillCabecera</class>
       	<class>com.nw.model.EnvasadoControlPesoFillDetalle</class>
+      	<class>com.nw.model.EnvasadoControlPesoNetoCabecera</class>
+      	<class>com.nw.model.EnvasadoControlPesoNetoDetalle</class>
       	<class>com.nw.model.EnvasadoDetalleProcesoCambio</class>
       	<class>com.nw.model.EnvasadoDetalleProcesoCambiosLuthy</class>
       	<class>com.nw.model.EnvasadoLineaCerradora</class>
@@ -389,6 +393,8 @@
       	<class>com.nw.model.OeePeriodoBaseObjetivo</class>
       	<class>com.nw.model.OeePeriodoBaseObjetivoDetalle</class>
       	<class>com.nw.model.Opcion</class>
+      	<class>com.nw.model.PanzasDetalleProcesoCoche</class>
+      	<class>com.nw.model.PanzasDetalleProcesoCocheDetalle</class>
       	<class>com.nw.model.PanzasDetalleProcesoConteo</class>
       	<class>com.nw.model.PanzasDetalleProcesoLote</class>
       	<class>com.nw.model.PanzasProceso</class>

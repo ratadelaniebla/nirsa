@@ -12,36 +12,23 @@ import java.util.List;
  */
 @Entity
 @Table(name="calidad_pcc_remuestreo_cajon")
+@NamedQuery(name="CalidadPccRemuestreoCajon.findAll", query="SELECT c FROM CalidadPccRemuestreoCajon c")
 public class CalidadPccRemuestreoCajon implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcalidadpccremuestreocajon;
-
 	private String accion;
-
 	private String desviacion;
-
 	private Timestamp fechareg;
-
-	//bi-directional many-to-one association to CalidadDetallePccRemuestreoCajon
-	@OneToMany(mappedBy="calidadPccRemuestreoCajon")
 	private List<CalidadDetallePccRemuestreoCajon> calidadDetallePccRemuestreoCajons;
-
-	//bi-directional many-to-one association to BarcoDescarga
-	@ManyToOne
-	@JoinColumn(name="idbarcodescarga")
 	private BarcoDescarga barcoDescarga;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public CalidadPccRemuestreoCajon() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcalidadpccremuestreocajon() {
 		return this.idcalidadpccremuestreocajon;
 	}
@@ -49,6 +36,7 @@ public class CalidadPccRemuestreoCajon implements Serializable {
 	public void setIdcalidadpccremuestreocajon(Long idcalidadpccremuestreocajon) {
 		this.idcalidadpccremuestreocajon = idcalidadpccremuestreocajon;
 	}
+
 
 	public String getAccion() {
 		return this.accion;
@@ -58,6 +46,7 @@ public class CalidadPccRemuestreoCajon implements Serializable {
 		this.accion = accion;
 	}
 
+
 	public String getDesviacion() {
 		return this.desviacion;
 	}
@@ -65,6 +54,7 @@ public class CalidadPccRemuestreoCajon implements Serializable {
 	public void setDesviacion(String desviacion) {
 		this.desviacion = desviacion;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -74,6 +64,9 @@ public class CalidadPccRemuestreoCajon implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
+	//bi-directional many-to-one association to CalidadDetallePccRemuestreoCajon
+	@OneToMany(mappedBy="calidadPccRemuestreoCajon")
 	public List<CalidadDetallePccRemuestreoCajon> getCalidadDetallePccRemuestreoCajons() {
 		return this.calidadDetallePccRemuestreoCajons;
 	}
@@ -82,6 +75,24 @@ public class CalidadPccRemuestreoCajon implements Serializable {
 		this.calidadDetallePccRemuestreoCajons = calidadDetallePccRemuestreoCajons;
 	}
 
+	public CalidadDetallePccRemuestreoCajon addCalidadDetallePccRemuestreoCajon(CalidadDetallePccRemuestreoCajon calidadDetallePccRemuestreoCajon) {
+		getCalidadDetallePccRemuestreoCajons().add(calidadDetallePccRemuestreoCajon);
+		calidadDetallePccRemuestreoCajon.setCalidadPccRemuestreoCajon(this);
+
+		return calidadDetallePccRemuestreoCajon;
+	}
+
+	public CalidadDetallePccRemuestreoCajon removeCalidadDetallePccRemuestreoCajon(CalidadDetallePccRemuestreoCajon calidadDetallePccRemuestreoCajon) {
+		getCalidadDetallePccRemuestreoCajons().remove(calidadDetallePccRemuestreoCajon);
+		calidadDetallePccRemuestreoCajon.setCalidadPccRemuestreoCajon(null);
+
+		return calidadDetallePccRemuestreoCajon;
+	}
+
+
+	//bi-directional many-to-one association to BarcoDescarga
+	@ManyToOne
+	@JoinColumn(name="idbarcodescarga")
 	public BarcoDescarga getBarcoDescarga() {
 		return this.barcoDescarga;
 	}
@@ -90,6 +101,10 @@ public class CalidadPccRemuestreoCajon implements Serializable {
 		this.barcoDescarga = barcoDescarga;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

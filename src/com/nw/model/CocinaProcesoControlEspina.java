@@ -11,22 +11,19 @@ import java.util.List;
  */
 @Entity
 @Table(name="cocina_proceso_control_espina")
+@NamedQuery(name="CocinaProcesoControlEspina.findAll", query="SELECT c FROM CocinaProcesoControlEspina c")
 public class CocinaProcesoControlEspina implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idcocinaprocesocontrolespina;
-
 	private Integer numeroespina;
-
-	//bi-directional many-to-one association to CocinaProcesoControlEspinaDetalle
-	@OneToMany(mappedBy="cocinaProcesoControlEspina")
 	private List<CocinaProcesoControlEspinaDetalle> cocinaProcesoControlEspinaDetalles;
 
 	public CocinaProcesoControlEspina() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdcocinaprocesocontrolespina() {
 		return this.idcocinaprocesocontrolespina;
 	}
@@ -34,6 +31,7 @@ public class CocinaProcesoControlEspina implements Serializable {
 	public void setIdcocinaprocesocontrolespina(Integer idcocinaprocesocontrolespina) {
 		this.idcocinaprocesocontrolespina = idcocinaprocesocontrolespina;
 	}
+
 
 	public Integer getNumeroespina() {
 		return this.numeroespina;
@@ -43,12 +41,29 @@ public class CocinaProcesoControlEspina implements Serializable {
 		this.numeroespina = numeroespina;
 	}
 
+
+	//bi-directional many-to-one association to CocinaProcesoControlEspinaDetalle
+	@OneToMany(mappedBy="cocinaProcesoControlEspina")
 	public List<CocinaProcesoControlEspinaDetalle> getCocinaProcesoControlEspinaDetalles() {
 		return this.cocinaProcesoControlEspinaDetalles;
 	}
 
 	public void setCocinaProcesoControlEspinaDetalles(List<CocinaProcesoControlEspinaDetalle> cocinaProcesoControlEspinaDetalles) {
 		this.cocinaProcesoControlEspinaDetalles = cocinaProcesoControlEspinaDetalles;
+	}
+
+	public CocinaProcesoControlEspinaDetalle addCocinaProcesoControlEspinaDetalle(CocinaProcesoControlEspinaDetalle cocinaProcesoControlEspinaDetalle) {
+		getCocinaProcesoControlEspinaDetalles().add(cocinaProcesoControlEspinaDetalle);
+		cocinaProcesoControlEspinaDetalle.setCocinaProcesoControlEspina(this);
+
+		return cocinaProcesoControlEspinaDetalle;
+	}
+
+	public CocinaProcesoControlEspinaDetalle removeCocinaProcesoControlEspinaDetalle(CocinaProcesoControlEspinaDetalle cocinaProcesoControlEspinaDetalle) {
+		getCocinaProcesoControlEspinaDetalles().remove(cocinaProcesoControlEspinaDetalle);
+		cocinaProcesoControlEspinaDetalle.setCocinaProcesoControlEspina(null);
+
+		return cocinaProcesoControlEspinaDetalle;
 	}
 
 }

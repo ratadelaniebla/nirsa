@@ -11,33 +11,21 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="limpieza_rallado_mezcla_batch_detalle")
+@NamedQuery(name="LimpiezaRalladoMezclaBatchDetalle.findAll", query="SELECT l FROM LimpiezaRalladoMezclaBatchDetalle l")
 public class LimpiezaRalladoMezclaBatchDetalle implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idlimpiezaralladomezclabatchdetalle;
-
 	private Timestamp fechareg;
-
-	//bi-directional many-to-one association to LimpiezaRalladoBatchCabecera
-	@ManyToOne
-	@JoinColumn(name="idlimpiezaralladobatchcabecera")
 	private LimpiezaRalladoBatchCabecera limpiezaRalladoBatchCabecera;
-
-	//bi-directional many-to-one association to LimpiezaRalladoMezclaBatchCabecera
-	@ManyToOne
-	@JoinColumn(name="idlimpiezaralladomezclabatchcabecera")
 	private LimpiezaRalladoMezclaBatchCabecera limpiezaRalladoMezclaBatchCabecera;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public LimpiezaRalladoMezclaBatchDetalle() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdlimpiezaralladomezclabatchdetalle() {
 		return this.idlimpiezaralladomezclabatchdetalle;
 	}
@@ -45,6 +33,7 @@ public class LimpiezaRalladoMezclaBatchDetalle implements Serializable {
 	public void setIdlimpiezaralladomezclabatchdetalle(Long idlimpiezaralladomezclabatchdetalle) {
 		this.idlimpiezaralladomezclabatchdetalle = idlimpiezaralladomezclabatchdetalle;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -54,6 +43,10 @@ public class LimpiezaRalladoMezclaBatchDetalle implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaRalladoBatchCabecera
+	@ManyToOne
+	@JoinColumn(name="idlimpiezaralladobatchcabecera")
 	public LimpiezaRalladoBatchCabecera getLimpiezaRalladoBatchCabecera() {
 		return this.limpiezaRalladoBatchCabecera;
 	}
@@ -62,6 +55,10 @@ public class LimpiezaRalladoMezclaBatchDetalle implements Serializable {
 		this.limpiezaRalladoBatchCabecera = limpiezaRalladoBatchCabecera;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaRalladoMezclaBatchCabecera
+	@ManyToOne
+	@JoinColumn(name="idlimpiezaralladomezclabatchcabecera")
 	public LimpiezaRalladoMezclaBatchCabecera getLimpiezaRalladoMezclaBatchCabecera() {
 		return this.limpiezaRalladoMezclaBatchCabecera;
 	}
@@ -70,6 +67,10 @@ public class LimpiezaRalladoMezclaBatchDetalle implements Serializable {
 		this.limpiezaRalladoMezclaBatchCabecera = limpiezaRalladoMezclaBatchCabecera;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

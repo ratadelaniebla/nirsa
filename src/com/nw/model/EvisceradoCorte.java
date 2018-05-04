@@ -11,34 +11,22 @@ import java.util.List;
  */
 @Entity
 @Table(name="eviscerado_corte")
+@NamedQuery(name="EvisceradoCorte.findAll", query="SELECT e FROM EvisceradoCorte e")
 public class EvisceradoCorte implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idevisceradocorte;
-
 	private String descripcion;
-
-	//bi-directional many-to-one association to EvisceradoCocheModificacion
-	@OneToMany(mappedBy="evisceradoCorte")
 	private List<EvisceradoCocheModificacion> evisceradoCocheModificacions;
-
-	//bi-directional many-to-one association to EvisceradoDetalleProcesoCoche
-	@OneToMany(mappedBy="evisceradoCorte")
 	private List<EvisceradoDetalleProcesoCoche> evisceradoDetalleProcesoCoches;
-
-	//bi-directional many-to-one association to LimpiezaDespellejadoPonchada
-	@OneToMany(mappedBy="evisceradoCorte")
 	private List<LimpiezaDespellejadoPonchada> limpiezaDespellejadoPonchadas;
-
-	//bi-directional many-to-one association to LimpiezaFileteadoPonchada
-	@OneToMany(mappedBy="evisceradoCorte")
 	private List<LimpiezaFileteadoPonchada> limpiezaFileteadoPonchadas;
 
 	public EvisceradoCorte() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdevisceradocorte() {
 		return this.idevisceradocorte;
 	}
@@ -46,6 +34,7 @@ public class EvisceradoCorte implements Serializable {
 	public void setIdevisceradocorte(Integer idevisceradocorte) {
 		this.idevisceradocorte = idevisceradocorte;
 	}
+
 
 	public String getDescripcion() {
 		return this.descripcion;
@@ -55,6 +44,9 @@ public class EvisceradoCorte implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+
+	//bi-directional many-to-one association to EvisceradoCocheModificacion
+	@OneToMany(mappedBy="evisceradoCorte")
 	public List<EvisceradoCocheModificacion> getEvisceradoCocheModificacions() {
 		return this.evisceradoCocheModificacions;
 	}
@@ -63,6 +55,23 @@ public class EvisceradoCorte implements Serializable {
 		this.evisceradoCocheModificacions = evisceradoCocheModificacions;
 	}
 
+	public EvisceradoCocheModificacion addEvisceradoCocheModificacion(EvisceradoCocheModificacion evisceradoCocheModificacion) {
+		getEvisceradoCocheModificacions().add(evisceradoCocheModificacion);
+		evisceradoCocheModificacion.setEvisceradoCorte(this);
+
+		return evisceradoCocheModificacion;
+	}
+
+	public EvisceradoCocheModificacion removeEvisceradoCocheModificacion(EvisceradoCocheModificacion evisceradoCocheModificacion) {
+		getEvisceradoCocheModificacions().remove(evisceradoCocheModificacion);
+		evisceradoCocheModificacion.setEvisceradoCorte(null);
+
+		return evisceradoCocheModificacion;
+	}
+
+
+	//bi-directional many-to-one association to EvisceradoDetalleProcesoCoche
+	@OneToMany(mappedBy="evisceradoCorte")
 	public List<EvisceradoDetalleProcesoCoche> getEvisceradoDetalleProcesoCoches() {
 		return this.evisceradoDetalleProcesoCoches;
 	}
@@ -71,6 +80,23 @@ public class EvisceradoCorte implements Serializable {
 		this.evisceradoDetalleProcesoCoches = evisceradoDetalleProcesoCoches;
 	}
 
+	public EvisceradoDetalleProcesoCoche addEvisceradoDetalleProcesoCoch(EvisceradoDetalleProcesoCoche evisceradoDetalleProcesoCoch) {
+		getEvisceradoDetalleProcesoCoches().add(evisceradoDetalleProcesoCoch);
+		evisceradoDetalleProcesoCoch.setEvisceradoCorte(this);
+
+		return evisceradoDetalleProcesoCoch;
+	}
+
+	public EvisceradoDetalleProcesoCoche removeEvisceradoDetalleProcesoCoch(EvisceradoDetalleProcesoCoche evisceradoDetalleProcesoCoch) {
+		getEvisceradoDetalleProcesoCoches().remove(evisceradoDetalleProcesoCoch);
+		evisceradoDetalleProcesoCoch.setEvisceradoCorte(null);
+
+		return evisceradoDetalleProcesoCoch;
+	}
+
+
+	//bi-directional many-to-one association to LimpiezaDespellejadoPonchada
+	@OneToMany(mappedBy="evisceradoCorte")
 	public List<LimpiezaDespellejadoPonchada> getLimpiezaDespellejadoPonchadas() {
 		return this.limpiezaDespellejadoPonchadas;
 	}
@@ -79,12 +105,43 @@ public class EvisceradoCorte implements Serializable {
 		this.limpiezaDespellejadoPonchadas = limpiezaDespellejadoPonchadas;
 	}
 
+	public LimpiezaDespellejadoPonchada addLimpiezaDespellejadoPonchada(LimpiezaDespellejadoPonchada limpiezaDespellejadoPonchada) {
+		getLimpiezaDespellejadoPonchadas().add(limpiezaDespellejadoPonchada);
+		limpiezaDespellejadoPonchada.setEvisceradoCorte(this);
+
+		return limpiezaDespellejadoPonchada;
+	}
+
+	public LimpiezaDespellejadoPonchada removeLimpiezaDespellejadoPonchada(LimpiezaDespellejadoPonchada limpiezaDespellejadoPonchada) {
+		getLimpiezaDespellejadoPonchadas().remove(limpiezaDespellejadoPonchada);
+		limpiezaDespellejadoPonchada.setEvisceradoCorte(null);
+
+		return limpiezaDespellejadoPonchada;
+	}
+
+
+	//bi-directional many-to-one association to LimpiezaFileteadoPonchada
+	@OneToMany(mappedBy="evisceradoCorte")
 	public List<LimpiezaFileteadoPonchada> getLimpiezaFileteadoPonchadas() {
 		return this.limpiezaFileteadoPonchadas;
 	}
 
 	public void setLimpiezaFileteadoPonchadas(List<LimpiezaFileteadoPonchada> limpiezaFileteadoPonchadas) {
 		this.limpiezaFileteadoPonchadas = limpiezaFileteadoPonchadas;
+	}
+
+	public LimpiezaFileteadoPonchada addLimpiezaFileteadoPonchada(LimpiezaFileteadoPonchada limpiezaFileteadoPonchada) {
+		getLimpiezaFileteadoPonchadas().add(limpiezaFileteadoPonchada);
+		limpiezaFileteadoPonchada.setEvisceradoCorte(this);
+
+		return limpiezaFileteadoPonchada;
+	}
+
+	public LimpiezaFileteadoPonchada removeLimpiezaFileteadoPonchada(LimpiezaFileteadoPonchada limpiezaFileteadoPonchada) {
+		getLimpiezaFileteadoPonchadas().remove(limpiezaFileteadoPonchada);
+		limpiezaFileteadoPonchada.setEvisceradoCorte(null);
+
+		return limpiezaFileteadoPonchada;
 	}
 
 }

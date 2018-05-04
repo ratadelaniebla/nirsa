@@ -10,20 +10,19 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="calidad_observaciones_cuba")
+@NamedQuery(name="CalidadObservacionesCuba.findAll", query="SELECT c FROM CalidadObservacionesCuba c")
 public class CalidadObservacionesCuba implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idcalidadobservacioncuba;
-
 	private Integer idcalidadobservacionmuestracuba;
-
 	private Integer idcalidadsensorialmp;
 
 	public CalidadObservacionesCuba() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdcalidadobservacioncuba() {
 		return this.idcalidadobservacioncuba;
 	}
@@ -32,6 +31,7 @@ public class CalidadObservacionesCuba implements Serializable {
 		this.idcalidadobservacioncuba = idcalidadobservacioncuba;
 	}
 
+
 	public Integer getIdcalidadobservacionmuestracuba() {
 		return this.idcalidadobservacionmuestracuba;
 	}
@@ -39,6 +39,7 @@ public class CalidadObservacionesCuba implements Serializable {
 	public void setIdcalidadobservacionmuestracuba(Integer idcalidadobservacionmuestracuba) {
 		this.idcalidadobservacionmuestracuba = idcalidadobservacionmuestracuba;
 	}
+
 
 	public Integer getIdcalidadsensorialmp() {
 		return this.idcalidadsensorialmp;

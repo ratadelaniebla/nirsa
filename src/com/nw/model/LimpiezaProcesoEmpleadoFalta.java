@@ -11,42 +11,24 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="limpieza_proceso_empleado_faltas")
+@NamedQuery(name="LimpiezaProcesoEmpleadoFalta.findAll", query="SELECT l FROM LimpiezaProcesoEmpleadoFalta l")
 public class LimpiezaProcesoEmpleadoFalta implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idlimpiezaprocesoempleadofaltas;
-
 	private String cedula;
-
 	private Timestamp fecharegistro;
-
 	private Boolean justificado;
-
-	//bi-directional many-to-one association to Empleado
-	@ManyToOne
-	@JoinColumn(name="idempleado")
 	private Empleado empleado;
-
-	//bi-directional many-to-one association to Produccion
-	@ManyToOne
-	@JoinColumn(name="idproduccion")
 	private Produccion produccion;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public LimpiezaProcesoEmpleadoFalta() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdlimpiezaprocesoempleadofaltas() {
 		return this.idlimpiezaprocesoempleadofaltas;
 	}
@@ -54,6 +36,7 @@ public class LimpiezaProcesoEmpleadoFalta implements Serializable {
 	public void setIdlimpiezaprocesoempleadofaltas(Long idlimpiezaprocesoempleadofaltas) {
 		this.idlimpiezaprocesoempleadofaltas = idlimpiezaprocesoempleadofaltas;
 	}
+
 
 	public String getCedula() {
 		return this.cedula;
@@ -63,6 +46,7 @@ public class LimpiezaProcesoEmpleadoFalta implements Serializable {
 		this.cedula = cedula;
 	}
 
+
 	public Timestamp getFecharegistro() {
 		return this.fecharegistro;
 	}
@@ -70,6 +54,7 @@ public class LimpiezaProcesoEmpleadoFalta implements Serializable {
 	public void setFecharegistro(Timestamp fecharegistro) {
 		this.fecharegistro = fecharegistro;
 	}
+
 
 	public Boolean getJustificado() {
 		return this.justificado;
@@ -79,6 +64,10 @@ public class LimpiezaProcesoEmpleadoFalta implements Serializable {
 		this.justificado = justificado;
 	}
 
+
+	//bi-directional many-to-one association to Empleado
+	@ManyToOne
+	@JoinColumn(name="idempleado")
 	public Empleado getEmpleado() {
 		return this.empleado;
 	}
@@ -87,6 +76,10 @@ public class LimpiezaProcesoEmpleadoFalta implements Serializable {
 		this.empleado = empleado;
 	}
 
+
+	//bi-directional many-to-one association to Produccion
+	@ManyToOne
+	@JoinColumn(name="idproduccion")
 	public Produccion getProduccion() {
 		return this.produccion;
 	}
@@ -95,6 +88,10 @@ public class LimpiezaProcesoEmpleadoFalta implements Serializable {
 		this.produccion = produccion;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -103,6 +100,10 @@ public class LimpiezaProcesoEmpleadoFalta implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

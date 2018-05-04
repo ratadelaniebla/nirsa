@@ -11,64 +11,40 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="camara_cajon_carga")
+@NamedQuery(name="CamaraCajonCarga.findAll", query="SELECT c FROM CamaraCajonCarga c")
 public class CamaraCajonCarga implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcamaracajoncarga;
-
 	private String columna;
-
-	@Column(name="descripcion_material")
 	private String descripcionMaterial;
-
 	private Timestamp fechacreacion;
-
 	private Timestamp fechareg;
-
 	private Integer fila;
-
 	private String idbarco;
-
 	private String idcajon;
-
 	private String idcuba;
-
 	private String idmaterial;
-
 	private String idorigen;
-
 	private String idtipocaptura;
-
 	private String idviaje;
-
 	private String lotecajonsap;
-
 	private String numregistro;
-
 	private double pesobruto;
-
 	private double pesolibreutilizacion;
-
 	private double pesoneto;
-
 	private String referencia;
-
 	private double tara;
-
 	private String ticket;
-
-	@Column(name="ubicacion_camara")
 	private Integer ubicacionCamara;
-
 	private String usuario;
-
 	private String zonafao;
 
 	public CamaraCajonCarga() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcamaracajoncarga() {
 		return this.idcamaracajoncarga;
 	}
@@ -76,6 +52,7 @@ public class CamaraCajonCarga implements Serializable {
 	public void setIdcamaracajoncarga(Long idcamaracajoncarga) {
 		this.idcamaracajoncarga = idcamaracajoncarga;
 	}
+
 
 	public String getColumna() {
 		return this.columna;
@@ -85,6 +62,8 @@ public class CamaraCajonCarga implements Serializable {
 		this.columna = columna;
 	}
 
+
+	@Column(name="descripcion_material")
 	public String getDescripcionMaterial() {
 		return this.descripcionMaterial;
 	}
@@ -92,6 +71,7 @@ public class CamaraCajonCarga implements Serializable {
 	public void setDescripcionMaterial(String descripcionMaterial) {
 		this.descripcionMaterial = descripcionMaterial;
 	}
+
 
 	public Timestamp getFechacreacion() {
 		return this.fechacreacion;
@@ -101,6 +81,7 @@ public class CamaraCajonCarga implements Serializable {
 		this.fechacreacion = fechacreacion;
 	}
 
+
 	public Timestamp getFechareg() {
 		return this.fechareg;
 	}
@@ -108,6 +89,7 @@ public class CamaraCajonCarga implements Serializable {
 	public void setFechareg(Timestamp fechareg) {
 		this.fechareg = fechareg;
 	}
+
 
 	public Integer getFila() {
 		return this.fila;
@@ -117,6 +99,7 @@ public class CamaraCajonCarga implements Serializable {
 		this.fila = fila;
 	}
 
+
 	public String getIdbarco() {
 		return this.idbarco;
 	}
@@ -124,6 +107,7 @@ public class CamaraCajonCarga implements Serializable {
 	public void setIdbarco(String idbarco) {
 		this.idbarco = idbarco;
 	}
+
 
 	public String getIdcajon() {
 		return this.idcajon;
@@ -133,6 +117,7 @@ public class CamaraCajonCarga implements Serializable {
 		this.idcajon = idcajon;
 	}
 
+
 	public String getIdcuba() {
 		return this.idcuba;
 	}
@@ -140,6 +125,7 @@ public class CamaraCajonCarga implements Serializable {
 	public void setIdcuba(String idcuba) {
 		this.idcuba = idcuba;
 	}
+
 
 	public String getIdmaterial() {
 		return this.idmaterial;
@@ -149,6 +135,7 @@ public class CamaraCajonCarga implements Serializable {
 		this.idmaterial = idmaterial;
 	}
 
+
 	public String getIdorigen() {
 		return this.idorigen;
 	}
@@ -156,6 +143,7 @@ public class CamaraCajonCarga implements Serializable {
 	public void setIdorigen(String idorigen) {
 		this.idorigen = idorigen;
 	}
+
 
 	public String getIdtipocaptura() {
 		return this.idtipocaptura;
@@ -165,6 +153,7 @@ public class CamaraCajonCarga implements Serializable {
 		this.idtipocaptura = idtipocaptura;
 	}
 
+
 	public String getIdviaje() {
 		return this.idviaje;
 	}
@@ -172,6 +161,7 @@ public class CamaraCajonCarga implements Serializable {
 	public void setIdviaje(String idviaje) {
 		this.idviaje = idviaje;
 	}
+
 
 	public String getLotecajonsap() {
 		return this.lotecajonsap;
@@ -181,6 +171,7 @@ public class CamaraCajonCarga implements Serializable {
 		this.lotecajonsap = lotecajonsap;
 	}
 
+
 	public String getNumregistro() {
 		return this.numregistro;
 	}
@@ -188,6 +179,7 @@ public class CamaraCajonCarga implements Serializable {
 	public void setNumregistro(String numregistro) {
 		this.numregistro = numregistro;
 	}
+
 
 	public double getPesobruto() {
 		return this.pesobruto;
@@ -197,6 +189,7 @@ public class CamaraCajonCarga implements Serializable {
 		this.pesobruto = pesobruto;
 	}
 
+
 	public double getPesolibreutilizacion() {
 		return this.pesolibreutilizacion;
 	}
@@ -204,6 +197,7 @@ public class CamaraCajonCarga implements Serializable {
 	public void setPesolibreutilizacion(double pesolibreutilizacion) {
 		this.pesolibreutilizacion = pesolibreutilizacion;
 	}
+
 
 	public double getPesoneto() {
 		return this.pesoneto;
@@ -213,6 +207,7 @@ public class CamaraCajonCarga implements Serializable {
 		this.pesoneto = pesoneto;
 	}
 
+
 	public String getReferencia() {
 		return this.referencia;
 	}
@@ -220,6 +215,7 @@ public class CamaraCajonCarga implements Serializable {
 	public void setReferencia(String referencia) {
 		this.referencia = referencia;
 	}
+
 
 	public double getTara() {
 		return this.tara;
@@ -229,6 +225,7 @@ public class CamaraCajonCarga implements Serializable {
 		this.tara = tara;
 	}
 
+
 	public String getTicket() {
 		return this.ticket;
 	}
@@ -237,6 +234,8 @@ public class CamaraCajonCarga implements Serializable {
 		this.ticket = ticket;
 	}
 
+
+	@Column(name="ubicacion_camara")
 	public Integer getUbicacionCamara() {
 		return this.ubicacionCamara;
 	}
@@ -245,6 +244,7 @@ public class CamaraCajonCarga implements Serializable {
 		this.ubicacionCamara = ubicacionCamara;
 	}
 
+
 	public String getUsuario() {
 		return this.usuario;
 	}
@@ -252,6 +252,7 @@ public class CamaraCajonCarga implements Serializable {
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
+
 
 	public String getZonafao() {
 		return this.zonafao;

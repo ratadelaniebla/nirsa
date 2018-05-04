@@ -11,5 +11,5 @@ public interface ProduccionDetalleOrdenDAO extends Dao {
 	public void updateObject(ProduccionDetalleOrden produccionDetalleOrden);
 	public ProduccionDetalleOrden existeDetalleOrden(Integer idturno, Long idproduccion, Integer item, String orden);
 	public List<ProduccionDetalleOrden> obtieneDetalleOrdenByProduccionTurno(Integer idturno, Long idproduccion);
-	public ProduccionDetalleOrden obtieneDetalleOrdenById(Long idproducciondetalleorden);
+	public ProduccionDetalleOrden obtieneDetalleOrdenById(Integer idproducciondetalleorden);
 }

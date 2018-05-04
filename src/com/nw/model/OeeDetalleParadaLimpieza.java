@@ -10,33 +10,21 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="oee_detalle_parada_limpieza")
+@NamedQuery(name="OeeDetalleParadaLimpieza.findAll", query="SELECT o FROM OeeDetalleParadaLimpieza o")
 public class OeeDetalleParadaLimpieza implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idoeedetalleparadalimpieza;
-
 	private Integer personas;
-
-	//bi-directional many-to-one association to LimpiezaLinea
-	@ManyToOne
-	@JoinColumn(name="idlimpiezalinea")
 	private LimpiezaLinea limpiezaLinea;
-
-	//bi-directional many-to-one association to LimpiezaProcesoEmpleado
-	@ManyToOne
-	@JoinColumn(name="idlimpiezaprocesoempleado")
 	private LimpiezaProcesoEmpleado limpiezaProcesoEmpleado;
-
-	//bi-directional many-to-one association to OeeDetalleParada
-	@ManyToOne
-	@JoinColumn(name="idoeedetalleparada")
 	private OeeDetalleParada oeeDetalleParada;
 
 	public OeeDetalleParadaLimpieza() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdoeedetalleparadalimpieza() {
 		return this.idoeedetalleparadalimpieza;
 	}
@@ -44,6 +32,7 @@ public class OeeDetalleParadaLimpieza implements Serializable {
 	public void setIdoeedetalleparadalimpieza(Long idoeedetalleparadalimpieza) {
 		this.idoeedetalleparadalimpieza = idoeedetalleparadalimpieza;
 	}
+
 
 	public Integer getPersonas() {
 		return this.personas;
@@ -53,6 +42,10 @@ public class OeeDetalleParadaLimpieza implements Serializable {
 		this.personas = personas;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaLinea
+	@ManyToOne
+	@JoinColumn(name="idlimpiezalinea")
 	public LimpiezaLinea getLimpiezaLinea() {
 		return this.limpiezaLinea;
 	}
@@ -61,6 +54,10 @@ public class OeeDetalleParadaLimpieza implements Serializable {
 		this.limpiezaLinea = limpiezaLinea;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaProcesoEmpleado
+	@ManyToOne
+	@JoinColumn(name="idlimpiezaprocesoempleado")
 	public LimpiezaProcesoEmpleado getLimpiezaProcesoEmpleado() {
 		return this.limpiezaProcesoEmpleado;
 	}
@@ -69,6 +66,10 @@ public class OeeDetalleParadaLimpieza implements Serializable {
 		this.limpiezaProcesoEmpleado = limpiezaProcesoEmpleado;
 	}
 
+
+	//bi-directional many-to-one association to OeeDetalleParada
+	@ManyToOne
+	@JoinColumn(name="idoeedetalleparada")
 	public OeeDetalleParada getOeeDetalleParada() {
 		return this.oeeDetalleParada;
 	}

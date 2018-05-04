@@ -10,33 +10,24 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="estandar_incentivo_kilos_modelo2")
+@NamedQuery(name="EstandarIncentivoKilosModelo2.findAll", query="SELECT e FROM EstandarIncentivoKilosModelo2 e")
 public class EstandarIncentivoKilosModelo2 implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idestandarincentivokilos;
-
 	private double eficienciaentero;
-
 	private double eficiencialimpio;
-
 	private double incentivo;
-
 	private double porcentajeeficiencia;
-
 	private double sueldomensual;
-
 	private double sueldototal;
-
-	//bi-directional many-to-one association to LimpiezaTipo
-	@ManyToOne
-	@JoinColumn(name="idlimpiezatipo")
 	private LimpiezaTipo limpiezaTipo;
 
 	public EstandarIncentivoKilosModelo2() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdestandarincentivokilos() {
 		return this.idestandarincentivokilos;
 	}
@@ -44,6 +35,7 @@ public class EstandarIncentivoKilosModelo2 implements Serializable {
 	public void setIdestandarincentivokilos(Integer idestandarincentivokilos) {
 		this.idestandarincentivokilos = idestandarincentivokilos;
 	}
+
 
 	public double getEficienciaentero() {
 		return this.eficienciaentero;
@@ -53,6 +45,7 @@ public class EstandarIncentivoKilosModelo2 implements Serializable {
 		this.eficienciaentero = eficienciaentero;
 	}
 
+
 	public double getEficiencialimpio() {
 		return this.eficiencialimpio;
 	}
@@ -60,6 +53,7 @@ public class EstandarIncentivoKilosModelo2 implements Serializable {
 	public void setEficiencialimpio(double eficiencialimpio) {
 		this.eficiencialimpio = eficiencialimpio;
 	}
+
 
 	public double getIncentivo() {
 		return this.incentivo;
@@ -69,6 +63,7 @@ public class EstandarIncentivoKilosModelo2 implements Serializable {
 		this.incentivo = incentivo;
 	}
 
+
 	public double getPorcentajeeficiencia() {
 		return this.porcentajeeficiencia;
 	}
@@ -76,6 +71,7 @@ public class EstandarIncentivoKilosModelo2 implements Serializable {
 	public void setPorcentajeeficiencia(double porcentajeeficiencia) {
 		this.porcentajeeficiencia = porcentajeeficiencia;
 	}
+
 
 	public double getSueldomensual() {
 		return this.sueldomensual;
@@ -85,6 +81,7 @@ public class EstandarIncentivoKilosModelo2 implements Serializable {
 		this.sueldomensual = sueldomensual;
 	}
 
+
 	public double getSueldototal() {
 		return this.sueldototal;
 	}
@@ -93,6 +90,10 @@ public class EstandarIncentivoKilosModelo2 implements Serializable {
 		this.sueldototal = sueldototal;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaTipo
+	@ManyToOne
+	@JoinColumn(name="idlimpiezatipo")
 	public LimpiezaTipo getLimpiezaTipo() {
 		return this.limpiezaTipo;
 	}

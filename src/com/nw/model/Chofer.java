@@ -10,30 +10,21 @@ import java.util.List;
  * 
  */
 @Entity
+@NamedQuery(name="Chofer.findAll", query="SELECT c FROM Chofer c")
 public class Chofer implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idchofer;
-
-	@Column(name="cedula_chofer")
 	private String cedulaChofer;
-
-	@Column(name="nombres_chofer")
 	private String nombresChofer;
-
-	//bi-directional many-to-one association to Carro
-	@OneToMany(mappedBy="chofer")
 	private List<Carro> carros;
-
-	//bi-directional many-to-one association to HarinaRecepcionPescaComprobante
-	@OneToMany(mappedBy="chofer")
 	private List<HarinaRecepcionPescaComprobante> harinaRecepcionPescaComprobantes;
 
 	public Chofer() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdchofer() {
 		return this.idchofer;
 	}
@@ -42,6 +33,8 @@ public class Chofer implements Serializable {
 		this.idchofer = idchofer;
 	}
 
+
+	@Column(name="cedula_chofer")
 	public String getCedulaChofer() {
 		return this.cedulaChofer;
 	}
@@ -50,6 +43,8 @@ public class Chofer implements Serializable {
 		this.cedulaChofer = cedulaChofer;
 	}
 
+
+	@Column(name="nombres_chofer")
 	public String getNombresChofer() {
 		return this.nombresChofer;
 	}
@@ -58,6 +53,9 @@ public class Chofer implements Serializable {
 		this.nombresChofer = nombresChofer;
 	}
 
+
+	//bi-directional many-to-one association to Carro
+	@OneToMany(mappedBy="chofer")
 	public List<Carro> getCarros() {
 		return this.carros;
 	}
@@ -66,12 +64,43 @@ public class Chofer implements Serializable {
 		this.carros = carros;
 	}
 
+	public Carro addCarro(Carro carro) {
+		getCarros().add(carro);
+		carro.setChofer(this);
+
+		return carro;
+	}
+
+	public Carro removeCarro(Carro carro) {
+		getCarros().remove(carro);
+		carro.setChofer(null);
+
+		return carro;
+	}
+
+
+	//bi-directional many-to-one association to HarinaRecepcionPescaComprobante
+	@OneToMany(mappedBy="chofer")
 	public List<HarinaRecepcionPescaComprobante> getHarinaRecepcionPescaComprobantes() {
 		return this.harinaRecepcionPescaComprobantes;
 	}
 
 	public void setHarinaRecepcionPescaComprobantes(List<HarinaRecepcionPescaComprobante> harinaRecepcionPescaComprobantes) {
 		this.harinaRecepcionPescaComprobantes = harinaRecepcionPescaComprobantes;
+	}
+
+	public HarinaRecepcionPescaComprobante addHarinaRecepcionPescaComprobante(HarinaRecepcionPescaComprobante harinaRecepcionPescaComprobante) {
+		getHarinaRecepcionPescaComprobantes().add(harinaRecepcionPescaComprobante);
+		harinaRecepcionPescaComprobante.setChofer(this);
+
+		return harinaRecepcionPescaComprobante;
+	}
+
+	public HarinaRecepcionPescaComprobante removeHarinaRecepcionPescaComprobante(HarinaRecepcionPescaComprobante harinaRecepcionPescaComprobante) {
+		getHarinaRecepcionPescaComprobantes().remove(harinaRecepcionPescaComprobante);
+		harinaRecepcionPescaComprobante.setChofer(null);
+
+		return harinaRecepcionPescaComprobante;
 	}
 
 }

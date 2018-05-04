@@ -10,33 +10,21 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="harina_detalle_espece_recepcion_detalle_pesca_comprobante")
+@NamedQuery(name="HarinaDetalleEspeceRecepcionDetallePescaComprobante.findAll", query="SELECT h FROM HarinaDetalleEspeceRecepcionDetallePescaComprobante h")
 public class HarinaDetalleEspeceRecepcionDetallePescaComprobante implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idharinadetalleespecerecepciondetallepescacomprobante;
-
 	private double pesobruto;
-
-	//bi-directional many-to-one association to HarinaClasificacionTipoPesca
-	@ManyToOne
-	@JoinColumn(name="idharinaclasificaciontipopesca")
 	private HarinaClasificacionTipoPesca harinaClasificacionTipoPesca;
-
-	//bi-directional many-to-one association to HarinaEspecie
-	@ManyToOne
-	@JoinColumn(name="idharinaespecie")
 	private HarinaEspecie harinaEspecie;
-
-	//bi-directional many-to-one association to HarinaRecepcionDetallePescaComprobante
-	@ManyToOne
-	@JoinColumn(name="idharinarecepciondetallepescacomprobante")
 	private HarinaRecepcionDetallePescaComprobante harinaRecepcionDetallePescaComprobante;
 
 	public HarinaDetalleEspeceRecepcionDetallePescaComprobante() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdharinadetalleespecerecepciondetallepescacomprobante() {
 		return this.idharinadetalleespecerecepciondetallepescacomprobante;
 	}
@@ -44,6 +32,7 @@ public class HarinaDetalleEspeceRecepcionDetallePescaComprobante implements Seri
 	public void setIdharinadetalleespecerecepciondetallepescacomprobante(Long idharinadetalleespecerecepciondetallepescacomprobante) {
 		this.idharinadetalleespecerecepciondetallepescacomprobante = idharinadetalleespecerecepciondetallepescacomprobante;
 	}
+
 
 	public double getPesobruto() {
 		return this.pesobruto;
@@ -53,6 +42,10 @@ public class HarinaDetalleEspeceRecepcionDetallePescaComprobante implements Seri
 		this.pesobruto = pesobruto;
 	}
 
+
+	//bi-directional many-to-one association to HarinaClasificacionTipoPesca
+	@ManyToOne
+	@JoinColumn(name="idharinaclasificaciontipopesca")
 	public HarinaClasificacionTipoPesca getHarinaClasificacionTipoPesca() {
 		return this.harinaClasificacionTipoPesca;
 	}
@@ -61,6 +54,10 @@ public class HarinaDetalleEspeceRecepcionDetallePescaComprobante implements Seri
 		this.harinaClasificacionTipoPesca = harinaClasificacionTipoPesca;
 	}
 
+
+	//bi-directional many-to-one association to HarinaEspecie
+	@ManyToOne
+	@JoinColumn(name="idharinaespecie")
 	public HarinaEspecie getHarinaEspecie() {
 		return this.harinaEspecie;
 	}
@@ -69,6 +66,10 @@ public class HarinaDetalleEspeceRecepcionDetallePescaComprobante implements Seri
 		this.harinaEspecie = harinaEspecie;
 	}
 
+
+	//bi-directional many-to-one association to HarinaRecepcionDetallePescaComprobante
+	@ManyToOne
+	@JoinColumn(name="idharinarecepciondetallepescacomprobante")
 	public HarinaRecepcionDetallePescaComprobante getHarinaRecepcionDetallePescaComprobante() {
 		return this.harinaRecepcionDetallePescaComprobante;
 	}

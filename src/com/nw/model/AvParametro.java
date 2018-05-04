@@ -10,20 +10,19 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="av_parametros")
+@NamedQuery(name="AvParametro.findAll", query="SELECT a FROM AvParametro a")
 public class AvParametro implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private String vidparametro;
-
 	private Integer ivalorentero;
-
 	private String vvalorcadena;
 
 	public AvParametro() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public String getVidparametro() {
 		return this.vidparametro;
 	}
@@ -32,6 +31,7 @@ public class AvParametro implements Serializable {
 		this.vidparametro = vidparametro;
 	}
 
+
 	public Integer getIvalorentero() {
 		return this.ivalorentero;
 	}
@@ -39,6 +39,7 @@ public class AvParametro implements Serializable {
 	public void setIvalorentero(Integer ivalorentero) {
 		this.ivalorentero = ivalorentero;
 	}
+
 
 	public String getVvalorcadena() {
 		return this.vvalorcadena;

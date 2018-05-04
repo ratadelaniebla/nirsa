@@ -11,43 +11,26 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="calidad_detalle_pcc_remuestreo_cajon")
+@NamedQuery(name="CalidadDetallePccRemuestreoCajon.findAll", query="SELECT c FROM CalidadDetallePccRemuestreoCajon c")
 public class CalidadDetallePccRemuestreoCajon implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcalidaddetallepccremuestreocajon;
-
 	private Timestamp fechareg;
-
 	private Timestamp fecharegactualizacion;
-
 	private double histamina;
-
 	private Integer nummuestra;
-
 	private double sal;
-
 	private String usuarioactualizacion;
-
-	//bi-directional many-to-one association to CalidadPccRemuestreoCajon
-	@ManyToOne
-	@JoinColumn(name="idcalidadpccremuestreocajon")
 	private CalidadPccRemuestreoCajon calidadPccRemuestreoCajon;
-
-	//bi-directional many-to-one association to CamaraCajon
-	@ManyToOne
-	@JoinColumn(name="idcamaracajon")
 	private CamaraCajon camaraCajon;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public CalidadDetallePccRemuestreoCajon() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcalidaddetallepccremuestreocajon() {
 		return this.idcalidaddetallepccremuestreocajon;
 	}
@@ -55,6 +38,7 @@ public class CalidadDetallePccRemuestreoCajon implements Serializable {
 	public void setIdcalidaddetallepccremuestreocajon(Long idcalidaddetallepccremuestreocajon) {
 		this.idcalidaddetallepccremuestreocajon = idcalidaddetallepccremuestreocajon;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -64,6 +48,7 @@ public class CalidadDetallePccRemuestreoCajon implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public Timestamp getFecharegactualizacion() {
 		return this.fecharegactualizacion;
 	}
@@ -71,6 +56,7 @@ public class CalidadDetallePccRemuestreoCajon implements Serializable {
 	public void setFecharegactualizacion(Timestamp fecharegactualizacion) {
 		this.fecharegactualizacion = fecharegactualizacion;
 	}
+
 
 	public double getHistamina() {
 		return this.histamina;
@@ -80,6 +66,7 @@ public class CalidadDetallePccRemuestreoCajon implements Serializable {
 		this.histamina = histamina;
 	}
 
+
 	public Integer getNummuestra() {
 		return this.nummuestra;
 	}
@@ -87,6 +74,7 @@ public class CalidadDetallePccRemuestreoCajon implements Serializable {
 	public void setNummuestra(Integer nummuestra) {
 		this.nummuestra = nummuestra;
 	}
+
 
 	public double getSal() {
 		return this.sal;
@@ -96,6 +84,7 @@ public class CalidadDetallePccRemuestreoCajon implements Serializable {
 		this.sal = sal;
 	}
 
+
 	public String getUsuarioactualizacion() {
 		return this.usuarioactualizacion;
 	}
@@ -104,6 +93,10 @@ public class CalidadDetallePccRemuestreoCajon implements Serializable {
 		this.usuarioactualizacion = usuarioactualizacion;
 	}
 
+
+	//bi-directional many-to-one association to CalidadPccRemuestreoCajon
+	@ManyToOne
+	@JoinColumn(name="idcalidadpccremuestreocajon")
 	public CalidadPccRemuestreoCajon getCalidadPccRemuestreoCajon() {
 		return this.calidadPccRemuestreoCajon;
 	}
@@ -112,6 +105,10 @@ public class CalidadDetallePccRemuestreoCajon implements Serializable {
 		this.calidadPccRemuestreoCajon = calidadPccRemuestreoCajon;
 	}
 
+
+	//bi-directional many-to-one association to CamaraCajon
+	@ManyToOne
+	@JoinColumn(name="idcamaracajon")
 	public CamaraCajon getCamaraCajon() {
 		return this.camaraCajon;
 	}
@@ -120,6 +117,10 @@ public class CalidadDetallePccRemuestreoCajon implements Serializable {
 		this.camaraCajon = camaraCajon;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

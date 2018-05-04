@@ -12,37 +12,22 @@ import java.util.List;
  */
 @Entity
 @Table(name="atc_limpieza_temp_agua_lav")
+@NamedQuery(name="AtcLimpiezaTempAguaLav.findAll", query="SELECT a FROM AtcLimpiezaTempAguaLav a")
 public class AtcLimpiezaTempAguaLav implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idatclimpiezatempagualav;
-
 	private Timestamp fechareg;
-
-	//bi-directional many-to-one association to AtcLimpiezaDetalleTempAguaLav
-	@OneToMany(mappedBy="atcLimpiezaTempAguaLav")
 	private List<AtcLimpiezaDetalleTempAguaLav> atcLimpiezaDetalleTempAguaLavs;
-
-	//bi-directional many-to-one association to AtcLimpiezaProceso
-	@ManyToOne
-	@JoinColumn(name="idatclimpiezaproceso")
 	private AtcLimpiezaProceso atcLimpiezaProceso;
-
-	//bi-directional many-to-one association to AtcTurno
-	@ManyToOne
-	@JoinColumn(name="idatcturno")
 	private AtcTurno atcTurno;
-
-	//bi-directional many-to-one association to AtcUsuario
-	@ManyToOne
-	@JoinColumn(name="idatcusuario")
 	private AtcUsuario atcUsuario;
 
 	public AtcLimpiezaTempAguaLav() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdatclimpiezatempagualav() {
 		return this.idatclimpiezatempagualav;
 	}
@@ -50,6 +35,7 @@ public class AtcLimpiezaTempAguaLav implements Serializable {
 	public void setIdatclimpiezatempagualav(Long idatclimpiezatempagualav) {
 		this.idatclimpiezatempagualav = idatclimpiezatempagualav;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -59,6 +45,9 @@ public class AtcLimpiezaTempAguaLav implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
+	//bi-directional many-to-one association to AtcLimpiezaDetalleTempAguaLav
+	@OneToMany(mappedBy="atcLimpiezaTempAguaLav")
 	public List<AtcLimpiezaDetalleTempAguaLav> getAtcLimpiezaDetalleTempAguaLavs() {
 		return this.atcLimpiezaDetalleTempAguaLavs;
 	}
@@ -67,6 +56,24 @@ public class AtcLimpiezaTempAguaLav implements Serializable {
 		this.atcLimpiezaDetalleTempAguaLavs = atcLimpiezaDetalleTempAguaLavs;
 	}
 
+	public AtcLimpiezaDetalleTempAguaLav addAtcLimpiezaDetalleTempAguaLav(AtcLimpiezaDetalleTempAguaLav atcLimpiezaDetalleTempAguaLav) {
+		getAtcLimpiezaDetalleTempAguaLavs().add(atcLimpiezaDetalleTempAguaLav);
+		atcLimpiezaDetalleTempAguaLav.setAtcLimpiezaTempAguaLav(this);
+
+		return atcLimpiezaDetalleTempAguaLav;
+	}
+
+	public AtcLimpiezaDetalleTempAguaLav removeAtcLimpiezaDetalleTempAguaLav(AtcLimpiezaDetalleTempAguaLav atcLimpiezaDetalleTempAguaLav) {
+		getAtcLimpiezaDetalleTempAguaLavs().remove(atcLimpiezaDetalleTempAguaLav);
+		atcLimpiezaDetalleTempAguaLav.setAtcLimpiezaTempAguaLav(null);
+
+		return atcLimpiezaDetalleTempAguaLav;
+	}
+
+
+	//bi-directional many-to-one association to AtcLimpiezaProceso
+	@ManyToOne
+	@JoinColumn(name="idatclimpiezaproceso")
 	public AtcLimpiezaProceso getAtcLimpiezaProceso() {
 		return this.atcLimpiezaProceso;
 	}
@@ -75,6 +82,10 @@ public class AtcLimpiezaTempAguaLav implements Serializable {
 		this.atcLimpiezaProceso = atcLimpiezaProceso;
 	}
 
+
+	//bi-directional many-to-one association to AtcTurno
+	@ManyToOne
+	@JoinColumn(name="idatcturno")
 	public AtcTurno getAtcTurno() {
 		return this.atcTurno;
 	}
@@ -83,6 +94,10 @@ public class AtcLimpiezaTempAguaLav implements Serializable {
 		this.atcTurno = atcTurno;
 	}
 
+
+	//bi-directional many-to-one association to AtcUsuario
+	@ManyToOne
+	@JoinColumn(name="idatcusuario")
 	public AtcUsuario getAtcUsuario() {
 		return this.atcUsuario;
 	}

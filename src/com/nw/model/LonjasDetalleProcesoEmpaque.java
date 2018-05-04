@@ -11,57 +11,27 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="lonjas_detalle_proceso_empaque")
+@NamedQuery(name="LonjasDetalleProcesoEmpaque.findAll", query="SELECT l FROM LonjasDetalleProcesoEmpaque l")
 public class LonjasDetalleProcesoEmpaque implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idlonjasdetalleprocesoempaque;
-
 	private Timestamp fechareg;
-
 	private double peso;
-
 	private String tarjetapersonalinea;
-
-	//bi-directional many-to-one association to LonjasDetalleProcesoLote
-	@ManyToOne
-	@JoinColumn(name="idlonjasdetalleprocesolote")
 	private LonjasDetalleProcesoLote lonjasDetalleProcesoLote;
-
-	//bi-directional many-to-one association to LonjasMaterial
-	@ManyToOne
-	@JoinColumn(name="idlonjasmaterial")
 	private LonjasMaterial lonjasMaterial;
-
-	//bi-directional many-to-one association to LonjasOrdenProduccion
-	@ManyToOne
-	@JoinColumn(name="idlonjasordenproduccion")
 	private LonjasOrdenProduccion lonjasOrdenProduccion;
-
-	//bi-directional many-to-one association to LonjasProcesoEmpleado
-	@ManyToOne
-	@JoinColumn(name="idlonjasprocesoempleado")
 	private LonjasProcesoEmpleado lonjasProcesoEmpleado;
-
-	//bi-directional many-to-one association to LonjasProcesoTipo
-	@ManyToOne
-	@JoinColumn(name="idlonjasprocesotipo")
 	private LonjasProcesoTipo lonjasProcesoTipo;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public LonjasDetalleProcesoEmpaque() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdlonjasdetalleprocesoempaque() {
 		return this.idlonjasdetalleprocesoempaque;
 	}
@@ -69,6 +39,7 @@ public class LonjasDetalleProcesoEmpaque implements Serializable {
 	public void setIdlonjasdetalleprocesoempaque(Long idlonjasdetalleprocesoempaque) {
 		this.idlonjasdetalleprocesoempaque = idlonjasdetalleprocesoempaque;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -78,6 +49,7 @@ public class LonjasDetalleProcesoEmpaque implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public double getPeso() {
 		return this.peso;
 	}
@@ -85,6 +57,7 @@ public class LonjasDetalleProcesoEmpaque implements Serializable {
 	public void setPeso(double peso) {
 		this.peso = peso;
 	}
+
 
 	public String getTarjetapersonalinea() {
 		return this.tarjetapersonalinea;
@@ -94,6 +67,10 @@ public class LonjasDetalleProcesoEmpaque implements Serializable {
 		this.tarjetapersonalinea = tarjetapersonalinea;
 	}
 
+
+	//bi-directional many-to-one association to LonjasDetalleProcesoLote
+	@ManyToOne
+	@JoinColumn(name="idlonjasdetalleprocesolote")
 	public LonjasDetalleProcesoLote getLonjasDetalleProcesoLote() {
 		return this.lonjasDetalleProcesoLote;
 	}
@@ -102,6 +79,10 @@ public class LonjasDetalleProcesoEmpaque implements Serializable {
 		this.lonjasDetalleProcesoLote = lonjasDetalleProcesoLote;
 	}
 
+
+	//bi-directional many-to-one association to LonjasMaterial
+	@ManyToOne
+	@JoinColumn(name="idlonjasmaterial")
 	public LonjasMaterial getLonjasMaterial() {
 		return this.lonjasMaterial;
 	}
@@ -110,6 +91,10 @@ public class LonjasDetalleProcesoEmpaque implements Serializable {
 		this.lonjasMaterial = lonjasMaterial;
 	}
 
+
+	//bi-directional many-to-one association to LonjasOrdenProduccion
+	@ManyToOne
+	@JoinColumn(name="idlonjasordenproduccion")
 	public LonjasOrdenProduccion getLonjasOrdenProduccion() {
 		return this.lonjasOrdenProduccion;
 	}
@@ -118,6 +103,10 @@ public class LonjasDetalleProcesoEmpaque implements Serializable {
 		this.lonjasOrdenProduccion = lonjasOrdenProduccion;
 	}
 
+
+	//bi-directional many-to-one association to LonjasProcesoEmpleado
+	@ManyToOne
+	@JoinColumn(name="idlonjasprocesoempleado")
 	public LonjasProcesoEmpleado getLonjasProcesoEmpleado() {
 		return this.lonjasProcesoEmpleado;
 	}
@@ -126,6 +115,10 @@ public class LonjasDetalleProcesoEmpaque implements Serializable {
 		this.lonjasProcesoEmpleado = lonjasProcesoEmpleado;
 	}
 
+
+	//bi-directional many-to-one association to LonjasProcesoTipo
+	@ManyToOne
+	@JoinColumn(name="idlonjasprocesotipo")
 	public LonjasProcesoTipo getLonjasProcesoTipo() {
 		return this.lonjasProcesoTipo;
 	}
@@ -134,6 +127,10 @@ public class LonjasDetalleProcesoEmpaque implements Serializable {
 		this.lonjasProcesoTipo = lonjasProcesoTipo;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -142,6 +139,10 @@ public class LonjasDetalleProcesoEmpaque implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

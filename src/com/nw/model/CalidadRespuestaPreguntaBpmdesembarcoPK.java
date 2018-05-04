@@ -11,19 +11,19 @@ import javax.persistence.*;
 public class CalidadRespuestaPreguntaBpmdesembarcoPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
-
 	private Long idcalidadbpmdesembarco;
-
 	private Integer idpreguntacalidadbpmdesembarco;
 
 	public CalidadRespuestaPreguntaBpmdesembarcoPK() {
 	}
+
 	public Long getIdcalidadbpmdesembarco() {
 		return this.idcalidadbpmdesembarco;
 	}
 	public void setIdcalidadbpmdesembarco(Long idcalidadbpmdesembarco) {
 		this.idcalidadbpmdesembarco = idcalidadbpmdesembarco;
 	}
+
 	public Integer getIdpreguntacalidadbpmdesembarco() {
 		return this.idpreguntacalidadbpmdesembarco;
 	}

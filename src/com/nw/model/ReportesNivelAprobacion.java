@@ -11,30 +11,21 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="reportes_nivel_aprobacion")
+@NamedQuery(name="ReportesNivelAprobacion.findAll", query="SELECT r FROM ReportesNivelAprobacion r")
 public class ReportesNivelAprobacion implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idreportesnivelaprobacion;
-
 	private Integer estado;
-
 	private Timestamp fechareg;
-
-	//bi-directional many-to-one association to ReportesNivelesUsuario
-	@ManyToOne
-	@JoinColumn(name="idreportesnivelesusuario")
 	private ReportesNivelesUsuario reportesNivelesUsuario;
-
-	//bi-directional many-to-one association to ReportesPuntoControl
-	@ManyToOne
-	@JoinColumn(name="idreportespuntocontrol")
 	private ReportesPuntoControl reportesPuntoControl;
 
 	public ReportesNivelAprobacion() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdreportesnivelaprobacion() {
 		return this.idreportesnivelaprobacion;
 	}
@@ -42,6 +33,7 @@ public class ReportesNivelAprobacion implements Serializable {
 	public void setIdreportesnivelaprobacion(Long idreportesnivelaprobacion) {
 		this.idreportesnivelaprobacion = idreportesnivelaprobacion;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -51,6 +43,7 @@ public class ReportesNivelAprobacion implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Timestamp getFechareg() {
 		return this.fechareg;
 	}
@@ -59,6 +52,10 @@ public class ReportesNivelAprobacion implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
+	//bi-directional many-to-one association to ReportesNivelesUsuario
+	@ManyToOne
+	@JoinColumn(name="idreportesnivelesusuario")
 	public ReportesNivelesUsuario getReportesNivelesUsuario() {
 		return this.reportesNivelesUsuario;
 	}
@@ -67,6 +64,10 @@ public class ReportesNivelAprobacion implements Serializable {
 		this.reportesNivelesUsuario = reportesNivelesUsuario;
 	}
 
+
+	//bi-directional many-to-one association to ReportesPuntoControl
+	@ManyToOne
+	@JoinColumn(name="idreportespuntocontrol")
 	public ReportesPuntoControl getReportesPuntoControl() {
 		return this.reportesPuntoControl;
 	}

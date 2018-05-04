@@ -11,52 +11,29 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="calidad_detalle_especietalla_cajon_banda")
+@NamedQuery(name="CalidadDetalleEspecietallaCajonBanda.findAll", query="SELECT c FROM CalidadDetalleEspecietallaCajonBanda c")
 public class CalidadDetalleEspecietallaCajonBanda implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcalidaddetalleespecietallacajonbanda;
-
 	private Boolean barcoexterno;
-
 	private Timestamp fechareg;
-
 	private Timestamp fecharegactualizacion;
-
 	private String idcajonexterno;
-
 	private double longitud;
-
 	private Integer nummuestra;
-
 	private double peso;
-
 	private String usuarioactualizacion;
-
-	//bi-directional many-to-one association to Cajon
-	@ManyToOne
-	@JoinColumn(name="idcajon")
 	private Cajon cajon;
-
-	//bi-directional many-to-one association to CalidadEspecietallaCajonBanda
-	@ManyToOne
-	@JoinColumn(name="idcalidadespecietallacajonbanda")
 	private CalidadEspecietallaCajonBanda calidadEspecietallaCajonBanda;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public CalidadDetalleEspecietallaCajonBanda() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcalidaddetalleespecietallacajonbanda() {
 		return this.idcalidaddetalleespecietallacajonbanda;
 	}
@@ -64,6 +41,7 @@ public class CalidadDetalleEspecietallaCajonBanda implements Serializable {
 	public void setIdcalidaddetalleespecietallacajonbanda(Long idcalidaddetalleespecietallacajonbanda) {
 		this.idcalidaddetalleespecietallacajonbanda = idcalidaddetalleespecietallacajonbanda;
 	}
+
 
 	public Boolean getBarcoexterno() {
 		return this.barcoexterno;
@@ -73,6 +51,7 @@ public class CalidadDetalleEspecietallaCajonBanda implements Serializable {
 		this.barcoexterno = barcoexterno;
 	}
 
+
 	public Timestamp getFechareg() {
 		return this.fechareg;
 	}
@@ -80,6 +59,7 @@ public class CalidadDetalleEspecietallaCajonBanda implements Serializable {
 	public void setFechareg(Timestamp fechareg) {
 		this.fechareg = fechareg;
 	}
+
 
 	public Timestamp getFecharegactualizacion() {
 		return this.fecharegactualizacion;
@@ -89,6 +69,7 @@ public class CalidadDetalleEspecietallaCajonBanda implements Serializable {
 		this.fecharegactualizacion = fecharegactualizacion;
 	}
 
+
 	public String getIdcajonexterno() {
 		return this.idcajonexterno;
 	}
@@ -96,6 +77,7 @@ public class CalidadDetalleEspecietallaCajonBanda implements Serializable {
 	public void setIdcajonexterno(String idcajonexterno) {
 		this.idcajonexterno = idcajonexterno;
 	}
+
 
 	public double getLongitud() {
 		return this.longitud;
@@ -105,6 +87,7 @@ public class CalidadDetalleEspecietallaCajonBanda implements Serializable {
 		this.longitud = longitud;
 	}
 
+
 	public Integer getNummuestra() {
 		return this.nummuestra;
 	}
@@ -112,6 +95,7 @@ public class CalidadDetalleEspecietallaCajonBanda implements Serializable {
 	public void setNummuestra(Integer nummuestra) {
 		this.nummuestra = nummuestra;
 	}
+
 
 	public double getPeso() {
 		return this.peso;
@@ -121,6 +105,7 @@ public class CalidadDetalleEspecietallaCajonBanda implements Serializable {
 		this.peso = peso;
 	}
 
+
 	public String getUsuarioactualizacion() {
 		return this.usuarioactualizacion;
 	}
@@ -129,6 +114,10 @@ public class CalidadDetalleEspecietallaCajonBanda implements Serializable {
 		this.usuarioactualizacion = usuarioactualizacion;
 	}
 
+
+	//bi-directional many-to-one association to Cajon
+	@ManyToOne
+	@JoinColumn(name="idcajon")
 	public Cajon getCajon() {
 		return this.cajon;
 	}
@@ -137,6 +126,10 @@ public class CalidadDetalleEspecietallaCajonBanda implements Serializable {
 		this.cajon = cajon;
 	}
 
+
+	//bi-directional many-to-one association to CalidadEspecietallaCajonBanda
+	@ManyToOne
+	@JoinColumn(name="idcalidadespecietallacajonbanda")
 	public CalidadEspecietallaCajonBanda getCalidadEspecietallaCajonBanda() {
 		return this.calidadEspecietallaCajonBanda;
 	}
@@ -145,6 +138,10 @@ public class CalidadDetalleEspecietallaCajonBanda implements Serializable {
 		this.calidadEspecietallaCajonBanda = calidadEspecietallaCajonBanda;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -153,6 +150,10 @@ public class CalidadDetalleEspecietallaCajonBanda implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

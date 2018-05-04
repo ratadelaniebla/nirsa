@@ -10,20 +10,19 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="cajon_temp")
+@NamedQuery(name="CajonTemp.findAll", query="SELECT c FROM CajonTemp c")
 public class CajonTemp implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private String idcajon;
-
 	private String observaciones;
-
 	private double tara;
 
 	public CajonTemp() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public String getIdcajon() {
 		return this.idcajon;
 	}
@@ -32,6 +31,7 @@ public class CajonTemp implements Serializable {
 		this.idcajon = idcajon;
 	}
 
+
 	public String getObservaciones() {
 		return this.observaciones;
 	}
@@ -39,6 +39,7 @@ public class CajonTemp implements Serializable {
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
 	}
+
 
 	public double getTara() {
 		return this.tara;

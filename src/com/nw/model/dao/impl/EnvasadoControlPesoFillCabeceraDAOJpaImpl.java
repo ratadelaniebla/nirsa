@@ -33,7 +33,7 @@ public class EnvasadoControlPesoFillCabeceraDAOJpaImpl extends BaseDaoJpaImpl im
 		}
 	}
 	
-	public EnvasadoControlPesoFillCabecera getByProduccionTurnoOrden(Long idenvasadoproceso, Long idproducciondetalleorden) {
+	public EnvasadoControlPesoFillCabecera getByProduccionTurnoOrden(Long idenvasadoproceso, Integer idproducciondetalleorden) {
 		try {
 			String sql = "SELECT e FROM EnvasadoControlPesoFillCabecera e "
 					+ "WHERE e.envasadoProceso.idenvasadoproceso = :idenvasadoproceso "

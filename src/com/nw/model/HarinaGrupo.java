@@ -11,24 +11,20 @@ import java.util.List;
  */
 @Entity
 @Table(name="harina_grupo")
+@NamedQuery(name="HarinaGrupo.findAll", query="SELECT h FROM HarinaGrupo h")
 public class HarinaGrupo implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idharinagrupo;
-
 	private String decripcion;
-
 	private Integer orden;
-
-	//bi-directional many-to-one association to HarinaGrupoEspecie
-	@OneToMany(mappedBy="harinaGrupo")
 	private List<HarinaGrupoEspecie> harinaGrupoEspecies;
 
 	public HarinaGrupo() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdharinagrupo() {
 		return this.idharinagrupo;
 	}
@@ -36,6 +32,7 @@ public class HarinaGrupo implements Serializable {
 	public void setIdharinagrupo(Long idharinagrupo) {
 		this.idharinagrupo = idharinagrupo;
 	}
+
 
 	public String getDecripcion() {
 		return this.decripcion;
@@ -45,6 +42,7 @@ public class HarinaGrupo implements Serializable {
 		this.decripcion = decripcion;
 	}
 
+
 	public Integer getOrden() {
 		return this.orden;
 	}
@@ -53,12 +51,29 @@ public class HarinaGrupo implements Serializable {
 		this.orden = orden;
 	}
 
+
+	//bi-directional many-to-one association to HarinaGrupoEspecie
+	@OneToMany(mappedBy="harinaGrupo")
 	public List<HarinaGrupoEspecie> getHarinaGrupoEspecies() {
 		return this.harinaGrupoEspecies;
 	}
 
 	public void setHarinaGrupoEspecies(List<HarinaGrupoEspecie> harinaGrupoEspecies) {
 		this.harinaGrupoEspecies = harinaGrupoEspecies;
+	}
+
+	public HarinaGrupoEspecie addHarinaGrupoEspecy(HarinaGrupoEspecie harinaGrupoEspecy) {
+		getHarinaGrupoEspecies().add(harinaGrupoEspecy);
+		harinaGrupoEspecy.setHarinaGrupo(this);
+
+		return harinaGrupoEspecy;
+	}
+
+	public HarinaGrupoEspecie removeHarinaGrupoEspecy(HarinaGrupoEspecie harinaGrupoEspecy) {
+		getHarinaGrupoEspecies().remove(harinaGrupoEspecy);
+		harinaGrupoEspecy.setHarinaGrupo(null);
+
+		return harinaGrupoEspecy;
 	}
 
 }

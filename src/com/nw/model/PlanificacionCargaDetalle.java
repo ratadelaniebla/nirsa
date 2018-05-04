@@ -11,49 +11,29 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="planificacion_carga_detalle")
+@NamedQuery(name="PlanificacionCargaDetalle.findAll", query="SELECT p FROM PlanificacionCargaDetalle p")
 public class PlanificacionCargaDetalle implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idplanificacioncargadetalle;
-
 	private String camara;
-
 	private String columna;
-
 	private Timestamp entregacamara;
-
 	private Timestamp entregaprecamara;
-
 	private String fila;
-
 	private Timestamp ingresodescongelado;
-
 	private Integer item;
-
 	private Integer pedido;
-
 	private String producto;
-
-	//bi-directional many-to-one association to CamaraCajon
-	@ManyToOne
-	@JoinColumn(name="idcamaracajon")
 	private CamaraCajon camaraCajon;
-
-	//bi-directional many-to-one association to Produccion
-	@ManyToOne
-	@JoinColumn(name="idproduccion")
 	private Produccion produccion;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
 
 	public PlanificacionCargaDetalle() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdplanificacioncargadetalle() {
 		return this.idplanificacioncargadetalle;
 	}
@@ -61,6 +41,7 @@ public class PlanificacionCargaDetalle implements Serializable {
 	public void setIdplanificacioncargadetalle(Long idplanificacioncargadetalle) {
 		this.idplanificacioncargadetalle = idplanificacioncargadetalle;
 	}
+
 
 	public String getCamara() {
 		return this.camara;
@@ -70,6 +51,7 @@ public class PlanificacionCargaDetalle implements Serializable {
 		this.camara = camara;
 	}
 
+
 	public String getColumna() {
 		return this.columna;
 	}
@@ -77,6 +59,7 @@ public class PlanificacionCargaDetalle implements Serializable {
 	public void setColumna(String columna) {
 		this.columna = columna;
 	}
+
 
 	public Timestamp getEntregacamara() {
 		return this.entregacamara;
@@ -86,6 +69,7 @@ public class PlanificacionCargaDetalle implements Serializable {
 		this.entregacamara = entregacamara;
 	}
 
+
 	public Timestamp getEntregaprecamara() {
 		return this.entregaprecamara;
 	}
@@ -93,6 +77,7 @@ public class PlanificacionCargaDetalle implements Serializable {
 	public void setEntregaprecamara(Timestamp entregaprecamara) {
 		this.entregaprecamara = entregaprecamara;
 	}
+
 
 	public String getFila() {
 		return this.fila;
@@ -102,6 +87,7 @@ public class PlanificacionCargaDetalle implements Serializable {
 		this.fila = fila;
 	}
 
+
 	public Timestamp getIngresodescongelado() {
 		return this.ingresodescongelado;
 	}
@@ -109,6 +95,7 @@ public class PlanificacionCargaDetalle implements Serializable {
 	public void setIngresodescongelado(Timestamp ingresodescongelado) {
 		this.ingresodescongelado = ingresodescongelado;
 	}
+
 
 	public Integer getItem() {
 		return this.item;
@@ -118,6 +105,7 @@ public class PlanificacionCargaDetalle implements Serializable {
 		this.item = item;
 	}
 
+
 	public Integer getPedido() {
 		return this.pedido;
 	}
@@ -125,6 +113,7 @@ public class PlanificacionCargaDetalle implements Serializable {
 	public void setPedido(Integer pedido) {
 		this.pedido = pedido;
 	}
+
 
 	public String getProducto() {
 		return this.producto;
@@ -134,6 +123,10 @@ public class PlanificacionCargaDetalle implements Serializable {
 		this.producto = producto;
 	}
 
+
+	//bi-directional many-to-one association to CamaraCajon
+	@ManyToOne
+	@JoinColumn(name="idcamaracajon")
 	public CamaraCajon getCamaraCajon() {
 		return this.camaraCajon;
 	}
@@ -142,6 +135,10 @@ public class PlanificacionCargaDetalle implements Serializable {
 		this.camaraCajon = camaraCajon;
 	}
 
+
+	//bi-directional many-to-one association to Produccion
+	@ManyToOne
+	@JoinColumn(name="idproduccion")
 	public Produccion getProduccion() {
 		return this.produccion;
 	}
@@ -150,6 +147,10 @@ public class PlanificacionCargaDetalle implements Serializable {
 		this.produccion = produccion;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}

@@ -11,28 +11,21 @@ import java.util.List;
  */
 @Entity
 @Table(name="lonjas_proceso_tipo")
+@NamedQuery(name="LonjasProcesoTipo.findAll", query="SELECT l FROM LonjasProcesoTipo l")
 public class LonjasProcesoTipo implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idlonjasprocesotipo;
-
 	private String descripcion;
-
 	private Integer estado;
-
-	//bi-directional many-to-one association to LonjasDetalleProcesoConteo
-	@OneToMany(mappedBy="lonjasProcesoTipo")
 	private List<LonjasDetalleProcesoConteo> lonjasDetalleProcesoConteos;
-
-	//bi-directional many-to-one association to LonjasDetalleProcesoEmpaque
-	@OneToMany(mappedBy="lonjasProcesoTipo")
 	private List<LonjasDetalleProcesoEmpaque> lonjasDetalleProcesoEmpaques;
 
 	public LonjasProcesoTipo() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdlonjasprocesotipo() {
 		return this.idlonjasprocesotipo;
 	}
@@ -40,6 +33,7 @@ public class LonjasProcesoTipo implements Serializable {
 	public void setIdlonjasprocesotipo(Integer idlonjasprocesotipo) {
 		this.idlonjasprocesotipo = idlonjasprocesotipo;
 	}
+
 
 	public String getDescripcion() {
 		return this.descripcion;
@@ -49,6 +43,7 @@ public class LonjasProcesoTipo implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+
 	public Integer getEstado() {
 		return this.estado;
 	}
@@ -57,6 +52,9 @@ public class LonjasProcesoTipo implements Serializable {
 		this.estado = estado;
 	}
 
+
+	//bi-directional many-to-one association to LonjasDetalleProcesoConteo
+	@OneToMany(mappedBy="lonjasProcesoTipo")
 	public List<LonjasDetalleProcesoConteo> getLonjasDetalleProcesoConteos() {
 		return this.lonjasDetalleProcesoConteos;
 	}
@@ -65,12 +63,43 @@ public class LonjasProcesoTipo implements Serializable {
 		this.lonjasDetalleProcesoConteos = lonjasDetalleProcesoConteos;
 	}
 
+	public LonjasDetalleProcesoConteo addLonjasDetalleProcesoConteo(LonjasDetalleProcesoConteo lonjasDetalleProcesoConteo) {
+		getLonjasDetalleProcesoConteos().add(lonjasDetalleProcesoConteo);
+		lonjasDetalleProcesoConteo.setLonjasProcesoTipo(this);
+
+		return lonjasDetalleProcesoConteo;
+	}
+
+	public LonjasDetalleProcesoConteo removeLonjasDetalleProcesoConteo(LonjasDetalleProcesoConteo lonjasDetalleProcesoConteo) {
+		getLonjasDetalleProcesoConteos().remove(lonjasDetalleProcesoConteo);
+		lonjasDetalleProcesoConteo.setLonjasProcesoTipo(null);
+
+		return lonjasDetalleProcesoConteo;
+	}
+
+
+	//bi-directional many-to-one association to LonjasDetalleProcesoEmpaque
+	@OneToMany(mappedBy="lonjasProcesoTipo")
 	public List<LonjasDetalleProcesoEmpaque> getLonjasDetalleProcesoEmpaques() {
 		return this.lonjasDetalleProcesoEmpaques;
 	}
 
 	public void setLonjasDetalleProcesoEmpaques(List<LonjasDetalleProcesoEmpaque> lonjasDetalleProcesoEmpaques) {
 		this.lonjasDetalleProcesoEmpaques = lonjasDetalleProcesoEmpaques;
+	}
+
+	public LonjasDetalleProcesoEmpaque addLonjasDetalleProcesoEmpaque(LonjasDetalleProcesoEmpaque lonjasDetalleProcesoEmpaque) {
+		getLonjasDetalleProcesoEmpaques().add(lonjasDetalleProcesoEmpaque);
+		lonjasDetalleProcesoEmpaque.setLonjasProcesoTipo(this);
+
+		return lonjasDetalleProcesoEmpaque;
+	}
+
+	public LonjasDetalleProcesoEmpaque removeLonjasDetalleProcesoEmpaque(LonjasDetalleProcesoEmpaque lonjasDetalleProcesoEmpaque) {
+		getLonjasDetalleProcesoEmpaques().remove(lonjasDetalleProcesoEmpaque);
+		lonjasDetalleProcesoEmpaque.setLonjasProcesoTipo(null);
+
+		return lonjasDetalleProcesoEmpaque;
 	}
 
 }

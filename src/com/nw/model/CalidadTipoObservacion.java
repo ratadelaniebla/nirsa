@@ -11,22 +11,19 @@ import java.util.List;
  */
 @Entity
 @Table(name="calidad_tipo_observacion")
+@NamedQuery(name="CalidadTipoObservacion.findAll", query="SELECT c FROM CalidadTipoObservacion c")
 public class CalidadTipoObservacion implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idcalidadtipoobservacion;
-
 	private String descripcion;
-
-	//bi-directional many-to-one association to CalidadObservacionesMuestraCuba
-	@OneToMany(mappedBy="calidadTipoObservacion")
 	private List<CalidadObservacionesMuestraCuba> calidadObservacionesMuestraCubas;
 
 	public CalidadTipoObservacion() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdcalidadtipoobservacion() {
 		return this.idcalidadtipoobservacion;
 	}
@@ -34,6 +31,7 @@ public class CalidadTipoObservacion implements Serializable {
 	public void setIdcalidadtipoobservacion(Integer idcalidadtipoobservacion) {
 		this.idcalidadtipoobservacion = idcalidadtipoobservacion;
 	}
+
 
 	public String getDescripcion() {
 		return this.descripcion;
@@ -43,12 +41,29 @@ public class CalidadTipoObservacion implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+
+	//bi-directional many-to-one association to CalidadObservacionesMuestraCuba
+	@OneToMany(mappedBy="calidadTipoObservacion")
 	public List<CalidadObservacionesMuestraCuba> getCalidadObservacionesMuestraCubas() {
 		return this.calidadObservacionesMuestraCubas;
 	}
 
 	public void setCalidadObservacionesMuestraCubas(List<CalidadObservacionesMuestraCuba> calidadObservacionesMuestraCubas) {
 		this.calidadObservacionesMuestraCubas = calidadObservacionesMuestraCubas;
+	}
+
+	public CalidadObservacionesMuestraCuba addCalidadObservacionesMuestraCuba(CalidadObservacionesMuestraCuba calidadObservacionesMuestraCuba) {
+		getCalidadObservacionesMuestraCubas().add(calidadObservacionesMuestraCuba);
+		calidadObservacionesMuestraCuba.setCalidadTipoObservacion(this);
+
+		return calidadObservacionesMuestraCuba;
+	}
+
+	public CalidadObservacionesMuestraCuba removeCalidadObservacionesMuestraCuba(CalidadObservacionesMuestraCuba calidadObservacionesMuestraCuba) {
+		getCalidadObservacionesMuestraCubas().remove(calidadObservacionesMuestraCuba);
+		calidadObservacionesMuestraCuba.setCalidadTipoObservacion(null);
+
+		return calidadObservacionesMuestraCuba;
 	}
 
 }

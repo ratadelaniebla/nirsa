@@ -12,95 +12,40 @@ import java.util.List;
  */
 @Entity
 @Table(name="lonjas_proceso")
+@NamedQuery(name="LonjasProceso.findAll", query="SELECT l FROM LonjasProceso l")
 public class LonjasProceso implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idlonjasproceso;
-
 	private String codigomaterial;
-
 	private Integer diajuliano;
-
 	private Timestamp fechareg;
-
 	private String nombrematerial;
-
-	@Column(name="objetivo_general")
 	private double objetivoGeneral;
-
 	private double oee;
-
 	private Long ordenfabricacion;
-
 	private String ordenproduccion;
-
-	@Column(name="periodo_base_calidad_lonjas")
 	private double periodoBaseCalidadLonjas;
-
-	@Column(name="periodo_base_general")
 	private double periodoBaseGeneral;
-
-	@Column(name="periodo_base_tiempo_lonjas")
 	private double periodoBaseTiempoLonjas;
-
-	@Column(name="periodo_base_velocidad_lonjas")
 	private double periodoBaseVelocidadLonjas;
-
-	//bi-directional many-to-one association to LonjasDetalleProcesoCoche
-	@OneToMany(mappedBy="lonjasProceso")
 	private List<LonjasDetalleProcesoCoche> lonjasDetalleProcesoCoches;
-
-	//bi-directional many-to-one association to LonjasDetalleProcesoCocheEmpacado
-	@OneToMany(mappedBy="lonjasProceso")
 	private List<LonjasDetalleProcesoCocheEmpacado> lonjasDetalleProcesoCocheEmpacados;
-
-	//bi-directional many-to-one association to LonjasDetalleProcesoLote
-	@OneToMany(mappedBy="lonjasProceso")
 	private List<LonjasDetalleProcesoLote> lonjasDetalleProcesoLotes;
-
-	//bi-directional many-to-one association to LonjasOrdenProduccion
-	@OneToMany(mappedBy="lonjasProceso")
 	private List<LonjasOrdenProduccion> lonjasOrdenProduccions;
-
-	//bi-directional many-to-one association to LimpiezaProceso
-	@ManyToOne
-	@JoinColumn(name="idlimpiezaproceso")
 	private LimpiezaProceso limpiezaProceso;
-
-	//bi-directional many-to-one association to OeePeriodoBaseObjetivo
-	@ManyToOne
-	@JoinColumn(name="id_oee_periodo_base_objetivo")
 	private OeePeriodoBaseObjetivo oeePeriodoBaseObjetivo;
-
-	//bi-directional many-to-one association to ProcesoAperturaCierre
-	@ManyToOne
-	@JoinColumn(name="idprocesoaperturacierre")
 	private ProcesoAperturaCierre procesoAperturaCierre;
-
-	//bi-directional many-to-one association to Produccion
-	@ManyToOne
-	@JoinColumn(name="idproduccion")
 	private Produccion produccion;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
-
-	//bi-directional many-to-one association to LonjasProcesoEmpleado
-	@OneToMany(mappedBy="lonjasProceso")
 	private List<LonjasProcesoEmpleado> lonjasProcesoEmpleados;
 
 	public LonjasProceso() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdlonjasproceso() {
 		return this.idlonjasproceso;
 	}
@@ -108,6 +53,7 @@ public class LonjasProceso implements Serializable {
 	public void setIdlonjasproceso(Long idlonjasproceso) {
 		this.idlonjasproceso = idlonjasproceso;
 	}
+
 
 	public String getCodigomaterial() {
 		return this.codigomaterial;
@@ -117,6 +63,7 @@ public class LonjasProceso implements Serializable {
 		this.codigomaterial = codigomaterial;
 	}
 
+
 	public Integer getDiajuliano() {
 		return this.diajuliano;
 	}
@@ -124,6 +71,7 @@ public class LonjasProceso implements Serializable {
 	public void setDiajuliano(Integer diajuliano) {
 		this.diajuliano = diajuliano;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -133,6 +81,7 @@ public class LonjasProceso implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public String getNombrematerial() {
 		return this.nombrematerial;
 	}
@@ -141,6 +90,8 @@ public class LonjasProceso implements Serializable {
 		this.nombrematerial = nombrematerial;
 	}
 
+
+	@Column(name="objetivo_general")
 	public double getObjetivoGeneral() {
 		return this.objetivoGeneral;
 	}
@@ -148,6 +99,7 @@ public class LonjasProceso implements Serializable {
 	public void setObjetivoGeneral(double objetivoGeneral) {
 		this.objetivoGeneral = objetivoGeneral;
 	}
+
 
 	public double getOee() {
 		return this.oee;
@@ -157,6 +109,7 @@ public class LonjasProceso implements Serializable {
 		this.oee = oee;
 	}
 
+
 	public Long getOrdenfabricacion() {
 		return this.ordenfabricacion;
 	}
@@ -164,6 +117,7 @@ public class LonjasProceso implements Serializable {
 	public void setOrdenfabricacion(Long ordenfabricacion) {
 		this.ordenfabricacion = ordenfabricacion;
 	}
+
 
 	public String getOrdenproduccion() {
 		return this.ordenproduccion;
@@ -173,6 +127,8 @@ public class LonjasProceso implements Serializable {
 		this.ordenproduccion = ordenproduccion;
 	}
 
+
+	@Column(name="periodo_base_calidad_lonjas")
 	public double getPeriodoBaseCalidadLonjas() {
 		return this.periodoBaseCalidadLonjas;
 	}
@@ -181,6 +137,8 @@ public class LonjasProceso implements Serializable {
 		this.periodoBaseCalidadLonjas = periodoBaseCalidadLonjas;
 	}
 
+
+	@Column(name="periodo_base_general")
 	public double getPeriodoBaseGeneral() {
 		return this.periodoBaseGeneral;
 	}
@@ -189,6 +147,8 @@ public class LonjasProceso implements Serializable {
 		this.periodoBaseGeneral = periodoBaseGeneral;
 	}
 
+
+	@Column(name="periodo_base_tiempo_lonjas")
 	public double getPeriodoBaseTiempoLonjas() {
 		return this.periodoBaseTiempoLonjas;
 	}
@@ -197,6 +157,8 @@ public class LonjasProceso implements Serializable {
 		this.periodoBaseTiempoLonjas = periodoBaseTiempoLonjas;
 	}
 
+
+	@Column(name="periodo_base_velocidad_lonjas")
 	public double getPeriodoBaseVelocidadLonjas() {
 		return this.periodoBaseVelocidadLonjas;
 	}
@@ -205,6 +167,9 @@ public class LonjasProceso implements Serializable {
 		this.periodoBaseVelocidadLonjas = periodoBaseVelocidadLonjas;
 	}
 
+
+	//bi-directional many-to-one association to LonjasDetalleProcesoCoche
+	@OneToMany(mappedBy="lonjasProceso")
 	public List<LonjasDetalleProcesoCoche> getLonjasDetalleProcesoCoches() {
 		return this.lonjasDetalleProcesoCoches;
 	}
@@ -213,6 +178,23 @@ public class LonjasProceso implements Serializable {
 		this.lonjasDetalleProcesoCoches = lonjasDetalleProcesoCoches;
 	}
 
+	public LonjasDetalleProcesoCoche addLonjasDetalleProcesoCoch(LonjasDetalleProcesoCoche lonjasDetalleProcesoCoch) {
+		getLonjasDetalleProcesoCoches().add(lonjasDetalleProcesoCoch);
+		lonjasDetalleProcesoCoch.setLonjasProceso(this);
+
+		return lonjasDetalleProcesoCoch;
+	}
+
+	public LonjasDetalleProcesoCoche removeLonjasDetalleProcesoCoch(LonjasDetalleProcesoCoche lonjasDetalleProcesoCoch) {
+		getLonjasDetalleProcesoCoches().remove(lonjasDetalleProcesoCoch);
+		lonjasDetalleProcesoCoch.setLonjasProceso(null);
+
+		return lonjasDetalleProcesoCoch;
+	}
+
+
+	//bi-directional many-to-one association to LonjasDetalleProcesoCocheEmpacado
+	@OneToMany(mappedBy="lonjasProceso")
 	public List<LonjasDetalleProcesoCocheEmpacado> getLonjasDetalleProcesoCocheEmpacados() {
 		return this.lonjasDetalleProcesoCocheEmpacados;
 	}
@@ -221,6 +203,23 @@ public class LonjasProceso implements Serializable {
 		this.lonjasDetalleProcesoCocheEmpacados = lonjasDetalleProcesoCocheEmpacados;
 	}
 
+	public LonjasDetalleProcesoCocheEmpacado addLonjasDetalleProcesoCocheEmpacado(LonjasDetalleProcesoCocheEmpacado lonjasDetalleProcesoCocheEmpacado) {
+		getLonjasDetalleProcesoCocheEmpacados().add(lonjasDetalleProcesoCocheEmpacado);
+		lonjasDetalleProcesoCocheEmpacado.setLonjasProceso(this);
+
+		return lonjasDetalleProcesoCocheEmpacado;
+	}
+
+	public LonjasDetalleProcesoCocheEmpacado removeLonjasDetalleProcesoCocheEmpacado(LonjasDetalleProcesoCocheEmpacado lonjasDetalleProcesoCocheEmpacado) {
+		getLonjasDetalleProcesoCocheEmpacados().remove(lonjasDetalleProcesoCocheEmpacado);
+		lonjasDetalleProcesoCocheEmpacado.setLonjasProceso(null);
+
+		return lonjasDetalleProcesoCocheEmpacado;
+	}
+
+
+	//bi-directional many-to-one association to LonjasDetalleProcesoLote
+	@OneToMany(mappedBy="lonjasProceso")
 	public List<LonjasDetalleProcesoLote> getLonjasDetalleProcesoLotes() {
 		return this.lonjasDetalleProcesoLotes;
 	}
@@ -229,6 +228,23 @@ public class LonjasProceso implements Serializable {
 		this.lonjasDetalleProcesoLotes = lonjasDetalleProcesoLotes;
 	}
 
+	public LonjasDetalleProcesoLote addLonjasDetalleProcesoLote(LonjasDetalleProcesoLote lonjasDetalleProcesoLote) {
+		getLonjasDetalleProcesoLotes().add(lonjasDetalleProcesoLote);
+		lonjasDetalleProcesoLote.setLonjasProceso(this);
+
+		return lonjasDetalleProcesoLote;
+	}
+
+	public LonjasDetalleProcesoLote removeLonjasDetalleProcesoLote(LonjasDetalleProcesoLote lonjasDetalleProcesoLote) {
+		getLonjasDetalleProcesoLotes().remove(lonjasDetalleProcesoLote);
+		lonjasDetalleProcesoLote.setLonjasProceso(null);
+
+		return lonjasDetalleProcesoLote;
+	}
+
+
+	//bi-directional many-to-one association to LonjasOrdenProduccion
+	@OneToMany(mappedBy="lonjasProceso")
 	public List<LonjasOrdenProduccion> getLonjasOrdenProduccions() {
 		return this.lonjasOrdenProduccions;
 	}
@@ -237,6 +253,24 @@ public class LonjasProceso implements Serializable {
 		this.lonjasOrdenProduccions = lonjasOrdenProduccions;
 	}
 
+	public LonjasOrdenProduccion addLonjasOrdenProduccion(LonjasOrdenProduccion lonjasOrdenProduccion) {
+		getLonjasOrdenProduccions().add(lonjasOrdenProduccion);
+		lonjasOrdenProduccion.setLonjasProceso(this);
+
+		return lonjasOrdenProduccion;
+	}
+
+	public LonjasOrdenProduccion removeLonjasOrdenProduccion(LonjasOrdenProduccion lonjasOrdenProduccion) {
+		getLonjasOrdenProduccions().remove(lonjasOrdenProduccion);
+		lonjasOrdenProduccion.setLonjasProceso(null);
+
+		return lonjasOrdenProduccion;
+	}
+
+
+	//bi-directional many-to-one association to LimpiezaProceso
+	@ManyToOne
+	@JoinColumn(name="idlimpiezaproceso")
 	public LimpiezaProceso getLimpiezaProceso() {
 		return this.limpiezaProceso;
 	}
@@ -245,6 +279,10 @@ public class LonjasProceso implements Serializable {
 		this.limpiezaProceso = limpiezaProceso;
 	}
 
+
+	//bi-directional many-to-one association to OeePeriodoBaseObjetivo
+	@ManyToOne
+	@JoinColumn(name="id_oee_periodo_base_objetivo")
 	public OeePeriodoBaseObjetivo getOeePeriodoBaseObjetivo() {
 		return this.oeePeriodoBaseObjetivo;
 	}
@@ -253,6 +291,10 @@ public class LonjasProceso implements Serializable {
 		this.oeePeriodoBaseObjetivo = oeePeriodoBaseObjetivo;
 	}
 
+
+	//bi-directional many-to-one association to ProcesoAperturaCierre
+	@ManyToOne
+	@JoinColumn(name="idprocesoaperturacierre")
 	public ProcesoAperturaCierre getProcesoAperturaCierre() {
 		return this.procesoAperturaCierre;
 	}
@@ -261,6 +303,10 @@ public class LonjasProceso implements Serializable {
 		this.procesoAperturaCierre = procesoAperturaCierre;
 	}
 
+
+	//bi-directional many-to-one association to Produccion
+	@ManyToOne
+	@JoinColumn(name="idproduccion")
 	public Produccion getProduccion() {
 		return this.produccion;
 	}
@@ -269,6 +315,10 @@ public class LonjasProceso implements Serializable {
 		this.produccion = produccion;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -277,6 +327,10 @@ public class LonjasProceso implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}
@@ -285,12 +339,29 @@ public class LonjasProceso implements Serializable {
 		this.usuario = usuario;
 	}
 
+
+	//bi-directional many-to-one association to LonjasProcesoEmpleado
+	@OneToMany(mappedBy="lonjasProceso")
 	public List<LonjasProcesoEmpleado> getLonjasProcesoEmpleados() {
 		return this.lonjasProcesoEmpleados;
 	}
 
 	public void setLonjasProcesoEmpleados(List<LonjasProcesoEmpleado> lonjasProcesoEmpleados) {
 		this.lonjasProcesoEmpleados = lonjasProcesoEmpleados;
+	}
+
+	public LonjasProcesoEmpleado addLonjasProcesoEmpleado(LonjasProcesoEmpleado lonjasProcesoEmpleado) {
+		getLonjasProcesoEmpleados().add(lonjasProcesoEmpleado);
+		lonjasProcesoEmpleado.setLonjasProceso(this);
+
+		return lonjasProcesoEmpleado;
+	}
+
+	public LonjasProcesoEmpleado removeLonjasProcesoEmpleado(LonjasProcesoEmpleado lonjasProcesoEmpleado) {
+		getLonjasProcesoEmpleados().remove(lonjasProcesoEmpleado);
+		lonjasProcesoEmpleado.setLonjasProceso(null);
+
+		return lonjasProcesoEmpleado;
 	}
 
 }

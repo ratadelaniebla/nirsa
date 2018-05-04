@@ -10,28 +10,20 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="bi_estandar_clasificacion_tallas")
+@NamedQuery(name="BiEstandarClasificacionTalla.findAll", query="SELECT b FROM BiEstandarClasificacionTalla b")
 public class BiEstandarClasificacionTalla implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idbiestandarclasificaciontallas;
-
 	private double valor;
-
-	//bi-directional many-to-one association to LimpiezaTipo
-	@ManyToOne
-	@JoinColumn(name="idlimpiezatipo")
 	private LimpiezaTipo limpiezaTipo;
-
-	//bi-directional many-to-one association to Talla
-	@ManyToOne
-	@JoinColumn(name="idtalla")
 	private Talla talla;
 
 	public BiEstandarClasificacionTalla() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdbiestandarclasificaciontallas() {
 		return this.idbiestandarclasificaciontallas;
 	}
@@ -39,6 +31,7 @@ public class BiEstandarClasificacionTalla implements Serializable {
 	public void setIdbiestandarclasificaciontallas(Integer idbiestandarclasificaciontallas) {
 		this.idbiestandarclasificaciontallas = idbiestandarclasificaciontallas;
 	}
+
 
 	public double getValor() {
 		return this.valor;
@@ -48,6 +41,10 @@ public class BiEstandarClasificacionTalla implements Serializable {
 		this.valor = valor;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaTipo
+	@ManyToOne
+	@JoinColumn(name="idlimpiezatipo")
 	public LimpiezaTipo getLimpiezaTipo() {
 		return this.limpiezaTipo;
 	}
@@ -56,6 +53,10 @@ public class BiEstandarClasificacionTalla implements Serializable {
 		this.limpiezaTipo = limpiezaTipo;
 	}
 
+
+	//bi-directional many-to-one association to Talla
+	@ManyToOne
+	@JoinColumn(name="idtalla")
 	public Talla getTalla() {
 		return this.talla;
 	}

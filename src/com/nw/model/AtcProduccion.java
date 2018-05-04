@@ -12,40 +12,24 @@ import java.util.List;
  */
 @Entity
 @Table(name="atc_produccion")
+@NamedQuery(name="AtcProduccion.findAll", query="SELECT a FROM AtcProduccion a")
 public class AtcProduccion implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idatcproduccion;
-
 	private Integer estado;
-
 	private Timestamp fechaproduccion;
-
-	//bi-directional many-to-one association to AtcDescongeladoProceso
-	@OneToMany(mappedBy="atcProduccion")
 	private List<AtcDescongeladoProceso> atcDescongeladoProcesos;
-
-	//bi-directional many-to-one association to AtcEvisceradoProceso
-	@OneToMany(mappedBy="atcProduccion")
 	private List<AtcEvisceradoProceso> atcEvisceradoProcesos;
-
-	//bi-directional many-to-one association to AtcLimpiezaProceso
-	@OneToMany(mappedBy="atcProduccion")
 	private List<AtcLimpiezaProceso> atcLimpiezaProcesos;
-
-	//bi-directional many-to-one association to AtcProduccionArchivoCargaLote
-	@OneToMany(mappedBy="atcProduccion")
 	private List<AtcProduccionArchivoCargaLote> atcProduccionArchivoCargaLotes;
-
-	//bi-directional many-to-one association to AtcProduccionDetalleLote
-	@OneToMany(mappedBy="atcProduccion")
 	private List<AtcProduccionDetalleLote> atcProduccionDetalleLotes;
 
 	public AtcProduccion() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdatcproduccion() {
 		return this.idatcproduccion;
 	}
@@ -53,6 +37,7 @@ public class AtcProduccion implements Serializable {
 	public void setIdatcproduccion(Long idatcproduccion) {
 		this.idatcproduccion = idatcproduccion;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -62,6 +47,7 @@ public class AtcProduccion implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Timestamp getFechaproduccion() {
 		return this.fechaproduccion;
 	}
@@ -70,6 +56,9 @@ public class AtcProduccion implements Serializable {
 		this.fechaproduccion = fechaproduccion;
 	}
 
+
+	//bi-directional many-to-one association to AtcDescongeladoProceso
+	@OneToMany(mappedBy="atcProduccion")
 	public List<AtcDescongeladoProceso> getAtcDescongeladoProcesos() {
 		return this.atcDescongeladoProcesos;
 	}
@@ -78,6 +67,23 @@ public class AtcProduccion implements Serializable {
 		this.atcDescongeladoProcesos = atcDescongeladoProcesos;
 	}
 
+	public AtcDescongeladoProceso addAtcDescongeladoProceso(AtcDescongeladoProceso atcDescongeladoProceso) {
+		getAtcDescongeladoProcesos().add(atcDescongeladoProceso);
+		atcDescongeladoProceso.setAtcProduccion(this);
+
+		return atcDescongeladoProceso;
+	}
+
+	public AtcDescongeladoProceso removeAtcDescongeladoProceso(AtcDescongeladoProceso atcDescongeladoProceso) {
+		getAtcDescongeladoProcesos().remove(atcDescongeladoProceso);
+		atcDescongeladoProceso.setAtcProduccion(null);
+
+		return atcDescongeladoProceso;
+	}
+
+
+	//bi-directional many-to-one association to AtcEvisceradoProceso
+	@OneToMany(mappedBy="atcProduccion")
 	public List<AtcEvisceradoProceso> getAtcEvisceradoProcesos() {
 		return this.atcEvisceradoProcesos;
 	}
@@ -86,6 +92,23 @@ public class AtcProduccion implements Serializable {
 		this.atcEvisceradoProcesos = atcEvisceradoProcesos;
 	}
 
+	public AtcEvisceradoProceso addAtcEvisceradoProceso(AtcEvisceradoProceso atcEvisceradoProceso) {
+		getAtcEvisceradoProcesos().add(atcEvisceradoProceso);
+		atcEvisceradoProceso.setAtcProduccion(this);
+
+		return atcEvisceradoProceso;
+	}
+
+	public AtcEvisceradoProceso removeAtcEvisceradoProceso(AtcEvisceradoProceso atcEvisceradoProceso) {
+		getAtcEvisceradoProcesos().remove(atcEvisceradoProceso);
+		atcEvisceradoProceso.setAtcProduccion(null);
+
+		return atcEvisceradoProceso;
+	}
+
+
+	//bi-directional many-to-one association to AtcLimpiezaProceso
+	@OneToMany(mappedBy="atcProduccion")
 	public List<AtcLimpiezaProceso> getAtcLimpiezaProcesos() {
 		return this.atcLimpiezaProcesos;
 	}
@@ -94,6 +117,23 @@ public class AtcProduccion implements Serializable {
 		this.atcLimpiezaProcesos = atcLimpiezaProcesos;
 	}
 
+	public AtcLimpiezaProceso addAtcLimpiezaProceso(AtcLimpiezaProceso atcLimpiezaProceso) {
+		getAtcLimpiezaProcesos().add(atcLimpiezaProceso);
+		atcLimpiezaProceso.setAtcProduccion(this);
+
+		return atcLimpiezaProceso;
+	}
+
+	public AtcLimpiezaProceso removeAtcLimpiezaProceso(AtcLimpiezaProceso atcLimpiezaProceso) {
+		getAtcLimpiezaProcesos().remove(atcLimpiezaProceso);
+		atcLimpiezaProceso.setAtcProduccion(null);
+
+		return atcLimpiezaProceso;
+	}
+
+
+	//bi-directional many-to-one association to AtcProduccionArchivoCargaLote
+	@OneToMany(mappedBy="atcProduccion")
 	public List<AtcProduccionArchivoCargaLote> getAtcProduccionArchivoCargaLotes() {
 		return this.atcProduccionArchivoCargaLotes;
 	}
@@ -102,12 +142,43 @@ public class AtcProduccion implements Serializable {
 		this.atcProduccionArchivoCargaLotes = atcProduccionArchivoCargaLotes;
 	}
 
+	public AtcProduccionArchivoCargaLote addAtcProduccionArchivoCargaLote(AtcProduccionArchivoCargaLote atcProduccionArchivoCargaLote) {
+		getAtcProduccionArchivoCargaLotes().add(atcProduccionArchivoCargaLote);
+		atcProduccionArchivoCargaLote.setAtcProduccion(this);
+
+		return atcProduccionArchivoCargaLote;
+	}
+
+	public AtcProduccionArchivoCargaLote removeAtcProduccionArchivoCargaLote(AtcProduccionArchivoCargaLote atcProduccionArchivoCargaLote) {
+		getAtcProduccionArchivoCargaLotes().remove(atcProduccionArchivoCargaLote);
+		atcProduccionArchivoCargaLote.setAtcProduccion(null);
+
+		return atcProduccionArchivoCargaLote;
+	}
+
+
+	//bi-directional many-to-one association to AtcProduccionDetalleLote
+	@OneToMany(mappedBy="atcProduccion")
 	public List<AtcProduccionDetalleLote> getAtcProduccionDetalleLotes() {
 		return this.atcProduccionDetalleLotes;
 	}
 
 	public void setAtcProduccionDetalleLotes(List<AtcProduccionDetalleLote> atcProduccionDetalleLotes) {
 		this.atcProduccionDetalleLotes = atcProduccionDetalleLotes;
+	}
+
+	public AtcProduccionDetalleLote addAtcProduccionDetalleLote(AtcProduccionDetalleLote atcProduccionDetalleLote) {
+		getAtcProduccionDetalleLotes().add(atcProduccionDetalleLote);
+		atcProduccionDetalleLote.setAtcProduccion(this);
+
+		return atcProduccionDetalleLote;
+	}
+
+	public AtcProduccionDetalleLote removeAtcProduccionDetalleLote(AtcProduccionDetalleLote atcProduccionDetalleLote) {
+		getAtcProduccionDetalleLotes().remove(atcProduccionDetalleLote);
+		atcProduccionDetalleLote.setAtcProduccion(null);
+
+		return atcProduccionDetalleLote;
 	}
 
 }

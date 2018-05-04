@@ -11,48 +11,25 @@ import java.util.List;
  */
 @Entity
 @Table(name="produccion_detalle_lote_cajon")
+@NamedQuery(name="ProduccionDetalleLoteCajon.findAll", query="SELECT p FROM ProduccionDetalleLoteCajon p")
 public class ProduccionDetalleLoteCajon implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idproducciondetallelotecajon;
-
 	private Integer estado;
-
-	//bi-directional many-to-one association to DescongeladoCajonModificacion
-	@OneToMany(mappedBy="produccionDetalleLoteCajon")
 	private List<DescongeladoCajonModificacion> descongeladoCajonModificacions;
-
-	//bi-directional many-to-one association to DescongeladoDetalleProceso
-	@OneToMany(mappedBy="produccionDetalleLoteCajon")
 	private List<DescongeladoDetalleProceso> descongeladoDetalleProcesos;
-
-	//bi-directional many-to-one association to EvisceradoDetalleProceso
-	@OneToMany(mappedBy="produccionDetalleLoteCajon")
 	private List<EvisceradoDetalleProceso> evisceradoDetalleProcesos;
-
-	//bi-directional many-to-one association to EvisceradoDetalleProcesoModificacion
-	@OneToMany(mappedBy="produccionDetalleLoteCajon")
 	private List<EvisceradoDetalleProcesoModificacion> evisceradoDetalleProcesoModificacions;
-
-	//bi-directional many-to-one association to EvisceradoRackeoLote
-	@OneToMany(mappedBy="produccionDetalleLoteCajon")
 	private List<EvisceradoRackeoLote> evisceradoRackeoLotes;
-
-	//bi-directional many-to-one association to CamaraCajon
-	@ManyToOne
-	@JoinColumn(name="idcamaracajon")
 	private CamaraCajon camaraCajon;
-
-	//bi-directional many-to-one association to ProduccionDetalleLote
-	@ManyToOne
-	@JoinColumn(name="idproducciondetallelote")
 	private ProduccionDetalleLote produccionDetalleLote;
 
 	public ProduccionDetalleLoteCajon() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdproducciondetallelotecajon() {
 		return this.idproducciondetallelotecajon;
 	}
@@ -60,6 +37,7 @@ public class ProduccionDetalleLoteCajon implements Serializable {
 	public void setIdproducciondetallelotecajon(Long idproducciondetallelotecajon) {
 		this.idproducciondetallelotecajon = idproducciondetallelotecajon;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -69,6 +47,9 @@ public class ProduccionDetalleLoteCajon implements Serializable {
 		this.estado = estado;
 	}
 
+
+	//bi-directional many-to-one association to DescongeladoCajonModificacion
+	@OneToMany(mappedBy="produccionDetalleLoteCajon")
 	public List<DescongeladoCajonModificacion> getDescongeladoCajonModificacions() {
 		return this.descongeladoCajonModificacions;
 	}
@@ -77,6 +58,23 @@ public class ProduccionDetalleLoteCajon implements Serializable {
 		this.descongeladoCajonModificacions = descongeladoCajonModificacions;
 	}
 
+	public DescongeladoCajonModificacion addDescongeladoCajonModificacion(DescongeladoCajonModificacion descongeladoCajonModificacion) {
+		getDescongeladoCajonModificacions().add(descongeladoCajonModificacion);
+		descongeladoCajonModificacion.setProduccionDetalleLoteCajon(this);
+
+		return descongeladoCajonModificacion;
+	}
+
+	public DescongeladoCajonModificacion removeDescongeladoCajonModificacion(DescongeladoCajonModificacion descongeladoCajonModificacion) {
+		getDescongeladoCajonModificacions().remove(descongeladoCajonModificacion);
+		descongeladoCajonModificacion.setProduccionDetalleLoteCajon(null);
+
+		return descongeladoCajonModificacion;
+	}
+
+
+	//bi-directional many-to-one association to DescongeladoDetalleProceso
+	@OneToMany(mappedBy="produccionDetalleLoteCajon")
 	public List<DescongeladoDetalleProceso> getDescongeladoDetalleProcesos() {
 		return this.descongeladoDetalleProcesos;
 	}
@@ -85,6 +83,23 @@ public class ProduccionDetalleLoteCajon implements Serializable {
 		this.descongeladoDetalleProcesos = descongeladoDetalleProcesos;
 	}
 
+	public DescongeladoDetalleProceso addDescongeladoDetalleProceso(DescongeladoDetalleProceso descongeladoDetalleProceso) {
+		getDescongeladoDetalleProcesos().add(descongeladoDetalleProceso);
+		descongeladoDetalleProceso.setProduccionDetalleLoteCajon(this);
+
+		return descongeladoDetalleProceso;
+	}
+
+	public DescongeladoDetalleProceso removeDescongeladoDetalleProceso(DescongeladoDetalleProceso descongeladoDetalleProceso) {
+		getDescongeladoDetalleProcesos().remove(descongeladoDetalleProceso);
+		descongeladoDetalleProceso.setProduccionDetalleLoteCajon(null);
+
+		return descongeladoDetalleProceso;
+	}
+
+
+	//bi-directional many-to-one association to EvisceradoDetalleProceso
+	@OneToMany(mappedBy="produccionDetalleLoteCajon")
 	public List<EvisceradoDetalleProceso> getEvisceradoDetalleProcesos() {
 		return this.evisceradoDetalleProcesos;
 	}
@@ -93,6 +108,23 @@ public class ProduccionDetalleLoteCajon implements Serializable {
 		this.evisceradoDetalleProcesos = evisceradoDetalleProcesos;
 	}
 
+	public EvisceradoDetalleProceso addEvisceradoDetalleProceso(EvisceradoDetalleProceso evisceradoDetalleProceso) {
+		getEvisceradoDetalleProcesos().add(evisceradoDetalleProceso);
+		evisceradoDetalleProceso.setProduccionDetalleLoteCajon(this);
+
+		return evisceradoDetalleProceso;
+	}
+
+	public EvisceradoDetalleProceso removeEvisceradoDetalleProceso(EvisceradoDetalleProceso evisceradoDetalleProceso) {
+		getEvisceradoDetalleProcesos().remove(evisceradoDetalleProceso);
+		evisceradoDetalleProceso.setProduccionDetalleLoteCajon(null);
+
+		return evisceradoDetalleProceso;
+	}
+
+
+	//bi-directional many-to-one association to EvisceradoDetalleProcesoModificacion
+	@OneToMany(mappedBy="produccionDetalleLoteCajon")
 	public List<EvisceradoDetalleProcesoModificacion> getEvisceradoDetalleProcesoModificacions() {
 		return this.evisceradoDetalleProcesoModificacions;
 	}
@@ -101,6 +133,23 @@ public class ProduccionDetalleLoteCajon implements Serializable {
 		this.evisceradoDetalleProcesoModificacions = evisceradoDetalleProcesoModificacions;
 	}
 
+	public EvisceradoDetalleProcesoModificacion addEvisceradoDetalleProcesoModificacion(EvisceradoDetalleProcesoModificacion evisceradoDetalleProcesoModificacion) {
+		getEvisceradoDetalleProcesoModificacions().add(evisceradoDetalleProcesoModificacion);
+		evisceradoDetalleProcesoModificacion.setProduccionDetalleLoteCajon(this);
+
+		return evisceradoDetalleProcesoModificacion;
+	}
+
+	public EvisceradoDetalleProcesoModificacion removeEvisceradoDetalleProcesoModificacion(EvisceradoDetalleProcesoModificacion evisceradoDetalleProcesoModificacion) {
+		getEvisceradoDetalleProcesoModificacions().remove(evisceradoDetalleProcesoModificacion);
+		evisceradoDetalleProcesoModificacion.setProduccionDetalleLoteCajon(null);
+
+		return evisceradoDetalleProcesoModificacion;
+	}
+
+
+	//bi-directional many-to-one association to EvisceradoRackeoLote
+	@OneToMany(mappedBy="produccionDetalleLoteCajon")
 	public List<EvisceradoRackeoLote> getEvisceradoRackeoLotes() {
 		return this.evisceradoRackeoLotes;
 	}
@@ -109,6 +158,24 @@ public class ProduccionDetalleLoteCajon implements Serializable {
 		this.evisceradoRackeoLotes = evisceradoRackeoLotes;
 	}
 
+	public EvisceradoRackeoLote addEvisceradoRackeoLote(EvisceradoRackeoLote evisceradoRackeoLote) {
+		getEvisceradoRackeoLotes().add(evisceradoRackeoLote);
+		evisceradoRackeoLote.setProduccionDetalleLoteCajon(this);
+
+		return evisceradoRackeoLote;
+	}
+
+	public EvisceradoRackeoLote removeEvisceradoRackeoLote(EvisceradoRackeoLote evisceradoRackeoLote) {
+		getEvisceradoRackeoLotes().remove(evisceradoRackeoLote);
+		evisceradoRackeoLote.setProduccionDetalleLoteCajon(null);
+
+		return evisceradoRackeoLote;
+	}
+
+
+	//bi-directional many-to-one association to CamaraCajon
+	@ManyToOne
+	@JoinColumn(name="idcamaracajon")
 	public CamaraCajon getCamaraCajon() {
 		return this.camaraCajon;
 	}
@@ -117,6 +184,10 @@ public class ProduccionDetalleLoteCajon implements Serializable {
 		this.camaraCajon = camaraCajon;
 	}
 
+
+	//bi-directional many-to-one association to ProduccionDetalleLote
+	@ManyToOne
+	@JoinColumn(name="idproducciondetallelote")
 	public ProduccionDetalleLote getProduccionDetalleLote() {
 		return this.produccionDetalleLote;
 	}

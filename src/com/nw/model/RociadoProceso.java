@@ -12,43 +12,24 @@ import java.util.List;
  */
 @Entity
 @Table(name="rociado_proceso")
+@NamedQuery(name="RociadoProceso.findAll", query="SELECT r FROM RociadoProceso r")
 public class RociadoProceso implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idrociadoproceso;
-
 	private Integer estado;
-
 	private Timestamp fechareg;
-
-	//bi-directional many-to-one association to RociadoDetalleProcesoCoche
-	@OneToMany(mappedBy="rociadoProceso")
 	private List<RociadoDetalleProcesoCoche> rociadoDetalleProcesoCoches;
-
-	//bi-directional many-to-one association to RociadoMuestreoTempCoche
-	@OneToMany(mappedBy="rociadoProceso")
 	private List<RociadoMuestreoTempCoche> rociadoMuestreoTempCoches;
-
-	//bi-directional many-to-one association to ObservacionesProceso
-	@ManyToOne
-	@JoinColumn(name="idobservacionesprocesos")
 	private ObservacionesProceso observacionesProceso;
-
-	//bi-directional many-to-one association to Produccion
-	@ManyToOne
-	@JoinColumn(name="idproduccion")
 	private Produccion produccion;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public RociadoProceso() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdrociadoproceso() {
 		return this.idrociadoproceso;
 	}
@@ -56,6 +37,7 @@ public class RociadoProceso implements Serializable {
 	public void setIdrociadoproceso(Long idrociadoproceso) {
 		this.idrociadoproceso = idrociadoproceso;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -65,6 +47,7 @@ public class RociadoProceso implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Timestamp getFechareg() {
 		return this.fechareg;
 	}
@@ -73,6 +56,9 @@ public class RociadoProceso implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
+	//bi-directional many-to-one association to RociadoDetalleProcesoCoche
+	@OneToMany(mappedBy="rociadoProceso")
 	public List<RociadoDetalleProcesoCoche> getRociadoDetalleProcesoCoches() {
 		return this.rociadoDetalleProcesoCoches;
 	}
@@ -81,6 +67,23 @@ public class RociadoProceso implements Serializable {
 		this.rociadoDetalleProcesoCoches = rociadoDetalleProcesoCoches;
 	}
 
+	public RociadoDetalleProcesoCoche addRociadoDetalleProcesoCoch(RociadoDetalleProcesoCoche rociadoDetalleProcesoCoch) {
+		getRociadoDetalleProcesoCoches().add(rociadoDetalleProcesoCoch);
+		rociadoDetalleProcesoCoch.setRociadoProceso(this);
+
+		return rociadoDetalleProcesoCoch;
+	}
+
+	public RociadoDetalleProcesoCoche removeRociadoDetalleProcesoCoch(RociadoDetalleProcesoCoche rociadoDetalleProcesoCoch) {
+		getRociadoDetalleProcesoCoches().remove(rociadoDetalleProcesoCoch);
+		rociadoDetalleProcesoCoch.setRociadoProceso(null);
+
+		return rociadoDetalleProcesoCoch;
+	}
+
+
+	//bi-directional many-to-one association to RociadoMuestreoTempCoche
+	@OneToMany(mappedBy="rociadoProceso")
 	public List<RociadoMuestreoTempCoche> getRociadoMuestreoTempCoches() {
 		return this.rociadoMuestreoTempCoches;
 	}
@@ -89,6 +92,24 @@ public class RociadoProceso implements Serializable {
 		this.rociadoMuestreoTempCoches = rociadoMuestreoTempCoches;
 	}
 
+	public RociadoMuestreoTempCoche addRociadoMuestreoTempCoch(RociadoMuestreoTempCoche rociadoMuestreoTempCoch) {
+		getRociadoMuestreoTempCoches().add(rociadoMuestreoTempCoch);
+		rociadoMuestreoTempCoch.setRociadoProceso(this);
+
+		return rociadoMuestreoTempCoch;
+	}
+
+	public RociadoMuestreoTempCoche removeRociadoMuestreoTempCoch(RociadoMuestreoTempCoche rociadoMuestreoTempCoch) {
+		getRociadoMuestreoTempCoches().remove(rociadoMuestreoTempCoch);
+		rociadoMuestreoTempCoch.setRociadoProceso(null);
+
+		return rociadoMuestreoTempCoch;
+	}
+
+
+	//bi-directional many-to-one association to ObservacionesProceso
+	@ManyToOne
+	@JoinColumn(name="idobservacionesprocesos")
 	public ObservacionesProceso getObservacionesProceso() {
 		return this.observacionesProceso;
 	}
@@ -97,6 +118,10 @@ public class RociadoProceso implements Serializable {
 		this.observacionesProceso = observacionesProceso;
 	}
 
+
+	//bi-directional many-to-one association to Produccion
+	@ManyToOne
+	@JoinColumn(name="idproduccion")
 	public Produccion getProduccion() {
 		return this.produccion;
 	}
@@ -105,6 +130,10 @@ public class RociadoProceso implements Serializable {
 		this.produccion = produccion;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

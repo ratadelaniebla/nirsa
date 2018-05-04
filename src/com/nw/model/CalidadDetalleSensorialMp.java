@@ -11,49 +11,27 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="calidad_detalle_sensorial_mp")
+@NamedQuery(name="CalidadDetalleSensorialMp.findAll", query="SELECT c FROM CalidadDetalleSensorialMp c")
 public class CalidadDetalleSensorialMp implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@EmbeddedId
 	private CalidadDetalleSensorialMpPK id;
-
 	private Timestamp fechareg;
-
 	private Integer idobservacionapariencia;
-
 	private Integer idobservacionolor;
-
 	private Integer idobservacionsabor;
-
 	private Integer numeromuestra;
-
 	private String observaciones;
-
 	private Long secuencialmuestra;
-
-	//bi-directional many-to-one association to BarcoEstibaCuba
-	@ManyToOne
-	@JoinColumn(name="idbarcoestibacuba")
 	private BarcoEstibaCuba barcoEstibaCuba;
-
-	//bi-directional many-to-one association to CalidadNivelCuba
-	@ManyToOne
-	@JoinColumn(name="idcalidadnivelcuba")
 	private CalidadNivelCuba calidadNivelCuba;
-
-	//bi-directional many-to-one association to EspecieTalla
-	@ManyToOne
-	@JoinColumn(name="idespecietalla")
 	private EspecieTalla especieTalla;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public CalidadDetalleSensorialMp() {
 	}
 
+
+	@EmbeddedId
 	public CalidadDetalleSensorialMpPK getId() {
 		return this.id;
 	}
@@ -61,6 +39,7 @@ public class CalidadDetalleSensorialMp implements Serializable {
 	public void setId(CalidadDetalleSensorialMpPK id) {
 		this.id = id;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -70,6 +49,7 @@ public class CalidadDetalleSensorialMp implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public Integer getIdobservacionapariencia() {
 		return this.idobservacionapariencia;
 	}
@@ -77,6 +57,7 @@ public class CalidadDetalleSensorialMp implements Serializable {
 	public void setIdobservacionapariencia(Integer idobservacionapariencia) {
 		this.idobservacionapariencia = idobservacionapariencia;
 	}
+
 
 	public Integer getIdobservacionolor() {
 		return this.idobservacionolor;
@@ -86,6 +67,7 @@ public class CalidadDetalleSensorialMp implements Serializable {
 		this.idobservacionolor = idobservacionolor;
 	}
 
+
 	public Integer getIdobservacionsabor() {
 		return this.idobservacionsabor;
 	}
@@ -93,6 +75,7 @@ public class CalidadDetalleSensorialMp implements Serializable {
 	public void setIdobservacionsabor(Integer idobservacionsabor) {
 		this.idobservacionsabor = idobservacionsabor;
 	}
+
 
 	public Integer getNumeromuestra() {
 		return this.numeromuestra;
@@ -102,6 +85,7 @@ public class CalidadDetalleSensorialMp implements Serializable {
 		this.numeromuestra = numeromuestra;
 	}
 
+
 	public String getObservaciones() {
 		return this.observaciones;
 	}
@@ -109,6 +93,7 @@ public class CalidadDetalleSensorialMp implements Serializable {
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
 	}
+
 
 	public Long getSecuencialmuestra() {
 		return this.secuencialmuestra;
@@ -118,6 +103,10 @@ public class CalidadDetalleSensorialMp implements Serializable {
 		this.secuencialmuestra = secuencialmuestra;
 	}
 
+
+	//bi-directional many-to-one association to BarcoEstibaCuba
+	@ManyToOne
+	@JoinColumn(name="idbarcoestibacuba")
 	public BarcoEstibaCuba getBarcoEstibaCuba() {
 		return this.barcoEstibaCuba;
 	}
@@ -126,6 +115,10 @@ public class CalidadDetalleSensorialMp implements Serializable {
 		this.barcoEstibaCuba = barcoEstibaCuba;
 	}
 
+
+	//bi-directional many-to-one association to CalidadNivelCuba
+	@ManyToOne
+	@JoinColumn(name="idcalidadnivelcuba")
 	public CalidadNivelCuba getCalidadNivelCuba() {
 		return this.calidadNivelCuba;
 	}
@@ -134,6 +127,10 @@ public class CalidadDetalleSensorialMp implements Serializable {
 		this.calidadNivelCuba = calidadNivelCuba;
 	}
 
+
+	//bi-directional many-to-one association to EspecieTalla
+	@ManyToOne
+	@JoinColumn(name="idespecietalla")
 	public EspecieTalla getEspecieTalla() {
 		return this.especieTalla;
 	}
@@ -142,6 +139,10 @@ public class CalidadDetalleSensorialMp implements Serializable {
 		this.especieTalla = especieTalla;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

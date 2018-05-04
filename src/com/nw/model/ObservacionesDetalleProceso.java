@@ -11,35 +11,22 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="observaciones_detalle_procesos")
+@NamedQuery(name="ObservacionesDetalleProceso.findAll", query="SELECT o FROM ObservacionesDetalleProceso o")
 public class ObservacionesDetalleProceso implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idobservacionesdetalleprocesos;
-
 	private Timestamp fechareg;
-
 	private String observaciones;
-
-	//bi-directional many-to-one association to Division
-	@ManyToOne
-	@JoinColumn(name="iddivision")
 	private Division division;
-
-	//bi-directional many-to-one association to ObservacionesProceso
-	@ManyToOne
-	@JoinColumn(name="idobservacionesprocesos")
 	private ObservacionesProceso observacionesProceso;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public ObservacionesDetalleProceso() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdobservacionesdetalleprocesos() {
 		return this.idobservacionesdetalleprocesos;
 	}
@@ -47,6 +34,7 @@ public class ObservacionesDetalleProceso implements Serializable {
 	public void setIdobservacionesdetalleprocesos(Long idobservacionesdetalleprocesos) {
 		this.idobservacionesdetalleprocesos = idobservacionesdetalleprocesos;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -56,6 +44,7 @@ public class ObservacionesDetalleProceso implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public String getObservaciones() {
 		return this.observaciones;
 	}
@@ -64,6 +53,10 @@ public class ObservacionesDetalleProceso implements Serializable {
 		this.observaciones = observaciones;
 	}
 
+
+	//bi-directional many-to-one association to Division
+	@ManyToOne
+	@JoinColumn(name="iddivision")
 	public Division getDivision() {
 		return this.division;
 	}
@@ -72,6 +65,10 @@ public class ObservacionesDetalleProceso implements Serializable {
 		this.division = division;
 	}
 
+
+	//bi-directional many-to-one association to ObservacionesProceso
+	@ManyToOne
+	@JoinColumn(name="idobservacionesprocesos")
 	public ObservacionesProceso getObservacionesProceso() {
 		return this.observacionesProceso;
 	}
@@ -80,6 +77,10 @@ public class ObservacionesDetalleProceso implements Serializable {
 		this.observacionesProceso = observacionesProceso;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

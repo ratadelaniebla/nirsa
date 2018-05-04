@@ -11,27 +11,21 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="calidad_bpm_desembarco")
+@NamedQuery(name="CalidadBpmDesembarco.findAll", query="SELECT c FROM CalidadBpmDesembarco c")
 public class CalidadBpmDesembarco implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idbpmdesembarco;
-
 	private Integer estado;
-
 	private Timestamp fecha;
-
 	private String observaciones;
-
-	//bi-directional many-to-one association to BarcoDescarga
-	@ManyToOne
-	@JoinColumn(name="idbarcodescarga")
 	private BarcoDescarga barcoDescarga;
 
 	public CalidadBpmDesembarco() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdbpmdesembarco() {
 		return this.idbpmdesembarco;
 	}
@@ -39,6 +33,7 @@ public class CalidadBpmDesembarco implements Serializable {
 	public void setIdbpmdesembarco(Long idbpmdesembarco) {
 		this.idbpmdesembarco = idbpmdesembarco;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -48,6 +43,7 @@ public class CalidadBpmDesembarco implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Timestamp getFecha() {
 		return this.fecha;
 	}
@@ -55,6 +51,7 @@ public class CalidadBpmDesembarco implements Serializable {
 	public void setFecha(Timestamp fecha) {
 		this.fecha = fecha;
 	}
+
 
 	public String getObservaciones() {
 		return this.observaciones;
@@ -64,6 +61,10 @@ public class CalidadBpmDesembarco implements Serializable {
 		this.observaciones = observaciones;
 	}
 
+
+	//bi-directional many-to-one association to BarcoDescarga
+	@ManyToOne
+	@JoinColumn(name="idbarcodescarga")
 	public BarcoDescarga getBarcoDescarga() {
 		return this.barcoDescarga;
 	}

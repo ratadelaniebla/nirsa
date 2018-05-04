@@ -11,24 +11,20 @@ import java.util.List;
  */
 @Entity
 @Table(name="limpieza_motivo_movimiento")
+@NamedQuery(name="LimpiezaMotivoMovimiento.findAll", query="SELECT l FROM LimpiezaMotivoMovimiento l")
 public class LimpiezaMotivoMovimiento implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idlimpiezamotivomovimiento;
-
 	private String descripcion;
-
 	private Integer tipo;
-
-	//bi-directional many-to-one association to LimpiezaProcesoEmpleadoAditoriaMovimiento
-	@OneToMany(mappedBy="limpiezaMotivoMovimiento")
 	private List<LimpiezaProcesoEmpleadoAditoriaMovimiento> limpiezaProcesoEmpleadoAditoriaMovimientos;
 
 	public LimpiezaMotivoMovimiento() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdlimpiezamotivomovimiento() {
 		return this.idlimpiezamotivomovimiento;
 	}
@@ -36,6 +32,7 @@ public class LimpiezaMotivoMovimiento implements Serializable {
 	public void setIdlimpiezamotivomovimiento(Integer idlimpiezamotivomovimiento) {
 		this.idlimpiezamotivomovimiento = idlimpiezamotivomovimiento;
 	}
+
 
 	public String getDescripcion() {
 		return this.descripcion;
@@ -45,6 +42,7 @@ public class LimpiezaMotivoMovimiento implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+
 	public Integer getTipo() {
 		return this.tipo;
 	}
@@ -53,12 +51,29 @@ public class LimpiezaMotivoMovimiento implements Serializable {
 		this.tipo = tipo;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaProcesoEmpleadoAditoriaMovimiento
+	@OneToMany(mappedBy="limpiezaMotivoMovimiento")
 	public List<LimpiezaProcesoEmpleadoAditoriaMovimiento> getLimpiezaProcesoEmpleadoAditoriaMovimientos() {
 		return this.limpiezaProcesoEmpleadoAditoriaMovimientos;
 	}
 
 	public void setLimpiezaProcesoEmpleadoAditoriaMovimientos(List<LimpiezaProcesoEmpleadoAditoriaMovimiento> limpiezaProcesoEmpleadoAditoriaMovimientos) {
 		this.limpiezaProcesoEmpleadoAditoriaMovimientos = limpiezaProcesoEmpleadoAditoriaMovimientos;
+	}
+
+	public LimpiezaProcesoEmpleadoAditoriaMovimiento addLimpiezaProcesoEmpleadoAditoriaMovimiento(LimpiezaProcesoEmpleadoAditoriaMovimiento limpiezaProcesoEmpleadoAditoriaMovimiento) {
+		getLimpiezaProcesoEmpleadoAditoriaMovimientos().add(limpiezaProcesoEmpleadoAditoriaMovimiento);
+		limpiezaProcesoEmpleadoAditoriaMovimiento.setLimpiezaMotivoMovimiento(this);
+
+		return limpiezaProcesoEmpleadoAditoriaMovimiento;
+	}
+
+	public LimpiezaProcesoEmpleadoAditoriaMovimiento removeLimpiezaProcesoEmpleadoAditoriaMovimiento(LimpiezaProcesoEmpleadoAditoriaMovimiento limpiezaProcesoEmpleadoAditoriaMovimiento) {
+		getLimpiezaProcesoEmpleadoAditoriaMovimientos().remove(limpiezaProcesoEmpleadoAditoriaMovimiento);
+		limpiezaProcesoEmpleadoAditoriaMovimiento.setLimpiezaMotivoMovimiento(null);
+
+		return limpiezaProcesoEmpleadoAditoriaMovimiento;
 	}
 
 }

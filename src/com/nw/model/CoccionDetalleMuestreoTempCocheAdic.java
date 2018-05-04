@@ -11,45 +11,27 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="coccion_detalle_muestreo_temp_coche_adic")
+@NamedQuery(name="CoccionDetalleMuestreoTempCocheAdic.findAll", query="SELECT c FROM CoccionDetalleMuestreoTempCocheAdic c")
 public class CoccionDetalleMuestreoTempCocheAdic implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcocciondetallemuestreotempcocheadic;
-
 	private Timestamp fechareg;
-
 	private Timestamp fecharegactualizacion;
-
 	private Integer nummuestra;
-
 	private double peso;
-
 	private double temperatura;
-
 	private Integer tipomuestra;
-
 	private String usuarioactualizacion;
-
-	//bi-directional many-to-one association to CoccionDetalleMuestreoTempCoche
-	@ManyToOne
-	@JoinColumn(name="idcocciondetallemuestreotempcoche")
 	private CoccionDetalleMuestreoTempCoche coccionDetalleMuestreoTempCoche;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public CoccionDetalleMuestreoTempCocheAdic() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcocciondetallemuestreotempcocheadic() {
 		return this.idcocciondetallemuestreotempcocheadic;
 	}
@@ -57,6 +39,7 @@ public class CoccionDetalleMuestreoTempCocheAdic implements Serializable {
 	public void setIdcocciondetallemuestreotempcocheadic(Long idcocciondetallemuestreotempcocheadic) {
 		this.idcocciondetallemuestreotempcocheadic = idcocciondetallemuestreotempcocheadic;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -66,6 +49,7 @@ public class CoccionDetalleMuestreoTempCocheAdic implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public Timestamp getFecharegactualizacion() {
 		return this.fecharegactualizacion;
 	}
@@ -73,6 +57,7 @@ public class CoccionDetalleMuestreoTempCocheAdic implements Serializable {
 	public void setFecharegactualizacion(Timestamp fecharegactualizacion) {
 		this.fecharegactualizacion = fecharegactualizacion;
 	}
+
 
 	public Integer getNummuestra() {
 		return this.nummuestra;
@@ -82,6 +67,7 @@ public class CoccionDetalleMuestreoTempCocheAdic implements Serializable {
 		this.nummuestra = nummuestra;
 	}
 
+
 	public double getPeso() {
 		return this.peso;
 	}
@@ -89,6 +75,7 @@ public class CoccionDetalleMuestreoTempCocheAdic implements Serializable {
 	public void setPeso(double peso) {
 		this.peso = peso;
 	}
+
 
 	public double getTemperatura() {
 		return this.temperatura;
@@ -98,6 +85,7 @@ public class CoccionDetalleMuestreoTempCocheAdic implements Serializable {
 		this.temperatura = temperatura;
 	}
 
+
 	public Integer getTipomuestra() {
 		return this.tipomuestra;
 	}
@@ -105,6 +93,7 @@ public class CoccionDetalleMuestreoTempCocheAdic implements Serializable {
 	public void setTipomuestra(Integer tipomuestra) {
 		this.tipomuestra = tipomuestra;
 	}
+
 
 	public String getUsuarioactualizacion() {
 		return this.usuarioactualizacion;
@@ -114,6 +103,10 @@ public class CoccionDetalleMuestreoTempCocheAdic implements Serializable {
 		this.usuarioactualizacion = usuarioactualizacion;
 	}
 
+
+	//bi-directional many-to-one association to CoccionDetalleMuestreoTempCoche
+	@ManyToOne
+	@JoinColumn(name="idcocciondetallemuestreotempcoche")
 	public CoccionDetalleMuestreoTempCoche getCoccionDetalleMuestreoTempCoche() {
 		return this.coccionDetalleMuestreoTempCoche;
 	}
@@ -122,6 +115,10 @@ public class CoccionDetalleMuestreoTempCocheAdic implements Serializable {
 		this.coccionDetalleMuestreoTempCoche = coccionDetalleMuestreoTempCoche;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -130,6 +127,10 @@ public class CoccionDetalleMuestreoTempCocheAdic implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

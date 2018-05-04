@@ -11,21 +11,19 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="salidas")
+@NamedQuery(name="Salida.findAll", query="SELECT s FROM Salida s")
 public class Salida implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idempleadosalida;
-
 	private String cedula;
-
-	@Column(name="fecha_salida")
 	private Timestamp fechaSalida;
 
 	public Salida() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdempleadosalida() {
 		return this.idempleadosalida;
 	}
@@ -33,6 +31,7 @@ public class Salida implements Serializable {
 	public void setIdempleadosalida(Long idempleadosalida) {
 		this.idempleadosalida = idempleadosalida;
 	}
+
 
 	public String getCedula() {
 		return this.cedula;
@@ -42,6 +41,8 @@ public class Salida implements Serializable {
 		this.cedula = cedula;
 	}
 
+
+	@Column(name="fecha_salida")
 	public Timestamp getFechaSalida() {
 		return this.fechaSalida;
 	}

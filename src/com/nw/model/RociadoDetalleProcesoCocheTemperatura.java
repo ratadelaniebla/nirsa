@@ -11,35 +11,22 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="rociado_detalle_proceso_coche_temperatura")
+@NamedQuery(name="RociadoDetalleProcesoCocheTemperatura.findAll", query="SELECT r FROM RociadoDetalleProcesoCocheTemperatura r")
 public class RociadoDetalleProcesoCocheTemperatura implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idrociadodetalleprocesocochetemperatura;
-
 	private Timestamp fechareg;
-
 	private double temperatura;
-
-	//bi-directional many-to-one association to RociadoDetalleProcesoCoche
-	@ManyToOne
-	@JoinColumn(name="idrociadodetalleprocesocoche")
 	private RociadoDetalleProcesoCoche rociadoDetalleProcesoCoche;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public RociadoDetalleProcesoCocheTemperatura() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdrociadodetalleprocesocochetemperatura() {
 		return this.idrociadodetalleprocesocochetemperatura;
 	}
@@ -47,6 +34,7 @@ public class RociadoDetalleProcesoCocheTemperatura implements Serializable {
 	public void setIdrociadodetalleprocesocochetemperatura(Long idrociadodetalleprocesocochetemperatura) {
 		this.idrociadodetalleprocesocochetemperatura = idrociadodetalleprocesocochetemperatura;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -56,6 +44,7 @@ public class RociadoDetalleProcesoCocheTemperatura implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public double getTemperatura() {
 		return this.temperatura;
 	}
@@ -64,6 +53,10 @@ public class RociadoDetalleProcesoCocheTemperatura implements Serializable {
 		this.temperatura = temperatura;
 	}
 
+
+	//bi-directional many-to-one association to RociadoDetalleProcesoCoche
+	@ManyToOne
+	@JoinColumn(name="idrociadodetalleprocesocoche")
 	public RociadoDetalleProcesoCoche getRociadoDetalleProcesoCoche() {
 		return this.rociadoDetalleProcesoCoche;
 	}
@@ -72,6 +65,10 @@ public class RociadoDetalleProcesoCocheTemperatura implements Serializable {
 		this.rociadoDetalleProcesoCoche = rociadoDetalleProcesoCoche;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -80,6 +77,10 @@ public class RociadoDetalleProcesoCocheTemperatura implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

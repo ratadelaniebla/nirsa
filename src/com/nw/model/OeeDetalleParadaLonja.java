@@ -10,26 +10,19 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="oee_detalle_parada_lonjas")
+@NamedQuery(name="OeeDetalleParadaLonja.findAll", query="SELECT o FROM OeeDetalleParadaLonja o")
 public class OeeDetalleParadaLonja implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idoeedetalleparadalonjas;
-
-	//bi-directional many-to-one association to LonjasLinea
-	@ManyToOne
-	@JoinColumn(name="idlonjaslinea")
 	private LonjasLinea lonjasLinea;
-
-	//bi-directional many-to-one association to OeeDetalleParada
-	@ManyToOne
-	@JoinColumn(name="idoeedetalleparada")
 	private OeeDetalleParada oeeDetalleParada;
 
 	public OeeDetalleParadaLonja() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdoeedetalleparadalonjas() {
 		return this.idoeedetalleparadalonjas;
 	}
@@ -38,6 +31,10 @@ public class OeeDetalleParadaLonja implements Serializable {
 		this.idoeedetalleparadalonjas = idoeedetalleparadalonjas;
 	}
 
+
+	//bi-directional many-to-one association to LonjasLinea
+	@ManyToOne
+	@JoinColumn(name="idlonjaslinea")
 	public LonjasLinea getLonjasLinea() {
 		return this.lonjasLinea;
 	}
@@ -46,6 +43,10 @@ public class OeeDetalleParadaLonja implements Serializable {
 		this.lonjasLinea = lonjasLinea;
 	}
 
+
+	//bi-directional many-to-one association to OeeDetalleParada
+	@ManyToOne
+	@JoinColumn(name="idoeedetalleparada")
 	public OeeDetalleParada getOeeDetalleParada() {
 		return this.oeeDetalleParada;
 	}

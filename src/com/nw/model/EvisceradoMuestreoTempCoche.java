@@ -12,43 +12,24 @@ import java.util.List;
  */
 @Entity
 @Table(name="eviscerado_muestreo_temp_coche")
+@NamedQuery(name="EvisceradoMuestreoTempCoche.findAll", query="SELECT e FROM EvisceradoMuestreoTempCoche e")
 public class EvisceradoMuestreoTempCoche implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idevisceradomuestreotempcoche;
-
 	private Timestamp fechareg;
-
 	private String observacion;
-
-	//bi-directional many-to-one association to ContraloriaEvisceradoDetalleMuestreoTempCoche
-	@OneToMany(mappedBy="evisceradoMuestreoTempCoche")
 	private List<ContraloriaEvisceradoDetalleMuestreoTempCoche> contraloriaEvisceradoDetalleMuestreoTempCoches;
-
-	//bi-directional many-to-one association to EvisceradoDetalleMuestreoTempCoche
-	@OneToMany(mappedBy="evisceradoMuestreoTempCoche")
 	private List<EvisceradoDetalleMuestreoTempCoche> evisceradoDetalleMuestreoTempCoches;
-
-	//bi-directional many-to-one association to EvisceradoProceso
-	@ManyToOne
-	@JoinColumn(name="idevisceradoproceso")
 	private EvisceradoProceso evisceradoProceso;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public EvisceradoMuestreoTempCoche() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdevisceradomuestreotempcoche() {
 		return this.idevisceradomuestreotempcoche;
 	}
@@ -56,6 +37,7 @@ public class EvisceradoMuestreoTempCoche implements Serializable {
 	public void setIdevisceradomuestreotempcoche(Long idevisceradomuestreotempcoche) {
 		this.idevisceradomuestreotempcoche = idevisceradomuestreotempcoche;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -65,6 +47,7 @@ public class EvisceradoMuestreoTempCoche implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public String getObservacion() {
 		return this.observacion;
 	}
@@ -73,6 +56,9 @@ public class EvisceradoMuestreoTempCoche implements Serializable {
 		this.observacion = observacion;
 	}
 
+
+	//bi-directional many-to-one association to ContraloriaEvisceradoDetalleMuestreoTempCoche
+	@OneToMany(mappedBy="evisceradoMuestreoTempCoche")
 	public List<ContraloriaEvisceradoDetalleMuestreoTempCoche> getContraloriaEvisceradoDetalleMuestreoTempCoches() {
 		return this.contraloriaEvisceradoDetalleMuestreoTempCoches;
 	}
@@ -81,6 +67,23 @@ public class EvisceradoMuestreoTempCoche implements Serializable {
 		this.contraloriaEvisceradoDetalleMuestreoTempCoches = contraloriaEvisceradoDetalleMuestreoTempCoches;
 	}
 
+	public ContraloriaEvisceradoDetalleMuestreoTempCoche addContraloriaEvisceradoDetalleMuestreoTempCoch(ContraloriaEvisceradoDetalleMuestreoTempCoche contraloriaEvisceradoDetalleMuestreoTempCoch) {
+		getContraloriaEvisceradoDetalleMuestreoTempCoches().add(contraloriaEvisceradoDetalleMuestreoTempCoch);
+		contraloriaEvisceradoDetalleMuestreoTempCoch.setEvisceradoMuestreoTempCoche(this);
+
+		return contraloriaEvisceradoDetalleMuestreoTempCoch;
+	}
+
+	public ContraloriaEvisceradoDetalleMuestreoTempCoche removeContraloriaEvisceradoDetalleMuestreoTempCoch(ContraloriaEvisceradoDetalleMuestreoTempCoche contraloriaEvisceradoDetalleMuestreoTempCoch) {
+		getContraloriaEvisceradoDetalleMuestreoTempCoches().remove(contraloriaEvisceradoDetalleMuestreoTempCoch);
+		contraloriaEvisceradoDetalleMuestreoTempCoch.setEvisceradoMuestreoTempCoche(null);
+
+		return contraloriaEvisceradoDetalleMuestreoTempCoch;
+	}
+
+
+	//bi-directional many-to-one association to EvisceradoDetalleMuestreoTempCoche
+	@OneToMany(mappedBy="evisceradoMuestreoTempCoche")
 	public List<EvisceradoDetalleMuestreoTempCoche> getEvisceradoDetalleMuestreoTempCoches() {
 		return this.evisceradoDetalleMuestreoTempCoches;
 	}
@@ -89,6 +92,24 @@ public class EvisceradoMuestreoTempCoche implements Serializable {
 		this.evisceradoDetalleMuestreoTempCoches = evisceradoDetalleMuestreoTempCoches;
 	}
 
+	public EvisceradoDetalleMuestreoTempCoche addEvisceradoDetalleMuestreoTempCoch(EvisceradoDetalleMuestreoTempCoche evisceradoDetalleMuestreoTempCoch) {
+		getEvisceradoDetalleMuestreoTempCoches().add(evisceradoDetalleMuestreoTempCoch);
+		evisceradoDetalleMuestreoTempCoch.setEvisceradoMuestreoTempCoche(this);
+
+		return evisceradoDetalleMuestreoTempCoch;
+	}
+
+	public EvisceradoDetalleMuestreoTempCoche removeEvisceradoDetalleMuestreoTempCoch(EvisceradoDetalleMuestreoTempCoche evisceradoDetalleMuestreoTempCoch) {
+		getEvisceradoDetalleMuestreoTempCoches().remove(evisceradoDetalleMuestreoTempCoch);
+		evisceradoDetalleMuestreoTempCoch.setEvisceradoMuestreoTempCoche(null);
+
+		return evisceradoDetalleMuestreoTempCoch;
+	}
+
+
+	//bi-directional many-to-one association to EvisceradoProceso
+	@ManyToOne
+	@JoinColumn(name="idevisceradoproceso")
 	public EvisceradoProceso getEvisceradoProceso() {
 		return this.evisceradoProceso;
 	}
@@ -97,6 +118,10 @@ public class EvisceradoMuestreoTempCoche implements Serializable {
 		this.evisceradoProceso = evisceradoProceso;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -105,6 +130,10 @@ public class EvisceradoMuestreoTempCoche implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

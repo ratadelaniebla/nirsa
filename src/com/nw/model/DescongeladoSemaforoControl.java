@@ -11,24 +11,20 @@ import java.util.List;
  */
 @Entity
 @Table(name="descongelado_semaforo_control")
+@NamedQuery(name="DescongeladoSemaforoControl.findAll", query="SELECT d FROM DescongeladoSemaforoControl d")
 public class DescongeladoSemaforoControl implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer iddescongeladosemaforocontrol;
-
 	private String codigocolor;
-
 	private String descripcion;
-
-	//bi-directional many-to-one association to DescongeladoDetalleDuchaTallaMonitoreo
-	@OneToMany(mappedBy="descongeladoSemaforoControl")
 	private List<DescongeladoDetalleDuchaTallaMonitoreo> descongeladoDetalleDuchaTallaMonitoreos;
 
 	public DescongeladoSemaforoControl() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIddescongeladosemaforocontrol() {
 		return this.iddescongeladosemaforocontrol;
 	}
@@ -36,6 +32,7 @@ public class DescongeladoSemaforoControl implements Serializable {
 	public void setIddescongeladosemaforocontrol(Integer iddescongeladosemaforocontrol) {
 		this.iddescongeladosemaforocontrol = iddescongeladosemaforocontrol;
 	}
+
 
 	public String getCodigocolor() {
 		return this.codigocolor;
@@ -45,6 +42,7 @@ public class DescongeladoSemaforoControl implements Serializable {
 		this.codigocolor = codigocolor;
 	}
 
+
 	public String getDescripcion() {
 		return this.descripcion;
 	}
@@ -53,12 +51,29 @@ public class DescongeladoSemaforoControl implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+
+	//bi-directional many-to-one association to DescongeladoDetalleDuchaTallaMonitoreo
+	@OneToMany(mappedBy="descongeladoSemaforoControl")
 	public List<DescongeladoDetalleDuchaTallaMonitoreo> getDescongeladoDetalleDuchaTallaMonitoreos() {
 		return this.descongeladoDetalleDuchaTallaMonitoreos;
 	}
 
 	public void setDescongeladoDetalleDuchaTallaMonitoreos(List<DescongeladoDetalleDuchaTallaMonitoreo> descongeladoDetalleDuchaTallaMonitoreos) {
 		this.descongeladoDetalleDuchaTallaMonitoreos = descongeladoDetalleDuchaTallaMonitoreos;
+	}
+
+	public DescongeladoDetalleDuchaTallaMonitoreo addDescongeladoDetalleDuchaTallaMonitoreo(DescongeladoDetalleDuchaTallaMonitoreo descongeladoDetalleDuchaTallaMonitoreo) {
+		getDescongeladoDetalleDuchaTallaMonitoreos().add(descongeladoDetalleDuchaTallaMonitoreo);
+		descongeladoDetalleDuchaTallaMonitoreo.setDescongeladoSemaforoControl(this);
+
+		return descongeladoDetalleDuchaTallaMonitoreo;
+	}
+
+	public DescongeladoDetalleDuchaTallaMonitoreo removeDescongeladoDetalleDuchaTallaMonitoreo(DescongeladoDetalleDuchaTallaMonitoreo descongeladoDetalleDuchaTallaMonitoreo) {
+		getDescongeladoDetalleDuchaTallaMonitoreos().remove(descongeladoDetalleDuchaTallaMonitoreo);
+		descongeladoDetalleDuchaTallaMonitoreo.setDescongeladoSemaforoControl(null);
+
+		return descongeladoDetalleDuchaTallaMonitoreo;
 	}
 
 }

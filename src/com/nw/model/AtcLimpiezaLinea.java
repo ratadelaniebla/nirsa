@@ -11,26 +11,20 @@ import java.util.List;
  */
 @Entity
 @Table(name="atc_limpieza_linea")
+@NamedQuery(name="AtcLimpiezaLinea.findAll", query="SELECT a FROM AtcLimpiezaLinea a")
 public class AtcLimpiezaLinea implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idatclimpiezalinea;
-
 	private String descripcion;
-
-	//bi-directional many-to-one association to AtcLimpiezaDetalleBandeja
-	@OneToMany(mappedBy="atcLimpiezaLinea")
 	private List<AtcLimpiezaDetalleBandeja> atcLimpiezaDetalleBandejas;
-
-	//bi-directional many-to-one association to AtcLimpiezaProcesoEmpleado
-	@OneToMany(mappedBy="atcLimpiezaLinea")
 	private List<AtcLimpiezaProcesoEmpleado> atcLimpiezaProcesoEmpleados;
 
 	public AtcLimpiezaLinea() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdatclimpiezalinea() {
 		return this.idatclimpiezalinea;
 	}
@@ -38,6 +32,7 @@ public class AtcLimpiezaLinea implements Serializable {
 	public void setIdatclimpiezalinea(Integer idatclimpiezalinea) {
 		this.idatclimpiezalinea = idatclimpiezalinea;
 	}
+
 
 	public String getDescripcion() {
 		return this.descripcion;
@@ -47,6 +42,9 @@ public class AtcLimpiezaLinea implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+
+	//bi-directional many-to-one association to AtcLimpiezaDetalleBandeja
+	@OneToMany(mappedBy="atcLimpiezaLinea")
 	public List<AtcLimpiezaDetalleBandeja> getAtcLimpiezaDetalleBandejas() {
 		return this.atcLimpiezaDetalleBandejas;
 	}
@@ -55,12 +53,43 @@ public class AtcLimpiezaLinea implements Serializable {
 		this.atcLimpiezaDetalleBandejas = atcLimpiezaDetalleBandejas;
 	}
 
+	public AtcLimpiezaDetalleBandeja addAtcLimpiezaDetalleBandeja(AtcLimpiezaDetalleBandeja atcLimpiezaDetalleBandeja) {
+		getAtcLimpiezaDetalleBandejas().add(atcLimpiezaDetalleBandeja);
+		atcLimpiezaDetalleBandeja.setAtcLimpiezaLinea(this);
+
+		return atcLimpiezaDetalleBandeja;
+	}
+
+	public AtcLimpiezaDetalleBandeja removeAtcLimpiezaDetalleBandeja(AtcLimpiezaDetalleBandeja atcLimpiezaDetalleBandeja) {
+		getAtcLimpiezaDetalleBandejas().remove(atcLimpiezaDetalleBandeja);
+		atcLimpiezaDetalleBandeja.setAtcLimpiezaLinea(null);
+
+		return atcLimpiezaDetalleBandeja;
+	}
+
+
+	//bi-directional many-to-one association to AtcLimpiezaProcesoEmpleado
+	@OneToMany(mappedBy="atcLimpiezaLinea")
 	public List<AtcLimpiezaProcesoEmpleado> getAtcLimpiezaProcesoEmpleados() {
 		return this.atcLimpiezaProcesoEmpleados;
 	}
 
 	public void setAtcLimpiezaProcesoEmpleados(List<AtcLimpiezaProcesoEmpleado> atcLimpiezaProcesoEmpleados) {
 		this.atcLimpiezaProcesoEmpleados = atcLimpiezaProcesoEmpleados;
+	}
+
+	public AtcLimpiezaProcesoEmpleado addAtcLimpiezaProcesoEmpleado(AtcLimpiezaProcesoEmpleado atcLimpiezaProcesoEmpleado) {
+		getAtcLimpiezaProcesoEmpleados().add(atcLimpiezaProcesoEmpleado);
+		atcLimpiezaProcesoEmpleado.setAtcLimpiezaLinea(this);
+
+		return atcLimpiezaProcesoEmpleado;
+	}
+
+	public AtcLimpiezaProcesoEmpleado removeAtcLimpiezaProcesoEmpleado(AtcLimpiezaProcesoEmpleado atcLimpiezaProcesoEmpleado) {
+		getAtcLimpiezaProcesoEmpleados().remove(atcLimpiezaProcesoEmpleado);
+		atcLimpiezaProcesoEmpleado.setAtcLimpiezaLinea(null);
+
+		return atcLimpiezaProcesoEmpleado;
 	}
 
 }

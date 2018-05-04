@@ -10,28 +10,20 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="oee_detalle_parada_envasado")
+@NamedQuery(name="OeeDetalleParadaEnvasado.findAll", query="SELECT o FROM OeeDetalleParadaEnvasado o")
 public class OeeDetalleParadaEnvasado implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idoeedetalleparadaenvasado;
-
 	private Integer idluthy;
-
-	//bi-directional many-to-one association to MaquinaCerradora
-	@ManyToOne
-	@JoinColumn(name="idmaquinacerradora")
 	private MaquinaCerradora maquinaCerradora;
-
-	//bi-directional many-to-one association to OeeDetalleParada
-	@ManyToOne
-	@JoinColumn(name="idoeedetalleparada")
 	private OeeDetalleParada oeeDetalleParada;
 
 	public OeeDetalleParadaEnvasado() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdoeedetalleparadaenvasado() {
 		return this.idoeedetalleparadaenvasado;
 	}
@@ -39,6 +31,7 @@ public class OeeDetalleParadaEnvasado implements Serializable {
 	public void setIdoeedetalleparadaenvasado(Long idoeedetalleparadaenvasado) {
 		this.idoeedetalleparadaenvasado = idoeedetalleparadaenvasado;
 	}
+
 
 	public Integer getIdluthy() {
 		return this.idluthy;
@@ -48,6 +41,10 @@ public class OeeDetalleParadaEnvasado implements Serializable {
 		this.idluthy = idluthy;
 	}
 
+
+	//bi-directional many-to-one association to MaquinaCerradora
+	@ManyToOne
+	@JoinColumn(name="idmaquinacerradora")
 	public MaquinaCerradora getMaquinaCerradora() {
 		return this.maquinaCerradora;
 	}
@@ -56,6 +53,10 @@ public class OeeDetalleParadaEnvasado implements Serializable {
 		this.maquinaCerradora = maquinaCerradora;
 	}
 
+
+	//bi-directional many-to-one association to OeeDetalleParada
+	@ManyToOne
+	@JoinColumn(name="idoeedetalleparada")
 	public OeeDetalleParada getOeeDetalleParada() {
 		return this.oeeDetalleParada;
 	}

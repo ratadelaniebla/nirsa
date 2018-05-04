@@ -10,26 +10,21 @@ import java.util.List;
  * 
  */
 @Entity
+@NamedQuery(name="Opcion.findAll", query="SELECT o FROM Opcion o")
 public class Opcion implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idopcion;
-
 	private String formulario;
-
 	private String imagen;
-
 	private String opcion;
-
-	//bi-directional many-to-many association to Grupo
-	@ManyToMany(mappedBy="opcions")
 	private List<Grupo> grupos;
 
 	public Opcion() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdopcion() {
 		return this.idopcion;
 	}
@@ -37,6 +32,7 @@ public class Opcion implements Serializable {
 	public void setIdopcion(Integer idopcion) {
 		this.idopcion = idopcion;
 	}
+
 
 	public String getFormulario() {
 		return this.formulario;
@@ -46,6 +42,7 @@ public class Opcion implements Serializable {
 		this.formulario = formulario;
 	}
 
+
 	public String getImagen() {
 		return this.imagen;
 	}
@@ -53,6 +50,7 @@ public class Opcion implements Serializable {
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
 	}
+
 
 	public String getOpcion() {
 		return this.opcion;
@@ -62,6 +60,9 @@ public class Opcion implements Serializable {
 		this.opcion = opcion;
 	}
 
+
+	//bi-directional many-to-many association to Grupo
+	@ManyToMany(mappedBy="opcions")
 	public List<Grupo> getGrupos() {
 		return this.grupos;
 	}

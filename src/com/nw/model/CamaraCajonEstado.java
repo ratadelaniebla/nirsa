@@ -10,20 +10,19 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="camara_cajon_estado")
+@NamedQuery(name="CamaraCajonEstado.findAll", query="SELECT c FROM CamaraCajonEstado c")
 public class CamaraCajonEstado implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idcamaracajonestado;
-
 	private String abreviao;
-
 	private String descripcionestado;
 
 	public CamaraCajonEstado() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdcamaracajonestado() {
 		return this.idcamaracajonestado;
 	}
@@ -32,6 +31,7 @@ public class CamaraCajonEstado implements Serializable {
 		this.idcamaracajonestado = idcamaracajonestado;
 	}
 
+
 	public String getAbreviao() {
 		return this.abreviao;
 	}
@@ -39,6 +39,7 @@ public class CamaraCajonEstado implements Serializable {
 	public void setAbreviao(String abreviao) {
 		this.abreviao = abreviao;
 	}
+
 
 	public String getDescripcionestado() {
 		return this.descripcionestado;

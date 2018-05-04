@@ -20,8 +20,6 @@ public class EnvasadoControlPesoFillCabecera implements Serializable {
 	private double agua;
 	private double caldovegetal;
 	private Timestamp fechareg;
-	private Integer idturnolabor;
-	private String idusuario;
 	private String observacion;
 	private double pesoenvase;
 	private double procentajelomos;
@@ -30,9 +28,11 @@ public class EnvasadoControlPesoFillCabecera implements Serializable {
 	private double proteina;
 	private EnvasadoCaldoVegetalProteina envasadoCaldoVegetalProteina;
 	private EnvasadoLineaCerradora envasadoLineaCerradora;
-	private List<EnvasadoControlPesoFillDetalle> envasadoControlPesoFillDetalles;
 	private EnvasadoProceso envasadoProceso;
 	private ProduccionDetalleOrden produccionDetalleOrden;
+	private Turno turno;
+	private Usuario usuario;
+	private List<EnvasadoControlPesoFillDetalle> envasadoControlPesoFillDetalles;
 
 	public EnvasadoControlPesoFillCabecera() {
 	}
@@ -82,24 +82,6 @@ public class EnvasadoControlPesoFillCabecera implements Serializable {
 
 	public void setFechareg(Timestamp fechareg) {
 		this.fechareg = fechareg;
-	}
-
-
-	public Integer getIdturnolabor() {
-		return this.idturnolabor;
-	}
-
-	public void setIdturnolabor(Integer idturnolabor) {
-		this.idturnolabor = idturnolabor;
-	}
-
-
-	public String getIdusuario() {
-		return this.idusuario;
-	}
-
-	public void setIdusuario(String idusuario) {
-		this.idusuario = idusuario;
 	}
 
 
@@ -181,6 +163,54 @@ public class EnvasadoControlPesoFillCabecera implements Serializable {
 	}
 
 
+	//bi-directional many-to-one association to EnvasadoProceso
+	@ManyToOne
+	@JoinColumn(name="idenvasadoproceso")
+	public EnvasadoProceso getEnvasadoProceso() {
+		return this.envasadoProceso;
+	}
+
+	public void setEnvasadoProceso(EnvasadoProceso envasadoProceso) {
+		this.envasadoProceso = envasadoProceso;
+	}
+
+
+	//bi-directional many-to-one association to ProduccionDetalleOrden
+	@ManyToOne
+	@JoinColumn(name="idproducciondetalleorden")
+	public ProduccionDetalleOrden getProduccionDetalleOrden() {
+		return this.produccionDetalleOrden;
+	}
+
+	public void setProduccionDetalleOrden(ProduccionDetalleOrden produccionDetalleOrden) {
+		this.produccionDetalleOrden = produccionDetalleOrden;
+	}
+
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturnolabor")
+	public Turno getTurno() {
+		return this.turno;
+	}
+
+	public void setTurno(Turno turno) {
+		this.turno = turno;
+	}
+
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
+	public Usuario getUsuario() {
+		return this.usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+
 	//bi-directional many-to-one association to EnvasadoControlPesoFillDetalle
 	@OneToMany(mappedBy="envasadoControlPesoFillCabecera")
 	public List<EnvasadoControlPesoFillDetalle> getEnvasadoControlPesoFillDetalles() {
@@ -204,31 +234,5 @@ public class EnvasadoControlPesoFillCabecera implements Serializable {
 
 		return envasadoControlPesoFillDetalle;
 	}
-
-
-	//bi-directional many-to-one association to EnvasadoProceso
-	@ManyToOne
-	@JoinColumn(name="idenvasadoproceso")
-	public EnvasadoProceso getEnvasadoProceso() {
-		return this.envasadoProceso;
-	}
-
-	public void setEnvasadoProceso(EnvasadoProceso envasadoProceso) {
-		this.envasadoProceso = envasadoProceso;
-	}
-
-
-	@ManyToOne
-	@JoinColumn(name="idproducciondetalleorden")
-	public ProduccionDetalleOrden getProduccionDetalleOrden() {
-		return produccionDetalleOrden;
-	}
-
-	public void setProduccionDetalleOrden(ProduccionDetalleOrden produccionDetalleOrden) {
-		this.produccionDetalleOrden = produccionDetalleOrden;
-	}
-	
-	
-	
 
 }

@@ -11,50 +11,31 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="limpieza_proceso_empleado_bonificacion_ponchadas")
+@NamedQuery(name="LimpiezaProcesoEmpleadoBonificacionPonchada.findAll", query="SELECT l FROM LimpiezaProcesoEmpleadoBonificacionPonchada l")
 public class LimpiezaProcesoEmpleadoBonificacionPonchada implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idlimpiezabonificacionponchadas;
-
 	private Integer cantidadextra100;
-
 	private Integer cantidadextra50;
-
 	private Integer cantidadnormal;
-
 	private Integer estado;
-
 	private Timestamp fecharegistro;
-
 	private double tarifabonificacion;
-
 	private double tarifanormal;
-
 	private Integer total;
-
 	private double valor100;
-
 	private double valor50;
-
 	private double valornormal;
-
 	private double valortotal;
-
-	//bi-directional many-to-one association to LimpiezaProcesoEmpleado
-	@ManyToOne
-	@JoinColumn(name="idlimpiezaprocesoempleado")
 	private LimpiezaProcesoEmpleado limpiezaProcesoEmpleado;
-
-	//bi-directional many-to-one association to LimpiezaTarifaPonchada
-	@ManyToOne
-	@JoinColumn(name="idlimpiezatarifaponchadas")
 	private LimpiezaTarifaPonchada limpiezaTarifaPonchada;
 
 	public LimpiezaProcesoEmpleadoBonificacionPonchada() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdlimpiezabonificacionponchadas() {
 		return this.idlimpiezabonificacionponchadas;
 	}
@@ -62,6 +43,7 @@ public class LimpiezaProcesoEmpleadoBonificacionPonchada implements Serializable
 	public void setIdlimpiezabonificacionponchadas(Long idlimpiezabonificacionponchadas) {
 		this.idlimpiezabonificacionponchadas = idlimpiezabonificacionponchadas;
 	}
+
 
 	public Integer getCantidadextra100() {
 		return this.cantidadextra100;
@@ -71,6 +53,7 @@ public class LimpiezaProcesoEmpleadoBonificacionPonchada implements Serializable
 		this.cantidadextra100 = cantidadextra100;
 	}
 
+
 	public Integer getCantidadextra50() {
 		return this.cantidadextra50;
 	}
@@ -78,6 +61,7 @@ public class LimpiezaProcesoEmpleadoBonificacionPonchada implements Serializable
 	public void setCantidadextra50(Integer cantidadextra50) {
 		this.cantidadextra50 = cantidadextra50;
 	}
+
 
 	public Integer getCantidadnormal() {
 		return this.cantidadnormal;
@@ -87,6 +71,7 @@ public class LimpiezaProcesoEmpleadoBonificacionPonchada implements Serializable
 		this.cantidadnormal = cantidadnormal;
 	}
 
+
 	public Integer getEstado() {
 		return this.estado;
 	}
@@ -94,6 +79,7 @@ public class LimpiezaProcesoEmpleadoBonificacionPonchada implements Serializable
 	public void setEstado(Integer estado) {
 		this.estado = estado;
 	}
+
 
 	public Timestamp getFecharegistro() {
 		return this.fecharegistro;
@@ -103,6 +89,7 @@ public class LimpiezaProcesoEmpleadoBonificacionPonchada implements Serializable
 		this.fecharegistro = fecharegistro;
 	}
 
+
 	public double getTarifabonificacion() {
 		return this.tarifabonificacion;
 	}
@@ -110,6 +97,7 @@ public class LimpiezaProcesoEmpleadoBonificacionPonchada implements Serializable
 	public void setTarifabonificacion(double tarifabonificacion) {
 		this.tarifabonificacion = tarifabonificacion;
 	}
+
 
 	public double getTarifanormal() {
 		return this.tarifanormal;
@@ -119,6 +107,7 @@ public class LimpiezaProcesoEmpleadoBonificacionPonchada implements Serializable
 		this.tarifanormal = tarifanormal;
 	}
 
+
 	public Integer getTotal() {
 		return this.total;
 	}
@@ -126,6 +115,7 @@ public class LimpiezaProcesoEmpleadoBonificacionPonchada implements Serializable
 	public void setTotal(Integer total) {
 		this.total = total;
 	}
+
 
 	public double getValor100() {
 		return this.valor100;
@@ -135,6 +125,7 @@ public class LimpiezaProcesoEmpleadoBonificacionPonchada implements Serializable
 		this.valor100 = valor100;
 	}
 
+
 	public double getValor50() {
 		return this.valor50;
 	}
@@ -142,6 +133,7 @@ public class LimpiezaProcesoEmpleadoBonificacionPonchada implements Serializable
 	public void setValor50(double valor50) {
 		this.valor50 = valor50;
 	}
+
 
 	public double getValornormal() {
 		return this.valornormal;
@@ -151,6 +143,7 @@ public class LimpiezaProcesoEmpleadoBonificacionPonchada implements Serializable
 		this.valornormal = valornormal;
 	}
 
+
 	public double getValortotal() {
 		return this.valortotal;
 	}
@@ -159,6 +152,10 @@ public class LimpiezaProcesoEmpleadoBonificacionPonchada implements Serializable
 		this.valortotal = valortotal;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaProcesoEmpleado
+	@ManyToOne
+	@JoinColumn(name="idlimpiezaprocesoempleado")
 	public LimpiezaProcesoEmpleado getLimpiezaProcesoEmpleado() {
 		return this.limpiezaProcesoEmpleado;
 	}
@@ -167,6 +164,10 @@ public class LimpiezaProcesoEmpleadoBonificacionPonchada implements Serializable
 		this.limpiezaProcesoEmpleado = limpiezaProcesoEmpleado;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaTarifaPonchada
+	@ManyToOne
+	@JoinColumn(name="idlimpiezatarifaponchadas")
 	public LimpiezaTarifaPonchada getLimpiezaTarifaPonchada() {
 		return this.limpiezaTarifaPonchada;
 	}

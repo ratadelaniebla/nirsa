@@ -11,22 +11,19 @@ import java.util.List;
  */
 @Entity
 @Table(name="limpieza_calidad_grupo")
+@NamedQuery(name="LimpiezaCalidadGrupo.findAll", query="SELECT l FROM LimpiezaCalidadGrupo l")
 public class LimpiezaCalidadGrupo implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idlimpiezacalidadgrupo;
-
 	private String descripcion;
-
-	//bi-directional many-to-one association to LimpiezaCalidadGrupoMaestroSubproducto
-	@OneToMany(mappedBy="limpiezaCalidadGrupo")
 	private List<LimpiezaCalidadGrupoMaestroSubproducto> limpiezaCalidadGrupoMaestroSubproductos;
 
 	public LimpiezaCalidadGrupo() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdlimpiezacalidadgrupo() {
 		return this.idlimpiezacalidadgrupo;
 	}
@@ -34,6 +31,7 @@ public class LimpiezaCalidadGrupo implements Serializable {
 	public void setIdlimpiezacalidadgrupo(Integer idlimpiezacalidadgrupo) {
 		this.idlimpiezacalidadgrupo = idlimpiezacalidadgrupo;
 	}
+
 
 	public String getDescripcion() {
 		return this.descripcion;
@@ -43,12 +41,29 @@ public class LimpiezaCalidadGrupo implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaCalidadGrupoMaestroSubproducto
+	@OneToMany(mappedBy="limpiezaCalidadGrupo")
 	public List<LimpiezaCalidadGrupoMaestroSubproducto> getLimpiezaCalidadGrupoMaestroSubproductos() {
 		return this.limpiezaCalidadGrupoMaestroSubproductos;
 	}
 
 	public void setLimpiezaCalidadGrupoMaestroSubproductos(List<LimpiezaCalidadGrupoMaestroSubproducto> limpiezaCalidadGrupoMaestroSubproductos) {
 		this.limpiezaCalidadGrupoMaestroSubproductos = limpiezaCalidadGrupoMaestroSubproductos;
+	}
+
+	public LimpiezaCalidadGrupoMaestroSubproducto addLimpiezaCalidadGrupoMaestroSubproducto(LimpiezaCalidadGrupoMaestroSubproducto limpiezaCalidadGrupoMaestroSubproducto) {
+		getLimpiezaCalidadGrupoMaestroSubproductos().add(limpiezaCalidadGrupoMaestroSubproducto);
+		limpiezaCalidadGrupoMaestroSubproducto.setLimpiezaCalidadGrupo(this);
+
+		return limpiezaCalidadGrupoMaestroSubproducto;
+	}
+
+	public LimpiezaCalidadGrupoMaestroSubproducto removeLimpiezaCalidadGrupoMaestroSubproducto(LimpiezaCalidadGrupoMaestroSubproducto limpiezaCalidadGrupoMaestroSubproducto) {
+		getLimpiezaCalidadGrupoMaestroSubproductos().remove(limpiezaCalidadGrupoMaestroSubproducto);
+		limpiezaCalidadGrupoMaestroSubproducto.setLimpiezaCalidadGrupo(null);
+
+		return limpiezaCalidadGrupoMaestroSubproducto;
 	}
 
 }

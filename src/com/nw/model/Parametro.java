@@ -10,28 +10,22 @@ import java.util.List;
  * 
  */
 @Entity
+@NamedQuery(name="Parametro.findAll", query="SELECT p FROM Parametro p")
 public class Parametro implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idparametro;
-
 	private String descripcionparametro;
-
 	private String permiso;
-
 	private double valor;
-
 	private double valor2;
-
-	//bi-directional many-to-one association to ParametroAuditoria
-	@OneToMany(mappedBy="parametro")
 	private List<ParametroAuditoria> parametroAuditorias;
 
 	public Parametro() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdparametro() {
 		return this.idparametro;
 	}
@@ -39,6 +33,7 @@ public class Parametro implements Serializable {
 	public void setIdparametro(Integer idparametro) {
 		this.idparametro = idparametro;
 	}
+
 
 	public String getDescripcionparametro() {
 		return this.descripcionparametro;
@@ -48,6 +43,7 @@ public class Parametro implements Serializable {
 		this.descripcionparametro = descripcionparametro;
 	}
 
+
 	public String getPermiso() {
 		return this.permiso;
 	}
@@ -55,6 +51,7 @@ public class Parametro implements Serializable {
 	public void setPermiso(String permiso) {
 		this.permiso = permiso;
 	}
+
 
 	public double getValor() {
 		return this.valor;
@@ -64,6 +61,7 @@ public class Parametro implements Serializable {
 		this.valor = valor;
 	}
 
+
 	public double getValor2() {
 		return this.valor2;
 	}
@@ -72,12 +70,29 @@ public class Parametro implements Serializable {
 		this.valor2 = valor2;
 	}
 
+
+	//bi-directional many-to-one association to ParametroAuditoria
+	@OneToMany(mappedBy="parametro")
 	public List<ParametroAuditoria> getParametroAuditorias() {
 		return this.parametroAuditorias;
 	}
 
 	public void setParametroAuditorias(List<ParametroAuditoria> parametroAuditorias) {
 		this.parametroAuditorias = parametroAuditorias;
+	}
+
+	public ParametroAuditoria addParametroAuditoria(ParametroAuditoria parametroAuditoria) {
+		getParametroAuditorias().add(parametroAuditoria);
+		parametroAuditoria.setParametro(this);
+
+		return parametroAuditoria;
+	}
+
+	public ParametroAuditoria removeParametroAuditoria(ParametroAuditoria parametroAuditoria) {
+		getParametroAuditorias().remove(parametroAuditoria);
+		parametroAuditoria.setParametro(null);
+
+		return parametroAuditoria;
 	}
 
 }

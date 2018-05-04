@@ -11,24 +11,20 @@ import java.util.List;
  */
 @Entity
 @Table(name="calidad_muestra_grupo_caracteristicas_tipo")
+@NamedQuery(name="CalidadMuestraGrupoCaracteristicasTipo.findAll", query="SELECT c FROM CalidadMuestraGrupoCaracteristicasTipo c")
 public class CalidadMuestraGrupoCaracteristicasTipo implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcalidadmuestragrupocaracteristicastipo;
-
 	private String descripcion;
-
 	private Integer estado;
-
-	//bi-directional many-to-one association to CalidadMuestraGrupoCaracteristica
-	@OneToMany(mappedBy="calidadMuestraGrupoCaracteristicasTipo")
 	private List<CalidadMuestraGrupoCaracteristica> calidadMuestraGrupoCaracteristicas;
 
 	public CalidadMuestraGrupoCaracteristicasTipo() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcalidadmuestragrupocaracteristicastipo() {
 		return this.idcalidadmuestragrupocaracteristicastipo;
 	}
@@ -36,6 +32,7 @@ public class CalidadMuestraGrupoCaracteristicasTipo implements Serializable {
 	public void setIdcalidadmuestragrupocaracteristicastipo(Long idcalidadmuestragrupocaracteristicastipo) {
 		this.idcalidadmuestragrupocaracteristicastipo = idcalidadmuestragrupocaracteristicastipo;
 	}
+
 
 	public String getDescripcion() {
 		return this.descripcion;
@@ -45,6 +42,7 @@ public class CalidadMuestraGrupoCaracteristicasTipo implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+
 	public Integer getEstado() {
 		return this.estado;
 	}
@@ -53,12 +51,29 @@ public class CalidadMuestraGrupoCaracteristicasTipo implements Serializable {
 		this.estado = estado;
 	}
 
+
+	//bi-directional many-to-one association to CalidadMuestraGrupoCaracteristica
+	@OneToMany(mappedBy="calidadMuestraGrupoCaracteristicasTipo")
 	public List<CalidadMuestraGrupoCaracteristica> getCalidadMuestraGrupoCaracteristicas() {
 		return this.calidadMuestraGrupoCaracteristicas;
 	}
 
 	public void setCalidadMuestraGrupoCaracteristicas(List<CalidadMuestraGrupoCaracteristica> calidadMuestraGrupoCaracteristicas) {
 		this.calidadMuestraGrupoCaracteristicas = calidadMuestraGrupoCaracteristicas;
+	}
+
+	public CalidadMuestraGrupoCaracteristica addCalidadMuestraGrupoCaracteristica(CalidadMuestraGrupoCaracteristica calidadMuestraGrupoCaracteristica) {
+		getCalidadMuestraGrupoCaracteristicas().add(calidadMuestraGrupoCaracteristica);
+		calidadMuestraGrupoCaracteristica.setCalidadMuestraGrupoCaracteristicasTipo(this);
+
+		return calidadMuestraGrupoCaracteristica;
+	}
+
+	public CalidadMuestraGrupoCaracteristica removeCalidadMuestraGrupoCaracteristica(CalidadMuestraGrupoCaracteristica calidadMuestraGrupoCaracteristica) {
+		getCalidadMuestraGrupoCaracteristicas().remove(calidadMuestraGrupoCaracteristica);
+		calidadMuestraGrupoCaracteristica.setCalidadMuestraGrupoCaracteristicasTipo(null);
+
+		return calidadMuestraGrupoCaracteristica;
 	}
 
 }

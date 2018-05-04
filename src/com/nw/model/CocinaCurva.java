@@ -11,22 +11,19 @@ import java.util.List;
  */
 @Entity
 @Table(name="cocina_curva")
+@NamedQuery(name="CocinaCurva.findAll", query="SELECT c FROM CocinaCurva c")
 public class CocinaCurva implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idcocinacurva;
-
 	private String descripcion;
-
-	//bi-directional many-to-one association to CocinaAperturaCierreDetalle
-	@OneToMany(mappedBy="cocinaCurva")
 	private List<CocinaAperturaCierreDetalle> cocinaAperturaCierreDetalles;
 
 	public CocinaCurva() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdcocinacurva() {
 		return this.idcocinacurva;
 	}
@@ -34,6 +31,7 @@ public class CocinaCurva implements Serializable {
 	public void setIdcocinacurva(Integer idcocinacurva) {
 		this.idcocinacurva = idcocinacurva;
 	}
+
 
 	public String getDescripcion() {
 		return this.descripcion;
@@ -43,12 +41,29 @@ public class CocinaCurva implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+
+	//bi-directional many-to-one association to CocinaAperturaCierreDetalle
+	@OneToMany(mappedBy="cocinaCurva")
 	public List<CocinaAperturaCierreDetalle> getCocinaAperturaCierreDetalles() {
 		return this.cocinaAperturaCierreDetalles;
 	}
 
 	public void setCocinaAperturaCierreDetalles(List<CocinaAperturaCierreDetalle> cocinaAperturaCierreDetalles) {
 		this.cocinaAperturaCierreDetalles = cocinaAperturaCierreDetalles;
+	}
+
+	public CocinaAperturaCierreDetalle addCocinaAperturaCierreDetalle(CocinaAperturaCierreDetalle cocinaAperturaCierreDetalle) {
+		getCocinaAperturaCierreDetalles().add(cocinaAperturaCierreDetalle);
+		cocinaAperturaCierreDetalle.setCocinaCurva(this);
+
+		return cocinaAperturaCierreDetalle;
+	}
+
+	public CocinaAperturaCierreDetalle removeCocinaAperturaCierreDetalle(CocinaAperturaCierreDetalle cocinaAperturaCierreDetalle) {
+		getCocinaAperturaCierreDetalles().remove(cocinaAperturaCierreDetalle);
+		cocinaAperturaCierreDetalle.setCocinaCurva(null);
+
+		return cocinaAperturaCierreDetalle;
 	}
 
 }

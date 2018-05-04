@@ -10,38 +10,25 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="calidad_observaciones_muestra_cuba")
+@NamedQuery(name="CalidadObservacionesMuestraCuba.findAll", query="SELECT c FROM CalidadObservacionesMuestraCuba c")
 public class CalidadObservacionesMuestraCuba implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idcalidadobservacion;
-
 	private String abreviatura;
-
 	private Integer calificacion;
-
 	private String descripcion;
-
-	private double valordesde;
-
-	private double valorhasta;
-	
 	private Integer estado;
-
-	//bi-directional many-to-one association to CalidadGrupoObservacionesMuestraCuba
-	@ManyToOne
-	@JoinColumn(name="idcalidadgrupoobservaciones")
+	private double valordesde;
+	private double valorhasta;
 	private CalidadGrupoObservacionesMuestraCuba calidadGrupoObservacionesMuestraCuba;
-
-	//bi-directional many-to-one association to CalidadTipoObservacion
-	@ManyToOne
-	@JoinColumn(name="idcalidadtipoobservacion")
 	private CalidadTipoObservacion calidadTipoObservacion;
 
 	public CalidadObservacionesMuestraCuba() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdcalidadobservacion() {
 		return this.idcalidadobservacion;
 	}
@@ -49,6 +36,7 @@ public class CalidadObservacionesMuestraCuba implements Serializable {
 	public void setIdcalidadobservacion(Integer idcalidadobservacion) {
 		this.idcalidadobservacion = idcalidadobservacion;
 	}
+
 
 	public String getAbreviatura() {
 		return this.abreviatura;
@@ -58,6 +46,7 @@ public class CalidadObservacionesMuestraCuba implements Serializable {
 		this.abreviatura = abreviatura;
 	}
 
+
 	public Integer getCalificacion() {
 		return this.calificacion;
 	}
@@ -65,6 +54,7 @@ public class CalidadObservacionesMuestraCuba implements Serializable {
 	public void setCalificacion(Integer calificacion) {
 		this.calificacion = calificacion;
 	}
+
 
 	public String getDescripcion() {
 		return this.descripcion;
@@ -74,6 +64,16 @@ public class CalidadObservacionesMuestraCuba implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+
+	public Integer getEstado() {
+		return this.estado;
+	}
+
+	public void setEstado(Integer estado) {
+		this.estado = estado;
+	}
+
+
 	public double getValordesde() {
 		return this.valordesde;
 	}
@@ -81,6 +81,7 @@ public class CalidadObservacionesMuestraCuba implements Serializable {
 	public void setValordesde(double valordesde) {
 		this.valordesde = valordesde;
 	}
+
 
 	public double getValorhasta() {
 		return this.valorhasta;
@@ -90,6 +91,10 @@ public class CalidadObservacionesMuestraCuba implements Serializable {
 		this.valorhasta = valorhasta;
 	}
 
+
+	//bi-directional many-to-one association to CalidadGrupoObservacionesMuestraCuba
+	@ManyToOne
+	@JoinColumn(name="idcalidadgrupoobservaciones")
 	public CalidadGrupoObservacionesMuestraCuba getCalidadGrupoObservacionesMuestraCuba() {
 		return this.calidadGrupoObservacionesMuestraCuba;
 	}
@@ -98,20 +103,16 @@ public class CalidadObservacionesMuestraCuba implements Serializable {
 		this.calidadGrupoObservacionesMuestraCuba = calidadGrupoObservacionesMuestraCuba;
 	}
 
+
+	//bi-directional many-to-one association to CalidadTipoObservacion
+	@ManyToOne
+	@JoinColumn(name="idcalidadtipoobservacion")
 	public CalidadTipoObservacion getCalidadTipoObservacion() {
 		return this.calidadTipoObservacion;
 	}
 
 	public void setCalidadTipoObservacion(CalidadTipoObservacion calidadTipoObservacion) {
 		this.calidadTipoObservacion = calidadTipoObservacion;
-	}
-
-	public Integer getEstado() {
-		return estado;
-	}
-
-	public void setEstado(Integer estado) {
-		this.estado = estado;
 	}
 
 }

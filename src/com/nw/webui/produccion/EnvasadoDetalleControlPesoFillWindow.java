@@ -43,6 +43,7 @@ import com.nw.model.dao.impl.EnvasadoProcesoDAOJpaImpl;
 import com.nw.model.dao.impl.ProduccionDAOJpaImpl;
 import com.nw.model.dao.impl.ProduccionDetalleOrdenDAOJpaImpl;
 import com.nw.model.dao.impl.TurnoDAOJpaImpl;
+import com.nw.model.dao.impl.UsuarioDAOJpaImpl;
 import com.nw.util.Sistema;
 
 /**
@@ -310,12 +311,15 @@ public class EnvasadoDetalleControlPesoFillWindow extends GenericForwardComposer
 				.obtieneByIdEnvasadoProceso(envasadoProceso.getIdenvasadoproceso())
 				.getEnvasadoControlFillCorteDetalles();
 		
-		if (listaEcfcd != null)
+		if (listaEcfcd != null) {
 			if (listaEcfcd.isEmpty()) {
 				Sistema.mensaje("No se encuentra configurado informacion para la configuracion de cortes.");
 				return;
 			}
-		
+		} else if (listaEcfcd == null) {
+			Sistema.mensaje("No se encuentra configurado informacion para la configuracion de cortes.");
+			return;
+		}
 		lbxCorte.getItems().clear();
 		Listitem li = new Listitem();
 		li.setValue(new EnvasadoControlFillCorteDetalle());
@@ -358,7 +362,7 @@ public class EnvasadoDetalleControlPesoFillWindow extends GenericForwardComposer
 		if (idenvasadocontrolpesofillcabecera!=null)
 			ecpfc.setIdenvasadocontrolpesofillcabecera(idenvasadocontrolpesofillcabecera);
 		ecpfc.setEnvasadoProceso(envasadoProceso);
-		ecpfc.setIdturnolabor(((Turno)lbxTurnoLabor.getSelectedItem().getValue()).getIdturno());
+		ecpfc.setTurno(((Turno)lbxTurnoLabor.getSelectedItem().getValue()));
 		ecpfc.setProduccionDetalleOrden((ProduccionDetalleOrden)lbxItemOrden.getSelectedItem().getValue());
 		
 		ecpfc.setEnvasadoLineaCerradora((EnvasadoLineaCerradora)lbxLineaCerradora.getSelectedItem().getValue());
@@ -378,12 +382,12 @@ public class EnvasadoDetalleControlPesoFillWindow extends GenericForwardComposer
 		ecpfc.setFechareg(new Timestamp(System.currentTimeMillis()));
 		ecpfc.setObservacion(txtObservacion.getValue());
 		//valida la informacion del usuario logueado
-		String idUsurio = (String) Sessions.getCurrent().getAttribute("usuario");
-		if (idUsurio==null) {
+		String idUsuario = (String) Sessions.getCurrent().getAttribute("usuario");
+		if (idUsuario==null) {
 			Sistema.mensaje("Error. Usuario no logueado.");
 			return;
 		}
-		ecpfc.setIdusuario(idUsurio);
+		ecpfc.setUsuario(new UsuarioDAOJpaImpl().getUser(idUsuario));
 		
 		if (guardaDetalle(ecpfc)==null) {
 			Sistema.mensaje("Error al guardar el detalle de la informacion.");
@@ -442,13 +446,13 @@ public class EnvasadoDetalleControlPesoFillWindow extends GenericForwardComposer
 		ecpfd.setFechareg(envasadoControlPesoFillCabecera.getFechareg());
 		ecpfd.setFecharegusuario(new Timestamp(System.currentTimeMillis()));
 		
-		String idUsurio = (String) Sessions.getCurrent().getAttribute("usuario");
-		if (idUsurio==null) {
+		String idUsuario = (String) Sessions.getCurrent().getAttribute("usuario");
+		if (idUsuario==null) {
 			Sistema.mensaje("Error. Usuario no logueado.");
 			return null;
 		}
 		
-		ecpfd.setIdusuario(idUsurio);
+		ecpfd.setUsuario(new UsuarioDAOJpaImpl().getUser(idUsuario));
 		ecpfd.setPesofill(parseDouble(txtPesofill.getValue()));
 		
 		envasadoControlPesoFillCabecera.setEnvasadoControlPesoFillDetalles(Arrays.asList(ecpfd));

@@ -10,32 +10,23 @@ import java.util.List;
  * 
  */
 @Entity
+@NamedQuery(name="Luthy.findAll", query="SELECT l FROM Luthy l")
 public class Luthy implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idluthy;
-
 	private Integer estado;
-
 	private Integer numeroluthy;
-
-	//bi-directional many-to-one association to LuthyMaquinaCerradoraEstandar
-	@OneToMany(mappedBy="luthy")
+	private List<EnvasadoDetalleProcesoCambiosLuthy> envasadoDetalleProcesoCambiosLuthies;
 	private List<LuthyMaquinaCerradoraEstandar> luthyMaquinaCerradoraEstandars;
-
-	//bi-directional many-to-one association to OeeDetalleMediosConDefectoEnvasado
-	@OneToMany(mappedBy="luthy")
 	private List<OeeDetalleMediosConDefectoEnvasado> oeeDetalleMediosConDefectoEnvasados;
-
-	//bi-directional many-to-one association to OeeEnvasadoDetalleVelocidadMaquinaCerradora
-	@OneToMany(mappedBy="luthy")
 	private List<OeeEnvasadoDetalleVelocidadMaquinaCerradora> oeeEnvasadoDetalleVelocidadMaquinaCerradoras;
 
 	public Luthy() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdluthy() {
 		return this.idluthy;
 	}
@@ -43,6 +34,7 @@ public class Luthy implements Serializable {
 	public void setIdluthy(Integer idluthy) {
 		this.idluthy = idluthy;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -52,6 +44,7 @@ public class Luthy implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Integer getNumeroluthy() {
 		return this.numeroluthy;
 	}
@@ -60,6 +53,34 @@ public class Luthy implements Serializable {
 		this.numeroluthy = numeroluthy;
 	}
 
+
+	//bi-directional many-to-one association to EnvasadoDetalleProcesoCambiosLuthy
+	@OneToMany(mappedBy="luthy")
+	public List<EnvasadoDetalleProcesoCambiosLuthy> getEnvasadoDetalleProcesoCambiosLuthies() {
+		return this.envasadoDetalleProcesoCambiosLuthies;
+	}
+
+	public void setEnvasadoDetalleProcesoCambiosLuthies(List<EnvasadoDetalleProcesoCambiosLuthy> envasadoDetalleProcesoCambiosLuthies) {
+		this.envasadoDetalleProcesoCambiosLuthies = envasadoDetalleProcesoCambiosLuthies;
+	}
+
+	public EnvasadoDetalleProcesoCambiosLuthy addEnvasadoDetalleProcesoCambiosLuthy(EnvasadoDetalleProcesoCambiosLuthy envasadoDetalleProcesoCambiosLuthy) {
+		getEnvasadoDetalleProcesoCambiosLuthies().add(envasadoDetalleProcesoCambiosLuthy);
+		envasadoDetalleProcesoCambiosLuthy.setLuthy(this);
+
+		return envasadoDetalleProcesoCambiosLuthy;
+	}
+
+	public EnvasadoDetalleProcesoCambiosLuthy removeEnvasadoDetalleProcesoCambiosLuthy(EnvasadoDetalleProcesoCambiosLuthy envasadoDetalleProcesoCambiosLuthy) {
+		getEnvasadoDetalleProcesoCambiosLuthies().remove(envasadoDetalleProcesoCambiosLuthy);
+		envasadoDetalleProcesoCambiosLuthy.setLuthy(null);
+
+		return envasadoDetalleProcesoCambiosLuthy;
+	}
+
+
+	//bi-directional many-to-one association to LuthyMaquinaCerradoraEstandar
+	@OneToMany(mappedBy="luthy")
 	public List<LuthyMaquinaCerradoraEstandar> getLuthyMaquinaCerradoraEstandars() {
 		return this.luthyMaquinaCerradoraEstandars;
 	}
@@ -68,6 +89,23 @@ public class Luthy implements Serializable {
 		this.luthyMaquinaCerradoraEstandars = luthyMaquinaCerradoraEstandars;
 	}
 
+	public LuthyMaquinaCerradoraEstandar addLuthyMaquinaCerradoraEstandar(LuthyMaquinaCerradoraEstandar luthyMaquinaCerradoraEstandar) {
+		getLuthyMaquinaCerradoraEstandars().add(luthyMaquinaCerradoraEstandar);
+		luthyMaquinaCerradoraEstandar.setLuthy(this);
+
+		return luthyMaquinaCerradoraEstandar;
+	}
+
+	public LuthyMaquinaCerradoraEstandar removeLuthyMaquinaCerradoraEstandar(LuthyMaquinaCerradoraEstandar luthyMaquinaCerradoraEstandar) {
+		getLuthyMaquinaCerradoraEstandars().remove(luthyMaquinaCerradoraEstandar);
+		luthyMaquinaCerradoraEstandar.setLuthy(null);
+
+		return luthyMaquinaCerradoraEstandar;
+	}
+
+
+	//bi-directional many-to-one association to OeeDetalleMediosConDefectoEnvasado
+	@OneToMany(mappedBy="luthy")
 	public List<OeeDetalleMediosConDefectoEnvasado> getOeeDetalleMediosConDefectoEnvasados() {
 		return this.oeeDetalleMediosConDefectoEnvasados;
 	}
@@ -76,12 +114,43 @@ public class Luthy implements Serializable {
 		this.oeeDetalleMediosConDefectoEnvasados = oeeDetalleMediosConDefectoEnvasados;
 	}
 
+	public OeeDetalleMediosConDefectoEnvasado addOeeDetalleMediosConDefectoEnvasado(OeeDetalleMediosConDefectoEnvasado oeeDetalleMediosConDefectoEnvasado) {
+		getOeeDetalleMediosConDefectoEnvasados().add(oeeDetalleMediosConDefectoEnvasado);
+		oeeDetalleMediosConDefectoEnvasado.setLuthy(this);
+
+		return oeeDetalleMediosConDefectoEnvasado;
+	}
+
+	public OeeDetalleMediosConDefectoEnvasado removeOeeDetalleMediosConDefectoEnvasado(OeeDetalleMediosConDefectoEnvasado oeeDetalleMediosConDefectoEnvasado) {
+		getOeeDetalleMediosConDefectoEnvasados().remove(oeeDetalleMediosConDefectoEnvasado);
+		oeeDetalleMediosConDefectoEnvasado.setLuthy(null);
+
+		return oeeDetalleMediosConDefectoEnvasado;
+	}
+
+
+	//bi-directional many-to-one association to OeeEnvasadoDetalleVelocidadMaquinaCerradora
+	@OneToMany(mappedBy="luthy")
 	public List<OeeEnvasadoDetalleVelocidadMaquinaCerradora> getOeeEnvasadoDetalleVelocidadMaquinaCerradoras() {
 		return this.oeeEnvasadoDetalleVelocidadMaquinaCerradoras;
 	}
 
 	public void setOeeEnvasadoDetalleVelocidadMaquinaCerradoras(List<OeeEnvasadoDetalleVelocidadMaquinaCerradora> oeeEnvasadoDetalleVelocidadMaquinaCerradoras) {
 		this.oeeEnvasadoDetalleVelocidadMaquinaCerradoras = oeeEnvasadoDetalleVelocidadMaquinaCerradoras;
+	}
+
+	public OeeEnvasadoDetalleVelocidadMaquinaCerradora addOeeEnvasadoDetalleVelocidadMaquinaCerradora(OeeEnvasadoDetalleVelocidadMaquinaCerradora oeeEnvasadoDetalleVelocidadMaquinaCerradora) {
+		getOeeEnvasadoDetalleVelocidadMaquinaCerradoras().add(oeeEnvasadoDetalleVelocidadMaquinaCerradora);
+		oeeEnvasadoDetalleVelocidadMaquinaCerradora.setLuthy(this);
+
+		return oeeEnvasadoDetalleVelocidadMaquinaCerradora;
+	}
+
+	public OeeEnvasadoDetalleVelocidadMaquinaCerradora removeOeeEnvasadoDetalleVelocidadMaquinaCerradora(OeeEnvasadoDetalleVelocidadMaquinaCerradora oeeEnvasadoDetalleVelocidadMaquinaCerradora) {
+		getOeeEnvasadoDetalleVelocidadMaquinaCerradoras().remove(oeeEnvasadoDetalleVelocidadMaquinaCerradora);
+		oeeEnvasadoDetalleVelocidadMaquinaCerradora.setLuthy(null);
+
+		return oeeEnvasadoDetalleVelocidadMaquinaCerradora;
 	}
 
 }

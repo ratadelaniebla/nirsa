@@ -11,81 +11,37 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="limpieza_calidad_detalle_proceso_bandeja")
+@NamedQuery(name="LimpiezaCalidadDetalleProcesoBandeja.findAll", query="SELECT l FROM LimpiezaCalidadDetalleProcesoBandeja l")
 public class LimpiezaCalidadDetalleProcesoBandeja implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idlimpiezacalidaddetalleprocesobandeja;
-
-	private Long idlimpiezacalidaddetalleprocesobandejaprincipal;
-	
 	private Boolean automatico;
-
 	private String codpersona;
-
 	private String dispositivo;
-
 	private Timestamp fechareg;
-
 	private Integer iddepartamento;
-
-	private double peso;
-
-	private double tara;
-
-	
-	private String tarjetapersonalinea;
-	
+	private Long idlimpiezacalidaddetalleprocesobandejaprincipal;
 	private String observacion;
-
+	private double peso;
+	private double tara;
+	private String tarjetapersonalinea;
 	private Integer ubicacionpersona;
-
 	private String unidad;
-
-	//bi-directional many-to-one association to Area
-	@ManyToOne
-	@JoinColumn(name="idarea")
 	private Area area;
-
-	//bi-directional many-to-one association to LimpiezaCalidadGrupoMaestroSubproducto
-	@ManyToOne
-	@JoinColumn(name="idlimpiezacalidadgrupomaestrosubproducto")
 	private LimpiezaCalidadGrupoMaestroSubproducto limpiezaCalidadGrupoMaestroSubproducto;
-
-	//bi-directional many-to-one association to LimpiezaLinea
-	@ManyToOne
-	@JoinColumn(name="idlinea")
 	private LimpiezaLinea limpiezaLinea;
-
-	//bi-directional many-to-one association to LimpiezaMaterial
-	@ManyToOne
-	@JoinColumn(name="idlimpiezamaterial")
 	private LimpiezaMaterial limpiezaMaterial;
-
-	//bi-directional many-to-one association to LimpiezaProcesoEmpleado
-	@ManyToOne
-	@JoinColumn(name="idlimpiezaprocesoempleado")
 	private LimpiezaProcesoEmpleado limpiezaProcesoEmpleado;
-
-	//bi-directional many-to-one association to LimpiezaProcesoLoteActivo
-	@ManyToOne
-	@JoinColumn(name="idlimpiezaprocesoloteactivo")
 	private LimpiezaProcesoLoteActivo limpiezaProcesoLoteActivo;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public LimpiezaCalidadDetalleProcesoBandeja() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdlimpiezacalidaddetalleprocesobandeja() {
 		return this.idlimpiezacalidaddetalleprocesobandeja;
 	}
@@ -93,6 +49,7 @@ public class LimpiezaCalidadDetalleProcesoBandeja implements Serializable {
 	public void setIdlimpiezacalidaddetalleprocesobandeja(Long idlimpiezacalidaddetalleprocesobandeja) {
 		this.idlimpiezacalidaddetalleprocesobandeja = idlimpiezacalidaddetalleprocesobandeja;
 	}
+
 
 	public Boolean getAutomatico() {
 		return this.automatico;
@@ -102,6 +59,7 @@ public class LimpiezaCalidadDetalleProcesoBandeja implements Serializable {
 		this.automatico = automatico;
 	}
 
+
 	public String getCodpersona() {
 		return this.codpersona;
 	}
@@ -109,6 +67,7 @@ public class LimpiezaCalidadDetalleProcesoBandeja implements Serializable {
 	public void setCodpersona(String codpersona) {
 		this.codpersona = codpersona;
 	}
+
 
 	public String getDispositivo() {
 		return this.dispositivo;
@@ -118,6 +77,7 @@ public class LimpiezaCalidadDetalleProcesoBandeja implements Serializable {
 		this.dispositivo = dispositivo;
 	}
 
+
 	public Timestamp getFechareg() {
 		return this.fechareg;
 	}
@@ -125,6 +85,7 @@ public class LimpiezaCalidadDetalleProcesoBandeja implements Serializable {
 	public void setFechareg(Timestamp fechareg) {
 		this.fechareg = fechareg;
 	}
+
 
 	public Integer getIddepartamento() {
 		return this.iddepartamento;
@@ -134,6 +95,25 @@ public class LimpiezaCalidadDetalleProcesoBandeja implements Serializable {
 		this.iddepartamento = iddepartamento;
 	}
 
+
+	public Long getIdlimpiezacalidaddetalleprocesobandejaprincipal() {
+		return this.idlimpiezacalidaddetalleprocesobandejaprincipal;
+	}
+
+	public void setIdlimpiezacalidaddetalleprocesobandejaprincipal(Long idlimpiezacalidaddetalleprocesobandejaprincipal) {
+		this.idlimpiezacalidaddetalleprocesobandejaprincipal = idlimpiezacalidaddetalleprocesobandejaprincipal;
+	}
+
+
+	public String getObservacion() {
+		return this.observacion;
+	}
+
+	public void setObservacion(String observacion) {
+		this.observacion = observacion;
+	}
+
+
 	public double getPeso() {
 		return this.peso;
 	}
@@ -141,6 +121,7 @@ public class LimpiezaCalidadDetalleProcesoBandeja implements Serializable {
 	public void setPeso(double peso) {
 		this.peso = peso;
 	}
+
 
 	public double getTara() {
 		return this.tara;
@@ -150,6 +131,7 @@ public class LimpiezaCalidadDetalleProcesoBandeja implements Serializable {
 		this.tara = tara;
 	}
 
+
 	public String getTarjetapersonalinea() {
 		return this.tarjetapersonalinea;
 	}
@@ -157,6 +139,7 @@ public class LimpiezaCalidadDetalleProcesoBandeja implements Serializable {
 	public void setTarjetapersonalinea(String tarjetapersonalinea) {
 		this.tarjetapersonalinea = tarjetapersonalinea;
 	}
+
 
 	public Integer getUbicacionpersona() {
 		return this.ubicacionpersona;
@@ -166,6 +149,7 @@ public class LimpiezaCalidadDetalleProcesoBandeja implements Serializable {
 		this.ubicacionpersona = ubicacionpersona;
 	}
 
+
 	public String getUnidad() {
 		return this.unidad;
 	}
@@ -174,6 +158,10 @@ public class LimpiezaCalidadDetalleProcesoBandeja implements Serializable {
 		this.unidad = unidad;
 	}
 
+
+	//bi-directional many-to-one association to Area
+	@ManyToOne
+	@JoinColumn(name="idarea")
 	public Area getArea() {
 		return this.area;
 	}
@@ -182,6 +170,10 @@ public class LimpiezaCalidadDetalleProcesoBandeja implements Serializable {
 		this.area = area;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaCalidadGrupoMaestroSubproducto
+	@ManyToOne
+	@JoinColumn(name="idlimpiezacalidadgrupomaestrosubproducto")
 	public LimpiezaCalidadGrupoMaestroSubproducto getLimpiezaCalidadGrupoMaestroSubproducto() {
 		return this.limpiezaCalidadGrupoMaestroSubproducto;
 	}
@@ -190,6 +182,10 @@ public class LimpiezaCalidadDetalleProcesoBandeja implements Serializable {
 		this.limpiezaCalidadGrupoMaestroSubproducto = limpiezaCalidadGrupoMaestroSubproducto;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaLinea
+	@ManyToOne
+	@JoinColumn(name="idlinea")
 	public LimpiezaLinea getLimpiezaLinea() {
 		return this.limpiezaLinea;
 	}
@@ -198,6 +194,10 @@ public class LimpiezaCalidadDetalleProcesoBandeja implements Serializable {
 		this.limpiezaLinea = limpiezaLinea;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaMaterial
+	@ManyToOne
+	@JoinColumn(name="idlimpiezamaterial")
 	public LimpiezaMaterial getLimpiezaMaterial() {
 		return this.limpiezaMaterial;
 	}
@@ -206,6 +206,10 @@ public class LimpiezaCalidadDetalleProcesoBandeja implements Serializable {
 		this.limpiezaMaterial = limpiezaMaterial;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaProcesoEmpleado
+	@ManyToOne
+	@JoinColumn(name="idlimpiezaprocesoempleado")
 	public LimpiezaProcesoEmpleado getLimpiezaProcesoEmpleado() {
 		return this.limpiezaProcesoEmpleado;
 	}
@@ -214,6 +218,10 @@ public class LimpiezaCalidadDetalleProcesoBandeja implements Serializable {
 		this.limpiezaProcesoEmpleado = limpiezaProcesoEmpleado;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaProcesoLoteActivo
+	@ManyToOne
+	@JoinColumn(name="idlimpiezaprocesoloteactivo")
 	public LimpiezaProcesoLoteActivo getLimpiezaProcesoLoteActivo() {
 		return this.limpiezaProcesoLoteActivo;
 	}
@@ -222,6 +230,10 @@ public class LimpiezaCalidadDetalleProcesoBandeja implements Serializable {
 		this.limpiezaProcesoLoteActivo = limpiezaProcesoLoteActivo;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -230,29 +242,16 @@ public class LimpiezaCalidadDetalleProcesoBandeja implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
-	}
-
-	public Long getIdlimpiezacalidaddetalleprocesobandejaprincipal() {
-		return idlimpiezacalidaddetalleprocesobandejaprincipal;
-	}
-
-	public void setIdlimpiezacalidaddetalleprocesobandejaprincipal(
-			Long idlimpiezacalidaddetalleprocesobandejaprincipal) {
-		this.idlimpiezacalidaddetalleprocesobandejaprincipal = idlimpiezacalidaddetalleprocesobandejaprincipal;
-	}
-
-	public String getObservacion() {
-		return observacion;
-	}
-
-	public void setObservacion(String observacion) {
-		this.observacion = observacion;
 	}
 
 }

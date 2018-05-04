@@ -11,39 +11,24 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="descongelado_detalle_ducha_talla_monitoreo")
+@NamedQuery(name="DescongeladoDetalleDuchaTallaMonitoreo.findAll", query="SELECT d FROM DescongeladoDetalleDuchaTallaMonitoreo d")
 public class DescongeladoDetalleDuchaTallaMonitoreo implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long iddescongeladodetalleduchatallamonitoreo;
-
 	private Timestamp fechacreacionregistro;
-
 	private String horafin;
-
 	private String horainicio;
-
 	private double tiempoperdido;
-
-	//bi-directional many-to-one association to DescongeladoDuchaAperturaCierreDetalle
-	@ManyToOne
-	@JoinColumn(name="iddescongeladoduchaaperturacierredetalle")
 	private DescongeladoDuchaAperturaCierreDetalle descongeladoDuchaAperturaCierreDetalle;
-
-	//bi-directional many-to-one association to DescongeladoSemaforoControl
-	@ManyToOne
-	@JoinColumn(name="iddescongeladosemaforocontrol")
 	private DescongeladoSemaforoControl descongeladoSemaforoControl;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public DescongeladoDetalleDuchaTallaMonitoreo() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIddescongeladodetalleduchatallamonitoreo() {
 		return this.iddescongeladodetalleduchatallamonitoreo;
 	}
@@ -51,6 +36,7 @@ public class DescongeladoDetalleDuchaTallaMonitoreo implements Serializable {
 	public void setIddescongeladodetalleduchatallamonitoreo(Long iddescongeladodetalleduchatallamonitoreo) {
 		this.iddescongeladodetalleduchatallamonitoreo = iddescongeladodetalleduchatallamonitoreo;
 	}
+
 
 	public Timestamp getFechacreacionregistro() {
 		return this.fechacreacionregistro;
@@ -60,6 +46,7 @@ public class DescongeladoDetalleDuchaTallaMonitoreo implements Serializable {
 		this.fechacreacionregistro = fechacreacionregistro;
 	}
 
+
 	public String getHorafin() {
 		return this.horafin;
 	}
@@ -67,6 +54,7 @@ public class DescongeladoDetalleDuchaTallaMonitoreo implements Serializable {
 	public void setHorafin(String horafin) {
 		this.horafin = horafin;
 	}
+
 
 	public String getHorainicio() {
 		return this.horainicio;
@@ -76,6 +64,7 @@ public class DescongeladoDetalleDuchaTallaMonitoreo implements Serializable {
 		this.horainicio = horainicio;
 	}
 
+
 	public double getTiempoperdido() {
 		return this.tiempoperdido;
 	}
@@ -84,6 +73,10 @@ public class DescongeladoDetalleDuchaTallaMonitoreo implements Serializable {
 		this.tiempoperdido = tiempoperdido;
 	}
 
+
+	//bi-directional many-to-one association to DescongeladoDuchaAperturaCierreDetalle
+	@ManyToOne
+	@JoinColumn(name="iddescongeladoduchaaperturacierredetalle")
 	public DescongeladoDuchaAperturaCierreDetalle getDescongeladoDuchaAperturaCierreDetalle() {
 		return this.descongeladoDuchaAperturaCierreDetalle;
 	}
@@ -92,6 +85,10 @@ public class DescongeladoDetalleDuchaTallaMonitoreo implements Serializable {
 		this.descongeladoDuchaAperturaCierreDetalle = descongeladoDuchaAperturaCierreDetalle;
 	}
 
+
+	//bi-directional many-to-one association to DescongeladoSemaforoControl
+	@ManyToOne
+	@JoinColumn(name="iddescongeladosemaforocontrol")
 	public DescongeladoSemaforoControl getDescongeladoSemaforoControl() {
 		return this.descongeladoSemaforoControl;
 	}
@@ -100,6 +97,10 @@ public class DescongeladoDetalleDuchaTallaMonitoreo implements Serializable {
 		this.descongeladoSemaforoControl = descongeladoSemaforoControl;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

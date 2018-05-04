@@ -11,28 +11,21 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="pcc_auditoria_alarmas_lote_cocinas_detalle")
+@NamedQuery(name="PccAuditoriaAlarmasLoteCocinasDetalle.findAll", query="SELECT p FROM PccAuditoriaAlarmasLoteCocinasDetalle p")
 public class PccAuditoriaAlarmasLoteCocinasDetalle implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idpccauditoriaalarmaslotecocinasdetalle;
-
-	@Column(name="alarma_final")
 	private Integer alarmaFinal;
-
 	private Timestamp fechareg;
-
 	private Long idcocinaaperturacierredetalle;
-
-	//bi-directional many-to-one association to PccAuditoriaAlarmasLote
-	@ManyToOne
-	@JoinColumn(name="idpccauditoriaalarmaslote")
 	private PccAuditoriaAlarmasLote pccAuditoriaAlarmasLote;
 
 	public PccAuditoriaAlarmasLoteCocinasDetalle() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdpccauditoriaalarmaslotecocinasdetalle() {
 		return this.idpccauditoriaalarmaslotecocinasdetalle;
 	}
@@ -41,6 +34,8 @@ public class PccAuditoriaAlarmasLoteCocinasDetalle implements Serializable {
 		this.idpccauditoriaalarmaslotecocinasdetalle = idpccauditoriaalarmaslotecocinasdetalle;
 	}
 
+
+	@Column(name="alarma_final")
 	public Integer getAlarmaFinal() {
 		return this.alarmaFinal;
 	}
@@ -48,6 +43,7 @@ public class PccAuditoriaAlarmasLoteCocinasDetalle implements Serializable {
 	public void setAlarmaFinal(Integer alarmaFinal) {
 		this.alarmaFinal = alarmaFinal;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -57,6 +53,7 @@ public class PccAuditoriaAlarmasLoteCocinasDetalle implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public Long getIdcocinaaperturacierredetalle() {
 		return this.idcocinaaperturacierredetalle;
 	}
@@ -65,6 +62,10 @@ public class PccAuditoriaAlarmasLoteCocinasDetalle implements Serializable {
 		this.idcocinaaperturacierredetalle = idcocinaaperturacierredetalle;
 	}
 
+
+	//bi-directional many-to-one association to PccAuditoriaAlarmasLote
+	@ManyToOne
+	@JoinColumn(name="idpccauditoriaalarmaslote")
 	public PccAuditoriaAlarmasLote getPccAuditoriaAlarmasLote() {
 		return this.pccAuditoriaAlarmasLote;
 	}

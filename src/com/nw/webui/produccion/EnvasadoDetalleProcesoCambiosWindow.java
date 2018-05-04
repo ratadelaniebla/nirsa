@@ -38,6 +38,7 @@ import com.nw.model.dao.impl.MaquinaCerradoraDAOJpaImpl;
 import com.nw.model.dao.impl.ProduccionDAOJpaImpl;
 import com.nw.model.dao.impl.ProduccionDetalleOrdenDAOJpaImpl;
 import com.nw.model.dao.impl.TurnoDAOJpaImpl;
+import com.nw.model.dao.impl.UsuarioDAOJpaImpl;
 import com.nw.util.Sistema;
 
 /**
@@ -389,30 +390,30 @@ public class EnvasadoDetalleProcesoCambiosWindow extends GenericForwardComposer{
 			
 			//prepara la informacion de la cabecera
 			
-			edpc.setIdproducciondetalleorden(produccionDetalleOrden.getIdproducciondetalleorden());
-			edpc.setIdenvasadoproceso(envasadoProceso.getIdenvasadoproceso());
+			edpc.setProduccionDetalleOrden(produccionDetalleOrden);
+			edpc.setEnvasadoProceso(envasadoProceso);
 			
 			Turno turno = (Turno)lbxTurnoLabor.getSelectedItem().getValue();
 			if (turno.getIdturno()==null) {
 				Sistema.mensaje("Debe seleccionar un valor para el campo Turno Labor.");
 				return;
 			}
-			edpc.setIdturno(turno.getIdturno());
+			edpc.setTurno(turno);
 			
 			MaquinaCerradora maquinaCerradora = (MaquinaCerradora) lbxMSelladora.getSelectedItem().getValue();
 			if (maquinaCerradora.getIdmaquinacerradora()==null) {
 				Sistema.mensaje("Debe seleccionar un valor para el campo M. Cerradora");
 				return;
 			}
-			edpc.setIdmaquinacerradora(maquinaCerradora.getIdmaquinacerradora());
+			edpc.setMaquinaCerradora(maquinaCerradora);
 			
 			//valida la informacion del usuario logueado
-			String idUsurio = (String) Sessions.getCurrent().getAttribute("usuario");
-			if (idUsurio==null) {
+			String idUsuario = (String) Sessions.getCurrent().getAttribute("usuario");
+			if (idUsuario==null) {
 				Sistema.mensaje("Error. Usuario no logueado.");
 				return;
 			}
-			edpc.setIdusuario(idUsurio);
+			edpc.setUsuario(new UsuarioDAOJpaImpl().getUser(idUsuario));
 			
 			//prepara la informacion del detalle
 			if (lbxLista.getItems().isEmpty()) {
@@ -424,7 +425,7 @@ public class EnvasadoDetalleProcesoCambiosWindow extends GenericForwardComposer{
 				Listcell cellCheck = (Listcell)listitem.getChildren().get(0);
 				if (cellCheck.getId()!=null) {
 					edpcL = new EnvasadoDetalleProcesoCambiosLuthy();
-					edpcL.setIdluthy(Integer.valueOf(cellCheck.getId()));
+					edpcL.setLuthy((Luthy)cellCheck.getValue());
 					edpcL.setEnvasadoDetalleProcesoCambio(edpc);
 					listaEdpcL.add(edpcL);
 				}

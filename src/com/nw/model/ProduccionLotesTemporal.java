@@ -10,24 +10,21 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="produccion_lotes_temporal")
+@NamedQuery(name="ProduccionLotesTemporal.findAll", query="SELECT p FROM ProduccionLotesTemporal p")
 public class ProduccionLotesTemporal implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idproduccionlotestemporal;
-
 	private Integer idlote;
-
 	private Long idproduccion;
-
 	private Integer idturno;
-
 	private double peso;
 
 	public ProduccionLotesTemporal() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdproduccionlotestemporal() {
 		return this.idproduccionlotestemporal;
 	}
@@ -35,6 +32,7 @@ public class ProduccionLotesTemporal implements Serializable {
 	public void setIdproduccionlotestemporal(Integer idproduccionlotestemporal) {
 		this.idproduccionlotestemporal = idproduccionlotestemporal;
 	}
+
 
 	public Integer getIdlote() {
 		return this.idlote;
@@ -44,6 +42,7 @@ public class ProduccionLotesTemporal implements Serializable {
 		this.idlote = idlote;
 	}
 
+
 	public Long getIdproduccion() {
 		return this.idproduccion;
 	}
@@ -52,6 +51,7 @@ public class ProduccionLotesTemporal implements Serializable {
 		this.idproduccion = idproduccion;
 	}
 
+
 	public Integer getIdturno() {
 		return this.idturno;
 	}
@@ -59,6 +59,7 @@ public class ProduccionLotesTemporal implements Serializable {
 	public void setIdturno(Integer idturno) {
 		this.idturno = idturno;
 	}
+
 
 	public double getPeso() {
 		return this.peso;

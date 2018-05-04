@@ -11,69 +11,33 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="limpieza_proceso_empleado_aditoria_movimiento")
+@NamedQuery(name="LimpiezaProcesoEmpleadoAditoriaMovimiento.findAll", query="SELECT l FROM LimpiezaProcesoEmpleadoAditoriaMovimiento l")
 public class LimpiezaProcesoEmpleadoAditoriaMovimiento implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idlimpiezaprocesoempleadoaditoriamovimiento;
-
 	private Integer estado;
-
 	private Timestamp fechareg;
-
 	private Integer idlimpiezacargo;
-
 	private Integer idlimpiezacargoorigen;
-
 	private Integer idlineaorigen;
-
 	private Integer secuencialmovimiento;
-
 	private String tarjetapersonalinea;
-
 	private Integer ubicacion;
-
 	private Integer ubicacionorigen;
-
-	//bi-directional many-to-one association to Empleado
-	@ManyToOne
-	@JoinColumn(name="idempleado")
 	private Empleado empleado;
-
-	//bi-directional many-to-one association to LimpiezaLinea
-	@ManyToOne
-	@JoinColumn(name="idlinea")
 	private LimpiezaLinea limpiezaLinea;
-
-	//bi-directional many-to-one association to LimpiezaLineaGrupo
-	@ManyToOne
-	@JoinColumn(name="idlimpiezalineagrupo")
 	private LimpiezaLineaGrupo limpiezaLineaGrupo;
-
-	//bi-directional many-to-one association to LimpiezaMotivoMovimiento
-	@ManyToOne
-	@JoinColumn(name="idlimpiezamotivomovimiento")
 	private LimpiezaMotivoMovimiento limpiezaMotivoMovimiento;
-
-	//bi-directional many-to-one association to LimpiezaProceso
-	@ManyToOne
-	@JoinColumn(name="idlimpiezaproceso")
 	private LimpiezaProceso limpiezaProceso;
-
-	//bi-directional many-to-one association to OeeParada
-	@ManyToOne
-	@JoinColumn(name="id_oee_parada")
 	private OeeParada oeeParada;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public LimpiezaProcesoEmpleadoAditoriaMovimiento() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdlimpiezaprocesoempleadoaditoriamovimiento() {
 		return this.idlimpiezaprocesoempleadoaditoriamovimiento;
 	}
@@ -81,6 +45,7 @@ public class LimpiezaProcesoEmpleadoAditoriaMovimiento implements Serializable {
 	public void setIdlimpiezaprocesoempleadoaditoriamovimiento(Long idlimpiezaprocesoempleadoaditoriamovimiento) {
 		this.idlimpiezaprocesoempleadoaditoriamovimiento = idlimpiezaprocesoempleadoaditoriamovimiento;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -90,6 +55,7 @@ public class LimpiezaProcesoEmpleadoAditoriaMovimiento implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Timestamp getFechareg() {
 		return this.fechareg;
 	}
@@ -97,6 +63,7 @@ public class LimpiezaProcesoEmpleadoAditoriaMovimiento implements Serializable {
 	public void setFechareg(Timestamp fechareg) {
 		this.fechareg = fechareg;
 	}
+
 
 	public Integer getIdlimpiezacargo() {
 		return this.idlimpiezacargo;
@@ -106,6 +73,7 @@ public class LimpiezaProcesoEmpleadoAditoriaMovimiento implements Serializable {
 		this.idlimpiezacargo = idlimpiezacargo;
 	}
 
+
 	public Integer getIdlimpiezacargoorigen() {
 		return this.idlimpiezacargoorigen;
 	}
@@ -113,6 +81,7 @@ public class LimpiezaProcesoEmpleadoAditoriaMovimiento implements Serializable {
 	public void setIdlimpiezacargoorigen(Integer idlimpiezacargoorigen) {
 		this.idlimpiezacargoorigen = idlimpiezacargoorigen;
 	}
+
 
 	public Integer getIdlineaorigen() {
 		return this.idlineaorigen;
@@ -122,6 +91,7 @@ public class LimpiezaProcesoEmpleadoAditoriaMovimiento implements Serializable {
 		this.idlineaorigen = idlineaorigen;
 	}
 
+
 	public Integer getSecuencialmovimiento() {
 		return this.secuencialmovimiento;
 	}
@@ -129,6 +99,7 @@ public class LimpiezaProcesoEmpleadoAditoriaMovimiento implements Serializable {
 	public void setSecuencialmovimiento(Integer secuencialmovimiento) {
 		this.secuencialmovimiento = secuencialmovimiento;
 	}
+
 
 	public String getTarjetapersonalinea() {
 		return this.tarjetapersonalinea;
@@ -138,6 +109,7 @@ public class LimpiezaProcesoEmpleadoAditoriaMovimiento implements Serializable {
 		this.tarjetapersonalinea = tarjetapersonalinea;
 	}
 
+
 	public Integer getUbicacion() {
 		return this.ubicacion;
 	}
@@ -145,6 +117,7 @@ public class LimpiezaProcesoEmpleadoAditoriaMovimiento implements Serializable {
 	public void setUbicacion(Integer ubicacion) {
 		this.ubicacion = ubicacion;
 	}
+
 
 	public Integer getUbicacionorigen() {
 		return this.ubicacionorigen;
@@ -154,6 +127,10 @@ public class LimpiezaProcesoEmpleadoAditoriaMovimiento implements Serializable {
 		this.ubicacionorigen = ubicacionorigen;
 	}
 
+
+	//bi-directional many-to-one association to Empleado
+	@ManyToOne
+	@JoinColumn(name="idempleado")
 	public Empleado getEmpleado() {
 		return this.empleado;
 	}
@@ -162,6 +139,10 @@ public class LimpiezaProcesoEmpleadoAditoriaMovimiento implements Serializable {
 		this.empleado = empleado;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaLinea
+	@ManyToOne
+	@JoinColumn(name="idlinea")
 	public LimpiezaLinea getLimpiezaLinea() {
 		return this.limpiezaLinea;
 	}
@@ -170,6 +151,10 @@ public class LimpiezaProcesoEmpleadoAditoriaMovimiento implements Serializable {
 		this.limpiezaLinea = limpiezaLinea;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaLineaGrupo
+	@ManyToOne
+	@JoinColumn(name="idlimpiezalineagrupo")
 	public LimpiezaLineaGrupo getLimpiezaLineaGrupo() {
 		return this.limpiezaLineaGrupo;
 	}
@@ -178,6 +163,10 @@ public class LimpiezaProcesoEmpleadoAditoriaMovimiento implements Serializable {
 		this.limpiezaLineaGrupo = limpiezaLineaGrupo;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaMotivoMovimiento
+	@ManyToOne
+	@JoinColumn(name="idlimpiezamotivomovimiento")
 	public LimpiezaMotivoMovimiento getLimpiezaMotivoMovimiento() {
 		return this.limpiezaMotivoMovimiento;
 	}
@@ -186,6 +175,10 @@ public class LimpiezaProcesoEmpleadoAditoriaMovimiento implements Serializable {
 		this.limpiezaMotivoMovimiento = limpiezaMotivoMovimiento;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaProceso
+	@ManyToOne
+	@JoinColumn(name="idlimpiezaproceso")
 	public LimpiezaProceso getLimpiezaProceso() {
 		return this.limpiezaProceso;
 	}
@@ -194,6 +187,10 @@ public class LimpiezaProcesoEmpleadoAditoriaMovimiento implements Serializable {
 		this.limpiezaProceso = limpiezaProceso;
 	}
 
+
+	//bi-directional many-to-one association to OeeParada
+	@ManyToOne
+	@JoinColumn(name="id_oee_parada")
 	public OeeParada getOeeParada() {
 		return this.oeeParada;
 	}
@@ -202,6 +199,10 @@ public class LimpiezaProcesoEmpleadoAditoriaMovimiento implements Serializable {
 		this.oeeParada = oeeParada;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

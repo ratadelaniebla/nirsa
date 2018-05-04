@@ -11,49 +11,29 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="descongelado_detalle_proceso_fin_forzado")
+@NamedQuery(name="DescongeladoDetalleProcesoFinForzado.findAll", query="SELECT d FROM DescongeladoDetalleProcesoFinForzado d")
 public class DescongeladoDetalleProcesoFinForzado implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long iddescongeladodetalleprocesofinforzado;
-
 	private Timestamp fechamovimiento;
-
 	private Timestamp horafin;
-
 	private Timestamp horafinforzado;
-
 	private Timestamp horaingreso;
-
 	private Timestamp horainicio;
-
 	private double horastranscurridas;
-
 	private double minutostranscurridos;
-
 	private String observaciones;
-
 	private double segundostranscurridos;
-
-	//bi-directional many-to-one association to DescongeladoDetalleProceso
-	@ManyToOne
-	@JoinColumn(name="iddescongeladodetalleproceso")
 	private DescongeladoDetalleProceso descongeladoDetalleProceso;
-
-	//bi-directional many-to-one association to DescongeladoDuchaAperturaCierreDetalle
-	@ManyToOne
-	@JoinColumn(name="iddescongeladoduchaaperturacierredetalle")
 	private DescongeladoDuchaAperturaCierreDetalle descongeladoDuchaAperturaCierreDetalle;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public DescongeladoDetalleProcesoFinForzado() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIddescongeladodetalleprocesofinforzado() {
 		return this.iddescongeladodetalleprocesofinforzado;
 	}
@@ -61,6 +41,7 @@ public class DescongeladoDetalleProcesoFinForzado implements Serializable {
 	public void setIddescongeladodetalleprocesofinforzado(Long iddescongeladodetalleprocesofinforzado) {
 		this.iddescongeladodetalleprocesofinforzado = iddescongeladodetalleprocesofinforzado;
 	}
+
 
 	public Timestamp getFechamovimiento() {
 		return this.fechamovimiento;
@@ -70,6 +51,7 @@ public class DescongeladoDetalleProcesoFinForzado implements Serializable {
 		this.fechamovimiento = fechamovimiento;
 	}
 
+
 	public Timestamp getHorafin() {
 		return this.horafin;
 	}
@@ -77,6 +59,7 @@ public class DescongeladoDetalleProcesoFinForzado implements Serializable {
 	public void setHorafin(Timestamp horafin) {
 		this.horafin = horafin;
 	}
+
 
 	public Timestamp getHorafinforzado() {
 		return this.horafinforzado;
@@ -86,6 +69,7 @@ public class DescongeladoDetalleProcesoFinForzado implements Serializable {
 		this.horafinforzado = horafinforzado;
 	}
 
+
 	public Timestamp getHoraingreso() {
 		return this.horaingreso;
 	}
@@ -93,6 +77,7 @@ public class DescongeladoDetalleProcesoFinForzado implements Serializable {
 	public void setHoraingreso(Timestamp horaingreso) {
 		this.horaingreso = horaingreso;
 	}
+
 
 	public Timestamp getHorainicio() {
 		return this.horainicio;
@@ -102,6 +87,7 @@ public class DescongeladoDetalleProcesoFinForzado implements Serializable {
 		this.horainicio = horainicio;
 	}
 
+
 	public double getHorastranscurridas() {
 		return this.horastranscurridas;
 	}
@@ -109,6 +95,7 @@ public class DescongeladoDetalleProcesoFinForzado implements Serializable {
 	public void setHorastranscurridas(double horastranscurridas) {
 		this.horastranscurridas = horastranscurridas;
 	}
+
 
 	public double getMinutostranscurridos() {
 		return this.minutostranscurridos;
@@ -118,6 +105,7 @@ public class DescongeladoDetalleProcesoFinForzado implements Serializable {
 		this.minutostranscurridos = minutostranscurridos;
 	}
 
+
 	public String getObservaciones() {
 		return this.observaciones;
 	}
@@ -125,6 +113,7 @@ public class DescongeladoDetalleProcesoFinForzado implements Serializable {
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
 	}
+
 
 	public double getSegundostranscurridos() {
 		return this.segundostranscurridos;
@@ -134,6 +123,10 @@ public class DescongeladoDetalleProcesoFinForzado implements Serializable {
 		this.segundostranscurridos = segundostranscurridos;
 	}
 
+
+	//bi-directional many-to-one association to DescongeladoDetalleProceso
+	@ManyToOne
+	@JoinColumn(name="iddescongeladodetalleproceso")
 	public DescongeladoDetalleProceso getDescongeladoDetalleProceso() {
 		return this.descongeladoDetalleProceso;
 	}
@@ -142,6 +135,10 @@ public class DescongeladoDetalleProcesoFinForzado implements Serializable {
 		this.descongeladoDetalleProceso = descongeladoDetalleProceso;
 	}
 
+
+	//bi-directional many-to-one association to DescongeladoDuchaAperturaCierreDetalle
+	@ManyToOne
+	@JoinColumn(name="iddescongeladoduchaaperturacierredetalle")
 	public DescongeladoDuchaAperturaCierreDetalle getDescongeladoDuchaAperturaCierreDetalle() {
 		return this.descongeladoDuchaAperturaCierreDetalle;
 	}
@@ -150,6 +147,10 @@ public class DescongeladoDetalleProcesoFinForzado implements Serializable {
 		this.descongeladoDuchaAperturaCierreDetalle = descongeladoDuchaAperturaCierreDetalle;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

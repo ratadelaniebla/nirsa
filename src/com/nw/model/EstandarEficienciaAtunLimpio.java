@@ -10,44 +10,28 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="estandar_eficiencia_atun_limpio")
+@NamedQuery(name="EstandarEficienciaAtunLimpio.findAll", query="SELECT e FROM EstandarEficienciaAtunLimpio e")
 public class EstandarEficienciaAtunLimpio implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idestandareficienciaatunlimpio;
-
 	private double costo;
-
 	private double factor;
-
 	private double factor2;
-
 	private double factor3;
-
 	private String unidadmedida;
-
 	private double valor;
-
 	private double valor1;
-
 	private double valor2;
-
 	private double valor3;
-
-	//bi-directional many-to-one association to LimpiezaTipo
-	@ManyToOne
-	@JoinColumn(name="idlimpiezatipo")
 	private LimpiezaTipo limpiezaTipo;
-
-	//bi-directional many-to-one association to Talla
-	@ManyToOne
-	@JoinColumn(name="idtalla")
 	private Talla talla;
 
 	public EstandarEficienciaAtunLimpio() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdestandareficienciaatunlimpio() {
 		return this.idestandareficienciaatunlimpio;
 	}
@@ -55,6 +39,7 @@ public class EstandarEficienciaAtunLimpio implements Serializable {
 	public void setIdestandareficienciaatunlimpio(Integer idestandareficienciaatunlimpio) {
 		this.idestandareficienciaatunlimpio = idestandareficienciaatunlimpio;
 	}
+
 
 	public double getCosto() {
 		return this.costo;
@@ -64,6 +49,7 @@ public class EstandarEficienciaAtunLimpio implements Serializable {
 		this.costo = costo;
 	}
 
+
 	public double getFactor() {
 		return this.factor;
 	}
@@ -71,6 +57,7 @@ public class EstandarEficienciaAtunLimpio implements Serializable {
 	public void setFactor(double factor) {
 		this.factor = factor;
 	}
+
 
 	public double getFactor2() {
 		return this.factor2;
@@ -80,6 +67,7 @@ public class EstandarEficienciaAtunLimpio implements Serializable {
 		this.factor2 = factor2;
 	}
 
+
 	public double getFactor3() {
 		return this.factor3;
 	}
@@ -87,6 +75,7 @@ public class EstandarEficienciaAtunLimpio implements Serializable {
 	public void setFactor3(double factor3) {
 		this.factor3 = factor3;
 	}
+
 
 	public String getUnidadmedida() {
 		return this.unidadmedida;
@@ -96,6 +85,7 @@ public class EstandarEficienciaAtunLimpio implements Serializable {
 		this.unidadmedida = unidadmedida;
 	}
 
+
 	public double getValor() {
 		return this.valor;
 	}
@@ -103,6 +93,7 @@ public class EstandarEficienciaAtunLimpio implements Serializable {
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
+
 
 	public double getValor1() {
 		return this.valor1;
@@ -112,6 +103,7 @@ public class EstandarEficienciaAtunLimpio implements Serializable {
 		this.valor1 = valor1;
 	}
 
+
 	public double getValor2() {
 		return this.valor2;
 	}
@@ -119,6 +111,7 @@ public class EstandarEficienciaAtunLimpio implements Serializable {
 	public void setValor2(double valor2) {
 		this.valor2 = valor2;
 	}
+
 
 	public double getValor3() {
 		return this.valor3;
@@ -128,6 +121,10 @@ public class EstandarEficienciaAtunLimpio implements Serializable {
 		this.valor3 = valor3;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaTipo
+	@ManyToOne
+	@JoinColumn(name="idlimpiezatipo")
 	public LimpiezaTipo getLimpiezaTipo() {
 		return this.limpiezaTipo;
 	}
@@ -136,6 +133,10 @@ public class EstandarEficienciaAtunLimpio implements Serializable {
 		this.limpiezaTipo = limpiezaTipo;
 	}
 
+
+	//bi-directional many-to-one association to Talla
+	@ManyToOne
+	@JoinColumn(name="idtalla")
 	public Talla getTalla() {
 		return this.talla;
 	}

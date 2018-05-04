@@ -10,20 +10,19 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="tmp_tara")
+@NamedQuery(name="TmpTara.findAll", query="SELECT t FROM TmpTara t")
 public class TmpTara implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idtmptara;
-
 	private String idcajon;
-
 	private Integer tara;
 
 	public TmpTara() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdtmptara() {
 		return this.idtmptara;
 	}
@@ -32,6 +31,7 @@ public class TmpTara implements Serializable {
 		this.idtmptara = idtmptara;
 	}
 
+
 	public String getIdcajon() {
 		return this.idcajon;
 	}
@@ -39,6 +39,7 @@ public class TmpTara implements Serializable {
 	public void setIdcajon(String idcajon) {
 		this.idcajon = idcajon;
 	}
+
 
 	public Integer getTara() {
 		return this.tara;

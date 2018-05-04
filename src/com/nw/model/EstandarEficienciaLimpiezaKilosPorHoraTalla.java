@@ -10,28 +10,20 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="estandar_eficiencia_limpieza_kilos_por_hora_talla")
+@NamedQuery(name="EstandarEficienciaLimpiezaKilosPorHoraTalla.findAll", query="SELECT e FROM EstandarEficienciaLimpiezaKilosPorHoraTalla e")
 public class EstandarEficienciaLimpiezaKilosPorHoraTalla implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idestandareficiencialimpiezakilosporhoratalla;
-
 	private double kghorapersona;
-
-	//bi-directional many-to-one association to LimpiezaTipo
-	@ManyToOne
-	@JoinColumn(name="idlimpiezatipo")
 	private LimpiezaTipo limpiezaTipo;
-
-	//bi-directional many-to-one association to Talla
-	@ManyToOne
-	@JoinColumn(name="idtalla")
 	private Talla talla;
 
 	public EstandarEficienciaLimpiezaKilosPorHoraTalla() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdestandareficiencialimpiezakilosporhoratalla() {
 		return this.idestandareficiencialimpiezakilosporhoratalla;
 	}
@@ -39,6 +31,7 @@ public class EstandarEficienciaLimpiezaKilosPorHoraTalla implements Serializable
 	public void setIdestandareficiencialimpiezakilosporhoratalla(Long idestandareficiencialimpiezakilosporhoratalla) {
 		this.idestandareficiencialimpiezakilosporhoratalla = idestandareficiencialimpiezakilosporhoratalla;
 	}
+
 
 	public double getKghorapersona() {
 		return this.kghorapersona;
@@ -48,6 +41,10 @@ public class EstandarEficienciaLimpiezaKilosPorHoraTalla implements Serializable
 		this.kghorapersona = kghorapersona;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaTipo
+	@ManyToOne
+	@JoinColumn(name="idlimpiezatipo")
 	public LimpiezaTipo getLimpiezaTipo() {
 		return this.limpiezaTipo;
 	}
@@ -56,6 +53,10 @@ public class EstandarEficienciaLimpiezaKilosPorHoraTalla implements Serializable
 		this.limpiezaTipo = limpiezaTipo;
 	}
 
+
+	//bi-directional many-to-one association to Talla
+	@ManyToOne
+	@JoinColumn(name="idtalla")
 	public Talla getTalla() {
 		return this.talla;
 	}

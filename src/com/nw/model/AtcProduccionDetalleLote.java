@@ -12,101 +12,50 @@ import java.util.List;
  */
 @Entity
 @Table(name="atc_produccion_detalle_lote")
+@NamedQuery(name="AtcProduccionDetalleLote.findAll", query="SELECT a FROM AtcProduccionDetalleLote a")
 public class AtcProduccionDetalleLote implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idatcproducciondetallelote;
-
 	private String almacen;
-
 	private double cant;
-
 	private double cf;
-
 	private double cr;
-
 	private String destinos;
-
 	private String destinoscliente;
-
 	private Timestamp fechadescarga;
-
 	private String hic;
-
 	private String hsc;
-
 	private Integer idcliente;
-
 	private Integer idlote;
-
 	private Integer idproducto;
-
 	private Integer itemprograma;
-
 	private String observaciones;
-
 	private String ordenfileteado;
-
 	private String ordenprecocido;
-
 	private String origen;
-
 	private Integer pedidocamara;
-
 	private Integer pescados;
-
 	private double peso;
-
 	private double rt;
-
 	private double salmax;
-
 	private double salmin;
-
 	private String statuspesca;
-
 	private double tempcocina;
-
 	private double tempcurva;
-
-	//bi-directional many-to-one association to AtcLimpiezaDetalleProcesoLote
-	@OneToMany(mappedBy="atcProduccionDetalleLote")
 	private List<AtcLimpiezaDetalleProcesoLote> atcLimpiezaDetalleProcesoLotes;
-
-	//bi-directional many-to-one association to AtcProduccion
-	@ManyToOne
-	@JoinColumn(name="idatcproduccion")
 	private AtcProduccion atcProduccion;
-
-	//bi-directional many-to-one association to AtcTurno
-	@ManyToOne
-	@JoinColumn(name="idatcturno")
 	private AtcTurno atcTurno;
-
-	//bi-directional many-to-one association to BarcoDescarga
-	@ManyToOne
-	@JoinColumn(name="idbarcodescarga")
 	private BarcoDescarga barcoDescarga;
-
-	//bi-directional many-to-one association to BarcoEstibaCuba
-	@ManyToOne
-	@JoinColumn(name="idbarcoestibacuba")
 	private BarcoEstibaCuba barcoEstibaCuba;
-
-	//bi-directional many-to-one association to EspecieTalla
-	@ManyToOne
-	@JoinColumn(name="idespecietalla")
 	private EspecieTalla especieTalla;
-
-	//bi-directional many-to-one association to AtcProduccionDetalleLoteCajon
-	@OneToMany(mappedBy="atcProduccionDetalleLote")
 	private List<AtcProduccionDetalleLoteCajon> atcProduccionDetalleLoteCajons;
 
 	public AtcProduccionDetalleLote() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdatcproducciondetallelote() {
 		return this.idatcproducciondetallelote;
 	}
@@ -114,6 +63,7 @@ public class AtcProduccionDetalleLote implements Serializable {
 	public void setIdatcproducciondetallelote(Long idatcproducciondetallelote) {
 		this.idatcproducciondetallelote = idatcproducciondetallelote;
 	}
+
 
 	public String getAlmacen() {
 		return this.almacen;
@@ -123,6 +73,7 @@ public class AtcProduccionDetalleLote implements Serializable {
 		this.almacen = almacen;
 	}
 
+
 	public double getCant() {
 		return this.cant;
 	}
@@ -130,6 +81,7 @@ public class AtcProduccionDetalleLote implements Serializable {
 	public void setCant(double cant) {
 		this.cant = cant;
 	}
+
 
 	public double getCf() {
 		return this.cf;
@@ -139,6 +91,7 @@ public class AtcProduccionDetalleLote implements Serializable {
 		this.cf = cf;
 	}
 
+
 	public double getCr() {
 		return this.cr;
 	}
@@ -146,6 +99,7 @@ public class AtcProduccionDetalleLote implements Serializable {
 	public void setCr(double cr) {
 		this.cr = cr;
 	}
+
 
 	public String getDestinos() {
 		return this.destinos;
@@ -155,6 +109,7 @@ public class AtcProduccionDetalleLote implements Serializable {
 		this.destinos = destinos;
 	}
 
+
 	public String getDestinoscliente() {
 		return this.destinoscliente;
 	}
@@ -162,6 +117,7 @@ public class AtcProduccionDetalleLote implements Serializable {
 	public void setDestinoscliente(String destinoscliente) {
 		this.destinoscliente = destinoscliente;
 	}
+
 
 	public Timestamp getFechadescarga() {
 		return this.fechadescarga;
@@ -171,6 +127,7 @@ public class AtcProduccionDetalleLote implements Serializable {
 		this.fechadescarga = fechadescarga;
 	}
 
+
 	public String getHic() {
 		return this.hic;
 	}
@@ -178,6 +135,7 @@ public class AtcProduccionDetalleLote implements Serializable {
 	public void setHic(String hic) {
 		this.hic = hic;
 	}
+
 
 	public String getHsc() {
 		return this.hsc;
@@ -187,6 +145,7 @@ public class AtcProduccionDetalleLote implements Serializable {
 		this.hsc = hsc;
 	}
 
+
 	public Integer getIdcliente() {
 		return this.idcliente;
 	}
@@ -194,6 +153,7 @@ public class AtcProduccionDetalleLote implements Serializable {
 	public void setIdcliente(Integer idcliente) {
 		this.idcliente = idcliente;
 	}
+
 
 	public Integer getIdlote() {
 		return this.idlote;
@@ -203,6 +163,7 @@ public class AtcProduccionDetalleLote implements Serializable {
 		this.idlote = idlote;
 	}
 
+
 	public Integer getIdproducto() {
 		return this.idproducto;
 	}
@@ -210,6 +171,7 @@ public class AtcProduccionDetalleLote implements Serializable {
 	public void setIdproducto(Integer idproducto) {
 		this.idproducto = idproducto;
 	}
+
 
 	public Integer getItemprograma() {
 		return this.itemprograma;
@@ -219,6 +181,7 @@ public class AtcProduccionDetalleLote implements Serializable {
 		this.itemprograma = itemprograma;
 	}
 
+
 	public String getObservaciones() {
 		return this.observaciones;
 	}
@@ -226,6 +189,7 @@ public class AtcProduccionDetalleLote implements Serializable {
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
 	}
+
 
 	public String getOrdenfileteado() {
 		return this.ordenfileteado;
@@ -235,6 +199,7 @@ public class AtcProduccionDetalleLote implements Serializable {
 		this.ordenfileteado = ordenfileteado;
 	}
 
+
 	public String getOrdenprecocido() {
 		return this.ordenprecocido;
 	}
@@ -242,6 +207,7 @@ public class AtcProduccionDetalleLote implements Serializable {
 	public void setOrdenprecocido(String ordenprecocido) {
 		this.ordenprecocido = ordenprecocido;
 	}
+
 
 	public String getOrigen() {
 		return this.origen;
@@ -251,6 +217,7 @@ public class AtcProduccionDetalleLote implements Serializable {
 		this.origen = origen;
 	}
 
+
 	public Integer getPedidocamara() {
 		return this.pedidocamara;
 	}
@@ -258,6 +225,7 @@ public class AtcProduccionDetalleLote implements Serializable {
 	public void setPedidocamara(Integer pedidocamara) {
 		this.pedidocamara = pedidocamara;
 	}
+
 
 	public Integer getPescados() {
 		return this.pescados;
@@ -267,6 +235,7 @@ public class AtcProduccionDetalleLote implements Serializable {
 		this.pescados = pescados;
 	}
 
+
 	public double getPeso() {
 		return this.peso;
 	}
@@ -274,6 +243,7 @@ public class AtcProduccionDetalleLote implements Serializable {
 	public void setPeso(double peso) {
 		this.peso = peso;
 	}
+
 
 	public double getRt() {
 		return this.rt;
@@ -283,6 +253,7 @@ public class AtcProduccionDetalleLote implements Serializable {
 		this.rt = rt;
 	}
 
+
 	public double getSalmax() {
 		return this.salmax;
 	}
@@ -290,6 +261,7 @@ public class AtcProduccionDetalleLote implements Serializable {
 	public void setSalmax(double salmax) {
 		this.salmax = salmax;
 	}
+
 
 	public double getSalmin() {
 		return this.salmin;
@@ -299,6 +271,7 @@ public class AtcProduccionDetalleLote implements Serializable {
 		this.salmin = salmin;
 	}
 
+
 	public String getStatuspesca() {
 		return this.statuspesca;
 	}
@@ -306,6 +279,7 @@ public class AtcProduccionDetalleLote implements Serializable {
 	public void setStatuspesca(String statuspesca) {
 		this.statuspesca = statuspesca;
 	}
+
 
 	public double getTempcocina() {
 		return this.tempcocina;
@@ -315,6 +289,7 @@ public class AtcProduccionDetalleLote implements Serializable {
 		this.tempcocina = tempcocina;
 	}
 
+
 	public double getTempcurva() {
 		return this.tempcurva;
 	}
@@ -323,6 +298,9 @@ public class AtcProduccionDetalleLote implements Serializable {
 		this.tempcurva = tempcurva;
 	}
 
+
+	//bi-directional many-to-one association to AtcLimpiezaDetalleProcesoLote
+	@OneToMany(mappedBy="atcProduccionDetalleLote")
 	public List<AtcLimpiezaDetalleProcesoLote> getAtcLimpiezaDetalleProcesoLotes() {
 		return this.atcLimpiezaDetalleProcesoLotes;
 	}
@@ -331,6 +309,24 @@ public class AtcProduccionDetalleLote implements Serializable {
 		this.atcLimpiezaDetalleProcesoLotes = atcLimpiezaDetalleProcesoLotes;
 	}
 
+	public AtcLimpiezaDetalleProcesoLote addAtcLimpiezaDetalleProcesoLote(AtcLimpiezaDetalleProcesoLote atcLimpiezaDetalleProcesoLote) {
+		getAtcLimpiezaDetalleProcesoLotes().add(atcLimpiezaDetalleProcesoLote);
+		atcLimpiezaDetalleProcesoLote.setAtcProduccionDetalleLote(this);
+
+		return atcLimpiezaDetalleProcesoLote;
+	}
+
+	public AtcLimpiezaDetalleProcesoLote removeAtcLimpiezaDetalleProcesoLote(AtcLimpiezaDetalleProcesoLote atcLimpiezaDetalleProcesoLote) {
+		getAtcLimpiezaDetalleProcesoLotes().remove(atcLimpiezaDetalleProcesoLote);
+		atcLimpiezaDetalleProcesoLote.setAtcProduccionDetalleLote(null);
+
+		return atcLimpiezaDetalleProcesoLote;
+	}
+
+
+	//bi-directional many-to-one association to AtcProduccion
+	@ManyToOne
+	@JoinColumn(name="idatcproduccion")
 	public AtcProduccion getAtcProduccion() {
 		return this.atcProduccion;
 	}
@@ -339,6 +335,10 @@ public class AtcProduccionDetalleLote implements Serializable {
 		this.atcProduccion = atcProduccion;
 	}
 
+
+	//bi-directional many-to-one association to AtcTurno
+	@ManyToOne
+	@JoinColumn(name="idatcturno")
 	public AtcTurno getAtcTurno() {
 		return this.atcTurno;
 	}
@@ -347,6 +347,10 @@ public class AtcProduccionDetalleLote implements Serializable {
 		this.atcTurno = atcTurno;
 	}
 
+
+	//bi-directional many-to-one association to BarcoDescarga
+	@ManyToOne
+	@JoinColumn(name="idbarcodescarga")
 	public BarcoDescarga getBarcoDescarga() {
 		return this.barcoDescarga;
 	}
@@ -355,6 +359,10 @@ public class AtcProduccionDetalleLote implements Serializable {
 		this.barcoDescarga = barcoDescarga;
 	}
 
+
+	//bi-directional many-to-one association to BarcoEstibaCuba
+	@ManyToOne
+	@JoinColumn(name="idbarcoestibacuba")
 	public BarcoEstibaCuba getBarcoEstibaCuba() {
 		return this.barcoEstibaCuba;
 	}
@@ -363,6 +371,10 @@ public class AtcProduccionDetalleLote implements Serializable {
 		this.barcoEstibaCuba = barcoEstibaCuba;
 	}
 
+
+	//bi-directional many-to-one association to EspecieTalla
+	@ManyToOne
+	@JoinColumn(name="idespecietalla")
 	public EspecieTalla getEspecieTalla() {
 		return this.especieTalla;
 	}
@@ -371,12 +383,29 @@ public class AtcProduccionDetalleLote implements Serializable {
 		this.especieTalla = especieTalla;
 	}
 
+
+	//bi-directional many-to-one association to AtcProduccionDetalleLoteCajon
+	@OneToMany(mappedBy="atcProduccionDetalleLote")
 	public List<AtcProduccionDetalleLoteCajon> getAtcProduccionDetalleLoteCajons() {
 		return this.atcProduccionDetalleLoteCajons;
 	}
 
 	public void setAtcProduccionDetalleLoteCajons(List<AtcProduccionDetalleLoteCajon> atcProduccionDetalleLoteCajons) {
 		this.atcProduccionDetalleLoteCajons = atcProduccionDetalleLoteCajons;
+	}
+
+	public AtcProduccionDetalleLoteCajon addAtcProduccionDetalleLoteCajon(AtcProduccionDetalleLoteCajon atcProduccionDetalleLoteCajon) {
+		getAtcProduccionDetalleLoteCajons().add(atcProduccionDetalleLoteCajon);
+		atcProduccionDetalleLoteCajon.setAtcProduccionDetalleLote(this);
+
+		return atcProduccionDetalleLoteCajon;
+	}
+
+	public AtcProduccionDetalleLoteCajon removeAtcProduccionDetalleLoteCajon(AtcProduccionDetalleLoteCajon atcProduccionDetalleLoteCajon) {
+		getAtcProduccionDetalleLoteCajons().remove(atcProduccionDetalleLoteCajon);
+		atcProduccionDetalleLoteCajon.setAtcProduccionDetalleLote(null);
+
+		return atcProduccionDetalleLoteCajon;
 	}
 
 }

@@ -12,46 +12,25 @@ import java.util.List;
  */
 @Entity
 @Table(name="especialidades_proceso_enlatado")
+@NamedQuery(name="EspecialidadesProcesoEnlatado.findAll", query="SELECT e FROM EspecialidadesProcesoEnlatado e")
 public class EspecialidadesProcesoEnlatado implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idespecialidadesprocesollenado;
-
 	private Timestamp fechafin;
-
 	private Timestamp fechainicio;
-
 	private Integer total;
-
-	//bi-directional many-to-one association to EspecialidadesIncidenciaEnlatado
-	@OneToMany(mappedBy="especialidadesProcesoEnlatado")
 	private List<EspecialidadesIncidenciaEnlatado> especialidadesIncidenciaEnlatados;
-
-	//bi-directional many-to-one association to EspecialidadesProceso
-	@ManyToOne
-	@JoinColumn(name="idespecialidadesproceso")
 	private EspecialidadesProceso especialidadesProceso;
-
-	//bi-directional many-to-one association to ProduccionDetalleLote
-	@ManyToOne
-	@JoinColumn(name="idproducciondetallelote")
 	private ProduccionDetalleLote produccionDetalleLote;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public EspecialidadesProcesoEnlatado() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdespecialidadesprocesollenado() {
 		return this.idespecialidadesprocesollenado;
 	}
@@ -59,6 +38,7 @@ public class EspecialidadesProcesoEnlatado implements Serializable {
 	public void setIdespecialidadesprocesollenado(Long idespecialidadesprocesollenado) {
 		this.idespecialidadesprocesollenado = idespecialidadesprocesollenado;
 	}
+
 
 	public Timestamp getFechafin() {
 		return this.fechafin;
@@ -68,6 +48,7 @@ public class EspecialidadesProcesoEnlatado implements Serializable {
 		this.fechafin = fechafin;
 	}
 
+
 	public Timestamp getFechainicio() {
 		return this.fechainicio;
 	}
@@ -75,6 +56,7 @@ public class EspecialidadesProcesoEnlatado implements Serializable {
 	public void setFechainicio(Timestamp fechainicio) {
 		this.fechainicio = fechainicio;
 	}
+
 
 	public Integer getTotal() {
 		return this.total;
@@ -84,6 +66,9 @@ public class EspecialidadesProcesoEnlatado implements Serializable {
 		this.total = total;
 	}
 
+
+	//bi-directional many-to-one association to EspecialidadesIncidenciaEnlatado
+	@OneToMany(mappedBy="especialidadesProcesoEnlatado")
 	public List<EspecialidadesIncidenciaEnlatado> getEspecialidadesIncidenciaEnlatados() {
 		return this.especialidadesIncidenciaEnlatados;
 	}
@@ -92,6 +77,24 @@ public class EspecialidadesProcesoEnlatado implements Serializable {
 		this.especialidadesIncidenciaEnlatados = especialidadesIncidenciaEnlatados;
 	}
 
+	public EspecialidadesIncidenciaEnlatado addEspecialidadesIncidenciaEnlatado(EspecialidadesIncidenciaEnlatado especialidadesIncidenciaEnlatado) {
+		getEspecialidadesIncidenciaEnlatados().add(especialidadesIncidenciaEnlatado);
+		especialidadesIncidenciaEnlatado.setEspecialidadesProcesoEnlatado(this);
+
+		return especialidadesIncidenciaEnlatado;
+	}
+
+	public EspecialidadesIncidenciaEnlatado removeEspecialidadesIncidenciaEnlatado(EspecialidadesIncidenciaEnlatado especialidadesIncidenciaEnlatado) {
+		getEspecialidadesIncidenciaEnlatados().remove(especialidadesIncidenciaEnlatado);
+		especialidadesIncidenciaEnlatado.setEspecialidadesProcesoEnlatado(null);
+
+		return especialidadesIncidenciaEnlatado;
+	}
+
+
+	//bi-directional many-to-one association to EspecialidadesProceso
+	@ManyToOne
+	@JoinColumn(name="idespecialidadesproceso")
 	public EspecialidadesProceso getEspecialidadesProceso() {
 		return this.especialidadesProceso;
 	}
@@ -100,6 +103,10 @@ public class EspecialidadesProcesoEnlatado implements Serializable {
 		this.especialidadesProceso = especialidadesProceso;
 	}
 
+
+	//bi-directional many-to-one association to ProduccionDetalleLote
+	@ManyToOne
+	@JoinColumn(name="idproducciondetallelote")
 	public ProduccionDetalleLote getProduccionDetalleLote() {
 		return this.produccionDetalleLote;
 	}
@@ -108,6 +115,10 @@ public class EspecialidadesProcesoEnlatado implements Serializable {
 		this.produccionDetalleLote = produccionDetalleLote;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -116,6 +127,10 @@ public class EspecialidadesProcesoEnlatado implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

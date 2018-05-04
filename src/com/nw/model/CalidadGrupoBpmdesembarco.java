@@ -11,22 +11,19 @@ import java.util.List;
  */
 @Entity
 @Table(name="calidad_grupo_bpmdesembarco")
+@NamedQuery(name="CalidadGrupoBpmdesembarco.findAll", query="SELECT c FROM CalidadGrupoBpmdesembarco c")
 public class CalidadGrupoBpmdesembarco implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idgrupobpmdesembarco;
-
 	private String nombre;
-
-	//bi-directional many-to-one association to CalidadPreguntaBpmdesembarco
-	@OneToMany(mappedBy="calidadGrupoBpmdesembarco")
 	private List<CalidadPreguntaBpmdesembarco> calidadPreguntaBpmdesembarcos;
 
 	public CalidadGrupoBpmdesembarco() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdgrupobpmdesembarco() {
 		return this.idgrupobpmdesembarco;
 	}
@@ -34,6 +31,7 @@ public class CalidadGrupoBpmdesembarco implements Serializable {
 	public void setIdgrupobpmdesembarco(Integer idgrupobpmdesembarco) {
 		this.idgrupobpmdesembarco = idgrupobpmdesembarco;
 	}
+
 
 	public String getNombre() {
 		return this.nombre;
@@ -43,12 +41,29 @@ public class CalidadGrupoBpmdesembarco implements Serializable {
 		this.nombre = nombre;
 	}
 
+
+	//bi-directional many-to-one association to CalidadPreguntaBpmdesembarco
+	@OneToMany(mappedBy="calidadGrupoBpmdesembarco")
 	public List<CalidadPreguntaBpmdesembarco> getCalidadPreguntaBpmdesembarcos() {
 		return this.calidadPreguntaBpmdesembarcos;
 	}
 
 	public void setCalidadPreguntaBpmdesembarcos(List<CalidadPreguntaBpmdesembarco> calidadPreguntaBpmdesembarcos) {
 		this.calidadPreguntaBpmdesembarcos = calidadPreguntaBpmdesembarcos;
+	}
+
+	public CalidadPreguntaBpmdesembarco addCalidadPreguntaBpmdesembarco(CalidadPreguntaBpmdesembarco calidadPreguntaBpmdesembarco) {
+		getCalidadPreguntaBpmdesembarcos().add(calidadPreguntaBpmdesembarco);
+		calidadPreguntaBpmdesembarco.setCalidadGrupoBpmdesembarco(this);
+
+		return calidadPreguntaBpmdesembarco;
+	}
+
+	public CalidadPreguntaBpmdesembarco removeCalidadPreguntaBpmdesembarco(CalidadPreguntaBpmdesembarco calidadPreguntaBpmdesembarco) {
+		getCalidadPreguntaBpmdesembarcos().remove(calidadPreguntaBpmdesembarco);
+		calidadPreguntaBpmdesembarco.setCalidadGrupoBpmdesembarco(null);
+
+		return calidadPreguntaBpmdesembarco;
 	}
 
 }

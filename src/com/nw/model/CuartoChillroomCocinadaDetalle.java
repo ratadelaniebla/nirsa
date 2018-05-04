@@ -11,33 +11,21 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="cuarto_chillroom_cocinada_detalle")
+@NamedQuery(name="CuartoChillroomCocinadaDetalle.findAll", query="SELECT c FROM CuartoChillroomCocinadaDetalle c")
 public class CuartoChillroomCocinadaDetalle implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcuartochillroomcocinadadetalle;
-
 	private Timestamp fechareg;
-
-	//bi-directional many-to-one association to CocinaAperturaCierreDetalle
-	@ManyToOne
-	@JoinColumn(name="idcocinaaperturacierredetalle")
 	private CocinaAperturaCierreDetalle cocinaAperturaCierreDetalle;
-
-	//bi-directional many-to-one association to Cuartochillroom
-	@ManyToOne
-	@JoinColumn(name="idcuartochillroom")
 	private Cuartochillroom cuartochillroom;
-
-	//bi-directional many-to-one association to EvisceradoDetalleProceso
-	@ManyToOne
-	@JoinColumn(name="idevisceradodetalleproceso")
 	private EvisceradoDetalleProceso evisceradoDetalleProceso;
 
 	public CuartoChillroomCocinadaDetalle() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcuartochillroomcocinadadetalle() {
 		return this.idcuartochillroomcocinadadetalle;
 	}
@@ -45,6 +33,7 @@ public class CuartoChillroomCocinadaDetalle implements Serializable {
 	public void setIdcuartochillroomcocinadadetalle(Long idcuartochillroomcocinadadetalle) {
 		this.idcuartochillroomcocinadadetalle = idcuartochillroomcocinadadetalle;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -54,6 +43,10 @@ public class CuartoChillroomCocinadaDetalle implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
+	//bi-directional many-to-one association to CocinaAperturaCierreDetalle
+	@ManyToOne
+	@JoinColumn(name="idcocinaaperturacierredetalle")
 	public CocinaAperturaCierreDetalle getCocinaAperturaCierreDetalle() {
 		return this.cocinaAperturaCierreDetalle;
 	}
@@ -62,6 +55,10 @@ public class CuartoChillroomCocinadaDetalle implements Serializable {
 		this.cocinaAperturaCierreDetalle = cocinaAperturaCierreDetalle;
 	}
 
+
+	//bi-directional many-to-one association to Cuartochillroom
+	@ManyToOne
+	@JoinColumn(name="idcuartochillroom")
 	public Cuartochillroom getCuartochillroom() {
 		return this.cuartochillroom;
 	}
@@ -70,6 +67,10 @@ public class CuartoChillroomCocinadaDetalle implements Serializable {
 		this.cuartochillroom = cuartochillroom;
 	}
 
+
+	//bi-directional many-to-one association to EvisceradoDetalleProceso
+	@ManyToOne
+	@JoinColumn(name="idevisceradodetalleproceso")
 	public EvisceradoDetalleProceso getEvisceradoDetalleProceso() {
 		return this.evisceradoDetalleProceso;
 	}

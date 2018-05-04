@@ -12,72 +12,33 @@ import java.util.List;
  */
 @Entity
 @Table(name="rackeo_proceso")
+@NamedQuery(name="RackeoProceso.findAll", query="SELECT r FROM RackeoProceso r")
 public class RackeoProceso implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idrackeoproceso;
-
 	private Integer estado;
-
 	private Timestamp fechareg;
-
-	@Column(name="objetivo_general")
 	private double objetivoGeneral;
-
 	private double oee;
-
-	@Column(name="periodo_base_calidad_rackeo")
 	private double periodoBaseCalidadRackeo;
-
-	@Column(name="periodo_base_general")
 	private double periodoBaseGeneral;
-
-	@Column(name="periodo_base_tiempo_rackeo")
 	private double periodoBaseTiempoRackeo;
-
-	@Column(name="periodo_base_velocidad_rackeo")
 	private double periodoBaseVelocidadRackeo;
-
 	private Integer piezas;
-
-	//bi-directional many-to-one association to DescongeladoDetalleProceso
-	@OneToMany(mappedBy="rackeoProceso")
 	private List<DescongeladoDetalleProceso> descongeladoDetalleProcesos;
-
-	//bi-directional many-to-one association to OeePeriodoBaseObjetivo
-	@ManyToOne
-	@JoinColumn(name="id_oee_periodo_base_objetivo")
 	private OeePeriodoBaseObjetivo oeePeriodoBaseObjetivo;
-
-	//bi-directional many-to-one association to ProcesoAperturaCierre
-	@ManyToOne
-	@JoinColumn(name="idprocesoaperturacierre")
 	private ProcesoAperturaCierre procesoAperturaCierre;
-
-	//bi-directional many-to-one association to Produccion
-	@ManyToOne
-	@JoinColumn(name="idproduccion")
 	private Produccion produccion;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
-
-	//bi-directional many-to-one association to RackeoProcesoEmpleado
-	@OneToMany(mappedBy="rackeoProceso")
 	private List<RackeoProcesoEmpleado> rackeoProcesoEmpleados;
 
 	public RackeoProceso() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdrackeoproceso() {
 		return this.idrackeoproceso;
 	}
@@ -85,6 +46,7 @@ public class RackeoProceso implements Serializable {
 	public void setIdrackeoproceso(Long idrackeoproceso) {
 		this.idrackeoproceso = idrackeoproceso;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -94,6 +56,7 @@ public class RackeoProceso implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Timestamp getFechareg() {
 		return this.fechareg;
 	}
@@ -102,6 +65,8 @@ public class RackeoProceso implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
+	@Column(name="objetivo_general")
 	public double getObjetivoGeneral() {
 		return this.objetivoGeneral;
 	}
@@ -109,6 +74,7 @@ public class RackeoProceso implements Serializable {
 	public void setObjetivoGeneral(double objetivoGeneral) {
 		this.objetivoGeneral = objetivoGeneral;
 	}
+
 
 	public double getOee() {
 		return this.oee;
@@ -118,6 +84,8 @@ public class RackeoProceso implements Serializable {
 		this.oee = oee;
 	}
 
+
+	@Column(name="periodo_base_calidad_rackeo")
 	public double getPeriodoBaseCalidadRackeo() {
 		return this.periodoBaseCalidadRackeo;
 	}
@@ -126,6 +94,8 @@ public class RackeoProceso implements Serializable {
 		this.periodoBaseCalidadRackeo = periodoBaseCalidadRackeo;
 	}
 
+
+	@Column(name="periodo_base_general")
 	public double getPeriodoBaseGeneral() {
 		return this.periodoBaseGeneral;
 	}
@@ -134,6 +104,8 @@ public class RackeoProceso implements Serializable {
 		this.periodoBaseGeneral = periodoBaseGeneral;
 	}
 
+
+	@Column(name="periodo_base_tiempo_rackeo")
 	public double getPeriodoBaseTiempoRackeo() {
 		return this.periodoBaseTiempoRackeo;
 	}
@@ -142,6 +114,8 @@ public class RackeoProceso implements Serializable {
 		this.periodoBaseTiempoRackeo = periodoBaseTiempoRackeo;
 	}
 
+
+	@Column(name="periodo_base_velocidad_rackeo")
 	public double getPeriodoBaseVelocidadRackeo() {
 		return this.periodoBaseVelocidadRackeo;
 	}
@@ -149,6 +123,7 @@ public class RackeoProceso implements Serializable {
 	public void setPeriodoBaseVelocidadRackeo(double periodoBaseVelocidadRackeo) {
 		this.periodoBaseVelocidadRackeo = periodoBaseVelocidadRackeo;
 	}
+
 
 	public Integer getPiezas() {
 		return this.piezas;
@@ -158,6 +133,9 @@ public class RackeoProceso implements Serializable {
 		this.piezas = piezas;
 	}
 
+
+	//bi-directional many-to-one association to DescongeladoDetalleProceso
+	@OneToMany(mappedBy="rackeoProceso")
 	public List<DescongeladoDetalleProceso> getDescongeladoDetalleProcesos() {
 		return this.descongeladoDetalleProcesos;
 	}
@@ -166,6 +144,24 @@ public class RackeoProceso implements Serializable {
 		this.descongeladoDetalleProcesos = descongeladoDetalleProcesos;
 	}
 
+	public DescongeladoDetalleProceso addDescongeladoDetalleProceso(DescongeladoDetalleProceso descongeladoDetalleProceso) {
+		getDescongeladoDetalleProcesos().add(descongeladoDetalleProceso);
+		descongeladoDetalleProceso.setRackeoProceso(this);
+
+		return descongeladoDetalleProceso;
+	}
+
+	public DescongeladoDetalleProceso removeDescongeladoDetalleProceso(DescongeladoDetalleProceso descongeladoDetalleProceso) {
+		getDescongeladoDetalleProcesos().remove(descongeladoDetalleProceso);
+		descongeladoDetalleProceso.setRackeoProceso(null);
+
+		return descongeladoDetalleProceso;
+	}
+
+
+	//bi-directional many-to-one association to OeePeriodoBaseObjetivo
+	@ManyToOne
+	@JoinColumn(name="id_oee_periodo_base_objetivo")
 	public OeePeriodoBaseObjetivo getOeePeriodoBaseObjetivo() {
 		return this.oeePeriodoBaseObjetivo;
 	}
@@ -174,6 +170,10 @@ public class RackeoProceso implements Serializable {
 		this.oeePeriodoBaseObjetivo = oeePeriodoBaseObjetivo;
 	}
 
+
+	//bi-directional many-to-one association to ProcesoAperturaCierre
+	@ManyToOne
+	@JoinColumn(name="idprocesoaperturacierre")
 	public ProcesoAperturaCierre getProcesoAperturaCierre() {
 		return this.procesoAperturaCierre;
 	}
@@ -182,6 +182,10 @@ public class RackeoProceso implements Serializable {
 		this.procesoAperturaCierre = procesoAperturaCierre;
 	}
 
+
+	//bi-directional many-to-one association to Produccion
+	@ManyToOne
+	@JoinColumn(name="idproduccion")
 	public Produccion getProduccion() {
 		return this.produccion;
 	}
@@ -190,6 +194,10 @@ public class RackeoProceso implements Serializable {
 		this.produccion = produccion;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -198,6 +206,10 @@ public class RackeoProceso implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}
@@ -206,12 +218,29 @@ public class RackeoProceso implements Serializable {
 		this.usuario = usuario;
 	}
 
+
+	//bi-directional many-to-one association to RackeoProcesoEmpleado
+	@OneToMany(mappedBy="rackeoProceso")
 	public List<RackeoProcesoEmpleado> getRackeoProcesoEmpleados() {
 		return this.rackeoProcesoEmpleados;
 	}
 
 	public void setRackeoProcesoEmpleados(List<RackeoProcesoEmpleado> rackeoProcesoEmpleados) {
 		this.rackeoProcesoEmpleados = rackeoProcesoEmpleados;
+	}
+
+	public RackeoProcesoEmpleado addRackeoProcesoEmpleado(RackeoProcesoEmpleado rackeoProcesoEmpleado) {
+		getRackeoProcesoEmpleados().add(rackeoProcesoEmpleado);
+		rackeoProcesoEmpleado.setRackeoProceso(this);
+
+		return rackeoProcesoEmpleado;
+	}
+
+	public RackeoProcesoEmpleado removeRackeoProcesoEmpleado(RackeoProcesoEmpleado rackeoProcesoEmpleado) {
+		getRackeoProcesoEmpleados().remove(rackeoProcesoEmpleado);
+		rackeoProcesoEmpleado.setRackeoProceso(null);
+
+		return rackeoProcesoEmpleado;
 	}
 
 }

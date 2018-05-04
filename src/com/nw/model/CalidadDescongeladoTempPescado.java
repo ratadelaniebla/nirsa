@@ -12,39 +12,23 @@ import java.util.List;
  */
 @Entity
 @Table(name="calidad_descongelado_temp_pescado")
+@NamedQuery(name="CalidadDescongeladoTempPescado.findAll", query="SELECT c FROM CalidadDescongeladoTempPescado c")
 public class CalidadDescongeladoTempPescado implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcalidaddescongeladotemppescado;
-
 	private Timestamp fechareg;
-
 	private String observacion;
-
-	//bi-directional many-to-one association to CalidadDescongeladoDetalleTempPescado
-	@OneToMany(mappedBy="calidadDescongeladoTempPescado")
 	private List<CalidadDescongeladoDetalleTempPescado> calidadDescongeladoDetalleTempPescados;
-
-	//bi-directional many-to-one association to DescongeladoDetalleProceso
-	@ManyToOne
-	@JoinColumn(name="iddescongeladodetalleproceso")
 	private DescongeladoDetalleProceso descongeladoDetalleProceso;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public CalidadDescongeladoTempPescado() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcalidaddescongeladotemppescado() {
 		return this.idcalidaddescongeladotemppescado;
 	}
@@ -52,6 +36,7 @@ public class CalidadDescongeladoTempPescado implements Serializable {
 	public void setIdcalidaddescongeladotemppescado(Long idcalidaddescongeladotemppescado) {
 		this.idcalidaddescongeladotemppescado = idcalidaddescongeladotemppescado;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -61,6 +46,7 @@ public class CalidadDescongeladoTempPescado implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public String getObservacion() {
 		return this.observacion;
 	}
@@ -69,6 +55,9 @@ public class CalidadDescongeladoTempPescado implements Serializable {
 		this.observacion = observacion;
 	}
 
+
+	//bi-directional many-to-one association to CalidadDescongeladoDetalleTempPescado
+	@OneToMany(mappedBy="calidadDescongeladoTempPescado")
 	public List<CalidadDescongeladoDetalleTempPescado> getCalidadDescongeladoDetalleTempPescados() {
 		return this.calidadDescongeladoDetalleTempPescados;
 	}
@@ -77,6 +66,24 @@ public class CalidadDescongeladoTempPescado implements Serializable {
 		this.calidadDescongeladoDetalleTempPescados = calidadDescongeladoDetalleTempPescados;
 	}
 
+	public CalidadDescongeladoDetalleTempPescado addCalidadDescongeladoDetalleTempPescado(CalidadDescongeladoDetalleTempPescado calidadDescongeladoDetalleTempPescado) {
+		getCalidadDescongeladoDetalleTempPescados().add(calidadDescongeladoDetalleTempPescado);
+		calidadDescongeladoDetalleTempPescado.setCalidadDescongeladoTempPescado(this);
+
+		return calidadDescongeladoDetalleTempPescado;
+	}
+
+	public CalidadDescongeladoDetalleTempPescado removeCalidadDescongeladoDetalleTempPescado(CalidadDescongeladoDetalleTempPescado calidadDescongeladoDetalleTempPescado) {
+		getCalidadDescongeladoDetalleTempPescados().remove(calidadDescongeladoDetalleTempPescado);
+		calidadDescongeladoDetalleTempPescado.setCalidadDescongeladoTempPescado(null);
+
+		return calidadDescongeladoDetalleTempPescado;
+	}
+
+
+	//bi-directional many-to-one association to DescongeladoDetalleProceso
+	@ManyToOne
+	@JoinColumn(name="iddescongeladodetalleproceso")
 	public DescongeladoDetalleProceso getDescongeladoDetalleProceso() {
 		return this.descongeladoDetalleProceso;
 	}
@@ -85,6 +92,10 @@ public class CalidadDescongeladoTempPescado implements Serializable {
 		this.descongeladoDetalleProceso = descongeladoDetalleProceso;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -93,6 +104,10 @@ public class CalidadDescongeladoTempPescado implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

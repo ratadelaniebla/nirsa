@@ -12,39 +12,23 @@ import java.util.List;
  */
 @Entity
 @Table(name="coccion_proceso")
+@NamedQuery(name="CoccionProceso.findAll", query="SELECT c FROM CoccionProceso c")
 public class CoccionProceso implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcoccionproceso;
-
 	private Integer estado;
-
 	private Timestamp fechareg;
-
-	//bi-directional many-to-one association to CoccionDetalleProcesoCoche
-	@OneToMany(mappedBy="coccionProceso")
 	private List<CoccionDetalleProcesoCoche> coccionDetalleProcesoCoches;
-
-	//bi-directional many-to-one association to ObservacionesProceso
-	@ManyToOne
-	@JoinColumn(name="idobservacionesprocesos")
 	private ObservacionesProceso observacionesProceso;
-
-	//bi-directional many-to-one association to Produccion
-	@ManyToOne
-	@JoinColumn(name="idproduccion")
 	private Produccion produccion;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public CoccionProceso() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcoccionproceso() {
 		return this.idcoccionproceso;
 	}
@@ -52,6 +36,7 @@ public class CoccionProceso implements Serializable {
 	public void setIdcoccionproceso(Long idcoccionproceso) {
 		this.idcoccionproceso = idcoccionproceso;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -61,6 +46,7 @@ public class CoccionProceso implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Timestamp getFechareg() {
 		return this.fechareg;
 	}
@@ -69,6 +55,9 @@ public class CoccionProceso implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
+	//bi-directional many-to-one association to CoccionDetalleProcesoCoche
+	@OneToMany(mappedBy="coccionProceso")
 	public List<CoccionDetalleProcesoCoche> getCoccionDetalleProcesoCoches() {
 		return this.coccionDetalleProcesoCoches;
 	}
@@ -77,6 +66,24 @@ public class CoccionProceso implements Serializable {
 		this.coccionDetalleProcesoCoches = coccionDetalleProcesoCoches;
 	}
 
+	public CoccionDetalleProcesoCoche addCoccionDetalleProcesoCoch(CoccionDetalleProcesoCoche coccionDetalleProcesoCoch) {
+		getCoccionDetalleProcesoCoches().add(coccionDetalleProcesoCoch);
+		coccionDetalleProcesoCoch.setCoccionProceso(this);
+
+		return coccionDetalleProcesoCoch;
+	}
+
+	public CoccionDetalleProcesoCoche removeCoccionDetalleProcesoCoch(CoccionDetalleProcesoCoche coccionDetalleProcesoCoch) {
+		getCoccionDetalleProcesoCoches().remove(coccionDetalleProcesoCoch);
+		coccionDetalleProcesoCoch.setCoccionProceso(null);
+
+		return coccionDetalleProcesoCoch;
+	}
+
+
+	//bi-directional many-to-one association to ObservacionesProceso
+	@ManyToOne
+	@JoinColumn(name="idobservacionesprocesos")
 	public ObservacionesProceso getObservacionesProceso() {
 		return this.observacionesProceso;
 	}
@@ -85,6 +92,10 @@ public class CoccionProceso implements Serializable {
 		this.observacionesProceso = observacionesProceso;
 	}
 
+
+	//bi-directional many-to-one association to Produccion
+	@ManyToOne
+	@JoinColumn(name="idproduccion")
 	public Produccion getProduccion() {
 		return this.produccion;
 	}
@@ -93,6 +104,10 @@ public class CoccionProceso implements Serializable {
 		this.produccion = produccion;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

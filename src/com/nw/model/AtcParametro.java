@@ -10,22 +10,20 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="atc_parametro")
+@NamedQuery(name="AtcParametro.findAll", query="SELECT a FROM AtcParametro a")
 public class AtcParametro implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idatcparametro;
-
 	private String descripcionparametro;
-
 	private String permiso;
-
 	private double valor;
 
 	public AtcParametro() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdatcparametro() {
 		return this.idatcparametro;
 	}
@@ -33,6 +31,7 @@ public class AtcParametro implements Serializable {
 	public void setIdatcparametro(Integer idatcparametro) {
 		this.idatcparametro = idatcparametro;
 	}
+
 
 	public String getDescripcionparametro() {
 		return this.descripcionparametro;
@@ -42,6 +41,7 @@ public class AtcParametro implements Serializable {
 		this.descripcionparametro = descripcionparametro;
 	}
 
+
 	public String getPermiso() {
 		return this.permiso;
 	}
@@ -49,6 +49,7 @@ public class AtcParametro implements Serializable {
 	public void setPermiso(String permiso) {
 		this.permiso = permiso;
 	}
+
 
 	public double getValor() {
 		return this.valor;

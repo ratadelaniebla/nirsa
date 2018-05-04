@@ -10,26 +10,19 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="oee_detalle_parada_rackeo")
+@NamedQuery(name="OeeDetalleParadaRackeo.findAll", query="SELECT o FROM OeeDetalleParadaRackeo o")
 public class OeeDetalleParadaRackeo implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idoeedetalleparadarackeo;
-
-	//bi-directional many-to-one association to DescongeladoDetalleProceso
-	@ManyToOne
-	@JoinColumn(name="iddescongeladodetalleproceso")
 	private DescongeladoDetalleProceso descongeladoDetalleProceso;
-
-	//bi-directional many-to-one association to OeeDetalleParada
-	@ManyToOne
-	@JoinColumn(name="idoeedetalleparada")
 	private OeeDetalleParada oeeDetalleParada;
 
 	public OeeDetalleParadaRackeo() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdoeedetalleparadarackeo() {
 		return this.idoeedetalleparadarackeo;
 	}
@@ -38,6 +31,10 @@ public class OeeDetalleParadaRackeo implements Serializable {
 		this.idoeedetalleparadarackeo = idoeedetalleparadarackeo;
 	}
 
+
+	//bi-directional many-to-one association to DescongeladoDetalleProceso
+	@ManyToOne
+	@JoinColumn(name="iddescongeladodetalleproceso")
 	public DescongeladoDetalleProceso getDescongeladoDetalleProceso() {
 		return this.descongeladoDetalleProceso;
 	}
@@ -46,6 +43,10 @@ public class OeeDetalleParadaRackeo implements Serializable {
 		this.descongeladoDetalleProceso = descongeladoDetalleProceso;
 	}
 
+
+	//bi-directional many-to-one association to OeeDetalleParada
+	@ManyToOne
+	@JoinColumn(name="idoeedetalleparada")
 	public OeeDetalleParada getOeeDetalleParada() {
 		return this.oeeDetalleParada;
 	}

@@ -10,28 +10,20 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="correos_pcc_parametros")
+@NamedQuery(name="CorreosPccParametro.findAll", query="SELECT c FROM CorreosPccParametro c")
 public class CorreosPccParametro implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcorreopccparametros;
-
 	private Boolean enviar;
-
-	//bi-directional many-to-one association to Correo
-	@ManyToOne
-	@JoinColumn(name="idcorreo")
 	private Correo correo;
-
-	//bi-directional many-to-one association to PccParametro
-	@ManyToOne
-	@JoinColumn(name="idpccparametros")
 	private PccParametro pccParametro;
 
 	public CorreosPccParametro() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcorreopccparametros() {
 		return this.idcorreopccparametros;
 	}
@@ -39,6 +31,7 @@ public class CorreosPccParametro implements Serializable {
 	public void setIdcorreopccparametros(Long idcorreopccparametros) {
 		this.idcorreopccparametros = idcorreopccparametros;
 	}
+
 
 	public Boolean getEnviar() {
 		return this.enviar;
@@ -48,6 +41,10 @@ public class CorreosPccParametro implements Serializable {
 		this.enviar = enviar;
 	}
 
+
+	//bi-directional many-to-one association to Correo
+	@ManyToOne
+	@JoinColumn(name="idcorreo")
 	public Correo getCorreo() {
 		return this.correo;
 	}
@@ -56,6 +53,10 @@ public class CorreosPccParametro implements Serializable {
 		this.correo = correo;
 	}
 
+
+	//bi-directional many-to-one association to PccParametro
+	@ManyToOne
+	@JoinColumn(name="idpccparametros")
 	public PccParametro getPccParametro() {
 		return this.pccParametro;
 	}

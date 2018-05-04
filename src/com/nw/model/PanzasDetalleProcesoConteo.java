@@ -11,37 +11,23 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="panzas_detalle_proceso_conteo")
+@NamedQuery(name="PanzasDetalleProcesoConteo.findAll", query="SELECT p FROM PanzasDetalleProcesoConteo p")
 public class PanzasDetalleProcesoConteo implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idpanzasdetalleprocesoconteo;
-
 	private Timestamp fechareg;
-
 	private Integer idcoche;
-
 	private Integer latas;
-
-	//bi-directional many-to-one association to PanzasDetalleProcesoLote
-	@ManyToOne
-	@JoinColumn(name="idpanzasdetalleprocesolote")
 	private PanzasDetalleProcesoLote panzasDetalleProcesoLote;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public PanzasDetalleProcesoConteo() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdpanzasdetalleprocesoconteo() {
 		return this.idpanzasdetalleprocesoconteo;
 	}
@@ -49,6 +35,7 @@ public class PanzasDetalleProcesoConteo implements Serializable {
 	public void setIdpanzasdetalleprocesoconteo(Long idpanzasdetalleprocesoconteo) {
 		this.idpanzasdetalleprocesoconteo = idpanzasdetalleprocesoconteo;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -58,6 +45,7 @@ public class PanzasDetalleProcesoConteo implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public Integer getIdcoche() {
 		return this.idcoche;
 	}
@@ -65,6 +53,7 @@ public class PanzasDetalleProcesoConteo implements Serializable {
 	public void setIdcoche(Integer idcoche) {
 		this.idcoche = idcoche;
 	}
+
 
 	public Integer getLatas() {
 		return this.latas;
@@ -74,6 +63,10 @@ public class PanzasDetalleProcesoConteo implements Serializable {
 		this.latas = latas;
 	}
 
+
+	//bi-directional many-to-one association to PanzasDetalleProcesoLote
+	@ManyToOne
+	@JoinColumn(name="idpanzasdetalleprocesolote")
 	public PanzasDetalleProcesoLote getPanzasDetalleProcesoLote() {
 		return this.panzasDetalleProcesoLote;
 	}
@@ -82,6 +75,10 @@ public class PanzasDetalleProcesoConteo implements Serializable {
 		this.panzasDetalleProcesoLote = panzasDetalleProcesoLote;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -90,6 +87,10 @@ public class PanzasDetalleProcesoConteo implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

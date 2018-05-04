@@ -10,30 +10,21 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="estandar_eficiencia_atun")
+@NamedQuery(name="EstandarEficienciaAtun.findAll", query="SELECT e FROM EstandarEficienciaAtun e")
 public class EstandarEficienciaAtun implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idestandareficienciaatun;
-
 	private String unidadmedida;
-
 	private double valor;
-
-	//bi-directional many-to-one association to LimpiezaTipo
-	@ManyToOne
-	@JoinColumn(name="idlimpiezatipo")
 	private LimpiezaTipo limpiezaTipo;
-
-	//bi-directional many-to-one association to Talla
-	@ManyToOne
-	@JoinColumn(name="idtalla")
 	private Talla talla;
 
 	public EstandarEficienciaAtun() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdestandareficienciaatun() {
 		return this.idestandareficienciaatun;
 	}
@@ -41,6 +32,7 @@ public class EstandarEficienciaAtun implements Serializable {
 	public void setIdestandareficienciaatun(Integer idestandareficienciaatun) {
 		this.idestandareficienciaatun = idestandareficienciaatun;
 	}
+
 
 	public String getUnidadmedida() {
 		return this.unidadmedida;
@@ -50,6 +42,7 @@ public class EstandarEficienciaAtun implements Serializable {
 		this.unidadmedida = unidadmedida;
 	}
 
+
 	public double getValor() {
 		return this.valor;
 	}
@@ -58,6 +51,10 @@ public class EstandarEficienciaAtun implements Serializable {
 		this.valor = valor;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaTipo
+	@ManyToOne
+	@JoinColumn(name="idlimpiezatipo")
 	public LimpiezaTipo getLimpiezaTipo() {
 		return this.limpiezaTipo;
 	}
@@ -66,6 +63,10 @@ public class EstandarEficienciaAtun implements Serializable {
 		this.limpiezaTipo = limpiezaTipo;
 	}
 
+
+	//bi-directional many-to-one association to Talla
+	@ManyToOne
+	@JoinColumn(name="idtalla")
 	public Talla getTalla() {
 		return this.talla;
 	}

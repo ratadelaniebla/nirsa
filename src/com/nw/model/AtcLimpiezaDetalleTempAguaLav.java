@@ -11,46 +11,26 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="atc_limpieza_detalle_temp_agua_lav")
+@NamedQuery(name="AtcLimpiezaDetalleTempAguaLav.findAll", query="SELECT a FROM AtcLimpiezaDetalleTempAguaLav a")
 public class AtcLimpiezaDetalleTempAguaLav implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idatclimpiezadetalletempagualav;
-
 	private Timestamp fechareg;
-
 	private Timestamp fecharegactualizacion;
-
 	private Integer nummuestralote;
-
 	private double temperatura;
-
 	private String usuarioactualizacion;
-
-	//bi-directional many-to-one association to AtcLimpiezaDetalleProcesoLote
-	@ManyToOne
-	@JoinColumn(name="idatclimpiezadetalleprocesolote")
 	private AtcLimpiezaDetalleProcesoLote atcLimpiezaDetalleProcesoLote;
-
-	//bi-directional many-to-one association to AtcLimpiezaTempAguaLav
-	@ManyToOne
-	@JoinColumn(name="idatclimpiezatempagualav")
 	private AtcLimpiezaTempAguaLav atcLimpiezaTempAguaLav;
-
-	//bi-directional many-to-one association to AtcTurno
-	@ManyToOne
-	@JoinColumn(name="idatcturno")
 	private AtcTurno atcTurno;
-
-	//bi-directional many-to-one association to AtcUsuario
-	@ManyToOne
-	@JoinColumn(name="idatcusuario")
 	private AtcUsuario atcUsuario;
 
 	public AtcLimpiezaDetalleTempAguaLav() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdatclimpiezadetalletempagualav() {
 		return this.idatclimpiezadetalletempagualav;
 	}
@@ -58,6 +38,7 @@ public class AtcLimpiezaDetalleTempAguaLav implements Serializable {
 	public void setIdatclimpiezadetalletempagualav(Long idatclimpiezadetalletempagualav) {
 		this.idatclimpiezadetalletempagualav = idatclimpiezadetalletempagualav;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -67,6 +48,7 @@ public class AtcLimpiezaDetalleTempAguaLav implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public Timestamp getFecharegactualizacion() {
 		return this.fecharegactualizacion;
 	}
@@ -74,6 +56,7 @@ public class AtcLimpiezaDetalleTempAguaLav implements Serializable {
 	public void setFecharegactualizacion(Timestamp fecharegactualizacion) {
 		this.fecharegactualizacion = fecharegactualizacion;
 	}
+
 
 	public Integer getNummuestralote() {
 		return this.nummuestralote;
@@ -83,6 +66,7 @@ public class AtcLimpiezaDetalleTempAguaLav implements Serializable {
 		this.nummuestralote = nummuestralote;
 	}
 
+
 	public double getTemperatura() {
 		return this.temperatura;
 	}
@@ -90,6 +74,7 @@ public class AtcLimpiezaDetalleTempAguaLav implements Serializable {
 	public void setTemperatura(double temperatura) {
 		this.temperatura = temperatura;
 	}
+
 
 	public String getUsuarioactualizacion() {
 		return this.usuarioactualizacion;
@@ -99,6 +84,10 @@ public class AtcLimpiezaDetalleTempAguaLav implements Serializable {
 		this.usuarioactualizacion = usuarioactualizacion;
 	}
 
+
+	//bi-directional many-to-one association to AtcLimpiezaDetalleProcesoLote
+	@ManyToOne
+	@JoinColumn(name="idatclimpiezadetalleprocesolote")
 	public AtcLimpiezaDetalleProcesoLote getAtcLimpiezaDetalleProcesoLote() {
 		return this.atcLimpiezaDetalleProcesoLote;
 	}
@@ -107,6 +96,10 @@ public class AtcLimpiezaDetalleTempAguaLav implements Serializable {
 		this.atcLimpiezaDetalleProcesoLote = atcLimpiezaDetalleProcesoLote;
 	}
 
+
+	//bi-directional many-to-one association to AtcLimpiezaTempAguaLav
+	@ManyToOne
+	@JoinColumn(name="idatclimpiezatempagualav")
 	public AtcLimpiezaTempAguaLav getAtcLimpiezaTempAguaLav() {
 		return this.atcLimpiezaTempAguaLav;
 	}
@@ -115,6 +108,10 @@ public class AtcLimpiezaDetalleTempAguaLav implements Serializable {
 		this.atcLimpiezaTempAguaLav = atcLimpiezaTempAguaLav;
 	}
 
+
+	//bi-directional many-to-one association to AtcTurno
+	@ManyToOne
+	@JoinColumn(name="idatcturno")
 	public AtcTurno getAtcTurno() {
 		return this.atcTurno;
 	}
@@ -123,6 +120,10 @@ public class AtcLimpiezaDetalleTempAguaLav implements Serializable {
 		this.atcTurno = atcTurno;
 	}
 
+
+	//bi-directional many-to-one association to AtcUsuario
+	@ManyToOne
+	@JoinColumn(name="idatcusuario")
 	public AtcUsuario getAtcUsuario() {
 		return this.atcUsuario;
 	}

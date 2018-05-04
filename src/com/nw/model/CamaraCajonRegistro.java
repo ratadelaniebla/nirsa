@@ -11,39 +11,28 @@ import java.util.Date;
  */
 @Entity
 @Table(name="camara_cajon_registro")
+@NamedQuery(name="CamaraCajonRegistro.findAll", query="SELECT c FROM CamaraCajonRegistro c")
 public class CamaraCajonRegistro implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcajonregistro;
-
 	private String calidadapariencia;
-
 	private String calidadcontaminante;
-
 	private String calidadolor;
-
-	@Temporal(TemporalType.DATE)
 	private Date fechacreacion;
-
 	private String idcajon;
-
 	private String idcuba;
-
 	private Integer idmaterial;
-
 	private String idtipocaptura;
-
 	private String numregistro;
-
 	private double pesobruto;
-
 	private double pesoneto;
 
 	public CamaraCajonRegistro() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcajonregistro() {
 		return this.idcajonregistro;
 	}
@@ -51,6 +40,7 @@ public class CamaraCajonRegistro implements Serializable {
 	public void setIdcajonregistro(Long idcajonregistro) {
 		this.idcajonregistro = idcajonregistro;
 	}
+
 
 	public String getCalidadapariencia() {
 		return this.calidadapariencia;
@@ -60,6 +50,7 @@ public class CamaraCajonRegistro implements Serializable {
 		this.calidadapariencia = calidadapariencia;
 	}
 
+
 	public String getCalidadcontaminante() {
 		return this.calidadcontaminante;
 	}
@@ -67,6 +58,7 @@ public class CamaraCajonRegistro implements Serializable {
 	public void setCalidadcontaminante(String calidadcontaminante) {
 		this.calidadcontaminante = calidadcontaminante;
 	}
+
 
 	public String getCalidadolor() {
 		return this.calidadolor;
@@ -76,6 +68,8 @@ public class CamaraCajonRegistro implements Serializable {
 		this.calidadolor = calidadolor;
 	}
 
+
+	@Temporal(TemporalType.DATE)
 	public Date getFechacreacion() {
 		return this.fechacreacion;
 	}
@@ -83,6 +77,7 @@ public class CamaraCajonRegistro implements Serializable {
 	public void setFechacreacion(Date fechacreacion) {
 		this.fechacreacion = fechacreacion;
 	}
+
 
 	public String getIdcajon() {
 		return this.idcajon;
@@ -92,6 +87,7 @@ public class CamaraCajonRegistro implements Serializable {
 		this.idcajon = idcajon;
 	}
 
+
 	public String getIdcuba() {
 		return this.idcuba;
 	}
@@ -99,6 +95,7 @@ public class CamaraCajonRegistro implements Serializable {
 	public void setIdcuba(String idcuba) {
 		this.idcuba = idcuba;
 	}
+
 
 	public Integer getIdmaterial() {
 		return this.idmaterial;
@@ -108,6 +105,7 @@ public class CamaraCajonRegistro implements Serializable {
 		this.idmaterial = idmaterial;
 	}
 
+
 	public String getIdtipocaptura() {
 		return this.idtipocaptura;
 	}
@@ -115,6 +113,7 @@ public class CamaraCajonRegistro implements Serializable {
 	public void setIdtipocaptura(String idtipocaptura) {
 		this.idtipocaptura = idtipocaptura;
 	}
+
 
 	public String getNumregistro() {
 		return this.numregistro;
@@ -124,6 +123,7 @@ public class CamaraCajonRegistro implements Serializable {
 		this.numregistro = numregistro;
 	}
 
+
 	public double getPesobruto() {
 		return this.pesobruto;
 	}
@@ -131,6 +131,7 @@ public class CamaraCajonRegistro implements Serializable {
 	public void setPesobruto(double pesobruto) {
 		this.pesobruto = pesobruto;
 	}
+
 
 	public double getPesoneto() {
 		return this.pesoneto;

@@ -12,47 +12,27 @@ import java.util.List;
  */
 @Entity
 @Table(name="pouch_detalle_proceso_lote")
+@NamedQuery(name="PouchDetalleProcesoLote.findAll", query="SELECT p FROM PouchDetalleProcesoLote p")
 public class PouchDetalleProcesoLote implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idpouchdetalleprocesolote;
-
 	private Integer agua;
-
 	private Integer estado;
-
 	private Timestamp fechafin;
-
 	private Timestamp fechainicio;
-
 	private Integer fill;
-
 	private Integer flake;
-
-	//bi-directional many-to-one association to PouchDetalleProcesoConteo
-	@OneToMany(mappedBy="pouchDetalleProcesoLote")
 	private List<PouchDetalleProcesoConteo> pouchDetalleProcesoConteos;
-
-	//bi-directional many-to-one association to LimpiezaDetalleProcesoLote
-	@ManyToOne
-	@JoinColumn(name="idlimpiezadetalleprocesolote")
 	private LimpiezaDetalleProcesoLote limpiezaDetalleProcesoLote;
-
-	//bi-directional many-to-one association to PouchProceso
-	@ManyToOne
-	@JoinColumn(name="idpouchproceso")
 	private PouchProceso pouchProceso;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public PouchDetalleProcesoLote() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdpouchdetalleprocesolote() {
 		return this.idpouchdetalleprocesolote;
 	}
@@ -60,6 +40,7 @@ public class PouchDetalleProcesoLote implements Serializable {
 	public void setIdpouchdetalleprocesolote(Long idpouchdetalleprocesolote) {
 		this.idpouchdetalleprocesolote = idpouchdetalleprocesolote;
 	}
+
 
 	public Integer getAgua() {
 		return this.agua;
@@ -69,6 +50,7 @@ public class PouchDetalleProcesoLote implements Serializable {
 		this.agua = agua;
 	}
 
+
 	public Integer getEstado() {
 		return this.estado;
 	}
@@ -76,6 +58,7 @@ public class PouchDetalleProcesoLote implements Serializable {
 	public void setEstado(Integer estado) {
 		this.estado = estado;
 	}
+
 
 	public Timestamp getFechafin() {
 		return this.fechafin;
@@ -85,6 +68,7 @@ public class PouchDetalleProcesoLote implements Serializable {
 		this.fechafin = fechafin;
 	}
 
+
 	public Timestamp getFechainicio() {
 		return this.fechainicio;
 	}
@@ -92,6 +76,7 @@ public class PouchDetalleProcesoLote implements Serializable {
 	public void setFechainicio(Timestamp fechainicio) {
 		this.fechainicio = fechainicio;
 	}
+
 
 	public Integer getFill() {
 		return this.fill;
@@ -101,6 +86,7 @@ public class PouchDetalleProcesoLote implements Serializable {
 		this.fill = fill;
 	}
 
+
 	public Integer getFlake() {
 		return this.flake;
 	}
@@ -109,6 +95,9 @@ public class PouchDetalleProcesoLote implements Serializable {
 		this.flake = flake;
 	}
 
+
+	//bi-directional many-to-one association to PouchDetalleProcesoConteo
+	@OneToMany(mappedBy="pouchDetalleProcesoLote")
 	public List<PouchDetalleProcesoConteo> getPouchDetalleProcesoConteos() {
 		return this.pouchDetalleProcesoConteos;
 	}
@@ -117,6 +106,24 @@ public class PouchDetalleProcesoLote implements Serializable {
 		this.pouchDetalleProcesoConteos = pouchDetalleProcesoConteos;
 	}
 
+	public PouchDetalleProcesoConteo addPouchDetalleProcesoConteo(PouchDetalleProcesoConteo pouchDetalleProcesoConteo) {
+		getPouchDetalleProcesoConteos().add(pouchDetalleProcesoConteo);
+		pouchDetalleProcesoConteo.setPouchDetalleProcesoLote(this);
+
+		return pouchDetalleProcesoConteo;
+	}
+
+	public PouchDetalleProcesoConteo removePouchDetalleProcesoConteo(PouchDetalleProcesoConteo pouchDetalleProcesoConteo) {
+		getPouchDetalleProcesoConteos().remove(pouchDetalleProcesoConteo);
+		pouchDetalleProcesoConteo.setPouchDetalleProcesoLote(null);
+
+		return pouchDetalleProcesoConteo;
+	}
+
+
+	//bi-directional many-to-one association to LimpiezaDetalleProcesoLote
+	@ManyToOne
+	@JoinColumn(name="idlimpiezadetalleprocesolote")
 	public LimpiezaDetalleProcesoLote getLimpiezaDetalleProcesoLote() {
 		return this.limpiezaDetalleProcesoLote;
 	}
@@ -125,6 +132,10 @@ public class PouchDetalleProcesoLote implements Serializable {
 		this.limpiezaDetalleProcesoLote = limpiezaDetalleProcesoLote;
 	}
 
+
+	//bi-directional many-to-one association to PouchProceso
+	@ManyToOne
+	@JoinColumn(name="idpouchproceso")
 	public PouchProceso getPouchProceso() {
 		return this.pouchProceso;
 	}
@@ -133,6 +144,10 @@ public class PouchDetalleProcesoLote implements Serializable {
 		this.pouchProceso = pouchProceso;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

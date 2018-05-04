@@ -11,36 +11,23 @@ import java.util.List;
  */
 @Entity
 @Table(name="reportes_niveles_usuario")
+@NamedQuery(name="ReportesNivelesUsuario.findAll", query="SELECT r FROM ReportesNivelesUsuario r")
 public class ReportesNivelesUsuario implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idreportesnivelesusuario;
-
 	private Integer activo;
-
 	private String cargoreporte;
-
 	private Integer nivel;
-
-	//bi-directional many-to-one association to ReportesNivelAprobacion
-	@OneToMany(mappedBy="reportesNivelesUsuario")
 	private List<ReportesNivelAprobacion> reportesNivelAprobacions;
-
-	//bi-directional many-to-one association to Reporte
-	@ManyToOne
-	@JoinColumn(name="idreportes")
 	private Reporte reporte;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public ReportesNivelesUsuario() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdreportesnivelesusuario() {
 		return this.idreportesnivelesusuario;
 	}
@@ -48,6 +35,7 @@ public class ReportesNivelesUsuario implements Serializable {
 	public void setIdreportesnivelesusuario(Integer idreportesnivelesusuario) {
 		this.idreportesnivelesusuario = idreportesnivelesusuario;
 	}
+
 
 	public Integer getActivo() {
 		return this.activo;
@@ -57,6 +45,7 @@ public class ReportesNivelesUsuario implements Serializable {
 		this.activo = activo;
 	}
 
+
 	public String getCargoreporte() {
 		return this.cargoreporte;
 	}
@@ -64,6 +53,7 @@ public class ReportesNivelesUsuario implements Serializable {
 	public void setCargoreporte(String cargoreporte) {
 		this.cargoreporte = cargoreporte;
 	}
+
 
 	public Integer getNivel() {
 		return this.nivel;
@@ -73,6 +63,9 @@ public class ReportesNivelesUsuario implements Serializable {
 		this.nivel = nivel;
 	}
 
+
+	//bi-directional many-to-one association to ReportesNivelAprobacion
+	@OneToMany(mappedBy="reportesNivelesUsuario")
 	public List<ReportesNivelAprobacion> getReportesNivelAprobacions() {
 		return this.reportesNivelAprobacions;
 	}
@@ -81,6 +74,24 @@ public class ReportesNivelesUsuario implements Serializable {
 		this.reportesNivelAprobacions = reportesNivelAprobacions;
 	}
 
+	public ReportesNivelAprobacion addReportesNivelAprobacion(ReportesNivelAprobacion reportesNivelAprobacion) {
+		getReportesNivelAprobacions().add(reportesNivelAprobacion);
+		reportesNivelAprobacion.setReportesNivelesUsuario(this);
+
+		return reportesNivelAprobacion;
+	}
+
+	public ReportesNivelAprobacion removeReportesNivelAprobacion(ReportesNivelAprobacion reportesNivelAprobacion) {
+		getReportesNivelAprobacions().remove(reportesNivelAprobacion);
+		reportesNivelAprobacion.setReportesNivelesUsuario(null);
+
+		return reportesNivelAprobacion;
+	}
+
+
+	//bi-directional many-to-one association to Reporte
+	@ManyToOne
+	@JoinColumn(name="idreportes")
 	public Reporte getReporte() {
 		return this.reporte;
 	}
@@ -89,6 +100,10 @@ public class ReportesNivelesUsuario implements Serializable {
 		this.reporte = reporte;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

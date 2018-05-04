@@ -11,48 +11,27 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="atc_limpieza_subproducto_crudo")
+@NamedQuery(name="AtcLimpiezaSubproductoCrudo.findAll", query="SELECT a FROM AtcLimpiezaSubproductoCrudo a")
 public class AtcLimpiezaSubproductoCrudo implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idatclimpiezasubproductocrudo;
-
 	private Integer cantidadmedio;
-
 	private Timestamp fechareg;
-
 	private double pesobruto;
-
 	private double taracoche;
-
 	private double taramedio;
-
 	private String tipoingreso;
-
-	//bi-directional many-to-one association to AtcLimpiezaDetalleProcesoLote
-	@ManyToOne
-	@JoinColumn(name="idatclimpiezadetalleprocesolote")
 	private AtcLimpiezaDetalleProcesoLote atcLimpiezaDetalleProcesoLote;
-
-	//bi-directional many-to-one association to AtcLimpiezaTipoSubproducto
-	@ManyToOne
-	@JoinColumn(name="idatclimpiezatiposubproducto")
 	private AtcLimpiezaTipoSubproducto atcLimpiezaTipoSubproducto;
-
-	//bi-directional many-to-one association to AtcUsuario
-	@ManyToOne
-	@JoinColumn(name="idatcusuario")
 	private AtcUsuario atcUsuario;
-
-	//bi-directional many-to-one association to Cajon
-	@ManyToOne
-	@JoinColumn(name="idcajon")
 	private Cajon cajon;
 
 	public AtcLimpiezaSubproductoCrudo() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdatclimpiezasubproductocrudo() {
 		return this.idatclimpiezasubproductocrudo;
 	}
@@ -60,6 +39,7 @@ public class AtcLimpiezaSubproductoCrudo implements Serializable {
 	public void setIdatclimpiezasubproductocrudo(Long idatclimpiezasubproductocrudo) {
 		this.idatclimpiezasubproductocrudo = idatclimpiezasubproductocrudo;
 	}
+
 
 	public Integer getCantidadmedio() {
 		return this.cantidadmedio;
@@ -69,6 +49,7 @@ public class AtcLimpiezaSubproductoCrudo implements Serializable {
 		this.cantidadmedio = cantidadmedio;
 	}
 
+
 	public Timestamp getFechareg() {
 		return this.fechareg;
 	}
@@ -76,6 +57,7 @@ public class AtcLimpiezaSubproductoCrudo implements Serializable {
 	public void setFechareg(Timestamp fechareg) {
 		this.fechareg = fechareg;
 	}
+
 
 	public double getPesobruto() {
 		return this.pesobruto;
@@ -85,6 +67,7 @@ public class AtcLimpiezaSubproductoCrudo implements Serializable {
 		this.pesobruto = pesobruto;
 	}
 
+
 	public double getTaracoche() {
 		return this.taracoche;
 	}
@@ -92,6 +75,7 @@ public class AtcLimpiezaSubproductoCrudo implements Serializable {
 	public void setTaracoche(double taracoche) {
 		this.taracoche = taracoche;
 	}
+
 
 	public double getTaramedio() {
 		return this.taramedio;
@@ -101,6 +85,7 @@ public class AtcLimpiezaSubproductoCrudo implements Serializable {
 		this.taramedio = taramedio;
 	}
 
+
 	public String getTipoingreso() {
 		return this.tipoingreso;
 	}
@@ -109,6 +94,10 @@ public class AtcLimpiezaSubproductoCrudo implements Serializable {
 		this.tipoingreso = tipoingreso;
 	}
 
+
+	//bi-directional many-to-one association to AtcLimpiezaDetalleProcesoLote
+	@ManyToOne
+	@JoinColumn(name="idatclimpiezadetalleprocesolote")
 	public AtcLimpiezaDetalleProcesoLote getAtcLimpiezaDetalleProcesoLote() {
 		return this.atcLimpiezaDetalleProcesoLote;
 	}
@@ -117,6 +106,10 @@ public class AtcLimpiezaSubproductoCrudo implements Serializable {
 		this.atcLimpiezaDetalleProcesoLote = atcLimpiezaDetalleProcesoLote;
 	}
 
+
+	//bi-directional many-to-one association to AtcLimpiezaTipoSubproducto
+	@ManyToOne
+	@JoinColumn(name="idatclimpiezatiposubproducto")
 	public AtcLimpiezaTipoSubproducto getAtcLimpiezaTipoSubproducto() {
 		return this.atcLimpiezaTipoSubproducto;
 	}
@@ -125,6 +118,10 @@ public class AtcLimpiezaSubproductoCrudo implements Serializable {
 		this.atcLimpiezaTipoSubproducto = atcLimpiezaTipoSubproducto;
 	}
 
+
+	//bi-directional many-to-one association to AtcUsuario
+	@ManyToOne
+	@JoinColumn(name="idatcusuario")
 	public AtcUsuario getAtcUsuario() {
 		return this.atcUsuario;
 	}
@@ -133,6 +130,10 @@ public class AtcLimpiezaSubproductoCrudo implements Serializable {
 		this.atcUsuario = atcUsuario;
 	}
 
+
+	//bi-directional many-to-one association to Cajon
+	@ManyToOne
+	@JoinColumn(name="idcajon")
 	public Cajon getCajon() {
 		return this.cajon;
 	}

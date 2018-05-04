@@ -12,45 +12,26 @@ import java.util.List;
  */
 @Entity
 @Table(name="descongelado_detalle_ducha_apertura_talla")
+@NamedQuery(name="DescongeladoDetalleDuchaAperturaTalla.findAll", query="SELECT d FROM DescongeladoDetalleDuchaAperturaTalla d")
 public class DescongeladoDetalleDuchaAperturaTalla implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long iddescongeladodetalleduchaaperturatalla;
-
 	private Integer estado;
-
 	private Timestamp fechacreacionregistro;
-
 	private Timestamp fechafin;
-
 	private Timestamp fechainicio;
-
 	private Integer numeroduchadageneral;
-
-	//bi-directional many-to-one association to DescongeladoDuchaAperturaCierreDetalle
-	@ManyToOne
-	@JoinColumn(name="iddescongeladoduchaaperturacierredetalle")
 	private DescongeladoDuchaAperturaCierreDetalle descongeladoDuchaAperturaCierreDetalle;
-
-	//bi-directional many-to-one association to Talla
-	@ManyToOne
-	@JoinColumn(name="idtalla")
 	private Talla talla;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
-
-	//bi-directional many-to-one association to DescongeladoDetalleProceso
-	@OneToMany(mappedBy="descongeladoDetalleDuchaAperturaTalla")
 	private List<DescongeladoDetalleProceso> descongeladoDetalleProcesos;
 
 	public DescongeladoDetalleDuchaAperturaTalla() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIddescongeladodetalleduchaaperturatalla() {
 		return this.iddescongeladodetalleduchaaperturatalla;
 	}
@@ -58,6 +39,7 @@ public class DescongeladoDetalleDuchaAperturaTalla implements Serializable {
 	public void setIddescongeladodetalleduchaaperturatalla(Long iddescongeladodetalleduchaaperturatalla) {
 		this.iddescongeladodetalleduchaaperturatalla = iddescongeladodetalleduchaaperturatalla;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -67,6 +49,7 @@ public class DescongeladoDetalleDuchaAperturaTalla implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Timestamp getFechacreacionregistro() {
 		return this.fechacreacionregistro;
 	}
@@ -74,6 +57,7 @@ public class DescongeladoDetalleDuchaAperturaTalla implements Serializable {
 	public void setFechacreacionregistro(Timestamp fechacreacionregistro) {
 		this.fechacreacionregistro = fechacreacionregistro;
 	}
+
 
 	public Timestamp getFechafin() {
 		return this.fechafin;
@@ -83,6 +67,7 @@ public class DescongeladoDetalleDuchaAperturaTalla implements Serializable {
 		this.fechafin = fechafin;
 	}
 
+
 	public Timestamp getFechainicio() {
 		return this.fechainicio;
 	}
@@ -90,6 +75,7 @@ public class DescongeladoDetalleDuchaAperturaTalla implements Serializable {
 	public void setFechainicio(Timestamp fechainicio) {
 		this.fechainicio = fechainicio;
 	}
+
 
 	public Integer getNumeroduchadageneral() {
 		return this.numeroduchadageneral;
@@ -99,6 +85,10 @@ public class DescongeladoDetalleDuchaAperturaTalla implements Serializable {
 		this.numeroduchadageneral = numeroduchadageneral;
 	}
 
+
+	//bi-directional many-to-one association to DescongeladoDuchaAperturaCierreDetalle
+	@ManyToOne
+	@JoinColumn(name="iddescongeladoduchaaperturacierredetalle")
 	public DescongeladoDuchaAperturaCierreDetalle getDescongeladoDuchaAperturaCierreDetalle() {
 		return this.descongeladoDuchaAperturaCierreDetalle;
 	}
@@ -107,6 +97,10 @@ public class DescongeladoDetalleDuchaAperturaTalla implements Serializable {
 		this.descongeladoDuchaAperturaCierreDetalle = descongeladoDuchaAperturaCierreDetalle;
 	}
 
+
+	//bi-directional many-to-one association to Talla
+	@ManyToOne
+	@JoinColumn(name="idtalla")
 	public Talla getTalla() {
 		return this.talla;
 	}
@@ -115,6 +109,10 @@ public class DescongeladoDetalleDuchaAperturaTalla implements Serializable {
 		this.talla = talla;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}
@@ -123,12 +121,29 @@ public class DescongeladoDetalleDuchaAperturaTalla implements Serializable {
 		this.usuario = usuario;
 	}
 
+
+	//bi-directional many-to-one association to DescongeladoDetalleProceso
+	@OneToMany(mappedBy="descongeladoDetalleDuchaAperturaTalla")
 	public List<DescongeladoDetalleProceso> getDescongeladoDetalleProcesos() {
 		return this.descongeladoDetalleProcesos;
 	}
 
 	public void setDescongeladoDetalleProcesos(List<DescongeladoDetalleProceso> descongeladoDetalleProcesos) {
 		this.descongeladoDetalleProcesos = descongeladoDetalleProcesos;
+	}
+
+	public DescongeladoDetalleProceso addDescongeladoDetalleProceso(DescongeladoDetalleProceso descongeladoDetalleProceso) {
+		getDescongeladoDetalleProcesos().add(descongeladoDetalleProceso);
+		descongeladoDetalleProceso.setDescongeladoDetalleDuchaAperturaTalla(this);
+
+		return descongeladoDetalleProceso;
+	}
+
+	public DescongeladoDetalleProceso removeDescongeladoDetalleProceso(DescongeladoDetalleProceso descongeladoDetalleProceso) {
+		getDescongeladoDetalleProcesos().remove(descongeladoDetalleProceso);
+		descongeladoDetalleProceso.setDescongeladoDetalleDuchaAperturaTalla(null);
+
+		return descongeladoDetalleProceso;
 	}
 
 }

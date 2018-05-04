@@ -10,38 +10,26 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="pcc2_lotes_resumen_notificaciones")
+@NamedQuery(name="Pcc2LotesResumenNotificacione.findAll", query="SELECT p FROM Pcc2LotesResumenNotificacione p")
 public class Pcc2LotesResumenNotificacione implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_pcc2_lotes_resumen_notificaciones")
 	private Long idPcc2LotesResumenNotificaciones;
-
-	@Column(name="cocina_cocinada")
 	private String cocinaCocinada;
-
-	@Column(name="especie_talla")
 	private String especieTalla;
-
 	private Integer idlote;
-
 	private Integer notificar;
-
 	private String proceso;
-
-	@Column(name="tiempo_alarma")
 	private String tiempoAlarma;
-
-	@Column(name="tipo_alarma")
 	private Integer tipoAlarma;
-
-	@Column(name="tipo_proceso")
 	private Integer tipoProceso;
 
 	public Pcc2LotesResumenNotificacione() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_pcc2_lotes_resumen_notificaciones")
 	public Long getIdPcc2LotesResumenNotificaciones() {
 		return this.idPcc2LotesResumenNotificaciones;
 	}
@@ -50,6 +38,8 @@ public class Pcc2LotesResumenNotificacione implements Serializable {
 		this.idPcc2LotesResumenNotificaciones = idPcc2LotesResumenNotificaciones;
 	}
 
+
+	@Column(name="cocina_cocinada")
 	public String getCocinaCocinada() {
 		return this.cocinaCocinada;
 	}
@@ -58,6 +48,8 @@ public class Pcc2LotesResumenNotificacione implements Serializable {
 		this.cocinaCocinada = cocinaCocinada;
 	}
 
+
+	@Column(name="especie_talla")
 	public String getEspecieTalla() {
 		return this.especieTalla;
 	}
@@ -65,6 +57,7 @@ public class Pcc2LotesResumenNotificacione implements Serializable {
 	public void setEspecieTalla(String especieTalla) {
 		this.especieTalla = especieTalla;
 	}
+
 
 	public Integer getIdlote() {
 		return this.idlote;
@@ -74,6 +67,7 @@ public class Pcc2LotesResumenNotificacione implements Serializable {
 		this.idlote = idlote;
 	}
 
+
 	public Integer getNotificar() {
 		return this.notificar;
 	}
@@ -81,6 +75,7 @@ public class Pcc2LotesResumenNotificacione implements Serializable {
 	public void setNotificar(Integer notificar) {
 		this.notificar = notificar;
 	}
+
 
 	public String getProceso() {
 		return this.proceso;
@@ -90,6 +85,8 @@ public class Pcc2LotesResumenNotificacione implements Serializable {
 		this.proceso = proceso;
 	}
 
+
+	@Column(name="tiempo_alarma")
 	public String getTiempoAlarma() {
 		return this.tiempoAlarma;
 	}
@@ -98,6 +95,8 @@ public class Pcc2LotesResumenNotificacione implements Serializable {
 		this.tiempoAlarma = tiempoAlarma;
 	}
 
+
+	@Column(name="tipo_alarma")
 	public Integer getTipoAlarma() {
 		return this.tipoAlarma;
 	}
@@ -106,6 +105,8 @@ public class Pcc2LotesResumenNotificacione implements Serializable {
 		this.tipoAlarma = tipoAlarma;
 	}
 
+
+	@Column(name="tipo_proceso")
 	public Integer getTipoProceso() {
 		return this.tipoProceso;
 	}

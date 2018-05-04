@@ -13,109 +13,45 @@ import java.util.List;
  */
 @Entity
 @Table(name="oee_periodo_base_objetivo")
+@NamedQuery(name="OeePeriodoBaseObjetivo.findAll", query="SELECT o FROM OeePeriodoBaseObjetivo o")
 public class OeePeriodoBaseObjetivo implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_oee_periodo_base_objetivo")
 	private Long idOeePeriodoBaseObjetivo;
-
 	private Boolean estado;
-
-	@Temporal(TemporalType.DATE)
-	@Column(name="fecha_fin_periodo")
 	private Date fechaFinPeriodo;
-
-	@Temporal(TemporalType.DATE)
-	@Column(name="fecha_inicio_periodo")
 	private Date fechaInicioPeriodo;
-
-	@Column(name="fecha_registro")
 	private Timestamp fechaRegistro;
-
-	@Column(name="objetivo_general")
 	private double objetivoGeneral;
-
 	private Integer orden;
-
-	@Column(name="periodo_base_calidad")
 	private double periodoBaseCalidad;
-
-	@Column(name="periodo_base_cantidad")
 	private double periodoBaseCantidad;
-
-	@Column(name="periodo_base_general")
 	private double periodoBaseGeneral;
-
-	@Column(name="periodo_base_tiempo")
 	private double periodoBaseTiempo;
-
-	@Column(name="periodo_base_velocidad")
 	private double periodoBaseVelocidad;
-
-	@Column(name="rango1_entregacamara")
 	private double rango1Entregacamara;
-
-	@Column(name="rango1_ingresodescongelado")
 	private double rango1Ingresodescongelado;
-
-	@Column(name="rango2_entregacamara")
 	private double rango2Entregacamara;
-
-	@Column(name="rango2_ingresodescongelado")
 	private double rango2Ingresodescongelado;
-
-	@Column(name="rango3_entregacamara")
 	private double rango3Entregacamara;
-
-	@Column(name="rango3_ingresodescongelado")
 	private double rango3Ingresodescongelado;
-
 	private String tablero;
-
-	//bi-directional many-to-one association to DescongeladoProceso
-	@OneToMany(mappedBy="oeePeriodoBaseObjetivo")
 	private List<DescongeladoProceso> descongeladoProcesos;
-
-	//bi-directional many-to-one association to EnvasadoProceso
-	@OneToMany(mappedBy="oeePeriodoBaseObjetivo")
 	private List<EnvasadoProceso> envasadoProcesos;
-
-	//bi-directional many-to-one association to LimpiezaProceso
-	@OneToMany(mappedBy="oeePeriodoBaseObjetivo")
 	private List<LimpiezaProceso> limpiezaProcesos;
-
-	//bi-directional many-to-one association to LonjasProceso
-	@OneToMany(mappedBy="oeePeriodoBaseObjetivo")
 	private List<LonjasProceso> lonjasProcesos;
-
-	//bi-directional many-to-one association to OeeAreaTablero
-	@ManyToOne
-	@JoinColumn(name="id_oee_area_tablero")
 	private OeeAreaTablero oeeAreaTablero;
-
-	//bi-directional many-to-one association to Proceso
-	@ManyToOne
-	@JoinColumn(name="idproceso")
 	private Proceso proceso;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
-
-	//bi-directional many-to-one association to OeePeriodoBaseObjetivoDetalle
-	@OneToMany(mappedBy="oeePeriodoBaseObjetivo")
 	private List<OeePeriodoBaseObjetivoDetalle> oeePeriodoBaseObjetivoDetalles;
-
-	//bi-directional many-to-one association to RackeoProceso
-	@OneToMany(mappedBy="oeePeriodoBaseObjetivo")
 	private List<RackeoProceso> rackeoProcesos;
 
 	public OeePeriodoBaseObjetivo() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_oee_periodo_base_objetivo")
 	public Long getIdOeePeriodoBaseObjetivo() {
 		return this.idOeePeriodoBaseObjetivo;
 	}
@@ -123,6 +59,7 @@ public class OeePeriodoBaseObjetivo implements Serializable {
 	public void setIdOeePeriodoBaseObjetivo(Long idOeePeriodoBaseObjetivo) {
 		this.idOeePeriodoBaseObjetivo = idOeePeriodoBaseObjetivo;
 	}
+
 
 	public Boolean getEstado() {
 		return this.estado;
@@ -132,6 +69,9 @@ public class OeePeriodoBaseObjetivo implements Serializable {
 		this.estado = estado;
 	}
 
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="fecha_fin_periodo")
 	public Date getFechaFinPeriodo() {
 		return this.fechaFinPeriodo;
 	}
@@ -140,6 +80,9 @@ public class OeePeriodoBaseObjetivo implements Serializable {
 		this.fechaFinPeriodo = fechaFinPeriodo;
 	}
 
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="fecha_inicio_periodo")
 	public Date getFechaInicioPeriodo() {
 		return this.fechaInicioPeriodo;
 	}
@@ -148,6 +91,8 @@ public class OeePeriodoBaseObjetivo implements Serializable {
 		this.fechaInicioPeriodo = fechaInicioPeriodo;
 	}
 
+
+	@Column(name="fecha_registro")
 	public Timestamp getFechaRegistro() {
 		return this.fechaRegistro;
 	}
@@ -156,6 +101,8 @@ public class OeePeriodoBaseObjetivo implements Serializable {
 		this.fechaRegistro = fechaRegistro;
 	}
 
+
+	@Column(name="objetivo_general")
 	public double getObjetivoGeneral() {
 		return this.objetivoGeneral;
 	}
@@ -163,6 +110,7 @@ public class OeePeriodoBaseObjetivo implements Serializable {
 	public void setObjetivoGeneral(double objetivoGeneral) {
 		this.objetivoGeneral = objetivoGeneral;
 	}
+
 
 	public Integer getOrden() {
 		return this.orden;
@@ -172,6 +120,8 @@ public class OeePeriodoBaseObjetivo implements Serializable {
 		this.orden = orden;
 	}
 
+
+	@Column(name="periodo_base_calidad")
 	public double getPeriodoBaseCalidad() {
 		return this.periodoBaseCalidad;
 	}
@@ -180,6 +130,8 @@ public class OeePeriodoBaseObjetivo implements Serializable {
 		this.periodoBaseCalidad = periodoBaseCalidad;
 	}
 
+
+	@Column(name="periodo_base_cantidad")
 	public double getPeriodoBaseCantidad() {
 		return this.periodoBaseCantidad;
 	}
@@ -188,6 +140,8 @@ public class OeePeriodoBaseObjetivo implements Serializable {
 		this.periodoBaseCantidad = periodoBaseCantidad;
 	}
 
+
+	@Column(name="periodo_base_general")
 	public double getPeriodoBaseGeneral() {
 		return this.periodoBaseGeneral;
 	}
@@ -196,6 +150,8 @@ public class OeePeriodoBaseObjetivo implements Serializable {
 		this.periodoBaseGeneral = periodoBaseGeneral;
 	}
 
+
+	@Column(name="periodo_base_tiempo")
 	public double getPeriodoBaseTiempo() {
 		return this.periodoBaseTiempo;
 	}
@@ -204,6 +160,8 @@ public class OeePeriodoBaseObjetivo implements Serializable {
 		this.periodoBaseTiempo = periodoBaseTiempo;
 	}
 
+
+	@Column(name="periodo_base_velocidad")
 	public double getPeriodoBaseVelocidad() {
 		return this.periodoBaseVelocidad;
 	}
@@ -212,6 +170,8 @@ public class OeePeriodoBaseObjetivo implements Serializable {
 		this.periodoBaseVelocidad = periodoBaseVelocidad;
 	}
 
+
+	@Column(name="rango1_entregacamara")
 	public double getRango1Entregacamara() {
 		return this.rango1Entregacamara;
 	}
@@ -220,6 +180,8 @@ public class OeePeriodoBaseObjetivo implements Serializable {
 		this.rango1Entregacamara = rango1Entregacamara;
 	}
 
+
+	@Column(name="rango1_ingresodescongelado")
 	public double getRango1Ingresodescongelado() {
 		return this.rango1Ingresodescongelado;
 	}
@@ -228,6 +190,8 @@ public class OeePeriodoBaseObjetivo implements Serializable {
 		this.rango1Ingresodescongelado = rango1Ingresodescongelado;
 	}
 
+
+	@Column(name="rango2_entregacamara")
 	public double getRango2Entregacamara() {
 		return this.rango2Entregacamara;
 	}
@@ -236,6 +200,8 @@ public class OeePeriodoBaseObjetivo implements Serializable {
 		this.rango2Entregacamara = rango2Entregacamara;
 	}
 
+
+	@Column(name="rango2_ingresodescongelado")
 	public double getRango2Ingresodescongelado() {
 		return this.rango2Ingresodescongelado;
 	}
@@ -244,6 +210,8 @@ public class OeePeriodoBaseObjetivo implements Serializable {
 		this.rango2Ingresodescongelado = rango2Ingresodescongelado;
 	}
 
+
+	@Column(name="rango3_entregacamara")
 	public double getRango3Entregacamara() {
 		return this.rango3Entregacamara;
 	}
@@ -252,6 +220,8 @@ public class OeePeriodoBaseObjetivo implements Serializable {
 		this.rango3Entregacamara = rango3Entregacamara;
 	}
 
+
+	@Column(name="rango3_ingresodescongelado")
 	public double getRango3Ingresodescongelado() {
 		return this.rango3Ingresodescongelado;
 	}
@@ -259,6 +229,7 @@ public class OeePeriodoBaseObjetivo implements Serializable {
 	public void setRango3Ingresodescongelado(double rango3Ingresodescongelado) {
 		this.rango3Ingresodescongelado = rango3Ingresodescongelado;
 	}
+
 
 	public String getTablero() {
 		return this.tablero;
@@ -268,6 +239,9 @@ public class OeePeriodoBaseObjetivo implements Serializable {
 		this.tablero = tablero;
 	}
 
+
+	//bi-directional many-to-one association to DescongeladoProceso
+	@OneToMany(mappedBy="oeePeriodoBaseObjetivo")
 	public List<DescongeladoProceso> getDescongeladoProcesos() {
 		return this.descongeladoProcesos;
 	}
@@ -276,6 +250,23 @@ public class OeePeriodoBaseObjetivo implements Serializable {
 		this.descongeladoProcesos = descongeladoProcesos;
 	}
 
+	public DescongeladoProceso addDescongeladoProceso(DescongeladoProceso descongeladoProceso) {
+		getDescongeladoProcesos().add(descongeladoProceso);
+		descongeladoProceso.setOeePeriodoBaseObjetivo(this);
+
+		return descongeladoProceso;
+	}
+
+	public DescongeladoProceso removeDescongeladoProceso(DescongeladoProceso descongeladoProceso) {
+		getDescongeladoProcesos().remove(descongeladoProceso);
+		descongeladoProceso.setOeePeriodoBaseObjetivo(null);
+
+		return descongeladoProceso;
+	}
+
+
+	//bi-directional many-to-one association to EnvasadoProceso
+	@OneToMany(mappedBy="oeePeriodoBaseObjetivo")
 	public List<EnvasadoProceso> getEnvasadoProcesos() {
 		return this.envasadoProcesos;
 	}
@@ -284,6 +275,23 @@ public class OeePeriodoBaseObjetivo implements Serializable {
 		this.envasadoProcesos = envasadoProcesos;
 	}
 
+	public EnvasadoProceso addEnvasadoProceso(EnvasadoProceso envasadoProceso) {
+		getEnvasadoProcesos().add(envasadoProceso);
+		envasadoProceso.setOeePeriodoBaseObjetivo(this);
+
+		return envasadoProceso;
+	}
+
+	public EnvasadoProceso removeEnvasadoProceso(EnvasadoProceso envasadoProceso) {
+		getEnvasadoProcesos().remove(envasadoProceso);
+		envasadoProceso.setOeePeriodoBaseObjetivo(null);
+
+		return envasadoProceso;
+	}
+
+
+	//bi-directional many-to-one association to LimpiezaProceso
+	@OneToMany(mappedBy="oeePeriodoBaseObjetivo")
 	public List<LimpiezaProceso> getLimpiezaProcesos() {
 		return this.limpiezaProcesos;
 	}
@@ -292,6 +300,23 @@ public class OeePeriodoBaseObjetivo implements Serializable {
 		this.limpiezaProcesos = limpiezaProcesos;
 	}
 
+	public LimpiezaProceso addLimpiezaProceso(LimpiezaProceso limpiezaProceso) {
+		getLimpiezaProcesos().add(limpiezaProceso);
+		limpiezaProceso.setOeePeriodoBaseObjetivo(this);
+
+		return limpiezaProceso;
+	}
+
+	public LimpiezaProceso removeLimpiezaProceso(LimpiezaProceso limpiezaProceso) {
+		getLimpiezaProcesos().remove(limpiezaProceso);
+		limpiezaProceso.setOeePeriodoBaseObjetivo(null);
+
+		return limpiezaProceso;
+	}
+
+
+	//bi-directional many-to-one association to LonjasProceso
+	@OneToMany(mappedBy="oeePeriodoBaseObjetivo")
 	public List<LonjasProceso> getLonjasProcesos() {
 		return this.lonjasProcesos;
 	}
@@ -300,6 +325,24 @@ public class OeePeriodoBaseObjetivo implements Serializable {
 		this.lonjasProcesos = lonjasProcesos;
 	}
 
+	public LonjasProceso addLonjasProceso(LonjasProceso lonjasProceso) {
+		getLonjasProcesos().add(lonjasProceso);
+		lonjasProceso.setOeePeriodoBaseObjetivo(this);
+
+		return lonjasProceso;
+	}
+
+	public LonjasProceso removeLonjasProceso(LonjasProceso lonjasProceso) {
+		getLonjasProcesos().remove(lonjasProceso);
+		lonjasProceso.setOeePeriodoBaseObjetivo(null);
+
+		return lonjasProceso;
+	}
+
+
+	//bi-directional many-to-one association to OeeAreaTablero
+	@ManyToOne
+	@JoinColumn(name="id_oee_area_tablero")
 	public OeeAreaTablero getOeeAreaTablero() {
 		return this.oeeAreaTablero;
 	}
@@ -308,6 +351,10 @@ public class OeePeriodoBaseObjetivo implements Serializable {
 		this.oeeAreaTablero = oeeAreaTablero;
 	}
 
+
+	//bi-directional many-to-one association to Proceso
+	@ManyToOne
+	@JoinColumn(name="idproceso")
 	public Proceso getProceso() {
 		return this.proceso;
 	}
@@ -316,6 +363,10 @@ public class OeePeriodoBaseObjetivo implements Serializable {
 		this.proceso = proceso;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}
@@ -324,6 +375,9 @@ public class OeePeriodoBaseObjetivo implements Serializable {
 		this.usuario = usuario;
 	}
 
+
+	//bi-directional many-to-one association to OeePeriodoBaseObjetivoDetalle
+	@OneToMany(mappedBy="oeePeriodoBaseObjetivo")
 	public List<OeePeriodoBaseObjetivoDetalle> getOeePeriodoBaseObjetivoDetalles() {
 		return this.oeePeriodoBaseObjetivoDetalles;
 	}
@@ -332,12 +386,43 @@ public class OeePeriodoBaseObjetivo implements Serializable {
 		this.oeePeriodoBaseObjetivoDetalles = oeePeriodoBaseObjetivoDetalles;
 	}
 
+	public OeePeriodoBaseObjetivoDetalle addOeePeriodoBaseObjetivoDetalle(OeePeriodoBaseObjetivoDetalle oeePeriodoBaseObjetivoDetalle) {
+		getOeePeriodoBaseObjetivoDetalles().add(oeePeriodoBaseObjetivoDetalle);
+		oeePeriodoBaseObjetivoDetalle.setOeePeriodoBaseObjetivo(this);
+
+		return oeePeriodoBaseObjetivoDetalle;
+	}
+
+	public OeePeriodoBaseObjetivoDetalle removeOeePeriodoBaseObjetivoDetalle(OeePeriodoBaseObjetivoDetalle oeePeriodoBaseObjetivoDetalle) {
+		getOeePeriodoBaseObjetivoDetalles().remove(oeePeriodoBaseObjetivoDetalle);
+		oeePeriodoBaseObjetivoDetalle.setOeePeriodoBaseObjetivo(null);
+
+		return oeePeriodoBaseObjetivoDetalle;
+	}
+
+
+	//bi-directional many-to-one association to RackeoProceso
+	@OneToMany(mappedBy="oeePeriodoBaseObjetivo")
 	public List<RackeoProceso> getRackeoProcesos() {
 		return this.rackeoProcesos;
 	}
 
 	public void setRackeoProcesos(List<RackeoProceso> rackeoProcesos) {
 		this.rackeoProcesos = rackeoProcesos;
+	}
+
+	public RackeoProceso addRackeoProceso(RackeoProceso rackeoProceso) {
+		getRackeoProcesos().add(rackeoProceso);
+		rackeoProceso.setOeePeriodoBaseObjetivo(this);
+
+		return rackeoProceso;
+	}
+
+	public RackeoProceso removeRackeoProceso(RackeoProceso rackeoProceso) {
+		getRackeoProcesos().remove(rackeoProceso);
+		rackeoProceso.setOeePeriodoBaseObjetivo(null);
+
+		return rackeoProceso;
 	}
 
 }

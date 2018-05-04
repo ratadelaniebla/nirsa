@@ -10,30 +10,21 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="harina_comprobante_detalle_grupo_especie")
+@NamedQuery(name="HarinaComprobanteDetalleGrupoEspecie.findAll", query="SELECT h FROM HarinaComprobanteDetalleGrupoEspecie h")
 public class HarinaComprobanteDetalleGrupoEspecie implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idharinacomprobantedetallegrupoespecie;
-
 	private Integer numerogabetas;
-
 	private double porcentaje;
-
-	//bi-directional many-to-one association to HarinaGrupoEspecie
-	@ManyToOne
-	@JoinColumn(name="idharinagrupoespecie")
 	private HarinaGrupoEspecie harinaGrupoEspecie;
-
-	//bi-directional many-to-one association to HarinaRecepcionPescaComprobante
-	@ManyToOne
-	@JoinColumn(name="idharinarecepcionpescacomprobante")
 	private HarinaRecepcionPescaComprobante harinaRecepcionPescaComprobante;
 
 	public HarinaComprobanteDetalleGrupoEspecie() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdharinacomprobantedetallegrupoespecie() {
 		return this.idharinacomprobantedetallegrupoespecie;
 	}
@@ -41,6 +32,7 @@ public class HarinaComprobanteDetalleGrupoEspecie implements Serializable {
 	public void setIdharinacomprobantedetallegrupoespecie(Long idharinacomprobantedetallegrupoespecie) {
 		this.idharinacomprobantedetallegrupoespecie = idharinacomprobantedetallegrupoespecie;
 	}
+
 
 	public Integer getNumerogabetas() {
 		return this.numerogabetas;
@@ -50,6 +42,7 @@ public class HarinaComprobanteDetalleGrupoEspecie implements Serializable {
 		this.numerogabetas = numerogabetas;
 	}
 
+
 	public double getPorcentaje() {
 		return this.porcentaje;
 	}
@@ -58,6 +51,10 @@ public class HarinaComprobanteDetalleGrupoEspecie implements Serializable {
 		this.porcentaje = porcentaje;
 	}
 
+
+	//bi-directional many-to-one association to HarinaGrupoEspecie
+	@ManyToOne
+	@JoinColumn(name="idharinagrupoespecie")
 	public HarinaGrupoEspecie getHarinaGrupoEspecie() {
 		return this.harinaGrupoEspecie;
 	}
@@ -66,6 +63,10 @@ public class HarinaComprobanteDetalleGrupoEspecie implements Serializable {
 		this.harinaGrupoEspecie = harinaGrupoEspecie;
 	}
 
+
+	//bi-directional many-to-one association to HarinaRecepcionPescaComprobante
+	@ManyToOne
+	@JoinColumn(name="idharinarecepcionpescacomprobante")
 	public HarinaRecepcionPescaComprobante getHarinaRecepcionPescaComprobante() {
 		return this.harinaRecepcionPescaComprobante;
 	}

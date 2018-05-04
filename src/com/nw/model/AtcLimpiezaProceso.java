@@ -12,56 +12,27 @@ import java.util.List;
  */
 @Entity
 @Table(name="atc_limpieza_proceso")
+@NamedQuery(name="AtcLimpiezaProceso.findAll", query="SELECT a FROM AtcLimpiezaProceso a")
 public class AtcLimpiezaProceso implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idatclimpiezaproceso;
-
 	private Integer estado;
-
 	private Timestamp fechareg;
-
-	//bi-directional many-to-one association to AtcLimpiezaDetalleProcesoLote
-	@OneToMany(mappedBy="atcLimpiezaProceso")
 	private List<AtcLimpiezaDetalleProcesoLote> atcLimpiezaDetalleProcesoLotes;
-
-	//bi-directional many-to-one association to AtcProcesoAperturaCierreAtunCrudo
-	@ManyToOne
-	@JoinColumn(name="idatcprocesoaperturacierre")
 	private AtcProcesoAperturaCierreAtunCrudo atcProcesoAperturaCierreAtunCrudo;
-
-	//bi-directional many-to-one association to AtcProduccion
-	@ManyToOne
-	@JoinColumn(name="idatcproduccion")
 	private AtcProduccion atcProduccion;
-
-	//bi-directional many-to-one association to AtcTurno
-	@ManyToOne
-	@JoinColumn(name="idatcturno")
 	private AtcTurno atcTurno;
-
-	//bi-directional many-to-one association to AtcUsuario
-	@ManyToOne
-	@JoinColumn(name="idatcusuario")
 	private AtcUsuario atcUsuario;
-
-	//bi-directional many-to-one association to AtcLimpiezaProcesoEmpleado
-	@OneToMany(mappedBy="atcLimpiezaProceso")
 	private List<AtcLimpiezaProcesoEmpleado> atcLimpiezaProcesoEmpleados;
-
-	//bi-directional many-to-one association to AtcLimpiezaTempAguaLav
-	@OneToMany(mappedBy="atcLimpiezaProceso")
 	private List<AtcLimpiezaTempAguaLav> atcLimpiezaTempAguaLavs;
-
-	//bi-directional many-to-one association to AtcLimpiezaTempLomo
-	@OneToMany(mappedBy="atcLimpiezaProceso")
 	private List<AtcLimpiezaTempLomo> atcLimpiezaTempLomos;
 
 	public AtcLimpiezaProceso() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdatclimpiezaproceso() {
 		return this.idatclimpiezaproceso;
 	}
@@ -69,6 +40,7 @@ public class AtcLimpiezaProceso implements Serializable {
 	public void setIdatclimpiezaproceso(Long idatclimpiezaproceso) {
 		this.idatclimpiezaproceso = idatclimpiezaproceso;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -78,6 +50,7 @@ public class AtcLimpiezaProceso implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Timestamp getFechareg() {
 		return this.fechareg;
 	}
@@ -86,6 +59,9 @@ public class AtcLimpiezaProceso implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
+	//bi-directional many-to-one association to AtcLimpiezaDetalleProcesoLote
+	@OneToMany(mappedBy="atcLimpiezaProceso")
 	public List<AtcLimpiezaDetalleProcesoLote> getAtcLimpiezaDetalleProcesoLotes() {
 		return this.atcLimpiezaDetalleProcesoLotes;
 	}
@@ -94,6 +70,24 @@ public class AtcLimpiezaProceso implements Serializable {
 		this.atcLimpiezaDetalleProcesoLotes = atcLimpiezaDetalleProcesoLotes;
 	}
 
+	public AtcLimpiezaDetalleProcesoLote addAtcLimpiezaDetalleProcesoLote(AtcLimpiezaDetalleProcesoLote atcLimpiezaDetalleProcesoLote) {
+		getAtcLimpiezaDetalleProcesoLotes().add(atcLimpiezaDetalleProcesoLote);
+		atcLimpiezaDetalleProcesoLote.setAtcLimpiezaProceso(this);
+
+		return atcLimpiezaDetalleProcesoLote;
+	}
+
+	public AtcLimpiezaDetalleProcesoLote removeAtcLimpiezaDetalleProcesoLote(AtcLimpiezaDetalleProcesoLote atcLimpiezaDetalleProcesoLote) {
+		getAtcLimpiezaDetalleProcesoLotes().remove(atcLimpiezaDetalleProcesoLote);
+		atcLimpiezaDetalleProcesoLote.setAtcLimpiezaProceso(null);
+
+		return atcLimpiezaDetalleProcesoLote;
+	}
+
+
+	//bi-directional many-to-one association to AtcProcesoAperturaCierreAtunCrudo
+	@ManyToOne
+	@JoinColumn(name="idatcprocesoaperturacierre")
 	public AtcProcesoAperturaCierreAtunCrudo getAtcProcesoAperturaCierreAtunCrudo() {
 		return this.atcProcesoAperturaCierreAtunCrudo;
 	}
@@ -102,6 +96,10 @@ public class AtcLimpiezaProceso implements Serializable {
 		this.atcProcesoAperturaCierreAtunCrudo = atcProcesoAperturaCierreAtunCrudo;
 	}
 
+
+	//bi-directional many-to-one association to AtcProduccion
+	@ManyToOne
+	@JoinColumn(name="idatcproduccion")
 	public AtcProduccion getAtcProduccion() {
 		return this.atcProduccion;
 	}
@@ -110,6 +108,10 @@ public class AtcLimpiezaProceso implements Serializable {
 		this.atcProduccion = atcProduccion;
 	}
 
+
+	//bi-directional many-to-one association to AtcTurno
+	@ManyToOne
+	@JoinColumn(name="idatcturno")
 	public AtcTurno getAtcTurno() {
 		return this.atcTurno;
 	}
@@ -118,6 +120,10 @@ public class AtcLimpiezaProceso implements Serializable {
 		this.atcTurno = atcTurno;
 	}
 
+
+	//bi-directional many-to-one association to AtcUsuario
+	@ManyToOne
+	@JoinColumn(name="idatcusuario")
 	public AtcUsuario getAtcUsuario() {
 		return this.atcUsuario;
 	}
@@ -126,6 +132,9 @@ public class AtcLimpiezaProceso implements Serializable {
 		this.atcUsuario = atcUsuario;
 	}
 
+
+	//bi-directional many-to-one association to AtcLimpiezaProcesoEmpleado
+	@OneToMany(mappedBy="atcLimpiezaProceso")
 	public List<AtcLimpiezaProcesoEmpleado> getAtcLimpiezaProcesoEmpleados() {
 		return this.atcLimpiezaProcesoEmpleados;
 	}
@@ -134,6 +143,23 @@ public class AtcLimpiezaProceso implements Serializable {
 		this.atcLimpiezaProcesoEmpleados = atcLimpiezaProcesoEmpleados;
 	}
 
+	public AtcLimpiezaProcesoEmpleado addAtcLimpiezaProcesoEmpleado(AtcLimpiezaProcesoEmpleado atcLimpiezaProcesoEmpleado) {
+		getAtcLimpiezaProcesoEmpleados().add(atcLimpiezaProcesoEmpleado);
+		atcLimpiezaProcesoEmpleado.setAtcLimpiezaProceso(this);
+
+		return atcLimpiezaProcesoEmpleado;
+	}
+
+	public AtcLimpiezaProcesoEmpleado removeAtcLimpiezaProcesoEmpleado(AtcLimpiezaProcesoEmpleado atcLimpiezaProcesoEmpleado) {
+		getAtcLimpiezaProcesoEmpleados().remove(atcLimpiezaProcesoEmpleado);
+		atcLimpiezaProcesoEmpleado.setAtcLimpiezaProceso(null);
+
+		return atcLimpiezaProcesoEmpleado;
+	}
+
+
+	//bi-directional many-to-one association to AtcLimpiezaTempAguaLav
+	@OneToMany(mappedBy="atcLimpiezaProceso")
 	public List<AtcLimpiezaTempAguaLav> getAtcLimpiezaTempAguaLavs() {
 		return this.atcLimpiezaTempAguaLavs;
 	}
@@ -142,12 +168,43 @@ public class AtcLimpiezaProceso implements Serializable {
 		this.atcLimpiezaTempAguaLavs = atcLimpiezaTempAguaLavs;
 	}
 
+	public AtcLimpiezaTempAguaLav addAtcLimpiezaTempAguaLav(AtcLimpiezaTempAguaLav atcLimpiezaTempAguaLav) {
+		getAtcLimpiezaTempAguaLavs().add(atcLimpiezaTempAguaLav);
+		atcLimpiezaTempAguaLav.setAtcLimpiezaProceso(this);
+
+		return atcLimpiezaTempAguaLav;
+	}
+
+	public AtcLimpiezaTempAguaLav removeAtcLimpiezaTempAguaLav(AtcLimpiezaTempAguaLav atcLimpiezaTempAguaLav) {
+		getAtcLimpiezaTempAguaLavs().remove(atcLimpiezaTempAguaLav);
+		atcLimpiezaTempAguaLav.setAtcLimpiezaProceso(null);
+
+		return atcLimpiezaTempAguaLav;
+	}
+
+
+	//bi-directional many-to-one association to AtcLimpiezaTempLomo
+	@OneToMany(mappedBy="atcLimpiezaProceso")
 	public List<AtcLimpiezaTempLomo> getAtcLimpiezaTempLomos() {
 		return this.atcLimpiezaTempLomos;
 	}
 
 	public void setAtcLimpiezaTempLomos(List<AtcLimpiezaTempLomo> atcLimpiezaTempLomos) {
 		this.atcLimpiezaTempLomos = atcLimpiezaTempLomos;
+	}
+
+	public AtcLimpiezaTempLomo addAtcLimpiezaTempLomo(AtcLimpiezaTempLomo atcLimpiezaTempLomo) {
+		getAtcLimpiezaTempLomos().add(atcLimpiezaTempLomo);
+		atcLimpiezaTempLomo.setAtcLimpiezaProceso(this);
+
+		return atcLimpiezaTempLomo;
+	}
+
+	public AtcLimpiezaTempLomo removeAtcLimpiezaTempLomo(AtcLimpiezaTempLomo atcLimpiezaTempLomo) {
+		getAtcLimpiezaTempLomos().remove(atcLimpiezaTempLomo);
+		atcLimpiezaTempLomo.setAtcLimpiezaProceso(null);
+
+		return atcLimpiezaTempLomo;
 	}
 
 }

@@ -12,39 +12,23 @@ import java.util.List;
  */
 @Entity
 @Table(name="rociado_muestreo_temp_coche")
+@NamedQuery(name="RociadoMuestreoTempCoche.findAll", query="SELECT r FROM RociadoMuestreoTempCoche r")
 public class RociadoMuestreoTempCoche implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idrociadomuestreotempcoche;
-
 	private Timestamp fechareg;
-
 	private String observacion;
-
-	//bi-directional many-to-one association to RociadoDetalleMuestreoTempCoche
-	@OneToMany(mappedBy="rociadoMuestreoTempCoche")
 	private List<RociadoDetalleMuestreoTempCoche> rociadoDetalleMuestreoTempCoches;
-
-	//bi-directional many-to-one association to RociadoProceso
-	@ManyToOne
-	@JoinColumn(name="idrociadoproceso")
 	private RociadoProceso rociadoProceso;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public RociadoMuestreoTempCoche() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdrociadomuestreotempcoche() {
 		return this.idrociadomuestreotempcoche;
 	}
@@ -52,6 +36,7 @@ public class RociadoMuestreoTempCoche implements Serializable {
 	public void setIdrociadomuestreotempcoche(Long idrociadomuestreotempcoche) {
 		this.idrociadomuestreotempcoche = idrociadomuestreotempcoche;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -61,6 +46,7 @@ public class RociadoMuestreoTempCoche implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public String getObservacion() {
 		return this.observacion;
 	}
@@ -69,6 +55,9 @@ public class RociadoMuestreoTempCoche implements Serializable {
 		this.observacion = observacion;
 	}
 
+
+	//bi-directional many-to-one association to RociadoDetalleMuestreoTempCoche
+	@OneToMany(mappedBy="rociadoMuestreoTempCoche")
 	public List<RociadoDetalleMuestreoTempCoche> getRociadoDetalleMuestreoTempCoches() {
 		return this.rociadoDetalleMuestreoTempCoches;
 	}
@@ -77,6 +66,24 @@ public class RociadoMuestreoTempCoche implements Serializable {
 		this.rociadoDetalleMuestreoTempCoches = rociadoDetalleMuestreoTempCoches;
 	}
 
+	public RociadoDetalleMuestreoTempCoche addRociadoDetalleMuestreoTempCoch(RociadoDetalleMuestreoTempCoche rociadoDetalleMuestreoTempCoch) {
+		getRociadoDetalleMuestreoTempCoches().add(rociadoDetalleMuestreoTempCoch);
+		rociadoDetalleMuestreoTempCoch.setRociadoMuestreoTempCoche(this);
+
+		return rociadoDetalleMuestreoTempCoch;
+	}
+
+	public RociadoDetalleMuestreoTempCoche removeRociadoDetalleMuestreoTempCoch(RociadoDetalleMuestreoTempCoche rociadoDetalleMuestreoTempCoch) {
+		getRociadoDetalleMuestreoTempCoches().remove(rociadoDetalleMuestreoTempCoch);
+		rociadoDetalleMuestreoTempCoch.setRociadoMuestreoTempCoche(null);
+
+		return rociadoDetalleMuestreoTempCoch;
+	}
+
+
+	//bi-directional many-to-one association to RociadoProceso
+	@ManyToOne
+	@JoinColumn(name="idrociadoproceso")
 	public RociadoProceso getRociadoProceso() {
 		return this.rociadoProceso;
 	}
@@ -85,6 +92,10 @@ public class RociadoMuestreoTempCoche implements Serializable {
 		this.rociadoProceso = rociadoProceso;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -93,6 +104,10 @@ public class RociadoMuestreoTempCoche implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

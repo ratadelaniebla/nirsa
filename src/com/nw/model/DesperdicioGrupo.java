@@ -10,16 +10,17 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="desperdicio_grupo")
+@NamedQuery(name="DesperdicioGrupo.findAll", query="SELECT d FROM DesperdicioGrupo d")
 public class DesperdicioGrupo implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer iddesperdiciogrupo;
 
 	public DesperdicioGrupo() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIddesperdiciogrupo() {
 		return this.iddesperdiciogrupo;
 	}

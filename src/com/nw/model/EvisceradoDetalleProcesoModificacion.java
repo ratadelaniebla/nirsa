@@ -11,54 +11,30 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="eviscerado_detalle_proceso_modificacion")
+@NamedQuery(name="EvisceradoDetalleProcesoModificacion.findAll", query="SELECT e FROM EvisceradoDetalleProcesoModificacion e")
 public class EvisceradoDetalleProcesoModificacion implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idevisceradodetalleprocesomodificacion;
-
 	private Integer estado;
-
 	private Timestamp fechaactualizacion;
-
 	private Timestamp fechafin;
-
 	private Timestamp fechafinrackeo;
-
 	private Timestamp fechainicio;
-
 	private Timestamp fechainiciorackeo;
-
 	private Timestamp fechareg;
-
 	private Integer finrackeomanual;
-
 	private String idusuarioactualizacion;
-
-	//bi-directional many-to-one association to EvisceradoDetalleProceso
-	@ManyToOne
-	@JoinColumn(name="idevisceradodetalleproceso")
 	private EvisceradoDetalleProceso evisceradoDetalleProceso;
-
-	//bi-directional many-to-one association to EvisceradoProceso
-	@ManyToOne
-	@JoinColumn(name="idevisceradoproceso")
 	private EvisceradoProceso evisceradoProceso;
-
-	//bi-directional many-to-one association to ProduccionDetalleLoteCajon
-	@ManyToOne
-	@JoinColumn(name="idproducciondetallelotecajon")
 	private ProduccionDetalleLoteCajon produccionDetalleLoteCajon;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public EvisceradoDetalleProcesoModificacion() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdevisceradodetalleprocesomodificacion() {
 		return this.idevisceradodetalleprocesomodificacion;
 	}
@@ -66,6 +42,7 @@ public class EvisceradoDetalleProcesoModificacion implements Serializable {
 	public void setIdevisceradodetalleprocesomodificacion(Long idevisceradodetalleprocesomodificacion) {
 		this.idevisceradodetalleprocesomodificacion = idevisceradodetalleprocesomodificacion;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -75,6 +52,7 @@ public class EvisceradoDetalleProcesoModificacion implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Timestamp getFechaactualizacion() {
 		return this.fechaactualizacion;
 	}
@@ -82,6 +60,7 @@ public class EvisceradoDetalleProcesoModificacion implements Serializable {
 	public void setFechaactualizacion(Timestamp fechaactualizacion) {
 		this.fechaactualizacion = fechaactualizacion;
 	}
+
 
 	public Timestamp getFechafin() {
 		return this.fechafin;
@@ -91,6 +70,7 @@ public class EvisceradoDetalleProcesoModificacion implements Serializable {
 		this.fechafin = fechafin;
 	}
 
+
 	public Timestamp getFechafinrackeo() {
 		return this.fechafinrackeo;
 	}
@@ -98,6 +78,7 @@ public class EvisceradoDetalleProcesoModificacion implements Serializable {
 	public void setFechafinrackeo(Timestamp fechafinrackeo) {
 		this.fechafinrackeo = fechafinrackeo;
 	}
+
 
 	public Timestamp getFechainicio() {
 		return this.fechainicio;
@@ -107,6 +88,7 @@ public class EvisceradoDetalleProcesoModificacion implements Serializable {
 		this.fechainicio = fechainicio;
 	}
 
+
 	public Timestamp getFechainiciorackeo() {
 		return this.fechainiciorackeo;
 	}
@@ -114,6 +96,7 @@ public class EvisceradoDetalleProcesoModificacion implements Serializable {
 	public void setFechainiciorackeo(Timestamp fechainiciorackeo) {
 		this.fechainiciorackeo = fechainiciorackeo;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -123,6 +106,7 @@ public class EvisceradoDetalleProcesoModificacion implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public Integer getFinrackeomanual() {
 		return this.finrackeomanual;
 	}
@@ -130,6 +114,7 @@ public class EvisceradoDetalleProcesoModificacion implements Serializable {
 	public void setFinrackeomanual(Integer finrackeomanual) {
 		this.finrackeomanual = finrackeomanual;
 	}
+
 
 	public String getIdusuarioactualizacion() {
 		return this.idusuarioactualizacion;
@@ -139,6 +124,10 @@ public class EvisceradoDetalleProcesoModificacion implements Serializable {
 		this.idusuarioactualizacion = idusuarioactualizacion;
 	}
 
+
+	//bi-directional many-to-one association to EvisceradoDetalleProceso
+	@ManyToOne
+	@JoinColumn(name="idevisceradodetalleproceso")
 	public EvisceradoDetalleProceso getEvisceradoDetalleProceso() {
 		return this.evisceradoDetalleProceso;
 	}
@@ -147,6 +136,10 @@ public class EvisceradoDetalleProcesoModificacion implements Serializable {
 		this.evisceradoDetalleProceso = evisceradoDetalleProceso;
 	}
 
+
+	//bi-directional many-to-one association to EvisceradoProceso
+	@ManyToOne
+	@JoinColumn(name="idevisceradoproceso")
 	public EvisceradoProceso getEvisceradoProceso() {
 		return this.evisceradoProceso;
 	}
@@ -155,6 +148,10 @@ public class EvisceradoDetalleProcesoModificacion implements Serializable {
 		this.evisceradoProceso = evisceradoProceso;
 	}
 
+
+	//bi-directional many-to-one association to ProduccionDetalleLoteCajon
+	@ManyToOne
+	@JoinColumn(name="idproducciondetallelotecajon")
 	public ProduccionDetalleLoteCajon getProduccionDetalleLoteCajon() {
 		return this.produccionDetalleLoteCajon;
 	}
@@ -163,6 +160,10 @@ public class EvisceradoDetalleProcesoModificacion implements Serializable {
 		this.produccionDetalleLoteCajon = produccionDetalleLoteCajon;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

@@ -11,22 +11,19 @@ import java.util.List;
  */
 @Entity
 @Table(name="calidad_numero_muestreo_pcc")
+@NamedQuery(name="CalidadNumeroMuestreoPcc.findAll", query="SELECT c FROM CalidadNumeroMuestreoPcc c")
 public class CalidadNumeroMuestreoPcc implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idcalidadnumeromuestreopcc;
-
 	private String descripcion;
-
-	//bi-directional many-to-one association to CalidadDetallePcc
-	@OneToMany(mappedBy="calidadNumeroMuestreoPcc")
 	private List<CalidadDetallePcc> calidadDetallePccs;
 
 	public CalidadNumeroMuestreoPcc() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdcalidadnumeromuestreopcc() {
 		return this.idcalidadnumeromuestreopcc;
 	}
@@ -34,6 +31,7 @@ public class CalidadNumeroMuestreoPcc implements Serializable {
 	public void setIdcalidadnumeromuestreopcc(Integer idcalidadnumeromuestreopcc) {
 		this.idcalidadnumeromuestreopcc = idcalidadnumeromuestreopcc;
 	}
+
 
 	public String getDescripcion() {
 		return this.descripcion;
@@ -43,12 +41,29 @@ public class CalidadNumeroMuestreoPcc implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+
+	//bi-directional many-to-one association to CalidadDetallePcc
+	@OneToMany(mappedBy="calidadNumeroMuestreoPcc")
 	public List<CalidadDetallePcc> getCalidadDetallePccs() {
 		return this.calidadDetallePccs;
 	}
 
 	public void setCalidadDetallePccs(List<CalidadDetallePcc> calidadDetallePccs) {
 		this.calidadDetallePccs = calidadDetallePccs;
+	}
+
+	public CalidadDetallePcc addCalidadDetallePcc(CalidadDetallePcc calidadDetallePcc) {
+		getCalidadDetallePccs().add(calidadDetallePcc);
+		calidadDetallePcc.setCalidadNumeroMuestreoPcc(this);
+
+		return calidadDetallePcc;
+	}
+
+	public CalidadDetallePcc removeCalidadDetallePcc(CalidadDetallePcc calidadDetallePcc) {
+		getCalidadDetallePccs().remove(calidadDetallePcc);
+		calidadDetallePcc.setCalidadNumeroMuestreoPcc(null);
+
+		return calidadDetallePcc;
 	}
 
 }

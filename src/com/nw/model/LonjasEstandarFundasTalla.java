@@ -11,24 +11,20 @@ import java.util.List;
  */
 @Entity
 @Table(name="lonjas_estandar_fundas_tallas")
+@NamedQuery(name="LonjasEstandarFundasTalla.findAll", query="SELECT l FROM LonjasEstandarFundasTalla l")
 public class LonjasEstandarFundasTalla implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idlonjasestandarfundastallas;
-
 	private Integer estandarfundasporhora;
-
 	private String idtalla;
-
-	//bi-directional many-to-one association to LonjasDetalleProcesoConteo
-	@OneToMany(mappedBy="lonjasEstandarFundasTalla")
 	private List<LonjasDetalleProcesoConteo> lonjasDetalleProcesoConteos;
 
 	public LonjasEstandarFundasTalla() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdlonjasestandarfundastallas() {
 		return this.idlonjasestandarfundastallas;
 	}
@@ -36,6 +32,7 @@ public class LonjasEstandarFundasTalla implements Serializable {
 	public void setIdlonjasestandarfundastallas(Integer idlonjasestandarfundastallas) {
 		this.idlonjasestandarfundastallas = idlonjasestandarfundastallas;
 	}
+
 
 	public Integer getEstandarfundasporhora() {
 		return this.estandarfundasporhora;
@@ -45,6 +42,7 @@ public class LonjasEstandarFundasTalla implements Serializable {
 		this.estandarfundasporhora = estandarfundasporhora;
 	}
 
+
 	public String getIdtalla() {
 		return this.idtalla;
 	}
@@ -53,12 +51,29 @@ public class LonjasEstandarFundasTalla implements Serializable {
 		this.idtalla = idtalla;
 	}
 
+
+	//bi-directional many-to-one association to LonjasDetalleProcesoConteo
+	@OneToMany(mappedBy="lonjasEstandarFundasTalla")
 	public List<LonjasDetalleProcesoConteo> getLonjasDetalleProcesoConteos() {
 		return this.lonjasDetalleProcesoConteos;
 	}
 
 	public void setLonjasDetalleProcesoConteos(List<LonjasDetalleProcesoConteo> lonjasDetalleProcesoConteos) {
 		this.lonjasDetalleProcesoConteos = lonjasDetalleProcesoConteos;
+	}
+
+	public LonjasDetalleProcesoConteo addLonjasDetalleProcesoConteo(LonjasDetalleProcesoConteo lonjasDetalleProcesoConteo) {
+		getLonjasDetalleProcesoConteos().add(lonjasDetalleProcesoConteo);
+		lonjasDetalleProcesoConteo.setLonjasEstandarFundasTalla(this);
+
+		return lonjasDetalleProcesoConteo;
+	}
+
+	public LonjasDetalleProcesoConteo removeLonjasDetalleProcesoConteo(LonjasDetalleProcesoConteo lonjasDetalleProcesoConteo) {
+		getLonjasDetalleProcesoConteos().remove(lonjasDetalleProcesoConteo);
+		lonjasDetalleProcesoConteo.setLonjasEstandarFundasTalla(null);
+
+		return lonjasDetalleProcesoConteo;
 	}
 
 }

@@ -11,22 +11,19 @@ import java.util.List;
  */
 @Entity
 @Table(name="barco_propiedad")
+@NamedQuery(name="BarcoPropiedad.findAll", query="SELECT b FROM BarcoPropiedad b")
 public class BarcoPropiedad implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idpropiedad;
-
 	private String descripcion;
-
-	//bi-directional many-to-one association to Barco
-	@OneToMany(mappedBy="barcoPropiedad")
 	private List<Barco> barcos;
 
 	public BarcoPropiedad() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdpropiedad() {
 		return this.idpropiedad;
 	}
@@ -34,6 +31,7 @@ public class BarcoPropiedad implements Serializable {
 	public void setIdpropiedad(Integer idpropiedad) {
 		this.idpropiedad = idpropiedad;
 	}
+
 
 	public String getDescripcion() {
 		return this.descripcion;
@@ -43,12 +41,29 @@ public class BarcoPropiedad implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+
+	//bi-directional many-to-one association to Barco
+	@OneToMany(mappedBy="barcoPropiedad")
 	public List<Barco> getBarcos() {
 		return this.barcos;
 	}
 
 	public void setBarcos(List<Barco> barcos) {
 		this.barcos = barcos;
+	}
+
+	public Barco addBarco(Barco barco) {
+		getBarcos().add(barco);
+		barco.setBarcoPropiedad(this);
+
+		return barco;
+	}
+
+	public Barco removeBarco(Barco barco) {
+		getBarcos().remove(barco);
+		barco.setBarcoPropiedad(null);
+
+		return barco;
 	}
 
 }

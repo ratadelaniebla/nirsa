@@ -14,7 +14,7 @@ import java.util.List;
 @NamedQuery(name="ProduccionDetalleOrden.findAll", query="SELECT p FROM ProduccionDetalleOrden p")
 public class ProduccionDetalleOrden implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private Long idproducciondetalleorden;
+	private Integer idproducciondetalleorden;
 	private double ac;
 	private double ag;
 	private Integer cajas;
@@ -27,9 +27,6 @@ public class ProduccionDetalleOrden implements Serializable {
 	private double fi;
 	private double fill;
 	private double flake;
-	private Long idproduccion;
-	private Integer idturno;
-	private String idusuario;
 	private Integer item;
 	private double latas;
 	private double lomolimpio;
@@ -52,6 +49,11 @@ public class ProduccionDetalleOrden implements Serializable {
 	private double ton;
 	private String video;
 	private List<EnvasadoControlPesoFillCabecera> envasadoControlPesoFillCabeceras;
+	private List<EnvasadoControlPesoNetoCabecera> envasadoControlPesoNetoCabeceras;
+	private List<EnvasadoDetalleProcesoCambio> envasadoDetalleProcesoCambios;
+	private Produccion produccion;
+	private Turno turno;
+	private Usuario usuario;
 
 	public ProduccionDetalleOrden() {
 	}
@@ -59,11 +61,11 @@ public class ProduccionDetalleOrden implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	public Long getIdproducciondetalleorden() {
+	public Integer getIdproducciondetalleorden() {
 		return this.idproducciondetalleorden;
 	}
 
-	public void setIdproducciondetalleorden(Long idproducciondetalleorden) {
+	public void setIdproducciondetalleorden(Integer idproducciondetalleorden) {
 		this.idproducciondetalleorden = idproducciondetalleorden;
 	}
 
@@ -173,33 +175,6 @@ public class ProduccionDetalleOrden implements Serializable {
 
 	public void setFlake(double flake) {
 		this.flake = flake;
-	}
-
-
-	public Long getIdproduccion() {
-		return this.idproduccion;
-	}
-
-	public void setIdproduccion(Long idproduccion) {
-		this.idproduccion = idproduccion;
-	}
-
-
-	public Integer getIdturno() {
-		return this.idturno;
-	}
-
-	public void setIdturno(Integer idturno) {
-		this.idturno = idturno;
-	}
-
-
-	public String getIdusuario() {
-		return this.idusuario;
-	}
-
-	public void setIdusuario(String idusuario) {
-		this.idusuario = idusuario;
 	}
 
 
@@ -414,6 +389,92 @@ public class ProduccionDetalleOrden implements Serializable {
 		envasadoControlPesoFillCabecera.setProduccionDetalleOrden(null);
 
 		return envasadoControlPesoFillCabecera;
+	}
+
+
+	//bi-directional many-to-one association to EnvasadoControlPesoNetoCabecera
+	@OneToMany(mappedBy="produccionDetalleOrden")
+	public List<EnvasadoControlPesoNetoCabecera> getEnvasadoControlPesoNetoCabeceras() {
+		return this.envasadoControlPesoNetoCabeceras;
+	}
+
+	public void setEnvasadoControlPesoNetoCabeceras(List<EnvasadoControlPesoNetoCabecera> envasadoControlPesoNetoCabeceras) {
+		this.envasadoControlPesoNetoCabeceras = envasadoControlPesoNetoCabeceras;
+	}
+
+	public EnvasadoControlPesoNetoCabecera addEnvasadoControlPesoNetoCabecera(EnvasadoControlPesoNetoCabecera envasadoControlPesoNetoCabecera) {
+		getEnvasadoControlPesoNetoCabeceras().add(envasadoControlPesoNetoCabecera);
+		envasadoControlPesoNetoCabecera.setProduccionDetalleOrden(this);
+
+		return envasadoControlPesoNetoCabecera;
+	}
+
+	public EnvasadoControlPesoNetoCabecera removeEnvasadoControlPesoNetoCabecera(EnvasadoControlPesoNetoCabecera envasadoControlPesoNetoCabecera) {
+		getEnvasadoControlPesoNetoCabeceras().remove(envasadoControlPesoNetoCabecera);
+		envasadoControlPesoNetoCabecera.setProduccionDetalleOrden(null);
+
+		return envasadoControlPesoNetoCabecera;
+	}
+
+
+	//bi-directional many-to-one association to EnvasadoDetalleProcesoCambio
+	@OneToMany(mappedBy="produccionDetalleOrden")
+	public List<EnvasadoDetalleProcesoCambio> getEnvasadoDetalleProcesoCambios() {
+		return this.envasadoDetalleProcesoCambios;
+	}
+
+	public void setEnvasadoDetalleProcesoCambios(List<EnvasadoDetalleProcesoCambio> envasadoDetalleProcesoCambios) {
+		this.envasadoDetalleProcesoCambios = envasadoDetalleProcesoCambios;
+	}
+
+	public EnvasadoDetalleProcesoCambio addEnvasadoDetalleProcesoCambio(EnvasadoDetalleProcesoCambio envasadoDetalleProcesoCambio) {
+		getEnvasadoDetalleProcesoCambios().add(envasadoDetalleProcesoCambio);
+		envasadoDetalleProcesoCambio.setProduccionDetalleOrden(this);
+
+		return envasadoDetalleProcesoCambio;
+	}
+
+	public EnvasadoDetalleProcesoCambio removeEnvasadoDetalleProcesoCambio(EnvasadoDetalleProcesoCambio envasadoDetalleProcesoCambio) {
+		getEnvasadoDetalleProcesoCambios().remove(envasadoDetalleProcesoCambio);
+		envasadoDetalleProcesoCambio.setProduccionDetalleOrden(null);
+
+		return envasadoDetalleProcesoCambio;
+	}
+
+
+	//bi-directional many-to-one association to Produccion
+	@ManyToOne
+	@JoinColumn(name="idproduccion")
+	public Produccion getProduccion() {
+		return this.produccion;
+	}
+
+	public void setProduccion(Produccion produccion) {
+		this.produccion = produccion;
+	}
+
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
+	public Turno getTurno() {
+		return this.turno;
+	}
+
+	public void setTurno(Turno turno) {
+		this.turno = turno;
+	}
+
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
+	public Usuario getUsuario() {
+		return this.usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 }

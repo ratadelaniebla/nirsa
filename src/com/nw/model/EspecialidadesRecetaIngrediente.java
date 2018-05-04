@@ -10,28 +10,20 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="especialidades_receta_ingrediente")
+@NamedQuery(name="EspecialidadesRecetaIngrediente.findAll", query="SELECT e FROM EspecialidadesRecetaIngrediente e")
 public class EspecialidadesRecetaIngrediente implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idespecialidadesrecetaingrediente;
-
 	private double cantidad;
-
-	//bi-directional many-to-one association to EspecialidadesIngrediente
-	@ManyToOne
-	@JoinColumn(name="idespecialidadesingrediente")
 	private EspecialidadesIngrediente especialidadesIngrediente;
-
-	//bi-directional many-to-one association to EspecialidadesReceta
-	@ManyToOne
-	@JoinColumn(name="idespecialidadesreceta")
 	private EspecialidadesReceta especialidadesReceta;
 
 	public EspecialidadesRecetaIngrediente() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdespecialidadesrecetaingrediente() {
 		return this.idespecialidadesrecetaingrediente;
 	}
@@ -39,6 +31,7 @@ public class EspecialidadesRecetaIngrediente implements Serializable {
 	public void setIdespecialidadesrecetaingrediente(Integer idespecialidadesrecetaingrediente) {
 		this.idespecialidadesrecetaingrediente = idespecialidadesrecetaingrediente;
 	}
+
 
 	public double getCantidad() {
 		return this.cantidad;
@@ -48,6 +41,10 @@ public class EspecialidadesRecetaIngrediente implements Serializable {
 		this.cantidad = cantidad;
 	}
 
+
+	//bi-directional many-to-one association to EspecialidadesIngrediente
+	@ManyToOne
+	@JoinColumn(name="idespecialidadesingrediente")
 	public EspecialidadesIngrediente getEspecialidadesIngrediente() {
 		return this.especialidadesIngrediente;
 	}
@@ -56,6 +53,10 @@ public class EspecialidadesRecetaIngrediente implements Serializable {
 		this.especialidadesIngrediente = especialidadesIngrediente;
 	}
 
+
+	//bi-directional many-to-one association to EspecialidadesReceta
+	@ManyToOne
+	@JoinColumn(name="idespecialidadesreceta")
 	public EspecialidadesReceta getEspecialidadesReceta() {
 		return this.especialidadesReceta;
 	}

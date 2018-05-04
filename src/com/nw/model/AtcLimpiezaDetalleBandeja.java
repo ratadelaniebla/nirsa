@@ -11,54 +11,27 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="atc_limpieza_detalle_bandeja")
+@NamedQuery(name="AtcLimpiezaDetalleBandeja.findAll", query="SELECT a FROM AtcLimpiezaDetalleBandeja a")
 public class AtcLimpiezaDetalleBandeja implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idatclimpiezadetallebandeja;
-
 	private Timestamp fechareg;
-
 	private double peso;
-
 	private String tarjetapersonalinea;
-
 	private Integer ubicacionpersona;
-
-	//bi-directional many-to-one association to AtcLimpiezaDetalleProcesoLote
-	@ManyToOne
-	@JoinColumn(name="idatclimpiezadetalleprocesolote")
 	private AtcLimpiezaDetalleProcesoLote atcLimpiezaDetalleProcesoLote;
-
-	//bi-directional many-to-one association to AtcLimpiezaLinea
-	@ManyToOne
-	@JoinColumn(name="idatclimpiezalinea")
 	private AtcLimpiezaLinea atcLimpiezaLinea;
-
-	//bi-directional many-to-one association to AtcLimpiezaMaterial
-	@ManyToOne
-	@JoinColumn(name="idatclimpiezamaterial")
 	private AtcLimpiezaMaterial atcLimpiezaMaterial;
-
-	//bi-directional many-to-one association to AtcLimpiezaProcesoEmpleado
-	@ManyToOne
-	@JoinColumn(name="idatclimpiezaprocesoempleado")
 	private AtcLimpiezaProcesoEmpleado atcLimpiezaProcesoEmpleado;
-
-	//bi-directional many-to-one association to AtcTurno
-	@ManyToOne
-	@JoinColumn(name="idatcturno")
 	private AtcTurno atcTurno;
-
-	//bi-directional many-to-one association to AtcUsuario
-	@ManyToOne
-	@JoinColumn(name="idatcusuario")
 	private AtcUsuario atcUsuario;
 
 	public AtcLimpiezaDetalleBandeja() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdatclimpiezadetallebandeja() {
 		return this.idatclimpiezadetallebandeja;
 	}
@@ -66,6 +39,7 @@ public class AtcLimpiezaDetalleBandeja implements Serializable {
 	public void setIdatclimpiezadetallebandeja(Long idatclimpiezadetallebandeja) {
 		this.idatclimpiezadetallebandeja = idatclimpiezadetallebandeja;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -75,6 +49,7 @@ public class AtcLimpiezaDetalleBandeja implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public double getPeso() {
 		return this.peso;
 	}
@@ -82,6 +57,7 @@ public class AtcLimpiezaDetalleBandeja implements Serializable {
 	public void setPeso(double peso) {
 		this.peso = peso;
 	}
+
 
 	public String getTarjetapersonalinea() {
 		return this.tarjetapersonalinea;
@@ -91,6 +67,7 @@ public class AtcLimpiezaDetalleBandeja implements Serializable {
 		this.tarjetapersonalinea = tarjetapersonalinea;
 	}
 
+
 	public Integer getUbicacionpersona() {
 		return this.ubicacionpersona;
 	}
@@ -99,6 +76,10 @@ public class AtcLimpiezaDetalleBandeja implements Serializable {
 		this.ubicacionpersona = ubicacionpersona;
 	}
 
+
+	//bi-directional many-to-one association to AtcLimpiezaDetalleProcesoLote
+	@ManyToOne
+	@JoinColumn(name="idatclimpiezadetalleprocesolote")
 	public AtcLimpiezaDetalleProcesoLote getAtcLimpiezaDetalleProcesoLote() {
 		return this.atcLimpiezaDetalleProcesoLote;
 	}
@@ -107,6 +88,10 @@ public class AtcLimpiezaDetalleBandeja implements Serializable {
 		this.atcLimpiezaDetalleProcesoLote = atcLimpiezaDetalleProcesoLote;
 	}
 
+
+	//bi-directional many-to-one association to AtcLimpiezaLinea
+	@ManyToOne
+	@JoinColumn(name="idatclimpiezalinea")
 	public AtcLimpiezaLinea getAtcLimpiezaLinea() {
 		return this.atcLimpiezaLinea;
 	}
@@ -115,6 +100,10 @@ public class AtcLimpiezaDetalleBandeja implements Serializable {
 		this.atcLimpiezaLinea = atcLimpiezaLinea;
 	}
 
+
+	//bi-directional many-to-one association to AtcLimpiezaMaterial
+	@ManyToOne
+	@JoinColumn(name="idatclimpiezamaterial")
 	public AtcLimpiezaMaterial getAtcLimpiezaMaterial() {
 		return this.atcLimpiezaMaterial;
 	}
@@ -123,6 +112,10 @@ public class AtcLimpiezaDetalleBandeja implements Serializable {
 		this.atcLimpiezaMaterial = atcLimpiezaMaterial;
 	}
 
+
+	//bi-directional many-to-one association to AtcLimpiezaProcesoEmpleado
+	@ManyToOne
+	@JoinColumn(name="idatclimpiezaprocesoempleado")
 	public AtcLimpiezaProcesoEmpleado getAtcLimpiezaProcesoEmpleado() {
 		return this.atcLimpiezaProcesoEmpleado;
 	}
@@ -131,6 +124,10 @@ public class AtcLimpiezaDetalleBandeja implements Serializable {
 		this.atcLimpiezaProcesoEmpleado = atcLimpiezaProcesoEmpleado;
 	}
 
+
+	//bi-directional many-to-one association to AtcTurno
+	@ManyToOne
+	@JoinColumn(name="idatcturno")
 	public AtcTurno getAtcTurno() {
 		return this.atcTurno;
 	}
@@ -139,6 +136,10 @@ public class AtcLimpiezaDetalleBandeja implements Serializable {
 		this.atcTurno = atcTurno;
 	}
 
+
+	//bi-directional many-to-one association to AtcUsuario
+	@ManyToOne
+	@JoinColumn(name="idatcusuario")
 	public AtcUsuario getAtcUsuario() {
 		return this.atcUsuario;
 	}

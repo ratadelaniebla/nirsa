@@ -12,39 +12,23 @@ import java.util.List;
  */
 @Entity
 @Table(name="calidad_muestreo_temp_coccion")
+@NamedQuery(name="CalidadMuestreoTempCoccion.findAll", query="SELECT c FROM CalidadMuestreoTempCoccion c")
 public class CalidadMuestreoTempCoccion implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcalidadmuestreotempcoccion;
-
 	private Timestamp fechareg;
-
 	private String observacion;
-
-	//bi-directional many-to-one association to CalidadDetalleMuestreoTempCoccion
-	@OneToMany(mappedBy="calidadMuestreoTempCoccion")
 	private List<CalidadDetalleMuestreoTempCoccion> calidadDetalleMuestreoTempCoccions;
-
-	//bi-directional many-to-one association to EvisceradoProceso
-	@ManyToOne
-	@JoinColumn(name="idevisceradoproceso")
 	private EvisceradoProceso evisceradoProceso;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public CalidadMuestreoTempCoccion() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcalidadmuestreotempcoccion() {
 		return this.idcalidadmuestreotempcoccion;
 	}
@@ -52,6 +36,7 @@ public class CalidadMuestreoTempCoccion implements Serializable {
 	public void setIdcalidadmuestreotempcoccion(Long idcalidadmuestreotempcoccion) {
 		this.idcalidadmuestreotempcoccion = idcalidadmuestreotempcoccion;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -61,6 +46,7 @@ public class CalidadMuestreoTempCoccion implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public String getObservacion() {
 		return this.observacion;
 	}
@@ -69,6 +55,9 @@ public class CalidadMuestreoTempCoccion implements Serializable {
 		this.observacion = observacion;
 	}
 
+
+	//bi-directional many-to-one association to CalidadDetalleMuestreoTempCoccion
+	@OneToMany(mappedBy="calidadMuestreoTempCoccion")
 	public List<CalidadDetalleMuestreoTempCoccion> getCalidadDetalleMuestreoTempCoccions() {
 		return this.calidadDetalleMuestreoTempCoccions;
 	}
@@ -77,6 +66,24 @@ public class CalidadMuestreoTempCoccion implements Serializable {
 		this.calidadDetalleMuestreoTempCoccions = calidadDetalleMuestreoTempCoccions;
 	}
 
+	public CalidadDetalleMuestreoTempCoccion addCalidadDetalleMuestreoTempCoccion(CalidadDetalleMuestreoTempCoccion calidadDetalleMuestreoTempCoccion) {
+		getCalidadDetalleMuestreoTempCoccions().add(calidadDetalleMuestreoTempCoccion);
+		calidadDetalleMuestreoTempCoccion.setCalidadMuestreoTempCoccion(this);
+
+		return calidadDetalleMuestreoTempCoccion;
+	}
+
+	public CalidadDetalleMuestreoTempCoccion removeCalidadDetalleMuestreoTempCoccion(CalidadDetalleMuestreoTempCoccion calidadDetalleMuestreoTempCoccion) {
+		getCalidadDetalleMuestreoTempCoccions().remove(calidadDetalleMuestreoTempCoccion);
+		calidadDetalleMuestreoTempCoccion.setCalidadMuestreoTempCoccion(null);
+
+		return calidadDetalleMuestreoTempCoccion;
+	}
+
+
+	//bi-directional many-to-one association to EvisceradoProceso
+	@ManyToOne
+	@JoinColumn(name="idevisceradoproceso")
 	public EvisceradoProceso getEvisceradoProceso() {
 		return this.evisceradoProceso;
 	}
@@ -85,6 +92,10 @@ public class CalidadMuestreoTempCoccion implements Serializable {
 		this.evisceradoProceso = evisceradoProceso;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -93,6 +104,10 @@ public class CalidadMuestreoTempCoccion implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

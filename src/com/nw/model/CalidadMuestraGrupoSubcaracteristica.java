@@ -11,29 +11,21 @@ import java.util.List;
  */
 @Entity
 @Table(name="calidad_muestra_grupo_subcaracteristicas")
+@NamedQuery(name="CalidadMuestraGrupoSubcaracteristica.findAll", query="SELECT c FROM CalidadMuestraGrupoSubcaracteristica c")
 public class CalidadMuestraGrupoSubcaracteristica implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcalidadmuestragruposubcaracteristicas;
-
 	private String descripcion;
-
 	private Integer estado;
-
-	//bi-directional many-to-one association to CalidadMuestraAreaDetalleMuestra
-	@OneToMany(mappedBy="calidadMuestraGrupoSubcaracteristica")
 	private List<CalidadMuestraAreaDetalleMuestra> calidadMuestraAreaDetalleMuestras;
-
-	//bi-directional many-to-one association to CalidadMuestraGrupoCaracteristica
-	@ManyToOne
-	@JoinColumn(name="idcalidadmuestragrupocaracteristicas")
 	private CalidadMuestraGrupoCaracteristica calidadMuestraGrupoCaracteristica;
 
 	public CalidadMuestraGrupoSubcaracteristica() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcalidadmuestragruposubcaracteristicas() {
 		return this.idcalidadmuestragruposubcaracteristicas;
 	}
@@ -41,6 +33,7 @@ public class CalidadMuestraGrupoSubcaracteristica implements Serializable {
 	public void setIdcalidadmuestragruposubcaracteristicas(Long idcalidadmuestragruposubcaracteristicas) {
 		this.idcalidadmuestragruposubcaracteristicas = idcalidadmuestragruposubcaracteristicas;
 	}
+
 
 	public String getDescripcion() {
 		return this.descripcion;
@@ -50,6 +43,7 @@ public class CalidadMuestraGrupoSubcaracteristica implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+
 	public Integer getEstado() {
 		return this.estado;
 	}
@@ -58,6 +52,9 @@ public class CalidadMuestraGrupoSubcaracteristica implements Serializable {
 		this.estado = estado;
 	}
 
+
+	//bi-directional many-to-one association to CalidadMuestraAreaDetalleMuestra
+	@OneToMany(mappedBy="calidadMuestraGrupoSubcaracteristica")
 	public List<CalidadMuestraAreaDetalleMuestra> getCalidadMuestraAreaDetalleMuestras() {
 		return this.calidadMuestraAreaDetalleMuestras;
 	}
@@ -66,6 +63,24 @@ public class CalidadMuestraGrupoSubcaracteristica implements Serializable {
 		this.calidadMuestraAreaDetalleMuestras = calidadMuestraAreaDetalleMuestras;
 	}
 
+	public CalidadMuestraAreaDetalleMuestra addCalidadMuestraAreaDetalleMuestra(CalidadMuestraAreaDetalleMuestra calidadMuestraAreaDetalleMuestra) {
+		getCalidadMuestraAreaDetalleMuestras().add(calidadMuestraAreaDetalleMuestra);
+		calidadMuestraAreaDetalleMuestra.setCalidadMuestraGrupoSubcaracteristica(this);
+
+		return calidadMuestraAreaDetalleMuestra;
+	}
+
+	public CalidadMuestraAreaDetalleMuestra removeCalidadMuestraAreaDetalleMuestra(CalidadMuestraAreaDetalleMuestra calidadMuestraAreaDetalleMuestra) {
+		getCalidadMuestraAreaDetalleMuestras().remove(calidadMuestraAreaDetalleMuestra);
+		calidadMuestraAreaDetalleMuestra.setCalidadMuestraGrupoSubcaracteristica(null);
+
+		return calidadMuestraAreaDetalleMuestra;
+	}
+
+
+	//bi-directional many-to-one association to CalidadMuestraGrupoCaracteristica
+	@ManyToOne
+	@JoinColumn(name="idcalidadmuestragrupocaracteristicas")
 	public CalidadMuestraGrupoCaracteristica getCalidadMuestraGrupoCaracteristica() {
 		return this.calidadMuestraGrupoCaracteristica;
 	}

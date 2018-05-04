@@ -10,25 +10,20 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="cajon_detalle_muestreo")
+@NamedQuery(name="CajonDetalleMuestreo.findAll", query="SELECT c FROM CajonDetalleMuestreo c")
 public class CajonDetalleMuestreo implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcajondetallemuestreo;
-
 	private Integer numeromuestreo;
-
 	private double pesomuestreo;
-
-	//bi-directional many-to-one association to CajonDetalleBarcoDescarga
-	@ManyToOne
-	@JoinColumn(name="idcajondetallebarcodescarga")
 	private CajonDetalleBarcoDescarga cajonDetalleBarcoDescarga;
 
 	public CajonDetalleMuestreo() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcajondetallemuestreo() {
 		return this.idcajondetallemuestreo;
 	}
@@ -36,6 +31,7 @@ public class CajonDetalleMuestreo implements Serializable {
 	public void setIdcajondetallemuestreo(Long idcajondetallemuestreo) {
 		this.idcajondetallemuestreo = idcajondetallemuestreo;
 	}
+
 
 	public Integer getNumeromuestreo() {
 		return this.numeromuestreo;
@@ -45,6 +41,7 @@ public class CajonDetalleMuestreo implements Serializable {
 		this.numeromuestreo = numeromuestreo;
 	}
 
+
 	public double getPesomuestreo() {
 		return this.pesomuestreo;
 	}
@@ -53,6 +50,10 @@ public class CajonDetalleMuestreo implements Serializable {
 		this.pesomuestreo = pesomuestreo;
 	}
 
+
+	//bi-directional many-to-one association to CajonDetalleBarcoDescarga
+	@ManyToOne
+	@JoinColumn(name="idcajondetallebarcodescarga")
 	public CajonDetalleBarcoDescarga getCajonDetalleBarcoDescarga() {
 		return this.cajonDetalleBarcoDescarga;
 	}

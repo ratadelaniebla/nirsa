@@ -11,97 +11,56 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="produccion_carga_lote")
+@NamedQuery(name="ProduccionCargaLote.findAll", query="SELECT p FROM ProduccionCargaLote p")
 public class ProduccionCargaLote implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idproduccioncargalote;
-
 	private double absaceite;
-
 	private double absagua;
-
 	private String almacen;
-
 	private double cant;
-
 	private double cf;
-
 	private String codigobarco;
-
 	private double cr;
-
 	private String destinos;
-
 	private String destinoscliente;
-
 	private String especietalla;
-
 	private Timestamp fechadescarga;
-
 	private double firme;
-
 	private String hic;
-
 	private String hsc;
-
 	private Integer idlimpiezatipo;
-
 	private Integer idlote;
-
 	private Integer idturno;
-
 	private Integer item;
-
 	private String nombrebarco;
-
 	private String observaciones;
-
 	private String ordenfileteado;
-
 	private String ordenprecocido;
-
 	private String origen;
-
 	private double pastoso;
-
 	private Integer pedido;
-
 	private Integer pescados;
-
 	private double peso;
-
 	private String poza;
-
 	private Integer registro;
-
 	private double rt;
-
 	private double salmax;
-
 	private double salmin;
-
 	private double semifirme;
-
 	private String statuspesca;
-
 	private double suave;
-
 	private double tempcocina;
-
 	private double tempcurva;
-
 	private String viaje;
-
-	//bi-directional many-to-one association to ProduccionArchivoCargaLote
-	@ManyToOne
-	@JoinColumn(name="idproduccionarchivocargalote")
 	private ProduccionArchivoCargaLote produccionArchivoCargaLote;
 
 	public ProduccionCargaLote() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdproduccioncargalote() {
 		return this.idproduccioncargalote;
 	}
@@ -109,6 +68,7 @@ public class ProduccionCargaLote implements Serializable {
 	public void setIdproduccioncargalote(Long idproduccioncargalote) {
 		this.idproduccioncargalote = idproduccioncargalote;
 	}
+
 
 	public double getAbsaceite() {
 		return this.absaceite;
@@ -118,6 +78,7 @@ public class ProduccionCargaLote implements Serializable {
 		this.absaceite = absaceite;
 	}
 
+
 	public double getAbsagua() {
 		return this.absagua;
 	}
@@ -125,6 +86,7 @@ public class ProduccionCargaLote implements Serializable {
 	public void setAbsagua(double absagua) {
 		this.absagua = absagua;
 	}
+
 
 	public String getAlmacen() {
 		return this.almacen;
@@ -134,6 +96,7 @@ public class ProduccionCargaLote implements Serializable {
 		this.almacen = almacen;
 	}
 
+
 	public double getCant() {
 		return this.cant;
 	}
@@ -141,6 +104,7 @@ public class ProduccionCargaLote implements Serializable {
 	public void setCant(double cant) {
 		this.cant = cant;
 	}
+
 
 	public double getCf() {
 		return this.cf;
@@ -150,6 +114,7 @@ public class ProduccionCargaLote implements Serializable {
 		this.cf = cf;
 	}
 
+
 	public String getCodigobarco() {
 		return this.codigobarco;
 	}
@@ -157,6 +122,7 @@ public class ProduccionCargaLote implements Serializable {
 	public void setCodigobarco(String codigobarco) {
 		this.codigobarco = codigobarco;
 	}
+
 
 	public double getCr() {
 		return this.cr;
@@ -166,6 +132,7 @@ public class ProduccionCargaLote implements Serializable {
 		this.cr = cr;
 	}
 
+
 	public String getDestinos() {
 		return this.destinos;
 	}
@@ -173,6 +140,7 @@ public class ProduccionCargaLote implements Serializable {
 	public void setDestinos(String destinos) {
 		this.destinos = destinos;
 	}
+
 
 	public String getDestinoscliente() {
 		return this.destinoscliente;
@@ -182,6 +150,7 @@ public class ProduccionCargaLote implements Serializable {
 		this.destinoscliente = destinoscliente;
 	}
 
+
 	public String getEspecietalla() {
 		return this.especietalla;
 	}
@@ -189,6 +158,7 @@ public class ProduccionCargaLote implements Serializable {
 	public void setEspecietalla(String especietalla) {
 		this.especietalla = especietalla;
 	}
+
 
 	public Timestamp getFechadescarga() {
 		return this.fechadescarga;
@@ -198,6 +168,7 @@ public class ProduccionCargaLote implements Serializable {
 		this.fechadescarga = fechadescarga;
 	}
 
+
 	public double getFirme() {
 		return this.firme;
 	}
@@ -205,6 +176,7 @@ public class ProduccionCargaLote implements Serializable {
 	public void setFirme(double firme) {
 		this.firme = firme;
 	}
+
 
 	public String getHic() {
 		return this.hic;
@@ -214,6 +186,7 @@ public class ProduccionCargaLote implements Serializable {
 		this.hic = hic;
 	}
 
+
 	public String getHsc() {
 		return this.hsc;
 	}
@@ -221,6 +194,7 @@ public class ProduccionCargaLote implements Serializable {
 	public void setHsc(String hsc) {
 		this.hsc = hsc;
 	}
+
 
 	public Integer getIdlimpiezatipo() {
 		return this.idlimpiezatipo;
@@ -230,6 +204,7 @@ public class ProduccionCargaLote implements Serializable {
 		this.idlimpiezatipo = idlimpiezatipo;
 	}
 
+
 	public Integer getIdlote() {
 		return this.idlote;
 	}
@@ -237,6 +212,7 @@ public class ProduccionCargaLote implements Serializable {
 	public void setIdlote(Integer idlote) {
 		this.idlote = idlote;
 	}
+
 
 	public Integer getIdturno() {
 		return this.idturno;
@@ -246,6 +222,7 @@ public class ProduccionCargaLote implements Serializable {
 		this.idturno = idturno;
 	}
 
+
 	public Integer getItem() {
 		return this.item;
 	}
@@ -253,6 +230,7 @@ public class ProduccionCargaLote implements Serializable {
 	public void setItem(Integer item) {
 		this.item = item;
 	}
+
 
 	public String getNombrebarco() {
 		return this.nombrebarco;
@@ -262,6 +240,7 @@ public class ProduccionCargaLote implements Serializable {
 		this.nombrebarco = nombrebarco;
 	}
 
+
 	public String getObservaciones() {
 		return this.observaciones;
 	}
@@ -269,6 +248,7 @@ public class ProduccionCargaLote implements Serializable {
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
 	}
+
 
 	public String getOrdenfileteado() {
 		return this.ordenfileteado;
@@ -278,6 +258,7 @@ public class ProduccionCargaLote implements Serializable {
 		this.ordenfileteado = ordenfileteado;
 	}
 
+
 	public String getOrdenprecocido() {
 		return this.ordenprecocido;
 	}
@@ -285,6 +266,7 @@ public class ProduccionCargaLote implements Serializable {
 	public void setOrdenprecocido(String ordenprecocido) {
 		this.ordenprecocido = ordenprecocido;
 	}
+
 
 	public String getOrigen() {
 		return this.origen;
@@ -294,6 +276,7 @@ public class ProduccionCargaLote implements Serializable {
 		this.origen = origen;
 	}
 
+
 	public double getPastoso() {
 		return this.pastoso;
 	}
@@ -301,6 +284,7 @@ public class ProduccionCargaLote implements Serializable {
 	public void setPastoso(double pastoso) {
 		this.pastoso = pastoso;
 	}
+
 
 	public Integer getPedido() {
 		return this.pedido;
@@ -310,6 +294,7 @@ public class ProduccionCargaLote implements Serializable {
 		this.pedido = pedido;
 	}
 
+
 	public Integer getPescados() {
 		return this.pescados;
 	}
@@ -317,6 +302,7 @@ public class ProduccionCargaLote implements Serializable {
 	public void setPescados(Integer pescados) {
 		this.pescados = pescados;
 	}
+
 
 	public double getPeso() {
 		return this.peso;
@@ -326,6 +312,7 @@ public class ProduccionCargaLote implements Serializable {
 		this.peso = peso;
 	}
 
+
 	public String getPoza() {
 		return this.poza;
 	}
@@ -333,6 +320,7 @@ public class ProduccionCargaLote implements Serializable {
 	public void setPoza(String poza) {
 		this.poza = poza;
 	}
+
 
 	public Integer getRegistro() {
 		return this.registro;
@@ -342,6 +330,7 @@ public class ProduccionCargaLote implements Serializable {
 		this.registro = registro;
 	}
 
+
 	public double getRt() {
 		return this.rt;
 	}
@@ -349,6 +338,7 @@ public class ProduccionCargaLote implements Serializable {
 	public void setRt(double rt) {
 		this.rt = rt;
 	}
+
 
 	public double getSalmax() {
 		return this.salmax;
@@ -358,6 +348,7 @@ public class ProduccionCargaLote implements Serializable {
 		this.salmax = salmax;
 	}
 
+
 	public double getSalmin() {
 		return this.salmin;
 	}
@@ -365,6 +356,7 @@ public class ProduccionCargaLote implements Serializable {
 	public void setSalmin(double salmin) {
 		this.salmin = salmin;
 	}
+
 
 	public double getSemifirme() {
 		return this.semifirme;
@@ -374,6 +366,7 @@ public class ProduccionCargaLote implements Serializable {
 		this.semifirme = semifirme;
 	}
 
+
 	public String getStatuspesca() {
 		return this.statuspesca;
 	}
@@ -381,6 +374,7 @@ public class ProduccionCargaLote implements Serializable {
 	public void setStatuspesca(String statuspesca) {
 		this.statuspesca = statuspesca;
 	}
+
 
 	public double getSuave() {
 		return this.suave;
@@ -390,6 +384,7 @@ public class ProduccionCargaLote implements Serializable {
 		this.suave = suave;
 	}
 
+
 	public double getTempcocina() {
 		return this.tempcocina;
 	}
@@ -397,6 +392,7 @@ public class ProduccionCargaLote implements Serializable {
 	public void setTempcocina(double tempcocina) {
 		this.tempcocina = tempcocina;
 	}
+
 
 	public double getTempcurva() {
 		return this.tempcurva;
@@ -406,6 +402,7 @@ public class ProduccionCargaLote implements Serializable {
 		this.tempcurva = tempcurva;
 	}
 
+
 	public String getViaje() {
 		return this.viaje;
 	}
@@ -414,6 +411,10 @@ public class ProduccionCargaLote implements Serializable {
 		this.viaje = viaje;
 	}
 
+
+	//bi-directional many-to-one association to ProduccionArchivoCargaLote
+	@ManyToOne
+	@JoinColumn(name="idproduccionarchivocargalote")
 	public ProduccionArchivoCargaLote getProduccionArchivoCargaLote() {
 		return this.produccionArchivoCargaLote;
 	}

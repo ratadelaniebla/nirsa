@@ -11,35 +11,22 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="limpieza_proceso_empleado_total_inicial")
+@NamedQuery(name="LimpiezaProcesoEmpleadoTotalInicial.findAll", query="SELECT l FROM LimpiezaProcesoEmpleadoTotalInicial l")
 public class LimpiezaProcesoEmpleadoTotalInicial implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idlimpiezaprocesoempleadototalinicial;
-
 	private Timestamp fechareg;
-
 	private Integer totalempleados;
-
-	//bi-directional many-to-one association to LimpiezaLinea
-	@ManyToOne
-	@JoinColumn(name="idlinea")
 	private LimpiezaLinea limpiezaLinea;
-
-	//bi-directional many-to-one association to LimpiezaProceso
-	@ManyToOne
-	@JoinColumn(name="idlimpiezaproceso")
 	private LimpiezaProceso limpiezaProceso;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public LimpiezaProcesoEmpleadoTotalInicial() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdlimpiezaprocesoempleadototalinicial() {
 		return this.idlimpiezaprocesoempleadototalinicial;
 	}
@@ -47,6 +34,7 @@ public class LimpiezaProcesoEmpleadoTotalInicial implements Serializable {
 	public void setIdlimpiezaprocesoempleadototalinicial(Long idlimpiezaprocesoempleadototalinicial) {
 		this.idlimpiezaprocesoempleadototalinicial = idlimpiezaprocesoempleadototalinicial;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -56,6 +44,7 @@ public class LimpiezaProcesoEmpleadoTotalInicial implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public Integer getTotalempleados() {
 		return this.totalempleados;
 	}
@@ -64,6 +53,10 @@ public class LimpiezaProcesoEmpleadoTotalInicial implements Serializable {
 		this.totalempleados = totalempleados;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaLinea
+	@ManyToOne
+	@JoinColumn(name="idlinea")
 	public LimpiezaLinea getLimpiezaLinea() {
 		return this.limpiezaLinea;
 	}
@@ -72,6 +65,10 @@ public class LimpiezaProcesoEmpleadoTotalInicial implements Serializable {
 		this.limpiezaLinea = limpiezaLinea;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaProceso
+	@ManyToOne
+	@JoinColumn(name="idlimpiezaproceso")
 	public LimpiezaProceso getLimpiezaProceso() {
 		return this.limpiezaProceso;
 	}
@@ -80,6 +77,10 @@ public class LimpiezaProcesoEmpleadoTotalInicial implements Serializable {
 		this.limpiezaProceso = limpiezaProceso;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

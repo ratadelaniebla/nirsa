@@ -11,28 +11,22 @@ import java.util.List;
  */
 @Entity
 @Table(name="evolution_orden_produccion")
+@NamedQuery(name="EvolutionOrdenProduccion.findAll", query="SELECT e FROM EvolutionOrdenProduccion e")
 public class EvolutionOrdenProduccion implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idevolutionordenproduccion;
-
 	private String descripcion;
-
 	private Integer estado;
-
 	private Integer idlinea;
-
 	private String ordenproduccion;
-
-	//bi-directional many-to-one association to EvolutionPlexusParametrosTarifasPesosLimpieza
-	@OneToMany(mappedBy="evolutionOrdenProduccion")
 	private List<EvolutionPlexusParametrosTarifasPesosLimpieza> evolutionPlexusParametrosTarifasPesosLimpiezas;
 
 	public EvolutionOrdenProduccion() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdevolutionordenproduccion() {
 		return this.idevolutionordenproduccion;
 	}
@@ -40,6 +34,7 @@ public class EvolutionOrdenProduccion implements Serializable {
 	public void setIdevolutionordenproduccion(Integer idevolutionordenproduccion) {
 		this.idevolutionordenproduccion = idevolutionordenproduccion;
 	}
+
 
 	public String getDescripcion() {
 		return this.descripcion;
@@ -49,6 +44,7 @@ public class EvolutionOrdenProduccion implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+
 	public Integer getEstado() {
 		return this.estado;
 	}
@@ -56,6 +52,7 @@ public class EvolutionOrdenProduccion implements Serializable {
 	public void setEstado(Integer estado) {
 		this.estado = estado;
 	}
+
 
 	public Integer getIdlinea() {
 		return this.idlinea;
@@ -65,6 +62,7 @@ public class EvolutionOrdenProduccion implements Serializable {
 		this.idlinea = idlinea;
 	}
 
+
 	public String getOrdenproduccion() {
 		return this.ordenproduccion;
 	}
@@ -73,12 +71,29 @@ public class EvolutionOrdenProduccion implements Serializable {
 		this.ordenproduccion = ordenproduccion;
 	}
 
+
+	//bi-directional many-to-one association to EvolutionPlexusParametrosTarifasPesosLimpieza
+	@OneToMany(mappedBy="evolutionOrdenProduccion")
 	public List<EvolutionPlexusParametrosTarifasPesosLimpieza> getEvolutionPlexusParametrosTarifasPesosLimpiezas() {
 		return this.evolutionPlexusParametrosTarifasPesosLimpiezas;
 	}
 
 	public void setEvolutionPlexusParametrosTarifasPesosLimpiezas(List<EvolutionPlexusParametrosTarifasPesosLimpieza> evolutionPlexusParametrosTarifasPesosLimpiezas) {
 		this.evolutionPlexusParametrosTarifasPesosLimpiezas = evolutionPlexusParametrosTarifasPesosLimpiezas;
+	}
+
+	public EvolutionPlexusParametrosTarifasPesosLimpieza addEvolutionPlexusParametrosTarifasPesosLimpieza(EvolutionPlexusParametrosTarifasPesosLimpieza evolutionPlexusParametrosTarifasPesosLimpieza) {
+		getEvolutionPlexusParametrosTarifasPesosLimpiezas().add(evolutionPlexusParametrosTarifasPesosLimpieza);
+		evolutionPlexusParametrosTarifasPesosLimpieza.setEvolutionOrdenProduccion(this);
+
+		return evolutionPlexusParametrosTarifasPesosLimpieza;
+	}
+
+	public EvolutionPlexusParametrosTarifasPesosLimpieza removeEvolutionPlexusParametrosTarifasPesosLimpieza(EvolutionPlexusParametrosTarifasPesosLimpieza evolutionPlexusParametrosTarifasPesosLimpieza) {
+		getEvolutionPlexusParametrosTarifasPesosLimpiezas().remove(evolutionPlexusParametrosTarifasPesosLimpieza);
+		evolutionPlexusParametrosTarifasPesosLimpieza.setEvolutionOrdenProduccion(null);
+
+		return evolutionPlexusParametrosTarifasPesosLimpieza;
 	}
 
 }

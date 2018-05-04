@@ -11,24 +11,20 @@ import java.util.List;
  */
 @Entity
 @Table(name="limpieza_coche_desviacion")
+@NamedQuery(name="LimpiezaCocheDesviacion.findAll", query="SELECT l FROM LimpiezaCocheDesviacion l")
 public class LimpiezaCocheDesviacion implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idlimpiezacochedesviacion;
-
 	private String descripcion;
-
 	private String scriptcomparacion;
-
-	//bi-directional many-to-one association to LimpiezaCocheObservacione
-	@OneToMany(mappedBy="limpiezaCocheDesviacion")
 	private List<LimpiezaCocheObservacione> limpiezaCocheObservaciones;
 
 	public LimpiezaCocheDesviacion() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdlimpiezacochedesviacion() {
 		return this.idlimpiezacochedesviacion;
 	}
@@ -36,6 +32,7 @@ public class LimpiezaCocheDesviacion implements Serializable {
 	public void setIdlimpiezacochedesviacion(Integer idlimpiezacochedesviacion) {
 		this.idlimpiezacochedesviacion = idlimpiezacochedesviacion;
 	}
+
 
 	public String getDescripcion() {
 		return this.descripcion;
@@ -45,6 +42,7 @@ public class LimpiezaCocheDesviacion implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+
 	public String getScriptcomparacion() {
 		return this.scriptcomparacion;
 	}
@@ -53,12 +51,29 @@ public class LimpiezaCocheDesviacion implements Serializable {
 		this.scriptcomparacion = scriptcomparacion;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaCocheObservacione
+	@OneToMany(mappedBy="limpiezaCocheDesviacion")
 	public List<LimpiezaCocheObservacione> getLimpiezaCocheObservaciones() {
 		return this.limpiezaCocheObservaciones;
 	}
 
 	public void setLimpiezaCocheObservaciones(List<LimpiezaCocheObservacione> limpiezaCocheObservaciones) {
 		this.limpiezaCocheObservaciones = limpiezaCocheObservaciones;
+	}
+
+	public LimpiezaCocheObservacione addLimpiezaCocheObservacione(LimpiezaCocheObservacione limpiezaCocheObservacione) {
+		getLimpiezaCocheObservaciones().add(limpiezaCocheObservacione);
+		limpiezaCocheObservacione.setLimpiezaCocheDesviacion(this);
+
+		return limpiezaCocheObservacione;
+	}
+
+	public LimpiezaCocheObservacione removeLimpiezaCocheObservacione(LimpiezaCocheObservacione limpiezaCocheObservacione) {
+		getLimpiezaCocheObservaciones().remove(limpiezaCocheObservacione);
+		limpiezaCocheObservacione.setLimpiezaCocheDesviacion(null);
+
+		return limpiezaCocheObservacione;
 	}
 
 }

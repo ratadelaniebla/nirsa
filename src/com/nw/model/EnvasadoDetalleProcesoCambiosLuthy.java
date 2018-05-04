@@ -10,11 +10,12 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="envasado_detalle_proceso_cambios_luthy")
+@NamedQuery(name="EnvasadoDetalleProcesoCambiosLuthy.findAll", query="SELECT e FROM EnvasadoDetalleProcesoCambiosLuthy e")
 public class EnvasadoDetalleProcesoCambiosLuthy implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Long idenvasadodetalleprocesocambiosluthy;
-	private Integer idluthy;
 	private EnvasadoDetalleProcesoCambio envasadoDetalleProcesoCambio;
+	private Luthy luthy;
 
 	public EnvasadoDetalleProcesoCambiosLuthy() {
 	}
@@ -31,15 +32,6 @@ public class EnvasadoDetalleProcesoCambiosLuthy implements Serializable {
 	}
 
 
-	public Integer getIdluthy() {
-		return this.idluthy;
-	}
-
-	public void setIdluthy(Integer idluthy) {
-		this.idluthy = idluthy;
-	}
-
-
 	//bi-directional many-to-one association to EnvasadoDetalleProcesoCambio
 	@ManyToOne
 	@JoinColumn(name="idenvasadodetalleprocesocambios")
@@ -49,6 +41,18 @@ public class EnvasadoDetalleProcesoCambiosLuthy implements Serializable {
 
 	public void setEnvasadoDetalleProcesoCambio(EnvasadoDetalleProcesoCambio envasadoDetalleProcesoCambio) {
 		this.envasadoDetalleProcesoCambio = envasadoDetalleProcesoCambio;
+	}
+
+
+	//bi-directional many-to-one association to Luthy
+	@ManyToOne
+	@JoinColumn(name="idluthy")
+	public Luthy getLuthy() {
+		return this.luthy;
+	}
+
+	public void setLuthy(Luthy luthy) {
+		this.luthy = luthy;
 	}
 
 }

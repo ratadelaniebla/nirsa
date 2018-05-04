@@ -12,44 +12,24 @@ import java.util.List;
  */
 @Entity
 @Table(name="calidad_especietalla_cajon_banda")
+@NamedQuery(name="CalidadEspecietallaCajonBanda.findAll", query="SELECT c FROM CalidadEspecietallaCajonBanda c")
 public class CalidadEspecietallaCajonBanda implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcalidadespecietallacajonbanda;
-
 	private Timestamp fechareg;
-
 	private String observaciones;
-
-	//bi-directional many-to-one association to CalidadDetalleEspecietallaCajonBanda
-	@OneToMany(mappedBy="calidadEspecietallaCajonBanda")
 	private List<CalidadDetalleEspecietallaCajonBanda> calidadDetalleEspecietallaCajonBandas;
-
-	//bi-directional many-to-one association to BarcoDescarga
-	@ManyToOne
-	@JoinColumn(name="idbarcodescarga")
 	private BarcoDescarga barcoDescarga;
-
-	//bi-directional many-to-one association to EspecieTalla
-	@ManyToOne
-	@JoinColumn(name="idespecietalladeclarada")
 	private EspecieTalla especieTalla;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
-	private Usuario usuario;
-	
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
+	private Usuario usuario;
 
 	public CalidadEspecietallaCajonBanda() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcalidadespecietallacajonbanda() {
 		return this.idcalidadespecietallacajonbanda;
 	}
@@ -57,6 +37,7 @@ public class CalidadEspecietallaCajonBanda implements Serializable {
 	public void setIdcalidadespecietallacajonbanda(Long idcalidadespecietallacajonbanda) {
 		this.idcalidadespecietallacajonbanda = idcalidadespecietallacajonbanda;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -66,6 +47,7 @@ public class CalidadEspecietallaCajonBanda implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public String getObservaciones() {
 		return this.observaciones;
 	}
@@ -74,6 +56,9 @@ public class CalidadEspecietallaCajonBanda implements Serializable {
 		this.observaciones = observaciones;
 	}
 
+
+	//bi-directional many-to-one association to CalidadDetalleEspecietallaCajonBanda
+	@OneToMany(mappedBy="calidadEspecietallaCajonBanda")
 	public List<CalidadDetalleEspecietallaCajonBanda> getCalidadDetalleEspecietallaCajonBandas() {
 		return this.calidadDetalleEspecietallaCajonBandas;
 	}
@@ -82,6 +67,24 @@ public class CalidadEspecietallaCajonBanda implements Serializable {
 		this.calidadDetalleEspecietallaCajonBandas = calidadDetalleEspecietallaCajonBandas;
 	}
 
+	public CalidadDetalleEspecietallaCajonBanda addCalidadDetalleEspecietallaCajonBanda(CalidadDetalleEspecietallaCajonBanda calidadDetalleEspecietallaCajonBanda) {
+		getCalidadDetalleEspecietallaCajonBandas().add(calidadDetalleEspecietallaCajonBanda);
+		calidadDetalleEspecietallaCajonBanda.setCalidadEspecietallaCajonBanda(this);
+
+		return calidadDetalleEspecietallaCajonBanda;
+	}
+
+	public CalidadDetalleEspecietallaCajonBanda removeCalidadDetalleEspecietallaCajonBanda(CalidadDetalleEspecietallaCajonBanda calidadDetalleEspecietallaCajonBanda) {
+		getCalidadDetalleEspecietallaCajonBandas().remove(calidadDetalleEspecietallaCajonBanda);
+		calidadDetalleEspecietallaCajonBanda.setCalidadEspecietallaCajonBanda(null);
+
+		return calidadDetalleEspecietallaCajonBanda;
+	}
+
+
+	//bi-directional many-to-one association to BarcoDescarga
+	@ManyToOne
+	@JoinColumn(name="idbarcodescarga")
 	public BarcoDescarga getBarcoDescarga() {
 		return this.barcoDescarga;
 	}
@@ -90,6 +93,10 @@ public class CalidadEspecietallaCajonBanda implements Serializable {
 		this.barcoDescarga = barcoDescarga;
 	}
 
+
+	//bi-directional many-to-one association to EspecieTalla
+	@ManyToOne
+	@JoinColumn(name="idespecietalladeclarada")
 	public EspecieTalla getEspecieTalla() {
 		return this.especieTalla;
 	}
@@ -98,20 +105,28 @@ public class CalidadEspecietallaCajonBanda implements Serializable {
 		this.especieTalla = especieTalla;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
+	public Turno getTurno() {
+		return this.turno;
+	}
+
+	public void setTurno(Turno turno) {
+		this.turno = turno;
+	}
+
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
-	}
-
-	public Turno getTurno() {
-		return turno;
-	}
-
-	public void setTurno(Turno turno) {
-		this.turno = turno;
 	}
 
 }

@@ -11,55 +11,30 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="pedido_produccion_archivo_carga_detalle")
+@NamedQuery(name="PedidoProduccionArchivoCargaDetalle.findAll", query="SELECT p FROM PedidoProduccionArchivoCargaDetalle p")
 public class PedidoProduccionArchivoCargaDetalle implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idpedidoproduccionarchivocargadetalle;
-
 	private Integer anulado;
-
 	private String destino;
-
-	@Column(name="hora_entrega_camara")
 	private Timestamp horaEntregaCamara;
-
-	@Column(name="hora_ingreso_descongelado")
 	private Timestamp horaIngresoDescongelado;
-
 	private String idcajon;
-
 	private Integer lote;
-
-	@Column(name="observacion_camara")
 	private String observacionCamara;
-
-	@Column(name="observacion_descongelado")
 	private String observacionDescongelado;
-
 	private Integer pedido;
-
 	private String registro;
-
-	//bi-directional many-to-one association to CamaraCajon
-	@ManyToOne
-	@JoinColumn(name="idcamaracajon")
 	private CamaraCajon camaraCajon;
-
-	//bi-directional many-to-one association to PedidoProduccionArchivoCargaCabecera
-	@ManyToOne
-	@JoinColumn(name="idpedidoproduccionarchivocargacabecera")
 	private PedidoProduccionArchivoCargaCabecera pedidoProduccionArchivoCargaCabecera;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
 
 	public PedidoProduccionArchivoCargaDetalle() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdpedidoproduccionarchivocargadetalle() {
 		return this.idpedidoproduccionarchivocargadetalle;
 	}
@@ -67,6 +42,7 @@ public class PedidoProduccionArchivoCargaDetalle implements Serializable {
 	public void setIdpedidoproduccionarchivocargadetalle(Integer idpedidoproduccionarchivocargadetalle) {
 		this.idpedidoproduccionarchivocargadetalle = idpedidoproduccionarchivocargadetalle;
 	}
+
 
 	public Integer getAnulado() {
 		return this.anulado;
@@ -76,6 +52,7 @@ public class PedidoProduccionArchivoCargaDetalle implements Serializable {
 		this.anulado = anulado;
 	}
 
+
 	public String getDestino() {
 		return this.destino;
 	}
@@ -84,6 +61,8 @@ public class PedidoProduccionArchivoCargaDetalle implements Serializable {
 		this.destino = destino;
 	}
 
+
+	@Column(name="hora_entrega_camara")
 	public Timestamp getHoraEntregaCamara() {
 		return this.horaEntregaCamara;
 	}
@@ -92,6 +71,8 @@ public class PedidoProduccionArchivoCargaDetalle implements Serializable {
 		this.horaEntregaCamara = horaEntregaCamara;
 	}
 
+
+	@Column(name="hora_ingreso_descongelado")
 	public Timestamp getHoraIngresoDescongelado() {
 		return this.horaIngresoDescongelado;
 	}
@@ -99,6 +80,7 @@ public class PedidoProduccionArchivoCargaDetalle implements Serializable {
 	public void setHoraIngresoDescongelado(Timestamp horaIngresoDescongelado) {
 		this.horaIngresoDescongelado = horaIngresoDescongelado;
 	}
+
 
 	public String getIdcajon() {
 		return this.idcajon;
@@ -108,6 +90,7 @@ public class PedidoProduccionArchivoCargaDetalle implements Serializable {
 		this.idcajon = idcajon;
 	}
 
+
 	public Integer getLote() {
 		return this.lote;
 	}
@@ -116,6 +99,8 @@ public class PedidoProduccionArchivoCargaDetalle implements Serializable {
 		this.lote = lote;
 	}
 
+
+	@Column(name="observacion_camara")
 	public String getObservacionCamara() {
 		return this.observacionCamara;
 	}
@@ -124,6 +109,8 @@ public class PedidoProduccionArchivoCargaDetalle implements Serializable {
 		this.observacionCamara = observacionCamara;
 	}
 
+
+	@Column(name="observacion_descongelado")
 	public String getObservacionDescongelado() {
 		return this.observacionDescongelado;
 	}
@@ -131,6 +118,7 @@ public class PedidoProduccionArchivoCargaDetalle implements Serializable {
 	public void setObservacionDescongelado(String observacionDescongelado) {
 		this.observacionDescongelado = observacionDescongelado;
 	}
+
 
 	public Integer getPedido() {
 		return this.pedido;
@@ -140,6 +128,7 @@ public class PedidoProduccionArchivoCargaDetalle implements Serializable {
 		this.pedido = pedido;
 	}
 
+
 	public String getRegistro() {
 		return this.registro;
 	}
@@ -148,6 +137,10 @@ public class PedidoProduccionArchivoCargaDetalle implements Serializable {
 		this.registro = registro;
 	}
 
+
+	//bi-directional many-to-one association to CamaraCajon
+	@ManyToOne
+	@JoinColumn(name="idcamaracajon")
 	public CamaraCajon getCamaraCajon() {
 		return this.camaraCajon;
 	}
@@ -156,6 +149,10 @@ public class PedidoProduccionArchivoCargaDetalle implements Serializable {
 		this.camaraCajon = camaraCajon;
 	}
 
+
+	//bi-directional many-to-one association to PedidoProduccionArchivoCargaCabecera
+	@ManyToOne
+	@JoinColumn(name="idpedidoproduccionarchivocargacabecera")
 	public PedidoProduccionArchivoCargaCabecera getPedidoProduccionArchivoCargaCabecera() {
 		return this.pedidoProduccionArchivoCargaCabecera;
 	}
@@ -164,6 +161,10 @@ public class PedidoProduccionArchivoCargaDetalle implements Serializable {
 		this.pedidoProduccionArchivoCargaCabecera = pedidoProduccionArchivoCargaCabecera;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}

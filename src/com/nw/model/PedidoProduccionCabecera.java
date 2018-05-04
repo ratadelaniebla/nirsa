@@ -12,37 +12,22 @@ import java.util.List;
  */
 @Entity
 @Table(name="pedido_produccion_cabecera")
+@NamedQuery(name="PedidoProduccionCabecera.findAll", query="SELECT p FROM PedidoProduccionCabecera p")
 public class PedidoProduccionCabecera implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idpedidoproduccioncabecera;
-
 	private Timestamp fechreg;
-
-	//bi-directional many-to-one association to PedidoProduccionArchivoCargaCabecera
-	@ManyToOne
-	@JoinColumn(name="idpedidoproduccionarchivocargacabecera")
 	private PedidoProduccionArchivoCargaCabecera pedidoProduccionArchivoCargaCabecera;
-
-	//bi-directional many-to-one association to Produccion
-	@ManyToOne
-	@JoinColumn(name="idproduccion")
 	private Produccion produccion;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
-
-	//bi-directional many-to-one association to PedidoProduccionDetalle
-	@OneToMany(mappedBy="pedidoProduccionCabecera")
 	private List<PedidoProduccionDetalle> pedidoProduccionDetalles;
 
 	public PedidoProduccionCabecera() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdpedidoproduccioncabecera() {
 		return this.idpedidoproduccioncabecera;
 	}
@@ -50,6 +35,7 @@ public class PedidoProduccionCabecera implements Serializable {
 	public void setIdpedidoproduccioncabecera(Integer idpedidoproduccioncabecera) {
 		this.idpedidoproduccioncabecera = idpedidoproduccioncabecera;
 	}
+
 
 	public Timestamp getFechreg() {
 		return this.fechreg;
@@ -59,6 +45,10 @@ public class PedidoProduccionCabecera implements Serializable {
 		this.fechreg = fechreg;
 	}
 
+
+	//bi-directional many-to-one association to PedidoProduccionArchivoCargaCabecera
+	@ManyToOne
+	@JoinColumn(name="idpedidoproduccionarchivocargacabecera")
 	public PedidoProduccionArchivoCargaCabecera getPedidoProduccionArchivoCargaCabecera() {
 		return this.pedidoProduccionArchivoCargaCabecera;
 	}
@@ -67,6 +57,10 @@ public class PedidoProduccionCabecera implements Serializable {
 		this.pedidoProduccionArchivoCargaCabecera = pedidoProduccionArchivoCargaCabecera;
 	}
 
+
+	//bi-directional many-to-one association to Produccion
+	@ManyToOne
+	@JoinColumn(name="idproduccion")
 	public Produccion getProduccion() {
 		return this.produccion;
 	}
@@ -75,6 +69,10 @@ public class PedidoProduccionCabecera implements Serializable {
 		this.produccion = produccion;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}
@@ -83,12 +81,29 @@ public class PedidoProduccionCabecera implements Serializable {
 		this.usuario = usuario;
 	}
 
+
+	//bi-directional many-to-one association to PedidoProduccionDetalle
+	@OneToMany(mappedBy="pedidoProduccionCabecera")
 	public List<PedidoProduccionDetalle> getPedidoProduccionDetalles() {
 		return this.pedidoProduccionDetalles;
 	}
 
 	public void setPedidoProduccionDetalles(List<PedidoProduccionDetalle> pedidoProduccionDetalles) {
 		this.pedidoProduccionDetalles = pedidoProduccionDetalles;
+	}
+
+	public PedidoProduccionDetalle addPedidoProduccionDetalle(PedidoProduccionDetalle pedidoProduccionDetalle) {
+		getPedidoProduccionDetalles().add(pedidoProduccionDetalle);
+		pedidoProduccionDetalle.setPedidoProduccionCabecera(this);
+
+		return pedidoProduccionDetalle;
+	}
+
+	public PedidoProduccionDetalle removePedidoProduccionDetalle(PedidoProduccionDetalle pedidoProduccionDetalle) {
+		getPedidoProduccionDetalles().remove(pedidoProduccionDetalle);
+		pedidoProduccionDetalle.setPedidoProduccionCabecera(null);
+
+		return pedidoProduccionDetalle;
 	}
 
 }

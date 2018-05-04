@@ -12,74 +12,33 @@ import java.util.List;
  */
 @Entity
 @Table(name="lonjas_detalle_proceso_lote")
+@NamedQuery(name="LonjasDetalleProcesoLote.findAll", query="SELECT l FROM LonjasDetalleProcesoLote l")
 public class LonjasDetalleProcesoLote implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idlonjasdetalleprocesolote;
-
 	private String codigobarco;
-
 	private Integer codigolonjas;
-
 	private Integer estado;
-
 	private Timestamp fechafin;
-
 	private Timestamp fechainicio;
-
 	private Timestamp fecharegistro;
-
-	//bi-directional many-to-one association to LonjasDetalleProcesoCoche
-	@OneToMany(mappedBy="lonjasDetalleProcesoLote")
 	private List<LonjasDetalleProcesoCoche> lonjasDetalleProcesoCoches;
-
-	//bi-directional many-to-one association to LonjasDetalleProcesoCocheEmpacado
-	@OneToMany(mappedBy="lonjasDetalleProcesoLote")
 	private List<LonjasDetalleProcesoCocheEmpacado> lonjasDetalleProcesoCocheEmpacados;
-
-	//bi-directional many-to-one association to LonjasDetalleProcesoConteo
-	@OneToMany(mappedBy="lonjasDetalleProcesoLote")
 	private List<LonjasDetalleProcesoConteo> lonjasDetalleProcesoConteos;
-
-	//bi-directional many-to-one association to LonjasDetalleProcesoEmpaque
-	@OneToMany(mappedBy="lonjasDetalleProcesoLote")
 	private List<LonjasDetalleProcesoEmpaque> lonjasDetalleProcesoEmpaques;
-
-	//bi-directional many-to-one association to LimpiezaDetalleProcesoLote
-	@ManyToOne
-	@JoinColumn(name="idlimpiezadetalleprocesolote")
 	private LimpiezaDetalleProcesoLote limpiezaDetalleProcesoLote;
-
-	//bi-directional many-to-one association to LonjasEspecietalla
-	@ManyToOne
-	@JoinColumn(name="idlonjasespecietalla")
 	private LonjasEspecietalla lonjasEspecietalla;
-
-	//bi-directional many-to-one association to LonjasOrdenProduccion
-	@ManyToOne
-	@JoinColumn(name="idlonjasordenproduccion")
 	private LonjasOrdenProduccion lonjasOrdenProduccion;
-
-	//bi-directional many-to-one association to LonjasProceso
-	@ManyToOne
-	@JoinColumn(name="idlonjasproceso")
 	private LonjasProceso lonjasProceso;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public LonjasDetalleProcesoLote() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdlonjasdetalleprocesolote() {
 		return this.idlonjasdetalleprocesolote;
 	}
@@ -87,6 +46,7 @@ public class LonjasDetalleProcesoLote implements Serializable {
 	public void setIdlonjasdetalleprocesolote(Long idlonjasdetalleprocesolote) {
 		this.idlonjasdetalleprocesolote = idlonjasdetalleprocesolote;
 	}
+
 
 	public String getCodigobarco() {
 		return this.codigobarco;
@@ -96,6 +56,7 @@ public class LonjasDetalleProcesoLote implements Serializable {
 		this.codigobarco = codigobarco;
 	}
 
+
 	public Integer getCodigolonjas() {
 		return this.codigolonjas;
 	}
@@ -103,6 +64,7 @@ public class LonjasDetalleProcesoLote implements Serializable {
 	public void setCodigolonjas(Integer codigolonjas) {
 		this.codigolonjas = codigolonjas;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -112,6 +74,7 @@ public class LonjasDetalleProcesoLote implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Timestamp getFechafin() {
 		return this.fechafin;
 	}
@@ -119,6 +82,7 @@ public class LonjasDetalleProcesoLote implements Serializable {
 	public void setFechafin(Timestamp fechafin) {
 		this.fechafin = fechafin;
 	}
+
 
 	public Timestamp getFechainicio() {
 		return this.fechainicio;
@@ -128,6 +92,7 @@ public class LonjasDetalleProcesoLote implements Serializable {
 		this.fechainicio = fechainicio;
 	}
 
+
 	public Timestamp getFecharegistro() {
 		return this.fecharegistro;
 	}
@@ -136,6 +101,9 @@ public class LonjasDetalleProcesoLote implements Serializable {
 		this.fecharegistro = fecharegistro;
 	}
 
+
+	//bi-directional many-to-one association to LonjasDetalleProcesoCoche
+	@OneToMany(mappedBy="lonjasDetalleProcesoLote")
 	public List<LonjasDetalleProcesoCoche> getLonjasDetalleProcesoCoches() {
 		return this.lonjasDetalleProcesoCoches;
 	}
@@ -144,6 +112,23 @@ public class LonjasDetalleProcesoLote implements Serializable {
 		this.lonjasDetalleProcesoCoches = lonjasDetalleProcesoCoches;
 	}
 
+	public LonjasDetalleProcesoCoche addLonjasDetalleProcesoCoch(LonjasDetalleProcesoCoche lonjasDetalleProcesoCoch) {
+		getLonjasDetalleProcesoCoches().add(lonjasDetalleProcesoCoch);
+		lonjasDetalleProcesoCoch.setLonjasDetalleProcesoLote(this);
+
+		return lonjasDetalleProcesoCoch;
+	}
+
+	public LonjasDetalleProcesoCoche removeLonjasDetalleProcesoCoch(LonjasDetalleProcesoCoche lonjasDetalleProcesoCoch) {
+		getLonjasDetalleProcesoCoches().remove(lonjasDetalleProcesoCoch);
+		lonjasDetalleProcesoCoch.setLonjasDetalleProcesoLote(null);
+
+		return lonjasDetalleProcesoCoch;
+	}
+
+
+	//bi-directional many-to-one association to LonjasDetalleProcesoCocheEmpacado
+	@OneToMany(mappedBy="lonjasDetalleProcesoLote")
 	public List<LonjasDetalleProcesoCocheEmpacado> getLonjasDetalleProcesoCocheEmpacados() {
 		return this.lonjasDetalleProcesoCocheEmpacados;
 	}
@@ -152,6 +137,23 @@ public class LonjasDetalleProcesoLote implements Serializable {
 		this.lonjasDetalleProcesoCocheEmpacados = lonjasDetalleProcesoCocheEmpacados;
 	}
 
+	public LonjasDetalleProcesoCocheEmpacado addLonjasDetalleProcesoCocheEmpacado(LonjasDetalleProcesoCocheEmpacado lonjasDetalleProcesoCocheEmpacado) {
+		getLonjasDetalleProcesoCocheEmpacados().add(lonjasDetalleProcesoCocheEmpacado);
+		lonjasDetalleProcesoCocheEmpacado.setLonjasDetalleProcesoLote(this);
+
+		return lonjasDetalleProcesoCocheEmpacado;
+	}
+
+	public LonjasDetalleProcesoCocheEmpacado removeLonjasDetalleProcesoCocheEmpacado(LonjasDetalleProcesoCocheEmpacado lonjasDetalleProcesoCocheEmpacado) {
+		getLonjasDetalleProcesoCocheEmpacados().remove(lonjasDetalleProcesoCocheEmpacado);
+		lonjasDetalleProcesoCocheEmpacado.setLonjasDetalleProcesoLote(null);
+
+		return lonjasDetalleProcesoCocheEmpacado;
+	}
+
+
+	//bi-directional many-to-one association to LonjasDetalleProcesoConteo
+	@OneToMany(mappedBy="lonjasDetalleProcesoLote")
 	public List<LonjasDetalleProcesoConteo> getLonjasDetalleProcesoConteos() {
 		return this.lonjasDetalleProcesoConteos;
 	}
@@ -160,6 +162,23 @@ public class LonjasDetalleProcesoLote implements Serializable {
 		this.lonjasDetalleProcesoConteos = lonjasDetalleProcesoConteos;
 	}
 
+	public LonjasDetalleProcesoConteo addLonjasDetalleProcesoConteo(LonjasDetalleProcesoConteo lonjasDetalleProcesoConteo) {
+		getLonjasDetalleProcesoConteos().add(lonjasDetalleProcesoConteo);
+		lonjasDetalleProcesoConteo.setLonjasDetalleProcesoLote(this);
+
+		return lonjasDetalleProcesoConteo;
+	}
+
+	public LonjasDetalleProcesoConteo removeLonjasDetalleProcesoConteo(LonjasDetalleProcesoConteo lonjasDetalleProcesoConteo) {
+		getLonjasDetalleProcesoConteos().remove(lonjasDetalleProcesoConteo);
+		lonjasDetalleProcesoConteo.setLonjasDetalleProcesoLote(null);
+
+		return lonjasDetalleProcesoConteo;
+	}
+
+
+	//bi-directional many-to-one association to LonjasDetalleProcesoEmpaque
+	@OneToMany(mappedBy="lonjasDetalleProcesoLote")
 	public List<LonjasDetalleProcesoEmpaque> getLonjasDetalleProcesoEmpaques() {
 		return this.lonjasDetalleProcesoEmpaques;
 	}
@@ -168,6 +187,24 @@ public class LonjasDetalleProcesoLote implements Serializable {
 		this.lonjasDetalleProcesoEmpaques = lonjasDetalleProcesoEmpaques;
 	}
 
+	public LonjasDetalleProcesoEmpaque addLonjasDetalleProcesoEmpaque(LonjasDetalleProcesoEmpaque lonjasDetalleProcesoEmpaque) {
+		getLonjasDetalleProcesoEmpaques().add(lonjasDetalleProcesoEmpaque);
+		lonjasDetalleProcesoEmpaque.setLonjasDetalleProcesoLote(this);
+
+		return lonjasDetalleProcesoEmpaque;
+	}
+
+	public LonjasDetalleProcesoEmpaque removeLonjasDetalleProcesoEmpaque(LonjasDetalleProcesoEmpaque lonjasDetalleProcesoEmpaque) {
+		getLonjasDetalleProcesoEmpaques().remove(lonjasDetalleProcesoEmpaque);
+		lonjasDetalleProcesoEmpaque.setLonjasDetalleProcesoLote(null);
+
+		return lonjasDetalleProcesoEmpaque;
+	}
+
+
+	//bi-directional many-to-one association to LimpiezaDetalleProcesoLote
+	@ManyToOne
+	@JoinColumn(name="idlimpiezadetalleprocesolote")
 	public LimpiezaDetalleProcesoLote getLimpiezaDetalleProcesoLote() {
 		return this.limpiezaDetalleProcesoLote;
 	}
@@ -176,6 +213,10 @@ public class LonjasDetalleProcesoLote implements Serializable {
 		this.limpiezaDetalleProcesoLote = limpiezaDetalleProcesoLote;
 	}
 
+
+	//bi-directional many-to-one association to LonjasEspecietalla
+	@ManyToOne
+	@JoinColumn(name="idlonjasespecietalla")
 	public LonjasEspecietalla getLonjasEspecietalla() {
 		return this.lonjasEspecietalla;
 	}
@@ -184,6 +225,10 @@ public class LonjasDetalleProcesoLote implements Serializable {
 		this.lonjasEspecietalla = lonjasEspecietalla;
 	}
 
+
+	//bi-directional many-to-one association to LonjasOrdenProduccion
+	@ManyToOne
+	@JoinColumn(name="idlonjasordenproduccion")
 	public LonjasOrdenProduccion getLonjasOrdenProduccion() {
 		return this.lonjasOrdenProduccion;
 	}
@@ -192,6 +237,10 @@ public class LonjasDetalleProcesoLote implements Serializable {
 		this.lonjasOrdenProduccion = lonjasOrdenProduccion;
 	}
 
+
+	//bi-directional many-to-one association to LonjasProceso
+	@ManyToOne
+	@JoinColumn(name="idlonjasproceso")
 	public LonjasProceso getLonjasProceso() {
 		return this.lonjasProceso;
 	}
@@ -200,6 +249,10 @@ public class LonjasDetalleProcesoLote implements Serializable {
 		this.lonjasProceso = lonjasProceso;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -208,6 +261,10 @@ public class LonjasDetalleProcesoLote implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

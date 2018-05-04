@@ -11,38 +11,25 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="descongelado_detalle_proceso_contraloria")
+@NamedQuery(name="DescongeladoDetalleProcesoContraloria.findAll", query="SELECT d FROM DescongeladoDetalleProcesoContraloria d")
 public class DescongeladoDetalleProcesoContraloria implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long iddescongeladodetalleproceso;
-
 	private Timestamp fechajoracreacionregisto;
-
 	private String idcajon;
-
 	private Integer idducha;
-
 	private String observaciones;
-
 	private double peso;
-
 	private double tara;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public DescongeladoDetalleProcesoContraloria() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIddescongeladodetalleproceso() {
 		return this.iddescongeladodetalleproceso;
 	}
@@ -50,6 +37,7 @@ public class DescongeladoDetalleProcesoContraloria implements Serializable {
 	public void setIddescongeladodetalleproceso(Long iddescongeladodetalleproceso) {
 		this.iddescongeladodetalleproceso = iddescongeladodetalleproceso;
 	}
+
 
 	public Timestamp getFechajoracreacionregisto() {
 		return this.fechajoracreacionregisto;
@@ -59,6 +47,7 @@ public class DescongeladoDetalleProcesoContraloria implements Serializable {
 		this.fechajoracreacionregisto = fechajoracreacionregisto;
 	}
 
+
 	public String getIdcajon() {
 		return this.idcajon;
 	}
@@ -66,6 +55,7 @@ public class DescongeladoDetalleProcesoContraloria implements Serializable {
 	public void setIdcajon(String idcajon) {
 		this.idcajon = idcajon;
 	}
+
 
 	public Integer getIdducha() {
 		return this.idducha;
@@ -75,6 +65,7 @@ public class DescongeladoDetalleProcesoContraloria implements Serializable {
 		this.idducha = idducha;
 	}
 
+
 	public String getObservaciones() {
 		return this.observaciones;
 	}
@@ -82,6 +73,7 @@ public class DescongeladoDetalleProcesoContraloria implements Serializable {
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
 	}
+
 
 	public double getPeso() {
 		return this.peso;
@@ -91,6 +83,7 @@ public class DescongeladoDetalleProcesoContraloria implements Serializable {
 		this.peso = peso;
 	}
 
+
 	public double getTara() {
 		return this.tara;
 	}
@@ -99,6 +92,10 @@ public class DescongeladoDetalleProcesoContraloria implements Serializable {
 		this.tara = tara;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -107,6 +104,10 @@ public class DescongeladoDetalleProcesoContraloria implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

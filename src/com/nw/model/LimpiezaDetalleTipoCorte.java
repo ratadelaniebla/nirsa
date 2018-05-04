@@ -11,42 +11,24 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="limpieza_detalle_tipo_corte")
+@NamedQuery(name="LimpiezaDetalleTipoCorte.findAll", query="SELECT l FROM LimpiezaDetalleTipoCorte l")
 public class LimpiezaDetalleTipoCorte implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idlimpiezadetalletipocorte;
-
 	private Timestamp horafin;
-
 	private Timestamp horainicio;
-
 	private Integer numeroincialempleados;
-
-	//bi-directional many-to-one association to LimpiezaLinea
-	@ManyToOne
-	@JoinColumn(name="idlimpiezalinea")
 	private LimpiezaLinea limpiezaLinea;
-
-	//bi-directional many-to-one association to LimpiezaProceso
-	@ManyToOne
-	@JoinColumn(name="idlimpiezaproceso")
 	private LimpiezaProceso limpiezaProceso;
-
-	//bi-directional many-to-one association to LimpiezaTipoCorte
-	@ManyToOne
-	@JoinColumn(name="idlimpiezatipocorte")
 	private LimpiezaTipoCorte limpiezaTipoCorte;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuarioactualizacion")
 	private Usuario usuario;
 
 	public LimpiezaDetalleTipoCorte() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdlimpiezadetalletipocorte() {
 		return this.idlimpiezadetalletipocorte;
 	}
@@ -54,6 +36,7 @@ public class LimpiezaDetalleTipoCorte implements Serializable {
 	public void setIdlimpiezadetalletipocorte(Long idlimpiezadetalletipocorte) {
 		this.idlimpiezadetalletipocorte = idlimpiezadetalletipocorte;
 	}
+
 
 	public Timestamp getHorafin() {
 		return this.horafin;
@@ -63,6 +46,7 @@ public class LimpiezaDetalleTipoCorte implements Serializable {
 		this.horafin = horafin;
 	}
 
+
 	public Timestamp getHorainicio() {
 		return this.horainicio;
 	}
@@ -70,6 +54,7 @@ public class LimpiezaDetalleTipoCorte implements Serializable {
 	public void setHorainicio(Timestamp horainicio) {
 		this.horainicio = horainicio;
 	}
+
 
 	public Integer getNumeroincialempleados() {
 		return this.numeroincialempleados;
@@ -79,6 +64,10 @@ public class LimpiezaDetalleTipoCorte implements Serializable {
 		this.numeroincialempleados = numeroincialempleados;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaLinea
+	@ManyToOne
+	@JoinColumn(name="idlimpiezalinea")
 	public LimpiezaLinea getLimpiezaLinea() {
 		return this.limpiezaLinea;
 	}
@@ -87,6 +76,10 @@ public class LimpiezaDetalleTipoCorte implements Serializable {
 		this.limpiezaLinea = limpiezaLinea;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaProceso
+	@ManyToOne
+	@JoinColumn(name="idlimpiezaproceso")
 	public LimpiezaProceso getLimpiezaProceso() {
 		return this.limpiezaProceso;
 	}
@@ -95,6 +88,10 @@ public class LimpiezaDetalleTipoCorte implements Serializable {
 		this.limpiezaProceso = limpiezaProceso;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaTipoCorte
+	@ManyToOne
+	@JoinColumn(name="idlimpiezatipocorte")
 	public LimpiezaTipoCorte getLimpiezaTipoCorte() {
 		return this.limpiezaTipoCorte;
 	}
@@ -103,6 +100,10 @@ public class LimpiezaDetalleTipoCorte implements Serializable {
 		this.limpiezaTipoCorte = limpiezaTipoCorte;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuarioactualizacion")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

@@ -12,34 +12,23 @@ import java.util.List;
  */
 @Entity
 @Table(name="evolution_periodo_pago")
+@NamedQuery(name="EvolutionPeriodoPago.findAll", query="SELECT e FROM EvolutionPeriodoPago e")
 public class EvolutionPeriodoPago implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idevolutionperiodopago;
-
 	private Integer anio;
-
 	private Boolean estado;
-
-	@Temporal(TemporalType.DATE)
-	@Column(name="fecha_desde")
 	private Date fechaDesde;
-
-	@Temporal(TemporalType.DATE)
-	@Column(name="fecha_hasta")
 	private Date fechaHasta;
-
 	private Integer mes;
-
-	//bi-directional many-to-one association to EvolutionPlexusParametrosTarifasPesosLimpieza
-	@OneToMany(mappedBy="evolutionPeriodoPago")
 	private List<EvolutionPlexusParametrosTarifasPesosLimpieza> evolutionPlexusParametrosTarifasPesosLimpiezas;
 
 	public EvolutionPeriodoPago() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdevolutionperiodopago() {
 		return this.idevolutionperiodopago;
 	}
@@ -47,6 +36,7 @@ public class EvolutionPeriodoPago implements Serializable {
 	public void setIdevolutionperiodopago(Long idevolutionperiodopago) {
 		this.idevolutionperiodopago = idevolutionperiodopago;
 	}
+
 
 	public Integer getAnio() {
 		return this.anio;
@@ -56,6 +46,7 @@ public class EvolutionPeriodoPago implements Serializable {
 		this.anio = anio;
 	}
 
+
 	public Boolean getEstado() {
 		return this.estado;
 	}
@@ -64,6 +55,9 @@ public class EvolutionPeriodoPago implements Serializable {
 		this.estado = estado;
 	}
 
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="fecha_desde")
 	public Date getFechaDesde() {
 		return this.fechaDesde;
 	}
@@ -72,6 +66,9 @@ public class EvolutionPeriodoPago implements Serializable {
 		this.fechaDesde = fechaDesde;
 	}
 
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="fecha_hasta")
 	public Date getFechaHasta() {
 		return this.fechaHasta;
 	}
@@ -79,6 +76,7 @@ public class EvolutionPeriodoPago implements Serializable {
 	public void setFechaHasta(Date fechaHasta) {
 		this.fechaHasta = fechaHasta;
 	}
+
 
 	public Integer getMes() {
 		return this.mes;
@@ -88,12 +86,29 @@ public class EvolutionPeriodoPago implements Serializable {
 		this.mes = mes;
 	}
 
+
+	//bi-directional many-to-one association to EvolutionPlexusParametrosTarifasPesosLimpieza
+	@OneToMany(mappedBy="evolutionPeriodoPago")
 	public List<EvolutionPlexusParametrosTarifasPesosLimpieza> getEvolutionPlexusParametrosTarifasPesosLimpiezas() {
 		return this.evolutionPlexusParametrosTarifasPesosLimpiezas;
 	}
 
 	public void setEvolutionPlexusParametrosTarifasPesosLimpiezas(List<EvolutionPlexusParametrosTarifasPesosLimpieza> evolutionPlexusParametrosTarifasPesosLimpiezas) {
 		this.evolutionPlexusParametrosTarifasPesosLimpiezas = evolutionPlexusParametrosTarifasPesosLimpiezas;
+	}
+
+	public EvolutionPlexusParametrosTarifasPesosLimpieza addEvolutionPlexusParametrosTarifasPesosLimpieza(EvolutionPlexusParametrosTarifasPesosLimpieza evolutionPlexusParametrosTarifasPesosLimpieza) {
+		getEvolutionPlexusParametrosTarifasPesosLimpiezas().add(evolutionPlexusParametrosTarifasPesosLimpieza);
+		evolutionPlexusParametrosTarifasPesosLimpieza.setEvolutionPeriodoPago(this);
+
+		return evolutionPlexusParametrosTarifasPesosLimpieza;
+	}
+
+	public EvolutionPlexusParametrosTarifasPesosLimpieza removeEvolutionPlexusParametrosTarifasPesosLimpieza(EvolutionPlexusParametrosTarifasPesosLimpieza evolutionPlexusParametrosTarifasPesosLimpieza) {
+		getEvolutionPlexusParametrosTarifasPesosLimpiezas().remove(evolutionPlexusParametrosTarifasPesosLimpieza);
+		evolutionPlexusParametrosTarifasPesosLimpieza.setEvolutionPeriodoPago(null);
+
+		return evolutionPlexusParametrosTarifasPesosLimpieza;
 	}
 
 }

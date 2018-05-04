@@ -11,40 +11,24 @@ import java.util.List;
  */
 @Entity
 @Table(name="reportes")
+@NamedQuery(name="Reporte.findAll", query="SELECT r FROM Reporte r")
 public class Reporte implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idreporte;
-
 	private String codigoreporte;
-
 	private String descripcion;
-
 	private String nombrereporte;
-
-	//bi-directional many-to-one association to Division
-	@ManyToOne
-	@JoinColumn(name="iddivision")
 	private Division division;
-
-	//bi-directional many-to-one association to Proceso
-	@ManyToOne
-	@JoinColumn(name="idproceso")
 	private Proceso proceso;
-
-	//bi-directional many-to-one association to ReportesNivelesUsuario
-	@OneToMany(mappedBy="reporte")
 	private List<ReportesNivelesUsuario> reportesNivelesUsuarios;
-
-	//bi-directional many-to-one association to ReportesPuntoControl
-	@OneToMany(mappedBy="reporte")
 	private List<ReportesPuntoControl> reportesPuntoControls;
 
 	public Reporte() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdreporte() {
 		return this.idreporte;
 	}
@@ -52,6 +36,7 @@ public class Reporte implements Serializable {
 	public void setIdreporte(Integer idreporte) {
 		this.idreporte = idreporte;
 	}
+
 
 	public String getCodigoreporte() {
 		return this.codigoreporte;
@@ -61,6 +46,7 @@ public class Reporte implements Serializable {
 		this.codigoreporte = codigoreporte;
 	}
 
+
 	public String getDescripcion() {
 		return this.descripcion;
 	}
@@ -68,6 +54,7 @@ public class Reporte implements Serializable {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+
 
 	public String getNombrereporte() {
 		return this.nombrereporte;
@@ -77,6 +64,10 @@ public class Reporte implements Serializable {
 		this.nombrereporte = nombrereporte;
 	}
 
+
+	//bi-directional many-to-one association to Division
+	@ManyToOne
+	@JoinColumn(name="iddivision")
 	public Division getDivision() {
 		return this.division;
 	}
@@ -85,6 +76,10 @@ public class Reporte implements Serializable {
 		this.division = division;
 	}
 
+
+	//bi-directional many-to-one association to Proceso
+	@ManyToOne
+	@JoinColumn(name="idproceso")
 	public Proceso getProceso() {
 		return this.proceso;
 	}
@@ -93,6 +88,9 @@ public class Reporte implements Serializable {
 		this.proceso = proceso;
 	}
 
+
+	//bi-directional many-to-one association to ReportesNivelesUsuario
+	@OneToMany(mappedBy="reporte")
 	public List<ReportesNivelesUsuario> getReportesNivelesUsuarios() {
 		return this.reportesNivelesUsuarios;
 	}
@@ -101,12 +99,43 @@ public class Reporte implements Serializable {
 		this.reportesNivelesUsuarios = reportesNivelesUsuarios;
 	}
 
+	public ReportesNivelesUsuario addReportesNivelesUsuario(ReportesNivelesUsuario reportesNivelesUsuario) {
+		getReportesNivelesUsuarios().add(reportesNivelesUsuario);
+		reportesNivelesUsuario.setReporte(this);
+
+		return reportesNivelesUsuario;
+	}
+
+	public ReportesNivelesUsuario removeReportesNivelesUsuario(ReportesNivelesUsuario reportesNivelesUsuario) {
+		getReportesNivelesUsuarios().remove(reportesNivelesUsuario);
+		reportesNivelesUsuario.setReporte(null);
+
+		return reportesNivelesUsuario;
+	}
+
+
+	//bi-directional many-to-one association to ReportesPuntoControl
+	@OneToMany(mappedBy="reporte")
 	public List<ReportesPuntoControl> getReportesPuntoControls() {
 		return this.reportesPuntoControls;
 	}
 
 	public void setReportesPuntoControls(List<ReportesPuntoControl> reportesPuntoControls) {
 		this.reportesPuntoControls = reportesPuntoControls;
+	}
+
+	public ReportesPuntoControl addReportesPuntoControl(ReportesPuntoControl reportesPuntoControl) {
+		getReportesPuntoControls().add(reportesPuntoControl);
+		reportesPuntoControl.setReporte(this);
+
+		return reportesPuntoControl;
+	}
+
+	public ReportesPuntoControl removeReportesPuntoControl(ReportesPuntoControl reportesPuntoControl) {
+		getReportesPuntoControls().remove(reportesPuntoControl);
+		reportesPuntoControl.setReporte(null);
+
+		return reportesPuntoControl;
 	}
 
 }

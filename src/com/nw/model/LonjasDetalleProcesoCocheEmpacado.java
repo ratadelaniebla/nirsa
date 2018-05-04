@@ -12,59 +12,30 @@ import java.util.List;
  */
 @Entity
 @Table(name="lonjas_detalle_proceso_coche_empacado")
+@NamedQuery(name="LonjasDetalleProcesoCocheEmpacado.findAll", query="SELECT l FROM LonjasDetalleProcesoCocheEmpacado l")
 public class LonjasDetalleProcesoCocheEmpacado implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idlonjasdetalleprocesococheempacado;
-
 	private Integer cantidadfunda;
-
 	private String cliente;
-
 	private Integer codigo;
-
 	private Integer estado;
-
 	private Timestamp horaingresotunel;
-
 	private String numerocoche;
-
 	private String tpesc;
-
-	//bi-directional many-to-one association to LonjasDetalleProcesoLote
-	@ManyToOne
-	@JoinColumn(name="idlonjasdetalleprocesolote")
 	private LonjasDetalleProcesoLote lonjasDetalleProcesoLote;
-
-	//bi-directional many-to-one association to LonjasOrdenProduccion
-	@ManyToOne
-	@JoinColumn(name="idlonjasordenproduccion")
 	private LonjasOrdenProduccion lonjasOrdenProduccion;
-
-	//bi-directional many-to-one association to LonjasProceso
-	@ManyToOne
-	@JoinColumn(name="idlonjasproceso")
 	private LonjasProceso lonjasProceso;
-
-	//bi-directional many-to-one association to LonjasTunel
-	@ManyToOne
-	@JoinColumn(name="idlonjastunel")
 	private LonjasTunel lonjasTunel;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
-
-	//bi-directional many-to-one association to TunelDetalleProcesoCoche
-	@OneToMany(mappedBy="lonjasDetalleProcesoCocheEmpacado")
 	private List<TunelDetalleProcesoCoche> tunelDetalleProcesoCoches;
 
 	public LonjasDetalleProcesoCocheEmpacado() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdlonjasdetalleprocesococheempacado() {
 		return this.idlonjasdetalleprocesococheempacado;
 	}
@@ -72,6 +43,7 @@ public class LonjasDetalleProcesoCocheEmpacado implements Serializable {
 	public void setIdlonjasdetalleprocesococheempacado(Long idlonjasdetalleprocesococheempacado) {
 		this.idlonjasdetalleprocesococheempacado = idlonjasdetalleprocesococheempacado;
 	}
+
 
 	public Integer getCantidadfunda() {
 		return this.cantidadfunda;
@@ -81,6 +53,7 @@ public class LonjasDetalleProcesoCocheEmpacado implements Serializable {
 		this.cantidadfunda = cantidadfunda;
 	}
 
+
 	public String getCliente() {
 		return this.cliente;
 	}
@@ -88,6 +61,7 @@ public class LonjasDetalleProcesoCocheEmpacado implements Serializable {
 	public void setCliente(String cliente) {
 		this.cliente = cliente;
 	}
+
 
 	public Integer getCodigo() {
 		return this.codigo;
@@ -97,6 +71,7 @@ public class LonjasDetalleProcesoCocheEmpacado implements Serializable {
 		this.codigo = codigo;
 	}
 
+
 	public Integer getEstado() {
 		return this.estado;
 	}
@@ -104,6 +79,7 @@ public class LonjasDetalleProcesoCocheEmpacado implements Serializable {
 	public void setEstado(Integer estado) {
 		this.estado = estado;
 	}
+
 
 	public Timestamp getHoraingresotunel() {
 		return this.horaingresotunel;
@@ -113,6 +89,7 @@ public class LonjasDetalleProcesoCocheEmpacado implements Serializable {
 		this.horaingresotunel = horaingresotunel;
 	}
 
+
 	public String getNumerocoche() {
 		return this.numerocoche;
 	}
@@ -120,6 +97,7 @@ public class LonjasDetalleProcesoCocheEmpacado implements Serializable {
 	public void setNumerocoche(String numerocoche) {
 		this.numerocoche = numerocoche;
 	}
+
 
 	public String getTpesc() {
 		return this.tpesc;
@@ -129,6 +107,10 @@ public class LonjasDetalleProcesoCocheEmpacado implements Serializable {
 		this.tpesc = tpesc;
 	}
 
+
+	//bi-directional many-to-one association to LonjasDetalleProcesoLote
+	@ManyToOne
+	@JoinColumn(name="idlonjasdetalleprocesolote")
 	public LonjasDetalleProcesoLote getLonjasDetalleProcesoLote() {
 		return this.lonjasDetalleProcesoLote;
 	}
@@ -137,6 +119,10 @@ public class LonjasDetalleProcesoCocheEmpacado implements Serializable {
 		this.lonjasDetalleProcesoLote = lonjasDetalleProcesoLote;
 	}
 
+
+	//bi-directional many-to-one association to LonjasOrdenProduccion
+	@ManyToOne
+	@JoinColumn(name="idlonjasordenproduccion")
 	public LonjasOrdenProduccion getLonjasOrdenProduccion() {
 		return this.lonjasOrdenProduccion;
 	}
@@ -145,6 +131,10 @@ public class LonjasDetalleProcesoCocheEmpacado implements Serializable {
 		this.lonjasOrdenProduccion = lonjasOrdenProduccion;
 	}
 
+
+	//bi-directional many-to-one association to LonjasProceso
+	@ManyToOne
+	@JoinColumn(name="idlonjasproceso")
 	public LonjasProceso getLonjasProceso() {
 		return this.lonjasProceso;
 	}
@@ -153,6 +143,10 @@ public class LonjasDetalleProcesoCocheEmpacado implements Serializable {
 		this.lonjasProceso = lonjasProceso;
 	}
 
+
+	//bi-directional many-to-one association to LonjasTunel
+	@ManyToOne
+	@JoinColumn(name="idlonjastunel")
 	public LonjasTunel getLonjasTunel() {
 		return this.lonjasTunel;
 	}
@@ -161,6 +155,10 @@ public class LonjasDetalleProcesoCocheEmpacado implements Serializable {
 		this.lonjasTunel = lonjasTunel;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}
@@ -169,12 +167,29 @@ public class LonjasDetalleProcesoCocheEmpacado implements Serializable {
 		this.usuario = usuario;
 	}
 
+
+	//bi-directional many-to-one association to TunelDetalleProcesoCoche
+	@OneToMany(mappedBy="lonjasDetalleProcesoCocheEmpacado")
 	public List<TunelDetalleProcesoCoche> getTunelDetalleProcesoCoches() {
 		return this.tunelDetalleProcesoCoches;
 	}
 
 	public void setTunelDetalleProcesoCoches(List<TunelDetalleProcesoCoche> tunelDetalleProcesoCoches) {
 		this.tunelDetalleProcesoCoches = tunelDetalleProcesoCoches;
+	}
+
+	public TunelDetalleProcesoCoche addTunelDetalleProcesoCoch(TunelDetalleProcesoCoche tunelDetalleProcesoCoch) {
+		getTunelDetalleProcesoCoches().add(tunelDetalleProcesoCoch);
+		tunelDetalleProcesoCoch.setLonjasDetalleProcesoCocheEmpacado(this);
+
+		return tunelDetalleProcesoCoch;
+	}
+
+	public TunelDetalleProcesoCoche removeTunelDetalleProcesoCoch(TunelDetalleProcesoCoche tunelDetalleProcesoCoch) {
+		getTunelDetalleProcesoCoches().remove(tunelDetalleProcesoCoch);
+		tunelDetalleProcesoCoch.setLonjasDetalleProcesoCocheEmpacado(null);
+
+		return tunelDetalleProcesoCoch;
 	}
 
 }

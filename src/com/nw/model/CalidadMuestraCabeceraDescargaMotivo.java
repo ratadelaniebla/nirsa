@@ -12,41 +12,24 @@ import java.util.List;
  */
 @Entity
 @Table(name="calidad_muestra_cabecera_descarga_motivo")
+@NamedQuery(name="CalidadMuestraCabeceraDescargaMotivo.findAll", query="SELECT c FROM CalidadMuestraCabeceraDescargaMotivo c")
 public class CalidadMuestraCabeceraDescargaMotivo implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcalidadmuestracabeceradescargamotivo;
-
 	private Integer cantidad;
-
 	private String comentario;
-
 	private Timestamp fecharegistro;
-
-	//bi-directional many-to-one association to CalidadMuestraAreaDetalle
-	@OneToMany(mappedBy="calidadMuestraCabeceraDescargaMotivo")
 	private List<CalidadMuestraAreaDetalle> calidadMuestraAreaDetalles;
-
-	//bi-directional many-to-one association to CalidadMuestraAreaCabecera
-	@ManyToOne
-	@JoinColumn(name="idcalidadmuestraareacabecera")
 	private CalidadMuestraAreaCabecera calidadMuestraAreaCabecera;
-
-	//bi-directional many-to-one association to CalidadMuestraAreaMotivo
-	@ManyToOne
-	@JoinColumn(name="idcalidadmuestraareamotivo")
 	private CalidadMuestraAreaMotivo calidadMuestraAreaMotivo;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public CalidadMuestraCabeceraDescargaMotivo() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcalidadmuestracabeceradescargamotivo() {
 		return this.idcalidadmuestracabeceradescargamotivo;
 	}
@@ -54,6 +37,7 @@ public class CalidadMuestraCabeceraDescargaMotivo implements Serializable {
 	public void setIdcalidadmuestracabeceradescargamotivo(Long idcalidadmuestracabeceradescargamotivo) {
 		this.idcalidadmuestracabeceradescargamotivo = idcalidadmuestracabeceradescargamotivo;
 	}
+
 
 	public Integer getCantidad() {
 		return this.cantidad;
@@ -63,6 +47,7 @@ public class CalidadMuestraCabeceraDescargaMotivo implements Serializable {
 		this.cantidad = cantidad;
 	}
 
+
 	public String getComentario() {
 		return this.comentario;
 	}
@@ -70,6 +55,7 @@ public class CalidadMuestraCabeceraDescargaMotivo implements Serializable {
 	public void setComentario(String comentario) {
 		this.comentario = comentario;
 	}
+
 
 	public Timestamp getFecharegistro() {
 		return this.fecharegistro;
@@ -79,6 +65,9 @@ public class CalidadMuestraCabeceraDescargaMotivo implements Serializable {
 		this.fecharegistro = fecharegistro;
 	}
 
+
+	//bi-directional many-to-one association to CalidadMuestraAreaDetalle
+	@OneToMany(mappedBy="calidadMuestraCabeceraDescargaMotivo")
 	public List<CalidadMuestraAreaDetalle> getCalidadMuestraAreaDetalles() {
 		return this.calidadMuestraAreaDetalles;
 	}
@@ -87,6 +76,24 @@ public class CalidadMuestraCabeceraDescargaMotivo implements Serializable {
 		this.calidadMuestraAreaDetalles = calidadMuestraAreaDetalles;
 	}
 
+	public CalidadMuestraAreaDetalle addCalidadMuestraAreaDetalle(CalidadMuestraAreaDetalle calidadMuestraAreaDetalle) {
+		getCalidadMuestraAreaDetalles().add(calidadMuestraAreaDetalle);
+		calidadMuestraAreaDetalle.setCalidadMuestraCabeceraDescargaMotivo(this);
+
+		return calidadMuestraAreaDetalle;
+	}
+
+	public CalidadMuestraAreaDetalle removeCalidadMuestraAreaDetalle(CalidadMuestraAreaDetalle calidadMuestraAreaDetalle) {
+		getCalidadMuestraAreaDetalles().remove(calidadMuestraAreaDetalle);
+		calidadMuestraAreaDetalle.setCalidadMuestraCabeceraDescargaMotivo(null);
+
+		return calidadMuestraAreaDetalle;
+	}
+
+
+	//bi-directional many-to-one association to CalidadMuestraAreaCabecera
+	@ManyToOne
+	@JoinColumn(name="idcalidadmuestraareacabecera")
 	public CalidadMuestraAreaCabecera getCalidadMuestraAreaCabecera() {
 		return this.calidadMuestraAreaCabecera;
 	}
@@ -95,6 +102,10 @@ public class CalidadMuestraCabeceraDescargaMotivo implements Serializable {
 		this.calidadMuestraAreaCabecera = calidadMuestraAreaCabecera;
 	}
 
+
+	//bi-directional many-to-one association to CalidadMuestraAreaMotivo
+	@ManyToOne
+	@JoinColumn(name="idcalidadmuestraareamotivo")
 	public CalidadMuestraAreaMotivo getCalidadMuestraAreaMotivo() {
 		return this.calidadMuestraAreaMotivo;
 	}
@@ -103,6 +114,10 @@ public class CalidadMuestraCabeceraDescargaMotivo implements Serializable {
 		this.calidadMuestraAreaMotivo = calidadMuestraAreaMotivo;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

@@ -10,32 +10,25 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="direccion_sistemas")
+@NamedQuery(name="DireccionSistema.findAll", query="SELECT d FROM DireccionSistema d")
 public class DireccionSistema implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long iddireccionsistema;
-
 	private String base;
-
 	private String clave;
-
 	private String descripcion;
-
 	private Integer estado;
-
 	private Integer idsistema;
-
 	private String ip;
-
 	private String puerto;
-
 	private String usuario;
 
 	public DireccionSistema() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIddireccionsistema() {
 		return this.iddireccionsistema;
 	}
@@ -43,6 +36,7 @@ public class DireccionSistema implements Serializable {
 	public void setIddireccionsistema(Long iddireccionsistema) {
 		this.iddireccionsistema = iddireccionsistema;
 	}
+
 
 	public String getBase() {
 		return this.base;
@@ -52,6 +46,7 @@ public class DireccionSistema implements Serializable {
 		this.base = base;
 	}
 
+
 	public String getClave() {
 		return this.clave;
 	}
@@ -59,6 +54,7 @@ public class DireccionSistema implements Serializable {
 	public void setClave(String clave) {
 		this.clave = clave;
 	}
+
 
 	public String getDescripcion() {
 		return this.descripcion;
@@ -68,6 +64,7 @@ public class DireccionSistema implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+
 	public Integer getEstado() {
 		return this.estado;
 	}
@@ -75,6 +72,7 @@ public class DireccionSistema implements Serializable {
 	public void setEstado(Integer estado) {
 		this.estado = estado;
 	}
+
 
 	public Integer getIdsistema() {
 		return this.idsistema;
@@ -84,6 +82,7 @@ public class DireccionSistema implements Serializable {
 		this.idsistema = idsistema;
 	}
 
+
 	public String getIp() {
 		return this.ip;
 	}
@@ -92,6 +91,7 @@ public class DireccionSistema implements Serializable {
 		this.ip = ip;
 	}
 
+
 	public String getPuerto() {
 		return this.puerto;
 	}
@@ -99,6 +99,7 @@ public class DireccionSistema implements Serializable {
 	public void setPuerto(String puerto) {
 		this.puerto = puerto;
 	}
+
 
 	public String getUsuario() {
 		return this.usuario;

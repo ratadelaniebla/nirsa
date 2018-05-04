@@ -11,54 +11,30 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="calidad_muestra_area_detalle")
+@NamedQuery(name="CalidadMuestraAreaDetalle.findAll", query="SELECT c FROM CalidadMuestraAreaDetalle c")
 public class CalidadMuestraAreaDetalle implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcalidadmuestraareadetalle;
-
 	private String comentario;
-
 	private Timestamp fecharegistro;
-
 	private Integer grupo;
-
 	private double histaminaindividual;
-
 	private double histaminaporgrupo;
-
 	private Integer idcalidadmuestragrupoanalisis;
-
 	private Integer ordenregistro;
-
 	private Integer pintar;
-
 	private Integer sal;
-
-	//bi-directional many-to-one association to CalidadMuestraAreaCabecera
-	@ManyToOne
-	@JoinColumn(name="idcalidadmuestraareacabecera")
 	private CalidadMuestraAreaCabecera calidadMuestraAreaCabecera;
-
-	//bi-directional many-to-one association to CalidadMuestraCabeceraDescargaMotivo
-	@ManyToOne
-	@JoinColumn(name="idcalidadmuestracabeceradescargamotivo")
 	private CalidadMuestraCabeceraDescargaMotivo calidadMuestraCabeceraDescargaMotivo;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public CalidadMuestraAreaDetalle() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcalidadmuestraareadetalle() {
 		return this.idcalidadmuestraareadetalle;
 	}
@@ -66,6 +42,7 @@ public class CalidadMuestraAreaDetalle implements Serializable {
 	public void setIdcalidadmuestraareadetalle(Long idcalidadmuestraareadetalle) {
 		this.idcalidadmuestraareadetalle = idcalidadmuestraareadetalle;
 	}
+
 
 	public String getComentario() {
 		return this.comentario;
@@ -75,6 +52,7 @@ public class CalidadMuestraAreaDetalle implements Serializable {
 		this.comentario = comentario;
 	}
 
+
 	public Timestamp getFecharegistro() {
 		return this.fecharegistro;
 	}
@@ -82,6 +60,7 @@ public class CalidadMuestraAreaDetalle implements Serializable {
 	public void setFecharegistro(Timestamp fecharegistro) {
 		this.fecharegistro = fecharegistro;
 	}
+
 
 	public Integer getGrupo() {
 		return this.grupo;
@@ -91,6 +70,7 @@ public class CalidadMuestraAreaDetalle implements Serializable {
 		this.grupo = grupo;
 	}
 
+
 	public double getHistaminaindividual() {
 		return this.histaminaindividual;
 	}
@@ -98,6 +78,7 @@ public class CalidadMuestraAreaDetalle implements Serializable {
 	public void setHistaminaindividual(double histaminaindividual) {
 		this.histaminaindividual = histaminaindividual;
 	}
+
 
 	public double getHistaminaporgrupo() {
 		return this.histaminaporgrupo;
@@ -107,6 +88,7 @@ public class CalidadMuestraAreaDetalle implements Serializable {
 		this.histaminaporgrupo = histaminaporgrupo;
 	}
 
+
 	public Integer getIdcalidadmuestragrupoanalisis() {
 		return this.idcalidadmuestragrupoanalisis;
 	}
@@ -114,6 +96,7 @@ public class CalidadMuestraAreaDetalle implements Serializable {
 	public void setIdcalidadmuestragrupoanalisis(Integer idcalidadmuestragrupoanalisis) {
 		this.idcalidadmuestragrupoanalisis = idcalidadmuestragrupoanalisis;
 	}
+
 
 	public Integer getOrdenregistro() {
 		return this.ordenregistro;
@@ -123,6 +106,7 @@ public class CalidadMuestraAreaDetalle implements Serializable {
 		this.ordenregistro = ordenregistro;
 	}
 
+
 	public Integer getPintar() {
 		return this.pintar;
 	}
@@ -130,6 +114,7 @@ public class CalidadMuestraAreaDetalle implements Serializable {
 	public void setPintar(Integer pintar) {
 		this.pintar = pintar;
 	}
+
 
 	public Integer getSal() {
 		return this.sal;
@@ -139,6 +124,10 @@ public class CalidadMuestraAreaDetalle implements Serializable {
 		this.sal = sal;
 	}
 
+
+	//bi-directional many-to-one association to CalidadMuestraAreaCabecera
+	@ManyToOne
+	@JoinColumn(name="idcalidadmuestraareacabecera")
 	public CalidadMuestraAreaCabecera getCalidadMuestraAreaCabecera() {
 		return this.calidadMuestraAreaCabecera;
 	}
@@ -147,6 +136,10 @@ public class CalidadMuestraAreaDetalle implements Serializable {
 		this.calidadMuestraAreaCabecera = calidadMuestraAreaCabecera;
 	}
 
+
+	//bi-directional many-to-one association to CalidadMuestraCabeceraDescargaMotivo
+	@ManyToOne
+	@JoinColumn(name="idcalidadmuestracabeceradescargamotivo")
 	public CalidadMuestraCabeceraDescargaMotivo getCalidadMuestraCabeceraDescargaMotivo() {
 		return this.calidadMuestraCabeceraDescargaMotivo;
 	}
@@ -155,6 +148,10 @@ public class CalidadMuestraAreaDetalle implements Serializable {
 		this.calidadMuestraCabeceraDescargaMotivo = calidadMuestraCabeceraDescargaMotivo;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -163,6 +160,10 @@ public class CalidadMuestraAreaDetalle implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

@@ -11,33 +11,21 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="limpieza_rallado_batch_detalle")
+@NamedQuery(name="LimpiezaRalladoBatchDetalle.findAll", query="SELECT l FROM LimpiezaRalladoBatchDetalle l")
 public class LimpiezaRalladoBatchDetalle implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idlimpiezaralladobatchdetalle;
-
 	private Timestamp fechareg;
-
-	//bi-directional many-to-one association to LimpiezaRalladoBatchCabecera
-	@ManyToOne
-	@JoinColumn(name="idlimpiezaralladobatchcabecera")
 	private LimpiezaRalladoBatchCabecera limpiezaRalladoBatchCabecera;
-
-	//bi-directional many-to-one association to LimpiezaRalladoDetallePeso
-	@ManyToOne
-	@JoinColumn(name="idlimpiezaralladodetallepesos")
 	private LimpiezaRalladoDetallePeso limpiezaRalladoDetallePeso;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public LimpiezaRalladoBatchDetalle() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdlimpiezaralladobatchdetalle() {
 		return this.idlimpiezaralladobatchdetalle;
 	}
@@ -45,6 +33,7 @@ public class LimpiezaRalladoBatchDetalle implements Serializable {
 	public void setIdlimpiezaralladobatchdetalle(Long idlimpiezaralladobatchdetalle) {
 		this.idlimpiezaralladobatchdetalle = idlimpiezaralladobatchdetalle;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -54,6 +43,10 @@ public class LimpiezaRalladoBatchDetalle implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaRalladoBatchCabecera
+	@ManyToOne
+	@JoinColumn(name="idlimpiezaralladobatchcabecera")
 	public LimpiezaRalladoBatchCabecera getLimpiezaRalladoBatchCabecera() {
 		return this.limpiezaRalladoBatchCabecera;
 	}
@@ -62,6 +55,10 @@ public class LimpiezaRalladoBatchDetalle implements Serializable {
 		this.limpiezaRalladoBatchCabecera = limpiezaRalladoBatchCabecera;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaRalladoDetallePeso
+	@ManyToOne
+	@JoinColumn(name="idlimpiezaralladodetallepesos")
 	public LimpiezaRalladoDetallePeso getLimpiezaRalladoDetallePeso() {
 		return this.limpiezaRalladoDetallePeso;
 	}
@@ -70,6 +67,10 @@ public class LimpiezaRalladoBatchDetalle implements Serializable {
 		this.limpiezaRalladoDetallePeso = limpiezaRalladoDetallePeso;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

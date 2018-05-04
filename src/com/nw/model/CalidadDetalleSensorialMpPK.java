@@ -11,19 +11,19 @@ import javax.persistence.*;
 public class CalidadDetalleSensorialMpPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
-
 	private Long idcalidadnumeromuestrasensorialmp;
-
 	private Long idcalidadsensorialmp;
 
 	public CalidadDetalleSensorialMpPK() {
 	}
+
 	public Long getIdcalidadnumeromuestrasensorialmp() {
 		return this.idcalidadnumeromuestrasensorialmp;
 	}
 	public void setIdcalidadnumeromuestrasensorialmp(Long idcalidadnumeromuestrasensorialmp) {
 		this.idcalidadnumeromuestrasensorialmp = idcalidadnumeromuestrasensorialmp;
 	}
+
 	public Long getIdcalidadsensorialmp() {
 		return this.idcalidadsensorialmp;
 	}

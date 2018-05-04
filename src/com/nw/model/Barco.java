@@ -10,40 +10,24 @@ import java.util.List;
  * 
  */
 @Entity
+@NamedQuery(name="Barco.findAll", query="SELECT b FROM Barco b")
 public class Barco implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idbarco;
-
 	private String idnomina;
-
 	private String nombre;
-
 	private String numbarco;
-
-	//bi-directional many-to-one association to BarcoPropiedad
-	@ManyToOne
-	@JoinColumn(name="idpropiedad")
 	private BarcoPropiedad barcoPropiedad;
-
-	//bi-directional many-to-one association to Mercante
-	@ManyToOne
-	@JoinColumn(name="idmercante")
 	private Mercante mercante;
-
-	//bi-directional many-to-one association to BarcoCuba
-	@OneToMany(mappedBy="barco")
 	private List<BarcoCuba> barcoCubas;
-
-	//bi-directional many-to-one association to BarcoDescarga
-	@OneToMany(mappedBy="barco")
 	private List<BarcoDescarga> barcoDescargas;
 
 	public Barco() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdbarco() {
 		return this.idbarco;
 	}
@@ -51,6 +35,7 @@ public class Barco implements Serializable {
 	public void setIdbarco(Integer idbarco) {
 		this.idbarco = idbarco;
 	}
+
 
 	public String getIdnomina() {
 		return this.idnomina;
@@ -60,6 +45,7 @@ public class Barco implements Serializable {
 		this.idnomina = idnomina;
 	}
 
+
 	public String getNombre() {
 		return this.nombre;
 	}
@@ -67,6 +53,7 @@ public class Barco implements Serializable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
 
 	public String getNumbarco() {
 		return this.numbarco;
@@ -76,6 +63,10 @@ public class Barco implements Serializable {
 		this.numbarco = numbarco;
 	}
 
+
+	//bi-directional many-to-one association to BarcoPropiedad
+	@ManyToOne
+	@JoinColumn(name="idpropiedad")
 	public BarcoPropiedad getBarcoPropiedad() {
 		return this.barcoPropiedad;
 	}
@@ -84,6 +75,10 @@ public class Barco implements Serializable {
 		this.barcoPropiedad = barcoPropiedad;
 	}
 
+
+	//bi-directional many-to-one association to Mercante
+	@ManyToOne
+	@JoinColumn(name="idmercante")
 	public Mercante getMercante() {
 		return this.mercante;
 	}
@@ -92,6 +87,9 @@ public class Barco implements Serializable {
 		this.mercante = mercante;
 	}
 
+
+	//bi-directional many-to-one association to BarcoCuba
+	@OneToMany(mappedBy="barco")
 	public List<BarcoCuba> getBarcoCubas() {
 		return this.barcoCubas;
 	}
@@ -100,12 +98,43 @@ public class Barco implements Serializable {
 		this.barcoCubas = barcoCubas;
 	}
 
+	public BarcoCuba addBarcoCuba(BarcoCuba barcoCuba) {
+		getBarcoCubas().add(barcoCuba);
+		barcoCuba.setBarco(this);
+
+		return barcoCuba;
+	}
+
+	public BarcoCuba removeBarcoCuba(BarcoCuba barcoCuba) {
+		getBarcoCubas().remove(barcoCuba);
+		barcoCuba.setBarco(null);
+
+		return barcoCuba;
+	}
+
+
+	//bi-directional many-to-one association to BarcoDescarga
+	@OneToMany(mappedBy="barco")
 	public List<BarcoDescarga> getBarcoDescargas() {
 		return this.barcoDescargas;
 	}
 
 	public void setBarcoDescargas(List<BarcoDescarga> barcoDescargas) {
 		this.barcoDescargas = barcoDescargas;
+	}
+
+	public BarcoDescarga addBarcoDescarga(BarcoDescarga barcoDescarga) {
+		getBarcoDescargas().add(barcoDescarga);
+		barcoDescarga.setBarco(this);
+
+		return barcoDescarga;
+	}
+
+	public BarcoDescarga removeBarcoDescarga(BarcoDescarga barcoDescarga) {
+		getBarcoDescargas().remove(barcoDescarga);
+		barcoDescarga.setBarco(null);
+
+		return barcoDescarga;
 	}
 
 }

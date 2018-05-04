@@ -11,37 +11,23 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="pouch_detalle_proceso_conteo")
+@NamedQuery(name="PouchDetalleProcesoConteo.findAll", query="SELECT p FROM PouchDetalleProcesoConteo p")
 public class PouchDetalleProcesoConteo implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idpouchdetalleprocesoconteo;
-
 	private Timestamp fechareg;
-
 	private Integer idcoche;
-
 	private Integer totalfundas;
-
-	//bi-directional many-to-one association to PouchDetalleProcesoLote
-	@ManyToOne
-	@JoinColumn(name="idpouchdetalleprocesolote")
 	private PouchDetalleProcesoLote pouchDetalleProcesoLote;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public PouchDetalleProcesoConteo() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdpouchdetalleprocesoconteo() {
 		return this.idpouchdetalleprocesoconteo;
 	}
@@ -49,6 +35,7 @@ public class PouchDetalleProcesoConteo implements Serializable {
 	public void setIdpouchdetalleprocesoconteo(Long idpouchdetalleprocesoconteo) {
 		this.idpouchdetalleprocesoconteo = idpouchdetalleprocesoconteo;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -58,6 +45,7 @@ public class PouchDetalleProcesoConteo implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public Integer getIdcoche() {
 		return this.idcoche;
 	}
@@ -65,6 +53,7 @@ public class PouchDetalleProcesoConteo implements Serializable {
 	public void setIdcoche(Integer idcoche) {
 		this.idcoche = idcoche;
 	}
+
 
 	public Integer getTotalfundas() {
 		return this.totalfundas;
@@ -74,6 +63,10 @@ public class PouchDetalleProcesoConteo implements Serializable {
 		this.totalfundas = totalfundas;
 	}
 
+
+	//bi-directional many-to-one association to PouchDetalleProcesoLote
+	@ManyToOne
+	@JoinColumn(name="idpouchdetalleprocesolote")
 	public PouchDetalleProcesoLote getPouchDetalleProcesoLote() {
 		return this.pouchDetalleProcesoLote;
 	}
@@ -82,6 +75,10 @@ public class PouchDetalleProcesoConteo implements Serializable {
 		this.pouchDetalleProcesoLote = pouchDetalleProcesoLote;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -90,6 +87,10 @@ public class PouchDetalleProcesoConteo implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

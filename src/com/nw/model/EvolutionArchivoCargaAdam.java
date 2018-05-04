@@ -11,20 +11,19 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="evolution_archivo_carga_adam")
+@NamedQuery(name="EvolutionArchivoCargaAdam.findAll", query="SELECT e FROM EvolutionArchivoCargaAdam e")
 public class EvolutionArchivoCargaAdam implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idevolutionarchivocargaadam;
-
 	private Timestamp fecharegistro;
-
 	private String usuario;
 
 	public EvolutionArchivoCargaAdam() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdevolutionarchivocargaadam() {
 		return this.idevolutionarchivocargaadam;
 	}
@@ -33,6 +32,7 @@ public class EvolutionArchivoCargaAdam implements Serializable {
 		this.idevolutionarchivocargaadam = idevolutionarchivocargaadam;
 	}
 
+
 	public Timestamp getFecharegistro() {
 		return this.fecharegistro;
 	}
@@ -40,6 +40,7 @@ public class EvolutionArchivoCargaAdam implements Serializable {
 	public void setFecharegistro(Timestamp fecharegistro) {
 		this.fecharegistro = fecharegistro;
 	}
+
 
 	public String getUsuario() {
 		return this.usuario;

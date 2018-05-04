@@ -10,39 +10,26 @@ import java.util.List;
  * 
  */
 @Entity
+@NamedQuery(name="Balanza.findAll", query="SELECT b FROM Balanza b")
 public class Balanza implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idbalanza;
-
 	private String descripcionbalanza;
-
 	private Integer estadobalanza;
-
 	private String ipbalanza;
-
 	private String proveedorbalanza;
-
 	private String puertobalanza;
-
 	private String serie;
-
 	private String tiempoesperabalanza;
-
-	//bi-directional many-to-one association to Area
-	@ManyToOne
-	@JoinColumn(name="idarea")
 	private Area area;
-
-	//bi-directional many-to-one association to GrupoBalanza
-	@OneToMany(mappedBy="balanza")
 	private List<GrupoBalanza> grupoBalanzas;
 
 	public Balanza() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdbalanza() {
 		return this.idbalanza;
 	}
@@ -50,6 +37,7 @@ public class Balanza implements Serializable {
 	public void setIdbalanza(Integer idbalanza) {
 		this.idbalanza = idbalanza;
 	}
+
 
 	public String getDescripcionbalanza() {
 		return this.descripcionbalanza;
@@ -59,6 +47,7 @@ public class Balanza implements Serializable {
 		this.descripcionbalanza = descripcionbalanza;
 	}
 
+
 	public Integer getEstadobalanza() {
 		return this.estadobalanza;
 	}
@@ -66,6 +55,7 @@ public class Balanza implements Serializable {
 	public void setEstadobalanza(Integer estadobalanza) {
 		this.estadobalanza = estadobalanza;
 	}
+
 
 	public String getIpbalanza() {
 		return this.ipbalanza;
@@ -75,6 +65,7 @@ public class Balanza implements Serializable {
 		this.ipbalanza = ipbalanza;
 	}
 
+
 	public String getProveedorbalanza() {
 		return this.proveedorbalanza;
 	}
@@ -82,6 +73,7 @@ public class Balanza implements Serializable {
 	public void setProveedorbalanza(String proveedorbalanza) {
 		this.proveedorbalanza = proveedorbalanza;
 	}
+
 
 	public String getPuertobalanza() {
 		return this.puertobalanza;
@@ -91,6 +83,7 @@ public class Balanza implements Serializable {
 		this.puertobalanza = puertobalanza;
 	}
 
+
 	public String getSerie() {
 		return this.serie;
 	}
@@ -98,6 +91,7 @@ public class Balanza implements Serializable {
 	public void setSerie(String serie) {
 		this.serie = serie;
 	}
+
 
 	public String getTiempoesperabalanza() {
 		return this.tiempoesperabalanza;
@@ -107,6 +101,10 @@ public class Balanza implements Serializable {
 		this.tiempoesperabalanza = tiempoesperabalanza;
 	}
 
+
+	//bi-directional many-to-one association to Area
+	@ManyToOne
+	@JoinColumn(name="idarea")
 	public Area getArea() {
 		return this.area;
 	}
@@ -115,12 +113,29 @@ public class Balanza implements Serializable {
 		this.area = area;
 	}
 
+
+	//bi-directional many-to-one association to GrupoBalanza
+	@OneToMany(mappedBy="balanza")
 	public List<GrupoBalanza> getGrupoBalanzas() {
 		return this.grupoBalanzas;
 	}
 
 	public void setGrupoBalanzas(List<GrupoBalanza> grupoBalanzas) {
 		this.grupoBalanzas = grupoBalanzas;
+	}
+
+	public GrupoBalanza addGrupoBalanza(GrupoBalanza grupoBalanza) {
+		getGrupoBalanzas().add(grupoBalanza);
+		grupoBalanza.setBalanza(this);
+
+		return grupoBalanza;
+	}
+
+	public GrupoBalanza removeGrupoBalanza(GrupoBalanza grupoBalanza) {
+		getGrupoBalanzas().remove(grupoBalanza);
+		grupoBalanza.setBalanza(null);
+
+		return grupoBalanza;
 	}
 
 }

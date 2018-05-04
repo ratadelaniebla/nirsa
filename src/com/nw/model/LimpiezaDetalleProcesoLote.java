@@ -12,88 +12,36 @@ import java.util.List;
  */
 @Entity
 @Table(name="limpieza_detalle_proceso_lote")
+@NamedQuery(name="LimpiezaDetalleProcesoLote.findAll", query="SELECT l FROM LimpiezaDetalleProcesoLote l")
 public class LimpiezaDetalleProcesoLote implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idlimpiezadetalleprocesolote;
-
 	private Integer estado;
-
 	private Timestamp fechafin;
-
 	private Timestamp fechainicio;
-
 	private Timestamp fechareg;
-
-	@Column(name="idtalla_ajustada")
 	private Integer idtallaAjustada;
-
-	//bi-directional many-to-one association to LimpiezaCocheModificacion
-	@OneToMany(mappedBy="limpiezaDetalleProcesoLote")
 	private List<LimpiezaCocheModificacion> limpiezaCocheModificacions;
-
-	//bi-directional many-to-one association to LimpiezaDetalleDesperdicio
-	@OneToMany(mappedBy="limpiezaDetalleProcesoLote")
 	private List<LimpiezaDetalleDesperdicio> limpiezaDetalleDesperdicios;
-
-	//bi-directional many-to-one association to LimpiezaDetallePesoDespellejadoT
-	@OneToMany(mappedBy="limpiezaDetalleProcesoLote")
 	private List<LimpiezaDetallePesoDespellejadoT> limpiezaDetallePesoDespellejadoTs;
-
-	//bi-directional many-to-one association to LimpiezaDetalleProcesoBandeja
-	@OneToMany(mappedBy="limpiezaDetalleProcesoLote")
 	private List<LimpiezaDetalleProcesoBandeja> limpiezaDetalleProcesoBandejas;
-
-	//bi-directional many-to-one association to LimpiezaDetalleProcesoBandejaAprobacion
-	@OneToMany(mappedBy="limpiezaDetalleProcesoLote")
 	private List<LimpiezaDetalleProcesoBandejaAprobacion> limpiezaDetalleProcesoBandejaAprobacions;
-
-	//bi-directional many-to-one association to LimpiezaDetalleProcesoCoche
-	@OneToMany(mappedBy="limpiezaDetalleProcesoLote")
 	private List<LimpiezaDetalleProcesoCoche> limpiezaDetalleProcesoCoches;
-
-	//bi-directional many-to-one association to LimpiezaProceso
-	@ManyToOne
-	@JoinColumn(name="idlimpiezaproceso")
 	private LimpiezaProceso limpiezaProceso;
-
-	//bi-directional many-to-one association to LimpiezaTipo
-	@ManyToOne
-	@JoinColumn(name="idlimpiezatipo")
 	private LimpiezaTipo limpiezaTipo;
-
-	//bi-directional many-to-one association to ProduccionDetalleLote
-	@ManyToOne
-	@JoinColumn(name="idproducciondetallelote")
 	private ProduccionDetalleLote produccionDetalleLote;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
-
-	//bi-directional many-to-one association to LimpiezaProcesoLoteActivo
-	@OneToMany(mappedBy="limpiezaDetalleProcesoLote")
 	private List<LimpiezaProcesoLoteActivo> limpiezaProcesoLoteActivos;
-
-	//bi-directional many-to-one association to LonjasDetalleProcesoLote
-	@OneToMany(mappedBy="limpiezaDetalleProcesoLote")
 	private List<LonjasDetalleProcesoLote> lonjasDetalleProcesoLotes;
-
-	//bi-directional many-to-one association to PouchDetalleProcesoLote
-	@OneToMany(mappedBy="limpiezaDetalleProcesoLote")
 	private List<PouchDetalleProcesoLote> pouchDetalleProcesoLotes;
 
 	public LimpiezaDetalleProcesoLote() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdlimpiezadetalleprocesolote() {
 		return this.idlimpiezadetalleprocesolote;
 	}
@@ -101,6 +49,7 @@ public class LimpiezaDetalleProcesoLote implements Serializable {
 	public void setIdlimpiezadetalleprocesolote(Long idlimpiezadetalleprocesolote) {
 		this.idlimpiezadetalleprocesolote = idlimpiezadetalleprocesolote;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -110,6 +59,7 @@ public class LimpiezaDetalleProcesoLote implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Timestamp getFechafin() {
 		return this.fechafin;
 	}
@@ -117,6 +67,7 @@ public class LimpiezaDetalleProcesoLote implements Serializable {
 	public void setFechafin(Timestamp fechafin) {
 		this.fechafin = fechafin;
 	}
+
 
 	public Timestamp getFechainicio() {
 		return this.fechainicio;
@@ -126,6 +77,7 @@ public class LimpiezaDetalleProcesoLote implements Serializable {
 		this.fechainicio = fechainicio;
 	}
 
+
 	public Timestamp getFechareg() {
 		return this.fechareg;
 	}
@@ -134,6 +86,8 @@ public class LimpiezaDetalleProcesoLote implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
+	@Column(name="idtalla_ajustada")
 	public Integer getIdtallaAjustada() {
 		return this.idtallaAjustada;
 	}
@@ -142,6 +96,9 @@ public class LimpiezaDetalleProcesoLote implements Serializable {
 		this.idtallaAjustada = idtallaAjustada;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaCocheModificacion
+	@OneToMany(mappedBy="limpiezaDetalleProcesoLote")
 	public List<LimpiezaCocheModificacion> getLimpiezaCocheModificacions() {
 		return this.limpiezaCocheModificacions;
 	}
@@ -150,6 +107,23 @@ public class LimpiezaDetalleProcesoLote implements Serializable {
 		this.limpiezaCocheModificacions = limpiezaCocheModificacions;
 	}
 
+	public LimpiezaCocheModificacion addLimpiezaCocheModificacion(LimpiezaCocheModificacion limpiezaCocheModificacion) {
+		getLimpiezaCocheModificacions().add(limpiezaCocheModificacion);
+		limpiezaCocheModificacion.setLimpiezaDetalleProcesoLote(this);
+
+		return limpiezaCocheModificacion;
+	}
+
+	public LimpiezaCocheModificacion removeLimpiezaCocheModificacion(LimpiezaCocheModificacion limpiezaCocheModificacion) {
+		getLimpiezaCocheModificacions().remove(limpiezaCocheModificacion);
+		limpiezaCocheModificacion.setLimpiezaDetalleProcesoLote(null);
+
+		return limpiezaCocheModificacion;
+	}
+
+
+	//bi-directional many-to-one association to LimpiezaDetalleDesperdicio
+	@OneToMany(mappedBy="limpiezaDetalleProcesoLote")
 	public List<LimpiezaDetalleDesperdicio> getLimpiezaDetalleDesperdicios() {
 		return this.limpiezaDetalleDesperdicios;
 	}
@@ -158,6 +132,23 @@ public class LimpiezaDetalleProcesoLote implements Serializable {
 		this.limpiezaDetalleDesperdicios = limpiezaDetalleDesperdicios;
 	}
 
+	public LimpiezaDetalleDesperdicio addLimpiezaDetalleDesperdicio(LimpiezaDetalleDesperdicio limpiezaDetalleDesperdicio) {
+		getLimpiezaDetalleDesperdicios().add(limpiezaDetalleDesperdicio);
+		limpiezaDetalleDesperdicio.setLimpiezaDetalleProcesoLote(this);
+
+		return limpiezaDetalleDesperdicio;
+	}
+
+	public LimpiezaDetalleDesperdicio removeLimpiezaDetalleDesperdicio(LimpiezaDetalleDesperdicio limpiezaDetalleDesperdicio) {
+		getLimpiezaDetalleDesperdicios().remove(limpiezaDetalleDesperdicio);
+		limpiezaDetalleDesperdicio.setLimpiezaDetalleProcesoLote(null);
+
+		return limpiezaDetalleDesperdicio;
+	}
+
+
+	//bi-directional many-to-one association to LimpiezaDetallePesoDespellejadoT
+	@OneToMany(mappedBy="limpiezaDetalleProcesoLote")
 	public List<LimpiezaDetallePesoDespellejadoT> getLimpiezaDetallePesoDespellejadoTs() {
 		return this.limpiezaDetallePesoDespellejadoTs;
 	}
@@ -166,6 +157,23 @@ public class LimpiezaDetalleProcesoLote implements Serializable {
 		this.limpiezaDetallePesoDespellejadoTs = limpiezaDetallePesoDespellejadoTs;
 	}
 
+	public LimpiezaDetallePesoDespellejadoT addLimpiezaDetallePesoDespellejadoT(LimpiezaDetallePesoDespellejadoT limpiezaDetallePesoDespellejadoT) {
+		getLimpiezaDetallePesoDespellejadoTs().add(limpiezaDetallePesoDespellejadoT);
+		limpiezaDetallePesoDespellejadoT.setLimpiezaDetalleProcesoLote(this);
+
+		return limpiezaDetallePesoDespellejadoT;
+	}
+
+	public LimpiezaDetallePesoDespellejadoT removeLimpiezaDetallePesoDespellejadoT(LimpiezaDetallePesoDespellejadoT limpiezaDetallePesoDespellejadoT) {
+		getLimpiezaDetallePesoDespellejadoTs().remove(limpiezaDetallePesoDespellejadoT);
+		limpiezaDetallePesoDespellejadoT.setLimpiezaDetalleProcesoLote(null);
+
+		return limpiezaDetallePesoDespellejadoT;
+	}
+
+
+	//bi-directional many-to-one association to LimpiezaDetalleProcesoBandeja
+	@OneToMany(mappedBy="limpiezaDetalleProcesoLote")
 	public List<LimpiezaDetalleProcesoBandeja> getLimpiezaDetalleProcesoBandejas() {
 		return this.limpiezaDetalleProcesoBandejas;
 	}
@@ -174,6 +182,23 @@ public class LimpiezaDetalleProcesoLote implements Serializable {
 		this.limpiezaDetalleProcesoBandejas = limpiezaDetalleProcesoBandejas;
 	}
 
+	public LimpiezaDetalleProcesoBandeja addLimpiezaDetalleProcesoBandeja(LimpiezaDetalleProcesoBandeja limpiezaDetalleProcesoBandeja) {
+		getLimpiezaDetalleProcesoBandejas().add(limpiezaDetalleProcesoBandeja);
+		limpiezaDetalleProcesoBandeja.setLimpiezaDetalleProcesoLote(this);
+
+		return limpiezaDetalleProcesoBandeja;
+	}
+
+	public LimpiezaDetalleProcesoBandeja removeLimpiezaDetalleProcesoBandeja(LimpiezaDetalleProcesoBandeja limpiezaDetalleProcesoBandeja) {
+		getLimpiezaDetalleProcesoBandejas().remove(limpiezaDetalleProcesoBandeja);
+		limpiezaDetalleProcesoBandeja.setLimpiezaDetalleProcesoLote(null);
+
+		return limpiezaDetalleProcesoBandeja;
+	}
+
+
+	//bi-directional many-to-one association to LimpiezaDetalleProcesoBandejaAprobacion
+	@OneToMany(mappedBy="limpiezaDetalleProcesoLote")
 	public List<LimpiezaDetalleProcesoBandejaAprobacion> getLimpiezaDetalleProcesoBandejaAprobacions() {
 		return this.limpiezaDetalleProcesoBandejaAprobacions;
 	}
@@ -182,6 +207,23 @@ public class LimpiezaDetalleProcesoLote implements Serializable {
 		this.limpiezaDetalleProcesoBandejaAprobacions = limpiezaDetalleProcesoBandejaAprobacions;
 	}
 
+	public LimpiezaDetalleProcesoBandejaAprobacion addLimpiezaDetalleProcesoBandejaAprobacion(LimpiezaDetalleProcesoBandejaAprobacion limpiezaDetalleProcesoBandejaAprobacion) {
+		getLimpiezaDetalleProcesoBandejaAprobacions().add(limpiezaDetalleProcesoBandejaAprobacion);
+		limpiezaDetalleProcesoBandejaAprobacion.setLimpiezaDetalleProcesoLote(this);
+
+		return limpiezaDetalleProcesoBandejaAprobacion;
+	}
+
+	public LimpiezaDetalleProcesoBandejaAprobacion removeLimpiezaDetalleProcesoBandejaAprobacion(LimpiezaDetalleProcesoBandejaAprobacion limpiezaDetalleProcesoBandejaAprobacion) {
+		getLimpiezaDetalleProcesoBandejaAprobacions().remove(limpiezaDetalleProcesoBandejaAprobacion);
+		limpiezaDetalleProcesoBandejaAprobacion.setLimpiezaDetalleProcesoLote(null);
+
+		return limpiezaDetalleProcesoBandejaAprobacion;
+	}
+
+
+	//bi-directional many-to-one association to LimpiezaDetalleProcesoCoche
+	@OneToMany(mappedBy="limpiezaDetalleProcesoLote")
 	public List<LimpiezaDetalleProcesoCoche> getLimpiezaDetalleProcesoCoches() {
 		return this.limpiezaDetalleProcesoCoches;
 	}
@@ -190,6 +232,24 @@ public class LimpiezaDetalleProcesoLote implements Serializable {
 		this.limpiezaDetalleProcesoCoches = limpiezaDetalleProcesoCoches;
 	}
 
+	public LimpiezaDetalleProcesoCoche addLimpiezaDetalleProcesoCoch(LimpiezaDetalleProcesoCoche limpiezaDetalleProcesoCoch) {
+		getLimpiezaDetalleProcesoCoches().add(limpiezaDetalleProcesoCoch);
+		limpiezaDetalleProcesoCoch.setLimpiezaDetalleProcesoLote(this);
+
+		return limpiezaDetalleProcesoCoch;
+	}
+
+	public LimpiezaDetalleProcesoCoche removeLimpiezaDetalleProcesoCoch(LimpiezaDetalleProcesoCoche limpiezaDetalleProcesoCoch) {
+		getLimpiezaDetalleProcesoCoches().remove(limpiezaDetalleProcesoCoch);
+		limpiezaDetalleProcesoCoch.setLimpiezaDetalleProcesoLote(null);
+
+		return limpiezaDetalleProcesoCoch;
+	}
+
+
+	//bi-directional many-to-one association to LimpiezaProceso
+	@ManyToOne
+	@JoinColumn(name="idlimpiezaproceso")
 	public LimpiezaProceso getLimpiezaProceso() {
 		return this.limpiezaProceso;
 	}
@@ -198,6 +258,10 @@ public class LimpiezaDetalleProcesoLote implements Serializable {
 		this.limpiezaProceso = limpiezaProceso;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaTipo
+	@ManyToOne
+	@JoinColumn(name="idlimpiezatipo")
 	public LimpiezaTipo getLimpiezaTipo() {
 		return this.limpiezaTipo;
 	}
@@ -206,6 +270,10 @@ public class LimpiezaDetalleProcesoLote implements Serializable {
 		this.limpiezaTipo = limpiezaTipo;
 	}
 
+
+	//bi-directional many-to-one association to ProduccionDetalleLote
+	@ManyToOne
+	@JoinColumn(name="idproducciondetallelote")
 	public ProduccionDetalleLote getProduccionDetalleLote() {
 		return this.produccionDetalleLote;
 	}
@@ -214,6 +282,10 @@ public class LimpiezaDetalleProcesoLote implements Serializable {
 		this.produccionDetalleLote = produccionDetalleLote;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -222,6 +294,10 @@ public class LimpiezaDetalleProcesoLote implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}
@@ -230,6 +306,9 @@ public class LimpiezaDetalleProcesoLote implements Serializable {
 		this.usuario = usuario;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaProcesoLoteActivo
+	@OneToMany(mappedBy="limpiezaDetalleProcesoLote")
 	public List<LimpiezaProcesoLoteActivo> getLimpiezaProcesoLoteActivos() {
 		return this.limpiezaProcesoLoteActivos;
 	}
@@ -238,6 +317,23 @@ public class LimpiezaDetalleProcesoLote implements Serializable {
 		this.limpiezaProcesoLoteActivos = limpiezaProcesoLoteActivos;
 	}
 
+	public LimpiezaProcesoLoteActivo addLimpiezaProcesoLoteActivo(LimpiezaProcesoLoteActivo limpiezaProcesoLoteActivo) {
+		getLimpiezaProcesoLoteActivos().add(limpiezaProcesoLoteActivo);
+		limpiezaProcesoLoteActivo.setLimpiezaDetalleProcesoLote(this);
+
+		return limpiezaProcesoLoteActivo;
+	}
+
+	public LimpiezaProcesoLoteActivo removeLimpiezaProcesoLoteActivo(LimpiezaProcesoLoteActivo limpiezaProcesoLoteActivo) {
+		getLimpiezaProcesoLoteActivos().remove(limpiezaProcesoLoteActivo);
+		limpiezaProcesoLoteActivo.setLimpiezaDetalleProcesoLote(null);
+
+		return limpiezaProcesoLoteActivo;
+	}
+
+
+	//bi-directional many-to-one association to LonjasDetalleProcesoLote
+	@OneToMany(mappedBy="limpiezaDetalleProcesoLote")
 	public List<LonjasDetalleProcesoLote> getLonjasDetalleProcesoLotes() {
 		return this.lonjasDetalleProcesoLotes;
 	}
@@ -246,12 +342,43 @@ public class LimpiezaDetalleProcesoLote implements Serializable {
 		this.lonjasDetalleProcesoLotes = lonjasDetalleProcesoLotes;
 	}
 
+	public LonjasDetalleProcesoLote addLonjasDetalleProcesoLote(LonjasDetalleProcesoLote lonjasDetalleProcesoLote) {
+		getLonjasDetalleProcesoLotes().add(lonjasDetalleProcesoLote);
+		lonjasDetalleProcesoLote.setLimpiezaDetalleProcesoLote(this);
+
+		return lonjasDetalleProcesoLote;
+	}
+
+	public LonjasDetalleProcesoLote removeLonjasDetalleProcesoLote(LonjasDetalleProcesoLote lonjasDetalleProcesoLote) {
+		getLonjasDetalleProcesoLotes().remove(lonjasDetalleProcesoLote);
+		lonjasDetalleProcesoLote.setLimpiezaDetalleProcesoLote(null);
+
+		return lonjasDetalleProcesoLote;
+	}
+
+
+	//bi-directional many-to-one association to PouchDetalleProcesoLote
+	@OneToMany(mappedBy="limpiezaDetalleProcesoLote")
 	public List<PouchDetalleProcesoLote> getPouchDetalleProcesoLotes() {
 		return this.pouchDetalleProcesoLotes;
 	}
 
 	public void setPouchDetalleProcesoLotes(List<PouchDetalleProcesoLote> pouchDetalleProcesoLotes) {
 		this.pouchDetalleProcesoLotes = pouchDetalleProcesoLotes;
+	}
+
+	public PouchDetalleProcesoLote addPouchDetalleProcesoLote(PouchDetalleProcesoLote pouchDetalleProcesoLote) {
+		getPouchDetalleProcesoLotes().add(pouchDetalleProcesoLote);
+		pouchDetalleProcesoLote.setLimpiezaDetalleProcesoLote(this);
+
+		return pouchDetalleProcesoLote;
+	}
+
+	public PouchDetalleProcesoLote removePouchDetalleProcesoLote(PouchDetalleProcesoLote pouchDetalleProcesoLote) {
+		getPouchDetalleProcesoLotes().remove(pouchDetalleProcesoLote);
+		pouchDetalleProcesoLote.setLimpiezaDetalleProcesoLote(null);
+
+		return pouchDetalleProcesoLote;
 	}
 
 }

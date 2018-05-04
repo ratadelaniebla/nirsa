@@ -11,50 +11,28 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="contraloria_coccion_detalle_muestreo_temp_coche")
+@NamedQuery(name="ContraloriaCoccionDetalleMuestreoTempCoche.findAll", query="SELECT c FROM ContraloriaCoccionDetalleMuestreoTempCoche c")
 public class ContraloriaCoccionDetalleMuestreoTempCoche implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcontraloriacocciondetallemuestreotempcoche;
-
 	private Timestamp fechareg;
-
 	private Timestamp fecharegactualizacion;
-
 	private Integer nivel;
-
 	private Integer nummuestralote;
-
 	private double peso;
-
 	private double temperatura;
-
 	private String usuarioactualizacion;
-
-	//bi-directional many-to-one association to CoccionMuestreoTempCoche
-	@ManyToOne
-	@JoinColumn(name="idcoccionmuestreotempcoche")
 	private CoccionMuestreoTempCoche coccionMuestreoTempCoche;
-
-	//bi-directional many-to-one association to EvisceradoDetalleProcesoCoche
-	@ManyToOne
-	@JoinColumn(name="idevisceradodetalleprocesocoche")
 	private EvisceradoDetalleProcesoCoche evisceradoDetalleProcesoCoche;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public ContraloriaCoccionDetalleMuestreoTempCoche() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcontraloriacocciondetallemuestreotempcoche() {
 		return this.idcontraloriacocciondetallemuestreotempcoche;
 	}
@@ -62,6 +40,7 @@ public class ContraloriaCoccionDetalleMuestreoTempCoche implements Serializable 
 	public void setIdcontraloriacocciondetallemuestreotempcoche(Long idcontraloriacocciondetallemuestreotempcoche) {
 		this.idcontraloriacocciondetallemuestreotempcoche = idcontraloriacocciondetallemuestreotempcoche;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -71,6 +50,7 @@ public class ContraloriaCoccionDetalleMuestreoTempCoche implements Serializable 
 		this.fechareg = fechareg;
 	}
 
+
 	public Timestamp getFecharegactualizacion() {
 		return this.fecharegactualizacion;
 	}
@@ -78,6 +58,7 @@ public class ContraloriaCoccionDetalleMuestreoTempCoche implements Serializable 
 	public void setFecharegactualizacion(Timestamp fecharegactualizacion) {
 		this.fecharegactualizacion = fecharegactualizacion;
 	}
+
 
 	public Integer getNivel() {
 		return this.nivel;
@@ -87,6 +68,7 @@ public class ContraloriaCoccionDetalleMuestreoTempCoche implements Serializable 
 		this.nivel = nivel;
 	}
 
+
 	public Integer getNummuestralote() {
 		return this.nummuestralote;
 	}
@@ -94,6 +76,7 @@ public class ContraloriaCoccionDetalleMuestreoTempCoche implements Serializable 
 	public void setNummuestralote(Integer nummuestralote) {
 		this.nummuestralote = nummuestralote;
 	}
+
 
 	public double getPeso() {
 		return this.peso;
@@ -103,6 +86,7 @@ public class ContraloriaCoccionDetalleMuestreoTempCoche implements Serializable 
 		this.peso = peso;
 	}
 
+
 	public double getTemperatura() {
 		return this.temperatura;
 	}
@@ -110,6 +94,7 @@ public class ContraloriaCoccionDetalleMuestreoTempCoche implements Serializable 
 	public void setTemperatura(double temperatura) {
 		this.temperatura = temperatura;
 	}
+
 
 	public String getUsuarioactualizacion() {
 		return this.usuarioactualizacion;
@@ -119,6 +104,10 @@ public class ContraloriaCoccionDetalleMuestreoTempCoche implements Serializable 
 		this.usuarioactualizacion = usuarioactualizacion;
 	}
 
+
+	//bi-directional many-to-one association to CoccionMuestreoTempCoche
+	@ManyToOne
+	@JoinColumn(name="idcoccionmuestreotempcoche")
 	public CoccionMuestreoTempCoche getCoccionMuestreoTempCoche() {
 		return this.coccionMuestreoTempCoche;
 	}
@@ -127,6 +116,10 @@ public class ContraloriaCoccionDetalleMuestreoTempCoche implements Serializable 
 		this.coccionMuestreoTempCoche = coccionMuestreoTempCoche;
 	}
 
+
+	//bi-directional many-to-one association to EvisceradoDetalleProcesoCoche
+	@ManyToOne
+	@JoinColumn(name="idevisceradodetalleprocesocoche")
 	public EvisceradoDetalleProcesoCoche getEvisceradoDetalleProcesoCoche() {
 		return this.evisceradoDetalleProcesoCoche;
 	}
@@ -135,6 +128,10 @@ public class ContraloriaCoccionDetalleMuestreoTempCoche implements Serializable 
 		this.evisceradoDetalleProcesoCoche = evisceradoDetalleProcesoCoche;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -143,6 +140,10 @@ public class ContraloriaCoccionDetalleMuestreoTempCoche implements Serializable 
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

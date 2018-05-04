@@ -11,48 +11,27 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="eviscerado_subproducto_crudo")
+@NamedQuery(name="EvisceradoSubproductoCrudo.findAll", query="SELECT e FROM EvisceradoSubproductoCrudo e")
 public class EvisceradoSubproductoCrudo implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idevisceradosubproductocrudo;
-
 	private Integer cantidadmedio;
-
 	private Timestamp fechareg;
-
 	private double pesobruto;
-
 	private double taracoche;
-
 	private double taramedio;
-
 	private String tipoingreso;
-
-	//bi-directional many-to-one association to Cajon
-	@ManyToOne
-	@JoinColumn(name="idcajon")
 	private Cajon cajon;
-
-	//bi-directional many-to-one association to EvisceradoDetalleProceso
-	@ManyToOne
-	@JoinColumn(name="idevisceradodetalleproceso")
 	private EvisceradoDetalleProceso evisceradoDetalleProceso;
-
-	//bi-directional many-to-one association to EvisceradoTipoSubproducto
-	@ManyToOne
-	@JoinColumn(name="idevisceradotiposubproducto")
 	private EvisceradoTipoSubproducto evisceradoTipoSubproducto;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public EvisceradoSubproductoCrudo() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdevisceradosubproductocrudo() {
 		return this.idevisceradosubproductocrudo;
 	}
@@ -60,6 +39,7 @@ public class EvisceradoSubproductoCrudo implements Serializable {
 	public void setIdevisceradosubproductocrudo(Long idevisceradosubproductocrudo) {
 		this.idevisceradosubproductocrudo = idevisceradosubproductocrudo;
 	}
+
 
 	public Integer getCantidadmedio() {
 		return this.cantidadmedio;
@@ -69,6 +49,7 @@ public class EvisceradoSubproductoCrudo implements Serializable {
 		this.cantidadmedio = cantidadmedio;
 	}
 
+
 	public Timestamp getFechareg() {
 		return this.fechareg;
 	}
@@ -76,6 +57,7 @@ public class EvisceradoSubproductoCrudo implements Serializable {
 	public void setFechareg(Timestamp fechareg) {
 		this.fechareg = fechareg;
 	}
+
 
 	public double getPesobruto() {
 		return this.pesobruto;
@@ -85,6 +67,7 @@ public class EvisceradoSubproductoCrudo implements Serializable {
 		this.pesobruto = pesobruto;
 	}
 
+
 	public double getTaracoche() {
 		return this.taracoche;
 	}
@@ -92,6 +75,7 @@ public class EvisceradoSubproductoCrudo implements Serializable {
 	public void setTaracoche(double taracoche) {
 		this.taracoche = taracoche;
 	}
+
 
 	public double getTaramedio() {
 		return this.taramedio;
@@ -101,6 +85,7 @@ public class EvisceradoSubproductoCrudo implements Serializable {
 		this.taramedio = taramedio;
 	}
 
+
 	public String getTipoingreso() {
 		return this.tipoingreso;
 	}
@@ -109,6 +94,10 @@ public class EvisceradoSubproductoCrudo implements Serializable {
 		this.tipoingreso = tipoingreso;
 	}
 
+
+	//bi-directional many-to-one association to Cajon
+	@ManyToOne
+	@JoinColumn(name="idcajon")
 	public Cajon getCajon() {
 		return this.cajon;
 	}
@@ -117,6 +106,10 @@ public class EvisceradoSubproductoCrudo implements Serializable {
 		this.cajon = cajon;
 	}
 
+
+	//bi-directional many-to-one association to EvisceradoDetalleProceso
+	@ManyToOne
+	@JoinColumn(name="idevisceradodetalleproceso")
 	public EvisceradoDetalleProceso getEvisceradoDetalleProceso() {
 		return this.evisceradoDetalleProceso;
 	}
@@ -125,6 +118,10 @@ public class EvisceradoSubproductoCrudo implements Serializable {
 		this.evisceradoDetalleProceso = evisceradoDetalleProceso;
 	}
 
+
+	//bi-directional many-to-one association to EvisceradoTipoSubproducto
+	@ManyToOne
+	@JoinColumn(name="idevisceradotiposubproducto")
 	public EvisceradoTipoSubproducto getEvisceradoTipoSubproducto() {
 		return this.evisceradoTipoSubproducto;
 	}
@@ -133,6 +130,10 @@ public class EvisceradoSubproductoCrudo implements Serializable {
 		this.evisceradoTipoSubproducto = evisceradoTipoSubproducto;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

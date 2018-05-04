@@ -11,41 +11,27 @@ import java.util.List;
  * 
  */
 @Entity
+@NamedQuery(name="Pedido.findAll", query="SELECT p FROM Pedido p")
 public class Pedido implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idpedido;
-
 	private String contenedor;
-
 	private Timestamp fechaembarque;
-
 	private Timestamp fechaentrega;
-
 	private Timestamp fechapedido;
-
-	@Column(name="id_ciudad")
 	private Integer idCiudad;
-
-	@Column(name="id_cliente")
 	private Integer idCliente;
-
-	@Column(name="id_puerto")
 	private Integer idPuerto;
-
 	private String instrucciones;
-
 	private String observaciones;
-
-	//bi-directional many-to-one association to DetallePedido
-	@OneToMany(mappedBy="pedido")
 	private List<DetallePedido> detallePedidos;
 
 	public Pedido() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdpedido() {
 		return this.idpedido;
 	}
@@ -53,6 +39,7 @@ public class Pedido implements Serializable {
 	public void setIdpedido(Long idpedido) {
 		this.idpedido = idpedido;
 	}
+
 
 	public String getContenedor() {
 		return this.contenedor;
@@ -62,6 +49,7 @@ public class Pedido implements Serializable {
 		this.contenedor = contenedor;
 	}
 
+
 	public Timestamp getFechaembarque() {
 		return this.fechaembarque;
 	}
@@ -69,6 +57,7 @@ public class Pedido implements Serializable {
 	public void setFechaembarque(Timestamp fechaembarque) {
 		this.fechaembarque = fechaembarque;
 	}
+
 
 	public Timestamp getFechaentrega() {
 		return this.fechaentrega;
@@ -78,6 +67,7 @@ public class Pedido implements Serializable {
 		this.fechaentrega = fechaentrega;
 	}
 
+
 	public Timestamp getFechapedido() {
 		return this.fechapedido;
 	}
@@ -86,6 +76,8 @@ public class Pedido implements Serializable {
 		this.fechapedido = fechapedido;
 	}
 
+
+	@Column(name="id_ciudad")
 	public Integer getIdCiudad() {
 		return this.idCiudad;
 	}
@@ -94,6 +86,8 @@ public class Pedido implements Serializable {
 		this.idCiudad = idCiudad;
 	}
 
+
+	@Column(name="id_cliente")
 	public Integer getIdCliente() {
 		return this.idCliente;
 	}
@@ -102,6 +96,8 @@ public class Pedido implements Serializable {
 		this.idCliente = idCliente;
 	}
 
+
+	@Column(name="id_puerto")
 	public Integer getIdPuerto() {
 		return this.idPuerto;
 	}
@@ -109,6 +105,7 @@ public class Pedido implements Serializable {
 	public void setIdPuerto(Integer idPuerto) {
 		this.idPuerto = idPuerto;
 	}
+
 
 	public String getInstrucciones() {
 		return this.instrucciones;
@@ -118,6 +115,7 @@ public class Pedido implements Serializable {
 		this.instrucciones = instrucciones;
 	}
 
+
 	public String getObservaciones() {
 		return this.observaciones;
 	}
@@ -126,12 +124,29 @@ public class Pedido implements Serializable {
 		this.observaciones = observaciones;
 	}
 
+
+	//bi-directional many-to-one association to DetallePedido
+	@OneToMany(mappedBy="pedido")
 	public List<DetallePedido> getDetallePedidos() {
 		return this.detallePedidos;
 	}
 
 	public void setDetallePedidos(List<DetallePedido> detallePedidos) {
 		this.detallePedidos = detallePedidos;
+	}
+
+	public DetallePedido addDetallePedido(DetallePedido detallePedido) {
+		getDetallePedidos().add(detallePedido);
+		detallePedido.setPedido(this);
+
+		return detallePedido;
+	}
+
+	public DetallePedido removeDetallePedido(DetallePedido detallePedido) {
+		getDetallePedidos().remove(detallePedido);
+		detallePedido.setPedido(null);
+
+		return detallePedido;
 	}
 
 }

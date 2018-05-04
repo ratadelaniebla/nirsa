@@ -10,113 +10,47 @@ import java.util.List;
  * 
  */
 @Entity
+@NamedQuery(name="Talla.findAll", query="SELECT t FROM Talla t")
 public class Talla implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idtalla;
-
 	private String codigoqm;
-
 	private String codigosaptalla;
-
 	private double desde;
-
 	private double desdekilos;
-
 	private double hasta;
-
 	private double hastakilos;
-
 	private String libras;
-
 	private String librasinternacional;
-
 	private String nombre;
-
 	private Integer notificar;
-
 	private String saptalla;
-
-	@Column(name="talla_kilos")
 	private String tallaKilos;
-
-	//bi-directional many-to-one association to BiEstandarClasificacionTalla
-	@OneToMany(mappedBy="talla")
 	private List<BiEstandarClasificacionTalla> biEstandarClasificacionTallas;
-
-	//bi-directional many-to-one association to DescongeladoDetalleDuchaAperturaTalla
-	@OneToMany(mappedBy="talla")
 	private List<DescongeladoDetalleDuchaAperturaTalla> descongeladoDetalleDuchaAperturaTallas;
-
-	//bi-directional many-to-one association to EspecieTalla
-	@OneToMany(mappedBy="talla")
 	private List<EspecieTalla> especieTallas;
-
-	//bi-directional many-to-one association to EstandarClasificacionProdTalla
-	@OneToMany(mappedBy="talla")
 	private List<EstandarClasificacionProdTalla> estandarClasificacionProdTallas;
-
-	//bi-directional many-to-one association to EstandarClasificacionTalla
-	@OneToMany(mappedBy="talla")
 	private List<EstandarClasificacionTalla> estandarClasificacionTallas;
-
-	//bi-directional many-to-one association to EstandarClasificacionTallaPlexus
-	@OneToMany(mappedBy="talla")
 	private List<EstandarClasificacionTallaPlexus> estandarClasificacionTallaPlexuses;
-
-	//bi-directional many-to-one association to EstandarDetalleEficienciaKilosPagoPlexus
-	@OneToMany(mappedBy="talla")
 	private List<EstandarDetalleEficienciaKilosPagoPlexus> estandarDetalleEficienciaKilosPagoPlexuses;
-
-	//bi-directional many-to-one association to EstandarDetalleEficienciaKilosPlexus
-	@OneToMany(mappedBy="talla")
 	private List<EstandarDetalleEficienciaKilosPlexus> estandarDetalleEficienciaKilosPlexuses;
-
-	//bi-directional many-to-one association to EstandarEficienciaAtun
-	@OneToMany(mappedBy="talla")
 	private List<EstandarEficienciaAtun> estandarEficienciaAtuns;
-
-	//bi-directional many-to-one association to EstandarEficienciaAtunLimpio
-	@OneToMany(mappedBy="talla")
 	private List<EstandarEficienciaAtunLimpio> estandarEficienciaAtunLimpios;
-
-	//bi-directional many-to-one association to EstandarEficienciaAtunLimpioP
-	@OneToMany(mappedBy="talla")
 	private List<EstandarEficienciaAtunLimpioP> estandarEficienciaAtunLimpioPs;
-
-	//bi-directional many-to-one association to EstandarEficienciaLimpiezaKilosPorHoraTalla
-	@OneToMany(mappedBy="talla")
 	private List<EstandarEficienciaLimpiezaKilosPorHoraTalla> estandarEficienciaLimpiezaKilosPorHoraTallas;
-
-	//bi-directional many-to-one association to EstandarEficienciaPonchadaPlexus
-	@OneToMany(mappedBy="talla")
 	private List<EstandarEficienciaPonchadaPlexus> estandarEficienciaPonchadaPlexuses;
-
-	//bi-directional many-to-one association to EstandarPonchadaTthh
-	@OneToMany(mappedBy="talla")
 	private List<EstandarPonchadaTthh> estandarPonchadaTthhs;
-
-	//bi-directional many-to-one association to EstandarTiemposDescongelado
-	@OneToMany(mappedBy="talla")
 	private List<EstandarTiemposDescongelado> estandarTiemposDescongelados;
-
-	//bi-directional many-to-one association to EstandarTiemposPrecamara
-	@OneToMany(mappedBy="talla")
 	private List<EstandarTiemposPrecamara> estandarTiemposPrecamaras;
-
-	//bi-directional many-to-one association to EvisceradoTiempoEstandarCajon
-	@OneToMany(mappedBy="talla")
 	private List<EvisceradoTiempoEstandarCajon> evisceradoTiempoEstandarCajons;
-
-	//bi-directional many-to-one association to EvolutionPlexusEstandarTarifa
-	@OneToMany(mappedBy="talla")
 	private List<EvolutionPlexusEstandarTarifa> evolutionPlexusEstandarTarifas;
 
 	public Talla() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdtalla() {
 		return this.idtalla;
 	}
@@ -124,6 +58,7 @@ public class Talla implements Serializable {
 	public void setIdtalla(Integer idtalla) {
 		this.idtalla = idtalla;
 	}
+
 
 	public String getCodigoqm() {
 		return this.codigoqm;
@@ -133,6 +68,7 @@ public class Talla implements Serializable {
 		this.codigoqm = codigoqm;
 	}
 
+
 	public String getCodigosaptalla() {
 		return this.codigosaptalla;
 	}
@@ -140,6 +76,7 @@ public class Talla implements Serializable {
 	public void setCodigosaptalla(String codigosaptalla) {
 		this.codigosaptalla = codigosaptalla;
 	}
+
 
 	public double getDesde() {
 		return this.desde;
@@ -149,6 +86,7 @@ public class Talla implements Serializable {
 		this.desde = desde;
 	}
 
+
 	public double getDesdekilos() {
 		return this.desdekilos;
 	}
@@ -156,6 +94,7 @@ public class Talla implements Serializable {
 	public void setDesdekilos(double desdekilos) {
 		this.desdekilos = desdekilos;
 	}
+
 
 	public double getHasta() {
 		return this.hasta;
@@ -165,6 +104,7 @@ public class Talla implements Serializable {
 		this.hasta = hasta;
 	}
 
+
 	public double getHastakilos() {
 		return this.hastakilos;
 	}
@@ -172,6 +112,7 @@ public class Talla implements Serializable {
 	public void setHastakilos(double hastakilos) {
 		this.hastakilos = hastakilos;
 	}
+
 
 	public String getLibras() {
 		return this.libras;
@@ -181,6 +122,7 @@ public class Talla implements Serializable {
 		this.libras = libras;
 	}
 
+
 	public String getLibrasinternacional() {
 		return this.librasinternacional;
 	}
@@ -188,6 +130,7 @@ public class Talla implements Serializable {
 	public void setLibrasinternacional(String librasinternacional) {
 		this.librasinternacional = librasinternacional;
 	}
+
 
 	public String getNombre() {
 		return this.nombre;
@@ -197,6 +140,7 @@ public class Talla implements Serializable {
 		this.nombre = nombre;
 	}
 
+
 	public Integer getNotificar() {
 		return this.notificar;
 	}
@@ -204,6 +148,7 @@ public class Talla implements Serializable {
 	public void setNotificar(Integer notificar) {
 		this.notificar = notificar;
 	}
+
 
 	public String getSaptalla() {
 		return this.saptalla;
@@ -213,6 +158,8 @@ public class Talla implements Serializable {
 		this.saptalla = saptalla;
 	}
 
+
+	@Column(name="talla_kilos")
 	public String getTallaKilos() {
 		return this.tallaKilos;
 	}
@@ -221,6 +168,9 @@ public class Talla implements Serializable {
 		this.tallaKilos = tallaKilos;
 	}
 
+
+	//bi-directional many-to-one association to BiEstandarClasificacionTalla
+	@OneToMany(mappedBy="talla")
 	public List<BiEstandarClasificacionTalla> getBiEstandarClasificacionTallas() {
 		return this.biEstandarClasificacionTallas;
 	}
@@ -229,6 +179,23 @@ public class Talla implements Serializable {
 		this.biEstandarClasificacionTallas = biEstandarClasificacionTallas;
 	}
 
+	public BiEstandarClasificacionTalla addBiEstandarClasificacionTalla(BiEstandarClasificacionTalla biEstandarClasificacionTalla) {
+		getBiEstandarClasificacionTallas().add(biEstandarClasificacionTalla);
+		biEstandarClasificacionTalla.setTalla(this);
+
+		return biEstandarClasificacionTalla;
+	}
+
+	public BiEstandarClasificacionTalla removeBiEstandarClasificacionTalla(BiEstandarClasificacionTalla biEstandarClasificacionTalla) {
+		getBiEstandarClasificacionTallas().remove(biEstandarClasificacionTalla);
+		biEstandarClasificacionTalla.setTalla(null);
+
+		return biEstandarClasificacionTalla;
+	}
+
+
+	//bi-directional many-to-one association to DescongeladoDetalleDuchaAperturaTalla
+	@OneToMany(mappedBy="talla")
 	public List<DescongeladoDetalleDuchaAperturaTalla> getDescongeladoDetalleDuchaAperturaTallas() {
 		return this.descongeladoDetalleDuchaAperturaTallas;
 	}
@@ -237,6 +204,23 @@ public class Talla implements Serializable {
 		this.descongeladoDetalleDuchaAperturaTallas = descongeladoDetalleDuchaAperturaTallas;
 	}
 
+	public DescongeladoDetalleDuchaAperturaTalla addDescongeladoDetalleDuchaAperturaTalla(DescongeladoDetalleDuchaAperturaTalla descongeladoDetalleDuchaAperturaTalla) {
+		getDescongeladoDetalleDuchaAperturaTallas().add(descongeladoDetalleDuchaAperturaTalla);
+		descongeladoDetalleDuchaAperturaTalla.setTalla(this);
+
+		return descongeladoDetalleDuchaAperturaTalla;
+	}
+
+	public DescongeladoDetalleDuchaAperturaTalla removeDescongeladoDetalleDuchaAperturaTalla(DescongeladoDetalleDuchaAperturaTalla descongeladoDetalleDuchaAperturaTalla) {
+		getDescongeladoDetalleDuchaAperturaTallas().remove(descongeladoDetalleDuchaAperturaTalla);
+		descongeladoDetalleDuchaAperturaTalla.setTalla(null);
+
+		return descongeladoDetalleDuchaAperturaTalla;
+	}
+
+
+	//bi-directional many-to-one association to EspecieTalla
+	@OneToMany(mappedBy="talla")
 	public List<EspecieTalla> getEspecieTallas() {
 		return this.especieTallas;
 	}
@@ -245,6 +229,23 @@ public class Talla implements Serializable {
 		this.especieTallas = especieTallas;
 	}
 
+	public EspecieTalla addEspecieTalla(EspecieTalla especieTalla) {
+		getEspecieTallas().add(especieTalla);
+		especieTalla.setTalla(this);
+
+		return especieTalla;
+	}
+
+	public EspecieTalla removeEspecieTalla(EspecieTalla especieTalla) {
+		getEspecieTallas().remove(especieTalla);
+		especieTalla.setTalla(null);
+
+		return especieTalla;
+	}
+
+
+	//bi-directional many-to-one association to EstandarClasificacionProdTalla
+	@OneToMany(mappedBy="talla")
 	public List<EstandarClasificacionProdTalla> getEstandarClasificacionProdTallas() {
 		return this.estandarClasificacionProdTallas;
 	}
@@ -253,6 +254,23 @@ public class Talla implements Serializable {
 		this.estandarClasificacionProdTallas = estandarClasificacionProdTallas;
 	}
 
+	public EstandarClasificacionProdTalla addEstandarClasificacionProdTalla(EstandarClasificacionProdTalla estandarClasificacionProdTalla) {
+		getEstandarClasificacionProdTallas().add(estandarClasificacionProdTalla);
+		estandarClasificacionProdTalla.setTalla(this);
+
+		return estandarClasificacionProdTalla;
+	}
+
+	public EstandarClasificacionProdTalla removeEstandarClasificacionProdTalla(EstandarClasificacionProdTalla estandarClasificacionProdTalla) {
+		getEstandarClasificacionProdTallas().remove(estandarClasificacionProdTalla);
+		estandarClasificacionProdTalla.setTalla(null);
+
+		return estandarClasificacionProdTalla;
+	}
+
+
+	//bi-directional many-to-one association to EstandarClasificacionTalla
+	@OneToMany(mappedBy="talla")
 	public List<EstandarClasificacionTalla> getEstandarClasificacionTallas() {
 		return this.estandarClasificacionTallas;
 	}
@@ -261,6 +279,23 @@ public class Talla implements Serializable {
 		this.estandarClasificacionTallas = estandarClasificacionTallas;
 	}
 
+	public EstandarClasificacionTalla addEstandarClasificacionTalla(EstandarClasificacionTalla estandarClasificacionTalla) {
+		getEstandarClasificacionTallas().add(estandarClasificacionTalla);
+		estandarClasificacionTalla.setTalla(this);
+
+		return estandarClasificacionTalla;
+	}
+
+	public EstandarClasificacionTalla removeEstandarClasificacionTalla(EstandarClasificacionTalla estandarClasificacionTalla) {
+		getEstandarClasificacionTallas().remove(estandarClasificacionTalla);
+		estandarClasificacionTalla.setTalla(null);
+
+		return estandarClasificacionTalla;
+	}
+
+
+	//bi-directional many-to-one association to EstandarClasificacionTallaPlexus
+	@OneToMany(mappedBy="talla")
 	public List<EstandarClasificacionTallaPlexus> getEstandarClasificacionTallaPlexuses() {
 		return this.estandarClasificacionTallaPlexuses;
 	}
@@ -269,6 +304,23 @@ public class Talla implements Serializable {
 		this.estandarClasificacionTallaPlexuses = estandarClasificacionTallaPlexuses;
 	}
 
+	public EstandarClasificacionTallaPlexus addEstandarClasificacionTallaPlexus(EstandarClasificacionTallaPlexus estandarClasificacionTallaPlexus) {
+		getEstandarClasificacionTallaPlexuses().add(estandarClasificacionTallaPlexus);
+		estandarClasificacionTallaPlexus.setTalla(this);
+
+		return estandarClasificacionTallaPlexus;
+	}
+
+	public EstandarClasificacionTallaPlexus removeEstandarClasificacionTallaPlexus(EstandarClasificacionTallaPlexus estandarClasificacionTallaPlexus) {
+		getEstandarClasificacionTallaPlexuses().remove(estandarClasificacionTallaPlexus);
+		estandarClasificacionTallaPlexus.setTalla(null);
+
+		return estandarClasificacionTallaPlexus;
+	}
+
+
+	//bi-directional many-to-one association to EstandarDetalleEficienciaKilosPagoPlexus
+	@OneToMany(mappedBy="talla")
 	public List<EstandarDetalleEficienciaKilosPagoPlexus> getEstandarDetalleEficienciaKilosPagoPlexuses() {
 		return this.estandarDetalleEficienciaKilosPagoPlexuses;
 	}
@@ -277,6 +329,23 @@ public class Talla implements Serializable {
 		this.estandarDetalleEficienciaKilosPagoPlexuses = estandarDetalleEficienciaKilosPagoPlexuses;
 	}
 
+	public EstandarDetalleEficienciaKilosPagoPlexus addEstandarDetalleEficienciaKilosPagoPlexus(EstandarDetalleEficienciaKilosPagoPlexus estandarDetalleEficienciaKilosPagoPlexus) {
+		getEstandarDetalleEficienciaKilosPagoPlexuses().add(estandarDetalleEficienciaKilosPagoPlexus);
+		estandarDetalleEficienciaKilosPagoPlexus.setTalla(this);
+
+		return estandarDetalleEficienciaKilosPagoPlexus;
+	}
+
+	public EstandarDetalleEficienciaKilosPagoPlexus removeEstandarDetalleEficienciaKilosPagoPlexus(EstandarDetalleEficienciaKilosPagoPlexus estandarDetalleEficienciaKilosPagoPlexus) {
+		getEstandarDetalleEficienciaKilosPagoPlexuses().remove(estandarDetalleEficienciaKilosPagoPlexus);
+		estandarDetalleEficienciaKilosPagoPlexus.setTalla(null);
+
+		return estandarDetalleEficienciaKilosPagoPlexus;
+	}
+
+
+	//bi-directional many-to-one association to EstandarDetalleEficienciaKilosPlexus
+	@OneToMany(mappedBy="talla")
 	public List<EstandarDetalleEficienciaKilosPlexus> getEstandarDetalleEficienciaKilosPlexuses() {
 		return this.estandarDetalleEficienciaKilosPlexuses;
 	}
@@ -285,6 +354,23 @@ public class Talla implements Serializable {
 		this.estandarDetalleEficienciaKilosPlexuses = estandarDetalleEficienciaKilosPlexuses;
 	}
 
+	public EstandarDetalleEficienciaKilosPlexus addEstandarDetalleEficienciaKilosPlexus(EstandarDetalleEficienciaKilosPlexus estandarDetalleEficienciaKilosPlexus) {
+		getEstandarDetalleEficienciaKilosPlexuses().add(estandarDetalleEficienciaKilosPlexus);
+		estandarDetalleEficienciaKilosPlexus.setTalla(this);
+
+		return estandarDetalleEficienciaKilosPlexus;
+	}
+
+	public EstandarDetalleEficienciaKilosPlexus removeEstandarDetalleEficienciaKilosPlexus(EstandarDetalleEficienciaKilosPlexus estandarDetalleEficienciaKilosPlexus) {
+		getEstandarDetalleEficienciaKilosPlexuses().remove(estandarDetalleEficienciaKilosPlexus);
+		estandarDetalleEficienciaKilosPlexus.setTalla(null);
+
+		return estandarDetalleEficienciaKilosPlexus;
+	}
+
+
+	//bi-directional many-to-one association to EstandarEficienciaAtun
+	@OneToMany(mappedBy="talla")
 	public List<EstandarEficienciaAtun> getEstandarEficienciaAtuns() {
 		return this.estandarEficienciaAtuns;
 	}
@@ -293,6 +379,23 @@ public class Talla implements Serializable {
 		this.estandarEficienciaAtuns = estandarEficienciaAtuns;
 	}
 
+	public EstandarEficienciaAtun addEstandarEficienciaAtun(EstandarEficienciaAtun estandarEficienciaAtun) {
+		getEstandarEficienciaAtuns().add(estandarEficienciaAtun);
+		estandarEficienciaAtun.setTalla(this);
+
+		return estandarEficienciaAtun;
+	}
+
+	public EstandarEficienciaAtun removeEstandarEficienciaAtun(EstandarEficienciaAtun estandarEficienciaAtun) {
+		getEstandarEficienciaAtuns().remove(estandarEficienciaAtun);
+		estandarEficienciaAtun.setTalla(null);
+
+		return estandarEficienciaAtun;
+	}
+
+
+	//bi-directional many-to-one association to EstandarEficienciaAtunLimpio
+	@OneToMany(mappedBy="talla")
 	public List<EstandarEficienciaAtunLimpio> getEstandarEficienciaAtunLimpios() {
 		return this.estandarEficienciaAtunLimpios;
 	}
@@ -301,6 +404,23 @@ public class Talla implements Serializable {
 		this.estandarEficienciaAtunLimpios = estandarEficienciaAtunLimpios;
 	}
 
+	public EstandarEficienciaAtunLimpio addEstandarEficienciaAtunLimpio(EstandarEficienciaAtunLimpio estandarEficienciaAtunLimpio) {
+		getEstandarEficienciaAtunLimpios().add(estandarEficienciaAtunLimpio);
+		estandarEficienciaAtunLimpio.setTalla(this);
+
+		return estandarEficienciaAtunLimpio;
+	}
+
+	public EstandarEficienciaAtunLimpio removeEstandarEficienciaAtunLimpio(EstandarEficienciaAtunLimpio estandarEficienciaAtunLimpio) {
+		getEstandarEficienciaAtunLimpios().remove(estandarEficienciaAtunLimpio);
+		estandarEficienciaAtunLimpio.setTalla(null);
+
+		return estandarEficienciaAtunLimpio;
+	}
+
+
+	//bi-directional many-to-one association to EstandarEficienciaAtunLimpioP
+	@OneToMany(mappedBy="talla")
 	public List<EstandarEficienciaAtunLimpioP> getEstandarEficienciaAtunLimpioPs() {
 		return this.estandarEficienciaAtunLimpioPs;
 	}
@@ -309,6 +429,23 @@ public class Talla implements Serializable {
 		this.estandarEficienciaAtunLimpioPs = estandarEficienciaAtunLimpioPs;
 	}
 
+	public EstandarEficienciaAtunLimpioP addEstandarEficienciaAtunLimpioP(EstandarEficienciaAtunLimpioP estandarEficienciaAtunLimpioP) {
+		getEstandarEficienciaAtunLimpioPs().add(estandarEficienciaAtunLimpioP);
+		estandarEficienciaAtunLimpioP.setTalla(this);
+
+		return estandarEficienciaAtunLimpioP;
+	}
+
+	public EstandarEficienciaAtunLimpioP removeEstandarEficienciaAtunLimpioP(EstandarEficienciaAtunLimpioP estandarEficienciaAtunLimpioP) {
+		getEstandarEficienciaAtunLimpioPs().remove(estandarEficienciaAtunLimpioP);
+		estandarEficienciaAtunLimpioP.setTalla(null);
+
+		return estandarEficienciaAtunLimpioP;
+	}
+
+
+	//bi-directional many-to-one association to EstandarEficienciaLimpiezaKilosPorHoraTalla
+	@OneToMany(mappedBy="talla")
 	public List<EstandarEficienciaLimpiezaKilosPorHoraTalla> getEstandarEficienciaLimpiezaKilosPorHoraTallas() {
 		return this.estandarEficienciaLimpiezaKilosPorHoraTallas;
 	}
@@ -317,6 +454,23 @@ public class Talla implements Serializable {
 		this.estandarEficienciaLimpiezaKilosPorHoraTallas = estandarEficienciaLimpiezaKilosPorHoraTallas;
 	}
 
+	public EstandarEficienciaLimpiezaKilosPorHoraTalla addEstandarEficienciaLimpiezaKilosPorHoraTalla(EstandarEficienciaLimpiezaKilosPorHoraTalla estandarEficienciaLimpiezaKilosPorHoraTalla) {
+		getEstandarEficienciaLimpiezaKilosPorHoraTallas().add(estandarEficienciaLimpiezaKilosPorHoraTalla);
+		estandarEficienciaLimpiezaKilosPorHoraTalla.setTalla(this);
+
+		return estandarEficienciaLimpiezaKilosPorHoraTalla;
+	}
+
+	public EstandarEficienciaLimpiezaKilosPorHoraTalla removeEstandarEficienciaLimpiezaKilosPorHoraTalla(EstandarEficienciaLimpiezaKilosPorHoraTalla estandarEficienciaLimpiezaKilosPorHoraTalla) {
+		getEstandarEficienciaLimpiezaKilosPorHoraTallas().remove(estandarEficienciaLimpiezaKilosPorHoraTalla);
+		estandarEficienciaLimpiezaKilosPorHoraTalla.setTalla(null);
+
+		return estandarEficienciaLimpiezaKilosPorHoraTalla;
+	}
+
+
+	//bi-directional many-to-one association to EstandarEficienciaPonchadaPlexus
+	@OneToMany(mappedBy="talla")
 	public List<EstandarEficienciaPonchadaPlexus> getEstandarEficienciaPonchadaPlexuses() {
 		return this.estandarEficienciaPonchadaPlexuses;
 	}
@@ -325,6 +479,23 @@ public class Talla implements Serializable {
 		this.estandarEficienciaPonchadaPlexuses = estandarEficienciaPonchadaPlexuses;
 	}
 
+	public EstandarEficienciaPonchadaPlexus addEstandarEficienciaPonchadaPlexus(EstandarEficienciaPonchadaPlexus estandarEficienciaPonchadaPlexus) {
+		getEstandarEficienciaPonchadaPlexuses().add(estandarEficienciaPonchadaPlexus);
+		estandarEficienciaPonchadaPlexus.setTalla(this);
+
+		return estandarEficienciaPonchadaPlexus;
+	}
+
+	public EstandarEficienciaPonchadaPlexus removeEstandarEficienciaPonchadaPlexus(EstandarEficienciaPonchadaPlexus estandarEficienciaPonchadaPlexus) {
+		getEstandarEficienciaPonchadaPlexuses().remove(estandarEficienciaPonchadaPlexus);
+		estandarEficienciaPonchadaPlexus.setTalla(null);
+
+		return estandarEficienciaPonchadaPlexus;
+	}
+
+
+	//bi-directional many-to-one association to EstandarPonchadaTthh
+	@OneToMany(mappedBy="talla")
 	public List<EstandarPonchadaTthh> getEstandarPonchadaTthhs() {
 		return this.estandarPonchadaTthhs;
 	}
@@ -333,6 +504,23 @@ public class Talla implements Serializable {
 		this.estandarPonchadaTthhs = estandarPonchadaTthhs;
 	}
 
+	public EstandarPonchadaTthh addEstandarPonchadaTthh(EstandarPonchadaTthh estandarPonchadaTthh) {
+		getEstandarPonchadaTthhs().add(estandarPonchadaTthh);
+		estandarPonchadaTthh.setTalla(this);
+
+		return estandarPonchadaTthh;
+	}
+
+	public EstandarPonchadaTthh removeEstandarPonchadaTthh(EstandarPonchadaTthh estandarPonchadaTthh) {
+		getEstandarPonchadaTthhs().remove(estandarPonchadaTthh);
+		estandarPonchadaTthh.setTalla(null);
+
+		return estandarPonchadaTthh;
+	}
+
+
+	//bi-directional many-to-one association to EstandarTiemposDescongelado
+	@OneToMany(mappedBy="talla")
 	public List<EstandarTiemposDescongelado> getEstandarTiemposDescongelados() {
 		return this.estandarTiemposDescongelados;
 	}
@@ -341,6 +529,23 @@ public class Talla implements Serializable {
 		this.estandarTiemposDescongelados = estandarTiemposDescongelados;
 	}
 
+	public EstandarTiemposDescongelado addEstandarTiemposDescongelado(EstandarTiemposDescongelado estandarTiemposDescongelado) {
+		getEstandarTiemposDescongelados().add(estandarTiemposDescongelado);
+		estandarTiemposDescongelado.setTalla(this);
+
+		return estandarTiemposDescongelado;
+	}
+
+	public EstandarTiemposDescongelado removeEstandarTiemposDescongelado(EstandarTiemposDescongelado estandarTiemposDescongelado) {
+		getEstandarTiemposDescongelados().remove(estandarTiemposDescongelado);
+		estandarTiemposDescongelado.setTalla(null);
+
+		return estandarTiemposDescongelado;
+	}
+
+
+	//bi-directional many-to-one association to EstandarTiemposPrecamara
+	@OneToMany(mappedBy="talla")
 	public List<EstandarTiemposPrecamara> getEstandarTiemposPrecamaras() {
 		return this.estandarTiemposPrecamaras;
 	}
@@ -349,6 +554,23 @@ public class Talla implements Serializable {
 		this.estandarTiemposPrecamaras = estandarTiemposPrecamaras;
 	}
 
+	public EstandarTiemposPrecamara addEstandarTiemposPrecamara(EstandarTiemposPrecamara estandarTiemposPrecamara) {
+		getEstandarTiemposPrecamaras().add(estandarTiemposPrecamara);
+		estandarTiemposPrecamara.setTalla(this);
+
+		return estandarTiemposPrecamara;
+	}
+
+	public EstandarTiemposPrecamara removeEstandarTiemposPrecamara(EstandarTiemposPrecamara estandarTiemposPrecamara) {
+		getEstandarTiemposPrecamaras().remove(estandarTiemposPrecamara);
+		estandarTiemposPrecamara.setTalla(null);
+
+		return estandarTiemposPrecamara;
+	}
+
+
+	//bi-directional many-to-one association to EvisceradoTiempoEstandarCajon
+	@OneToMany(mappedBy="talla")
 	public List<EvisceradoTiempoEstandarCajon> getEvisceradoTiempoEstandarCajons() {
 		return this.evisceradoTiempoEstandarCajons;
 	}
@@ -357,12 +579,43 @@ public class Talla implements Serializable {
 		this.evisceradoTiempoEstandarCajons = evisceradoTiempoEstandarCajons;
 	}
 
+	public EvisceradoTiempoEstandarCajon addEvisceradoTiempoEstandarCajon(EvisceradoTiempoEstandarCajon evisceradoTiempoEstandarCajon) {
+		getEvisceradoTiempoEstandarCajons().add(evisceradoTiempoEstandarCajon);
+		evisceradoTiempoEstandarCajon.setTalla(this);
+
+		return evisceradoTiempoEstandarCajon;
+	}
+
+	public EvisceradoTiempoEstandarCajon removeEvisceradoTiempoEstandarCajon(EvisceradoTiempoEstandarCajon evisceradoTiempoEstandarCajon) {
+		getEvisceradoTiempoEstandarCajons().remove(evisceradoTiempoEstandarCajon);
+		evisceradoTiempoEstandarCajon.setTalla(null);
+
+		return evisceradoTiempoEstandarCajon;
+	}
+
+
+	//bi-directional many-to-one association to EvolutionPlexusEstandarTarifa
+	@OneToMany(mappedBy="talla")
 	public List<EvolutionPlexusEstandarTarifa> getEvolutionPlexusEstandarTarifas() {
 		return this.evolutionPlexusEstandarTarifas;
 	}
 
 	public void setEvolutionPlexusEstandarTarifas(List<EvolutionPlexusEstandarTarifa> evolutionPlexusEstandarTarifas) {
 		this.evolutionPlexusEstandarTarifas = evolutionPlexusEstandarTarifas;
+	}
+
+	public EvolutionPlexusEstandarTarifa addEvolutionPlexusEstandarTarifa(EvolutionPlexusEstandarTarifa evolutionPlexusEstandarTarifa) {
+		getEvolutionPlexusEstandarTarifas().add(evolutionPlexusEstandarTarifa);
+		evolutionPlexusEstandarTarifa.setTalla(this);
+
+		return evolutionPlexusEstandarTarifa;
+	}
+
+	public EvolutionPlexusEstandarTarifa removeEvolutionPlexusEstandarTarifa(EvolutionPlexusEstandarTarifa evolutionPlexusEstandarTarifa) {
+		getEvolutionPlexusEstandarTarifas().remove(evolutionPlexusEstandarTarifa);
+		evolutionPlexusEstandarTarifa.setTalla(null);
+
+		return evolutionPlexusEstandarTarifa;
 	}
 
 }

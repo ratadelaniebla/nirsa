@@ -11,35 +11,22 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="descongelado_detalle_proceso_temperatura")
+@NamedQuery(name="DescongeladoDetalleProcesoTemperatura.findAll", query="SELECT d FROM DescongeladoDetalleProcesoTemperatura d")
 public class DescongeladoDetalleProcesoTemperatura implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long iddescongeladodetalleprocesotemperatura;
-
 	private Timestamp fechareg;
-
 	private double temperatura;
-
-	//bi-directional many-to-one association to DescongeladoDetalleProceso
-	@ManyToOne
-	@JoinColumn(name="iddescongeladodetalleproceso")
 	private DescongeladoDetalleProceso descongeladoDetalleProceso;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public DescongeladoDetalleProcesoTemperatura() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIddescongeladodetalleprocesotemperatura() {
 		return this.iddescongeladodetalleprocesotemperatura;
 	}
@@ -47,6 +34,7 @@ public class DescongeladoDetalleProcesoTemperatura implements Serializable {
 	public void setIddescongeladodetalleprocesotemperatura(Long iddescongeladodetalleprocesotemperatura) {
 		this.iddescongeladodetalleprocesotemperatura = iddescongeladodetalleprocesotemperatura;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -56,6 +44,7 @@ public class DescongeladoDetalleProcesoTemperatura implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public double getTemperatura() {
 		return this.temperatura;
 	}
@@ -64,6 +53,10 @@ public class DescongeladoDetalleProcesoTemperatura implements Serializable {
 		this.temperatura = temperatura;
 	}
 
+
+	//bi-directional many-to-one association to DescongeladoDetalleProceso
+	@ManyToOne
+	@JoinColumn(name="iddescongeladodetalleproceso")
 	public DescongeladoDetalleProceso getDescongeladoDetalleProceso() {
 		return this.descongeladoDetalleProceso;
 	}
@@ -72,6 +65,10 @@ public class DescongeladoDetalleProcesoTemperatura implements Serializable {
 		this.descongeladoDetalleProceso = descongeladoDetalleProceso;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -80,6 +77,10 @@ public class DescongeladoDetalleProcesoTemperatura implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

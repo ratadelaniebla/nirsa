@@ -11,44 +11,25 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="limpieza_coche_observaciones")
+@NamedQuery(name="LimpiezaCocheObservacione.findAll", query="SELECT l FROM LimpiezaCocheObservacione l")
 public class LimpiezaCocheObservacione implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idlimpiezacocheobservaciones;
-
 	private Integer estado;
-
 	private Timestamp fechaaccion;
-
 	private Timestamp fechadesviacion;
-
 	private Integer origendesviacion;
-
-	//bi-directional many-to-one association to LimpiezaCocheDesviacion
-	@ManyToOne
-	@JoinColumn(name="idlimpiezacochedesviacion")
 	private LimpiezaCocheDesviacion limpiezaCocheDesviacion;
-
-	//bi-directional many-to-one association to LimpiezaDetalleProcesoCoche
-	@ManyToOne
-	@JoinColumn(name="idlimpiezadetalleprocesocoche")
 	private LimpiezaDetalleProcesoCoche limpiezaDetalleProcesoCoche;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuarioaccion")
 	private Usuario usuario1;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuariodesviacion")
 	private Usuario usuario2;
 
 	public LimpiezaCocheObservacione() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdlimpiezacocheobservaciones() {
 		return this.idlimpiezacocheobservaciones;
 	}
@@ -56,6 +37,7 @@ public class LimpiezaCocheObservacione implements Serializable {
 	public void setIdlimpiezacocheobservaciones(Long idlimpiezacocheobservaciones) {
 		this.idlimpiezacocheobservaciones = idlimpiezacocheobservaciones;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -65,6 +47,7 @@ public class LimpiezaCocheObservacione implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Timestamp getFechaaccion() {
 		return this.fechaaccion;
 	}
@@ -72,6 +55,7 @@ public class LimpiezaCocheObservacione implements Serializable {
 	public void setFechaaccion(Timestamp fechaaccion) {
 		this.fechaaccion = fechaaccion;
 	}
+
 
 	public Timestamp getFechadesviacion() {
 		return this.fechadesviacion;
@@ -81,6 +65,7 @@ public class LimpiezaCocheObservacione implements Serializable {
 		this.fechadesviacion = fechadesviacion;
 	}
 
+
 	public Integer getOrigendesviacion() {
 		return this.origendesviacion;
 	}
@@ -89,6 +74,10 @@ public class LimpiezaCocheObservacione implements Serializable {
 		this.origendesviacion = origendesviacion;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaCocheDesviacion
+	@ManyToOne
+	@JoinColumn(name="idlimpiezacochedesviacion")
 	public LimpiezaCocheDesviacion getLimpiezaCocheDesviacion() {
 		return this.limpiezaCocheDesviacion;
 	}
@@ -97,6 +86,10 @@ public class LimpiezaCocheObservacione implements Serializable {
 		this.limpiezaCocheDesviacion = limpiezaCocheDesviacion;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaDetalleProcesoCoche
+	@ManyToOne
+	@JoinColumn(name="idlimpiezadetalleprocesocoche")
 	public LimpiezaDetalleProcesoCoche getLimpiezaDetalleProcesoCoche() {
 		return this.limpiezaDetalleProcesoCoche;
 	}
@@ -105,6 +98,10 @@ public class LimpiezaCocheObservacione implements Serializable {
 		this.limpiezaDetalleProcesoCoche = limpiezaDetalleProcesoCoche;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuarioaccion")
 	public Usuario getUsuario1() {
 		return this.usuario1;
 	}
@@ -113,6 +110,10 @@ public class LimpiezaCocheObservacione implements Serializable {
 		this.usuario1 = usuario1;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuariodesviacion")
 	public Usuario getUsuario2() {
 		return this.usuario2;
 	}

@@ -10,22 +10,19 @@ import java.util.List;
  * 
  */
 @Entity
+@NamedQuery(name="Procedencia.findAll", query="SELECT p FROM Procedencia p")
 public class Procedencia implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idprocedencia;
-
 	private String descripcionprocedencia;
-
-	//bi-directional many-to-one association to Area
-	@OneToMany(mappedBy="procedencia")
 	private List<Area> areas;
 
 	public Procedencia() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdprocedencia() {
 		return this.idprocedencia;
 	}
@@ -33,6 +30,7 @@ public class Procedencia implements Serializable {
 	public void setIdprocedencia(Integer idprocedencia) {
 		this.idprocedencia = idprocedencia;
 	}
+
 
 	public String getDescripcionprocedencia() {
 		return this.descripcionprocedencia;
@@ -42,12 +40,29 @@ public class Procedencia implements Serializable {
 		this.descripcionprocedencia = descripcionprocedencia;
 	}
 
+
+	//bi-directional many-to-one association to Area
+	@OneToMany(mappedBy="procedencia")
 	public List<Area> getAreas() {
 		return this.areas;
 	}
 
 	public void setAreas(List<Area> areas) {
 		this.areas = areas;
+	}
+
+	public Area addArea(Area area) {
+		getAreas().add(area);
+		area.setProcedencia(this);
+
+		return area;
+	}
+
+	public Area removeArea(Area area) {
+		getAreas().remove(area);
+		area.setProcedencia(null);
+
+		return area;
 	}
 
 }

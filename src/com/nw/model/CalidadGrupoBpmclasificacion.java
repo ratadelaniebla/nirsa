@@ -11,22 +11,19 @@ import java.util.List;
  */
 @Entity
 @Table(name="calidad_grupo_bpmclasificacion")
+@NamedQuery(name="CalidadGrupoBpmclasificacion.findAll", query="SELECT c FROM CalidadGrupoBpmclasificacion c")
 public class CalidadGrupoBpmclasificacion implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idgrupobpmclasificacion;
-
 	private String nombre;
-
-	//bi-directional many-to-one association to CalidadPreguntaBpmclasificacion
-	@OneToMany(mappedBy="calidadGrupoBpmclasificacion")
 	private List<CalidadPreguntaBpmclasificacion> calidadPreguntaBpmclasificacions;
 
 	public CalidadGrupoBpmclasificacion() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdgrupobpmclasificacion() {
 		return this.idgrupobpmclasificacion;
 	}
@@ -34,6 +31,7 @@ public class CalidadGrupoBpmclasificacion implements Serializable {
 	public void setIdgrupobpmclasificacion(Integer idgrupobpmclasificacion) {
 		this.idgrupobpmclasificacion = idgrupobpmclasificacion;
 	}
+
 
 	public String getNombre() {
 		return this.nombre;
@@ -43,12 +41,29 @@ public class CalidadGrupoBpmclasificacion implements Serializable {
 		this.nombre = nombre;
 	}
 
+
+	//bi-directional many-to-one association to CalidadPreguntaBpmclasificacion
+	@OneToMany(mappedBy="calidadGrupoBpmclasificacion")
 	public List<CalidadPreguntaBpmclasificacion> getCalidadPreguntaBpmclasificacions() {
 		return this.calidadPreguntaBpmclasificacions;
 	}
 
 	public void setCalidadPreguntaBpmclasificacions(List<CalidadPreguntaBpmclasificacion> calidadPreguntaBpmclasificacions) {
 		this.calidadPreguntaBpmclasificacions = calidadPreguntaBpmclasificacions;
+	}
+
+	public CalidadPreguntaBpmclasificacion addCalidadPreguntaBpmclasificacion(CalidadPreguntaBpmclasificacion calidadPreguntaBpmclasificacion) {
+		getCalidadPreguntaBpmclasificacions().add(calidadPreguntaBpmclasificacion);
+		calidadPreguntaBpmclasificacion.setCalidadGrupoBpmclasificacion(this);
+
+		return calidadPreguntaBpmclasificacion;
+	}
+
+	public CalidadPreguntaBpmclasificacion removeCalidadPreguntaBpmclasificacion(CalidadPreguntaBpmclasificacion calidadPreguntaBpmclasificacion) {
+		getCalidadPreguntaBpmclasificacions().remove(calidadPreguntaBpmclasificacion);
+		calidadPreguntaBpmclasificacion.setCalidadGrupoBpmclasificacion(null);
+
+		return calidadPreguntaBpmclasificacion;
 	}
 
 }

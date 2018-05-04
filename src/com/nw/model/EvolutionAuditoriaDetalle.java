@@ -11,54 +11,33 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="evolution_auditoria_detalle")
+@NamedQuery(name="EvolutionAuditoriaDetalle.findAll", query="SELECT e FROM EvolutionAuditoriaDetalle e")
 public class EvolutionAuditoriaDetalle implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idevolutionauditoriadetalle;
-
 	private Integer area;
-
 	private String cedula;
-
 	private String codccosto;
-
 	private String codproceso;
-
 	private String codproducto;
-
 	private String codtalla;
-
 	private Timestamp fechadesde;
-
 	private String fechaenvio;
-
 	private Timestamp fechahasta;
-
 	private Integer idevolutionauditoria;
-
 	private Integer idpeso;
-
 	private String ordenproduccion;
-
 	private String unidad;
-
 	private double valor;
-
-	//bi-directional many-to-one association to Produccion
-	@ManyToOne
-	@JoinColumn(name="idproduccion")
 	private Produccion produccion;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public EvolutionAuditoriaDetalle() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdevolutionauditoriadetalle() {
 		return this.idevolutionauditoriadetalle;
 	}
@@ -66,6 +45,7 @@ public class EvolutionAuditoriaDetalle implements Serializable {
 	public void setIdevolutionauditoriadetalle(Long idevolutionauditoriadetalle) {
 		this.idevolutionauditoriadetalle = idevolutionauditoriadetalle;
 	}
+
 
 	public Integer getArea() {
 		return this.area;
@@ -75,6 +55,7 @@ public class EvolutionAuditoriaDetalle implements Serializable {
 		this.area = area;
 	}
 
+
 	public String getCedula() {
 		return this.cedula;
 	}
@@ -82,6 +63,7 @@ public class EvolutionAuditoriaDetalle implements Serializable {
 	public void setCedula(String cedula) {
 		this.cedula = cedula;
 	}
+
 
 	public String getCodccosto() {
 		return this.codccosto;
@@ -91,6 +73,7 @@ public class EvolutionAuditoriaDetalle implements Serializable {
 		this.codccosto = codccosto;
 	}
 
+
 	public String getCodproceso() {
 		return this.codproceso;
 	}
@@ -98,6 +81,7 @@ public class EvolutionAuditoriaDetalle implements Serializable {
 	public void setCodproceso(String codproceso) {
 		this.codproceso = codproceso;
 	}
+
 
 	public String getCodproducto() {
 		return this.codproducto;
@@ -107,6 +91,7 @@ public class EvolutionAuditoriaDetalle implements Serializable {
 		this.codproducto = codproducto;
 	}
 
+
 	public String getCodtalla() {
 		return this.codtalla;
 	}
@@ -114,6 +99,7 @@ public class EvolutionAuditoriaDetalle implements Serializable {
 	public void setCodtalla(String codtalla) {
 		this.codtalla = codtalla;
 	}
+
 
 	public Timestamp getFechadesde() {
 		return this.fechadesde;
@@ -123,6 +109,7 @@ public class EvolutionAuditoriaDetalle implements Serializable {
 		this.fechadesde = fechadesde;
 	}
 
+
 	public String getFechaenvio() {
 		return this.fechaenvio;
 	}
@@ -130,6 +117,7 @@ public class EvolutionAuditoriaDetalle implements Serializable {
 	public void setFechaenvio(String fechaenvio) {
 		this.fechaenvio = fechaenvio;
 	}
+
 
 	public Timestamp getFechahasta() {
 		return this.fechahasta;
@@ -139,6 +127,7 @@ public class EvolutionAuditoriaDetalle implements Serializable {
 		this.fechahasta = fechahasta;
 	}
 
+
 	public Integer getIdevolutionauditoria() {
 		return this.idevolutionauditoria;
 	}
@@ -146,6 +135,7 @@ public class EvolutionAuditoriaDetalle implements Serializable {
 	public void setIdevolutionauditoria(Integer idevolutionauditoria) {
 		this.idevolutionauditoria = idevolutionauditoria;
 	}
+
 
 	public Integer getIdpeso() {
 		return this.idpeso;
@@ -155,6 +145,7 @@ public class EvolutionAuditoriaDetalle implements Serializable {
 		this.idpeso = idpeso;
 	}
 
+
 	public String getOrdenproduccion() {
 		return this.ordenproduccion;
 	}
@@ -162,6 +153,7 @@ public class EvolutionAuditoriaDetalle implements Serializable {
 	public void setOrdenproduccion(String ordenproduccion) {
 		this.ordenproduccion = ordenproduccion;
 	}
+
 
 	public String getUnidad() {
 		return this.unidad;
@@ -171,6 +163,7 @@ public class EvolutionAuditoriaDetalle implements Serializable {
 		this.unidad = unidad;
 	}
 
+
 	public double getValor() {
 		return this.valor;
 	}
@@ -179,6 +172,10 @@ public class EvolutionAuditoriaDetalle implements Serializable {
 		this.valor = valor;
 	}
 
+
+	//bi-directional many-to-one association to Produccion
+	@ManyToOne
+	@JoinColumn(name="idproduccion")
 	public Produccion getProduccion() {
 		return this.produccion;
 	}
@@ -187,6 +184,10 @@ public class EvolutionAuditoriaDetalle implements Serializable {
 		this.produccion = produccion;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

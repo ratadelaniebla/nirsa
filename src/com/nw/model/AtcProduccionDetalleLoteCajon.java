@@ -11,34 +11,21 @@ import java.util.List;
  */
 @Entity
 @Table(name="atc_produccion_detalle_lote_cajon")
+@NamedQuery(name="AtcProduccionDetalleLoteCajon.findAll", query="SELECT a FROM AtcProduccionDetalleLoteCajon a")
 public class AtcProduccionDetalleLoteCajon implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idatcproducciondetallelotecajon;
-
-	//bi-directional many-to-one association to AtcDescongeladoDetalleProceso
-	@OneToMany(mappedBy="atcProduccionDetalleLoteCajon")
 	private List<AtcDescongeladoDetalleProceso> atcDescongeladoDetalleProcesos;
-
-	//bi-directional many-to-one association to AtcEvisceradoDetalleProcesoLote
-	@OneToMany(mappedBy="atcProduccionDetalleLoteCajon")
 	private List<AtcEvisceradoDetalleProcesoLote> atcEvisceradoDetalleProcesoLotes;
-
-	//bi-directional many-to-one association to AtcProduccionDetalleLote
-	@ManyToOne
-	@JoinColumn(name="idatcproducciondetallelote")
 	private AtcProduccionDetalleLote atcProduccionDetalleLote;
-
-	//bi-directional many-to-one association to CamaraCajon
-	@ManyToOne
-	@JoinColumn(name="idcamaracajon")
 	private CamaraCajon camaraCajon;
 
 	public AtcProduccionDetalleLoteCajon() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdatcproducciondetallelotecajon() {
 		return this.idatcproducciondetallelotecajon;
 	}
@@ -47,6 +34,9 @@ public class AtcProduccionDetalleLoteCajon implements Serializable {
 		this.idatcproducciondetallelotecajon = idatcproducciondetallelotecajon;
 	}
 
+
+	//bi-directional many-to-one association to AtcDescongeladoDetalleProceso
+	@OneToMany(mappedBy="atcProduccionDetalleLoteCajon")
 	public List<AtcDescongeladoDetalleProceso> getAtcDescongeladoDetalleProcesos() {
 		return this.atcDescongeladoDetalleProcesos;
 	}
@@ -55,6 +45,23 @@ public class AtcProduccionDetalleLoteCajon implements Serializable {
 		this.atcDescongeladoDetalleProcesos = atcDescongeladoDetalleProcesos;
 	}
 
+	public AtcDescongeladoDetalleProceso addAtcDescongeladoDetalleProceso(AtcDescongeladoDetalleProceso atcDescongeladoDetalleProceso) {
+		getAtcDescongeladoDetalleProcesos().add(atcDescongeladoDetalleProceso);
+		atcDescongeladoDetalleProceso.setAtcProduccionDetalleLoteCajon(this);
+
+		return atcDescongeladoDetalleProceso;
+	}
+
+	public AtcDescongeladoDetalleProceso removeAtcDescongeladoDetalleProceso(AtcDescongeladoDetalleProceso atcDescongeladoDetalleProceso) {
+		getAtcDescongeladoDetalleProcesos().remove(atcDescongeladoDetalleProceso);
+		atcDescongeladoDetalleProceso.setAtcProduccionDetalleLoteCajon(null);
+
+		return atcDescongeladoDetalleProceso;
+	}
+
+
+	//bi-directional many-to-one association to AtcEvisceradoDetalleProcesoLote
+	@OneToMany(mappedBy="atcProduccionDetalleLoteCajon")
 	public List<AtcEvisceradoDetalleProcesoLote> getAtcEvisceradoDetalleProcesoLotes() {
 		return this.atcEvisceradoDetalleProcesoLotes;
 	}
@@ -63,6 +70,24 @@ public class AtcProduccionDetalleLoteCajon implements Serializable {
 		this.atcEvisceradoDetalleProcesoLotes = atcEvisceradoDetalleProcesoLotes;
 	}
 
+	public AtcEvisceradoDetalleProcesoLote addAtcEvisceradoDetalleProcesoLote(AtcEvisceradoDetalleProcesoLote atcEvisceradoDetalleProcesoLote) {
+		getAtcEvisceradoDetalleProcesoLotes().add(atcEvisceradoDetalleProcesoLote);
+		atcEvisceradoDetalleProcesoLote.setAtcProduccionDetalleLoteCajon(this);
+
+		return atcEvisceradoDetalleProcesoLote;
+	}
+
+	public AtcEvisceradoDetalleProcesoLote removeAtcEvisceradoDetalleProcesoLote(AtcEvisceradoDetalleProcesoLote atcEvisceradoDetalleProcesoLote) {
+		getAtcEvisceradoDetalleProcesoLotes().remove(atcEvisceradoDetalleProcesoLote);
+		atcEvisceradoDetalleProcesoLote.setAtcProduccionDetalleLoteCajon(null);
+
+		return atcEvisceradoDetalleProcesoLote;
+	}
+
+
+	//bi-directional many-to-one association to AtcProduccionDetalleLote
+	@ManyToOne
+	@JoinColumn(name="idatcproducciondetallelote")
 	public AtcProduccionDetalleLote getAtcProduccionDetalleLote() {
 		return this.atcProduccionDetalleLote;
 	}
@@ -71,6 +96,10 @@ public class AtcProduccionDetalleLoteCajon implements Serializable {
 		this.atcProduccionDetalleLote = atcProduccionDetalleLote;
 	}
 
+
+	//bi-directional many-to-one association to CamaraCajon
+	@ManyToOne
+	@JoinColumn(name="idcamaracajon")
 	public CamaraCajon getCamaraCajon() {
 		return this.camaraCajon;
 	}

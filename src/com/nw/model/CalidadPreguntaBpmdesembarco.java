@@ -10,23 +10,19 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="calidad_pregunta_bpmdesembarco")
+@NamedQuery(name="CalidadPreguntaBpmdesembarco.findAll", query="SELECT c FROM CalidadPreguntaBpmdesembarco c")
 public class CalidadPreguntaBpmdesembarco implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idpreguntabpmdesembarco;
-
 	private String pregunta;
-
-	//bi-directional many-to-one association to CalidadGrupoBpmdesembarco
-	@ManyToOne
-	@JoinColumn(name="idgrupobpmdesembarco")
 	private CalidadGrupoBpmdesembarco calidadGrupoBpmdesembarco;
 
 	public CalidadPreguntaBpmdesembarco() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdpreguntabpmdesembarco() {
 		return this.idpreguntabpmdesembarco;
 	}
@@ -34,6 +30,7 @@ public class CalidadPreguntaBpmdesembarco implements Serializable {
 	public void setIdpreguntabpmdesembarco(Integer idpreguntabpmdesembarco) {
 		this.idpreguntabpmdesembarco = idpreguntabpmdesembarco;
 	}
+
 
 	public String getPregunta() {
 		return this.pregunta;
@@ -43,6 +40,10 @@ public class CalidadPreguntaBpmdesembarco implements Serializable {
 		this.pregunta = pregunta;
 	}
 
+
+	//bi-directional many-to-one association to CalidadGrupoBpmdesembarco
+	@ManyToOne
+	@JoinColumn(name="idgrupobpmdesembarco")
 	public CalidadGrupoBpmdesembarco getCalidadGrupoBpmdesembarco() {
 		return this.calidadGrupoBpmdesembarco;
 	}

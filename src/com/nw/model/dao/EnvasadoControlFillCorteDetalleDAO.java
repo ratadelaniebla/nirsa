@@ -1,4 +1,4 @@
-package com.nw.model.dao.impl;
+package com.nw.model.dao;
 
 import java.util.List;
 

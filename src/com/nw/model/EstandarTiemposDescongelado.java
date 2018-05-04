@@ -10,23 +10,19 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="estandar_tiempos_descongelado")
+@NamedQuery(name="EstandarTiemposDescongelado.findAll", query="SELECT e FROM EstandarTiemposDescongelado e")
 public class EstandarTiemposDescongelado implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idestandartiemposdescongelado;
-
 	private Integer tiempo;
-
-	//bi-directional many-to-one association to Talla
-	@ManyToOne
-	@JoinColumn(name="idtalla")
 	private Talla talla;
 
 	public EstandarTiemposDescongelado() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdestandartiemposdescongelado() {
 		return this.idestandartiemposdescongelado;
 	}
@@ -34,6 +30,7 @@ public class EstandarTiemposDescongelado implements Serializable {
 	public void setIdestandartiemposdescongelado(Integer idestandartiemposdescongelado) {
 		this.idestandartiemposdescongelado = idestandartiemposdescongelado;
 	}
+
 
 	public Integer getTiempo() {
 		return this.tiempo;
@@ -43,6 +40,10 @@ public class EstandarTiemposDescongelado implements Serializable {
 		this.tiempo = tiempo;
 	}
 
+
+	//bi-directional many-to-one association to Talla
+	@ManyToOne
+	@JoinColumn(name="idtalla")
 	public Talla getTalla() {
 		return this.talla;
 	}

@@ -11,40 +11,23 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="limpieza_detalle_tipo_para")
+@NamedQuery(name="LimpiezaDetalleTipoPara.findAll", query="SELECT l FROM LimpiezaDetalleTipoPara l")
 public class LimpiezaDetalleTipoPara implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idlimpiezadetalletipopara;
-
 	private Timestamp horafin;
-
 	private Timestamp horainicio;
-
-	//bi-directional many-to-one association to LimpiezaLinea
-	@ManyToOne
-	@JoinColumn(name="idlimpiezalinea")
 	private LimpiezaLinea limpiezaLinea;
-
-	//bi-directional many-to-one association to LimpiezaProceso
-	@ManyToOne
-	@JoinColumn(name="idlimpiezaproceso")
 	private LimpiezaProceso limpiezaProceso;
-
-	//bi-directional many-to-one association to LimpiezaTipoPara
-	@ManyToOne
-	@JoinColumn(name="idlimpiezatipopara")
 	private LimpiezaTipoPara limpiezaTipoPara;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public LimpiezaDetalleTipoPara() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdlimpiezadetalletipopara() {
 		return this.idlimpiezadetalletipopara;
 	}
@@ -52,6 +35,7 @@ public class LimpiezaDetalleTipoPara implements Serializable {
 	public void setIdlimpiezadetalletipopara(Long idlimpiezadetalletipopara) {
 		this.idlimpiezadetalletipopara = idlimpiezadetalletipopara;
 	}
+
 
 	public Timestamp getHorafin() {
 		return this.horafin;
@@ -61,6 +45,7 @@ public class LimpiezaDetalleTipoPara implements Serializable {
 		this.horafin = horafin;
 	}
 
+
 	public Timestamp getHorainicio() {
 		return this.horainicio;
 	}
@@ -69,6 +54,10 @@ public class LimpiezaDetalleTipoPara implements Serializable {
 		this.horainicio = horainicio;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaLinea
+	@ManyToOne
+	@JoinColumn(name="idlimpiezalinea")
 	public LimpiezaLinea getLimpiezaLinea() {
 		return this.limpiezaLinea;
 	}
@@ -77,6 +66,10 @@ public class LimpiezaDetalleTipoPara implements Serializable {
 		this.limpiezaLinea = limpiezaLinea;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaProceso
+	@ManyToOne
+	@JoinColumn(name="idlimpiezaproceso")
 	public LimpiezaProceso getLimpiezaProceso() {
 		return this.limpiezaProceso;
 	}
@@ -85,6 +78,10 @@ public class LimpiezaDetalleTipoPara implements Serializable {
 		this.limpiezaProceso = limpiezaProceso;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaTipoPara
+	@ManyToOne
+	@JoinColumn(name="idlimpiezatipopara")
 	public LimpiezaTipoPara getLimpiezaTipoPara() {
 		return this.limpiezaTipoPara;
 	}
@@ -93,6 +90,10 @@ public class LimpiezaDetalleTipoPara implements Serializable {
 		this.limpiezaTipoPara = limpiezaTipoPara;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

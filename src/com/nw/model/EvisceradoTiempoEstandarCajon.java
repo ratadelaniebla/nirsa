@@ -10,24 +10,19 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="eviscerado_tiempo_estandar_cajon")
+@NamedQuery(name="EvisceradoTiempoEstandarCajon.findAll", query="SELECT e FROM EvisceradoTiempoEstandarCajon e")
 public class EvisceradoTiempoEstandarCajon implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idevisceradotiempoestandarcajon;
-
-	@Column(name="tiempo_estandar")
 	private double tiempoEstandar;
-
-	//bi-directional many-to-one association to Talla
-	@ManyToOne
-	@JoinColumn(name="idtalla")
 	private Talla talla;
 
 	public EvisceradoTiempoEstandarCajon() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdevisceradotiempoestandarcajon() {
 		return this.idevisceradotiempoestandarcajon;
 	}
@@ -36,6 +31,8 @@ public class EvisceradoTiempoEstandarCajon implements Serializable {
 		this.idevisceradotiempoestandarcajon = idevisceradotiempoestandarcajon;
 	}
 
+
+	@Column(name="tiempo_estandar")
 	public double getTiempoEstandar() {
 		return this.tiempoEstandar;
 	}
@@ -44,6 +41,10 @@ public class EvisceradoTiempoEstandarCajon implements Serializable {
 		this.tiempoEstandar = tiempoEstandar;
 	}
 
+
+	//bi-directional many-to-one association to Talla
+	@ManyToOne
+	@JoinColumn(name="idtalla")
 	public Talla getTalla() {
 		return this.talla;
 	}

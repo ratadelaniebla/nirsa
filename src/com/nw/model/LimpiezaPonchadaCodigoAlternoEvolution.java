@@ -10,26 +10,22 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="limpieza_ponchada_codigo_alterno_evolution")
+@NamedQuery(name="LimpiezaPonchadaCodigoAlternoEvolution.findAll", query="SELECT l FROM LimpiezaPonchadaCodigoAlternoEvolution l")
 public class LimpiezaPonchadaCodigoAlternoEvolution implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idcodigoalternoevolution;
-
 	private String codigoevolutionasociado;
-
 	private Integer idespecie;
-
 	private Integer idevisceradopescadoporlata;
-
 	private Integer idtipolimpieza;
-
 	private Integer idturno;
 
 	public LimpiezaPonchadaCodigoAlternoEvolution() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdcodigoalternoevolution() {
 		return this.idcodigoalternoevolution;
 	}
@@ -37,6 +33,7 @@ public class LimpiezaPonchadaCodigoAlternoEvolution implements Serializable {
 	public void setIdcodigoalternoevolution(Integer idcodigoalternoevolution) {
 		this.idcodigoalternoevolution = idcodigoalternoevolution;
 	}
+
 
 	public String getCodigoevolutionasociado() {
 		return this.codigoevolutionasociado;
@@ -46,6 +43,7 @@ public class LimpiezaPonchadaCodigoAlternoEvolution implements Serializable {
 		this.codigoevolutionasociado = codigoevolutionasociado;
 	}
 
+
 	public Integer getIdespecie() {
 		return this.idespecie;
 	}
@@ -53,6 +51,7 @@ public class LimpiezaPonchadaCodigoAlternoEvolution implements Serializable {
 	public void setIdespecie(Integer idespecie) {
 		this.idespecie = idespecie;
 	}
+
 
 	public Integer getIdevisceradopescadoporlata() {
 		return this.idevisceradopescadoporlata;
@@ -62,6 +61,7 @@ public class LimpiezaPonchadaCodigoAlternoEvolution implements Serializable {
 		this.idevisceradopescadoporlata = idevisceradopescadoporlata;
 	}
 
+
 	public Integer getIdtipolimpieza() {
 		return this.idtipolimpieza;
 	}
@@ -69,6 +69,7 @@ public class LimpiezaPonchadaCodigoAlternoEvolution implements Serializable {
 	public void setIdtipolimpieza(Integer idtipolimpieza) {
 		this.idtipolimpieza = idtipolimpieza;
 	}
+
 
 	public Integer getIdturno() {
 		return this.idturno;

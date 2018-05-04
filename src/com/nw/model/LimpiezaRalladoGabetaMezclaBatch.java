@@ -11,33 +11,21 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="limpieza_rallado_gabeta_mezcla_batch")
+@NamedQuery(name="LimpiezaRalladoGabetaMezclaBatch.findAll", query="SELECT l FROM LimpiezaRalladoGabetaMezclaBatch l")
 public class LimpiezaRalladoGabetaMezclaBatch implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idlimpiezaralladogabetamezclabatch;
-
 	private Timestamp fechareg;
-
-	//bi-directional many-to-one association to ControlFichaBatch
-	@ManyToOne
-	@JoinColumn(name="idcontrolfichabatch")
 	private ControlFichaBatch controlFichaBatch;
-
-	//bi-directional many-to-one association to LimpiezaRalladoMezclaBatchCabecera
-	@ManyToOne
-	@JoinColumn(name="idlimpiezaralladomezclabatchcabecera")
 	private LimpiezaRalladoMezclaBatchCabecera limpiezaRalladoMezclaBatchCabecera;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public LimpiezaRalladoGabetaMezclaBatch() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdlimpiezaralladogabetamezclabatch() {
 		return this.idlimpiezaralladogabetamezclabatch;
 	}
@@ -45,6 +33,7 @@ public class LimpiezaRalladoGabetaMezclaBatch implements Serializable {
 	public void setIdlimpiezaralladogabetamezclabatch(Long idlimpiezaralladogabetamezclabatch) {
 		this.idlimpiezaralladogabetamezclabatch = idlimpiezaralladogabetamezclabatch;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -54,6 +43,10 @@ public class LimpiezaRalladoGabetaMezclaBatch implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
+	//bi-directional many-to-one association to ControlFichaBatch
+	@ManyToOne
+	@JoinColumn(name="idcontrolfichabatch")
 	public ControlFichaBatch getControlFichaBatch() {
 		return this.controlFichaBatch;
 	}
@@ -62,6 +55,10 @@ public class LimpiezaRalladoGabetaMezclaBatch implements Serializable {
 		this.controlFichaBatch = controlFichaBatch;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaRalladoMezclaBatchCabecera
+	@ManyToOne
+	@JoinColumn(name="idlimpiezaralladomezclabatchcabecera")
 	public LimpiezaRalladoMezclaBatchCabecera getLimpiezaRalladoMezclaBatchCabecera() {
 		return this.limpiezaRalladoMezclaBatchCabecera;
 	}
@@ -70,6 +67,10 @@ public class LimpiezaRalladoGabetaMezclaBatch implements Serializable {
 		this.limpiezaRalladoMezclaBatchCabecera = limpiezaRalladoMezclaBatchCabecera;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityTransaction;
 
 import com.nw.model.EnvasadoControlFillCorteDetalle;
+import com.nw.model.dao.EnvasadoControlFillCorteDetalleDAO;
 
 public class EnvasadoControlFillCorteDetalleDAOJpaImpl extends BaseDaoJpaImpl implements EnvasadoControlFillCorteDetalleDAO {
 	private EntityTransaction t;

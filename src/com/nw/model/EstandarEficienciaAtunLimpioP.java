@@ -10,30 +10,21 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="estandar_eficiencia_atun_limpio_p")
+@NamedQuery(name="EstandarEficienciaAtunLimpioP.findAll", query="SELECT e FROM EstandarEficienciaAtunLimpioP e")
 public class EstandarEficienciaAtunLimpioP implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idestandareficienciaatunlimpiop;
-
 	private String unidadmedida;
-
 	private double valor;
-
-	//bi-directional many-to-one association to LimpiezaTipo
-	@ManyToOne
-	@JoinColumn(name="idlimpiezatipo")
 	private LimpiezaTipo limpiezaTipo;
-
-	//bi-directional many-to-one association to Talla
-	@ManyToOne
-	@JoinColumn(name="idtalla")
 	private Talla talla;
 
 	public EstandarEficienciaAtunLimpioP() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdestandareficienciaatunlimpiop() {
 		return this.idestandareficienciaatunlimpiop;
 	}
@@ -41,6 +32,7 @@ public class EstandarEficienciaAtunLimpioP implements Serializable {
 	public void setIdestandareficienciaatunlimpiop(Integer idestandareficienciaatunlimpiop) {
 		this.idestandareficienciaatunlimpiop = idestandareficienciaatunlimpiop;
 	}
+
 
 	public String getUnidadmedida() {
 		return this.unidadmedida;
@@ -50,6 +42,7 @@ public class EstandarEficienciaAtunLimpioP implements Serializable {
 		this.unidadmedida = unidadmedida;
 	}
 
+
 	public double getValor() {
 		return this.valor;
 	}
@@ -58,6 +51,10 @@ public class EstandarEficienciaAtunLimpioP implements Serializable {
 		this.valor = valor;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaTipo
+	@ManyToOne
+	@JoinColumn(name="idlimpiezatipo")
 	public LimpiezaTipo getLimpiezaTipo() {
 		return this.limpiezaTipo;
 	}
@@ -66,6 +63,10 @@ public class EstandarEficienciaAtunLimpioP implements Serializable {
 		this.limpiezaTipo = limpiezaTipo;
 	}
 
+
+	//bi-directional many-to-one association to Talla
+	@ManyToOne
+	@JoinColumn(name="idtalla")
 	public Talla getTalla() {
 		return this.talla;
 	}

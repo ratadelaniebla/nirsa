@@ -13,66 +13,32 @@ import java.util.List;
  */
 @Entity
 @Table(name="harina_recepcion_pesca_comprobante")
+@NamedQuery(name="HarinaRecepcionPescaComprobante.findAll", query="SELECT h FROM HarinaRecepcionPescaComprobante h")
 public class HarinaRecepcionPescaComprobante implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idharinarecepcionpescacomprobante;
-
 	private Integer estado;
-
 	private Timestamp fechacreacion;
-
-	@Temporal(TemporalType.DATE)
 	private Date fecharecepcion;
-
 	private String observaciones;
-
 	private String origen;
-
 	private double pesoentrada;
-
 	private double pesosalida;
-
 	private String placa;
-
-	//bi-directional many-to-one association to HarinaComprobanteDetalleGrupoEspecie
-	@OneToMany(mappedBy="harinaRecepcionPescaComprobante")
 	private List<HarinaComprobanteDetalleGrupoEspecie> harinaComprobanteDetalleGrupoEspecies;
-
-	//bi-directional many-to-one association to HarinaRecepcionDetallePescaComprobante
-	@OneToMany(mappedBy="harinaRecepcionPescaComprobante")
 	private List<HarinaRecepcionDetallePescaComprobante> harinaRecepcionDetallePescaComprobantes;
-
-	//bi-directional many-to-one association to Chofer
-	@ManyToOne
-	@JoinColumn(name="idchofer")
 	private Chofer chofer;
-
-	//bi-directional many-to-one association to HarinaClasificacionTipoPesca
-	@ManyToOne
-	@JoinColumn(name="idharinaclasificaciontipopesca")
 	private HarinaClasificacionTipoPesca harinaClasificacionTipoPesca;
-
-	//bi-directional many-to-one association to Proveedor
-	@ManyToOne
-	@JoinColumn(name="idproveedor")
 	private Proveedor proveedor;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public HarinaRecepcionPescaComprobante() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdharinarecepcionpescacomprobante() {
 		return this.idharinarecepcionpescacomprobante;
 	}
@@ -80,6 +46,7 @@ public class HarinaRecepcionPescaComprobante implements Serializable {
 	public void setIdharinarecepcionpescacomprobante(Long idharinarecepcionpescacomprobante) {
 		this.idharinarecepcionpescacomprobante = idharinarecepcionpescacomprobante;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -89,6 +56,7 @@ public class HarinaRecepcionPescaComprobante implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Timestamp getFechacreacion() {
 		return this.fechacreacion;
 	}
@@ -97,6 +65,8 @@ public class HarinaRecepcionPescaComprobante implements Serializable {
 		this.fechacreacion = fechacreacion;
 	}
 
+
+	@Temporal(TemporalType.DATE)
 	public Date getFecharecepcion() {
 		return this.fecharecepcion;
 	}
@@ -104,6 +74,7 @@ public class HarinaRecepcionPescaComprobante implements Serializable {
 	public void setFecharecepcion(Date fecharecepcion) {
 		this.fecharecepcion = fecharecepcion;
 	}
+
 
 	public String getObservaciones() {
 		return this.observaciones;
@@ -113,6 +84,7 @@ public class HarinaRecepcionPescaComprobante implements Serializable {
 		this.observaciones = observaciones;
 	}
 
+
 	public String getOrigen() {
 		return this.origen;
 	}
@@ -120,6 +92,7 @@ public class HarinaRecepcionPescaComprobante implements Serializable {
 	public void setOrigen(String origen) {
 		this.origen = origen;
 	}
+
 
 	public double getPesoentrada() {
 		return this.pesoentrada;
@@ -129,6 +102,7 @@ public class HarinaRecepcionPescaComprobante implements Serializable {
 		this.pesoentrada = pesoentrada;
 	}
 
+
 	public double getPesosalida() {
 		return this.pesosalida;
 	}
@@ -136,6 +110,7 @@ public class HarinaRecepcionPescaComprobante implements Serializable {
 	public void setPesosalida(double pesosalida) {
 		this.pesosalida = pesosalida;
 	}
+
 
 	public String getPlaca() {
 		return this.placa;
@@ -145,6 +120,9 @@ public class HarinaRecepcionPescaComprobante implements Serializable {
 		this.placa = placa;
 	}
 
+
+	//bi-directional many-to-one association to HarinaComprobanteDetalleGrupoEspecie
+	@OneToMany(mappedBy="harinaRecepcionPescaComprobante")
 	public List<HarinaComprobanteDetalleGrupoEspecie> getHarinaComprobanteDetalleGrupoEspecies() {
 		return this.harinaComprobanteDetalleGrupoEspecies;
 	}
@@ -153,6 +131,23 @@ public class HarinaRecepcionPescaComprobante implements Serializable {
 		this.harinaComprobanteDetalleGrupoEspecies = harinaComprobanteDetalleGrupoEspecies;
 	}
 
+	public HarinaComprobanteDetalleGrupoEspecie addHarinaComprobanteDetalleGrupoEspecy(HarinaComprobanteDetalleGrupoEspecie harinaComprobanteDetalleGrupoEspecy) {
+		getHarinaComprobanteDetalleGrupoEspecies().add(harinaComprobanteDetalleGrupoEspecy);
+		harinaComprobanteDetalleGrupoEspecy.setHarinaRecepcionPescaComprobante(this);
+
+		return harinaComprobanteDetalleGrupoEspecy;
+	}
+
+	public HarinaComprobanteDetalleGrupoEspecie removeHarinaComprobanteDetalleGrupoEspecy(HarinaComprobanteDetalleGrupoEspecie harinaComprobanteDetalleGrupoEspecy) {
+		getHarinaComprobanteDetalleGrupoEspecies().remove(harinaComprobanteDetalleGrupoEspecy);
+		harinaComprobanteDetalleGrupoEspecy.setHarinaRecepcionPescaComprobante(null);
+
+		return harinaComprobanteDetalleGrupoEspecy;
+	}
+
+
+	//bi-directional many-to-one association to HarinaRecepcionDetallePescaComprobante
+	@OneToMany(mappedBy="harinaRecepcionPescaComprobante")
 	public List<HarinaRecepcionDetallePescaComprobante> getHarinaRecepcionDetallePescaComprobantes() {
 		return this.harinaRecepcionDetallePescaComprobantes;
 	}
@@ -161,6 +156,24 @@ public class HarinaRecepcionPescaComprobante implements Serializable {
 		this.harinaRecepcionDetallePescaComprobantes = harinaRecepcionDetallePescaComprobantes;
 	}
 
+	public HarinaRecepcionDetallePescaComprobante addHarinaRecepcionDetallePescaComprobante(HarinaRecepcionDetallePescaComprobante harinaRecepcionDetallePescaComprobante) {
+		getHarinaRecepcionDetallePescaComprobantes().add(harinaRecepcionDetallePescaComprobante);
+		harinaRecepcionDetallePescaComprobante.setHarinaRecepcionPescaComprobante(this);
+
+		return harinaRecepcionDetallePescaComprobante;
+	}
+
+	public HarinaRecepcionDetallePescaComprobante removeHarinaRecepcionDetallePescaComprobante(HarinaRecepcionDetallePescaComprobante harinaRecepcionDetallePescaComprobante) {
+		getHarinaRecepcionDetallePescaComprobantes().remove(harinaRecepcionDetallePescaComprobante);
+		harinaRecepcionDetallePescaComprobante.setHarinaRecepcionPescaComprobante(null);
+
+		return harinaRecepcionDetallePescaComprobante;
+	}
+
+
+	//bi-directional many-to-one association to Chofer
+	@ManyToOne
+	@JoinColumn(name="idchofer")
 	public Chofer getChofer() {
 		return this.chofer;
 	}
@@ -169,6 +182,10 @@ public class HarinaRecepcionPescaComprobante implements Serializable {
 		this.chofer = chofer;
 	}
 
+
+	//bi-directional many-to-one association to HarinaClasificacionTipoPesca
+	@ManyToOne
+	@JoinColumn(name="idharinaclasificaciontipopesca")
 	public HarinaClasificacionTipoPesca getHarinaClasificacionTipoPesca() {
 		return this.harinaClasificacionTipoPesca;
 	}
@@ -177,6 +194,10 @@ public class HarinaRecepcionPescaComprobante implements Serializable {
 		this.harinaClasificacionTipoPesca = harinaClasificacionTipoPesca;
 	}
 
+
+	//bi-directional many-to-one association to Proveedor
+	@ManyToOne
+	@JoinColumn(name="idproveedor")
 	public Proveedor getProveedor() {
 		return this.proveedor;
 	}
@@ -185,6 +206,10 @@ public class HarinaRecepcionPescaComprobante implements Serializable {
 		this.proveedor = proveedor;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -193,6 +218,10 @@ public class HarinaRecepcionPescaComprobante implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

@@ -11,30 +11,21 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="impresion_detalle")
+@NamedQuery(name="ImpresionDetalle.findAll", query="SELECT i FROM ImpresionDetalle i")
 public class ImpresionDetalle implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idimpresiondetalle;
-
 	private Timestamp fechahoraimpresion;
-
 	private Long iddato;
-
-	//bi-directional many-to-one association to Impresion
-	@ManyToOne
-	@JoinColumn(name="idimpresion")
 	private Impresion impresion;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public ImpresionDetalle() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdimpresiondetalle() {
 		return this.idimpresiondetalle;
 	}
@@ -42,6 +33,7 @@ public class ImpresionDetalle implements Serializable {
 	public void setIdimpresiondetalle(Long idimpresiondetalle) {
 		this.idimpresiondetalle = idimpresiondetalle;
 	}
+
 
 	public Timestamp getFechahoraimpresion() {
 		return this.fechahoraimpresion;
@@ -51,6 +43,7 @@ public class ImpresionDetalle implements Serializable {
 		this.fechahoraimpresion = fechahoraimpresion;
 	}
 
+
 	public Long getIddato() {
 		return this.iddato;
 	}
@@ -59,6 +52,10 @@ public class ImpresionDetalle implements Serializable {
 		this.iddato = iddato;
 	}
 
+
+	//bi-directional many-to-one association to Impresion
+	@ManyToOne
+	@JoinColumn(name="idimpresion")
 	public Impresion getImpresion() {
 		return this.impresion;
 	}
@@ -67,6 +64,10 @@ public class ImpresionDetalle implements Serializable {
 		this.impresion = impresion;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

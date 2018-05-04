@@ -12,39 +12,23 @@ import java.util.List;
  */
 @Entity
 @Table(name="coccion_muestreo_temp_coche_ingreso")
+@NamedQuery(name="CoccionMuestreoTempCocheIngreso.findAll", query="SELECT c FROM CoccionMuestreoTempCocheIngreso c")
 public class CoccionMuestreoTempCocheIngreso implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcoccionmuestreotempcocheingreso;
-
 	private Timestamp fechareg;
-
 	private String observacion;
-
-	//bi-directional many-to-one association to CoccionDetalleMuestreoTempCocheIngreso
-	@OneToMany(mappedBy="coccionMuestreoTempCocheIngreso")
 	private List<CoccionDetalleMuestreoTempCocheIngreso> coccionDetalleMuestreoTempCocheIngresos;
-
-	//bi-directional many-to-one association to EvisceradoProceso
-	@ManyToOne
-	@JoinColumn(name="idevisceradoproceso")
 	private EvisceradoProceso evisceradoProceso;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public CoccionMuestreoTempCocheIngreso() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcoccionmuestreotempcocheingreso() {
 		return this.idcoccionmuestreotempcocheingreso;
 	}
@@ -52,6 +36,7 @@ public class CoccionMuestreoTempCocheIngreso implements Serializable {
 	public void setIdcoccionmuestreotempcocheingreso(Long idcoccionmuestreotempcocheingreso) {
 		this.idcoccionmuestreotempcocheingreso = idcoccionmuestreotempcocheingreso;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -61,6 +46,7 @@ public class CoccionMuestreoTempCocheIngreso implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public String getObservacion() {
 		return this.observacion;
 	}
@@ -69,6 +55,9 @@ public class CoccionMuestreoTempCocheIngreso implements Serializable {
 		this.observacion = observacion;
 	}
 
+
+	//bi-directional many-to-one association to CoccionDetalleMuestreoTempCocheIngreso
+	@OneToMany(mappedBy="coccionMuestreoTempCocheIngreso")
 	public List<CoccionDetalleMuestreoTempCocheIngreso> getCoccionDetalleMuestreoTempCocheIngresos() {
 		return this.coccionDetalleMuestreoTempCocheIngresos;
 	}
@@ -77,6 +66,24 @@ public class CoccionMuestreoTempCocheIngreso implements Serializable {
 		this.coccionDetalleMuestreoTempCocheIngresos = coccionDetalleMuestreoTempCocheIngresos;
 	}
 
+	public CoccionDetalleMuestreoTempCocheIngreso addCoccionDetalleMuestreoTempCocheIngreso(CoccionDetalleMuestreoTempCocheIngreso coccionDetalleMuestreoTempCocheIngreso) {
+		getCoccionDetalleMuestreoTempCocheIngresos().add(coccionDetalleMuestreoTempCocheIngreso);
+		coccionDetalleMuestreoTempCocheIngreso.setCoccionMuestreoTempCocheIngreso(this);
+
+		return coccionDetalleMuestreoTempCocheIngreso;
+	}
+
+	public CoccionDetalleMuestreoTempCocheIngreso removeCoccionDetalleMuestreoTempCocheIngreso(CoccionDetalleMuestreoTempCocheIngreso coccionDetalleMuestreoTempCocheIngreso) {
+		getCoccionDetalleMuestreoTempCocheIngresos().remove(coccionDetalleMuestreoTempCocheIngreso);
+		coccionDetalleMuestreoTempCocheIngreso.setCoccionMuestreoTempCocheIngreso(null);
+
+		return coccionDetalleMuestreoTempCocheIngreso;
+	}
+
+
+	//bi-directional many-to-one association to EvisceradoProceso
+	@ManyToOne
+	@JoinColumn(name="idevisceradoproceso")
 	public EvisceradoProceso getEvisceradoProceso() {
 		return this.evisceradoProceso;
 	}
@@ -85,6 +92,10 @@ public class CoccionMuestreoTempCocheIngreso implements Serializable {
 		this.evisceradoProceso = evisceradoProceso;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -93,6 +104,10 @@ public class CoccionMuestreoTempCocheIngreso implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

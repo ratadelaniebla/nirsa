@@ -12,40 +12,25 @@ import java.util.List;
  */
 @Entity
 @Table(name="planificacion_carga_archivo")
+@NamedQuery(name="PlanificacionCargaArchivo.findAll", query="SELECT p FROM PlanificacionCargaArchivo p")
 public class PlanificacionCargaArchivo implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idplanificacioncargaarchivo;
-
 	private Timestamp fechaarchivo;
-
 	private Timestamp fechacarga;
-
 	private Integer idsemana;
-
 	private String nombrearchivo;
-
 	private Integer turnoarchivo;
-
-	//bi-directional many-to-one association to Produccion
-	@ManyToOne
-	@JoinColumn(name="idproduccion")
 	private Produccion produccion;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
-
-	//bi-directional many-to-one association to PlanificacionCargaArchivoDetalle
-	@OneToMany(mappedBy="planificacionCargaArchivo")
 	private List<PlanificacionCargaArchivoDetalle> planificacionCargaArchivoDetalles;
 
 	public PlanificacionCargaArchivo() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdplanificacioncargaarchivo() {
 		return this.idplanificacioncargaarchivo;
 	}
@@ -53,6 +38,7 @@ public class PlanificacionCargaArchivo implements Serializable {
 	public void setIdplanificacioncargaarchivo(Long idplanificacioncargaarchivo) {
 		this.idplanificacioncargaarchivo = idplanificacioncargaarchivo;
 	}
+
 
 	public Timestamp getFechaarchivo() {
 		return this.fechaarchivo;
@@ -62,6 +48,7 @@ public class PlanificacionCargaArchivo implements Serializable {
 		this.fechaarchivo = fechaarchivo;
 	}
 
+
 	public Timestamp getFechacarga() {
 		return this.fechacarga;
 	}
@@ -69,6 +56,7 @@ public class PlanificacionCargaArchivo implements Serializable {
 	public void setFechacarga(Timestamp fechacarga) {
 		this.fechacarga = fechacarga;
 	}
+
 
 	public Integer getIdsemana() {
 		return this.idsemana;
@@ -78,6 +66,7 @@ public class PlanificacionCargaArchivo implements Serializable {
 		this.idsemana = idsemana;
 	}
 
+
 	public String getNombrearchivo() {
 		return this.nombrearchivo;
 	}
@@ -85,6 +74,7 @@ public class PlanificacionCargaArchivo implements Serializable {
 	public void setNombrearchivo(String nombrearchivo) {
 		this.nombrearchivo = nombrearchivo;
 	}
+
 
 	public Integer getTurnoarchivo() {
 		return this.turnoarchivo;
@@ -94,6 +84,10 @@ public class PlanificacionCargaArchivo implements Serializable {
 		this.turnoarchivo = turnoarchivo;
 	}
 
+
+	//bi-directional many-to-one association to Produccion
+	@ManyToOne
+	@JoinColumn(name="idproduccion")
 	public Produccion getProduccion() {
 		return this.produccion;
 	}
@@ -102,6 +96,10 @@ public class PlanificacionCargaArchivo implements Serializable {
 		this.produccion = produccion;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}
@@ -110,12 +108,29 @@ public class PlanificacionCargaArchivo implements Serializable {
 		this.usuario = usuario;
 	}
 
+
+	//bi-directional many-to-one association to PlanificacionCargaArchivoDetalle
+	@OneToMany(mappedBy="planificacionCargaArchivo")
 	public List<PlanificacionCargaArchivoDetalle> getPlanificacionCargaArchivoDetalles() {
 		return this.planificacionCargaArchivoDetalles;
 	}
 
 	public void setPlanificacionCargaArchivoDetalles(List<PlanificacionCargaArchivoDetalle> planificacionCargaArchivoDetalles) {
 		this.planificacionCargaArchivoDetalles = planificacionCargaArchivoDetalles;
+	}
+
+	public PlanificacionCargaArchivoDetalle addPlanificacionCargaArchivoDetalle(PlanificacionCargaArchivoDetalle planificacionCargaArchivoDetalle) {
+		getPlanificacionCargaArchivoDetalles().add(planificacionCargaArchivoDetalle);
+		planificacionCargaArchivoDetalle.setPlanificacionCargaArchivo(this);
+
+		return planificacionCargaArchivoDetalle;
+	}
+
+	public PlanificacionCargaArchivoDetalle removePlanificacionCargaArchivoDetalle(PlanificacionCargaArchivoDetalle planificacionCargaArchivoDetalle) {
+		getPlanificacionCargaArchivoDetalles().remove(planificacionCargaArchivoDetalle);
+		planificacionCargaArchivoDetalle.setPlanificacionCargaArchivo(null);
+
+		return planificacionCargaArchivoDetalle;
 	}
 
 }

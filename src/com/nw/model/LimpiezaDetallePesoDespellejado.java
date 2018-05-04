@@ -11,30 +11,21 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="limpieza_detalle_peso_despellejado")
+@NamedQuery(name="LimpiezaDetallePesoDespellejado.findAll", query="SELECT l FROM LimpiezaDetallePesoDespellejado l")
 public class LimpiezaDetallePesoDespellejado implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idlimpiezadetallepesodespellejado;
-
 	private Timestamp fechareg;
-
 	private double peso;
-
-	//bi-directional many-to-one association to LimpiezaAsignacionCanastilla
-	@ManyToOne
-	@JoinColumn(name="idlimpiezaasignacioncanastilla")
 	private LimpiezaAsignacionCanastilla limpiezaAsignacionCanastilla;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public LimpiezaDetallePesoDespellejado() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdlimpiezadetallepesodespellejado() {
 		return this.idlimpiezadetallepesodespellejado;
 	}
@@ -42,6 +33,7 @@ public class LimpiezaDetallePesoDespellejado implements Serializable {
 	public void setIdlimpiezadetallepesodespellejado(Long idlimpiezadetallepesodespellejado) {
 		this.idlimpiezadetallepesodespellejado = idlimpiezadetallepesodespellejado;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -51,6 +43,7 @@ public class LimpiezaDetallePesoDespellejado implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public double getPeso() {
 		return this.peso;
 	}
@@ -59,6 +52,10 @@ public class LimpiezaDetallePesoDespellejado implements Serializable {
 		this.peso = peso;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaAsignacionCanastilla
+	@ManyToOne
+	@JoinColumn(name="idlimpiezaasignacioncanastilla")
 	public LimpiezaAsignacionCanastilla getLimpiezaAsignacionCanastilla() {
 		return this.limpiezaAsignacionCanastilla;
 	}
@@ -67,6 +64,10 @@ public class LimpiezaDetallePesoDespellejado implements Serializable {
 		this.limpiezaAsignacionCanastilla = limpiezaAsignacionCanastilla;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

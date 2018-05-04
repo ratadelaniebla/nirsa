@@ -48,8 +48,8 @@ public class ProduccionDetalleOrdenDAOJpaImpl extends BaseDaoJpaImpl implements 
 	
 	public ProduccionDetalleOrden existeDetalleOrden(Integer idturno, Long idproduccion, Integer item, String orden) {
 		String sql = "SELECT a FROM ProduccionDetalleOrden a "
-				+ " where a.idturno = :idturno "
-				+ " and a.idproduccion = :idproduccion"
+				+ " where a.turno.idturno = :idturno "
+				+ " and a.produccion.idproduccion = :idproduccion"
 				+ " and a.item = :item"
 				+ " and a.orden = :orden ";
 		return (ProduccionDetalleOrden) em.createQuery(sql)
@@ -62,8 +62,8 @@ public class ProduccionDetalleOrdenDAOJpaImpl extends BaseDaoJpaImpl implements 
 	@SuppressWarnings("unchecked")
 	public List<ProduccionDetalleOrden> obtieneDetalleOrdenByProduccionTurno(Integer idturno, Long idproduccion) {
 		String sql = "SELECT a FROM ProduccionDetalleOrden a "
-				+ " where a.idturno = :idturno "
-				+ " and a.idproduccion = :idproduccion"
+				+ " where a.turno.idturno = :idturno "
+				+ " and a.produccion.idproduccion = :idproduccion"
 				+ " order by a.item, a.orden";
 		return em.createQuery(sql)
 				.setParameter("idturno", idturno)
@@ -71,7 +71,7 @@ public class ProduccionDetalleOrdenDAOJpaImpl extends BaseDaoJpaImpl implements 
 				.getResultList();
 	}
 	
-	public ProduccionDetalleOrden obtieneDetalleOrdenById(Long idproducciondetalleorden) {
+	public ProduccionDetalleOrden obtieneDetalleOrdenById(Integer idproducciondetalleorden) {
 		String sql = "SELECT a FROM ProduccionDetalleOrden a "
 				+ " where a.idproducciondetalleorden = :idproducciondetalleorden ";
 		return (ProduccionDetalleOrden)em.createQuery(sql)

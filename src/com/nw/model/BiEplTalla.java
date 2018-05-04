@@ -10,20 +10,19 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="bi_epl_talla")
+@NamedQuery(name="BiEplTalla.findAll", query="SELECT b FROM BiEplTalla b")
 public class BiEplTalla implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idbiepltallas;
-
 	private Integer idevisceradopescadoslata;
-
 	private Integer idtalla;
 
 	public BiEplTalla() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdbiepltallas() {
 		return this.idbiepltallas;
 	}
@@ -32,6 +31,7 @@ public class BiEplTalla implements Serializable {
 		this.idbiepltallas = idbiepltallas;
 	}
 
+
 	public Integer getIdevisceradopescadoslata() {
 		return this.idevisceradopescadoslata;
 	}
@@ -39,6 +39,7 @@ public class BiEplTalla implements Serializable {
 	public void setIdevisceradopescadoslata(Integer idevisceradopescadoslata) {
 		this.idevisceradopescadoslata = idevisceradopescadoslata;
 	}
+
 
 	public Integer getIdtalla() {
 		return this.idtalla;

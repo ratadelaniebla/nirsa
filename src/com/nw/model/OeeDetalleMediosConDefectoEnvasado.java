@@ -10,31 +10,20 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="oee_detalle_medios_con_defecto_envasado")
+@NamedQuery(name="OeeDetalleMediosConDefectoEnvasado.findAll", query="SELECT o FROM OeeDetalleMediosConDefectoEnvasado o")
 public class OeeDetalleMediosConDefectoEnvasado implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idoeedetallemedioscondefectoenvasado;
-
-	//bi-directional many-to-one association to Luthy
-	@ManyToOne
-	@JoinColumn(name="idluthy")
 	private Luthy luthy;
-
-	//bi-directional many-to-one association to MaquinaCerradora
-	@ManyToOne
-	@JoinColumn(name="idmaquinacerradora")
 	private MaquinaCerradora maquinaCerradora;
-
-	//bi-directional many-to-one association to OeeDetalleMediosConDefecto
-	@ManyToOne
-	@JoinColumn(name="idoeedetallemedioscondefecto")
 	private OeeDetalleMediosConDefecto oeeDetalleMediosConDefecto;
 
 	public OeeDetalleMediosConDefectoEnvasado() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdoeedetallemedioscondefectoenvasado() {
 		return this.idoeedetallemedioscondefectoenvasado;
 	}
@@ -43,6 +32,10 @@ public class OeeDetalleMediosConDefectoEnvasado implements Serializable {
 		this.idoeedetallemedioscondefectoenvasado = idoeedetallemedioscondefectoenvasado;
 	}
 
+
+	//bi-directional many-to-one association to Luthy
+	@ManyToOne
+	@JoinColumn(name="idluthy")
 	public Luthy getLuthy() {
 		return this.luthy;
 	}
@@ -51,6 +44,10 @@ public class OeeDetalleMediosConDefectoEnvasado implements Serializable {
 		this.luthy = luthy;
 	}
 
+
+	//bi-directional many-to-one association to MaquinaCerradora
+	@ManyToOne
+	@JoinColumn(name="idmaquinacerradora")
 	public MaquinaCerradora getMaquinaCerradora() {
 		return this.maquinaCerradora;
 	}
@@ -59,6 +56,10 @@ public class OeeDetalleMediosConDefectoEnvasado implements Serializable {
 		this.maquinaCerradora = maquinaCerradora;
 	}
 
+
+	//bi-directional many-to-one association to OeeDetalleMediosConDefecto
+	@ManyToOne
+	@JoinColumn(name="idoeedetallemedioscondefecto")
 	public OeeDetalleMediosConDefecto getOeeDetalleMediosConDefecto() {
 		return this.oeeDetalleMediosConDefecto;
 	}

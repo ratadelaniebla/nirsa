@@ -10,43 +10,25 @@ import java.util.List;
  * 
  */
 @Entity
+@NamedQuery(name="Subproducto.findAll", query="SELECT s FROM Subproducto s")
 public class Subproducto implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idsubproducto;
-
 	private String descripcion;
-
 	private Integer rechazo;
-
 	private String tipo;
-
-	//bi-directional many-to-one association to AreaSubproducto
-	@OneToMany(mappedBy="subproducto")
 	private List<AreaSubproducto> areaSubproductos;
-
-	//bi-directional many-to-one association to DesperdicioCajonHarina
-	@OneToMany(mappedBy="subproducto")
 	private List<DesperdicioCajonHarina> desperdicioCajonHarinas;
-
-	//bi-directional many-to-one association to DesperdicioDetalle
-	@OneToMany(mappedBy="subproducto")
 	private List<DesperdicioDetalle> desperdicioDetalles;
-
-	//bi-directional many-to-one association to LimpiezaDetalleDesperdicio
-	@OneToMany(mappedBy="subproducto")
 	private List<LimpiezaDetalleDesperdicio> limpiezaDetalleDesperdicios;
-
-	//bi-directional many-to-one association to Lugar
-	@ManyToOne
-	@JoinColumn(name="idlugar")
 	private Lugar lugar;
 
 	public Subproducto() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdsubproducto() {
 		return this.idsubproducto;
 	}
@@ -54,6 +36,7 @@ public class Subproducto implements Serializable {
 	public void setIdsubproducto(Integer idsubproducto) {
 		this.idsubproducto = idsubproducto;
 	}
+
 
 	public String getDescripcion() {
 		return this.descripcion;
@@ -63,6 +46,7 @@ public class Subproducto implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+
 	public Integer getRechazo() {
 		return this.rechazo;
 	}
@@ -70,6 +54,7 @@ public class Subproducto implements Serializable {
 	public void setRechazo(Integer rechazo) {
 		this.rechazo = rechazo;
 	}
+
 
 	public String getTipo() {
 		return this.tipo;
@@ -79,6 +64,9 @@ public class Subproducto implements Serializable {
 		this.tipo = tipo;
 	}
 
+
+	//bi-directional many-to-one association to AreaSubproducto
+	@OneToMany(mappedBy="subproducto")
 	public List<AreaSubproducto> getAreaSubproductos() {
 		return this.areaSubproductos;
 	}
@@ -87,6 +75,23 @@ public class Subproducto implements Serializable {
 		this.areaSubproductos = areaSubproductos;
 	}
 
+	public AreaSubproducto addAreaSubproducto(AreaSubproducto areaSubproducto) {
+		getAreaSubproductos().add(areaSubproducto);
+		areaSubproducto.setSubproducto(this);
+
+		return areaSubproducto;
+	}
+
+	public AreaSubproducto removeAreaSubproducto(AreaSubproducto areaSubproducto) {
+		getAreaSubproductos().remove(areaSubproducto);
+		areaSubproducto.setSubproducto(null);
+
+		return areaSubproducto;
+	}
+
+
+	//bi-directional many-to-one association to DesperdicioCajonHarina
+	@OneToMany(mappedBy="subproducto")
 	public List<DesperdicioCajonHarina> getDesperdicioCajonHarinas() {
 		return this.desperdicioCajonHarinas;
 	}
@@ -95,6 +100,23 @@ public class Subproducto implements Serializable {
 		this.desperdicioCajonHarinas = desperdicioCajonHarinas;
 	}
 
+	public DesperdicioCajonHarina addDesperdicioCajonHarina(DesperdicioCajonHarina desperdicioCajonHarina) {
+		getDesperdicioCajonHarinas().add(desperdicioCajonHarina);
+		desperdicioCajonHarina.setSubproducto(this);
+
+		return desperdicioCajonHarina;
+	}
+
+	public DesperdicioCajonHarina removeDesperdicioCajonHarina(DesperdicioCajonHarina desperdicioCajonHarina) {
+		getDesperdicioCajonHarinas().remove(desperdicioCajonHarina);
+		desperdicioCajonHarina.setSubproducto(null);
+
+		return desperdicioCajonHarina;
+	}
+
+
+	//bi-directional many-to-one association to DesperdicioDetalle
+	@OneToMany(mappedBy="subproducto")
 	public List<DesperdicioDetalle> getDesperdicioDetalles() {
 		return this.desperdicioDetalles;
 	}
@@ -103,6 +125,23 @@ public class Subproducto implements Serializable {
 		this.desperdicioDetalles = desperdicioDetalles;
 	}
 
+	public DesperdicioDetalle addDesperdicioDetalle(DesperdicioDetalle desperdicioDetalle) {
+		getDesperdicioDetalles().add(desperdicioDetalle);
+		desperdicioDetalle.setSubproducto(this);
+
+		return desperdicioDetalle;
+	}
+
+	public DesperdicioDetalle removeDesperdicioDetalle(DesperdicioDetalle desperdicioDetalle) {
+		getDesperdicioDetalles().remove(desperdicioDetalle);
+		desperdicioDetalle.setSubproducto(null);
+
+		return desperdicioDetalle;
+	}
+
+
+	//bi-directional many-to-one association to LimpiezaDetalleDesperdicio
+	@OneToMany(mappedBy="subproducto")
 	public List<LimpiezaDetalleDesperdicio> getLimpiezaDetalleDesperdicios() {
 		return this.limpiezaDetalleDesperdicios;
 	}
@@ -111,6 +150,24 @@ public class Subproducto implements Serializable {
 		this.limpiezaDetalleDesperdicios = limpiezaDetalleDesperdicios;
 	}
 
+	public LimpiezaDetalleDesperdicio addLimpiezaDetalleDesperdicio(LimpiezaDetalleDesperdicio limpiezaDetalleDesperdicio) {
+		getLimpiezaDetalleDesperdicios().add(limpiezaDetalleDesperdicio);
+		limpiezaDetalleDesperdicio.setSubproducto(this);
+
+		return limpiezaDetalleDesperdicio;
+	}
+
+	public LimpiezaDetalleDesperdicio removeLimpiezaDetalleDesperdicio(LimpiezaDetalleDesperdicio limpiezaDetalleDesperdicio) {
+		getLimpiezaDetalleDesperdicios().remove(limpiezaDetalleDesperdicio);
+		limpiezaDetalleDesperdicio.setSubproducto(null);
+
+		return limpiezaDetalleDesperdicio;
+	}
+
+
+	//bi-directional many-to-one association to Lugar
+	@ManyToOne
+	@JoinColumn(name="idlugar")
 	public Lugar getLugar() {
 		return this.lugar;
 	}

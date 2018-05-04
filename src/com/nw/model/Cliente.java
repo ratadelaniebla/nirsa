@@ -9,25 +9,20 @@ import javax.persistence.*;
  * 
  */
 @Entity
+@NamedQuery(name="Cliente.findAll", query="SELECT c FROM Cliente c")
 public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcliente;
-
-	@Column(name="apellidos_cliente")
 	private String apellidosCliente;
-
-	@Column(name="cedula_cliente")
 	private String cedulaCliente;
-
-	@Column(name="nombres_cliente")
 	private String nombresCliente;
 
 	public Cliente() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcliente() {
 		return this.idcliente;
 	}
@@ -36,6 +31,8 @@ public class Cliente implements Serializable {
 		this.idcliente = idcliente;
 	}
 
+
+	@Column(name="apellidos_cliente")
 	public String getApellidosCliente() {
 		return this.apellidosCliente;
 	}
@@ -44,6 +41,8 @@ public class Cliente implements Serializable {
 		this.apellidosCliente = apellidosCliente;
 	}
 
+
+	@Column(name="cedula_cliente")
 	public String getCedulaCliente() {
 		return this.cedulaCliente;
 	}
@@ -52,6 +51,8 @@ public class Cliente implements Serializable {
 		this.cedulaCliente = cedulaCliente;
 	}
 
+
+	@Column(name="nombres_cliente")
 	public String getNombresCliente() {
 		return this.nombresCliente;
 	}

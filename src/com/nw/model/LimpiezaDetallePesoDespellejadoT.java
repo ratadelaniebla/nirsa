@@ -11,42 +11,24 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="limpieza_detalle_peso_despellejado_t")
+@NamedQuery(name="LimpiezaDetallePesoDespellejadoT.findAll", query="SELECT l FROM LimpiezaDetallePesoDespellejadoT l")
 public class LimpiezaDetallePesoDespellejadoT implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idlimpiezadetallepesodespellejadot;
-
 	private Timestamp fechareg;
-
 	private double peso;
-
 	private String tarjetadespellejador;
-
-	//bi-directional many-to-one association to EvisceradoPescadosLata
-	@ManyToOne
-	@JoinColumn(name="idpescadosporlata")
 	private EvisceradoPescadosLata evisceradoPescadosLata;
-
-	//bi-directional many-to-one association to LimpiezaDetalleProcesoLote
-	@ManyToOne
-	@JoinColumn(name="idlimpiezadetalleprocesolote")
 	private LimpiezaDetalleProcesoLote limpiezaDetalleProcesoLote;
-
-	//bi-directional many-to-one association to LimpiezaProcesoEmpleado
-	@ManyToOne
-	@JoinColumn(name="idlimpiezaprocesoempleado")
 	private LimpiezaProcesoEmpleado limpiezaProcesoEmpleado;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public LimpiezaDetallePesoDespellejadoT() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdlimpiezadetallepesodespellejadot() {
 		return this.idlimpiezadetallepesodespellejadot;
 	}
@@ -54,6 +36,7 @@ public class LimpiezaDetallePesoDespellejadoT implements Serializable {
 	public void setIdlimpiezadetallepesodespellejadot(Long idlimpiezadetallepesodespellejadot) {
 		this.idlimpiezadetallepesodespellejadot = idlimpiezadetallepesodespellejadot;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -63,6 +46,7 @@ public class LimpiezaDetallePesoDespellejadoT implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public double getPeso() {
 		return this.peso;
 	}
@@ -70,6 +54,7 @@ public class LimpiezaDetallePesoDespellejadoT implements Serializable {
 	public void setPeso(double peso) {
 		this.peso = peso;
 	}
+
 
 	public String getTarjetadespellejador() {
 		return this.tarjetadespellejador;
@@ -79,6 +64,10 @@ public class LimpiezaDetallePesoDespellejadoT implements Serializable {
 		this.tarjetadespellejador = tarjetadespellejador;
 	}
 
+
+	//bi-directional many-to-one association to EvisceradoPescadosLata
+	@ManyToOne
+	@JoinColumn(name="idpescadosporlata")
 	public EvisceradoPescadosLata getEvisceradoPescadosLata() {
 		return this.evisceradoPescadosLata;
 	}
@@ -87,6 +76,10 @@ public class LimpiezaDetallePesoDespellejadoT implements Serializable {
 		this.evisceradoPescadosLata = evisceradoPescadosLata;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaDetalleProcesoLote
+	@ManyToOne
+	@JoinColumn(name="idlimpiezadetalleprocesolote")
 	public LimpiezaDetalleProcesoLote getLimpiezaDetalleProcesoLote() {
 		return this.limpiezaDetalleProcesoLote;
 	}
@@ -95,6 +88,10 @@ public class LimpiezaDetallePesoDespellejadoT implements Serializable {
 		this.limpiezaDetalleProcesoLote = limpiezaDetalleProcesoLote;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaProcesoEmpleado
+	@ManyToOne
+	@JoinColumn(name="idlimpiezaprocesoempleado")
 	public LimpiezaProcesoEmpleado getLimpiezaProcesoEmpleado() {
 		return this.limpiezaProcesoEmpleado;
 	}
@@ -103,6 +100,10 @@ public class LimpiezaDetallePesoDespellejadoT implements Serializable {
 		this.limpiezaProcesoEmpleado = limpiezaProcesoEmpleado;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

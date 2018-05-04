@@ -12,49 +12,25 @@ import java.util.List;
  */
 @Entity
 @Table(name="control_batch_proceso")
+@NamedQuery(name="ControlBatchProceso.findAll", query="SELECT c FROM ControlBatchProceso c")
 public class ControlBatchProceso implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcontrolbatchproceso;
-
 	private Integer estado;
-
 	private Timestamp fechareg;
-
-	//bi-directional many-to-one association to ObservacionesProceso
-	@ManyToOne
-	@JoinColumn(name="idobservacionesprocesos")
 	private ObservacionesProceso observacionesProceso;
-
-	//bi-directional many-to-one association to ProcesoAperturaCierre
-	@ManyToOne
-	@JoinColumn(name="idprocesoaperturacierre")
 	private ProcesoAperturaCierre procesoAperturaCierre;
-
-	//bi-directional many-to-one association to Produccion
-	@ManyToOne
-	@JoinColumn(name="idproduccion")
 	private Produccion produccion;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
-
-	//bi-directional many-to-one association to ControlFichaBatch
-	@OneToMany(mappedBy="controlBatchProceso")
 	private List<ControlFichaBatch> controlFichaBatches;
 
 	public ControlBatchProceso() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcontrolbatchproceso() {
 		return this.idcontrolbatchproceso;
 	}
@@ -62,6 +38,7 @@ public class ControlBatchProceso implements Serializable {
 	public void setIdcontrolbatchproceso(Long idcontrolbatchproceso) {
 		this.idcontrolbatchproceso = idcontrolbatchproceso;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -71,6 +48,7 @@ public class ControlBatchProceso implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Timestamp getFechareg() {
 		return this.fechareg;
 	}
@@ -79,6 +57,10 @@ public class ControlBatchProceso implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
+	//bi-directional many-to-one association to ObservacionesProceso
+	@ManyToOne
+	@JoinColumn(name="idobservacionesprocesos")
 	public ObservacionesProceso getObservacionesProceso() {
 		return this.observacionesProceso;
 	}
@@ -87,6 +69,10 @@ public class ControlBatchProceso implements Serializable {
 		this.observacionesProceso = observacionesProceso;
 	}
 
+
+	//bi-directional many-to-one association to ProcesoAperturaCierre
+	@ManyToOne
+	@JoinColumn(name="idprocesoaperturacierre")
 	public ProcesoAperturaCierre getProcesoAperturaCierre() {
 		return this.procesoAperturaCierre;
 	}
@@ -95,6 +81,10 @@ public class ControlBatchProceso implements Serializable {
 		this.procesoAperturaCierre = procesoAperturaCierre;
 	}
 
+
+	//bi-directional many-to-one association to Produccion
+	@ManyToOne
+	@JoinColumn(name="idproduccion")
 	public Produccion getProduccion() {
 		return this.produccion;
 	}
@@ -103,6 +93,10 @@ public class ControlBatchProceso implements Serializable {
 		this.produccion = produccion;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -111,6 +105,10 @@ public class ControlBatchProceso implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}
@@ -119,12 +117,29 @@ public class ControlBatchProceso implements Serializable {
 		this.usuario = usuario;
 	}
 
+
+	//bi-directional many-to-one association to ControlFichaBatch
+	@OneToMany(mappedBy="controlBatchProceso")
 	public List<ControlFichaBatch> getControlFichaBatches() {
 		return this.controlFichaBatches;
 	}
 
 	public void setControlFichaBatches(List<ControlFichaBatch> controlFichaBatches) {
 		this.controlFichaBatches = controlFichaBatches;
+	}
+
+	public ControlFichaBatch addControlFichaBatch(ControlFichaBatch controlFichaBatch) {
+		getControlFichaBatches().add(controlFichaBatch);
+		controlFichaBatch.setControlBatchProceso(this);
+
+		return controlFichaBatch;
+	}
+
+	public ControlFichaBatch removeControlFichaBatch(ControlFichaBatch controlFichaBatch) {
+		getControlFichaBatches().remove(controlFichaBatch);
+		controlFichaBatch.setControlBatchProceso(null);
+
+		return controlFichaBatch;
 	}
 
 }

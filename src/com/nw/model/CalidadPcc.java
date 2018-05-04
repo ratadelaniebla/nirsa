@@ -11,33 +11,23 @@ import java.util.List;
  */
 @Entity
 @Table(name="calidad_pcc")
+@NamedQuery(name="CalidadPcc.findAll", query="SELECT c FROM CalidadPcc c")
 public class CalidadPcc implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcalidadpcc;
-
 	private String accion;
-
 	private String desviacion;
-
 	private Integer estado;
-
 	private Integer turno;
-
-	//bi-directional many-to-one association to CalidadDetallePcc
-	@OneToMany(mappedBy="calidadPcc")
 	private List<CalidadDetallePcc> calidadDetallePccs;
-
-	//bi-directional many-to-one association to BarcoDescarga
-	@ManyToOne
-	@JoinColumn(name="idbarcodescarga")
 	private BarcoDescarga barcoDescarga;
 
 	public CalidadPcc() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcalidadpcc() {
 		return this.idcalidadpcc;
 	}
@@ -45,6 +35,7 @@ public class CalidadPcc implements Serializable {
 	public void setIdcalidadpcc(Long idcalidadpcc) {
 		this.idcalidadpcc = idcalidadpcc;
 	}
+
 
 	public String getAccion() {
 		return this.accion;
@@ -54,6 +45,7 @@ public class CalidadPcc implements Serializable {
 		this.accion = accion;
 	}
 
+
 	public String getDesviacion() {
 		return this.desviacion;
 	}
@@ -61,6 +53,7 @@ public class CalidadPcc implements Serializable {
 	public void setDesviacion(String desviacion) {
 		this.desviacion = desviacion;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -70,6 +63,7 @@ public class CalidadPcc implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Integer getTurno() {
 		return this.turno;
 	}
@@ -78,6 +72,9 @@ public class CalidadPcc implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to CalidadDetallePcc
+	@OneToMany(mappedBy="calidadPcc")
 	public List<CalidadDetallePcc> getCalidadDetallePccs() {
 		return this.calidadDetallePccs;
 	}
@@ -86,6 +83,24 @@ public class CalidadPcc implements Serializable {
 		this.calidadDetallePccs = calidadDetallePccs;
 	}
 
+	public CalidadDetallePcc addCalidadDetallePcc(CalidadDetallePcc calidadDetallePcc) {
+		getCalidadDetallePccs().add(calidadDetallePcc);
+		calidadDetallePcc.setCalidadPcc(this);
+
+		return calidadDetallePcc;
+	}
+
+	public CalidadDetallePcc removeCalidadDetallePcc(CalidadDetallePcc calidadDetallePcc) {
+		getCalidadDetallePccs().remove(calidadDetallePcc);
+		calidadDetallePcc.setCalidadPcc(null);
+
+		return calidadDetallePcc;
+	}
+
+
+	//bi-directional many-to-one association to BarcoDescarga
+	@ManyToOne
+	@JoinColumn(name="idbarcodescarga")
 	public BarcoDescarga getBarcoDescarga() {
 		return this.barcoDescarga;
 	}

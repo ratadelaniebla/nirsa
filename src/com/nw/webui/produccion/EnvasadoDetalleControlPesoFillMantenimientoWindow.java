@@ -32,6 +32,7 @@ import com.nw.model.EnvasadoProceso;
 import com.nw.model.Produccion;
 import com.nw.model.ProduccionDetalleOrden;
 import com.nw.model.Turno;
+import com.nw.model.Usuario;
 import com.nw.model.dao.EnvasadoCaldoVegetalProteinaDAO;
 import com.nw.model.dao.EnvasadoControlFillCorteCabeceraDAO;
 import com.nw.model.dao.EnvasadoControlPesoFillCabeceraDAO;
@@ -47,6 +48,7 @@ import com.nw.model.dao.impl.EnvasadoProcesoDAOJpaImpl;
 import com.nw.model.dao.impl.ProduccionDAOJpaImpl;
 import com.nw.model.dao.impl.ProduccionDetalleOrdenDAOJpaImpl;
 import com.nw.model.dao.impl.TurnoDAOJpaImpl;
+import com.nw.model.dao.impl.UsuarioDAOJpaImpl;
 import com.nw.util.Sistema;
 
 /**
@@ -230,10 +232,10 @@ private static final String NUEVO = "- NUEVO -";
 	
 	public void onSelect$lbxItemOrdenCliente() {
 		EnvasadoControlPesoFillCabecera ecpfc = ((Compuesto)lbxItemOrdenCliente.getSelectedItem().getValue()).envasadoControlPesoFillCabecera;
-		if (ecpfc.getIdturnolabor()==null)
+		if (ecpfc.getTurno()==null)
 			lbxTurnoLabor.setSelectedIndex(0);
 		else
-			lbxTurnoLabor.setSelectedIndex(ecpfc.getIdturnolabor());
+			lbxTurnoLabor.setSelectedIndex(ecpfc.getTurno().getIdturno());
 		
 		cargaItemOrden();
 		cargaInformacionFormulario() ;
@@ -559,7 +561,7 @@ private static final String NUEVO = "- NUEVO -";
 
 		ecpfc.setEnvasadoProceso((EnvasadoProceso)lbxTurnoProduccion.getSelectedItem().getValue());
 		ecpfc.setEnvasadoControlPesoFillDetalles(Arrays.asList(ecpfd));
-		ecpfc.setIdturnolabor(((Turno)lbxTurnoLabor.getSelectedItem().getValue()).getIdturno());
+		ecpfc.setTurno(((Turno)lbxTurnoLabor.getSelectedItem().getValue()));
 		ecpfc.setProduccionDetalleOrden(pdo);
 		ecpfc.setEnvasadoLineaCerradora((EnvasadoLineaCerradora)lbxLineaCerradora.getSelectedItem().getValue());
 		ecpfc.setPesoenvase(parseDouble(txtPesoEnvase.getValue()));
@@ -582,13 +584,15 @@ private static final String NUEVO = "- NUEVO -";
 		ecpfd.setFecharegusuario(fechaRegistro);
 		ecpfd.setFechareg(new Timestamp(System.currentTimeMillis()));
 		
-		String idUsurio = (String) Sessions.getCurrent().getAttribute("usuario");
-		if (idUsurio==null) {
+		String idUsuario = (String) Sessions.getCurrent().getAttribute("usuario");
+		if (idUsuario==null) {
 			Sistema.mensaje("Error. Usuario no logueado.");
 			return;
 		}
-		ecpfc.setIdusuario(idUsurio);
-		ecpfc.getEnvasadoControlPesoFillDetalles().get(0).setIdusuario(idUsurio);
+		Usuario usuario = new UsuarioDAOJpaImpl().getUser(idUsuario);
+		
+		ecpfc.setUsuario(usuario);
+		ecpfc.getEnvasadoControlPesoFillDetalles().get(0).setUsuario(usuario);
 		
 		EnvasadoControlFillCorteDetalle envasadoControlFillCorteDetalle = (EnvasadoControlFillCorteDetalle)lbxCorte.getSelectedItem().getValue();
 		ecpfc.getEnvasadoControlPesoFillDetalles().get(0).setEnvasadoControlFillCorteDetalle(envasadoControlFillCorteDetalle);

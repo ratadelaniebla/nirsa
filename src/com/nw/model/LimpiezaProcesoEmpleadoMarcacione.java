@@ -11,50 +11,27 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="limpieza_proceso_empleado_marcaciones")
+@NamedQuery(name="LimpiezaProcesoEmpleadoMarcacione.findAll", query="SELECT l FROM LimpiezaProcesoEmpleadoMarcacione l")
 public class LimpiezaProcesoEmpleadoMarcacione implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idlimpiezaprocesoempleadomarcaciones;
-
 	private String cedula;
-
-	@Column(name="fecha_hora_fin")
 	private Timestamp fechaHoraFin;
-
-	@Column(name="fecha_hora_inicio")
 	private Timestamp fechaHoraInicio;
-
 	private Timestamp fecharegistro;
-
 	private Boolean justificado;
-
 	private String tipo;
-
-	//bi-directional many-to-one association to Empleado
-	@ManyToOne
-	@JoinColumn(name="idempleado")
 	private Empleado empleado;
-
-	//bi-directional many-to-one association to Produccion
-	@ManyToOne
-	@JoinColumn(name="idproduccion")
 	private Produccion produccion;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public LimpiezaProcesoEmpleadoMarcacione() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdlimpiezaprocesoempleadomarcaciones() {
 		return this.idlimpiezaprocesoempleadomarcaciones;
 	}
@@ -62,6 +39,7 @@ public class LimpiezaProcesoEmpleadoMarcacione implements Serializable {
 	public void setIdlimpiezaprocesoempleadomarcaciones(Long idlimpiezaprocesoempleadomarcaciones) {
 		this.idlimpiezaprocesoempleadomarcaciones = idlimpiezaprocesoempleadomarcaciones;
 	}
+
 
 	public String getCedula() {
 		return this.cedula;
@@ -71,6 +49,8 @@ public class LimpiezaProcesoEmpleadoMarcacione implements Serializable {
 		this.cedula = cedula;
 	}
 
+
+	@Column(name="fecha_hora_fin")
 	public Timestamp getFechaHoraFin() {
 		return this.fechaHoraFin;
 	}
@@ -79,6 +59,8 @@ public class LimpiezaProcesoEmpleadoMarcacione implements Serializable {
 		this.fechaHoraFin = fechaHoraFin;
 	}
 
+
+	@Column(name="fecha_hora_inicio")
 	public Timestamp getFechaHoraInicio() {
 		return this.fechaHoraInicio;
 	}
@@ -86,6 +68,7 @@ public class LimpiezaProcesoEmpleadoMarcacione implements Serializable {
 	public void setFechaHoraInicio(Timestamp fechaHoraInicio) {
 		this.fechaHoraInicio = fechaHoraInicio;
 	}
+
 
 	public Timestamp getFecharegistro() {
 		return this.fecharegistro;
@@ -95,6 +78,7 @@ public class LimpiezaProcesoEmpleadoMarcacione implements Serializable {
 		this.fecharegistro = fecharegistro;
 	}
 
+
 	public Boolean getJustificado() {
 		return this.justificado;
 	}
@@ -102,6 +86,7 @@ public class LimpiezaProcesoEmpleadoMarcacione implements Serializable {
 	public void setJustificado(Boolean justificado) {
 		this.justificado = justificado;
 	}
+
 
 	public String getTipo() {
 		return this.tipo;
@@ -111,6 +96,10 @@ public class LimpiezaProcesoEmpleadoMarcacione implements Serializable {
 		this.tipo = tipo;
 	}
 
+
+	//bi-directional many-to-one association to Empleado
+	@ManyToOne
+	@JoinColumn(name="idempleado")
 	public Empleado getEmpleado() {
 		return this.empleado;
 	}
@@ -119,6 +108,10 @@ public class LimpiezaProcesoEmpleadoMarcacione implements Serializable {
 		this.empleado = empleado;
 	}
 
+
+	//bi-directional many-to-one association to Produccion
+	@ManyToOne
+	@JoinColumn(name="idproduccion")
 	public Produccion getProduccion() {
 		return this.produccion;
 	}
@@ -127,6 +120,10 @@ public class LimpiezaProcesoEmpleadoMarcacione implements Serializable {
 		this.produccion = produccion;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -135,6 +132,10 @@ public class LimpiezaProcesoEmpleadoMarcacione implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

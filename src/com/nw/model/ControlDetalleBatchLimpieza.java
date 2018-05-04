@@ -11,55 +11,29 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="control_detalle_batch_limpieza")
+@NamedQuery(name="ControlDetalleBatchLimpieza.findAll", query="SELECT c FROM ControlDetalleBatchLimpieza c")
 public class ControlDetalleBatchLimpieza implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcontroldetallebatchlimpieza;
-
 	private Integer estado;
-
 	private Timestamp fechaactualizacion;
-
 	private Timestamp fechafin;
-
 	private Timestamp fechainicio;
-
 	private String idusuarioactualizacion;
-
 	private String idusuariofin;
-
 	private String observaciones;
-
-	//bi-directional many-to-one association to ControlFichaBatch
-	@ManyToOne
-	@JoinColumn(name="idcontrolfichabatch")
 	private ControlFichaBatch controlFichaBatch;
-
-	//bi-directional many-to-one association to EvisceradoDetalleProcesoCoche
-	@ManyToOne
-	@JoinColumn(name="idevisceradodetalleprocesocoche")
 	private EvisceradoDetalleProcesoCoche evisceradoDetalleProcesoCoche;
-
-	//bi-directional many-to-one association to LimpiezaLinea
-	@ManyToOne
-	@JoinColumn(name="idlimpiezalinea")
 	private LimpiezaLinea limpiezaLinea;
-
-	//bi-directional many-to-one association to MaquinaLinea
-	@ManyToOne
-	@JoinColumn(name="idmaquinalinea")
 	private MaquinaLinea maquinaLinea;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuarioinicio")
 	private Usuario usuario;
 
 	public ControlDetalleBatchLimpieza() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcontroldetallebatchlimpieza() {
 		return this.idcontroldetallebatchlimpieza;
 	}
@@ -67,6 +41,7 @@ public class ControlDetalleBatchLimpieza implements Serializable {
 	public void setIdcontroldetallebatchlimpieza(Long idcontroldetallebatchlimpieza) {
 		this.idcontroldetallebatchlimpieza = idcontroldetallebatchlimpieza;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -76,6 +51,7 @@ public class ControlDetalleBatchLimpieza implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Timestamp getFechaactualizacion() {
 		return this.fechaactualizacion;
 	}
@@ -83,6 +59,7 @@ public class ControlDetalleBatchLimpieza implements Serializable {
 	public void setFechaactualizacion(Timestamp fechaactualizacion) {
 		this.fechaactualizacion = fechaactualizacion;
 	}
+
 
 	public Timestamp getFechafin() {
 		return this.fechafin;
@@ -92,6 +69,7 @@ public class ControlDetalleBatchLimpieza implements Serializable {
 		this.fechafin = fechafin;
 	}
 
+
 	public Timestamp getFechainicio() {
 		return this.fechainicio;
 	}
@@ -99,6 +77,7 @@ public class ControlDetalleBatchLimpieza implements Serializable {
 	public void setFechainicio(Timestamp fechainicio) {
 		this.fechainicio = fechainicio;
 	}
+
 
 	public String getIdusuarioactualizacion() {
 		return this.idusuarioactualizacion;
@@ -108,6 +87,7 @@ public class ControlDetalleBatchLimpieza implements Serializable {
 		this.idusuarioactualizacion = idusuarioactualizacion;
 	}
 
+
 	public String getIdusuariofin() {
 		return this.idusuariofin;
 	}
@@ -115,6 +95,7 @@ public class ControlDetalleBatchLimpieza implements Serializable {
 	public void setIdusuariofin(String idusuariofin) {
 		this.idusuariofin = idusuariofin;
 	}
+
 
 	public String getObservaciones() {
 		return this.observaciones;
@@ -124,6 +105,10 @@ public class ControlDetalleBatchLimpieza implements Serializable {
 		this.observaciones = observaciones;
 	}
 
+
+	//bi-directional many-to-one association to ControlFichaBatch
+	@ManyToOne
+	@JoinColumn(name="idcontrolfichabatch")
 	public ControlFichaBatch getControlFichaBatch() {
 		return this.controlFichaBatch;
 	}
@@ -132,6 +117,10 @@ public class ControlDetalleBatchLimpieza implements Serializable {
 		this.controlFichaBatch = controlFichaBatch;
 	}
 
+
+	//bi-directional many-to-one association to EvisceradoDetalleProcesoCoche
+	@ManyToOne
+	@JoinColumn(name="idevisceradodetalleprocesocoche")
 	public EvisceradoDetalleProcesoCoche getEvisceradoDetalleProcesoCoche() {
 		return this.evisceradoDetalleProcesoCoche;
 	}
@@ -140,6 +129,10 @@ public class ControlDetalleBatchLimpieza implements Serializable {
 		this.evisceradoDetalleProcesoCoche = evisceradoDetalleProcesoCoche;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaLinea
+	@ManyToOne
+	@JoinColumn(name="idlimpiezalinea")
 	public LimpiezaLinea getLimpiezaLinea() {
 		return this.limpiezaLinea;
 	}
@@ -148,6 +141,10 @@ public class ControlDetalleBatchLimpieza implements Serializable {
 		this.limpiezaLinea = limpiezaLinea;
 	}
 
+
+	//bi-directional many-to-one association to MaquinaLinea
+	@ManyToOne
+	@JoinColumn(name="idmaquinalinea")
 	public MaquinaLinea getMaquinaLinea() {
 		return this.maquinaLinea;
 	}
@@ -156,6 +153,10 @@ public class ControlDetalleBatchLimpieza implements Serializable {
 		this.maquinaLinea = maquinaLinea;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuarioinicio")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

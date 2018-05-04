@@ -11,38 +11,25 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="eviscerado_reanudacion_sec_coche")
+@NamedQuery(name="EvisceradoReanudacionSecCoche.findAll", query="SELECT e FROM EvisceradoReanudacionSecCoche e")
 public class EvisceradoReanudacionSecCoche implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idevisceradoreanudacionseccoche;
-
 	private Integer estado;
-
 	private Timestamp fechadeshabilita;
-
 	private Timestamp fechahabilita;
-
 	private String idusuariodeshabilita;
-
 	private Integer secuenciafin;
-
 	private Integer secuenciainicio;
-
-	//bi-directional many-to-one association to EvisceradoDetalleProcesoCoche
-	@ManyToOne
-	@JoinColumn(name="idevisceradodetalleprocesocoche")
 	private EvisceradoDetalleProcesoCoche evisceradoDetalleProcesoCoche;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuariohabilita")
 	private Usuario usuario;
 
 	public EvisceradoReanudacionSecCoche() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdevisceradoreanudacionseccoche() {
 		return this.idevisceradoreanudacionseccoche;
 	}
@@ -50,6 +37,7 @@ public class EvisceradoReanudacionSecCoche implements Serializable {
 	public void setIdevisceradoreanudacionseccoche(Integer idevisceradoreanudacionseccoche) {
 		this.idevisceradoreanudacionseccoche = idevisceradoreanudacionseccoche;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -59,6 +47,7 @@ public class EvisceradoReanudacionSecCoche implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Timestamp getFechadeshabilita() {
 		return this.fechadeshabilita;
 	}
@@ -66,6 +55,7 @@ public class EvisceradoReanudacionSecCoche implements Serializable {
 	public void setFechadeshabilita(Timestamp fechadeshabilita) {
 		this.fechadeshabilita = fechadeshabilita;
 	}
+
 
 	public Timestamp getFechahabilita() {
 		return this.fechahabilita;
@@ -75,6 +65,7 @@ public class EvisceradoReanudacionSecCoche implements Serializable {
 		this.fechahabilita = fechahabilita;
 	}
 
+
 	public String getIdusuariodeshabilita() {
 		return this.idusuariodeshabilita;
 	}
@@ -82,6 +73,7 @@ public class EvisceradoReanudacionSecCoche implements Serializable {
 	public void setIdusuariodeshabilita(String idusuariodeshabilita) {
 		this.idusuariodeshabilita = idusuariodeshabilita;
 	}
+
 
 	public Integer getSecuenciafin() {
 		return this.secuenciafin;
@@ -91,6 +83,7 @@ public class EvisceradoReanudacionSecCoche implements Serializable {
 		this.secuenciafin = secuenciafin;
 	}
 
+
 	public Integer getSecuenciainicio() {
 		return this.secuenciainicio;
 	}
@@ -99,6 +92,10 @@ public class EvisceradoReanudacionSecCoche implements Serializable {
 		this.secuenciainicio = secuenciainicio;
 	}
 
+
+	//bi-directional many-to-one association to EvisceradoDetalleProcesoCoche
+	@ManyToOne
+	@JoinColumn(name="idevisceradodetalleprocesocoche")
 	public EvisceradoDetalleProcesoCoche getEvisceradoDetalleProcesoCoche() {
 		return this.evisceradoDetalleProcesoCoche;
 	}
@@ -107,6 +104,10 @@ public class EvisceradoReanudacionSecCoche implements Serializable {
 		this.evisceradoDetalleProcesoCoche = evisceradoDetalleProcesoCoche;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuariohabilita")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

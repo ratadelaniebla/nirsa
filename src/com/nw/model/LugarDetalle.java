@@ -11,32 +11,21 @@ import java.util.List;
  */
 @Entity
 @Table(name="lugar_detalle")
+@NamedQuery(name="LugarDetalle.findAll", query="SELECT l FROM LugarDetalle l")
 public class LugarDetalle implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idlugardetalle;
-
 	private Integer numerolugar;
-
-	//bi-directional many-to-one association to DesperdicioDetalle
-	@OneToMany(mappedBy="lugarDetalle")
 	private List<DesperdicioDetalle> desperdicioDetalles;
-
-	//bi-directional many-to-one association to Area
-	@ManyToOne
-	@JoinColumn(name="idarea")
 	private Area area;
-
-	//bi-directional many-to-one association to Lugar
-	@ManyToOne
-	@JoinColumn(name="idlugar")
 	private Lugar lugar;
 
 	public LugarDetalle() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdlugardetalle() {
 		return this.idlugardetalle;
 	}
@@ -44,6 +33,7 @@ public class LugarDetalle implements Serializable {
 	public void setIdlugardetalle(Integer idlugardetalle) {
 		this.idlugardetalle = idlugardetalle;
 	}
+
 
 	public Integer getNumerolugar() {
 		return this.numerolugar;
@@ -53,6 +43,9 @@ public class LugarDetalle implements Serializable {
 		this.numerolugar = numerolugar;
 	}
 
+
+	//bi-directional many-to-one association to DesperdicioDetalle
+	@OneToMany(mappedBy="lugarDetalle")
 	public List<DesperdicioDetalle> getDesperdicioDetalles() {
 		return this.desperdicioDetalles;
 	}
@@ -61,6 +54,24 @@ public class LugarDetalle implements Serializable {
 		this.desperdicioDetalles = desperdicioDetalles;
 	}
 
+	public DesperdicioDetalle addDesperdicioDetalle(DesperdicioDetalle desperdicioDetalle) {
+		getDesperdicioDetalles().add(desperdicioDetalle);
+		desperdicioDetalle.setLugarDetalle(this);
+
+		return desperdicioDetalle;
+	}
+
+	public DesperdicioDetalle removeDesperdicioDetalle(DesperdicioDetalle desperdicioDetalle) {
+		getDesperdicioDetalles().remove(desperdicioDetalle);
+		desperdicioDetalle.setLugarDetalle(null);
+
+		return desperdicioDetalle;
+	}
+
+
+	//bi-directional many-to-one association to Area
+	@ManyToOne
+	@JoinColumn(name="idarea")
 	public Area getArea() {
 		return this.area;
 	}
@@ -69,6 +80,10 @@ public class LugarDetalle implements Serializable {
 		this.area = area;
 	}
 
+
+	//bi-directional many-to-one association to Lugar
+	@ManyToOne
+	@JoinColumn(name="idlugar")
 	public Lugar getLugar() {
 		return this.lugar;
 	}

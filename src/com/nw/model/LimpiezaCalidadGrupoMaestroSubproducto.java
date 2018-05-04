@@ -11,31 +11,20 @@ import java.util.List;
  */
 @Entity
 @Table(name="limpieza_calidad_grupo_maestro_subproducto")
+@NamedQuery(name="LimpiezaCalidadGrupoMaestroSubproducto.findAll", query="SELECT l FROM LimpiezaCalidadGrupoMaestroSubproducto l")
 public class LimpiezaCalidadGrupoMaestroSubproducto implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idlimpiezacalidadgrupomaestrosubproducto;
-
-	//bi-directional many-to-one association to LimpiezaCalidadDetalleProcesoBandeja
-	@OneToMany(mappedBy="limpiezaCalidadGrupoMaestroSubproducto")
 	private List<LimpiezaCalidadDetalleProcesoBandeja> limpiezaCalidadDetalleProcesoBandejas;
-
-	//bi-directional many-to-one association to LimpiezaCalidadGrupo
-	@ManyToOne
-	@JoinColumn(name="idlimpiezacalidadgrupo")
 	private LimpiezaCalidadGrupo limpiezaCalidadGrupo;
-
-	//bi-directional many-to-one association to LimpiezaCalidadMaestroSubproducto
-	@ManyToOne
-	@JoinColumn(name="idlimpiezacalidadmaestrosubproducto")
 	private LimpiezaCalidadMaestroSubproducto limpiezaCalidadMaestroSubproducto;
-
 
 	public LimpiezaCalidadGrupoMaestroSubproducto() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdlimpiezacalidadgrupomaestrosubproducto() {
 		return this.idlimpiezacalidadgrupomaestrosubproducto;
 	}
@@ -44,6 +33,9 @@ public class LimpiezaCalidadGrupoMaestroSubproducto implements Serializable {
 		this.idlimpiezacalidadgrupomaestrosubproducto = idlimpiezacalidadgrupomaestrosubproducto;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaCalidadDetalleProcesoBandeja
+	@OneToMany(mappedBy="limpiezaCalidadGrupoMaestroSubproducto")
 	public List<LimpiezaCalidadDetalleProcesoBandeja> getLimpiezaCalidadDetalleProcesoBandejas() {
 		return this.limpiezaCalidadDetalleProcesoBandejas;
 	}
@@ -52,6 +44,24 @@ public class LimpiezaCalidadGrupoMaestroSubproducto implements Serializable {
 		this.limpiezaCalidadDetalleProcesoBandejas = limpiezaCalidadDetalleProcesoBandejas;
 	}
 
+	public LimpiezaCalidadDetalleProcesoBandeja addLimpiezaCalidadDetalleProcesoBandeja(LimpiezaCalidadDetalleProcesoBandeja limpiezaCalidadDetalleProcesoBandeja) {
+		getLimpiezaCalidadDetalleProcesoBandejas().add(limpiezaCalidadDetalleProcesoBandeja);
+		limpiezaCalidadDetalleProcesoBandeja.setLimpiezaCalidadGrupoMaestroSubproducto(this);
+
+		return limpiezaCalidadDetalleProcesoBandeja;
+	}
+
+	public LimpiezaCalidadDetalleProcesoBandeja removeLimpiezaCalidadDetalleProcesoBandeja(LimpiezaCalidadDetalleProcesoBandeja limpiezaCalidadDetalleProcesoBandeja) {
+		getLimpiezaCalidadDetalleProcesoBandejas().remove(limpiezaCalidadDetalleProcesoBandeja);
+		limpiezaCalidadDetalleProcesoBandeja.setLimpiezaCalidadGrupoMaestroSubproducto(null);
+
+		return limpiezaCalidadDetalleProcesoBandeja;
+	}
+
+
+	//bi-directional many-to-one association to LimpiezaCalidadGrupo
+	@ManyToOne
+	@JoinColumn(name="idlimpiezacalidadgrupo")
 	public LimpiezaCalidadGrupo getLimpiezaCalidadGrupo() {
 		return this.limpiezaCalidadGrupo;
 	}
@@ -60,6 +70,10 @@ public class LimpiezaCalidadGrupoMaestroSubproducto implements Serializable {
 		this.limpiezaCalidadGrupo = limpiezaCalidadGrupo;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaCalidadMaestroSubproducto
+	@ManyToOne
+	@JoinColumn(name="idlimpiezacalidadmaestrosubproducto")
 	public LimpiezaCalidadMaestroSubproducto getLimpiezaCalidadMaestroSubproducto() {
 		return this.limpiezaCalidadMaestroSubproducto;
 	}

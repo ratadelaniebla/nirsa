@@ -10,42 +10,30 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="camara_temporal_carga_inventario")
+@NamedQuery(name="CamaraTemporalCargaInventario.findAll", query="SELECT c FROM CamaraTemporalCargaInventario c")
 public class CamaraTemporalCargaInventario implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idcamaratemporalinv;
-
 	private String camara;
-
 	private String columna;
-
 	private String fila;
-
 	private String idcajon;
-
 	private String idmaterial;
-
 	private String lotesap;
-
 	private String nombrecuba;
-
 	private double pesobruto;
-
 	private double pesoneto;
-
 	private String registro;
-
 	private double tara;
-
 	private String ticket;
-
 	private String tipocaptura;
 
 	public CamaraTemporalCargaInventario() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdcamaratemporalinv() {
 		return this.idcamaratemporalinv;
 	}
@@ -53,6 +41,7 @@ public class CamaraTemporalCargaInventario implements Serializable {
 	public void setIdcamaratemporalinv(Integer idcamaratemporalinv) {
 		this.idcamaratemporalinv = idcamaratemporalinv;
 	}
+
 
 	public String getCamara() {
 		return this.camara;
@@ -62,6 +51,7 @@ public class CamaraTemporalCargaInventario implements Serializable {
 		this.camara = camara;
 	}
 
+
 	public String getColumna() {
 		return this.columna;
 	}
@@ -69,6 +59,7 @@ public class CamaraTemporalCargaInventario implements Serializable {
 	public void setColumna(String columna) {
 		this.columna = columna;
 	}
+
 
 	public String getFila() {
 		return this.fila;
@@ -78,6 +69,7 @@ public class CamaraTemporalCargaInventario implements Serializable {
 		this.fila = fila;
 	}
 
+
 	public String getIdcajon() {
 		return this.idcajon;
 	}
@@ -85,6 +77,7 @@ public class CamaraTemporalCargaInventario implements Serializable {
 	public void setIdcajon(String idcajon) {
 		this.idcajon = idcajon;
 	}
+
 
 	public String getIdmaterial() {
 		return this.idmaterial;
@@ -94,6 +87,7 @@ public class CamaraTemporalCargaInventario implements Serializable {
 		this.idmaterial = idmaterial;
 	}
 
+
 	public String getLotesap() {
 		return this.lotesap;
 	}
@@ -101,6 +95,7 @@ public class CamaraTemporalCargaInventario implements Serializable {
 	public void setLotesap(String lotesap) {
 		this.lotesap = lotesap;
 	}
+
 
 	public String getNombrecuba() {
 		return this.nombrecuba;
@@ -110,6 +105,7 @@ public class CamaraTemporalCargaInventario implements Serializable {
 		this.nombrecuba = nombrecuba;
 	}
 
+
 	public double getPesobruto() {
 		return this.pesobruto;
 	}
@@ -117,6 +113,7 @@ public class CamaraTemporalCargaInventario implements Serializable {
 	public void setPesobruto(double pesobruto) {
 		this.pesobruto = pesobruto;
 	}
+
 
 	public double getPesoneto() {
 		return this.pesoneto;
@@ -126,6 +123,7 @@ public class CamaraTemporalCargaInventario implements Serializable {
 		this.pesoneto = pesoneto;
 	}
 
+
 	public String getRegistro() {
 		return this.registro;
 	}
@@ -133,6 +131,7 @@ public class CamaraTemporalCargaInventario implements Serializable {
 	public void setRegistro(String registro) {
 		this.registro = registro;
 	}
+
 
 	public double getTara() {
 		return this.tara;
@@ -142,6 +141,7 @@ public class CamaraTemporalCargaInventario implements Serializable {
 		this.tara = tara;
 	}
 
+
 	public String getTicket() {
 		return this.ticket;
 	}
@@ -149,6 +149,7 @@ public class CamaraTemporalCargaInventario implements Serializable {
 	public void setTicket(String ticket) {
 		this.ticket = ticket;
 	}
+
 
 	public String getTipocaptura() {
 		return this.tipocaptura;

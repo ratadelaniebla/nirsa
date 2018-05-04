@@ -2,6 +2,7 @@ package com.nw.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -15,6 +16,7 @@ public class EnvasadoTipoProteina implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer idenvasadotipoproteina;
 	private String descripcion;
+	private List<EnvasadoDetalleProcesoCambio> envasadoDetalleProcesoCambios;
 
 	public EnvasadoTipoProteina() {
 	}
@@ -37,6 +39,31 @@ public class EnvasadoTipoProteina implements Serializable {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+
+	//bi-directional many-to-one association to EnvasadoDetalleProcesoCambio
+	@OneToMany(mappedBy="envasadoTipoProteina")
+	public List<EnvasadoDetalleProcesoCambio> getEnvasadoDetalleProcesoCambios() {
+		return this.envasadoDetalleProcesoCambios;
+	}
+
+	public void setEnvasadoDetalleProcesoCambios(List<EnvasadoDetalleProcesoCambio> envasadoDetalleProcesoCambios) {
+		this.envasadoDetalleProcesoCambios = envasadoDetalleProcesoCambios;
+	}
+
+	public EnvasadoDetalleProcesoCambio addEnvasadoDetalleProcesoCambio(EnvasadoDetalleProcesoCambio envasadoDetalleProcesoCambio) {
+		getEnvasadoDetalleProcesoCambios().add(envasadoDetalleProcesoCambio);
+		envasadoDetalleProcesoCambio.setEnvasadoTipoProteina(this);
+
+		return envasadoDetalleProcesoCambio;
+	}
+
+	public EnvasadoDetalleProcesoCambio removeEnvasadoDetalleProcesoCambio(EnvasadoDetalleProcesoCambio envasadoDetalleProcesoCambio) {
+		getEnvasadoDetalleProcesoCambios().remove(envasadoDetalleProcesoCambio);
+		envasadoDetalleProcesoCambio.setEnvasadoTipoProteina(null);
+
+		return envasadoDetalleProcesoCambio;
 	}
 
 }

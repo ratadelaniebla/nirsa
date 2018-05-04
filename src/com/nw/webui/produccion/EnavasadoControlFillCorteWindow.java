@@ -25,8 +25,8 @@ import com.nw.model.EnvasadoProceso;
 import com.nw.model.Produccion;
 import com.nw.model.Turno;
 import com.nw.model.dao.EnvasadoControlFillCorteCabeceraDAO;
+import com.nw.model.dao.EnvasadoControlFillCorteDetalleDAO;
 import com.nw.model.dao.impl.EnvasadoControlFillCorteCabeceraDAOJpaImpl;
-import com.nw.model.dao.impl.EnvasadoControlFillCorteDetalleDAO;
 import com.nw.model.dao.impl.EnvasadoControlFillCorteDetalleDAOJpaImpl;
 import com.nw.model.dao.impl.EnvasadoProcesoDAOJpaImpl;
 import com.nw.model.dao.impl.ProduccionDAOJpaImpl;
@@ -273,7 +273,7 @@ public class EnavasadoControlFillCorteWindow extends GenericForwardComposer {
 		
 		if (this.ecfcc.getIdenvasadocontrolfillcortecabecera()==null)
 			this.ecfcc = new EnvasadoControlFillCorteCabecera();
-		ecfcc.setIdenvasadoproceso(envasadoProceso.getIdenvasadoproceso());
+		ecfcc.setEnvasadoProceso(envasadoProceso);
 		ecfcc.setFechareg(new Timestamp(System.currentTimeMillis()));
 		
 		//valida la informacion del usuario logueado

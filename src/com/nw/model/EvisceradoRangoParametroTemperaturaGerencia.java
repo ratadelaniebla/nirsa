@@ -10,22 +10,20 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="eviscerado_rango_parametro_temperatura_gerencia")
+@NamedQuery(name="EvisceradoRangoParametroTemperaturaGerencia.findAll", query="SELECT e FROM EvisceradoRangoParametroTemperaturaGerencia e")
 public class EvisceradoRangoParametroTemperaturaGerencia implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idevisceradorangoparametrotemperaturagerencia;
-
 	private String color;
-
 	private double desde;
-
 	private double hasta;
 
 	public EvisceradoRangoParametroTemperaturaGerencia() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdevisceradorangoparametrotemperaturagerencia() {
 		return this.idevisceradorangoparametrotemperaturagerencia;
 	}
@@ -33,6 +31,7 @@ public class EvisceradoRangoParametroTemperaturaGerencia implements Serializable
 	public void setIdevisceradorangoparametrotemperaturagerencia(Integer idevisceradorangoparametrotemperaturagerencia) {
 		this.idevisceradorangoparametrotemperaturagerencia = idevisceradorangoparametrotemperaturagerencia;
 	}
+
 
 	public String getColor() {
 		return this.color;
@@ -42,6 +41,7 @@ public class EvisceradoRangoParametroTemperaturaGerencia implements Serializable
 		this.color = color;
 	}
 
+
 	public double getDesde() {
 		return this.desde;
 	}
@@ -49,6 +49,7 @@ public class EvisceradoRangoParametroTemperaturaGerencia implements Serializable
 	public void setDesde(double desde) {
 		this.desde = desde;
 	}
+
 
 	public double getHasta() {
 		return this.hasta;

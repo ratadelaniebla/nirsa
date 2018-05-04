@@ -11,82 +11,43 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="calidad_detalle_pcc")
+@NamedQuery(name="CalidadDetallePcc.findAll", query="SELECT c FROM CalidadDetallePcc c")
 public class CalidadDetallePcc implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long iddetallecalidadpcc;
-
 	private Integer agalla;
-
 	private double consumonitrogeno;
-
 	private Integer danofisico;
-
 	private Timestamp fechareg;
-
 	private double histamina;
-
 	private Integer idcalidadolormuestra;
-
 	private Integer idcalidadsabormuestra;
-
 	private String lotecamara;
-
 	private double nitrogeno;
-
 	private Integer nummuestra;
-
 	private String observacionnhistnit;
-
 	private Integer ojos;
-
 	private double pesonitrogeno;
-
 	private double ph;
-
 	private Integer piel;
-
 	private double sal;
-
 	private double temperatura;
-
 	private double tempsalmuera;
-
-	//bi-directional many-to-one association to BarcoEstibaCuba
-	@ManyToOne
-	@JoinColumn(name="idbarcoestibacuba")
+	private String usuariohistamina;
+	private String usuariosal;
 	private BarcoEstibaCuba barcoEstibaCuba;
-
-	//bi-directional many-to-one association to CalidadNumeroMuestreoPcc
-	@ManyToOne
-	@JoinColumn(name="nummuestreo")
 	private CalidadNumeroMuestreoPcc calidadNumeroMuestreoPcc;
-
-	//bi-directional many-to-one association to CalidadPcc
-	@ManyToOne
-	@JoinColumn(name="idcalidadpcc")
 	private CalidadPcc calidadPcc;
-
-	//bi-directional many-to-one association to CamaraCajon
-	@ManyToOne
-	@JoinColumn(name="idcamaracajon")
 	private CamaraCajon camaraCajon;
-
-	//bi-directional many-to-one association to EspecieTalla
-	@ManyToOne
-	@JoinColumn(name="idespecietalla")
 	private EspecieTalla especieTalla;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public CalidadDetallePcc() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIddetallecalidadpcc() {
 		return this.iddetallecalidadpcc;
 	}
@@ -94,6 +55,7 @@ public class CalidadDetallePcc implements Serializable {
 	public void setIddetallecalidadpcc(Long iddetallecalidadpcc) {
 		this.iddetallecalidadpcc = iddetallecalidadpcc;
 	}
+
 
 	public Integer getAgalla() {
 		return this.agalla;
@@ -103,6 +65,7 @@ public class CalidadDetallePcc implements Serializable {
 		this.agalla = agalla;
 	}
 
+
 	public double getConsumonitrogeno() {
 		return this.consumonitrogeno;
 	}
@@ -110,6 +73,7 @@ public class CalidadDetallePcc implements Serializable {
 	public void setConsumonitrogeno(double consumonitrogeno) {
 		this.consumonitrogeno = consumonitrogeno;
 	}
+
 
 	public Integer getDanofisico() {
 		return this.danofisico;
@@ -119,6 +83,7 @@ public class CalidadDetallePcc implements Serializable {
 		this.danofisico = danofisico;
 	}
 
+
 	public Timestamp getFechareg() {
 		return this.fechareg;
 	}
@@ -126,6 +91,7 @@ public class CalidadDetallePcc implements Serializable {
 	public void setFechareg(Timestamp fechareg) {
 		this.fechareg = fechareg;
 	}
+
 
 	public double getHistamina() {
 		return this.histamina;
@@ -135,6 +101,7 @@ public class CalidadDetallePcc implements Serializable {
 		this.histamina = histamina;
 	}
 
+
 	public Integer getIdcalidadolormuestra() {
 		return this.idcalidadolormuestra;
 	}
@@ -142,6 +109,7 @@ public class CalidadDetallePcc implements Serializable {
 	public void setIdcalidadolormuestra(Integer idcalidadolormuestra) {
 		this.idcalidadolormuestra = idcalidadolormuestra;
 	}
+
 
 	public Integer getIdcalidadsabormuestra() {
 		return this.idcalidadsabormuestra;
@@ -151,6 +119,7 @@ public class CalidadDetallePcc implements Serializable {
 		this.idcalidadsabormuestra = idcalidadsabormuestra;
 	}
 
+
 	public String getLotecamara() {
 		return this.lotecamara;
 	}
@@ -158,6 +127,7 @@ public class CalidadDetallePcc implements Serializable {
 	public void setLotecamara(String lotecamara) {
 		this.lotecamara = lotecamara;
 	}
+
 
 	public double getNitrogeno() {
 		return this.nitrogeno;
@@ -167,6 +137,7 @@ public class CalidadDetallePcc implements Serializable {
 		this.nitrogeno = nitrogeno;
 	}
 
+
 	public Integer getNummuestra() {
 		return this.nummuestra;
 	}
@@ -174,6 +145,7 @@ public class CalidadDetallePcc implements Serializable {
 	public void setNummuestra(Integer nummuestra) {
 		this.nummuestra = nummuestra;
 	}
+
 
 	public String getObservacionnhistnit() {
 		return this.observacionnhistnit;
@@ -183,6 +155,7 @@ public class CalidadDetallePcc implements Serializable {
 		this.observacionnhistnit = observacionnhistnit;
 	}
 
+
 	public Integer getOjos() {
 		return this.ojos;
 	}
@@ -190,6 +163,7 @@ public class CalidadDetallePcc implements Serializable {
 	public void setOjos(Integer ojos) {
 		this.ojos = ojos;
 	}
+
 
 	public double getPesonitrogeno() {
 		return this.pesonitrogeno;
@@ -199,6 +173,7 @@ public class CalidadDetallePcc implements Serializable {
 		this.pesonitrogeno = pesonitrogeno;
 	}
 
+
 	public double getPh() {
 		return this.ph;
 	}
@@ -206,6 +181,7 @@ public class CalidadDetallePcc implements Serializable {
 	public void setPh(double ph) {
 		this.ph = ph;
 	}
+
 
 	public Integer getPiel() {
 		return this.piel;
@@ -215,6 +191,7 @@ public class CalidadDetallePcc implements Serializable {
 		this.piel = piel;
 	}
 
+
 	public double getSal() {
 		return this.sal;
 	}
@@ -222,6 +199,7 @@ public class CalidadDetallePcc implements Serializable {
 	public void setSal(double sal) {
 		this.sal = sal;
 	}
+
 
 	public double getTemperatura() {
 		return this.temperatura;
@@ -231,6 +209,7 @@ public class CalidadDetallePcc implements Serializable {
 		this.temperatura = temperatura;
 	}
 
+
 	public double getTempsalmuera() {
 		return this.tempsalmuera;
 	}
@@ -239,6 +218,28 @@ public class CalidadDetallePcc implements Serializable {
 		this.tempsalmuera = tempsalmuera;
 	}
 
+
+	public String getUsuariohistamina() {
+		return this.usuariohistamina;
+	}
+
+	public void setUsuariohistamina(String usuariohistamina) {
+		this.usuariohistamina = usuariohistamina;
+	}
+
+
+	public String getUsuariosal() {
+		return this.usuariosal;
+	}
+
+	public void setUsuariosal(String usuariosal) {
+		this.usuariosal = usuariosal;
+	}
+
+
+	//bi-directional many-to-one association to BarcoEstibaCuba
+	@ManyToOne
+	@JoinColumn(name="idbarcoestibacuba")
 	public BarcoEstibaCuba getBarcoEstibaCuba() {
 		return this.barcoEstibaCuba;
 	}
@@ -247,6 +248,10 @@ public class CalidadDetallePcc implements Serializable {
 		this.barcoEstibaCuba = barcoEstibaCuba;
 	}
 
+
+	//bi-directional many-to-one association to CalidadNumeroMuestreoPcc
+	@ManyToOne
+	@JoinColumn(name="nummuestreo")
 	public CalidadNumeroMuestreoPcc getCalidadNumeroMuestreoPcc() {
 		return this.calidadNumeroMuestreoPcc;
 	}
@@ -255,6 +260,10 @@ public class CalidadDetallePcc implements Serializable {
 		this.calidadNumeroMuestreoPcc = calidadNumeroMuestreoPcc;
 	}
 
+
+	//bi-directional many-to-one association to CalidadPcc
+	@ManyToOne
+	@JoinColumn(name="idcalidadpcc")
 	public CalidadPcc getCalidadPcc() {
 		return this.calidadPcc;
 	}
@@ -263,6 +272,10 @@ public class CalidadDetallePcc implements Serializable {
 		this.calidadPcc = calidadPcc;
 	}
 
+
+	//bi-directional many-to-one association to CamaraCajon
+	@ManyToOne
+	@JoinColumn(name="idcamaracajon")
 	public CamaraCajon getCamaraCajon() {
 		return this.camaraCajon;
 	}
@@ -271,6 +284,10 @@ public class CalidadDetallePcc implements Serializable {
 		this.camaraCajon = camaraCajon;
 	}
 
+
+	//bi-directional many-to-one association to EspecieTalla
+	@ManyToOne
+	@JoinColumn(name="idespecietalla")
 	public EspecieTalla getEspecieTalla() {
 		return this.especieTalla;
 	}
@@ -279,6 +296,10 @@ public class CalidadDetallePcc implements Serializable {
 		this.especieTalla = especieTalla;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

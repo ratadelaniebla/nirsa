@@ -11,80 +11,33 @@ import java.util.List;
  */
 @Entity
 @Table(name="especie_talla")
+@NamedQuery(name="EspecieTalla.findAll", query="SELECT e FROM EspecieTalla e")
 public class EspecieTalla implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idespecietalla;
-
 	private String descripcion;
-
-	//bi-directional many-to-one association to AtcProduccionDetalleLote
-	@OneToMany(mappedBy="especieTalla")
 	private List<AtcProduccionDetalleLote> atcProduccionDetalleLotes;
-
-	//bi-directional many-to-one association to CajonDetalleBarcoDescarga
-	@OneToMany(mappedBy="especieTalla")
 	private List<CajonDetalleBarcoDescarga> cajonDetalleBarcoDescargas;
-
-	//bi-directional many-to-one association to CalidadDetallePcc
-	@OneToMany(mappedBy="especieTalla")
 	private List<CalidadDetallePcc> calidadDetallePccs;
-
-	//bi-directional many-to-one association to CalidadDetalleSensorialMp
-	@OneToMany(mappedBy="especieTalla")
 	private List<CalidadDetalleSensorialMp> calidadDetalleSensorialMps;
-
-	//bi-directional many-to-one association to CalidadDetalleTemperaturaCajonBanda
-	@OneToMany(mappedBy="especieTalla")
 	private List<CalidadDetalleTemperaturaCajonBanda> calidadDetalleTemperaturaCajonBandas;
-
-	//bi-directional many-to-one association to CalidadEspecietallaCajonBanda
-	@OneToMany(mappedBy="especieTalla")
 	private List<CalidadEspecietallaCajonBanda> calidadEspecietallaCajonBandas;
-
-	//bi-directional many-to-one association to CamaraCajon
-	@OneToMany(mappedBy="especieTalla")
 	private List<CamaraCajon> camaraCajons;
-
-	//bi-directional many-to-one association to Especie
-	@ManyToOne
-	@JoinColumn(name="idespecie")
 	private Especie especie;
-
-	//bi-directional many-to-one association to Talla
-	@ManyToOne
-	@JoinColumn(name="idtalla")
 	private Talla talla;
-
-	//bi-directional many-to-one association to EstandarDesperdicioAtun
-	@OneToMany(mappedBy="especieTalla")
 	private List<EstandarDesperdicioAtun> estandarDesperdicioAtuns;
-
-	//bi-directional many-to-one association to EstandarRendimientoAtun
-	@OneToMany(mappedBy="especieTalla")
 	private List<EstandarRendimientoAtun> estandarRendimientoAtuns;
-
-	//bi-directional many-to-one association to EstandarRendimientosAtun
-	@OneToMany(mappedBy="especieTalla")
 	private List<EstandarRendimientosAtun> estandarRendimientosAtuns;
-
-	//bi-directional many-to-one association to GrupoTallaEspecieTalla
-	@OneToMany(mappedBy="especieTalla")
 	private List<GrupoTallaEspecieTalla> grupoTallaEspecieTallas;
-
-	//bi-directional many-to-one association to LonjasEspecietalla
-	@OneToMany(mappedBy="especieTalla")
 	private List<LonjasEspecietalla> lonjasEspecietallas;
-
-	//bi-directional many-to-one association to ProduccionDetalleLote
-	@OneToMany(mappedBy="especieTalla")
 	private List<ProduccionDetalleLote> produccionDetalleLotes;
 
 	public EspecieTalla() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdespecietalla() {
 		return this.idespecietalla;
 	}
@@ -92,6 +45,7 @@ public class EspecieTalla implements Serializable {
 	public void setIdespecietalla(Integer idespecietalla) {
 		this.idespecietalla = idespecietalla;
 	}
+
 
 	public String getDescripcion() {
 		return this.descripcion;
@@ -101,6 +55,9 @@ public class EspecieTalla implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+
+	//bi-directional many-to-one association to AtcProduccionDetalleLote
+	@OneToMany(mappedBy="especieTalla")
 	public List<AtcProduccionDetalleLote> getAtcProduccionDetalleLotes() {
 		return this.atcProduccionDetalleLotes;
 	}
@@ -109,6 +66,23 @@ public class EspecieTalla implements Serializable {
 		this.atcProduccionDetalleLotes = atcProduccionDetalleLotes;
 	}
 
+	public AtcProduccionDetalleLote addAtcProduccionDetalleLote(AtcProduccionDetalleLote atcProduccionDetalleLote) {
+		getAtcProduccionDetalleLotes().add(atcProduccionDetalleLote);
+		atcProduccionDetalleLote.setEspecieTalla(this);
+
+		return atcProduccionDetalleLote;
+	}
+
+	public AtcProduccionDetalleLote removeAtcProduccionDetalleLote(AtcProduccionDetalleLote atcProduccionDetalleLote) {
+		getAtcProduccionDetalleLotes().remove(atcProduccionDetalleLote);
+		atcProduccionDetalleLote.setEspecieTalla(null);
+
+		return atcProduccionDetalleLote;
+	}
+
+
+	//bi-directional many-to-one association to CajonDetalleBarcoDescarga
+	@OneToMany(mappedBy="especieTalla")
 	public List<CajonDetalleBarcoDescarga> getCajonDetalleBarcoDescargas() {
 		return this.cajonDetalleBarcoDescargas;
 	}
@@ -117,6 +91,23 @@ public class EspecieTalla implements Serializable {
 		this.cajonDetalleBarcoDescargas = cajonDetalleBarcoDescargas;
 	}
 
+	public CajonDetalleBarcoDescarga addCajonDetalleBarcoDescarga(CajonDetalleBarcoDescarga cajonDetalleBarcoDescarga) {
+		getCajonDetalleBarcoDescargas().add(cajonDetalleBarcoDescarga);
+		cajonDetalleBarcoDescarga.setEspecieTalla(this);
+
+		return cajonDetalleBarcoDescarga;
+	}
+
+	public CajonDetalleBarcoDescarga removeCajonDetalleBarcoDescarga(CajonDetalleBarcoDescarga cajonDetalleBarcoDescarga) {
+		getCajonDetalleBarcoDescargas().remove(cajonDetalleBarcoDescarga);
+		cajonDetalleBarcoDescarga.setEspecieTalla(null);
+
+		return cajonDetalleBarcoDescarga;
+	}
+
+
+	//bi-directional many-to-one association to CalidadDetallePcc
+	@OneToMany(mappedBy="especieTalla")
 	public List<CalidadDetallePcc> getCalidadDetallePccs() {
 		return this.calidadDetallePccs;
 	}
@@ -125,6 +116,23 @@ public class EspecieTalla implements Serializable {
 		this.calidadDetallePccs = calidadDetallePccs;
 	}
 
+	public CalidadDetallePcc addCalidadDetallePcc(CalidadDetallePcc calidadDetallePcc) {
+		getCalidadDetallePccs().add(calidadDetallePcc);
+		calidadDetallePcc.setEspecieTalla(this);
+
+		return calidadDetallePcc;
+	}
+
+	public CalidadDetallePcc removeCalidadDetallePcc(CalidadDetallePcc calidadDetallePcc) {
+		getCalidadDetallePccs().remove(calidadDetallePcc);
+		calidadDetallePcc.setEspecieTalla(null);
+
+		return calidadDetallePcc;
+	}
+
+
+	//bi-directional many-to-one association to CalidadDetalleSensorialMp
+	@OneToMany(mappedBy="especieTalla")
 	public List<CalidadDetalleSensorialMp> getCalidadDetalleSensorialMps() {
 		return this.calidadDetalleSensorialMps;
 	}
@@ -133,6 +141,23 @@ public class EspecieTalla implements Serializable {
 		this.calidadDetalleSensorialMps = calidadDetalleSensorialMps;
 	}
 
+	public CalidadDetalleSensorialMp addCalidadDetalleSensorialMp(CalidadDetalleSensorialMp calidadDetalleSensorialMp) {
+		getCalidadDetalleSensorialMps().add(calidadDetalleSensorialMp);
+		calidadDetalleSensorialMp.setEspecieTalla(this);
+
+		return calidadDetalleSensorialMp;
+	}
+
+	public CalidadDetalleSensorialMp removeCalidadDetalleSensorialMp(CalidadDetalleSensorialMp calidadDetalleSensorialMp) {
+		getCalidadDetalleSensorialMps().remove(calidadDetalleSensorialMp);
+		calidadDetalleSensorialMp.setEspecieTalla(null);
+
+		return calidadDetalleSensorialMp;
+	}
+
+
+	//bi-directional many-to-one association to CalidadDetalleTemperaturaCajonBanda
+	@OneToMany(mappedBy="especieTalla")
 	public List<CalidadDetalleTemperaturaCajonBanda> getCalidadDetalleTemperaturaCajonBandas() {
 		return this.calidadDetalleTemperaturaCajonBandas;
 	}
@@ -141,6 +166,23 @@ public class EspecieTalla implements Serializable {
 		this.calidadDetalleTemperaturaCajonBandas = calidadDetalleTemperaturaCajonBandas;
 	}
 
+	public CalidadDetalleTemperaturaCajonBanda addCalidadDetalleTemperaturaCajonBanda(CalidadDetalleTemperaturaCajonBanda calidadDetalleTemperaturaCajonBanda) {
+		getCalidadDetalleTemperaturaCajonBandas().add(calidadDetalleTemperaturaCajonBanda);
+		calidadDetalleTemperaturaCajonBanda.setEspecieTalla(this);
+
+		return calidadDetalleTemperaturaCajonBanda;
+	}
+
+	public CalidadDetalleTemperaturaCajonBanda removeCalidadDetalleTemperaturaCajonBanda(CalidadDetalleTemperaturaCajonBanda calidadDetalleTemperaturaCajonBanda) {
+		getCalidadDetalleTemperaturaCajonBandas().remove(calidadDetalleTemperaturaCajonBanda);
+		calidadDetalleTemperaturaCajonBanda.setEspecieTalla(null);
+
+		return calidadDetalleTemperaturaCajonBanda;
+	}
+
+
+	//bi-directional many-to-one association to CalidadEspecietallaCajonBanda
+	@OneToMany(mappedBy="especieTalla")
 	public List<CalidadEspecietallaCajonBanda> getCalidadEspecietallaCajonBandas() {
 		return this.calidadEspecietallaCajonBandas;
 	}
@@ -149,6 +191,23 @@ public class EspecieTalla implements Serializable {
 		this.calidadEspecietallaCajonBandas = calidadEspecietallaCajonBandas;
 	}
 
+	public CalidadEspecietallaCajonBanda addCalidadEspecietallaCajonBanda(CalidadEspecietallaCajonBanda calidadEspecietallaCajonBanda) {
+		getCalidadEspecietallaCajonBandas().add(calidadEspecietallaCajonBanda);
+		calidadEspecietallaCajonBanda.setEspecieTalla(this);
+
+		return calidadEspecietallaCajonBanda;
+	}
+
+	public CalidadEspecietallaCajonBanda removeCalidadEspecietallaCajonBanda(CalidadEspecietallaCajonBanda calidadEspecietallaCajonBanda) {
+		getCalidadEspecietallaCajonBandas().remove(calidadEspecietallaCajonBanda);
+		calidadEspecietallaCajonBanda.setEspecieTalla(null);
+
+		return calidadEspecietallaCajonBanda;
+	}
+
+
+	//bi-directional many-to-one association to CamaraCajon
+	@OneToMany(mappedBy="especieTalla")
 	public List<CamaraCajon> getCamaraCajons() {
 		return this.camaraCajons;
 	}
@@ -157,6 +216,24 @@ public class EspecieTalla implements Serializable {
 		this.camaraCajons = camaraCajons;
 	}
 
+	public CamaraCajon addCamaraCajon(CamaraCajon camaraCajon) {
+		getCamaraCajons().add(camaraCajon);
+		camaraCajon.setEspecieTalla(this);
+
+		return camaraCajon;
+	}
+
+	public CamaraCajon removeCamaraCajon(CamaraCajon camaraCajon) {
+		getCamaraCajons().remove(camaraCajon);
+		camaraCajon.setEspecieTalla(null);
+
+		return camaraCajon;
+	}
+
+
+	//bi-directional many-to-one association to Especie
+	@ManyToOne
+	@JoinColumn(name="idespecie")
 	public Especie getEspecie() {
 		return this.especie;
 	}
@@ -165,6 +242,10 @@ public class EspecieTalla implements Serializable {
 		this.especie = especie;
 	}
 
+
+	//bi-directional many-to-one association to Talla
+	@ManyToOne
+	@JoinColumn(name="idtalla")
 	public Talla getTalla() {
 		return this.talla;
 	}
@@ -173,6 +254,9 @@ public class EspecieTalla implements Serializable {
 		this.talla = talla;
 	}
 
+
+	//bi-directional many-to-one association to EstandarDesperdicioAtun
+	@OneToMany(mappedBy="especieTalla")
 	public List<EstandarDesperdicioAtun> getEstandarDesperdicioAtuns() {
 		return this.estandarDesperdicioAtuns;
 	}
@@ -181,6 +265,23 @@ public class EspecieTalla implements Serializable {
 		this.estandarDesperdicioAtuns = estandarDesperdicioAtuns;
 	}
 
+	public EstandarDesperdicioAtun addEstandarDesperdicioAtun(EstandarDesperdicioAtun estandarDesperdicioAtun) {
+		getEstandarDesperdicioAtuns().add(estandarDesperdicioAtun);
+		estandarDesperdicioAtun.setEspecieTalla(this);
+
+		return estandarDesperdicioAtun;
+	}
+
+	public EstandarDesperdicioAtun removeEstandarDesperdicioAtun(EstandarDesperdicioAtun estandarDesperdicioAtun) {
+		getEstandarDesperdicioAtuns().remove(estandarDesperdicioAtun);
+		estandarDesperdicioAtun.setEspecieTalla(null);
+
+		return estandarDesperdicioAtun;
+	}
+
+
+	//bi-directional many-to-one association to EstandarRendimientoAtun
+	@OneToMany(mappedBy="especieTalla")
 	public List<EstandarRendimientoAtun> getEstandarRendimientoAtuns() {
 		return this.estandarRendimientoAtuns;
 	}
@@ -189,6 +290,23 @@ public class EspecieTalla implements Serializable {
 		this.estandarRendimientoAtuns = estandarRendimientoAtuns;
 	}
 
+	public EstandarRendimientoAtun addEstandarRendimientoAtun(EstandarRendimientoAtun estandarRendimientoAtun) {
+		getEstandarRendimientoAtuns().add(estandarRendimientoAtun);
+		estandarRendimientoAtun.setEspecieTalla(this);
+
+		return estandarRendimientoAtun;
+	}
+
+	public EstandarRendimientoAtun removeEstandarRendimientoAtun(EstandarRendimientoAtun estandarRendimientoAtun) {
+		getEstandarRendimientoAtuns().remove(estandarRendimientoAtun);
+		estandarRendimientoAtun.setEspecieTalla(null);
+
+		return estandarRendimientoAtun;
+	}
+
+
+	//bi-directional many-to-one association to EstandarRendimientosAtun
+	@OneToMany(mappedBy="especieTalla")
 	public List<EstandarRendimientosAtun> getEstandarRendimientosAtuns() {
 		return this.estandarRendimientosAtuns;
 	}
@@ -197,6 +315,23 @@ public class EspecieTalla implements Serializable {
 		this.estandarRendimientosAtuns = estandarRendimientosAtuns;
 	}
 
+	public EstandarRendimientosAtun addEstandarRendimientosAtun(EstandarRendimientosAtun estandarRendimientosAtun) {
+		getEstandarRendimientosAtuns().add(estandarRendimientosAtun);
+		estandarRendimientosAtun.setEspecieTalla(this);
+
+		return estandarRendimientosAtun;
+	}
+
+	public EstandarRendimientosAtun removeEstandarRendimientosAtun(EstandarRendimientosAtun estandarRendimientosAtun) {
+		getEstandarRendimientosAtuns().remove(estandarRendimientosAtun);
+		estandarRendimientosAtun.setEspecieTalla(null);
+
+		return estandarRendimientosAtun;
+	}
+
+
+	//bi-directional many-to-one association to GrupoTallaEspecieTalla
+	@OneToMany(mappedBy="especieTalla")
 	public List<GrupoTallaEspecieTalla> getGrupoTallaEspecieTallas() {
 		return this.grupoTallaEspecieTallas;
 	}
@@ -205,6 +340,23 @@ public class EspecieTalla implements Serializable {
 		this.grupoTallaEspecieTallas = grupoTallaEspecieTallas;
 	}
 
+	public GrupoTallaEspecieTalla addGrupoTallaEspecieTalla(GrupoTallaEspecieTalla grupoTallaEspecieTalla) {
+		getGrupoTallaEspecieTallas().add(grupoTallaEspecieTalla);
+		grupoTallaEspecieTalla.setEspecieTalla(this);
+
+		return grupoTallaEspecieTalla;
+	}
+
+	public GrupoTallaEspecieTalla removeGrupoTallaEspecieTalla(GrupoTallaEspecieTalla grupoTallaEspecieTalla) {
+		getGrupoTallaEspecieTallas().remove(grupoTallaEspecieTalla);
+		grupoTallaEspecieTalla.setEspecieTalla(null);
+
+		return grupoTallaEspecieTalla;
+	}
+
+
+	//bi-directional many-to-one association to LonjasEspecietalla
+	@OneToMany(mappedBy="especieTalla")
 	public List<LonjasEspecietalla> getLonjasEspecietallas() {
 		return this.lonjasEspecietallas;
 	}
@@ -213,12 +365,43 @@ public class EspecieTalla implements Serializable {
 		this.lonjasEspecietallas = lonjasEspecietallas;
 	}
 
+	public LonjasEspecietalla addLonjasEspecietalla(LonjasEspecietalla lonjasEspecietalla) {
+		getLonjasEspecietallas().add(lonjasEspecietalla);
+		lonjasEspecietalla.setEspecieTalla(this);
+
+		return lonjasEspecietalla;
+	}
+
+	public LonjasEspecietalla removeLonjasEspecietalla(LonjasEspecietalla lonjasEspecietalla) {
+		getLonjasEspecietallas().remove(lonjasEspecietalla);
+		lonjasEspecietalla.setEspecieTalla(null);
+
+		return lonjasEspecietalla;
+	}
+
+
+	//bi-directional many-to-one association to ProduccionDetalleLote
+	@OneToMany(mappedBy="especieTalla")
 	public List<ProduccionDetalleLote> getProduccionDetalleLotes() {
 		return this.produccionDetalleLotes;
 	}
 
 	public void setProduccionDetalleLotes(List<ProduccionDetalleLote> produccionDetalleLotes) {
 		this.produccionDetalleLotes = produccionDetalleLotes;
+	}
+
+	public ProduccionDetalleLote addProduccionDetalleLote(ProduccionDetalleLote produccionDetalleLote) {
+		getProduccionDetalleLotes().add(produccionDetalleLote);
+		produccionDetalleLote.setEspecieTalla(this);
+
+		return produccionDetalleLote;
+	}
+
+	public ProduccionDetalleLote removeProduccionDetalleLote(ProduccionDetalleLote produccionDetalleLote) {
+		getProduccionDetalleLotes().remove(produccionDetalleLote);
+		produccionDetalleLote.setEspecieTalla(null);
+
+		return produccionDetalleLote;
 	}
 
 }

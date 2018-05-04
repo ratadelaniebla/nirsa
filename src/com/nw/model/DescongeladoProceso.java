@@ -12,77 +12,35 @@ import java.util.List;
  */
 @Entity
 @Table(name="descongelado_proceso")
+@NamedQuery(name="DescongeladoProceso.findAll", query="SELECT d FROM DescongeladoProceso d")
 public class DescongeladoProceso implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long iddescongeladoproceso;
-
 	private Timestamp fechareg;
-
 	private double objetivo;
-
-	@Column(name="objetivo_general")
 	private double objetivoGeneral;
-
 	private double otif;
-
-	@Column(name="periodo_base_cantidad_descongelado")
 	private double periodoBaseCantidadDescongelado;
-
-	@Column(name="periodo_base_tiempo_descongelado")
 	private double periodoBaseTiempoDescongelado;
-
-	@Column(name="rango1_entregacamara")
 	private double rango1Entregacamara;
-
-	@Column(name="rango1_ingresodescongelado")
 	private double rango1Ingresodescongelado;
-
-	@Column(name="rango2_entregacamara")
 	private double rango2Entregacamara;
-
-	@Column(name="rango2_ingresodescongelado")
 	private double rango2Ingresodescongelado;
-
-	@Column(name="rango3_entregacamara")
 	private double rango3Entregacamara;
-
-	@Column(name="rango3_ingresodescongelado")
 	private double rango3Ingresodescongelado;
-
-	//bi-directional many-to-one association to DescongeladoCajonModificacion
-	@OneToMany(mappedBy="descongeladoProceso")
 	private List<DescongeladoCajonModificacion> descongeladoCajonModificacions;
-
-	//bi-directional many-to-one association to DescongeladoDetalleProceso
-	@OneToMany(mappedBy="descongeladoProceso")
 	private List<DescongeladoDetalleProceso> descongeladoDetalleProcesos;
-
-	//bi-directional many-to-one association to ObservacionesProceso
-	@ManyToOne
-	@JoinColumn(name="idobservacionesprocesos")
 	private ObservacionesProceso observacionesProceso;
-
-	//bi-directional many-to-one association to OeePeriodoBaseObjetivo
-	@ManyToOne
-	@JoinColumn(name="id_oee_periodo_base_objetivo")
 	private OeePeriodoBaseObjetivo oeePeriodoBaseObjetivo;
-
-	//bi-directional many-to-one association to ProcesoAperturaCierre
-	@ManyToOne
-	@JoinColumn(name="idprocesoaperturacierre")
 	private ProcesoAperturaCierre procesoAperturaCierre;
-
-	//bi-directional many-to-one association to Produccion
-	@ManyToOne
-	@JoinColumn(name="idproduccion")
 	private Produccion produccion;
 
 	public DescongeladoProceso() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIddescongeladoproceso() {
 		return this.iddescongeladoproceso;
 	}
@@ -90,6 +48,7 @@ public class DescongeladoProceso implements Serializable {
 	public void setIddescongeladoproceso(Long iddescongeladoproceso) {
 		this.iddescongeladoproceso = iddescongeladoproceso;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -99,6 +58,7 @@ public class DescongeladoProceso implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public double getObjetivo() {
 		return this.objetivo;
 	}
@@ -107,6 +67,8 @@ public class DescongeladoProceso implements Serializable {
 		this.objetivo = objetivo;
 	}
 
+
+	@Column(name="objetivo_general")
 	public double getObjetivoGeneral() {
 		return this.objetivoGeneral;
 	}
@@ -114,6 +76,7 @@ public class DescongeladoProceso implements Serializable {
 	public void setObjetivoGeneral(double objetivoGeneral) {
 		this.objetivoGeneral = objetivoGeneral;
 	}
+
 
 	public double getOtif() {
 		return this.otif;
@@ -123,6 +86,8 @@ public class DescongeladoProceso implements Serializable {
 		this.otif = otif;
 	}
 
+
+	@Column(name="periodo_base_cantidad_descongelado")
 	public double getPeriodoBaseCantidadDescongelado() {
 		return this.periodoBaseCantidadDescongelado;
 	}
@@ -131,6 +96,8 @@ public class DescongeladoProceso implements Serializable {
 		this.periodoBaseCantidadDescongelado = periodoBaseCantidadDescongelado;
 	}
 
+
+	@Column(name="periodo_base_tiempo_descongelado")
 	public double getPeriodoBaseTiempoDescongelado() {
 		return this.periodoBaseTiempoDescongelado;
 	}
@@ -139,6 +106,8 @@ public class DescongeladoProceso implements Serializable {
 		this.periodoBaseTiempoDescongelado = periodoBaseTiempoDescongelado;
 	}
 
+
+	@Column(name="rango1_entregacamara")
 	public double getRango1Entregacamara() {
 		return this.rango1Entregacamara;
 	}
@@ -147,6 +116,8 @@ public class DescongeladoProceso implements Serializable {
 		this.rango1Entregacamara = rango1Entregacamara;
 	}
 
+
+	@Column(name="rango1_ingresodescongelado")
 	public double getRango1Ingresodescongelado() {
 		return this.rango1Ingresodescongelado;
 	}
@@ -155,6 +126,8 @@ public class DescongeladoProceso implements Serializable {
 		this.rango1Ingresodescongelado = rango1Ingresodescongelado;
 	}
 
+
+	@Column(name="rango2_entregacamara")
 	public double getRango2Entregacamara() {
 		return this.rango2Entregacamara;
 	}
@@ -163,6 +136,8 @@ public class DescongeladoProceso implements Serializable {
 		this.rango2Entregacamara = rango2Entregacamara;
 	}
 
+
+	@Column(name="rango2_ingresodescongelado")
 	public double getRango2Ingresodescongelado() {
 		return this.rango2Ingresodescongelado;
 	}
@@ -171,6 +146,8 @@ public class DescongeladoProceso implements Serializable {
 		this.rango2Ingresodescongelado = rango2Ingresodescongelado;
 	}
 
+
+	@Column(name="rango3_entregacamara")
 	public double getRango3Entregacamara() {
 		return this.rango3Entregacamara;
 	}
@@ -179,6 +156,8 @@ public class DescongeladoProceso implements Serializable {
 		this.rango3Entregacamara = rango3Entregacamara;
 	}
 
+
+	@Column(name="rango3_ingresodescongelado")
 	public double getRango3Ingresodescongelado() {
 		return this.rango3Ingresodescongelado;
 	}
@@ -187,6 +166,9 @@ public class DescongeladoProceso implements Serializable {
 		this.rango3Ingresodescongelado = rango3Ingresodescongelado;
 	}
 
+
+	//bi-directional many-to-one association to DescongeladoCajonModificacion
+	@OneToMany(mappedBy="descongeladoProceso")
 	public List<DescongeladoCajonModificacion> getDescongeladoCajonModificacions() {
 		return this.descongeladoCajonModificacions;
 	}
@@ -195,6 +177,23 @@ public class DescongeladoProceso implements Serializable {
 		this.descongeladoCajonModificacions = descongeladoCajonModificacions;
 	}
 
+	public DescongeladoCajonModificacion addDescongeladoCajonModificacion(DescongeladoCajonModificacion descongeladoCajonModificacion) {
+		getDescongeladoCajonModificacions().add(descongeladoCajonModificacion);
+		descongeladoCajonModificacion.setDescongeladoProceso(this);
+
+		return descongeladoCajonModificacion;
+	}
+
+	public DescongeladoCajonModificacion removeDescongeladoCajonModificacion(DescongeladoCajonModificacion descongeladoCajonModificacion) {
+		getDescongeladoCajonModificacions().remove(descongeladoCajonModificacion);
+		descongeladoCajonModificacion.setDescongeladoProceso(null);
+
+		return descongeladoCajonModificacion;
+	}
+
+
+	//bi-directional many-to-one association to DescongeladoDetalleProceso
+	@OneToMany(mappedBy="descongeladoProceso")
 	public List<DescongeladoDetalleProceso> getDescongeladoDetalleProcesos() {
 		return this.descongeladoDetalleProcesos;
 	}
@@ -203,6 +202,24 @@ public class DescongeladoProceso implements Serializable {
 		this.descongeladoDetalleProcesos = descongeladoDetalleProcesos;
 	}
 
+	public DescongeladoDetalleProceso addDescongeladoDetalleProceso(DescongeladoDetalleProceso descongeladoDetalleProceso) {
+		getDescongeladoDetalleProcesos().add(descongeladoDetalleProceso);
+		descongeladoDetalleProceso.setDescongeladoProceso(this);
+
+		return descongeladoDetalleProceso;
+	}
+
+	public DescongeladoDetalleProceso removeDescongeladoDetalleProceso(DescongeladoDetalleProceso descongeladoDetalleProceso) {
+		getDescongeladoDetalleProcesos().remove(descongeladoDetalleProceso);
+		descongeladoDetalleProceso.setDescongeladoProceso(null);
+
+		return descongeladoDetalleProceso;
+	}
+
+
+	//bi-directional many-to-one association to ObservacionesProceso
+	@ManyToOne
+	@JoinColumn(name="idobservacionesprocesos")
 	public ObservacionesProceso getObservacionesProceso() {
 		return this.observacionesProceso;
 	}
@@ -211,6 +228,10 @@ public class DescongeladoProceso implements Serializable {
 		this.observacionesProceso = observacionesProceso;
 	}
 
+
+	//bi-directional many-to-one association to OeePeriodoBaseObjetivo
+	@ManyToOne
+	@JoinColumn(name="id_oee_periodo_base_objetivo")
 	public OeePeriodoBaseObjetivo getOeePeriodoBaseObjetivo() {
 		return this.oeePeriodoBaseObjetivo;
 	}
@@ -219,6 +240,10 @@ public class DescongeladoProceso implements Serializable {
 		this.oeePeriodoBaseObjetivo = oeePeriodoBaseObjetivo;
 	}
 
+
+	//bi-directional many-to-one association to ProcesoAperturaCierre
+	@ManyToOne
+	@JoinColumn(name="idprocesoaperturacierre")
 	public ProcesoAperturaCierre getProcesoAperturaCierre() {
 		return this.procesoAperturaCierre;
 	}
@@ -227,6 +252,10 @@ public class DescongeladoProceso implements Serializable {
 		this.procesoAperturaCierre = procesoAperturaCierre;
 	}
 
+
+	//bi-directional many-to-one association to Produccion
+	@ManyToOne
+	@JoinColumn(name="idproduccion")
 	public Produccion getProduccion() {
 		return this.produccion;
 	}

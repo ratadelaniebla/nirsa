@@ -10,40 +10,27 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="pcc4_pcc5_batch_resumen_notificaciones")
+@NamedQuery(name="Pcc4Pcc5BatchResumenNotificacione.findAll", query="SELECT p FROM Pcc4Pcc5BatchResumenNotificacione p")
 public class Pcc4Pcc5BatchResumenNotificacione implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_pcc4_pcc5_batch_resumen_notificaciones")
 	private Long idPcc4Pcc5BatchResumenNotificaciones;
-
 	private String batch;
-
-	@Column(name="especie_talla")
 	private String especieTalla;
-
 	private Integer notificar;
-
 	private Integer pcc;
-
 	private String proceso;
-
-	@Column(name="tarjeta_batch")
 	private String tarjetaBatch;
-
-	@Column(name="tiempo_alarma")
 	private String tiempoAlarma;
-
-	@Column(name="tipo_alarma")
 	private Integer tipoAlarma;
-
-	@Column(name="tipo_proceso")
 	private Integer tipoProceso;
 
 	public Pcc4Pcc5BatchResumenNotificacione() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_pcc4_pcc5_batch_resumen_notificaciones")
 	public Long getIdPcc4Pcc5BatchResumenNotificaciones() {
 		return this.idPcc4Pcc5BatchResumenNotificaciones;
 	}
@@ -51,6 +38,7 @@ public class Pcc4Pcc5BatchResumenNotificacione implements Serializable {
 	public void setIdPcc4Pcc5BatchResumenNotificaciones(Long idPcc4Pcc5BatchResumenNotificaciones) {
 		this.idPcc4Pcc5BatchResumenNotificaciones = idPcc4Pcc5BatchResumenNotificaciones;
 	}
+
 
 	public String getBatch() {
 		return this.batch;
@@ -60,6 +48,8 @@ public class Pcc4Pcc5BatchResumenNotificacione implements Serializable {
 		this.batch = batch;
 	}
 
+
+	@Column(name="especie_talla")
 	public String getEspecieTalla() {
 		return this.especieTalla;
 	}
@@ -67,6 +57,7 @@ public class Pcc4Pcc5BatchResumenNotificacione implements Serializable {
 	public void setEspecieTalla(String especieTalla) {
 		this.especieTalla = especieTalla;
 	}
+
 
 	public Integer getNotificar() {
 		return this.notificar;
@@ -76,6 +67,7 @@ public class Pcc4Pcc5BatchResumenNotificacione implements Serializable {
 		this.notificar = notificar;
 	}
 
+
 	public Integer getPcc() {
 		return this.pcc;
 	}
@@ -83,6 +75,7 @@ public class Pcc4Pcc5BatchResumenNotificacione implements Serializable {
 	public void setPcc(Integer pcc) {
 		this.pcc = pcc;
 	}
+
 
 	public String getProceso() {
 		return this.proceso;
@@ -92,6 +85,8 @@ public class Pcc4Pcc5BatchResumenNotificacione implements Serializable {
 		this.proceso = proceso;
 	}
 
+
+	@Column(name="tarjeta_batch")
 	public String getTarjetaBatch() {
 		return this.tarjetaBatch;
 	}
@@ -100,6 +95,8 @@ public class Pcc4Pcc5BatchResumenNotificacione implements Serializable {
 		this.tarjetaBatch = tarjetaBatch;
 	}
 
+
+	@Column(name="tiempo_alarma")
 	public String getTiempoAlarma() {
 		return this.tiempoAlarma;
 	}
@@ -108,6 +105,8 @@ public class Pcc4Pcc5BatchResumenNotificacione implements Serializable {
 		this.tiempoAlarma = tiempoAlarma;
 	}
 
+
+	@Column(name="tipo_alarma")
 	public Integer getTipoAlarma() {
 		return this.tipoAlarma;
 	}
@@ -116,6 +115,8 @@ public class Pcc4Pcc5BatchResumenNotificacione implements Serializable {
 		this.tipoAlarma = tipoAlarma;
 	}
 
+
+	@Column(name="tipo_proceso")
 	public Integer getTipoProceso() {
 		return this.tipoProceso;
 	}

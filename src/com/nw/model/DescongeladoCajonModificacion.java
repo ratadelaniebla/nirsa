@@ -11,119 +11,55 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="descongelado_cajon_modificacion")
+@NamedQuery(name="DescongeladoCajonModificacion.findAll", query="SELECT d FROM DescongeladoCajonModificacion d")
 public class DescongeladoCajonModificacion implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long iddescongeladocajonmodificacion;
-
 	private String cajonrevolteo;
-
 	private Boolean checkpermitirpesodiferencia;
-
 	private Integer checkpesocamara;
-
 	private Boolean checkpesodividido;
-
 	private Integer estado;
-
 	private Timestamp fechaactualizacion;
-
 	private Integer finforzado;
-
 	private Integer finproceso;
-
 	private Timestamp horafin;
-
 	private Timestamp horafindescongelado;
-
 	private Timestamp horafinforzado;
-
 	private Timestamp horaingreso;
-
 	private Timestamp horainicio;
-
 	private Timestamp horapesocajon;
-
 	private double horastranscurridas;
-
 	private String idusuarioactualizacion;
-
 	private String idusuarioingreso;
-
 	private String idusuariopesocajon;
-
 	private String idusuariosalida;
-
 	private double minutostranscurridos;
-
 	private Integer numeroduchadageneral;
-
 	private String observaciones;
-
 	private double peso;
-
 	private double pesocomparativodiferenciacamara;
-
 	private double pesodiferenciacamara;
-
 	private double segundostranscurridos;
-
 	private double tara;
-
 	private String tipoingreso;
-
 	private Integer ultimaidducha;
-
-	//bi-directional many-to-one association to DescongeladoDetalleProceso
-	@ManyToOne
-	@JoinColumn(name="iddescongeladodetalleproceso")
 	private DescongeladoDetalleProceso descongeladoDetalleProceso;
-
-	//bi-directional many-to-one association to DescongeladoDucha
-	@ManyToOne
-	@JoinColumn(name="idducha")
 	private DescongeladoDucha descongeladoDucha;
-
-	//bi-directional many-to-one association to DescongeladoDuchaAperturaCierreDetalle
-	@ManyToOne
-	@JoinColumn(name="ultimoiddescongeladoduchaaperturacierredetalle")
 	private DescongeladoDuchaAperturaCierreDetalle descongeladoDuchaAperturaCierreDetalle1;
-
-	//bi-directional many-to-one association to DescongeladoDuchaAperturaCierreDetalle
-	@ManyToOne
-	@JoinColumn(name="iddescongeladoduchaaperturacierredetalle")
 	private DescongeladoDuchaAperturaCierreDetalle descongeladoDuchaAperturaCierreDetalle2;
-
-	//bi-directional many-to-one association to DescongeladoProceso
-	@ManyToOne
-	@JoinColumn(name="iddescongeladoproceso")
 	private DescongeladoProceso descongeladoProceso;
-
-	//bi-directional many-to-one association to DuchaAperturaCierreDetalle
-	@ManyToOne
-	@JoinColumn(name="idduchaaperturacierredetalle")
 	private DuchaAperturaCierreDetalle duchaAperturaCierreDetalle;
-
-	//bi-directional many-to-one association to ProduccionDetalleLoteCajon
-	@ManyToOne
-	@JoinColumn(name="idproducciondetallelotecajon")
 	private ProduccionDetalleLoteCajon produccionDetalleLoteCajon;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public DescongeladoCajonModificacion() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIddescongeladocajonmodificacion() {
 		return this.iddescongeladocajonmodificacion;
 	}
@@ -131,6 +67,7 @@ public class DescongeladoCajonModificacion implements Serializable {
 	public void setIddescongeladocajonmodificacion(Long iddescongeladocajonmodificacion) {
 		this.iddescongeladocajonmodificacion = iddescongeladocajonmodificacion;
 	}
+
 
 	public String getCajonrevolteo() {
 		return this.cajonrevolteo;
@@ -140,6 +77,7 @@ public class DescongeladoCajonModificacion implements Serializable {
 		this.cajonrevolteo = cajonrevolteo;
 	}
 
+
 	public Boolean getCheckpermitirpesodiferencia() {
 		return this.checkpermitirpesodiferencia;
 	}
@@ -147,6 +85,7 @@ public class DescongeladoCajonModificacion implements Serializable {
 	public void setCheckpermitirpesodiferencia(Boolean checkpermitirpesodiferencia) {
 		this.checkpermitirpesodiferencia = checkpermitirpesodiferencia;
 	}
+
 
 	public Integer getCheckpesocamara() {
 		return this.checkpesocamara;
@@ -156,6 +95,7 @@ public class DescongeladoCajonModificacion implements Serializable {
 		this.checkpesocamara = checkpesocamara;
 	}
 
+
 	public Boolean getCheckpesodividido() {
 		return this.checkpesodividido;
 	}
@@ -163,6 +103,7 @@ public class DescongeladoCajonModificacion implements Serializable {
 	public void setCheckpesodividido(Boolean checkpesodividido) {
 		this.checkpesodividido = checkpesodividido;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -172,6 +113,7 @@ public class DescongeladoCajonModificacion implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Timestamp getFechaactualizacion() {
 		return this.fechaactualizacion;
 	}
@@ -179,6 +121,7 @@ public class DescongeladoCajonModificacion implements Serializable {
 	public void setFechaactualizacion(Timestamp fechaactualizacion) {
 		this.fechaactualizacion = fechaactualizacion;
 	}
+
 
 	public Integer getFinforzado() {
 		return this.finforzado;
@@ -188,6 +131,7 @@ public class DescongeladoCajonModificacion implements Serializable {
 		this.finforzado = finforzado;
 	}
 
+
 	public Integer getFinproceso() {
 		return this.finproceso;
 	}
@@ -195,6 +139,7 @@ public class DescongeladoCajonModificacion implements Serializable {
 	public void setFinproceso(Integer finproceso) {
 		this.finproceso = finproceso;
 	}
+
 
 	public Timestamp getHorafin() {
 		return this.horafin;
@@ -204,6 +149,7 @@ public class DescongeladoCajonModificacion implements Serializable {
 		this.horafin = horafin;
 	}
 
+
 	public Timestamp getHorafindescongelado() {
 		return this.horafindescongelado;
 	}
@@ -211,6 +157,7 @@ public class DescongeladoCajonModificacion implements Serializable {
 	public void setHorafindescongelado(Timestamp horafindescongelado) {
 		this.horafindescongelado = horafindescongelado;
 	}
+
 
 	public Timestamp getHorafinforzado() {
 		return this.horafinforzado;
@@ -220,6 +167,7 @@ public class DescongeladoCajonModificacion implements Serializable {
 		this.horafinforzado = horafinforzado;
 	}
 
+
 	public Timestamp getHoraingreso() {
 		return this.horaingreso;
 	}
@@ -227,6 +175,7 @@ public class DescongeladoCajonModificacion implements Serializable {
 	public void setHoraingreso(Timestamp horaingreso) {
 		this.horaingreso = horaingreso;
 	}
+
 
 	public Timestamp getHorainicio() {
 		return this.horainicio;
@@ -236,6 +185,7 @@ public class DescongeladoCajonModificacion implements Serializable {
 		this.horainicio = horainicio;
 	}
 
+
 	public Timestamp getHorapesocajon() {
 		return this.horapesocajon;
 	}
@@ -243,6 +193,7 @@ public class DescongeladoCajonModificacion implements Serializable {
 	public void setHorapesocajon(Timestamp horapesocajon) {
 		this.horapesocajon = horapesocajon;
 	}
+
 
 	public double getHorastranscurridas() {
 		return this.horastranscurridas;
@@ -252,6 +203,7 @@ public class DescongeladoCajonModificacion implements Serializable {
 		this.horastranscurridas = horastranscurridas;
 	}
 
+
 	public String getIdusuarioactualizacion() {
 		return this.idusuarioactualizacion;
 	}
@@ -259,6 +211,7 @@ public class DescongeladoCajonModificacion implements Serializable {
 	public void setIdusuarioactualizacion(String idusuarioactualizacion) {
 		this.idusuarioactualizacion = idusuarioactualizacion;
 	}
+
 
 	public String getIdusuarioingreso() {
 		return this.idusuarioingreso;
@@ -268,6 +221,7 @@ public class DescongeladoCajonModificacion implements Serializable {
 		this.idusuarioingreso = idusuarioingreso;
 	}
 
+
 	public String getIdusuariopesocajon() {
 		return this.idusuariopesocajon;
 	}
@@ -275,6 +229,7 @@ public class DescongeladoCajonModificacion implements Serializable {
 	public void setIdusuariopesocajon(String idusuariopesocajon) {
 		this.idusuariopesocajon = idusuariopesocajon;
 	}
+
 
 	public String getIdusuariosalida() {
 		return this.idusuariosalida;
@@ -284,6 +239,7 @@ public class DescongeladoCajonModificacion implements Serializable {
 		this.idusuariosalida = idusuariosalida;
 	}
 
+
 	public double getMinutostranscurridos() {
 		return this.minutostranscurridos;
 	}
@@ -291,6 +247,7 @@ public class DescongeladoCajonModificacion implements Serializable {
 	public void setMinutostranscurridos(double minutostranscurridos) {
 		this.minutostranscurridos = minutostranscurridos;
 	}
+
 
 	public Integer getNumeroduchadageneral() {
 		return this.numeroduchadageneral;
@@ -300,6 +257,7 @@ public class DescongeladoCajonModificacion implements Serializable {
 		this.numeroduchadageneral = numeroduchadageneral;
 	}
 
+
 	public String getObservaciones() {
 		return this.observaciones;
 	}
@@ -307,6 +265,7 @@ public class DescongeladoCajonModificacion implements Serializable {
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
 	}
+
 
 	public double getPeso() {
 		return this.peso;
@@ -316,6 +275,7 @@ public class DescongeladoCajonModificacion implements Serializable {
 		this.peso = peso;
 	}
 
+
 	public double getPesocomparativodiferenciacamara() {
 		return this.pesocomparativodiferenciacamara;
 	}
@@ -323,6 +283,7 @@ public class DescongeladoCajonModificacion implements Serializable {
 	public void setPesocomparativodiferenciacamara(double pesocomparativodiferenciacamara) {
 		this.pesocomparativodiferenciacamara = pesocomparativodiferenciacamara;
 	}
+
 
 	public double getPesodiferenciacamara() {
 		return this.pesodiferenciacamara;
@@ -332,6 +293,7 @@ public class DescongeladoCajonModificacion implements Serializable {
 		this.pesodiferenciacamara = pesodiferenciacamara;
 	}
 
+
 	public double getSegundostranscurridos() {
 		return this.segundostranscurridos;
 	}
@@ -339,6 +301,7 @@ public class DescongeladoCajonModificacion implements Serializable {
 	public void setSegundostranscurridos(double segundostranscurridos) {
 		this.segundostranscurridos = segundostranscurridos;
 	}
+
 
 	public double getTara() {
 		return this.tara;
@@ -348,6 +311,7 @@ public class DescongeladoCajonModificacion implements Serializable {
 		this.tara = tara;
 	}
 
+
 	public String getTipoingreso() {
 		return this.tipoingreso;
 	}
@@ -355,6 +319,7 @@ public class DescongeladoCajonModificacion implements Serializable {
 	public void setTipoingreso(String tipoingreso) {
 		this.tipoingreso = tipoingreso;
 	}
+
 
 	public Integer getUltimaidducha() {
 		return this.ultimaidducha;
@@ -364,6 +329,10 @@ public class DescongeladoCajonModificacion implements Serializable {
 		this.ultimaidducha = ultimaidducha;
 	}
 
+
+	//bi-directional many-to-one association to DescongeladoDetalleProceso
+	@ManyToOne
+	@JoinColumn(name="iddescongeladodetalleproceso")
 	public DescongeladoDetalleProceso getDescongeladoDetalleProceso() {
 		return this.descongeladoDetalleProceso;
 	}
@@ -372,6 +341,10 @@ public class DescongeladoCajonModificacion implements Serializable {
 		this.descongeladoDetalleProceso = descongeladoDetalleProceso;
 	}
 
+
+	//bi-directional many-to-one association to DescongeladoDucha
+	@ManyToOne
+	@JoinColumn(name="idducha")
 	public DescongeladoDucha getDescongeladoDucha() {
 		return this.descongeladoDucha;
 	}
@@ -380,6 +353,10 @@ public class DescongeladoCajonModificacion implements Serializable {
 		this.descongeladoDucha = descongeladoDucha;
 	}
 
+
+	//bi-directional many-to-one association to DescongeladoDuchaAperturaCierreDetalle
+	@ManyToOne
+	@JoinColumn(name="ultimoiddescongeladoduchaaperturacierredetalle")
 	public DescongeladoDuchaAperturaCierreDetalle getDescongeladoDuchaAperturaCierreDetalle1() {
 		return this.descongeladoDuchaAperturaCierreDetalle1;
 	}
@@ -388,6 +365,10 @@ public class DescongeladoCajonModificacion implements Serializable {
 		this.descongeladoDuchaAperturaCierreDetalle1 = descongeladoDuchaAperturaCierreDetalle1;
 	}
 
+
+	//bi-directional many-to-one association to DescongeladoDuchaAperturaCierreDetalle
+	@ManyToOne
+	@JoinColumn(name="iddescongeladoduchaaperturacierredetalle")
 	public DescongeladoDuchaAperturaCierreDetalle getDescongeladoDuchaAperturaCierreDetalle2() {
 		return this.descongeladoDuchaAperturaCierreDetalle2;
 	}
@@ -396,6 +377,10 @@ public class DescongeladoCajonModificacion implements Serializable {
 		this.descongeladoDuchaAperturaCierreDetalle2 = descongeladoDuchaAperturaCierreDetalle2;
 	}
 
+
+	//bi-directional many-to-one association to DescongeladoProceso
+	@ManyToOne
+	@JoinColumn(name="iddescongeladoproceso")
 	public DescongeladoProceso getDescongeladoProceso() {
 		return this.descongeladoProceso;
 	}
@@ -404,6 +389,10 @@ public class DescongeladoCajonModificacion implements Serializable {
 		this.descongeladoProceso = descongeladoProceso;
 	}
 
+
+	//bi-directional many-to-one association to DuchaAperturaCierreDetalle
+	@ManyToOne
+	@JoinColumn(name="idduchaaperturacierredetalle")
 	public DuchaAperturaCierreDetalle getDuchaAperturaCierreDetalle() {
 		return this.duchaAperturaCierreDetalle;
 	}
@@ -412,6 +401,10 @@ public class DescongeladoCajonModificacion implements Serializable {
 		this.duchaAperturaCierreDetalle = duchaAperturaCierreDetalle;
 	}
 
+
+	//bi-directional many-to-one association to ProduccionDetalleLoteCajon
+	@ManyToOne
+	@JoinColumn(name="idproducciondetallelotecajon")
 	public ProduccionDetalleLoteCajon getProduccionDetalleLoteCajon() {
 		return this.produccionDetalleLoteCajon;
 	}
@@ -420,6 +413,10 @@ public class DescongeladoCajonModificacion implements Serializable {
 		this.produccionDetalleLoteCajon = produccionDetalleLoteCajon;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -428,6 +425,10 @@ public class DescongeladoCajonModificacion implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

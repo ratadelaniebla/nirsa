@@ -10,6 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="produccion_archivo_carga_orden_detalle")
+@NamedQuery(name="ProduccionArchivoCargaOrdenDetalle.findAll", query="SELECT p FROM ProduccionArchivoCargaOrdenDetalle p")
 public class ProduccionArchivoCargaOrdenDetalle implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Long idproduccionarchivocargaordendetalle;
@@ -25,7 +26,6 @@ public class ProduccionArchivoCargaOrdenDetalle implements Serializable {
 	private double fi;
 	private double fill;
 	private double flake;
-	private Integer idturno;
 	private Integer item;
 	private double latas;
 	private double lomolimpio;
@@ -47,14 +47,14 @@ public class ProduccionArchivoCargaOrdenDetalle implements Serializable {
 	private double ton;
 	private String video;
 	private ProduccionArchivoCargaOrden produccionArchivoCargaOrden;
+	private Turno turno;
 
 	public ProduccionArchivoCargaOrdenDetalle() {
 	}
 
 
 	@Id
-	@SequenceGenerator(name="PRODUCCION_ARCHIVO_CARGA_ORDEN_DETALLE_IDPRODUCCIONARCHIVOCARGAORDENDETALLE_GENERATOR", sequenceName="PRODUCCION_DETALLE_CARGA_ORDE_IDPRODUCCIONDETALLECARGAORDEN_SEQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PRODUCCION_ARCHIVO_CARGA_ORDEN_DETALLE_IDPRODUCCIONARCHIVOCARGAORDENDETALLE_GENERATOR")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdproduccionarchivocargaordendetalle() {
 		return this.idproduccionarchivocargaordendetalle;
 	}
@@ -169,15 +169,6 @@ public class ProduccionArchivoCargaOrdenDetalle implements Serializable {
 
 	public void setFlake(double flake) {
 		this.flake = flake;
-	}
-
-
-	public Integer getIdturno() {
-		return this.idturno;
-	}
-
-	public void setIdturno(Integer idturno) {
-		this.idturno = idturno;
 	}
 
 
@@ -370,6 +361,18 @@ public class ProduccionArchivoCargaOrdenDetalle implements Serializable {
 
 	public void setProduccionArchivoCargaOrden(ProduccionArchivoCargaOrden produccionArchivoCargaOrden) {
 		this.produccionArchivoCargaOrden = produccionArchivoCargaOrden;
+	}
+
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
+	public Turno getTurno() {
+		return this.turno;
+	}
+
+	public void setTurno(Turno turno) {
+		this.turno = turno;
 	}
 
 }

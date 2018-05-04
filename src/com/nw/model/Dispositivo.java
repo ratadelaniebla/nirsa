@@ -10,24 +10,20 @@ import java.util.List;
  * 
  */
 @Entity
+@NamedQuery(name="Dispositivo.findAll", query="SELECT d FROM Dispositivo d")
 public class Dispositivo implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer iddispositivo;
-
 	private String descripcion;
-
 	private Integer estado;
-
-	//bi-directional many-to-one association to DispositivoDestino
-	@OneToMany(mappedBy="dispositivo")
 	private List<DispositivoDestino> dispositivoDestinos;
 
 	public Dispositivo() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIddispositivo() {
 		return this.iddispositivo;
 	}
@@ -35,6 +31,7 @@ public class Dispositivo implements Serializable {
 	public void setIddispositivo(Integer iddispositivo) {
 		this.iddispositivo = iddispositivo;
 	}
+
 
 	public String getDescripcion() {
 		return this.descripcion;
@@ -44,6 +41,7 @@ public class Dispositivo implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+
 	public Integer getEstado() {
 		return this.estado;
 	}
@@ -52,12 +50,29 @@ public class Dispositivo implements Serializable {
 		this.estado = estado;
 	}
 
+
+	//bi-directional many-to-one association to DispositivoDestino
+	@OneToMany(mappedBy="dispositivo")
 	public List<DispositivoDestino> getDispositivoDestinos() {
 		return this.dispositivoDestinos;
 	}
 
 	public void setDispositivoDestinos(List<DispositivoDestino> dispositivoDestinos) {
 		this.dispositivoDestinos = dispositivoDestinos;
+	}
+
+	public DispositivoDestino addDispositivoDestino(DispositivoDestino dispositivoDestino) {
+		getDispositivoDestinos().add(dispositivoDestino);
+		dispositivoDestino.setDispositivo(this);
+
+		return dispositivoDestino;
+	}
+
+	public DispositivoDestino removeDispositivoDestino(DispositivoDestino dispositivoDestino) {
+		getDispositivoDestinos().remove(dispositivoDestino);
+		dispositivoDestino.setDispositivo(null);
+
+		return dispositivoDestino;
 	}
 
 }

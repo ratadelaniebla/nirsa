@@ -12,85 +12,38 @@ import java.util.List;
  */
 @Entity
 @Table(name="eviscerado_detalle_proceso")
+@NamedQuery(name="EvisceradoDetalleProceso.findAll", query="SELECT e FROM EvisceradoDetalleProceso e")
 public class EvisceradoDetalleProceso implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idevisceradodetalleproceso;
-
 	private Integer estado;
-
 	private Timestamp fechaactualizacion;
-
 	private Timestamp fechafin;
-
 	private Timestamp fechafinrackeo;
-
 	private Timestamp fechainicio;
-
 	private Timestamp fechainiciorackeo;
-
 	private Timestamp fechareg;
-
 	private Integer finrackeomanual;
-
 	private String idusuarioactualizacion;
-
-	//bi-directional many-to-one association to CalidadDetalleMuestreoTempPanzaEviscerado
-	@OneToMany(mappedBy="evisceradoDetalleProceso")
 	private List<CalidadDetalleMuestreoTempPanzaEviscerado> calidadDetalleMuestreoTempPanzaEviscerados;
-
-	//bi-directional many-to-one association to CuartoChillroomCocinadaDetalle
-	@OneToMany(mappedBy="evisceradoDetalleProceso")
 	private List<CuartoChillroomCocinadaDetalle> cuartoChillroomCocinadaDetalles;
-
-	//bi-directional many-to-one association to EvisceradoCocheModificacion
-	@OneToMany(mappedBy="evisceradoDetalleProceso")
 	private List<EvisceradoCocheModificacion> evisceradoCocheModificacions;
-
-	//bi-directional many-to-one association to EvisceradoProceso
-	@ManyToOne
-	@JoinColumn(name="idevisceradoproceso")
 	private EvisceradoProceso evisceradoProceso;
-
-	//bi-directional many-to-one association to ProduccionDetalleLoteCajon
-	@ManyToOne
-	@JoinColumn(name="idproducciondetallelotecajon")
 	private ProduccionDetalleLoteCajon produccionDetalleLoteCajon;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
-
-	//bi-directional many-to-one association to EvisceradoDetalleProcesoCoche
-	@OneToMany(mappedBy="evisceradoDetalleProceso")
 	private List<EvisceradoDetalleProcesoCoche> evisceradoDetalleProcesoCoches;
-
-	//bi-directional many-to-one association to EvisceradoDetalleProcesoModificacion
-	@OneToMany(mappedBy="evisceradoDetalleProceso")
 	private List<EvisceradoDetalleProcesoModificacion> evisceradoDetalleProcesoModificacions;
-
-	//bi-directional many-to-one association to EvisceradoSubproductoCrudo
-	@OneToMany(mappedBy="evisceradoDetalleProceso")
 	private List<EvisceradoSubproductoCrudo> evisceradoSubproductoCrudos;
-
-	//bi-directional many-to-one association to PanzasDetalleProcesoLote
-	@OneToMany(mappedBy="evisceradoDetalleProceso")
 	private List<PanzasDetalleProcesoLote> panzasDetalleProcesoLotes;
-
-	//bi-directional many-to-one association to RociadoCicloDetalle
-	@OneToMany(mappedBy="evisceradoDetalleProceso")
 	private List<RociadoCicloDetalle> rociadoCicloDetalles;
-
-	//bi-directional many-to-one association to RociadoCocinadaDetalle
-	@OneToMany(mappedBy="evisceradoDetalleProceso")
 	private List<RociadoCocinadaDetalle> rociadoCocinadaDetalles;
 
 	public EvisceradoDetalleProceso() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdevisceradodetalleproceso() {
 		return this.idevisceradodetalleproceso;
 	}
@@ -98,6 +51,7 @@ public class EvisceradoDetalleProceso implements Serializable {
 	public void setIdevisceradodetalleproceso(Long idevisceradodetalleproceso) {
 		this.idevisceradodetalleproceso = idevisceradodetalleproceso;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -107,6 +61,7 @@ public class EvisceradoDetalleProceso implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Timestamp getFechaactualizacion() {
 		return this.fechaactualizacion;
 	}
@@ -114,6 +69,7 @@ public class EvisceradoDetalleProceso implements Serializable {
 	public void setFechaactualizacion(Timestamp fechaactualizacion) {
 		this.fechaactualizacion = fechaactualizacion;
 	}
+
 
 	public Timestamp getFechafin() {
 		return this.fechafin;
@@ -123,6 +79,7 @@ public class EvisceradoDetalleProceso implements Serializable {
 		this.fechafin = fechafin;
 	}
 
+
 	public Timestamp getFechafinrackeo() {
 		return this.fechafinrackeo;
 	}
@@ -130,6 +87,7 @@ public class EvisceradoDetalleProceso implements Serializable {
 	public void setFechafinrackeo(Timestamp fechafinrackeo) {
 		this.fechafinrackeo = fechafinrackeo;
 	}
+
 
 	public Timestamp getFechainicio() {
 		return this.fechainicio;
@@ -139,6 +97,7 @@ public class EvisceradoDetalleProceso implements Serializable {
 		this.fechainicio = fechainicio;
 	}
 
+
 	public Timestamp getFechainiciorackeo() {
 		return this.fechainiciorackeo;
 	}
@@ -146,6 +105,7 @@ public class EvisceradoDetalleProceso implements Serializable {
 	public void setFechainiciorackeo(Timestamp fechainiciorackeo) {
 		this.fechainiciorackeo = fechainiciorackeo;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -155,6 +115,7 @@ public class EvisceradoDetalleProceso implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public Integer getFinrackeomanual() {
 		return this.finrackeomanual;
 	}
@@ -162,6 +123,7 @@ public class EvisceradoDetalleProceso implements Serializable {
 	public void setFinrackeomanual(Integer finrackeomanual) {
 		this.finrackeomanual = finrackeomanual;
 	}
+
 
 	public String getIdusuarioactualizacion() {
 		return this.idusuarioactualizacion;
@@ -171,6 +133,9 @@ public class EvisceradoDetalleProceso implements Serializable {
 		this.idusuarioactualizacion = idusuarioactualizacion;
 	}
 
+
+	//bi-directional many-to-one association to CalidadDetalleMuestreoTempPanzaEviscerado
+	@OneToMany(mappedBy="evisceradoDetalleProceso")
 	public List<CalidadDetalleMuestreoTempPanzaEviscerado> getCalidadDetalleMuestreoTempPanzaEviscerados() {
 		return this.calidadDetalleMuestreoTempPanzaEviscerados;
 	}
@@ -179,6 +144,23 @@ public class EvisceradoDetalleProceso implements Serializable {
 		this.calidadDetalleMuestreoTempPanzaEviscerados = calidadDetalleMuestreoTempPanzaEviscerados;
 	}
 
+	public CalidadDetalleMuestreoTempPanzaEviscerado addCalidadDetalleMuestreoTempPanzaEviscerado(CalidadDetalleMuestreoTempPanzaEviscerado calidadDetalleMuestreoTempPanzaEviscerado) {
+		getCalidadDetalleMuestreoTempPanzaEviscerados().add(calidadDetalleMuestreoTempPanzaEviscerado);
+		calidadDetalleMuestreoTempPanzaEviscerado.setEvisceradoDetalleProceso(this);
+
+		return calidadDetalleMuestreoTempPanzaEviscerado;
+	}
+
+	public CalidadDetalleMuestreoTempPanzaEviscerado removeCalidadDetalleMuestreoTempPanzaEviscerado(CalidadDetalleMuestreoTempPanzaEviscerado calidadDetalleMuestreoTempPanzaEviscerado) {
+		getCalidadDetalleMuestreoTempPanzaEviscerados().remove(calidadDetalleMuestreoTempPanzaEviscerado);
+		calidadDetalleMuestreoTempPanzaEviscerado.setEvisceradoDetalleProceso(null);
+
+		return calidadDetalleMuestreoTempPanzaEviscerado;
+	}
+
+
+	//bi-directional many-to-one association to CuartoChillroomCocinadaDetalle
+	@OneToMany(mappedBy="evisceradoDetalleProceso")
 	public List<CuartoChillroomCocinadaDetalle> getCuartoChillroomCocinadaDetalles() {
 		return this.cuartoChillroomCocinadaDetalles;
 	}
@@ -187,6 +169,23 @@ public class EvisceradoDetalleProceso implements Serializable {
 		this.cuartoChillroomCocinadaDetalles = cuartoChillroomCocinadaDetalles;
 	}
 
+	public CuartoChillroomCocinadaDetalle addCuartoChillroomCocinadaDetalle(CuartoChillroomCocinadaDetalle cuartoChillroomCocinadaDetalle) {
+		getCuartoChillroomCocinadaDetalles().add(cuartoChillroomCocinadaDetalle);
+		cuartoChillroomCocinadaDetalle.setEvisceradoDetalleProceso(this);
+
+		return cuartoChillroomCocinadaDetalle;
+	}
+
+	public CuartoChillroomCocinadaDetalle removeCuartoChillroomCocinadaDetalle(CuartoChillroomCocinadaDetalle cuartoChillroomCocinadaDetalle) {
+		getCuartoChillroomCocinadaDetalles().remove(cuartoChillroomCocinadaDetalle);
+		cuartoChillroomCocinadaDetalle.setEvisceradoDetalleProceso(null);
+
+		return cuartoChillroomCocinadaDetalle;
+	}
+
+
+	//bi-directional many-to-one association to EvisceradoCocheModificacion
+	@OneToMany(mappedBy="evisceradoDetalleProceso")
 	public List<EvisceradoCocheModificacion> getEvisceradoCocheModificacions() {
 		return this.evisceradoCocheModificacions;
 	}
@@ -195,6 +194,24 @@ public class EvisceradoDetalleProceso implements Serializable {
 		this.evisceradoCocheModificacions = evisceradoCocheModificacions;
 	}
 
+	public EvisceradoCocheModificacion addEvisceradoCocheModificacion(EvisceradoCocheModificacion evisceradoCocheModificacion) {
+		getEvisceradoCocheModificacions().add(evisceradoCocheModificacion);
+		evisceradoCocheModificacion.setEvisceradoDetalleProceso(this);
+
+		return evisceradoCocheModificacion;
+	}
+
+	public EvisceradoCocheModificacion removeEvisceradoCocheModificacion(EvisceradoCocheModificacion evisceradoCocheModificacion) {
+		getEvisceradoCocheModificacions().remove(evisceradoCocheModificacion);
+		evisceradoCocheModificacion.setEvisceradoDetalleProceso(null);
+
+		return evisceradoCocheModificacion;
+	}
+
+
+	//bi-directional many-to-one association to EvisceradoProceso
+	@ManyToOne
+	@JoinColumn(name="idevisceradoproceso")
 	public EvisceradoProceso getEvisceradoProceso() {
 		return this.evisceradoProceso;
 	}
@@ -203,6 +220,10 @@ public class EvisceradoDetalleProceso implements Serializable {
 		this.evisceradoProceso = evisceradoProceso;
 	}
 
+
+	//bi-directional many-to-one association to ProduccionDetalleLoteCajon
+	@ManyToOne
+	@JoinColumn(name="idproducciondetallelotecajon")
 	public ProduccionDetalleLoteCajon getProduccionDetalleLoteCajon() {
 		return this.produccionDetalleLoteCajon;
 	}
@@ -211,6 +232,10 @@ public class EvisceradoDetalleProceso implements Serializable {
 		this.produccionDetalleLoteCajon = produccionDetalleLoteCajon;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}
@@ -219,6 +244,9 @@ public class EvisceradoDetalleProceso implements Serializable {
 		this.usuario = usuario;
 	}
 
+
+	//bi-directional many-to-one association to EvisceradoDetalleProcesoCoche
+	@OneToMany(mappedBy="evisceradoDetalleProceso")
 	public List<EvisceradoDetalleProcesoCoche> getEvisceradoDetalleProcesoCoches() {
 		return this.evisceradoDetalleProcesoCoches;
 	}
@@ -227,6 +255,23 @@ public class EvisceradoDetalleProceso implements Serializable {
 		this.evisceradoDetalleProcesoCoches = evisceradoDetalleProcesoCoches;
 	}
 
+	public EvisceradoDetalleProcesoCoche addEvisceradoDetalleProcesoCoch(EvisceradoDetalleProcesoCoche evisceradoDetalleProcesoCoch) {
+		getEvisceradoDetalleProcesoCoches().add(evisceradoDetalleProcesoCoch);
+		evisceradoDetalleProcesoCoch.setEvisceradoDetalleProceso(this);
+
+		return evisceradoDetalleProcesoCoch;
+	}
+
+	public EvisceradoDetalleProcesoCoche removeEvisceradoDetalleProcesoCoch(EvisceradoDetalleProcesoCoche evisceradoDetalleProcesoCoch) {
+		getEvisceradoDetalleProcesoCoches().remove(evisceradoDetalleProcesoCoch);
+		evisceradoDetalleProcesoCoch.setEvisceradoDetalleProceso(null);
+
+		return evisceradoDetalleProcesoCoch;
+	}
+
+
+	//bi-directional many-to-one association to EvisceradoDetalleProcesoModificacion
+	@OneToMany(mappedBy="evisceradoDetalleProceso")
 	public List<EvisceradoDetalleProcesoModificacion> getEvisceradoDetalleProcesoModificacions() {
 		return this.evisceradoDetalleProcesoModificacions;
 	}
@@ -235,6 +280,23 @@ public class EvisceradoDetalleProceso implements Serializable {
 		this.evisceradoDetalleProcesoModificacions = evisceradoDetalleProcesoModificacions;
 	}
 
+	public EvisceradoDetalleProcesoModificacion addEvisceradoDetalleProcesoModificacion(EvisceradoDetalleProcesoModificacion evisceradoDetalleProcesoModificacion) {
+		getEvisceradoDetalleProcesoModificacions().add(evisceradoDetalleProcesoModificacion);
+		evisceradoDetalleProcesoModificacion.setEvisceradoDetalleProceso(this);
+
+		return evisceradoDetalleProcesoModificacion;
+	}
+
+	public EvisceradoDetalleProcesoModificacion removeEvisceradoDetalleProcesoModificacion(EvisceradoDetalleProcesoModificacion evisceradoDetalleProcesoModificacion) {
+		getEvisceradoDetalleProcesoModificacions().remove(evisceradoDetalleProcesoModificacion);
+		evisceradoDetalleProcesoModificacion.setEvisceradoDetalleProceso(null);
+
+		return evisceradoDetalleProcesoModificacion;
+	}
+
+
+	//bi-directional many-to-one association to EvisceradoSubproductoCrudo
+	@OneToMany(mappedBy="evisceradoDetalleProceso")
 	public List<EvisceradoSubproductoCrudo> getEvisceradoSubproductoCrudos() {
 		return this.evisceradoSubproductoCrudos;
 	}
@@ -243,6 +305,23 @@ public class EvisceradoDetalleProceso implements Serializable {
 		this.evisceradoSubproductoCrudos = evisceradoSubproductoCrudos;
 	}
 
+	public EvisceradoSubproductoCrudo addEvisceradoSubproductoCrudo(EvisceradoSubproductoCrudo evisceradoSubproductoCrudo) {
+		getEvisceradoSubproductoCrudos().add(evisceradoSubproductoCrudo);
+		evisceradoSubproductoCrudo.setEvisceradoDetalleProceso(this);
+
+		return evisceradoSubproductoCrudo;
+	}
+
+	public EvisceradoSubproductoCrudo removeEvisceradoSubproductoCrudo(EvisceradoSubproductoCrudo evisceradoSubproductoCrudo) {
+		getEvisceradoSubproductoCrudos().remove(evisceradoSubproductoCrudo);
+		evisceradoSubproductoCrudo.setEvisceradoDetalleProceso(null);
+
+		return evisceradoSubproductoCrudo;
+	}
+
+
+	//bi-directional many-to-one association to PanzasDetalleProcesoLote
+	@OneToMany(mappedBy="evisceradoDetalleProceso")
 	public List<PanzasDetalleProcesoLote> getPanzasDetalleProcesoLotes() {
 		return this.panzasDetalleProcesoLotes;
 	}
@@ -251,6 +330,23 @@ public class EvisceradoDetalleProceso implements Serializable {
 		this.panzasDetalleProcesoLotes = panzasDetalleProcesoLotes;
 	}
 
+	public PanzasDetalleProcesoLote addPanzasDetalleProcesoLote(PanzasDetalleProcesoLote panzasDetalleProcesoLote) {
+		getPanzasDetalleProcesoLotes().add(panzasDetalleProcesoLote);
+		panzasDetalleProcesoLote.setEvisceradoDetalleProceso(this);
+
+		return panzasDetalleProcesoLote;
+	}
+
+	public PanzasDetalleProcesoLote removePanzasDetalleProcesoLote(PanzasDetalleProcesoLote panzasDetalleProcesoLote) {
+		getPanzasDetalleProcesoLotes().remove(panzasDetalleProcesoLote);
+		panzasDetalleProcesoLote.setEvisceradoDetalleProceso(null);
+
+		return panzasDetalleProcesoLote;
+	}
+
+
+	//bi-directional many-to-one association to RociadoCicloDetalle
+	@OneToMany(mappedBy="evisceradoDetalleProceso")
 	public List<RociadoCicloDetalle> getRociadoCicloDetalles() {
 		return this.rociadoCicloDetalles;
 	}
@@ -259,12 +355,43 @@ public class EvisceradoDetalleProceso implements Serializable {
 		this.rociadoCicloDetalles = rociadoCicloDetalles;
 	}
 
+	public RociadoCicloDetalle addRociadoCicloDetalle(RociadoCicloDetalle rociadoCicloDetalle) {
+		getRociadoCicloDetalles().add(rociadoCicloDetalle);
+		rociadoCicloDetalle.setEvisceradoDetalleProceso(this);
+
+		return rociadoCicloDetalle;
+	}
+
+	public RociadoCicloDetalle removeRociadoCicloDetalle(RociadoCicloDetalle rociadoCicloDetalle) {
+		getRociadoCicloDetalles().remove(rociadoCicloDetalle);
+		rociadoCicloDetalle.setEvisceradoDetalleProceso(null);
+
+		return rociadoCicloDetalle;
+	}
+
+
+	//bi-directional many-to-one association to RociadoCocinadaDetalle
+	@OneToMany(mappedBy="evisceradoDetalleProceso")
 	public List<RociadoCocinadaDetalle> getRociadoCocinadaDetalles() {
 		return this.rociadoCocinadaDetalles;
 	}
 
 	public void setRociadoCocinadaDetalles(List<RociadoCocinadaDetalle> rociadoCocinadaDetalles) {
 		this.rociadoCocinadaDetalles = rociadoCocinadaDetalles;
+	}
+
+	public RociadoCocinadaDetalle addRociadoCocinadaDetalle(RociadoCocinadaDetalle rociadoCocinadaDetalle) {
+		getRociadoCocinadaDetalles().add(rociadoCocinadaDetalle);
+		rociadoCocinadaDetalle.setEvisceradoDetalleProceso(this);
+
+		return rociadoCocinadaDetalle;
+	}
+
+	public RociadoCocinadaDetalle removeRociadoCocinadaDetalle(RociadoCocinadaDetalle rociadoCocinadaDetalle) {
+		getRociadoCocinadaDetalles().remove(rociadoCocinadaDetalle);
+		rociadoCocinadaDetalle.setEvisceradoDetalleProceso(null);
+
+		return rociadoCocinadaDetalle;
 	}
 
 }

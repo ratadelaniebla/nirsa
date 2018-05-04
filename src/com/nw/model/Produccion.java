@@ -11,144 +11,52 @@ import java.util.List;
  * 
  */
 @Entity
+@NamedQuery(name="Produccion.findAll", query="SELECT p FROM Produccion p")
 public class Produccion implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idproduccion;
-
 	private Integer estado;
-
 	private Timestamp fechaproduccion;
-
-	//bi-directional many-to-one association to CoccionProceso
-	@OneToMany(mappedBy="produccion")
 	private List<CoccionProceso> coccionProcesos;
-
-	//bi-directional many-to-one association to CocinaAperturaCierreDetalle
-	@OneToMany(mappedBy="produccion")
 	private List<CocinaAperturaCierreDetalle> cocinaAperturaCierreDetalles;
-
-	//bi-directional many-to-one association to ControlBatchProceso
-	@OneToMany(mappedBy="produccion")
 	private List<ControlBatchProceso> controlBatchProcesos;
-
-	//bi-directional many-to-one association to DescongeladoDuchaAperturaCierreDetalle
-	@OneToMany(mappedBy="produccion")
 	private List<DescongeladoDuchaAperturaCierreDetalle> descongeladoDuchaAperturaCierreDetalles;
-
-	//bi-directional many-to-one association to DescongeladoProceso
-	@OneToMany(mappedBy="produccion")
 	private List<DescongeladoProceso> descongeladoProcesos;
-
-	//bi-directional many-to-one association to DesperdicioCajonHarina
-	@OneToMany(mappedBy="produccion")
 	private List<DesperdicioCajonHarina> desperdicioCajonHarinas;
-
-	//bi-directional many-to-one association to DuchaAperturaCierreDetalle
-	@OneToMany(mappedBy="produccion")
 	private List<DuchaAperturaCierreDetalle> duchaAperturaCierreDetalles;
-
-	//bi-directional many-to-one association to EnvasadoProceso
-	@OneToMany(mappedBy="produccion")
 	private List<EnvasadoProceso> envasadoProcesos;
-
-	//bi-directional many-to-one association to EspecialidadesProceso
-	@OneToMany(mappedBy="produccion")
 	private List<EspecialidadesProceso> especialidadesProcesos;
-
-	//bi-directional many-to-one association to EvisceradoProceso
-	@OneToMany(mappedBy="produccion")
 	private List<EvisceradoProceso> evisceradoProcesos;
-
-	//bi-directional many-to-one association to EvolutionAuditoriaDetalle
-	@OneToMany(mappedBy="produccion")
 	private List<EvolutionAuditoriaDetalle> evolutionAuditoriaDetalles;
-
-	//bi-directional many-to-one association to LimpiezaAsignacionCanastilla
-	@OneToMany(mappedBy="produccion")
 	private List<LimpiezaAsignacionCanastilla> limpiezaAsignacionCanastillas;
-
-	//bi-directional many-to-one association to LimpiezaProceso
-	@OneToMany(mappedBy="produccion")
 	private List<LimpiezaProceso> limpiezaProcesos;
-
-	//bi-directional many-to-one association to LimpiezaProcesoEmpleadoFalta
-	@OneToMany(mappedBy="produccion")
 	private List<LimpiezaProcesoEmpleadoFalta> limpiezaProcesoEmpleadoFaltas;
-
-	//bi-directional many-to-one association to LimpiezaProcesoEmpleadoMarcacione
-	@OneToMany(mappedBy="produccion")
 	private List<LimpiezaProcesoEmpleadoMarcacione> limpiezaProcesoEmpleadoMarcaciones;
-
-	//bi-directional many-to-one association to LonjasProceso
-	@OneToMany(mappedBy="produccion")
 	private List<LonjasProceso> lonjasProcesos;
-
-	//bi-directional many-to-one association to ObservacionesPuntoControl
-	@OneToMany(mappedBy="produccion")
 	private List<ObservacionesPuntoControl> observacionesPuntoControls;
-
-	//bi-directional many-to-one association to PanzasProceso
-	@OneToMany(mappedBy="produccion")
 	private List<PanzasProceso> panzasProcesos;
-
-	//bi-directional many-to-one association to PedidoProduccionArchivoCargaCabecera
-	@OneToMany(mappedBy="produccion")
 	private List<PedidoProduccionArchivoCargaCabecera> pedidoProduccionArchivoCargaCabeceras;
-
-	//bi-directional many-to-one association to PedidoProduccionCabecera
-	@OneToMany(mappedBy="produccion")
 	private List<PedidoProduccionCabecera> pedidoProduccionCabeceras;
-
-	//bi-directional many-to-one association to PlanificacionCargaArchivo
-	@OneToMany(mappedBy="produccion")
 	private List<PlanificacionCargaArchivo> planificacionCargaArchivos;
-
-	//bi-directional many-to-one association to PlanificacionCargaDetalle
-	@OneToMany(mappedBy="produccion")
 	private List<PlanificacionCargaDetalle> planificacionCargaDetalles;
-
-	//bi-directional many-to-one association to PouchProceso
-	@OneToMany(mappedBy="produccion")
 	private List<PouchProceso> pouchProcesos;
-
-	//bi-directional many-to-one association to ProduccionArchivoCargaLote
-	@OneToMany(mappedBy="produccion")
 	private List<ProduccionArchivoCargaLote> produccionArchivoCargaLotes;
-
-	//bi-directional many-to-one association to ProduccionCargaArchivoPedido
-	@OneToMany(mappedBy="produccion")
+	private List<ProduccionArchivoCargaOrden> produccionArchivoCargaOrdens;
 	private List<ProduccionCargaArchivoPedido> produccionCargaArchivoPedidos;
-
-	//bi-directional many-to-one association to ProduccionDetalleLote
-	@OneToMany(mappedBy="produccion")
 	private List<ProduccionDetalleLote> produccionDetalleLotes;
-
-	//bi-directional many-to-one association to ProduccionDetalleLoteCarryover
-	@OneToMany(mappedBy="produccion")
 	private List<ProduccionDetalleLoteCarryover> produccionDetalleLoteCarryovers;
-
-	//bi-directional many-to-one association to ProduccionOrdenPedido
-	@OneToMany(mappedBy="produccion")
+	private List<ProduccionDetalleOrden> produccionDetalleOrdens;
 	private List<ProduccionOrdenPedido> produccionOrdenPedidos;
-
-	//bi-directional many-to-one association to RackeoProceso
-	@OneToMany(mappedBy="produccion")
 	private List<RackeoProceso> rackeoProcesos;
-
-	//bi-directional many-to-one association to ReportesPuntoControl
-	@OneToMany(mappedBy="produccion")
 	private List<ReportesPuntoControl> reportesPuntoControls;
-
-	//bi-directional many-to-one association to RociadoProceso
-	@OneToMany(mappedBy="produccion")
 	private List<RociadoProceso> rociadoProcesos;
 
 	public Produccion() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdproduccion() {
 		return this.idproduccion;
 	}
@@ -156,6 +64,7 @@ public class Produccion implements Serializable {
 	public void setIdproduccion(Long idproduccion) {
 		this.idproduccion = idproduccion;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -165,6 +74,7 @@ public class Produccion implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Timestamp getFechaproduccion() {
 		return this.fechaproduccion;
 	}
@@ -173,6 +83,9 @@ public class Produccion implements Serializable {
 		this.fechaproduccion = fechaproduccion;
 	}
 
+
+	//bi-directional many-to-one association to CoccionProceso
+	@OneToMany(mappedBy="produccion")
 	public List<CoccionProceso> getCoccionProcesos() {
 		return this.coccionProcesos;
 	}
@@ -181,6 +94,23 @@ public class Produccion implements Serializable {
 		this.coccionProcesos = coccionProcesos;
 	}
 
+	public CoccionProceso addCoccionProceso(CoccionProceso coccionProceso) {
+		getCoccionProcesos().add(coccionProceso);
+		coccionProceso.setProduccion(this);
+
+		return coccionProceso;
+	}
+
+	public CoccionProceso removeCoccionProceso(CoccionProceso coccionProceso) {
+		getCoccionProcesos().remove(coccionProceso);
+		coccionProceso.setProduccion(null);
+
+		return coccionProceso;
+	}
+
+
+	//bi-directional many-to-one association to CocinaAperturaCierreDetalle
+	@OneToMany(mappedBy="produccion")
 	public List<CocinaAperturaCierreDetalle> getCocinaAperturaCierreDetalles() {
 		return this.cocinaAperturaCierreDetalles;
 	}
@@ -189,6 +119,23 @@ public class Produccion implements Serializable {
 		this.cocinaAperturaCierreDetalles = cocinaAperturaCierreDetalles;
 	}
 
+	public CocinaAperturaCierreDetalle addCocinaAperturaCierreDetalle(CocinaAperturaCierreDetalle cocinaAperturaCierreDetalle) {
+		getCocinaAperturaCierreDetalles().add(cocinaAperturaCierreDetalle);
+		cocinaAperturaCierreDetalle.setProduccion(this);
+
+		return cocinaAperturaCierreDetalle;
+	}
+
+	public CocinaAperturaCierreDetalle removeCocinaAperturaCierreDetalle(CocinaAperturaCierreDetalle cocinaAperturaCierreDetalle) {
+		getCocinaAperturaCierreDetalles().remove(cocinaAperturaCierreDetalle);
+		cocinaAperturaCierreDetalle.setProduccion(null);
+
+		return cocinaAperturaCierreDetalle;
+	}
+
+
+	//bi-directional many-to-one association to ControlBatchProceso
+	@OneToMany(mappedBy="produccion")
 	public List<ControlBatchProceso> getControlBatchProcesos() {
 		return this.controlBatchProcesos;
 	}
@@ -197,6 +144,23 @@ public class Produccion implements Serializable {
 		this.controlBatchProcesos = controlBatchProcesos;
 	}
 
+	public ControlBatchProceso addControlBatchProceso(ControlBatchProceso controlBatchProceso) {
+		getControlBatchProcesos().add(controlBatchProceso);
+		controlBatchProceso.setProduccion(this);
+
+		return controlBatchProceso;
+	}
+
+	public ControlBatchProceso removeControlBatchProceso(ControlBatchProceso controlBatchProceso) {
+		getControlBatchProcesos().remove(controlBatchProceso);
+		controlBatchProceso.setProduccion(null);
+
+		return controlBatchProceso;
+	}
+
+
+	//bi-directional many-to-one association to DescongeladoDuchaAperturaCierreDetalle
+	@OneToMany(mappedBy="produccion")
 	public List<DescongeladoDuchaAperturaCierreDetalle> getDescongeladoDuchaAperturaCierreDetalles() {
 		return this.descongeladoDuchaAperturaCierreDetalles;
 	}
@@ -205,6 +169,23 @@ public class Produccion implements Serializable {
 		this.descongeladoDuchaAperturaCierreDetalles = descongeladoDuchaAperturaCierreDetalles;
 	}
 
+	public DescongeladoDuchaAperturaCierreDetalle addDescongeladoDuchaAperturaCierreDetalle(DescongeladoDuchaAperturaCierreDetalle descongeladoDuchaAperturaCierreDetalle) {
+		getDescongeladoDuchaAperturaCierreDetalles().add(descongeladoDuchaAperturaCierreDetalle);
+		descongeladoDuchaAperturaCierreDetalle.setProduccion(this);
+
+		return descongeladoDuchaAperturaCierreDetalle;
+	}
+
+	public DescongeladoDuchaAperturaCierreDetalle removeDescongeladoDuchaAperturaCierreDetalle(DescongeladoDuchaAperturaCierreDetalle descongeladoDuchaAperturaCierreDetalle) {
+		getDescongeladoDuchaAperturaCierreDetalles().remove(descongeladoDuchaAperturaCierreDetalle);
+		descongeladoDuchaAperturaCierreDetalle.setProduccion(null);
+
+		return descongeladoDuchaAperturaCierreDetalle;
+	}
+
+
+	//bi-directional many-to-one association to DescongeladoProceso
+	@OneToMany(mappedBy="produccion")
 	public List<DescongeladoProceso> getDescongeladoProcesos() {
 		return this.descongeladoProcesos;
 	}
@@ -213,6 +194,23 @@ public class Produccion implements Serializable {
 		this.descongeladoProcesos = descongeladoProcesos;
 	}
 
+	public DescongeladoProceso addDescongeladoProceso(DescongeladoProceso descongeladoProceso) {
+		getDescongeladoProcesos().add(descongeladoProceso);
+		descongeladoProceso.setProduccion(this);
+
+		return descongeladoProceso;
+	}
+
+	public DescongeladoProceso removeDescongeladoProceso(DescongeladoProceso descongeladoProceso) {
+		getDescongeladoProcesos().remove(descongeladoProceso);
+		descongeladoProceso.setProduccion(null);
+
+		return descongeladoProceso;
+	}
+
+
+	//bi-directional many-to-one association to DesperdicioCajonHarina
+	@OneToMany(mappedBy="produccion")
 	public List<DesperdicioCajonHarina> getDesperdicioCajonHarinas() {
 		return this.desperdicioCajonHarinas;
 	}
@@ -221,6 +219,23 @@ public class Produccion implements Serializable {
 		this.desperdicioCajonHarinas = desperdicioCajonHarinas;
 	}
 
+	public DesperdicioCajonHarina addDesperdicioCajonHarina(DesperdicioCajonHarina desperdicioCajonHarina) {
+		getDesperdicioCajonHarinas().add(desperdicioCajonHarina);
+		desperdicioCajonHarina.setProduccion(this);
+
+		return desperdicioCajonHarina;
+	}
+
+	public DesperdicioCajonHarina removeDesperdicioCajonHarina(DesperdicioCajonHarina desperdicioCajonHarina) {
+		getDesperdicioCajonHarinas().remove(desperdicioCajonHarina);
+		desperdicioCajonHarina.setProduccion(null);
+
+		return desperdicioCajonHarina;
+	}
+
+
+	//bi-directional many-to-one association to DuchaAperturaCierreDetalle
+	@OneToMany(mappedBy="produccion")
 	public List<DuchaAperturaCierreDetalle> getDuchaAperturaCierreDetalles() {
 		return this.duchaAperturaCierreDetalles;
 	}
@@ -229,6 +244,23 @@ public class Produccion implements Serializable {
 		this.duchaAperturaCierreDetalles = duchaAperturaCierreDetalles;
 	}
 
+	public DuchaAperturaCierreDetalle addDuchaAperturaCierreDetalle(DuchaAperturaCierreDetalle duchaAperturaCierreDetalle) {
+		getDuchaAperturaCierreDetalles().add(duchaAperturaCierreDetalle);
+		duchaAperturaCierreDetalle.setProduccion(this);
+
+		return duchaAperturaCierreDetalle;
+	}
+
+	public DuchaAperturaCierreDetalle removeDuchaAperturaCierreDetalle(DuchaAperturaCierreDetalle duchaAperturaCierreDetalle) {
+		getDuchaAperturaCierreDetalles().remove(duchaAperturaCierreDetalle);
+		duchaAperturaCierreDetalle.setProduccion(null);
+
+		return duchaAperturaCierreDetalle;
+	}
+
+
+	//bi-directional many-to-one association to EnvasadoProceso
+	@OneToMany(mappedBy="produccion")
 	public List<EnvasadoProceso> getEnvasadoProcesos() {
 		return this.envasadoProcesos;
 	}
@@ -237,6 +269,23 @@ public class Produccion implements Serializable {
 		this.envasadoProcesos = envasadoProcesos;
 	}
 
+	public EnvasadoProceso addEnvasadoProceso(EnvasadoProceso envasadoProceso) {
+		getEnvasadoProcesos().add(envasadoProceso);
+		envasadoProceso.setProduccion(this);
+
+		return envasadoProceso;
+	}
+
+	public EnvasadoProceso removeEnvasadoProceso(EnvasadoProceso envasadoProceso) {
+		getEnvasadoProcesos().remove(envasadoProceso);
+		envasadoProceso.setProduccion(null);
+
+		return envasadoProceso;
+	}
+
+
+	//bi-directional many-to-one association to EspecialidadesProceso
+	@OneToMany(mappedBy="produccion")
 	public List<EspecialidadesProceso> getEspecialidadesProcesos() {
 		return this.especialidadesProcesos;
 	}
@@ -245,6 +294,23 @@ public class Produccion implements Serializable {
 		this.especialidadesProcesos = especialidadesProcesos;
 	}
 
+	public EspecialidadesProceso addEspecialidadesProceso(EspecialidadesProceso especialidadesProceso) {
+		getEspecialidadesProcesos().add(especialidadesProceso);
+		especialidadesProceso.setProduccion(this);
+
+		return especialidadesProceso;
+	}
+
+	public EspecialidadesProceso removeEspecialidadesProceso(EspecialidadesProceso especialidadesProceso) {
+		getEspecialidadesProcesos().remove(especialidadesProceso);
+		especialidadesProceso.setProduccion(null);
+
+		return especialidadesProceso;
+	}
+
+
+	//bi-directional many-to-one association to EvisceradoProceso
+	@OneToMany(mappedBy="produccion")
 	public List<EvisceradoProceso> getEvisceradoProcesos() {
 		return this.evisceradoProcesos;
 	}
@@ -253,6 +319,23 @@ public class Produccion implements Serializable {
 		this.evisceradoProcesos = evisceradoProcesos;
 	}
 
+	public EvisceradoProceso addEvisceradoProceso(EvisceradoProceso evisceradoProceso) {
+		getEvisceradoProcesos().add(evisceradoProceso);
+		evisceradoProceso.setProduccion(this);
+
+		return evisceradoProceso;
+	}
+
+	public EvisceradoProceso removeEvisceradoProceso(EvisceradoProceso evisceradoProceso) {
+		getEvisceradoProcesos().remove(evisceradoProceso);
+		evisceradoProceso.setProduccion(null);
+
+		return evisceradoProceso;
+	}
+
+
+	//bi-directional many-to-one association to EvolutionAuditoriaDetalle
+	@OneToMany(mappedBy="produccion")
 	public List<EvolutionAuditoriaDetalle> getEvolutionAuditoriaDetalles() {
 		return this.evolutionAuditoriaDetalles;
 	}
@@ -261,6 +344,23 @@ public class Produccion implements Serializable {
 		this.evolutionAuditoriaDetalles = evolutionAuditoriaDetalles;
 	}
 
+	public EvolutionAuditoriaDetalle addEvolutionAuditoriaDetalle(EvolutionAuditoriaDetalle evolutionAuditoriaDetalle) {
+		getEvolutionAuditoriaDetalles().add(evolutionAuditoriaDetalle);
+		evolutionAuditoriaDetalle.setProduccion(this);
+
+		return evolutionAuditoriaDetalle;
+	}
+
+	public EvolutionAuditoriaDetalle removeEvolutionAuditoriaDetalle(EvolutionAuditoriaDetalle evolutionAuditoriaDetalle) {
+		getEvolutionAuditoriaDetalles().remove(evolutionAuditoriaDetalle);
+		evolutionAuditoriaDetalle.setProduccion(null);
+
+		return evolutionAuditoriaDetalle;
+	}
+
+
+	//bi-directional many-to-one association to LimpiezaAsignacionCanastilla
+	@OneToMany(mappedBy="produccion")
 	public List<LimpiezaAsignacionCanastilla> getLimpiezaAsignacionCanastillas() {
 		return this.limpiezaAsignacionCanastillas;
 	}
@@ -269,6 +369,23 @@ public class Produccion implements Serializable {
 		this.limpiezaAsignacionCanastillas = limpiezaAsignacionCanastillas;
 	}
 
+	public LimpiezaAsignacionCanastilla addLimpiezaAsignacionCanastilla(LimpiezaAsignacionCanastilla limpiezaAsignacionCanastilla) {
+		getLimpiezaAsignacionCanastillas().add(limpiezaAsignacionCanastilla);
+		limpiezaAsignacionCanastilla.setProduccion(this);
+
+		return limpiezaAsignacionCanastilla;
+	}
+
+	public LimpiezaAsignacionCanastilla removeLimpiezaAsignacionCanastilla(LimpiezaAsignacionCanastilla limpiezaAsignacionCanastilla) {
+		getLimpiezaAsignacionCanastillas().remove(limpiezaAsignacionCanastilla);
+		limpiezaAsignacionCanastilla.setProduccion(null);
+
+		return limpiezaAsignacionCanastilla;
+	}
+
+
+	//bi-directional many-to-one association to LimpiezaProceso
+	@OneToMany(mappedBy="produccion")
 	public List<LimpiezaProceso> getLimpiezaProcesos() {
 		return this.limpiezaProcesos;
 	}
@@ -277,6 +394,23 @@ public class Produccion implements Serializable {
 		this.limpiezaProcesos = limpiezaProcesos;
 	}
 
+	public LimpiezaProceso addLimpiezaProceso(LimpiezaProceso limpiezaProceso) {
+		getLimpiezaProcesos().add(limpiezaProceso);
+		limpiezaProceso.setProduccion(this);
+
+		return limpiezaProceso;
+	}
+
+	public LimpiezaProceso removeLimpiezaProceso(LimpiezaProceso limpiezaProceso) {
+		getLimpiezaProcesos().remove(limpiezaProceso);
+		limpiezaProceso.setProduccion(null);
+
+		return limpiezaProceso;
+	}
+
+
+	//bi-directional many-to-one association to LimpiezaProcesoEmpleadoFalta
+	@OneToMany(mappedBy="produccion")
 	public List<LimpiezaProcesoEmpleadoFalta> getLimpiezaProcesoEmpleadoFaltas() {
 		return this.limpiezaProcesoEmpleadoFaltas;
 	}
@@ -285,6 +419,23 @@ public class Produccion implements Serializable {
 		this.limpiezaProcesoEmpleadoFaltas = limpiezaProcesoEmpleadoFaltas;
 	}
 
+	public LimpiezaProcesoEmpleadoFalta addLimpiezaProcesoEmpleadoFalta(LimpiezaProcesoEmpleadoFalta limpiezaProcesoEmpleadoFalta) {
+		getLimpiezaProcesoEmpleadoFaltas().add(limpiezaProcesoEmpleadoFalta);
+		limpiezaProcesoEmpleadoFalta.setProduccion(this);
+
+		return limpiezaProcesoEmpleadoFalta;
+	}
+
+	public LimpiezaProcesoEmpleadoFalta removeLimpiezaProcesoEmpleadoFalta(LimpiezaProcesoEmpleadoFalta limpiezaProcesoEmpleadoFalta) {
+		getLimpiezaProcesoEmpleadoFaltas().remove(limpiezaProcesoEmpleadoFalta);
+		limpiezaProcesoEmpleadoFalta.setProduccion(null);
+
+		return limpiezaProcesoEmpleadoFalta;
+	}
+
+
+	//bi-directional many-to-one association to LimpiezaProcesoEmpleadoMarcacione
+	@OneToMany(mappedBy="produccion")
 	public List<LimpiezaProcesoEmpleadoMarcacione> getLimpiezaProcesoEmpleadoMarcaciones() {
 		return this.limpiezaProcesoEmpleadoMarcaciones;
 	}
@@ -293,6 +444,23 @@ public class Produccion implements Serializable {
 		this.limpiezaProcesoEmpleadoMarcaciones = limpiezaProcesoEmpleadoMarcaciones;
 	}
 
+	public LimpiezaProcesoEmpleadoMarcacione addLimpiezaProcesoEmpleadoMarcacione(LimpiezaProcesoEmpleadoMarcacione limpiezaProcesoEmpleadoMarcacione) {
+		getLimpiezaProcesoEmpleadoMarcaciones().add(limpiezaProcesoEmpleadoMarcacione);
+		limpiezaProcesoEmpleadoMarcacione.setProduccion(this);
+
+		return limpiezaProcesoEmpleadoMarcacione;
+	}
+
+	public LimpiezaProcesoEmpleadoMarcacione removeLimpiezaProcesoEmpleadoMarcacione(LimpiezaProcesoEmpleadoMarcacione limpiezaProcesoEmpleadoMarcacione) {
+		getLimpiezaProcesoEmpleadoMarcaciones().remove(limpiezaProcesoEmpleadoMarcacione);
+		limpiezaProcesoEmpleadoMarcacione.setProduccion(null);
+
+		return limpiezaProcesoEmpleadoMarcacione;
+	}
+
+
+	//bi-directional many-to-one association to LonjasProceso
+	@OneToMany(mappedBy="produccion")
 	public List<LonjasProceso> getLonjasProcesos() {
 		return this.lonjasProcesos;
 	}
@@ -301,6 +469,23 @@ public class Produccion implements Serializable {
 		this.lonjasProcesos = lonjasProcesos;
 	}
 
+	public LonjasProceso addLonjasProceso(LonjasProceso lonjasProceso) {
+		getLonjasProcesos().add(lonjasProceso);
+		lonjasProceso.setProduccion(this);
+
+		return lonjasProceso;
+	}
+
+	public LonjasProceso removeLonjasProceso(LonjasProceso lonjasProceso) {
+		getLonjasProcesos().remove(lonjasProceso);
+		lonjasProceso.setProduccion(null);
+
+		return lonjasProceso;
+	}
+
+
+	//bi-directional many-to-one association to ObservacionesPuntoControl
+	@OneToMany(mappedBy="produccion")
 	public List<ObservacionesPuntoControl> getObservacionesPuntoControls() {
 		return this.observacionesPuntoControls;
 	}
@@ -309,6 +494,23 @@ public class Produccion implements Serializable {
 		this.observacionesPuntoControls = observacionesPuntoControls;
 	}
 
+	public ObservacionesPuntoControl addObservacionesPuntoControl(ObservacionesPuntoControl observacionesPuntoControl) {
+		getObservacionesPuntoControls().add(observacionesPuntoControl);
+		observacionesPuntoControl.setProduccion(this);
+
+		return observacionesPuntoControl;
+	}
+
+	public ObservacionesPuntoControl removeObservacionesPuntoControl(ObservacionesPuntoControl observacionesPuntoControl) {
+		getObservacionesPuntoControls().remove(observacionesPuntoControl);
+		observacionesPuntoControl.setProduccion(null);
+
+		return observacionesPuntoControl;
+	}
+
+
+	//bi-directional many-to-one association to PanzasProceso
+	@OneToMany(mappedBy="produccion")
 	public List<PanzasProceso> getPanzasProcesos() {
 		return this.panzasProcesos;
 	}
@@ -317,6 +519,23 @@ public class Produccion implements Serializable {
 		this.panzasProcesos = panzasProcesos;
 	}
 
+	public PanzasProceso addPanzasProceso(PanzasProceso panzasProceso) {
+		getPanzasProcesos().add(panzasProceso);
+		panzasProceso.setProduccion(this);
+
+		return panzasProceso;
+	}
+
+	public PanzasProceso removePanzasProceso(PanzasProceso panzasProceso) {
+		getPanzasProcesos().remove(panzasProceso);
+		panzasProceso.setProduccion(null);
+
+		return panzasProceso;
+	}
+
+
+	//bi-directional many-to-one association to PedidoProduccionArchivoCargaCabecera
+	@OneToMany(mappedBy="produccion")
 	public List<PedidoProduccionArchivoCargaCabecera> getPedidoProduccionArchivoCargaCabeceras() {
 		return this.pedidoProduccionArchivoCargaCabeceras;
 	}
@@ -325,6 +544,23 @@ public class Produccion implements Serializable {
 		this.pedidoProduccionArchivoCargaCabeceras = pedidoProduccionArchivoCargaCabeceras;
 	}
 
+	public PedidoProduccionArchivoCargaCabecera addPedidoProduccionArchivoCargaCabecera(PedidoProduccionArchivoCargaCabecera pedidoProduccionArchivoCargaCabecera) {
+		getPedidoProduccionArchivoCargaCabeceras().add(pedidoProduccionArchivoCargaCabecera);
+		pedidoProduccionArchivoCargaCabecera.setProduccion(this);
+
+		return pedidoProduccionArchivoCargaCabecera;
+	}
+
+	public PedidoProduccionArchivoCargaCabecera removePedidoProduccionArchivoCargaCabecera(PedidoProduccionArchivoCargaCabecera pedidoProduccionArchivoCargaCabecera) {
+		getPedidoProduccionArchivoCargaCabeceras().remove(pedidoProduccionArchivoCargaCabecera);
+		pedidoProduccionArchivoCargaCabecera.setProduccion(null);
+
+		return pedidoProduccionArchivoCargaCabecera;
+	}
+
+
+	//bi-directional many-to-one association to PedidoProduccionCabecera
+	@OneToMany(mappedBy="produccion")
 	public List<PedidoProduccionCabecera> getPedidoProduccionCabeceras() {
 		return this.pedidoProduccionCabeceras;
 	}
@@ -333,6 +569,23 @@ public class Produccion implements Serializable {
 		this.pedidoProduccionCabeceras = pedidoProduccionCabeceras;
 	}
 
+	public PedidoProduccionCabecera addPedidoProduccionCabecera(PedidoProduccionCabecera pedidoProduccionCabecera) {
+		getPedidoProduccionCabeceras().add(pedidoProduccionCabecera);
+		pedidoProduccionCabecera.setProduccion(this);
+
+		return pedidoProduccionCabecera;
+	}
+
+	public PedidoProduccionCabecera removePedidoProduccionCabecera(PedidoProduccionCabecera pedidoProduccionCabecera) {
+		getPedidoProduccionCabeceras().remove(pedidoProduccionCabecera);
+		pedidoProduccionCabecera.setProduccion(null);
+
+		return pedidoProduccionCabecera;
+	}
+
+
+	//bi-directional many-to-one association to PlanificacionCargaArchivo
+	@OneToMany(mappedBy="produccion")
 	public List<PlanificacionCargaArchivo> getPlanificacionCargaArchivos() {
 		return this.planificacionCargaArchivos;
 	}
@@ -341,6 +594,23 @@ public class Produccion implements Serializable {
 		this.planificacionCargaArchivos = planificacionCargaArchivos;
 	}
 
+	public PlanificacionCargaArchivo addPlanificacionCargaArchivo(PlanificacionCargaArchivo planificacionCargaArchivo) {
+		getPlanificacionCargaArchivos().add(planificacionCargaArchivo);
+		planificacionCargaArchivo.setProduccion(this);
+
+		return planificacionCargaArchivo;
+	}
+
+	public PlanificacionCargaArchivo removePlanificacionCargaArchivo(PlanificacionCargaArchivo planificacionCargaArchivo) {
+		getPlanificacionCargaArchivos().remove(planificacionCargaArchivo);
+		planificacionCargaArchivo.setProduccion(null);
+
+		return planificacionCargaArchivo;
+	}
+
+
+	//bi-directional many-to-one association to PlanificacionCargaDetalle
+	@OneToMany(mappedBy="produccion")
 	public List<PlanificacionCargaDetalle> getPlanificacionCargaDetalles() {
 		return this.planificacionCargaDetalles;
 	}
@@ -349,6 +619,23 @@ public class Produccion implements Serializable {
 		this.planificacionCargaDetalles = planificacionCargaDetalles;
 	}
 
+	public PlanificacionCargaDetalle addPlanificacionCargaDetalle(PlanificacionCargaDetalle planificacionCargaDetalle) {
+		getPlanificacionCargaDetalles().add(planificacionCargaDetalle);
+		planificacionCargaDetalle.setProduccion(this);
+
+		return planificacionCargaDetalle;
+	}
+
+	public PlanificacionCargaDetalle removePlanificacionCargaDetalle(PlanificacionCargaDetalle planificacionCargaDetalle) {
+		getPlanificacionCargaDetalles().remove(planificacionCargaDetalle);
+		planificacionCargaDetalle.setProduccion(null);
+
+		return planificacionCargaDetalle;
+	}
+
+
+	//bi-directional many-to-one association to PouchProceso
+	@OneToMany(mappedBy="produccion")
 	public List<PouchProceso> getPouchProcesos() {
 		return this.pouchProcesos;
 	}
@@ -357,6 +644,23 @@ public class Produccion implements Serializable {
 		this.pouchProcesos = pouchProcesos;
 	}
 
+	public PouchProceso addPouchProceso(PouchProceso pouchProceso) {
+		getPouchProcesos().add(pouchProceso);
+		pouchProceso.setProduccion(this);
+
+		return pouchProceso;
+	}
+
+	public PouchProceso removePouchProceso(PouchProceso pouchProceso) {
+		getPouchProcesos().remove(pouchProceso);
+		pouchProceso.setProduccion(null);
+
+		return pouchProceso;
+	}
+
+
+	//bi-directional many-to-one association to ProduccionArchivoCargaLote
+	@OneToMany(mappedBy="produccion")
 	public List<ProduccionArchivoCargaLote> getProduccionArchivoCargaLotes() {
 		return this.produccionArchivoCargaLotes;
 	}
@@ -365,6 +669,48 @@ public class Produccion implements Serializable {
 		this.produccionArchivoCargaLotes = produccionArchivoCargaLotes;
 	}
 
+	public ProduccionArchivoCargaLote addProduccionArchivoCargaLote(ProduccionArchivoCargaLote produccionArchivoCargaLote) {
+		getProduccionArchivoCargaLotes().add(produccionArchivoCargaLote);
+		produccionArchivoCargaLote.setProduccion(this);
+
+		return produccionArchivoCargaLote;
+	}
+
+	public ProduccionArchivoCargaLote removeProduccionArchivoCargaLote(ProduccionArchivoCargaLote produccionArchivoCargaLote) {
+		getProduccionArchivoCargaLotes().remove(produccionArchivoCargaLote);
+		produccionArchivoCargaLote.setProduccion(null);
+
+		return produccionArchivoCargaLote;
+	}
+
+
+	//bi-directional many-to-one association to ProduccionArchivoCargaOrden
+	@OneToMany(mappedBy="produccion")
+	public List<ProduccionArchivoCargaOrden> getProduccionArchivoCargaOrdens() {
+		return this.produccionArchivoCargaOrdens;
+	}
+
+	public void setProduccionArchivoCargaOrdens(List<ProduccionArchivoCargaOrden> produccionArchivoCargaOrdens) {
+		this.produccionArchivoCargaOrdens = produccionArchivoCargaOrdens;
+	}
+
+	public ProduccionArchivoCargaOrden addProduccionArchivoCargaOrden(ProduccionArchivoCargaOrden produccionArchivoCargaOrden) {
+		getProduccionArchivoCargaOrdens().add(produccionArchivoCargaOrden);
+		produccionArchivoCargaOrden.setProduccion(this);
+
+		return produccionArchivoCargaOrden;
+	}
+
+	public ProduccionArchivoCargaOrden removeProduccionArchivoCargaOrden(ProduccionArchivoCargaOrden produccionArchivoCargaOrden) {
+		getProduccionArchivoCargaOrdens().remove(produccionArchivoCargaOrden);
+		produccionArchivoCargaOrden.setProduccion(null);
+
+		return produccionArchivoCargaOrden;
+	}
+
+
+	//bi-directional many-to-one association to ProduccionCargaArchivoPedido
+	@OneToMany(mappedBy="produccion")
 	public List<ProduccionCargaArchivoPedido> getProduccionCargaArchivoPedidos() {
 		return this.produccionCargaArchivoPedidos;
 	}
@@ -373,6 +719,23 @@ public class Produccion implements Serializable {
 		this.produccionCargaArchivoPedidos = produccionCargaArchivoPedidos;
 	}
 
+	public ProduccionCargaArchivoPedido addProduccionCargaArchivoPedido(ProduccionCargaArchivoPedido produccionCargaArchivoPedido) {
+		getProduccionCargaArchivoPedidos().add(produccionCargaArchivoPedido);
+		produccionCargaArchivoPedido.setProduccion(this);
+
+		return produccionCargaArchivoPedido;
+	}
+
+	public ProduccionCargaArchivoPedido removeProduccionCargaArchivoPedido(ProduccionCargaArchivoPedido produccionCargaArchivoPedido) {
+		getProduccionCargaArchivoPedidos().remove(produccionCargaArchivoPedido);
+		produccionCargaArchivoPedido.setProduccion(null);
+
+		return produccionCargaArchivoPedido;
+	}
+
+
+	//bi-directional many-to-one association to ProduccionDetalleLote
+	@OneToMany(mappedBy="produccion")
 	public List<ProduccionDetalleLote> getProduccionDetalleLotes() {
 		return this.produccionDetalleLotes;
 	}
@@ -381,6 +744,23 @@ public class Produccion implements Serializable {
 		this.produccionDetalleLotes = produccionDetalleLotes;
 	}
 
+	public ProduccionDetalleLote addProduccionDetalleLote(ProduccionDetalleLote produccionDetalleLote) {
+		getProduccionDetalleLotes().add(produccionDetalleLote);
+		produccionDetalleLote.setProduccion(this);
+
+		return produccionDetalleLote;
+	}
+
+	public ProduccionDetalleLote removeProduccionDetalleLote(ProduccionDetalleLote produccionDetalleLote) {
+		getProduccionDetalleLotes().remove(produccionDetalleLote);
+		produccionDetalleLote.setProduccion(null);
+
+		return produccionDetalleLote;
+	}
+
+
+	//bi-directional many-to-one association to ProduccionDetalleLoteCarryover
+	@OneToMany(mappedBy="produccion")
 	public List<ProduccionDetalleLoteCarryover> getProduccionDetalleLoteCarryovers() {
 		return this.produccionDetalleLoteCarryovers;
 	}
@@ -389,6 +769,48 @@ public class Produccion implements Serializable {
 		this.produccionDetalleLoteCarryovers = produccionDetalleLoteCarryovers;
 	}
 
+	public ProduccionDetalleLoteCarryover addProduccionDetalleLoteCarryover(ProduccionDetalleLoteCarryover produccionDetalleLoteCarryover) {
+		getProduccionDetalleLoteCarryovers().add(produccionDetalleLoteCarryover);
+		produccionDetalleLoteCarryover.setProduccion(this);
+
+		return produccionDetalleLoteCarryover;
+	}
+
+	public ProduccionDetalleLoteCarryover removeProduccionDetalleLoteCarryover(ProduccionDetalleLoteCarryover produccionDetalleLoteCarryover) {
+		getProduccionDetalleLoteCarryovers().remove(produccionDetalleLoteCarryover);
+		produccionDetalleLoteCarryover.setProduccion(null);
+
+		return produccionDetalleLoteCarryover;
+	}
+
+
+	//bi-directional many-to-one association to ProduccionDetalleOrden
+	@OneToMany(mappedBy="produccion")
+	public List<ProduccionDetalleOrden> getProduccionDetalleOrdens() {
+		return this.produccionDetalleOrdens;
+	}
+
+	public void setProduccionDetalleOrdens(List<ProduccionDetalleOrden> produccionDetalleOrdens) {
+		this.produccionDetalleOrdens = produccionDetalleOrdens;
+	}
+
+	public ProduccionDetalleOrden addProduccionDetalleOrden(ProduccionDetalleOrden produccionDetalleOrden) {
+		getProduccionDetalleOrdens().add(produccionDetalleOrden);
+		produccionDetalleOrden.setProduccion(this);
+
+		return produccionDetalleOrden;
+	}
+
+	public ProduccionDetalleOrden removeProduccionDetalleOrden(ProduccionDetalleOrden produccionDetalleOrden) {
+		getProduccionDetalleOrdens().remove(produccionDetalleOrden);
+		produccionDetalleOrden.setProduccion(null);
+
+		return produccionDetalleOrden;
+	}
+
+
+	//bi-directional many-to-one association to ProduccionOrdenPedido
+	@OneToMany(mappedBy="produccion")
 	public List<ProduccionOrdenPedido> getProduccionOrdenPedidos() {
 		return this.produccionOrdenPedidos;
 	}
@@ -397,6 +819,23 @@ public class Produccion implements Serializable {
 		this.produccionOrdenPedidos = produccionOrdenPedidos;
 	}
 
+	public ProduccionOrdenPedido addProduccionOrdenPedido(ProduccionOrdenPedido produccionOrdenPedido) {
+		getProduccionOrdenPedidos().add(produccionOrdenPedido);
+		produccionOrdenPedido.setProduccion(this);
+
+		return produccionOrdenPedido;
+	}
+
+	public ProduccionOrdenPedido removeProduccionOrdenPedido(ProduccionOrdenPedido produccionOrdenPedido) {
+		getProduccionOrdenPedidos().remove(produccionOrdenPedido);
+		produccionOrdenPedido.setProduccion(null);
+
+		return produccionOrdenPedido;
+	}
+
+
+	//bi-directional many-to-one association to RackeoProceso
+	@OneToMany(mappedBy="produccion")
 	public List<RackeoProceso> getRackeoProcesos() {
 		return this.rackeoProcesos;
 	}
@@ -405,6 +844,23 @@ public class Produccion implements Serializable {
 		this.rackeoProcesos = rackeoProcesos;
 	}
 
+	public RackeoProceso addRackeoProceso(RackeoProceso rackeoProceso) {
+		getRackeoProcesos().add(rackeoProceso);
+		rackeoProceso.setProduccion(this);
+
+		return rackeoProceso;
+	}
+
+	public RackeoProceso removeRackeoProceso(RackeoProceso rackeoProceso) {
+		getRackeoProcesos().remove(rackeoProceso);
+		rackeoProceso.setProduccion(null);
+
+		return rackeoProceso;
+	}
+
+
+	//bi-directional many-to-one association to ReportesPuntoControl
+	@OneToMany(mappedBy="produccion")
 	public List<ReportesPuntoControl> getReportesPuntoControls() {
 		return this.reportesPuntoControls;
 	}
@@ -413,12 +869,43 @@ public class Produccion implements Serializable {
 		this.reportesPuntoControls = reportesPuntoControls;
 	}
 
+	public ReportesPuntoControl addReportesPuntoControl(ReportesPuntoControl reportesPuntoControl) {
+		getReportesPuntoControls().add(reportesPuntoControl);
+		reportesPuntoControl.setProduccion(this);
+
+		return reportesPuntoControl;
+	}
+
+	public ReportesPuntoControl removeReportesPuntoControl(ReportesPuntoControl reportesPuntoControl) {
+		getReportesPuntoControls().remove(reportesPuntoControl);
+		reportesPuntoControl.setProduccion(null);
+
+		return reportesPuntoControl;
+	}
+
+
+	//bi-directional many-to-one association to RociadoProceso
+	@OneToMany(mappedBy="produccion")
 	public List<RociadoProceso> getRociadoProcesos() {
 		return this.rociadoProcesos;
 	}
 
 	public void setRociadoProcesos(List<RociadoProceso> rociadoProcesos) {
 		this.rociadoProcesos = rociadoProcesos;
+	}
+
+	public RociadoProceso addRociadoProceso(RociadoProceso rociadoProceso) {
+		getRociadoProcesos().add(rociadoProceso);
+		rociadoProceso.setProduccion(this);
+
+		return rociadoProceso;
+	}
+
+	public RociadoProceso removeRociadoProceso(RociadoProceso rociadoProceso) {
+		getRociadoProcesos().remove(rociadoProceso);
+		rociadoProceso.setProduccion(null);
+
+		return rociadoProceso;
 	}
 
 }

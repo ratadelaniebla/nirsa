@@ -10,22 +10,19 @@ import java.util.List;
  * 
  */
 @Entity
+@NamedQuery(name="Medio.findAll", query="SELECT m FROM Medio m")
 public class Medio implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idmedio;
-
 	private String descripcion;
-
-	//bi-directional many-to-one association to CalidadIncidencia
-	@OneToMany(mappedBy="medio")
 	private List<CalidadIncidencia> calidadIncidencias;
 
 	public Medio() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdmedio() {
 		return this.idmedio;
 	}
@@ -33,6 +30,7 @@ public class Medio implements Serializable {
 	public void setIdmedio(Integer idmedio) {
 		this.idmedio = idmedio;
 	}
+
 
 	public String getDescripcion() {
 		return this.descripcion;
@@ -42,12 +40,29 @@ public class Medio implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+
+	//bi-directional many-to-one association to CalidadIncidencia
+	@OneToMany(mappedBy="medio")
 	public List<CalidadIncidencia> getCalidadIncidencias() {
 		return this.calidadIncidencias;
 	}
 
 	public void setCalidadIncidencias(List<CalidadIncidencia> calidadIncidencias) {
 		this.calidadIncidencias = calidadIncidencias;
+	}
+
+	public CalidadIncidencia addCalidadIncidencia(CalidadIncidencia calidadIncidencia) {
+		getCalidadIncidencias().add(calidadIncidencia);
+		calidadIncidencia.setMedio(this);
+
+		return calidadIncidencia;
+	}
+
+	public CalidadIncidencia removeCalidadIncidencia(CalidadIncidencia calidadIncidencia) {
+		getCalidadIncidencias().remove(calidadIncidencia);
+		calidadIncidencia.setMedio(null);
+
+		return calidadIncidencia;
 	}
 
 }

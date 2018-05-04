@@ -10,32 +10,22 @@ import java.util.List;
  * 
  */
 @Entity
+@NamedQuery(name="Division.findAll", query="SELECT d FROM Division d")
 public class Division implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer iddivision;
-
 	private String abreviacion;
-
 	private String descripcion;
-
-	//bi-directional many-to-one association to ObservacionesDetalleProceso
-	@OneToMany(mappedBy="division")
 	private List<ObservacionesDetalleProceso> observacionesDetalleProcesos;
-
-	//bi-directional many-to-one association to ObservacionesPuntoControl
-	@OneToMany(mappedBy="division")
 	private List<ObservacionesPuntoControl> observacionesPuntoControls;
-
-	//bi-directional many-to-one association to Reporte
-	@OneToMany(mappedBy="division")
 	private List<Reporte> reportes;
 
 	public Division() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIddivision() {
 		return this.iddivision;
 	}
@@ -43,6 +33,7 @@ public class Division implements Serializable {
 	public void setIddivision(Integer iddivision) {
 		this.iddivision = iddivision;
 	}
+
 
 	public String getAbreviacion() {
 		return this.abreviacion;
@@ -52,6 +43,7 @@ public class Division implements Serializable {
 		this.abreviacion = abreviacion;
 	}
 
+
 	public String getDescripcion() {
 		return this.descripcion;
 	}
@@ -60,6 +52,9 @@ public class Division implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+
+	//bi-directional many-to-one association to ObservacionesDetalleProceso
+	@OneToMany(mappedBy="division")
 	public List<ObservacionesDetalleProceso> getObservacionesDetalleProcesos() {
 		return this.observacionesDetalleProcesos;
 	}
@@ -68,6 +63,23 @@ public class Division implements Serializable {
 		this.observacionesDetalleProcesos = observacionesDetalleProcesos;
 	}
 
+	public ObservacionesDetalleProceso addObservacionesDetalleProceso(ObservacionesDetalleProceso observacionesDetalleProceso) {
+		getObservacionesDetalleProcesos().add(observacionesDetalleProceso);
+		observacionesDetalleProceso.setDivision(this);
+
+		return observacionesDetalleProceso;
+	}
+
+	public ObservacionesDetalleProceso removeObservacionesDetalleProceso(ObservacionesDetalleProceso observacionesDetalleProceso) {
+		getObservacionesDetalleProcesos().remove(observacionesDetalleProceso);
+		observacionesDetalleProceso.setDivision(null);
+
+		return observacionesDetalleProceso;
+	}
+
+
+	//bi-directional many-to-one association to ObservacionesPuntoControl
+	@OneToMany(mappedBy="division")
 	public List<ObservacionesPuntoControl> getObservacionesPuntoControls() {
 		return this.observacionesPuntoControls;
 	}
@@ -76,12 +88,43 @@ public class Division implements Serializable {
 		this.observacionesPuntoControls = observacionesPuntoControls;
 	}
 
+	public ObservacionesPuntoControl addObservacionesPuntoControl(ObservacionesPuntoControl observacionesPuntoControl) {
+		getObservacionesPuntoControls().add(observacionesPuntoControl);
+		observacionesPuntoControl.setDivision(this);
+
+		return observacionesPuntoControl;
+	}
+
+	public ObservacionesPuntoControl removeObservacionesPuntoControl(ObservacionesPuntoControl observacionesPuntoControl) {
+		getObservacionesPuntoControls().remove(observacionesPuntoControl);
+		observacionesPuntoControl.setDivision(null);
+
+		return observacionesPuntoControl;
+	}
+
+
+	//bi-directional many-to-one association to Reporte
+	@OneToMany(mappedBy="division")
 	public List<Reporte> getReportes() {
 		return this.reportes;
 	}
 
 	public void setReportes(List<Reporte> reportes) {
 		this.reportes = reportes;
+	}
+
+	public Reporte addReporte(Reporte reporte) {
+		getReportes().add(reporte);
+		reporte.setDivision(this);
+
+		return reporte;
+	}
+
+	public Reporte removeReporte(Reporte reporte) {
+		getReportes().remove(reporte);
+		reporte.setDivision(null);
+
+		return reporte;
 	}
 
 }

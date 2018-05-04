@@ -11,22 +11,19 @@ import java.util.List;
  */
 @Entity
 @Table(name="barco_descarga_medio_transporte")
+@NamedQuery(name="BarcoDescargaMedioTransporte.findAll", query="SELECT b FROM BarcoDescargaMedioTransporte b")
 public class BarcoDescargaMedioTransporte implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idbarcodescargamediotransporte;
-
 	private String descripcion;
-
-	//bi-directional many-to-one association to BarcoDescarga
-	@OneToMany(mappedBy="barcoDescargaMedioTransporte")
 	private List<BarcoDescarga> barcoDescargas;
 
 	public BarcoDescargaMedioTransporte() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdbarcodescargamediotransporte() {
 		return this.idbarcodescargamediotransporte;
 	}
@@ -34,6 +31,7 @@ public class BarcoDescargaMedioTransporte implements Serializable {
 	public void setIdbarcodescargamediotransporte(Integer idbarcodescargamediotransporte) {
 		this.idbarcodescargamediotransporte = idbarcodescargamediotransporte;
 	}
+
 
 	public String getDescripcion() {
 		return this.descripcion;
@@ -43,12 +41,29 @@ public class BarcoDescargaMedioTransporte implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+
+	//bi-directional many-to-one association to BarcoDescarga
+	@OneToMany(mappedBy="barcoDescargaMedioTransporte")
 	public List<BarcoDescarga> getBarcoDescargas() {
 		return this.barcoDescargas;
 	}
 
 	public void setBarcoDescargas(List<BarcoDescarga> barcoDescargas) {
 		this.barcoDescargas = barcoDescargas;
+	}
+
+	public BarcoDescarga addBarcoDescarga(BarcoDescarga barcoDescarga) {
+		getBarcoDescargas().add(barcoDescarga);
+		barcoDescarga.setBarcoDescargaMedioTransporte(this);
+
+		return barcoDescarga;
+	}
+
+	public BarcoDescarga removeBarcoDescarga(BarcoDescarga barcoDescarga) {
+		getBarcoDescargas().remove(barcoDescarga);
+		barcoDescarga.setBarcoDescargaMedioTransporte(null);
+
+		return barcoDescarga;
 	}
 
 }

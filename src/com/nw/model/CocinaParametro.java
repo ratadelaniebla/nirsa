@@ -10,25 +10,21 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="cocina_parametros")
+@NamedQuery(name="CocinaParametro.findAll", query="SELECT c FROM CocinaParametro c")
 public class CocinaParametro implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idcocinaparametros;
-
 	private String habilitado;
-
 	private Integer idcocina;
-
 	private Integer numerococinadageneral;
-
-	@Column(name="velocidad_lectura")
 	private Integer velocidadLectura;
 
 	public CocinaParametro() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdcocinaparametros() {
 		return this.idcocinaparametros;
 	}
@@ -36,6 +32,7 @@ public class CocinaParametro implements Serializable {
 	public void setIdcocinaparametros(Integer idcocinaparametros) {
 		this.idcocinaparametros = idcocinaparametros;
 	}
+
 
 	public String getHabilitado() {
 		return this.habilitado;
@@ -45,6 +42,7 @@ public class CocinaParametro implements Serializable {
 		this.habilitado = habilitado;
 	}
 
+
 	public Integer getIdcocina() {
 		return this.idcocina;
 	}
@@ -52,6 +50,7 @@ public class CocinaParametro implements Serializable {
 	public void setIdcocina(Integer idcocina) {
 		this.idcocina = idcocina;
 	}
+
 
 	public Integer getNumerococinadageneral() {
 		return this.numerococinadageneral;
@@ -61,6 +60,8 @@ public class CocinaParametro implements Serializable {
 		this.numerococinadageneral = numerococinadageneral;
 	}
 
+
+	@Column(name="velocidad_lectura")
 	public Integer getVelocidadLectura() {
 		return this.velocidadLectura;
 	}

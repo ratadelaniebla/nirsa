@@ -10,55 +10,29 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="dispositivo_destino")
+@NamedQuery(name="DispositivoDestino.findAll", query="SELECT d FROM DispositivoDestino d")
 public class DispositivoDestino implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long iddispositivodestino;
-
 	private String descripciondispotivodestino;
-
 	private Integer estadodispositivo;
-
 	private String ipdispositivo;
-
 	private String proveedordispositivo;
-
 	private String puertdispositivo;
-
 	private String serie;
-
 	private String tiempoesperadispositivo;
-
-	//bi-directional many-to-one association to Dispositivo
-	@ManyToOne
-	@JoinColumn(name="iddispositivo")
 	private Dispositivo dispositivo;
-
-	//bi-directional many-to-one association to DispositivoLado
-	@ManyToOne
-	@JoinColumn(name="iddispositivolado")
 	private DispositivoLado dispositivoLado;
-
-	//bi-directional many-to-one association to DispositivoPuestoTrabajo
-	@ManyToOne
-	@JoinColumn(name="iddispositivopuestotrabajo")
 	private DispositivoPuestoTrabajo dispositivoPuestoTrabajo;
-
-	//bi-directional many-to-one association to Empresa
-	@ManyToOne
-	@JoinColumn(name="idempresa")
 	private Empresa empresa;
-
-	//bi-directional many-to-one association to Proceso
-	@ManyToOne
-	@JoinColumn(name="idproceso")
 	private Proceso proceso;
 
 	public DispositivoDestino() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIddispositivodestino() {
 		return this.iddispositivodestino;
 	}
@@ -66,6 +40,7 @@ public class DispositivoDestino implements Serializable {
 	public void setIddispositivodestino(Long iddispositivodestino) {
 		this.iddispositivodestino = iddispositivodestino;
 	}
+
 
 	public String getDescripciondispotivodestino() {
 		return this.descripciondispotivodestino;
@@ -75,6 +50,7 @@ public class DispositivoDestino implements Serializable {
 		this.descripciondispotivodestino = descripciondispotivodestino;
 	}
 
+
 	public Integer getEstadodispositivo() {
 		return this.estadodispositivo;
 	}
@@ -82,6 +58,7 @@ public class DispositivoDestino implements Serializable {
 	public void setEstadodispositivo(Integer estadodispositivo) {
 		this.estadodispositivo = estadodispositivo;
 	}
+
 
 	public String getIpdispositivo() {
 		return this.ipdispositivo;
@@ -91,6 +68,7 @@ public class DispositivoDestino implements Serializable {
 		this.ipdispositivo = ipdispositivo;
 	}
 
+
 	public String getProveedordispositivo() {
 		return this.proveedordispositivo;
 	}
@@ -98,6 +76,7 @@ public class DispositivoDestino implements Serializable {
 	public void setProveedordispositivo(String proveedordispositivo) {
 		this.proveedordispositivo = proveedordispositivo;
 	}
+
 
 	public String getPuertdispositivo() {
 		return this.puertdispositivo;
@@ -107,6 +86,7 @@ public class DispositivoDestino implements Serializable {
 		this.puertdispositivo = puertdispositivo;
 	}
 
+
 	public String getSerie() {
 		return this.serie;
 	}
@@ -114,6 +94,7 @@ public class DispositivoDestino implements Serializable {
 	public void setSerie(String serie) {
 		this.serie = serie;
 	}
+
 
 	public String getTiempoesperadispositivo() {
 		return this.tiempoesperadispositivo;
@@ -123,6 +104,10 @@ public class DispositivoDestino implements Serializable {
 		this.tiempoesperadispositivo = tiempoesperadispositivo;
 	}
 
+
+	//bi-directional many-to-one association to Dispositivo
+	@ManyToOne
+	@JoinColumn(name="iddispositivo")
 	public Dispositivo getDispositivo() {
 		return this.dispositivo;
 	}
@@ -131,6 +116,10 @@ public class DispositivoDestino implements Serializable {
 		this.dispositivo = dispositivo;
 	}
 
+
+	//bi-directional many-to-one association to DispositivoLado
+	@ManyToOne
+	@JoinColumn(name="iddispositivolado")
 	public DispositivoLado getDispositivoLado() {
 		return this.dispositivoLado;
 	}
@@ -139,6 +128,10 @@ public class DispositivoDestino implements Serializable {
 		this.dispositivoLado = dispositivoLado;
 	}
 
+
+	//bi-directional many-to-one association to DispositivoPuestoTrabajo
+	@ManyToOne
+	@JoinColumn(name="iddispositivopuestotrabajo")
 	public DispositivoPuestoTrabajo getDispositivoPuestoTrabajo() {
 		return this.dispositivoPuestoTrabajo;
 	}
@@ -147,6 +140,10 @@ public class DispositivoDestino implements Serializable {
 		this.dispositivoPuestoTrabajo = dispositivoPuestoTrabajo;
 	}
 
+
+	//bi-directional many-to-one association to Empresa
+	@ManyToOne
+	@JoinColumn(name="idempresa")
 	public Empresa getEmpresa() {
 		return this.empresa;
 	}
@@ -155,6 +152,10 @@ public class DispositivoDestino implements Serializable {
 		this.empresa = empresa;
 	}
 
+
+	//bi-directional many-to-one association to Proceso
+	@ManyToOne
+	@JoinColumn(name="idproceso")
 	public Proceso getProceso() {
 		return this.proceso;
 	}

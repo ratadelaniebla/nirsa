@@ -10,25 +10,20 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="estandar_rallado_linea")
+@NamedQuery(name="EstandarRalladoLinea.findAll", query="SELECT e FROM EstandarRalladoLinea e")
 public class EstandarRalladoLinea implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idestandarralladolinea;
-
 	private double rangodesde;
-
 	private double rangohasta;
-
-	//bi-directional many-to-one association to LimpiezaTipo
-	@ManyToOne
-	@JoinColumn(name="idlimpiezatipo")
 	private LimpiezaTipo limpiezaTipo;
 
 	public EstandarRalladoLinea() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdestandarralladolinea() {
 		return this.idestandarralladolinea;
 	}
@@ -36,6 +31,7 @@ public class EstandarRalladoLinea implements Serializable {
 	public void setIdestandarralladolinea(Integer idestandarralladolinea) {
 		this.idestandarralladolinea = idestandarralladolinea;
 	}
+
 
 	public double getRangodesde() {
 		return this.rangodesde;
@@ -45,6 +41,7 @@ public class EstandarRalladoLinea implements Serializable {
 		this.rangodesde = rangodesde;
 	}
 
+
 	public double getRangohasta() {
 		return this.rangohasta;
 	}
@@ -53,6 +50,10 @@ public class EstandarRalladoLinea implements Serializable {
 		this.rangohasta = rangohasta;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaTipo
+	@ManyToOne
+	@JoinColumn(name="idlimpiezatipo")
 	public LimpiezaTipo getLimpiezaTipo() {
 		return this.limpiezaTipo;
 	}

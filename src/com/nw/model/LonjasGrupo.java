@@ -11,22 +11,19 @@ import java.util.List;
  */
 @Entity
 @Table(name="lonjas_grupo")
+@NamedQuery(name="LonjasGrupo.findAll", query="SELECT l FROM LonjasGrupo l")
 public class LonjasGrupo implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idlonjasgrupo;
-
 	private String descripcion;
-
-	//bi-directional many-to-one association to LonjasLineaGrupo
-	@OneToMany(mappedBy="lonjasGrupo")
 	private List<LonjasLineaGrupo> lonjasLineaGrupos;
 
 	public LonjasGrupo() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdlonjasgrupo() {
 		return this.idlonjasgrupo;
 	}
@@ -34,6 +31,7 @@ public class LonjasGrupo implements Serializable {
 	public void setIdlonjasgrupo(Integer idlonjasgrupo) {
 		this.idlonjasgrupo = idlonjasgrupo;
 	}
+
 
 	public String getDescripcion() {
 		return this.descripcion;
@@ -43,12 +41,29 @@ public class LonjasGrupo implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+
+	//bi-directional many-to-one association to LonjasLineaGrupo
+	@OneToMany(mappedBy="lonjasGrupo")
 	public List<LonjasLineaGrupo> getLonjasLineaGrupos() {
 		return this.lonjasLineaGrupos;
 	}
 
 	public void setLonjasLineaGrupos(List<LonjasLineaGrupo> lonjasLineaGrupos) {
 		this.lonjasLineaGrupos = lonjasLineaGrupos;
+	}
+
+	public LonjasLineaGrupo addLonjasLineaGrupo(LonjasLineaGrupo lonjasLineaGrupo) {
+		getLonjasLineaGrupos().add(lonjasLineaGrupo);
+		lonjasLineaGrupo.setLonjasGrupo(this);
+
+		return lonjasLineaGrupo;
+	}
+
+	public LonjasLineaGrupo removeLonjasLineaGrupo(LonjasLineaGrupo lonjasLineaGrupo) {
+		getLonjasLineaGrupos().remove(lonjasLineaGrupo);
+		lonjasLineaGrupo.setLonjasGrupo(null);
+
+		return lonjasLineaGrupo;
 	}
 
 }

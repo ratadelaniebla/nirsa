@@ -10,31 +10,22 @@ import java.util.List;
  * 
  */
 @Entity
+@NamedQuery(name="Proveedor.findAll", query="SELECT p FROM Proveedor p")
 public class Proveedor implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idproveedor;
-
-	@Column(name="apellidos_proveedor")
 	private String apellidosProveedor;
-
-	@Column(name="cedula_proveedor")
 	private String cedulaProveedor;
-
 	private String codigosap;
-
-	@Column(name="nombres_proveedor")
 	private String nombresProveedor;
-
-	//bi-directional many-to-one association to HarinaRecepcionPescaComprobante
-	@OneToMany(mappedBy="proveedor")
 	private List<HarinaRecepcionPescaComprobante> harinaRecepcionPescaComprobantes;
 
 	public Proveedor() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdproveedor() {
 		return this.idproveedor;
 	}
@@ -43,6 +34,8 @@ public class Proveedor implements Serializable {
 		this.idproveedor = idproveedor;
 	}
 
+
+	@Column(name="apellidos_proveedor")
 	public String getApellidosProveedor() {
 		return this.apellidosProveedor;
 	}
@@ -51,6 +44,8 @@ public class Proveedor implements Serializable {
 		this.apellidosProveedor = apellidosProveedor;
 	}
 
+
+	@Column(name="cedula_proveedor")
 	public String getCedulaProveedor() {
 		return this.cedulaProveedor;
 	}
@@ -58,6 +53,7 @@ public class Proveedor implements Serializable {
 	public void setCedulaProveedor(String cedulaProveedor) {
 		this.cedulaProveedor = cedulaProveedor;
 	}
+
 
 	public String getCodigosap() {
 		return this.codigosap;
@@ -67,6 +63,8 @@ public class Proveedor implements Serializable {
 		this.codigosap = codigosap;
 	}
 
+
+	@Column(name="nombres_proveedor")
 	public String getNombresProveedor() {
 		return this.nombresProveedor;
 	}
@@ -75,12 +73,29 @@ public class Proveedor implements Serializable {
 		this.nombresProveedor = nombresProveedor;
 	}
 
+
+	//bi-directional many-to-one association to HarinaRecepcionPescaComprobante
+	@OneToMany(mappedBy="proveedor")
 	public List<HarinaRecepcionPescaComprobante> getHarinaRecepcionPescaComprobantes() {
 		return this.harinaRecepcionPescaComprobantes;
 	}
 
 	public void setHarinaRecepcionPescaComprobantes(List<HarinaRecepcionPescaComprobante> harinaRecepcionPescaComprobantes) {
 		this.harinaRecepcionPescaComprobantes = harinaRecepcionPescaComprobantes;
+	}
+
+	public HarinaRecepcionPescaComprobante addHarinaRecepcionPescaComprobante(HarinaRecepcionPescaComprobante harinaRecepcionPescaComprobante) {
+		getHarinaRecepcionPescaComprobantes().add(harinaRecepcionPescaComprobante);
+		harinaRecepcionPescaComprobante.setProveedor(this);
+
+		return harinaRecepcionPescaComprobante;
+	}
+
+	public HarinaRecepcionPescaComprobante removeHarinaRecepcionPescaComprobante(HarinaRecepcionPescaComprobante harinaRecepcionPescaComprobante) {
+		getHarinaRecepcionPescaComprobantes().remove(harinaRecepcionPescaComprobante);
+		harinaRecepcionPescaComprobante.setProveedor(null);
+
+		return harinaRecepcionPescaComprobante;
 	}
 
 }

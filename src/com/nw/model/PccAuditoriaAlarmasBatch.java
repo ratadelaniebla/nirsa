@@ -11,34 +11,24 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="pcc_auditoria_alarmas_batch")
+@NamedQuery(name="PccAuditoriaAlarmasBatch.findAll", query="SELECT p FROM PccAuditoriaAlarmasBatch p")
 public class PccAuditoriaAlarmasBatch implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idpccauditoriaalarmasbatch;
-
-	@Column(name="estado_alarma_final")
 	private Integer estadoAlarmaFinal;
-
-	@Column(name="estado_alarma_inicial")
 	private Integer estadoAlarmaInicial;
-
-	@Column(name="fechareg_alarma_final")
 	private Timestamp fecharegAlarmaFinal;
-
-	@Column(name="fechareg_alarma_inicial")
 	private Timestamp fecharegAlarmaInicial;
-
 	private Long idcontrolfichabatch;
-
 	private Integer pcc;
-
 	private Integer proceso;
 
 	public PccAuditoriaAlarmasBatch() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdpccauditoriaalarmasbatch() {
 		return this.idpccauditoriaalarmasbatch;
 	}
@@ -47,6 +37,8 @@ public class PccAuditoriaAlarmasBatch implements Serializable {
 		this.idpccauditoriaalarmasbatch = idpccauditoriaalarmasbatch;
 	}
 
+
+	@Column(name="estado_alarma_final")
 	public Integer getEstadoAlarmaFinal() {
 		return this.estadoAlarmaFinal;
 	}
@@ -55,6 +47,8 @@ public class PccAuditoriaAlarmasBatch implements Serializable {
 		this.estadoAlarmaFinal = estadoAlarmaFinal;
 	}
 
+
+	@Column(name="estado_alarma_inicial")
 	public Integer getEstadoAlarmaInicial() {
 		return this.estadoAlarmaInicial;
 	}
@@ -63,6 +57,8 @@ public class PccAuditoriaAlarmasBatch implements Serializable {
 		this.estadoAlarmaInicial = estadoAlarmaInicial;
 	}
 
+
+	@Column(name="fechareg_alarma_final")
 	public Timestamp getFecharegAlarmaFinal() {
 		return this.fecharegAlarmaFinal;
 	}
@@ -71,6 +67,8 @@ public class PccAuditoriaAlarmasBatch implements Serializable {
 		this.fecharegAlarmaFinal = fecharegAlarmaFinal;
 	}
 
+
+	@Column(name="fechareg_alarma_inicial")
 	public Timestamp getFecharegAlarmaInicial() {
 		return this.fecharegAlarmaInicial;
 	}
@@ -78,6 +76,7 @@ public class PccAuditoriaAlarmasBatch implements Serializable {
 	public void setFecharegAlarmaInicial(Timestamp fecharegAlarmaInicial) {
 		this.fecharegAlarmaInicial = fecharegAlarmaInicial;
 	}
+
 
 	public Long getIdcontrolfichabatch() {
 		return this.idcontrolfichabatch;
@@ -87,6 +86,7 @@ public class PccAuditoriaAlarmasBatch implements Serializable {
 		this.idcontrolfichabatch = idcontrolfichabatch;
 	}
 
+
 	public Integer getPcc() {
 		return this.pcc;
 	}
@@ -94,6 +94,7 @@ public class PccAuditoriaAlarmasBatch implements Serializable {
 	public void setPcc(Integer pcc) {
 		this.pcc = pcc;
 	}
+
 
 	public Integer getProceso() {
 		return this.proceso;

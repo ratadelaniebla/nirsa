@@ -11,48 +11,27 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="calidad_muestra_area_cabecera_aprobacion")
+@NamedQuery(name="CalidadMuestraAreaCabeceraAprobacion.findAll", query="SELECT c FROM CalidadMuestraAreaCabeceraAprobacion c")
 public class CalidadMuestraAreaCabeceraAprobacion implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcalidadmuestraareacabeceraaprobacion;
-
 	private Boolean accesoaprobacion;
-
 	private Boolean accesorevision;
-
 	private Boolean accesoverificado;
-
 	private String comentario;
-
 	private Timestamp fecharegistro;
-
 	private Integer idarearevisionaprobacion;
-
-	//bi-directional many-to-one association to CalidadMuestraArea
-	@ManyToOne
-	@JoinColumn(name="idcalidadmuestraarea")
 	private CalidadMuestraArea calidadMuestraArea;
-
-	//bi-directional many-to-one association to CalidadMuestraAreaCabecera
-	@ManyToOne
-	@JoinColumn(name="idcalidadmuestraareacabecera")
 	private CalidadMuestraAreaCabecera calidadMuestraAreaCabecera;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
-
-	//bi-directional many-to-one association to UsuariosAprobacion
-	@ManyToOne
-	@JoinColumn(name="idusuarioaprobacion")
 	private UsuariosAprobacion usuariosAprobacion;
 
 	public CalidadMuestraAreaCabeceraAprobacion() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcalidadmuestraareacabeceraaprobacion() {
 		return this.idcalidadmuestraareacabeceraaprobacion;
 	}
@@ -60,6 +39,7 @@ public class CalidadMuestraAreaCabeceraAprobacion implements Serializable {
 	public void setIdcalidadmuestraareacabeceraaprobacion(Long idcalidadmuestraareacabeceraaprobacion) {
 		this.idcalidadmuestraareacabeceraaprobacion = idcalidadmuestraareacabeceraaprobacion;
 	}
+
 
 	public Boolean getAccesoaprobacion() {
 		return this.accesoaprobacion;
@@ -69,6 +49,7 @@ public class CalidadMuestraAreaCabeceraAprobacion implements Serializable {
 		this.accesoaprobacion = accesoaprobacion;
 	}
 
+
 	public Boolean getAccesorevision() {
 		return this.accesorevision;
 	}
@@ -76,6 +57,7 @@ public class CalidadMuestraAreaCabeceraAprobacion implements Serializable {
 	public void setAccesorevision(Boolean accesorevision) {
 		this.accesorevision = accesorevision;
 	}
+
 
 	public Boolean getAccesoverificado() {
 		return this.accesoverificado;
@@ -85,6 +67,7 @@ public class CalidadMuestraAreaCabeceraAprobacion implements Serializable {
 		this.accesoverificado = accesoverificado;
 	}
 
+
 	public String getComentario() {
 		return this.comentario;
 	}
@@ -92,6 +75,7 @@ public class CalidadMuestraAreaCabeceraAprobacion implements Serializable {
 	public void setComentario(String comentario) {
 		this.comentario = comentario;
 	}
+
 
 	public Timestamp getFecharegistro() {
 		return this.fecharegistro;
@@ -101,6 +85,7 @@ public class CalidadMuestraAreaCabeceraAprobacion implements Serializable {
 		this.fecharegistro = fecharegistro;
 	}
 
+
 	public Integer getIdarearevisionaprobacion() {
 		return this.idarearevisionaprobacion;
 	}
@@ -109,6 +94,10 @@ public class CalidadMuestraAreaCabeceraAprobacion implements Serializable {
 		this.idarearevisionaprobacion = idarearevisionaprobacion;
 	}
 
+
+	//bi-directional many-to-one association to CalidadMuestraArea
+	@ManyToOne
+	@JoinColumn(name="idcalidadmuestraarea")
 	public CalidadMuestraArea getCalidadMuestraArea() {
 		return this.calidadMuestraArea;
 	}
@@ -117,6 +106,10 @@ public class CalidadMuestraAreaCabeceraAprobacion implements Serializable {
 		this.calidadMuestraArea = calidadMuestraArea;
 	}
 
+
+	//bi-directional many-to-one association to CalidadMuestraAreaCabecera
+	@ManyToOne
+	@JoinColumn(name="idcalidadmuestraareacabecera")
 	public CalidadMuestraAreaCabecera getCalidadMuestraAreaCabecera() {
 		return this.calidadMuestraAreaCabecera;
 	}
@@ -125,6 +118,10 @@ public class CalidadMuestraAreaCabeceraAprobacion implements Serializable {
 		this.calidadMuestraAreaCabecera = calidadMuestraAreaCabecera;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}
@@ -133,6 +130,10 @@ public class CalidadMuestraAreaCabeceraAprobacion implements Serializable {
 		this.usuario = usuario;
 	}
 
+
+	//bi-directional many-to-one association to UsuariosAprobacion
+	@ManyToOne
+	@JoinColumn(name="idusuarioaprobacion")
 	public UsuariosAprobacion getUsuariosAprobacion() {
 		return this.usuariosAprobacion;
 	}

@@ -11,27 +11,20 @@ import java.util.List;
  */
 @Entity
 @Table(name="lonjas_especietalla")
+@NamedQuery(name="LonjasEspecietalla.findAll", query="SELECT l FROM LonjasEspecietalla l")
 public class LonjasEspecietalla implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idlonjasespecietalla;
-
 	private String tallalonjas;
-
-	//bi-directional many-to-one association to LonjasDetalleProcesoLote
-	@OneToMany(mappedBy="lonjasEspecietalla")
 	private List<LonjasDetalleProcesoLote> lonjasDetalleProcesoLotes;
-
-	//bi-directional many-to-one association to EspecieTalla
-	@ManyToOne
-	@JoinColumn(name="idespecietalla")
 	private EspecieTalla especieTalla;
 
 	public LonjasEspecietalla() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdlonjasespecietalla() {
 		return this.idlonjasespecietalla;
 	}
@@ -39,6 +32,7 @@ public class LonjasEspecietalla implements Serializable {
 	public void setIdlonjasespecietalla(Integer idlonjasespecietalla) {
 		this.idlonjasespecietalla = idlonjasespecietalla;
 	}
+
 
 	public String getTallalonjas() {
 		return this.tallalonjas;
@@ -48,6 +42,9 @@ public class LonjasEspecietalla implements Serializable {
 		this.tallalonjas = tallalonjas;
 	}
 
+
+	//bi-directional many-to-one association to LonjasDetalleProcesoLote
+	@OneToMany(mappedBy="lonjasEspecietalla")
 	public List<LonjasDetalleProcesoLote> getLonjasDetalleProcesoLotes() {
 		return this.lonjasDetalleProcesoLotes;
 	}
@@ -56,6 +53,24 @@ public class LonjasEspecietalla implements Serializable {
 		this.lonjasDetalleProcesoLotes = lonjasDetalleProcesoLotes;
 	}
 
+	public LonjasDetalleProcesoLote addLonjasDetalleProcesoLote(LonjasDetalleProcesoLote lonjasDetalleProcesoLote) {
+		getLonjasDetalleProcesoLotes().add(lonjasDetalleProcesoLote);
+		lonjasDetalleProcesoLote.setLonjasEspecietalla(this);
+
+		return lonjasDetalleProcesoLote;
+	}
+
+	public LonjasDetalleProcesoLote removeLonjasDetalleProcesoLote(LonjasDetalleProcesoLote lonjasDetalleProcesoLote) {
+		getLonjasDetalleProcesoLotes().remove(lonjasDetalleProcesoLote);
+		lonjasDetalleProcesoLote.setLonjasEspecietalla(null);
+
+		return lonjasDetalleProcesoLote;
+	}
+
+
+	//bi-directional many-to-one association to EspecieTalla
+	@ManyToOne
+	@JoinColumn(name="idespecietalla")
 	public EspecieTalla getEspecieTalla() {
 		return this.especieTalla;
 	}

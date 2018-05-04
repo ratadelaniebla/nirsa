@@ -11,36 +11,24 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name="calidad_incidencia")
+@NamedQuery(name="CalidadIncidencia.findAll", query="SELECT c FROM CalidadIncidencia c")
 public class CalidadIncidencia implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcalidadincidencia;
-
 	private Integer idcalidadobservacion;
-
 	private BigDecimal idmuestra;
-
 	private Long idnumformato;
-
 	private Long idnummedio;
-
 	private double valorcuantitativo;
-
-	//bi-directional many-to-one association to Codificacion
-	@ManyToOne
-	@JoinColumn(name="idformato")
 	private Codificacion codificacion;
-
-	//bi-directional many-to-one association to Medio
-	@ManyToOne
-	@JoinColumn(name="idmedio")
 	private Medio medio;
 
 	public CalidadIncidencia() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcalidadincidencia() {
 		return this.idcalidadincidencia;
 	}
@@ -48,6 +36,7 @@ public class CalidadIncidencia implements Serializable {
 	public void setIdcalidadincidencia(Long idcalidadincidencia) {
 		this.idcalidadincidencia = idcalidadincidencia;
 	}
+
 
 	public Integer getIdcalidadobservacion() {
 		return this.idcalidadobservacion;
@@ -57,6 +46,7 @@ public class CalidadIncidencia implements Serializable {
 		this.idcalidadobservacion = idcalidadobservacion;
 	}
 
+
 	public BigDecimal getIdmuestra() {
 		return this.idmuestra;
 	}
@@ -64,6 +54,7 @@ public class CalidadIncidencia implements Serializable {
 	public void setIdmuestra(BigDecimal idmuestra) {
 		this.idmuestra = idmuestra;
 	}
+
 
 	public Long getIdnumformato() {
 		return this.idnumformato;
@@ -73,6 +64,7 @@ public class CalidadIncidencia implements Serializable {
 		this.idnumformato = idnumformato;
 	}
 
+
 	public Long getIdnummedio() {
 		return this.idnummedio;
 	}
@@ -80,6 +72,7 @@ public class CalidadIncidencia implements Serializable {
 	public void setIdnummedio(Long idnummedio) {
 		this.idnummedio = idnummedio;
 	}
+
 
 	public double getValorcuantitativo() {
 		return this.valorcuantitativo;
@@ -89,6 +82,10 @@ public class CalidadIncidencia implements Serializable {
 		this.valorcuantitativo = valorcuantitativo;
 	}
 
+
+	//bi-directional many-to-one association to Codificacion
+	@ManyToOne
+	@JoinColumn(name="idformato")
 	public Codificacion getCodificacion() {
 		return this.codificacion;
 	}
@@ -97,6 +94,10 @@ public class CalidadIncidencia implements Serializable {
 		this.codificacion = codificacion;
 	}
 
+
+	//bi-directional many-to-one association to Medio
+	@ManyToOne
+	@JoinColumn(name="idmedio")
 	public Medio getMedio() {
 		return this.medio;
 	}

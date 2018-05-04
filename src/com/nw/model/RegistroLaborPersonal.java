@@ -10,20 +10,19 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="registro_labor_personal")
+@NamedQuery(name="RegistroLaborPersonal.findAll", query="SELECT r FROM RegistroLaborPersonal r")
 public class RegistroLaborPersonal implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idregistrolaborpersonal;
-
 	private Long codigoordenfabricacion;
-
 	private Integer idbarco;
 
 	public RegistroLaborPersonal() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdregistrolaborpersonal() {
 		return this.idregistrolaborpersonal;
 	}
@@ -32,6 +31,7 @@ public class RegistroLaborPersonal implements Serializable {
 		this.idregistrolaborpersonal = idregistrolaborpersonal;
 	}
 
+
 	public Long getCodigoordenfabricacion() {
 		return this.codigoordenfabricacion;
 	}
@@ -39,6 +39,7 @@ public class RegistroLaborPersonal implements Serializable {
 	public void setCodigoordenfabricacion(Long codigoordenfabricacion) {
 		this.codigoordenfabricacion = codigoordenfabricacion;
 	}
+
 
 	public Integer getIdbarco() {
 		return this.idbarco;

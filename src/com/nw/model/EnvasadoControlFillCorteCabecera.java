@@ -18,8 +18,8 @@ public class EnvasadoControlFillCorteCabecera implements Serializable {
 	private Long idenvasadocontrolfillcortecabecera;
 	private Timestamp fechareg;
 	private String idusuario;
+	private EnvasadoProceso envasadoProceso;
 	private List<EnvasadoControlFillCorteDetalle> envasadoControlFillCorteDetalles;
-	private Long idenvasadoproceso;
 
 	public EnvasadoControlFillCorteCabecera() {
 	}
@@ -54,6 +54,18 @@ public class EnvasadoControlFillCorteCabecera implements Serializable {
 	}
 
 
+	//bi-directional many-to-one association to EnvasadoProceso
+	@ManyToOne
+	@JoinColumn(name="idenvasadoproceso")
+	public EnvasadoProceso getEnvasadoProceso() {
+		return this.envasadoProceso;
+	}
+
+	public void setEnvasadoProceso(EnvasadoProceso envasadoProceso) {
+		this.envasadoProceso = envasadoProceso;
+	}
+
+
 	//bi-directional many-to-one association to EnvasadoControlFillCorteDetalle
 	@OneToMany(mappedBy="envasadoControlFillCorteCabecera")
 	public List<EnvasadoControlFillCorteDetalle> getEnvasadoControlFillCorteDetalles() {
@@ -64,30 +76,18 @@ public class EnvasadoControlFillCorteCabecera implements Serializable {
 		this.envasadoControlFillCorteDetalles = envasadoControlFillCorteDetalles;
 	}
 
+	public EnvasadoControlFillCorteDetalle addEnvasadoControlFillCorteDetalle(EnvasadoControlFillCorteDetalle envasadoControlFillCorteDetalle) {
+		getEnvasadoControlFillCorteDetalles().add(envasadoControlFillCorteDetalle);
+		envasadoControlFillCorteDetalle.setEnvasadoControlFillCorteCabecera(this);
 
-	public Long getIdenvasadoproceso() {
-		return idenvasadoproceso;
+		return envasadoControlFillCorteDetalle;
 	}
 
+	public EnvasadoControlFillCorteDetalle removeEnvasadoControlFillCorteDetalle(EnvasadoControlFillCorteDetalle envasadoControlFillCorteDetalle) {
+		getEnvasadoControlFillCorteDetalles().remove(envasadoControlFillCorteDetalle);
+		envasadoControlFillCorteDetalle.setEnvasadoControlFillCorteCabecera(null);
 
-	public void setIdenvasadoproceso(Long idenvasadoproceso) {
-		this.idenvasadoproceso = idenvasadoproceso;
+		return envasadoControlFillCorteDetalle;
 	}
-
-//	public EnvasadoControlFillCorteDetalle addEnvasadoControlFillCorteDetalle(EnvasadoControlFillCorteDetalle envasadoControlFillCorteDetalle) {
-//		getEnvasadoControlFillCorteDetalles().add(envasadoControlFillCorteDetalle);
-//		envasadoControlFillCorteDetalle.setEnvasadoControlFillCorteCabecera(this);
-//
-//		return envasadoControlFillCorteDetalle;
-//	}
-//
-//	public EnvasadoControlFillCorteDetalle removeEnvasadoControlFillCorteDetalle(EnvasadoControlFillCorteDetalle envasadoControlFillCorteDetalle) {
-//		getEnvasadoControlFillCorteDetalles().remove(envasadoControlFillCorteDetalle);
-//		envasadoControlFillCorteDetalle.setEnvasadoControlFillCorteCabecera(null);
-//
-//		return envasadoControlFillCorteDetalle;
-//	}
-
-
 
 }

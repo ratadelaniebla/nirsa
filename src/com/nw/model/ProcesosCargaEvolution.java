@@ -10,20 +10,19 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="procesos_carga_evolution")
+@NamedQuery(name="ProcesosCargaEvolution.findAll", query="SELECT p FROM ProcesosCargaEvolution p")
 public class ProcesosCargaEvolution implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idprocesocargaevolution;
-
 	private String descripcion;
-
 	private Integer estado;
 
 	public ProcesosCargaEvolution() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdprocesocargaevolution() {
 		return this.idprocesocargaevolution;
 	}
@@ -32,6 +31,7 @@ public class ProcesosCargaEvolution implements Serializable {
 		this.idprocesocargaevolution = idprocesocargaevolution;
 	}
 
+
 	public String getDescripcion() {
 		return this.descripcion;
 	}
@@ -39,6 +39,7 @@ public class ProcesosCargaEvolution implements Serializable {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;

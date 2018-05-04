@@ -11,41 +11,25 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="gestion_turno")
+@NamedQuery(name="GestionTurno.findAll", query="SELECT g FROM GestionTurno g")
 public class GestionTurno implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idgestionturno;
-
 	private Timestamp fechahorafin;
-
 	private Timestamp fechahoraincio;
-
 	private Timestamp fechaproduccion;
-
 	private Timestamp fecharegistro;
-
 	private String observacion;
-
-	//bi-directional many-to-one association to Proceso
-	@ManyToOne
-	@JoinColumn(name="idproceso")
 	private Proceso proceso;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public GestionTurno() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdgestionturno() {
 		return this.idgestionturno;
 	}
@@ -53,6 +37,7 @@ public class GestionTurno implements Serializable {
 	public void setIdgestionturno(Long idgestionturno) {
 		this.idgestionturno = idgestionturno;
 	}
+
 
 	public Timestamp getFechahorafin() {
 		return this.fechahorafin;
@@ -62,6 +47,7 @@ public class GestionTurno implements Serializable {
 		this.fechahorafin = fechahorafin;
 	}
 
+
 	public Timestamp getFechahoraincio() {
 		return this.fechahoraincio;
 	}
@@ -69,6 +55,7 @@ public class GestionTurno implements Serializable {
 	public void setFechahoraincio(Timestamp fechahoraincio) {
 		this.fechahoraincio = fechahoraincio;
 	}
+
 
 	public Timestamp getFechaproduccion() {
 		return this.fechaproduccion;
@@ -78,6 +65,7 @@ public class GestionTurno implements Serializable {
 		this.fechaproduccion = fechaproduccion;
 	}
 
+
 	public Timestamp getFecharegistro() {
 		return this.fecharegistro;
 	}
@@ -85,6 +73,7 @@ public class GestionTurno implements Serializable {
 	public void setFecharegistro(Timestamp fecharegistro) {
 		this.fecharegistro = fecharegistro;
 	}
+
 
 	public String getObservacion() {
 		return this.observacion;
@@ -94,6 +83,10 @@ public class GestionTurno implements Serializable {
 		this.observacion = observacion;
 	}
 
+
+	//bi-directional many-to-one association to Proceso
+	@ManyToOne
+	@JoinColumn(name="idproceso")
 	public Proceso getProceso() {
 		return this.proceso;
 	}
@@ -102,6 +95,10 @@ public class GestionTurno implements Serializable {
 		this.proceso = proceso;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -110,6 +107,10 @@ public class GestionTurno implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

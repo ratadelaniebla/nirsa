@@ -17,10 +17,10 @@ public class EnvasadoControlPesoFillDetalle implements Serializable {
 	private Long idenvasadocontrolpesofilldetalle;
 	private Timestamp fechareg;
 	private Timestamp fecharegusuario;
-	private String idusuario;
 	private double pesofill;
 	private EnvasadoControlFillCorteDetalle envasadoControlFillCorteDetalle;
 	private EnvasadoControlPesoFillCabecera envasadoControlPesoFillCabecera;
+	private Usuario usuario;
 
 	public EnvasadoControlPesoFillDetalle() {
 	}
@@ -55,15 +55,6 @@ public class EnvasadoControlPesoFillDetalle implements Serializable {
 	}
 
 
-	public String getIdusuario() {
-		return this.idusuario;
-	}
-
-	public void setIdusuario(String idusuario) {
-		this.idusuario = idusuario;
-	}
-
-
 	public double getPesofill() {
 		return this.pesofill;
 	}
@@ -94,6 +85,18 @@ public class EnvasadoControlPesoFillDetalle implements Serializable {
 
 	public void setEnvasadoControlPesoFillCabecera(EnvasadoControlPesoFillCabecera envasadoControlPesoFillCabecera) {
 		this.envasadoControlPesoFillCabecera = envasadoControlPesoFillCabecera;
+	}
+
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
+	public Usuario getUsuario() {
+		return this.usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 }

@@ -11,33 +11,21 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="rociado_cocinada_detalle")
+@NamedQuery(name="RociadoCocinadaDetalle.findAll", query="SELECT r FROM RociadoCocinadaDetalle r")
 public class RociadoCocinadaDetalle implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idrociadococinadadetalle;
-
 	private Timestamp fechareg;
-
-	//bi-directional many-to-one association to CocinaAperturaCierreDetalle
-	@ManyToOne
-	@JoinColumn(name="idcocinaaperturacierredetalle")
 	private CocinaAperturaCierreDetalle cocinaAperturaCierreDetalle;
-
-	//bi-directional many-to-one association to Ducharociado
-	@ManyToOne
-	@JoinColumn(name="idducharociado")
 	private Ducharociado ducharociado;
-
-	//bi-directional many-to-one association to EvisceradoDetalleProceso
-	@ManyToOne
-	@JoinColumn(name="idevisceradodetalleproceso")
 	private EvisceradoDetalleProceso evisceradoDetalleProceso;
 
 	public RociadoCocinadaDetalle() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdrociadococinadadetalle() {
 		return this.idrociadococinadadetalle;
 	}
@@ -45,6 +33,7 @@ public class RociadoCocinadaDetalle implements Serializable {
 	public void setIdrociadococinadadetalle(Long idrociadococinadadetalle) {
 		this.idrociadococinadadetalle = idrociadococinadadetalle;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -54,6 +43,10 @@ public class RociadoCocinadaDetalle implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
+	//bi-directional many-to-one association to CocinaAperturaCierreDetalle
+	@ManyToOne
+	@JoinColumn(name="idcocinaaperturacierredetalle")
 	public CocinaAperturaCierreDetalle getCocinaAperturaCierreDetalle() {
 		return this.cocinaAperturaCierreDetalle;
 	}
@@ -62,6 +55,10 @@ public class RociadoCocinadaDetalle implements Serializable {
 		this.cocinaAperturaCierreDetalle = cocinaAperturaCierreDetalle;
 	}
 
+
+	//bi-directional many-to-one association to Ducharociado
+	@ManyToOne
+	@JoinColumn(name="idducharociado")
 	public Ducharociado getDucharociado() {
 		return this.ducharociado;
 	}
@@ -70,6 +67,10 @@ public class RociadoCocinadaDetalle implements Serializable {
 		this.ducharociado = ducharociado;
 	}
 
+
+	//bi-directional many-to-one association to EvisceradoDetalleProceso
+	@ManyToOne
+	@JoinColumn(name="idevisceradodetalleproceso")
 	public EvisceradoDetalleProceso getEvisceradoDetalleProceso() {
 		return this.evisceradoDetalleProceso;
 	}

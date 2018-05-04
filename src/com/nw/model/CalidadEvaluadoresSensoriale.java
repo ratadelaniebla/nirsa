@@ -11,31 +11,23 @@ import java.util.List;
  */
 @Entity
 @Table(name="calidad_evaluadores_sensoriales")
+@NamedQuery(name="CalidadEvaluadoresSensoriale.findAll", query="SELECT c FROM CalidadEvaluadoresSensoriale c")
 public class CalidadEvaluadoresSensoriale implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idevaluador;
-
 	private String cargo;
-
 	private Integer estado;
-
-	@Column(name="firma_digital")
 	private String firmaDigital;
-
 	private String idusuario;
-
 	private String nombres;
-
-	//bi-directional many-to-one association to CalidadMuestraAreaDetalleMuestra
-	@OneToMany(mappedBy="calidadEvaluadoresSensoriale")
 	private List<CalidadMuestraAreaDetalleMuestra> calidadMuestraAreaDetalleMuestras;
 
 	public CalidadEvaluadoresSensoriale() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdevaluador() {
 		return this.idevaluador;
 	}
@@ -43,6 +35,7 @@ public class CalidadEvaluadoresSensoriale implements Serializable {
 	public void setIdevaluador(Integer idevaluador) {
 		this.idevaluador = idevaluador;
 	}
+
 
 	public String getCargo() {
 		return this.cargo;
@@ -52,6 +45,7 @@ public class CalidadEvaluadoresSensoriale implements Serializable {
 		this.cargo = cargo;
 	}
 
+
 	public Integer getEstado() {
 		return this.estado;
 	}
@@ -60,6 +54,8 @@ public class CalidadEvaluadoresSensoriale implements Serializable {
 		this.estado = estado;
 	}
 
+
+	@Column(name="firma_digital")
 	public String getFirmaDigital() {
 		return this.firmaDigital;
 	}
@@ -67,6 +63,7 @@ public class CalidadEvaluadoresSensoriale implements Serializable {
 	public void setFirmaDigital(String firmaDigital) {
 		this.firmaDigital = firmaDigital;
 	}
+
 
 	public String getIdusuario() {
 		return this.idusuario;
@@ -76,6 +73,7 @@ public class CalidadEvaluadoresSensoriale implements Serializable {
 		this.idusuario = idusuario;
 	}
 
+
 	public String getNombres() {
 		return this.nombres;
 	}
@@ -84,12 +82,29 @@ public class CalidadEvaluadoresSensoriale implements Serializable {
 		this.nombres = nombres;
 	}
 
+
+	//bi-directional many-to-one association to CalidadMuestraAreaDetalleMuestra
+	@OneToMany(mappedBy="calidadEvaluadoresSensoriale")
 	public List<CalidadMuestraAreaDetalleMuestra> getCalidadMuestraAreaDetalleMuestras() {
 		return this.calidadMuestraAreaDetalleMuestras;
 	}
 
 	public void setCalidadMuestraAreaDetalleMuestras(List<CalidadMuestraAreaDetalleMuestra> calidadMuestraAreaDetalleMuestras) {
 		this.calidadMuestraAreaDetalleMuestras = calidadMuestraAreaDetalleMuestras;
+	}
+
+	public CalidadMuestraAreaDetalleMuestra addCalidadMuestraAreaDetalleMuestra(CalidadMuestraAreaDetalleMuestra calidadMuestraAreaDetalleMuestra) {
+		getCalidadMuestraAreaDetalleMuestras().add(calidadMuestraAreaDetalleMuestra);
+		calidadMuestraAreaDetalleMuestra.setCalidadEvaluadoresSensoriale(this);
+
+		return calidadMuestraAreaDetalleMuestra;
+	}
+
+	public CalidadMuestraAreaDetalleMuestra removeCalidadMuestraAreaDetalleMuestra(CalidadMuestraAreaDetalleMuestra calidadMuestraAreaDetalleMuestra) {
+		getCalidadMuestraAreaDetalleMuestras().remove(calidadMuestraAreaDetalleMuestra);
+		calidadMuestraAreaDetalleMuestra.setCalidadEvaluadoresSensoriale(null);
+
+		return calidadMuestraAreaDetalleMuestra;
 	}
 
 }

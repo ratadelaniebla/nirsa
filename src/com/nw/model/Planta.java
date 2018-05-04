@@ -11,26 +11,20 @@ import java.util.List;
  */
 @Entity
 @Table(name="plantas")
+@NamedQuery(name="Planta.findAll", query="SELECT p FROM Planta p")
 public class Planta implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idplanta;
-
 	private String descripcionplanta;
-
-	//bi-directional many-to-one association to Area
-	@OneToMany(mappedBy="planta")
 	private List<Area> areas;
-
-	//bi-directional many-to-one association to DesperdicioCajonHarina
-	@OneToMany(mappedBy="planta")
 	private List<DesperdicioCajonHarina> desperdicioCajonHarinas;
 
 	public Planta() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdplanta() {
 		return this.idplanta;
 	}
@@ -38,6 +32,7 @@ public class Planta implements Serializable {
 	public void setIdplanta(Integer idplanta) {
 		this.idplanta = idplanta;
 	}
+
 
 	public String getDescripcionplanta() {
 		return this.descripcionplanta;
@@ -47,6 +42,9 @@ public class Planta implements Serializable {
 		this.descripcionplanta = descripcionplanta;
 	}
 
+
+	//bi-directional many-to-one association to Area
+	@OneToMany(mappedBy="planta")
 	public List<Area> getAreas() {
 		return this.areas;
 	}
@@ -55,12 +53,43 @@ public class Planta implements Serializable {
 		this.areas = areas;
 	}
 
+	public Area addArea(Area area) {
+		getAreas().add(area);
+		area.setPlanta(this);
+
+		return area;
+	}
+
+	public Area removeArea(Area area) {
+		getAreas().remove(area);
+		area.setPlanta(null);
+
+		return area;
+	}
+
+
+	//bi-directional many-to-one association to DesperdicioCajonHarina
+	@OneToMany(mappedBy="planta")
 	public List<DesperdicioCajonHarina> getDesperdicioCajonHarinas() {
 		return this.desperdicioCajonHarinas;
 	}
 
 	public void setDesperdicioCajonHarinas(List<DesperdicioCajonHarina> desperdicioCajonHarinas) {
 		this.desperdicioCajonHarinas = desperdicioCajonHarinas;
+	}
+
+	public DesperdicioCajonHarina addDesperdicioCajonHarina(DesperdicioCajonHarina desperdicioCajonHarina) {
+		getDesperdicioCajonHarinas().add(desperdicioCajonHarina);
+		desperdicioCajonHarina.setPlanta(this);
+
+		return desperdicioCajonHarina;
+	}
+
+	public DesperdicioCajonHarina removeDesperdicioCajonHarina(DesperdicioCajonHarina desperdicioCajonHarina) {
+		getDesperdicioCajonHarinas().remove(desperdicioCajonHarina);
+		desperdicioCajonHarina.setPlanta(null);
+
+		return desperdicioCajonHarina;
 	}
 
 }

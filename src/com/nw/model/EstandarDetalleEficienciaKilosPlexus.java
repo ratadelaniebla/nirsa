@@ -10,33 +10,21 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="estandar_detalle_eficiencia_kilos_plexus")
+@NamedQuery(name="EstandarDetalleEficienciaKilosPlexus.findAll", query="SELECT e FROM EstandarDetalleEficienciaKilosPlexus e")
 public class EstandarDetalleEficienciaKilosPlexus implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idestandardetalleeficienciakilosplexus;
-
 	private double eficiencia;
-
-	//bi-directional many-to-one association to EstandarEficienciaKilosPlexus
-	@ManyToOne
-	@JoinColumn(name="idestandareficienciakilosplexus")
 	private EstandarEficienciaKilosPlexus estandarEficienciaKilosPlexus;
-
-	//bi-directional many-to-one association to LimpiezaTipo
-	@ManyToOne
-	@JoinColumn(name="idlimpiezatipo")
 	private LimpiezaTipo limpiezaTipo;
-
-	//bi-directional many-to-one association to Talla
-	@ManyToOne
-	@JoinColumn(name="idtalla")
 	private Talla talla;
 
 	public EstandarDetalleEficienciaKilosPlexus() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdestandardetalleeficienciakilosplexus() {
 		return this.idestandardetalleeficienciakilosplexus;
 	}
@@ -44,6 +32,7 @@ public class EstandarDetalleEficienciaKilosPlexus implements Serializable {
 	public void setIdestandardetalleeficienciakilosplexus(Integer idestandardetalleeficienciakilosplexus) {
 		this.idestandardetalleeficienciakilosplexus = idestandardetalleeficienciakilosplexus;
 	}
+
 
 	public double getEficiencia() {
 		return this.eficiencia;
@@ -53,6 +42,10 @@ public class EstandarDetalleEficienciaKilosPlexus implements Serializable {
 		this.eficiencia = eficiencia;
 	}
 
+
+	//bi-directional many-to-one association to EstandarEficienciaKilosPlexus
+	@ManyToOne
+	@JoinColumn(name="idestandareficienciakilosplexus")
 	public EstandarEficienciaKilosPlexus getEstandarEficienciaKilosPlexus() {
 		return this.estandarEficienciaKilosPlexus;
 	}
@@ -61,6 +54,10 @@ public class EstandarDetalleEficienciaKilosPlexus implements Serializable {
 		this.estandarEficienciaKilosPlexus = estandarEficienciaKilosPlexus;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaTipo
+	@ManyToOne
+	@JoinColumn(name="idlimpiezatipo")
 	public LimpiezaTipo getLimpiezaTipo() {
 		return this.limpiezaTipo;
 	}
@@ -69,6 +66,10 @@ public class EstandarDetalleEficienciaKilosPlexus implements Serializable {
 		this.limpiezaTipo = limpiezaTipo;
 	}
 
+
+	//bi-directional many-to-one association to Talla
+	@ManyToOne
+	@JoinColumn(name="idtalla")
 	public Talla getTalla() {
 		return this.talla;
 	}

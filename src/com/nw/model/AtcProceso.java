@@ -11,22 +11,19 @@ import java.util.List;
  */
 @Entity
 @Table(name="atc_proceso")
+@NamedQuery(name="AtcProceso.findAll", query="SELECT a FROM AtcProceso a")
 public class AtcProceso implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idatcproceso;
-
 	private String descripcionproceso;
-
-	//bi-directional many-to-one association to AtcProcesoAperturaCierreAtunCrudo
-	@OneToMany(mappedBy="atcProceso")
 	private List<AtcProcesoAperturaCierreAtunCrudo> atcProcesoAperturaCierreAtunCrudos;
 
 	public AtcProceso() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdatcproceso() {
 		return this.idatcproceso;
 	}
@@ -34,6 +31,7 @@ public class AtcProceso implements Serializable {
 	public void setIdatcproceso(Integer idatcproceso) {
 		this.idatcproceso = idatcproceso;
 	}
+
 
 	public String getDescripcionproceso() {
 		return this.descripcionproceso;
@@ -43,12 +41,29 @@ public class AtcProceso implements Serializable {
 		this.descripcionproceso = descripcionproceso;
 	}
 
+
+	//bi-directional many-to-one association to AtcProcesoAperturaCierreAtunCrudo
+	@OneToMany(mappedBy="atcProceso")
 	public List<AtcProcesoAperturaCierreAtunCrudo> getAtcProcesoAperturaCierreAtunCrudos() {
 		return this.atcProcesoAperturaCierreAtunCrudos;
 	}
 
 	public void setAtcProcesoAperturaCierreAtunCrudos(List<AtcProcesoAperturaCierreAtunCrudo> atcProcesoAperturaCierreAtunCrudos) {
 		this.atcProcesoAperturaCierreAtunCrudos = atcProcesoAperturaCierreAtunCrudos;
+	}
+
+	public AtcProcesoAperturaCierreAtunCrudo addAtcProcesoAperturaCierreAtunCrudo(AtcProcesoAperturaCierreAtunCrudo atcProcesoAperturaCierreAtunCrudo) {
+		getAtcProcesoAperturaCierreAtunCrudos().add(atcProcesoAperturaCierreAtunCrudo);
+		atcProcesoAperturaCierreAtunCrudo.setAtcProceso(this);
+
+		return atcProcesoAperturaCierreAtunCrudo;
+	}
+
+	public AtcProcesoAperturaCierreAtunCrudo removeAtcProcesoAperturaCierreAtunCrudo(AtcProcesoAperturaCierreAtunCrudo atcProcesoAperturaCierreAtunCrudo) {
+		getAtcProcesoAperturaCierreAtunCrudos().remove(atcProcesoAperturaCierreAtunCrudo);
+		atcProcesoAperturaCierreAtunCrudo.setAtcProceso(null);
+
+		return atcProcesoAperturaCierreAtunCrudo;
 	}
 
 }

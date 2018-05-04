@@ -11,22 +11,19 @@ import java.util.List;
  */
 @Entity
 @Table(name="limpieza_grupo")
+@NamedQuery(name="LimpiezaGrupo.findAll", query="SELECT l FROM LimpiezaGrupo l")
 public class LimpiezaGrupo implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idlimpiezagrupo;
-
 	private String descripcion;
-
-	//bi-directional many-to-one association to LimpiezaLineaGrupo
-	@OneToMany(mappedBy="limpiezaGrupo")
 	private List<LimpiezaLineaGrupo> limpiezaLineaGrupos;
 
 	public LimpiezaGrupo() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdlimpiezagrupo() {
 		return this.idlimpiezagrupo;
 	}
@@ -34,6 +31,7 @@ public class LimpiezaGrupo implements Serializable {
 	public void setIdlimpiezagrupo(Integer idlimpiezagrupo) {
 		this.idlimpiezagrupo = idlimpiezagrupo;
 	}
+
 
 	public String getDescripcion() {
 		return this.descripcion;
@@ -43,12 +41,29 @@ public class LimpiezaGrupo implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaLineaGrupo
+	@OneToMany(mappedBy="limpiezaGrupo")
 	public List<LimpiezaLineaGrupo> getLimpiezaLineaGrupos() {
 		return this.limpiezaLineaGrupos;
 	}
 
 	public void setLimpiezaLineaGrupos(List<LimpiezaLineaGrupo> limpiezaLineaGrupos) {
 		this.limpiezaLineaGrupos = limpiezaLineaGrupos;
+	}
+
+	public LimpiezaLineaGrupo addLimpiezaLineaGrupo(LimpiezaLineaGrupo limpiezaLineaGrupo) {
+		getLimpiezaLineaGrupos().add(limpiezaLineaGrupo);
+		limpiezaLineaGrupo.setLimpiezaGrupo(this);
+
+		return limpiezaLineaGrupo;
+	}
+
+	public LimpiezaLineaGrupo removeLimpiezaLineaGrupo(LimpiezaLineaGrupo limpiezaLineaGrupo) {
+		getLimpiezaLineaGrupos().remove(limpiezaLineaGrupo);
+		limpiezaLineaGrupo.setLimpiezaGrupo(null);
+
+		return limpiezaLineaGrupo;
 	}
 
 }

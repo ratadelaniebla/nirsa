@@ -12,36 +12,23 @@ import java.util.List;
  */
 @Entity
 @Table(name="estandar_eficiencia_kilos_pago_plexus")
+@NamedQuery(name="EstandarEficienciaKilosPagoPlexus.findAll", query="SELECT e FROM EstandarEficienciaKilosPagoPlexus e")
 public class EstandarEficienciaKilosPagoPlexus implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idestandareficienciakilospagoplexus;
-
 	private Integer estado;
-
 	private Timestamp fechafin;
-
 	private Timestamp fechainicio;
-
-	//bi-directional many-to-one association to EstandarDetalleEficienciaKilosPagoPlexus
-	@OneToMany(mappedBy="estandarEficienciaKilosPagoPlexus")
 	private List<EstandarDetalleEficienciaKilosPagoPlexus> estandarDetalleEficienciaKilosPagoPlexuses;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuarioapertura")
 	private Usuario usuario1;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuariocierre")
 	private Usuario usuario2;
 
 	public EstandarEficienciaKilosPagoPlexus() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdestandareficienciakilospagoplexus() {
 		return this.idestandareficienciakilospagoplexus;
 	}
@@ -49,6 +36,7 @@ public class EstandarEficienciaKilosPagoPlexus implements Serializable {
 	public void setIdestandareficienciakilospagoplexus(Integer idestandareficienciakilospagoplexus) {
 		this.idestandareficienciakilospagoplexus = idestandareficienciakilospagoplexus;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -58,6 +46,7 @@ public class EstandarEficienciaKilosPagoPlexus implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Timestamp getFechafin() {
 		return this.fechafin;
 	}
@@ -65,6 +54,7 @@ public class EstandarEficienciaKilosPagoPlexus implements Serializable {
 	public void setFechafin(Timestamp fechafin) {
 		this.fechafin = fechafin;
 	}
+
 
 	public Timestamp getFechainicio() {
 		return this.fechainicio;
@@ -74,6 +64,9 @@ public class EstandarEficienciaKilosPagoPlexus implements Serializable {
 		this.fechainicio = fechainicio;
 	}
 
+
+	//bi-directional many-to-one association to EstandarDetalleEficienciaKilosPagoPlexus
+	@OneToMany(mappedBy="estandarEficienciaKilosPagoPlexus")
 	public List<EstandarDetalleEficienciaKilosPagoPlexus> getEstandarDetalleEficienciaKilosPagoPlexuses() {
 		return this.estandarDetalleEficienciaKilosPagoPlexuses;
 	}
@@ -82,6 +75,24 @@ public class EstandarEficienciaKilosPagoPlexus implements Serializable {
 		this.estandarDetalleEficienciaKilosPagoPlexuses = estandarDetalleEficienciaKilosPagoPlexuses;
 	}
 
+	public EstandarDetalleEficienciaKilosPagoPlexus addEstandarDetalleEficienciaKilosPagoPlexus(EstandarDetalleEficienciaKilosPagoPlexus estandarDetalleEficienciaKilosPagoPlexus) {
+		getEstandarDetalleEficienciaKilosPagoPlexuses().add(estandarDetalleEficienciaKilosPagoPlexus);
+		estandarDetalleEficienciaKilosPagoPlexus.setEstandarEficienciaKilosPagoPlexus(this);
+
+		return estandarDetalleEficienciaKilosPagoPlexus;
+	}
+
+	public EstandarDetalleEficienciaKilosPagoPlexus removeEstandarDetalleEficienciaKilosPagoPlexus(EstandarDetalleEficienciaKilosPagoPlexus estandarDetalleEficienciaKilosPagoPlexus) {
+		getEstandarDetalleEficienciaKilosPagoPlexuses().remove(estandarDetalleEficienciaKilosPagoPlexus);
+		estandarDetalleEficienciaKilosPagoPlexus.setEstandarEficienciaKilosPagoPlexus(null);
+
+		return estandarDetalleEficienciaKilosPagoPlexus;
+	}
+
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuarioapertura")
 	public Usuario getUsuario1() {
 		return this.usuario1;
 	}
@@ -90,6 +101,10 @@ public class EstandarEficienciaKilosPagoPlexus implements Serializable {
 		this.usuario1 = usuario1;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuariocierre")
 	public Usuario getUsuario2() {
 		return this.usuario2;
 	}

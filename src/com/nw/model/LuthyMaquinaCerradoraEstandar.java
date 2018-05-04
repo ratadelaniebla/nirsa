@@ -10,43 +10,25 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="luthy_maquina_cerradora_estandar")
+@NamedQuery(name="LuthyMaquinaCerradoraEstandar.findAll", query="SELECT l FROM LuthyMaquinaCerradoraEstandar l")
 public class LuthyMaquinaCerradoraEstandar implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_luthy_maquina_cerradora_estandar")
 	private Integer idLuthyMaquinaCerradoraEstandar;
-
 	private double aprovechamiento;
-
-	@Column(name="numero_maquinas_llenadoras")
 	private Integer numeroMaquinasLlenadoras;
-
-	@Column(name="velocidad_maxima")
 	private Integer velocidadMaxima;
-
-	@Column(name="velocidad_nominal")
 	private Integer velocidadNominal;
-
-	//bi-directional many-to-one association to CantidadLibra
-	@ManyToOne
-	@JoinColumn(name="idcantidadlibras")
 	private CantidadLibra cantidadLibra;
-
-	//bi-directional many-to-one association to Luthy
-	@ManyToOne
-	@JoinColumn(name="idluthy")
 	private Luthy luthy;
-
-	//bi-directional many-to-one association to MaquinaCerradora
-	@ManyToOne
-	@JoinColumn(name="idmaquinacerradora")
 	private MaquinaCerradora maquinaCerradora;
 
 	public LuthyMaquinaCerradoraEstandar() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_luthy_maquina_cerradora_estandar")
 	public Integer getIdLuthyMaquinaCerradoraEstandar() {
 		return this.idLuthyMaquinaCerradoraEstandar;
 	}
@@ -54,6 +36,7 @@ public class LuthyMaquinaCerradoraEstandar implements Serializable {
 	public void setIdLuthyMaquinaCerradoraEstandar(Integer idLuthyMaquinaCerradoraEstandar) {
 		this.idLuthyMaquinaCerradoraEstandar = idLuthyMaquinaCerradoraEstandar;
 	}
+
 
 	public double getAprovechamiento() {
 		return this.aprovechamiento;
@@ -63,6 +46,8 @@ public class LuthyMaquinaCerradoraEstandar implements Serializable {
 		this.aprovechamiento = aprovechamiento;
 	}
 
+
+	@Column(name="numero_maquinas_llenadoras")
 	public Integer getNumeroMaquinasLlenadoras() {
 		return this.numeroMaquinasLlenadoras;
 	}
@@ -71,6 +56,8 @@ public class LuthyMaquinaCerradoraEstandar implements Serializable {
 		this.numeroMaquinasLlenadoras = numeroMaquinasLlenadoras;
 	}
 
+
+	@Column(name="velocidad_maxima")
 	public Integer getVelocidadMaxima() {
 		return this.velocidadMaxima;
 	}
@@ -79,6 +66,8 @@ public class LuthyMaquinaCerradoraEstandar implements Serializable {
 		this.velocidadMaxima = velocidadMaxima;
 	}
 
+
+	@Column(name="velocidad_nominal")
 	public Integer getVelocidadNominal() {
 		return this.velocidadNominal;
 	}
@@ -87,6 +76,10 @@ public class LuthyMaquinaCerradoraEstandar implements Serializable {
 		this.velocidadNominal = velocidadNominal;
 	}
 
+
+	//bi-directional many-to-one association to CantidadLibra
+	@ManyToOne
+	@JoinColumn(name="idcantidadlibras")
 	public CantidadLibra getCantidadLibra() {
 		return this.cantidadLibra;
 	}
@@ -95,6 +88,10 @@ public class LuthyMaquinaCerradoraEstandar implements Serializable {
 		this.cantidadLibra = cantidadLibra;
 	}
 
+
+	//bi-directional many-to-one association to Luthy
+	@ManyToOne
+	@JoinColumn(name="idluthy")
 	public Luthy getLuthy() {
 		return this.luthy;
 	}
@@ -103,6 +100,10 @@ public class LuthyMaquinaCerradoraEstandar implements Serializable {
 		this.luthy = luthy;
 	}
 
+
+	//bi-directional many-to-one association to MaquinaCerradora
+	@ManyToOne
+	@JoinColumn(name="idmaquinacerradora")
 	public MaquinaCerradora getMaquinaCerradora() {
 		return this.maquinaCerradora;
 	}

@@ -11,42 +11,24 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="camara_detalle_banda")
+@NamedQuery(name="CamaraDetalleBanda.findAll", query="SELECT c FROM CamaraDetalleBanda c")
 public class CamaraDetalleBanda implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcamaradetallebanda;
-
 	private Timestamp fecharegistrollegadacamara;
-
 	private Timestamp fecharegistrosalidamuelle;
-
 	private Integer viaje;
-
-	//bi-directional many-to-one association to Banda
-	@ManyToOne
-	@JoinColumn(name="idbanda")
 	private Banda banda;
-
-	//bi-directional many-to-one association to BarcoDescarga
-	@ManyToOne
-	@JoinColumn(name="idbarcodescarga")
 	private BarcoDescarga barcoDescarga;
-
-	//bi-directional many-to-one association to BarcoEstibaCuba
-	@ManyToOne
-	@JoinColumn(name="idbarcoestibacuba")
 	private BarcoEstibaCuba barcoEstibaCuba;
-
-	//bi-directional many-to-one association to Volqueta
-	@ManyToOne
-	@JoinColumn(name="idvolqueta")
 	private Volqueta volqueta;
 
 	public CamaraDetalleBanda() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcamaradetallebanda() {
 		return this.idcamaradetallebanda;
 	}
@@ -54,6 +36,7 @@ public class CamaraDetalleBanda implements Serializable {
 	public void setIdcamaradetallebanda(Long idcamaradetallebanda) {
 		this.idcamaradetallebanda = idcamaradetallebanda;
 	}
+
 
 	public Timestamp getFecharegistrollegadacamara() {
 		return this.fecharegistrollegadacamara;
@@ -63,6 +46,7 @@ public class CamaraDetalleBanda implements Serializable {
 		this.fecharegistrollegadacamara = fecharegistrollegadacamara;
 	}
 
+
 	public Timestamp getFecharegistrosalidamuelle() {
 		return this.fecharegistrosalidamuelle;
 	}
@@ -70,6 +54,7 @@ public class CamaraDetalleBanda implements Serializable {
 	public void setFecharegistrosalidamuelle(Timestamp fecharegistrosalidamuelle) {
 		this.fecharegistrosalidamuelle = fecharegistrosalidamuelle;
 	}
+
 
 	public Integer getViaje() {
 		return this.viaje;
@@ -79,6 +64,10 @@ public class CamaraDetalleBanda implements Serializable {
 		this.viaje = viaje;
 	}
 
+
+	//bi-directional many-to-one association to Banda
+	@ManyToOne
+	@JoinColumn(name="idbanda")
 	public Banda getBanda() {
 		return this.banda;
 	}
@@ -87,6 +76,10 @@ public class CamaraDetalleBanda implements Serializable {
 		this.banda = banda;
 	}
 
+
+	//bi-directional many-to-one association to BarcoDescarga
+	@ManyToOne
+	@JoinColumn(name="idbarcodescarga")
 	public BarcoDescarga getBarcoDescarga() {
 		return this.barcoDescarga;
 	}
@@ -95,6 +88,10 @@ public class CamaraDetalleBanda implements Serializable {
 		this.barcoDescarga = barcoDescarga;
 	}
 
+
+	//bi-directional many-to-one association to BarcoEstibaCuba
+	@ManyToOne
+	@JoinColumn(name="idbarcoestibacuba")
 	public BarcoEstibaCuba getBarcoEstibaCuba() {
 		return this.barcoEstibaCuba;
 	}
@@ -103,6 +100,10 @@ public class CamaraDetalleBanda implements Serializable {
 		this.barcoEstibaCuba = barcoEstibaCuba;
 	}
 
+
+	//bi-directional many-to-one association to Volqueta
+	@ManyToOne
+	@JoinColumn(name="idvolqueta")
 	public Volqueta getVolqueta() {
 		return this.volqueta;
 	}

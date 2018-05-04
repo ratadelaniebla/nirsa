@@ -10,26 +10,19 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="estandar_clasificacion_prod_talla")
+@NamedQuery(name="EstandarClasificacionProdTalla.findAll", query="SELECT e FROM EstandarClasificacionProdTalla e")
 public class EstandarClasificacionProdTalla implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idestandarclasificacionprodtalla;
-
-	//bi-directional many-to-one association to EvisceradoPescadosLata
-	@ManyToOne
-	@JoinColumn(name="idevisceradopescadoslata")
 	private EvisceradoPescadosLata evisceradoPescadosLata;
-
-	//bi-directional many-to-one association to Talla
-	@ManyToOne
-	@JoinColumn(name="idtalla")
 	private Talla talla;
 
 	public EstandarClasificacionProdTalla() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdestandarclasificacionprodtalla() {
 		return this.idestandarclasificacionprodtalla;
 	}
@@ -38,6 +31,10 @@ public class EstandarClasificacionProdTalla implements Serializable {
 		this.idestandarclasificacionprodtalla = idestandarclasificacionprodtalla;
 	}
 
+
+	//bi-directional many-to-one association to EvisceradoPescadosLata
+	@ManyToOne
+	@JoinColumn(name="idevisceradopescadoslata")
 	public EvisceradoPescadosLata getEvisceradoPescadosLata() {
 		return this.evisceradoPescadosLata;
 	}
@@ -46,6 +43,10 @@ public class EstandarClasificacionProdTalla implements Serializable {
 		this.evisceradoPescadosLata = evisceradoPescadosLata;
 	}
 
+
+	//bi-directional many-to-one association to Talla
+	@ManyToOne
+	@JoinColumn(name="idtalla")
 	public Talla getTalla() {
 		return this.talla;
 	}

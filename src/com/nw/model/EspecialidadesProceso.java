@@ -12,44 +12,24 @@ import java.util.List;
  */
 @Entity
 @Table(name="especialidades_proceso")
+@NamedQuery(name="EspecialidadesProceso.findAll", query="SELECT e FROM EspecialidadesProceso e")
 public class EspecialidadesProceso implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idespecialidadesproceso;
-
 	private Timestamp fechareg;
-
 	private Long ordenproduccion;
-
-	//bi-directional many-to-one association to EspecialidadesReceta
-	@ManyToOne
-	@JoinColumn(name="idespecialidadesreceta")
 	private EspecialidadesReceta especialidadesReceta;
-
-	//bi-directional many-to-one association to ProcesoAperturaCierre
-	@ManyToOne
-	@JoinColumn(name="idprocesoaperturacierre")
 	private ProcesoAperturaCierre procesoAperturaCierre;
-
-	//bi-directional many-to-one association to Produccion
-	@ManyToOne
-	@JoinColumn(name="idproduccion")
 	private Produccion produccion;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
-
-	//bi-directional many-to-one association to EspecialidadesProcesoEnlatado
-	@OneToMany(mappedBy="especialidadesProceso")
 	private List<EspecialidadesProcesoEnlatado> especialidadesProcesoEnlatados;
 
 	public EspecialidadesProceso() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdespecialidadesproceso() {
 		return this.idespecialidadesproceso;
 	}
@@ -57,6 +37,7 @@ public class EspecialidadesProceso implements Serializable {
 	public void setIdespecialidadesproceso(Long idespecialidadesproceso) {
 		this.idespecialidadesproceso = idespecialidadesproceso;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -66,6 +47,7 @@ public class EspecialidadesProceso implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public Long getOrdenproduccion() {
 		return this.ordenproduccion;
 	}
@@ -74,6 +56,10 @@ public class EspecialidadesProceso implements Serializable {
 		this.ordenproduccion = ordenproduccion;
 	}
 
+
+	//bi-directional many-to-one association to EspecialidadesReceta
+	@ManyToOne
+	@JoinColumn(name="idespecialidadesreceta")
 	public EspecialidadesReceta getEspecialidadesReceta() {
 		return this.especialidadesReceta;
 	}
@@ -82,6 +68,10 @@ public class EspecialidadesProceso implements Serializable {
 		this.especialidadesReceta = especialidadesReceta;
 	}
 
+
+	//bi-directional many-to-one association to ProcesoAperturaCierre
+	@ManyToOne
+	@JoinColumn(name="idprocesoaperturacierre")
 	public ProcesoAperturaCierre getProcesoAperturaCierre() {
 		return this.procesoAperturaCierre;
 	}
@@ -90,6 +80,10 @@ public class EspecialidadesProceso implements Serializable {
 		this.procesoAperturaCierre = procesoAperturaCierre;
 	}
 
+
+	//bi-directional many-to-one association to Produccion
+	@ManyToOne
+	@JoinColumn(name="idproduccion")
 	public Produccion getProduccion() {
 		return this.produccion;
 	}
@@ -98,6 +92,10 @@ public class EspecialidadesProceso implements Serializable {
 		this.produccion = produccion;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}
@@ -106,12 +104,29 @@ public class EspecialidadesProceso implements Serializable {
 		this.usuario = usuario;
 	}
 
+
+	//bi-directional many-to-one association to EspecialidadesProcesoEnlatado
+	@OneToMany(mappedBy="especialidadesProceso")
 	public List<EspecialidadesProcesoEnlatado> getEspecialidadesProcesoEnlatados() {
 		return this.especialidadesProcesoEnlatados;
 	}
 
 	public void setEspecialidadesProcesoEnlatados(List<EspecialidadesProcesoEnlatado> especialidadesProcesoEnlatados) {
 		this.especialidadesProcesoEnlatados = especialidadesProcesoEnlatados;
+	}
+
+	public EspecialidadesProcesoEnlatado addEspecialidadesProcesoEnlatado(EspecialidadesProcesoEnlatado especialidadesProcesoEnlatado) {
+		getEspecialidadesProcesoEnlatados().add(especialidadesProcesoEnlatado);
+		especialidadesProcesoEnlatado.setEspecialidadesProceso(this);
+
+		return especialidadesProcesoEnlatado;
+	}
+
+	public EspecialidadesProcesoEnlatado removeEspecialidadesProcesoEnlatado(EspecialidadesProcesoEnlatado especialidadesProcesoEnlatado) {
+		getEspecialidadesProcesoEnlatados().remove(especialidadesProcesoEnlatado);
+		especialidadesProcesoEnlatado.setEspecialidadesProceso(null);
+
+		return especialidadesProcesoEnlatado;
 	}
 
 }

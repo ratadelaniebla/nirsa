@@ -12,59 +12,29 @@ import java.util.List;
  */
 @Entity
 @Table(name="oee_envasado_cabecera_velocidad_maquina_cerradora")
+@NamedQuery(name="OeeEnvasadoCabeceraVelocidadMaquinaCerradora.findAll", query="SELECT o FROM OeeEnvasadoCabeceraVelocidadMaquinaCerradora o")
 public class OeeEnvasadoCabeceraVelocidadMaquinaCerradora implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_oee_envasado_cabecera_velocidad_maquina_cerradora")
 	private Integer idOeeEnvasadoCabeceraVelocidadMaquinaCerradora;
-
-	@Column(name="fecha_hora_corte")
 	private Timestamp fechaHoraCorte;
-
-	@Column(name="fecha_hora_fin")
 	private Timestamp fechaHoraFin;
-
-	@Column(name="fecha_registro")
 	private Timestamp fechaRegistro;
-
-	@Column(name="velocidad_maxima")
 	private Integer velocidadMaxima;
-
-	@Column(name="velocidad_nominal")
 	private Integer velocidadNominal;
-
-	@Column(name="velocidad_real")
 	private Integer velocidadReal;
-
-	//bi-directional many-to-one association to CantidadLibra
-	@ManyToOne
-	@JoinColumn(name="idcantidadlibras")
 	private CantidadLibra cantidadLibra;
-
-	//bi-directional many-to-one association to MaquinaCerradora
-	@ManyToOne
-	@JoinColumn(name="idmaquinacerradora")
 	private MaquinaCerradora maquinaCerradora;
-
-	//bi-directional many-to-one association to ProcesoAperturaCierre
-	@ManyToOne
-	@JoinColumn(name="idprocesoaperturacierre")
 	private ProcesoAperturaCierre procesoAperturaCierre;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
-
-	//bi-directional many-to-one association to OeeEnvasadoDetalleVelocidadMaquinaCerradora
-	@OneToMany(mappedBy="oeeEnvasadoCabeceraVelocidadMaquinaCerradora")
 	private List<OeeEnvasadoDetalleVelocidadMaquinaCerradora> oeeEnvasadoDetalleVelocidadMaquinaCerradoras;
 
 	public OeeEnvasadoCabeceraVelocidadMaquinaCerradora() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_oee_envasado_cabecera_velocidad_maquina_cerradora")
 	public Integer getIdOeeEnvasadoCabeceraVelocidadMaquinaCerradora() {
 		return this.idOeeEnvasadoCabeceraVelocidadMaquinaCerradora;
 	}
@@ -73,6 +43,8 @@ public class OeeEnvasadoCabeceraVelocidadMaquinaCerradora implements Serializabl
 		this.idOeeEnvasadoCabeceraVelocidadMaquinaCerradora = idOeeEnvasadoCabeceraVelocidadMaquinaCerradora;
 	}
 
+
+	@Column(name="fecha_hora_corte")
 	public Timestamp getFechaHoraCorte() {
 		return this.fechaHoraCorte;
 	}
@@ -81,6 +53,8 @@ public class OeeEnvasadoCabeceraVelocidadMaquinaCerradora implements Serializabl
 		this.fechaHoraCorte = fechaHoraCorte;
 	}
 
+
+	@Column(name="fecha_hora_fin")
 	public Timestamp getFechaHoraFin() {
 		return this.fechaHoraFin;
 	}
@@ -89,6 +63,8 @@ public class OeeEnvasadoCabeceraVelocidadMaquinaCerradora implements Serializabl
 		this.fechaHoraFin = fechaHoraFin;
 	}
 
+
+	@Column(name="fecha_registro")
 	public Timestamp getFechaRegistro() {
 		return this.fechaRegistro;
 	}
@@ -97,6 +73,8 @@ public class OeeEnvasadoCabeceraVelocidadMaquinaCerradora implements Serializabl
 		this.fechaRegistro = fechaRegistro;
 	}
 
+
+	@Column(name="velocidad_maxima")
 	public Integer getVelocidadMaxima() {
 		return this.velocidadMaxima;
 	}
@@ -105,6 +83,8 @@ public class OeeEnvasadoCabeceraVelocidadMaquinaCerradora implements Serializabl
 		this.velocidadMaxima = velocidadMaxima;
 	}
 
+
+	@Column(name="velocidad_nominal")
 	public Integer getVelocidadNominal() {
 		return this.velocidadNominal;
 	}
@@ -113,6 +93,8 @@ public class OeeEnvasadoCabeceraVelocidadMaquinaCerradora implements Serializabl
 		this.velocidadNominal = velocidadNominal;
 	}
 
+
+	@Column(name="velocidad_real")
 	public Integer getVelocidadReal() {
 		return this.velocidadReal;
 	}
@@ -121,6 +103,10 @@ public class OeeEnvasadoCabeceraVelocidadMaquinaCerradora implements Serializabl
 		this.velocidadReal = velocidadReal;
 	}
 
+
+	//bi-directional many-to-one association to CantidadLibra
+	@ManyToOne
+	@JoinColumn(name="idcantidadlibras")
 	public CantidadLibra getCantidadLibra() {
 		return this.cantidadLibra;
 	}
@@ -129,6 +115,10 @@ public class OeeEnvasadoCabeceraVelocidadMaquinaCerradora implements Serializabl
 		this.cantidadLibra = cantidadLibra;
 	}
 
+
+	//bi-directional many-to-one association to MaquinaCerradora
+	@ManyToOne
+	@JoinColumn(name="idmaquinacerradora")
 	public MaquinaCerradora getMaquinaCerradora() {
 		return this.maquinaCerradora;
 	}
@@ -137,6 +127,10 @@ public class OeeEnvasadoCabeceraVelocidadMaquinaCerradora implements Serializabl
 		this.maquinaCerradora = maquinaCerradora;
 	}
 
+
+	//bi-directional many-to-one association to ProcesoAperturaCierre
+	@ManyToOne
+	@JoinColumn(name="idprocesoaperturacierre")
 	public ProcesoAperturaCierre getProcesoAperturaCierre() {
 		return this.procesoAperturaCierre;
 	}
@@ -145,6 +139,10 @@ public class OeeEnvasadoCabeceraVelocidadMaquinaCerradora implements Serializabl
 		this.procesoAperturaCierre = procesoAperturaCierre;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}
@@ -153,12 +151,29 @@ public class OeeEnvasadoCabeceraVelocidadMaquinaCerradora implements Serializabl
 		this.usuario = usuario;
 	}
 
+
+	//bi-directional many-to-one association to OeeEnvasadoDetalleVelocidadMaquinaCerradora
+	@OneToMany(mappedBy="oeeEnvasadoCabeceraVelocidadMaquinaCerradora")
 	public List<OeeEnvasadoDetalleVelocidadMaquinaCerradora> getOeeEnvasadoDetalleVelocidadMaquinaCerradoras() {
 		return this.oeeEnvasadoDetalleVelocidadMaquinaCerradoras;
 	}
 
 	public void setOeeEnvasadoDetalleVelocidadMaquinaCerradoras(List<OeeEnvasadoDetalleVelocidadMaquinaCerradora> oeeEnvasadoDetalleVelocidadMaquinaCerradoras) {
 		this.oeeEnvasadoDetalleVelocidadMaquinaCerradoras = oeeEnvasadoDetalleVelocidadMaquinaCerradoras;
+	}
+
+	public OeeEnvasadoDetalleVelocidadMaquinaCerradora addOeeEnvasadoDetalleVelocidadMaquinaCerradora(OeeEnvasadoDetalleVelocidadMaquinaCerradora oeeEnvasadoDetalleVelocidadMaquinaCerradora) {
+		getOeeEnvasadoDetalleVelocidadMaquinaCerradoras().add(oeeEnvasadoDetalleVelocidadMaquinaCerradora);
+		oeeEnvasadoDetalleVelocidadMaquinaCerradora.setOeeEnvasadoCabeceraVelocidadMaquinaCerradora(this);
+
+		return oeeEnvasadoDetalleVelocidadMaquinaCerradora;
+	}
+
+	public OeeEnvasadoDetalleVelocidadMaquinaCerradora removeOeeEnvasadoDetalleVelocidadMaquinaCerradora(OeeEnvasadoDetalleVelocidadMaquinaCerradora oeeEnvasadoDetalleVelocidadMaquinaCerradora) {
+		getOeeEnvasadoDetalleVelocidadMaquinaCerradoras().remove(oeeEnvasadoDetalleVelocidadMaquinaCerradora);
+		oeeEnvasadoDetalleVelocidadMaquinaCerradora.setOeeEnvasadoCabeceraVelocidadMaquinaCerradora(null);
+
+		return oeeEnvasadoDetalleVelocidadMaquinaCerradora;
 	}
 
 }

@@ -11,30 +11,20 @@ import java.util.List;
  */
 @Entity
 @Table(name="harina_grupo_especie")
+@NamedQuery(name="HarinaGrupoEspecie.findAll", query="SELECT h FROM HarinaGrupoEspecie h")
 public class HarinaGrupoEspecie implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idharinagrupoespecie;
-
-	//bi-directional many-to-one association to HarinaComprobanteDetalleGrupoEspecie
-	@OneToMany(mappedBy="harinaGrupoEspecie")
 	private List<HarinaComprobanteDetalleGrupoEspecie> harinaComprobanteDetalleGrupoEspecies;
-
-	//bi-directional many-to-one association to HarinaEspecie
-	@ManyToOne
-	@JoinColumn(name="idharinaespecie")
 	private HarinaEspecie harinaEspecie;
-
-	//bi-directional many-to-one association to HarinaGrupo
-	@ManyToOne
-	@JoinColumn(name="idharinagrupo")
 	private HarinaGrupo harinaGrupo;
 
 	public HarinaGrupoEspecie() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdharinagrupoespecie() {
 		return this.idharinagrupoespecie;
 	}
@@ -43,6 +33,9 @@ public class HarinaGrupoEspecie implements Serializable {
 		this.idharinagrupoespecie = idharinagrupoespecie;
 	}
 
+
+	//bi-directional many-to-one association to HarinaComprobanteDetalleGrupoEspecie
+	@OneToMany(mappedBy="harinaGrupoEspecie")
 	public List<HarinaComprobanteDetalleGrupoEspecie> getHarinaComprobanteDetalleGrupoEspecies() {
 		return this.harinaComprobanteDetalleGrupoEspecies;
 	}
@@ -51,6 +44,24 @@ public class HarinaGrupoEspecie implements Serializable {
 		this.harinaComprobanteDetalleGrupoEspecies = harinaComprobanteDetalleGrupoEspecies;
 	}
 
+	public HarinaComprobanteDetalleGrupoEspecie addHarinaComprobanteDetalleGrupoEspecy(HarinaComprobanteDetalleGrupoEspecie harinaComprobanteDetalleGrupoEspecy) {
+		getHarinaComprobanteDetalleGrupoEspecies().add(harinaComprobanteDetalleGrupoEspecy);
+		harinaComprobanteDetalleGrupoEspecy.setHarinaGrupoEspecie(this);
+
+		return harinaComprobanteDetalleGrupoEspecy;
+	}
+
+	public HarinaComprobanteDetalleGrupoEspecie removeHarinaComprobanteDetalleGrupoEspecy(HarinaComprobanteDetalleGrupoEspecie harinaComprobanteDetalleGrupoEspecy) {
+		getHarinaComprobanteDetalleGrupoEspecies().remove(harinaComprobanteDetalleGrupoEspecy);
+		harinaComprobanteDetalleGrupoEspecy.setHarinaGrupoEspecie(null);
+
+		return harinaComprobanteDetalleGrupoEspecy;
+	}
+
+
+	//bi-directional many-to-one association to HarinaEspecie
+	@ManyToOne
+	@JoinColumn(name="idharinaespecie")
 	public HarinaEspecie getHarinaEspecie() {
 		return this.harinaEspecie;
 	}
@@ -59,6 +70,10 @@ public class HarinaGrupoEspecie implements Serializable {
 		this.harinaEspecie = harinaEspecie;
 	}
 
+
+	//bi-directional many-to-one association to HarinaGrupo
+	@ManyToOne
+	@JoinColumn(name="idharinagrupo")
 	public HarinaGrupo getHarinaGrupo() {
 		return this.harinaGrupo;
 	}

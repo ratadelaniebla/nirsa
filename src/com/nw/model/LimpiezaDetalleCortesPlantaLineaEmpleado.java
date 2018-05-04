@@ -10,36 +10,22 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="limpieza_detalle_cortes_planta_linea_empleados")
+@NamedQuery(name="LimpiezaDetalleCortesPlantaLineaEmpleado.findAll", query="SELECT l FROM LimpiezaDetalleCortesPlantaLineaEmpleado l")
 public class LimpiezaDetalleCortesPlantaLineaEmpleado implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idlimpiezadetallecortesplantalineaempleados;
-
 	private Integer corte;
-
-	@Column(name="numero_empleados")
 	private Integer numeroEmpleados;
-
-	//bi-directional many-to-one association to LimpiezaCabeceraCortesPlantaLineaEmpleado
-	@ManyToOne
-	@JoinColumn(name="idlimpiezacabeceracortesplantalineaempleados")
 	private LimpiezaCabeceraCortesPlantaLineaEmpleado limpiezaCabeceraCortesPlantaLineaEmpleado;
-
-	//bi-directional many-to-one association to LimpiezaLinea
-	@ManyToOne
-	@JoinColumn(name="idlimpiezalinea")
 	private LimpiezaLinea limpiezaLinea;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public LimpiezaDetalleCortesPlantaLineaEmpleado() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdlimpiezadetallecortesplantalineaempleados() {
 		return this.idlimpiezadetallecortesplantalineaempleados;
 	}
@@ -47,6 +33,7 @@ public class LimpiezaDetalleCortesPlantaLineaEmpleado implements Serializable {
 	public void setIdlimpiezadetallecortesplantalineaempleados(Long idlimpiezadetallecortesplantalineaempleados) {
 		this.idlimpiezadetallecortesplantalineaempleados = idlimpiezadetallecortesplantalineaempleados;
 	}
+
 
 	public Integer getCorte() {
 		return this.corte;
@@ -56,6 +43,8 @@ public class LimpiezaDetalleCortesPlantaLineaEmpleado implements Serializable {
 		this.corte = corte;
 	}
 
+
+	@Column(name="numero_empleados")
 	public Integer getNumeroEmpleados() {
 		return this.numeroEmpleados;
 	}
@@ -64,6 +53,10 @@ public class LimpiezaDetalleCortesPlantaLineaEmpleado implements Serializable {
 		this.numeroEmpleados = numeroEmpleados;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaCabeceraCortesPlantaLineaEmpleado
+	@ManyToOne
+	@JoinColumn(name="idlimpiezacabeceracortesplantalineaempleados")
 	public LimpiezaCabeceraCortesPlantaLineaEmpleado getLimpiezaCabeceraCortesPlantaLineaEmpleado() {
 		return this.limpiezaCabeceraCortesPlantaLineaEmpleado;
 	}
@@ -72,6 +65,10 @@ public class LimpiezaDetalleCortesPlantaLineaEmpleado implements Serializable {
 		this.limpiezaCabeceraCortesPlantaLineaEmpleado = limpiezaCabeceraCortesPlantaLineaEmpleado;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaLinea
+	@ManyToOne
+	@JoinColumn(name="idlimpiezalinea")
 	public LimpiezaLinea getLimpiezaLinea() {
 		return this.limpiezaLinea;
 	}
@@ -80,6 +77,10 @@ public class LimpiezaDetalleCortesPlantaLineaEmpleado implements Serializable {
 		this.limpiezaLinea = limpiezaLinea;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

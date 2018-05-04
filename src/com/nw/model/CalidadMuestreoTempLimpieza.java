@@ -12,37 +12,22 @@ import java.util.List;
  */
 @Entity
 @Table(name="calidad_muestreo_temp_limpieza")
+@NamedQuery(name="CalidadMuestreoTempLimpieza.findAll", query="SELECT c FROM CalidadMuestreoTempLimpieza c")
 public class CalidadMuestreoTempLimpieza implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcalidadmuestreotemplimpieza;
-
 	private Timestamp fechareg;
-
-	//bi-directional many-to-one association to CalidadDetalleMuestreoTempLimpieza
-	@OneToMany(mappedBy="calidadMuestreoTempLimpieza")
 	private List<CalidadDetalleMuestreoTempLimpieza> calidadDetalleMuestreoTempLimpiezas;
-
-	//bi-directional many-to-one association to LimpiezaProceso
-	@ManyToOne
-	@JoinColumn(name="idlimpiezaproceso")
 	private LimpiezaProceso limpiezaProceso;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public CalidadMuestreoTempLimpieza() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcalidadmuestreotemplimpieza() {
 		return this.idcalidadmuestreotemplimpieza;
 	}
@@ -50,6 +35,7 @@ public class CalidadMuestreoTempLimpieza implements Serializable {
 	public void setIdcalidadmuestreotemplimpieza(Long idcalidadmuestreotemplimpieza) {
 		this.idcalidadmuestreotemplimpieza = idcalidadmuestreotemplimpieza;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -59,6 +45,9 @@ public class CalidadMuestreoTempLimpieza implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
+	//bi-directional many-to-one association to CalidadDetalleMuestreoTempLimpieza
+	@OneToMany(mappedBy="calidadMuestreoTempLimpieza")
 	public List<CalidadDetalleMuestreoTempLimpieza> getCalidadDetalleMuestreoTempLimpiezas() {
 		return this.calidadDetalleMuestreoTempLimpiezas;
 	}
@@ -67,6 +56,24 @@ public class CalidadMuestreoTempLimpieza implements Serializable {
 		this.calidadDetalleMuestreoTempLimpiezas = calidadDetalleMuestreoTempLimpiezas;
 	}
 
+	public CalidadDetalleMuestreoTempLimpieza addCalidadDetalleMuestreoTempLimpieza(CalidadDetalleMuestreoTempLimpieza calidadDetalleMuestreoTempLimpieza) {
+		getCalidadDetalleMuestreoTempLimpiezas().add(calidadDetalleMuestreoTempLimpieza);
+		calidadDetalleMuestreoTempLimpieza.setCalidadMuestreoTempLimpieza(this);
+
+		return calidadDetalleMuestreoTempLimpieza;
+	}
+
+	public CalidadDetalleMuestreoTempLimpieza removeCalidadDetalleMuestreoTempLimpieza(CalidadDetalleMuestreoTempLimpieza calidadDetalleMuestreoTempLimpieza) {
+		getCalidadDetalleMuestreoTempLimpiezas().remove(calidadDetalleMuestreoTempLimpieza);
+		calidadDetalleMuestreoTempLimpieza.setCalidadMuestreoTempLimpieza(null);
+
+		return calidadDetalleMuestreoTempLimpieza;
+	}
+
+
+	//bi-directional many-to-one association to LimpiezaProceso
+	@ManyToOne
+	@JoinColumn(name="idlimpiezaproceso")
 	public LimpiezaProceso getLimpiezaProceso() {
 		return this.limpiezaProceso;
 	}
@@ -75,6 +82,10 @@ public class CalidadMuestreoTempLimpieza implements Serializable {
 		this.limpiezaProceso = limpiezaProceso;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -83,6 +94,10 @@ public class CalidadMuestreoTempLimpieza implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

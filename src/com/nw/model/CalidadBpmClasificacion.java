@@ -12,31 +12,22 @@ import java.util.List;
  */
 @Entity
 @Table(name="calidad_bpm_clasificacion")
+@NamedQuery(name="CalidadBpmClasificacion.findAll", query="SELECT c FROM CalidadBpmClasificacion c")
 public class CalidadBpmClasificacion implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idbpmclasificacion;
-
 	private Integer estado;
-
 	private Timestamp fecha;
-
 	private String observaciones;
-
-	//bi-directional many-to-one association to BarcoDescarga
-	@ManyToOne
-	@JoinColumn(name="idbarcodescarga")
 	private BarcoDescarga barcoDescarga;
-
-	//bi-directional many-to-one association to CalidadRespuestaPreguntaBpmclasificacion
-	@OneToMany(mappedBy="calidadBpmClasificacion")
 	private List<CalidadRespuestaPreguntaBpmclasificacion> calidadRespuestaPreguntaBpmclasificacions;
 
 	public CalidadBpmClasificacion() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdbpmclasificacion() {
 		return this.idbpmclasificacion;
 	}
@@ -44,6 +35,7 @@ public class CalidadBpmClasificacion implements Serializable {
 	public void setIdbpmclasificacion(Long idbpmclasificacion) {
 		this.idbpmclasificacion = idbpmclasificacion;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -53,6 +45,7 @@ public class CalidadBpmClasificacion implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Timestamp getFecha() {
 		return this.fecha;
 	}
@@ -60,6 +53,7 @@ public class CalidadBpmClasificacion implements Serializable {
 	public void setFecha(Timestamp fecha) {
 		this.fecha = fecha;
 	}
+
 
 	public String getObservaciones() {
 		return this.observaciones;
@@ -69,6 +63,10 @@ public class CalidadBpmClasificacion implements Serializable {
 		this.observaciones = observaciones;
 	}
 
+
+	//bi-directional many-to-one association to BarcoDescarga
+	@ManyToOne
+	@JoinColumn(name="idbarcodescarga")
 	public BarcoDescarga getBarcoDescarga() {
 		return this.barcoDescarga;
 	}
@@ -77,12 +75,29 @@ public class CalidadBpmClasificacion implements Serializable {
 		this.barcoDescarga = barcoDescarga;
 	}
 
+
+	//bi-directional many-to-one association to CalidadRespuestaPreguntaBpmclasificacion
+	@OneToMany(mappedBy="calidadBpmClasificacion")
 	public List<CalidadRespuestaPreguntaBpmclasificacion> getCalidadRespuestaPreguntaBpmclasificacions() {
 		return this.calidadRespuestaPreguntaBpmclasificacions;
 	}
 
 	public void setCalidadRespuestaPreguntaBpmclasificacions(List<CalidadRespuestaPreguntaBpmclasificacion> calidadRespuestaPreguntaBpmclasificacions) {
 		this.calidadRespuestaPreguntaBpmclasificacions = calidadRespuestaPreguntaBpmclasificacions;
+	}
+
+	public CalidadRespuestaPreguntaBpmclasificacion addCalidadRespuestaPreguntaBpmclasificacion(CalidadRespuestaPreguntaBpmclasificacion calidadRespuestaPreguntaBpmclasificacion) {
+		getCalidadRespuestaPreguntaBpmclasificacions().add(calidadRespuestaPreguntaBpmclasificacion);
+		calidadRespuestaPreguntaBpmclasificacion.setCalidadBpmClasificacion(this);
+
+		return calidadRespuestaPreguntaBpmclasificacion;
+	}
+
+	public CalidadRespuestaPreguntaBpmclasificacion removeCalidadRespuestaPreguntaBpmclasificacion(CalidadRespuestaPreguntaBpmclasificacion calidadRespuestaPreguntaBpmclasificacion) {
+		getCalidadRespuestaPreguntaBpmclasificacions().remove(calidadRespuestaPreguntaBpmclasificacion);
+		calidadRespuestaPreguntaBpmclasificacion.setCalidadBpmClasificacion(null);
+
+		return calidadRespuestaPreguntaBpmclasificacion;
 	}
 
 }

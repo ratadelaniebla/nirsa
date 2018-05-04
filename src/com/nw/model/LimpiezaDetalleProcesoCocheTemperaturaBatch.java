@@ -11,35 +11,22 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="limpieza_detalle_proceso_coche_temperatura_batch")
+@NamedQuery(name="LimpiezaDetalleProcesoCocheTemperaturaBatch.findAll", query="SELECT l FROM LimpiezaDetalleProcesoCocheTemperaturaBatch l")
 public class LimpiezaDetalleProcesoCocheTemperaturaBatch implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idlimpiezadetalleprocesocochetemperaturabatch;
-
 	private Timestamp fechareg;
-
 	private double temperatura;
-
-	//bi-directional many-to-one association to CocinaAperturaCierreDetalle
-	@ManyToOne
-	@JoinColumn(name="idcocinaaperturacierredetalle")
 	private CocinaAperturaCierreDetalle cocinaAperturaCierreDetalle;
-
-	//bi-directional many-to-one association to LimpiezaDetalleProcesoCoche
-	@ManyToOne
-	@JoinColumn(name="idlimpiezadetalleprocesocoche")
 	private LimpiezaDetalleProcesoCoche limpiezaDetalleProcesoCoche;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public LimpiezaDetalleProcesoCocheTemperaturaBatch() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdlimpiezadetalleprocesocochetemperaturabatch() {
 		return this.idlimpiezadetalleprocesocochetemperaturabatch;
 	}
@@ -47,6 +34,7 @@ public class LimpiezaDetalleProcesoCocheTemperaturaBatch implements Serializable
 	public void setIdlimpiezadetalleprocesocochetemperaturabatch(Long idlimpiezadetalleprocesocochetemperaturabatch) {
 		this.idlimpiezadetalleprocesocochetemperaturabatch = idlimpiezadetalleprocesocochetemperaturabatch;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -56,6 +44,7 @@ public class LimpiezaDetalleProcesoCocheTemperaturaBatch implements Serializable
 		this.fechareg = fechareg;
 	}
 
+
 	public double getTemperatura() {
 		return this.temperatura;
 	}
@@ -64,6 +53,10 @@ public class LimpiezaDetalleProcesoCocheTemperaturaBatch implements Serializable
 		this.temperatura = temperatura;
 	}
 
+
+	//bi-directional many-to-one association to CocinaAperturaCierreDetalle
+	@ManyToOne
+	@JoinColumn(name="idcocinaaperturacierredetalle")
 	public CocinaAperturaCierreDetalle getCocinaAperturaCierreDetalle() {
 		return this.cocinaAperturaCierreDetalle;
 	}
@@ -72,6 +65,10 @@ public class LimpiezaDetalleProcesoCocheTemperaturaBatch implements Serializable
 		this.cocinaAperturaCierreDetalle = cocinaAperturaCierreDetalle;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaDetalleProcesoCoche
+	@ManyToOne
+	@JoinColumn(name="idlimpiezadetalleprocesocoche")
 	public LimpiezaDetalleProcesoCoche getLimpiezaDetalleProcesoCoche() {
 		return this.limpiezaDetalleProcesoCoche;
 	}
@@ -80,6 +77,10 @@ public class LimpiezaDetalleProcesoCocheTemperaturaBatch implements Serializable
 		this.limpiezaDetalleProcesoCoche = limpiezaDetalleProcesoCoche;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

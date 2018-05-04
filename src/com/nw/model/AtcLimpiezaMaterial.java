@@ -11,22 +11,19 @@ import java.util.List;
  */
 @Entity
 @Table(name="atc_limpieza_material")
+@NamedQuery(name="AtcLimpiezaMaterial.findAll", query="SELECT a FROM AtcLimpiezaMaterial a")
 public class AtcLimpiezaMaterial implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idatclimpiezamaterial;
-
 	private String nombre;
-
-	//bi-directional many-to-one association to AtcLimpiezaDetalleBandeja
-	@OneToMany(mappedBy="atcLimpiezaMaterial")
 	private List<AtcLimpiezaDetalleBandeja> atcLimpiezaDetalleBandejas;
 
 	public AtcLimpiezaMaterial() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdatclimpiezamaterial() {
 		return this.idatclimpiezamaterial;
 	}
@@ -34,6 +31,7 @@ public class AtcLimpiezaMaterial implements Serializable {
 	public void setIdatclimpiezamaterial(Integer idatclimpiezamaterial) {
 		this.idatclimpiezamaterial = idatclimpiezamaterial;
 	}
+
 
 	public String getNombre() {
 		return this.nombre;
@@ -43,12 +41,29 @@ public class AtcLimpiezaMaterial implements Serializable {
 		this.nombre = nombre;
 	}
 
+
+	//bi-directional many-to-one association to AtcLimpiezaDetalleBandeja
+	@OneToMany(mappedBy="atcLimpiezaMaterial")
 	public List<AtcLimpiezaDetalleBandeja> getAtcLimpiezaDetalleBandejas() {
 		return this.atcLimpiezaDetalleBandejas;
 	}
 
 	public void setAtcLimpiezaDetalleBandejas(List<AtcLimpiezaDetalleBandeja> atcLimpiezaDetalleBandejas) {
 		this.atcLimpiezaDetalleBandejas = atcLimpiezaDetalleBandejas;
+	}
+
+	public AtcLimpiezaDetalleBandeja addAtcLimpiezaDetalleBandeja(AtcLimpiezaDetalleBandeja atcLimpiezaDetalleBandeja) {
+		getAtcLimpiezaDetalleBandejas().add(atcLimpiezaDetalleBandeja);
+		atcLimpiezaDetalleBandeja.setAtcLimpiezaMaterial(this);
+
+		return atcLimpiezaDetalleBandeja;
+	}
+
+	public AtcLimpiezaDetalleBandeja removeAtcLimpiezaDetalleBandeja(AtcLimpiezaDetalleBandeja atcLimpiezaDetalleBandeja) {
+		getAtcLimpiezaDetalleBandejas().remove(atcLimpiezaDetalleBandeja);
+		atcLimpiezaDetalleBandeja.setAtcLimpiezaMaterial(null);
+
+		return atcLimpiezaDetalleBandeja;
 	}
 
 }

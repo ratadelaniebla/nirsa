@@ -11,24 +11,20 @@ import java.util.List;
  */
 @Entity
 @Table(name="centro_costo")
+@NamedQuery(name="CentroCosto.findAll", query="SELECT c FROM CentroCosto c")
 public class CentroCosto implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idcentrocosto;
-
 	private String descripcion;
-
 	private Integer propiedad;
-
-	//bi-directional many-to-one association to Nomina
-	@OneToMany(mappedBy="centroCosto")
 	private List<Nomina> nominas;
 
 	public CentroCosto() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdcentrocosto() {
 		return this.idcentrocosto;
 	}
@@ -36,6 +32,7 @@ public class CentroCosto implements Serializable {
 	public void setIdcentrocosto(Integer idcentrocosto) {
 		this.idcentrocosto = idcentrocosto;
 	}
+
 
 	public String getDescripcion() {
 		return this.descripcion;
@@ -45,6 +42,7 @@ public class CentroCosto implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+
 	public Integer getPropiedad() {
 		return this.propiedad;
 	}
@@ -53,12 +51,29 @@ public class CentroCosto implements Serializable {
 		this.propiedad = propiedad;
 	}
 
+
+	//bi-directional many-to-one association to Nomina
+	@OneToMany(mappedBy="centroCosto")
 	public List<Nomina> getNominas() {
 		return this.nominas;
 	}
 
 	public void setNominas(List<Nomina> nominas) {
 		this.nominas = nominas;
+	}
+
+	public Nomina addNomina(Nomina nomina) {
+		getNominas().add(nomina);
+		nomina.setCentroCosto(this);
+
+		return nomina;
+	}
+
+	public Nomina removeNomina(Nomina nomina) {
+		getNominas().remove(nomina);
+		nomina.setCentroCosto(null);
+
+		return nomina;
 	}
 
 }

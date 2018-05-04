@@ -10,34 +10,25 @@ import java.util.List;
  * 
  */
 @Entity
+@NamedQuery(name="Empresa.findAll", query="SELECT e FROM Empresa e")
 public class Empresa implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idempresa;
-
 	private String codigosap;
-
 	private String direccion;
-
 	private Integer estado;
-
 	private String nombre;
-
 	private String razonsocial;
-
 	private Integer ruc;
-
 	private Integer telefono;
-
-	//bi-directional many-to-one association to DispositivoDestino
-	@OneToMany(mappedBy="empresa")
 	private List<DispositivoDestino> dispositivoDestinos;
 
 	public Empresa() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdempresa() {
 		return this.idempresa;
 	}
@@ -45,6 +36,7 @@ public class Empresa implements Serializable {
 	public void setIdempresa(Integer idempresa) {
 		this.idempresa = idempresa;
 	}
+
 
 	public String getCodigosap() {
 		return this.codigosap;
@@ -54,6 +46,7 @@ public class Empresa implements Serializable {
 		this.codigosap = codigosap;
 	}
 
+
 	public String getDireccion() {
 		return this.direccion;
 	}
@@ -61,6 +54,7 @@ public class Empresa implements Serializable {
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -70,6 +64,7 @@ public class Empresa implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public String getNombre() {
 		return this.nombre;
 	}
@@ -77,6 +72,7 @@ public class Empresa implements Serializable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
 
 	public String getRazonsocial() {
 		return this.razonsocial;
@@ -86,6 +82,7 @@ public class Empresa implements Serializable {
 		this.razonsocial = razonsocial;
 	}
 
+
 	public Integer getRuc() {
 		return this.ruc;
 	}
@@ -93,6 +90,7 @@ public class Empresa implements Serializable {
 	public void setRuc(Integer ruc) {
 		this.ruc = ruc;
 	}
+
 
 	public Integer getTelefono() {
 		return this.telefono;
@@ -102,12 +100,29 @@ public class Empresa implements Serializable {
 		this.telefono = telefono;
 	}
 
+
+	//bi-directional many-to-one association to DispositivoDestino
+	@OneToMany(mappedBy="empresa")
 	public List<DispositivoDestino> getDispositivoDestinos() {
 		return this.dispositivoDestinos;
 	}
 
 	public void setDispositivoDestinos(List<DispositivoDestino> dispositivoDestinos) {
 		this.dispositivoDestinos = dispositivoDestinos;
+	}
+
+	public DispositivoDestino addDispositivoDestino(DispositivoDestino dispositivoDestino) {
+		getDispositivoDestinos().add(dispositivoDestino);
+		dispositivoDestino.setEmpresa(this);
+
+		return dispositivoDestino;
+	}
+
+	public DispositivoDestino removeDispositivoDestino(DispositivoDestino dispositivoDestino) {
+		getDispositivoDestinos().remove(dispositivoDestino);
+		dispositivoDestino.setEmpresa(null);
+
+		return dispositivoDestino;
 	}
 
 }

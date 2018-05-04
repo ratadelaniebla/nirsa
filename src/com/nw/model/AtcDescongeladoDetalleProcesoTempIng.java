@@ -11,35 +11,22 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="atc_descongelado_detalle_proceso_temp_ing")
+@NamedQuery(name="AtcDescongeladoDetalleProcesoTempIng.findAll", query="SELECT a FROM AtcDescongeladoDetalleProcesoTempIng a")
 public class AtcDescongeladoDetalleProcesoTempIng implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idatcdescongeladodetalleprocesotemping;
-
 	private Timestamp fechareg;
-
 	private double temperatura;
-
-	//bi-directional many-to-one association to AtcDescongeladoDetalleProceso
-	@ManyToOne
-	@JoinColumn(name="idatcdescongeladodetalleproceso")
 	private AtcDescongeladoDetalleProceso atcDescongeladoDetalleProceso;
-
-	//bi-directional many-to-one association to AtcTurno
-	@ManyToOne
-	@JoinColumn(name="idatcturno")
 	private AtcTurno atcTurno;
-
-	//bi-directional many-to-one association to AtcUsuario
-	@ManyToOne
-	@JoinColumn(name="idatcusuario")
 	private AtcUsuario atcUsuario;
 
 	public AtcDescongeladoDetalleProcesoTempIng() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdatcdescongeladodetalleprocesotemping() {
 		return this.idatcdescongeladodetalleprocesotemping;
 	}
@@ -47,6 +34,7 @@ public class AtcDescongeladoDetalleProcesoTempIng implements Serializable {
 	public void setIdatcdescongeladodetalleprocesotemping(Long idatcdescongeladodetalleprocesotemping) {
 		this.idatcdescongeladodetalleprocesotemping = idatcdescongeladodetalleprocesotemping;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -56,6 +44,7 @@ public class AtcDescongeladoDetalleProcesoTempIng implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public double getTemperatura() {
 		return this.temperatura;
 	}
@@ -64,6 +53,10 @@ public class AtcDescongeladoDetalleProcesoTempIng implements Serializable {
 		this.temperatura = temperatura;
 	}
 
+
+	//bi-directional many-to-one association to AtcDescongeladoDetalleProceso
+	@ManyToOne
+	@JoinColumn(name="idatcdescongeladodetalleproceso")
 	public AtcDescongeladoDetalleProceso getAtcDescongeladoDetalleProceso() {
 		return this.atcDescongeladoDetalleProceso;
 	}
@@ -72,6 +65,10 @@ public class AtcDescongeladoDetalleProcesoTempIng implements Serializable {
 		this.atcDescongeladoDetalleProceso = atcDescongeladoDetalleProceso;
 	}
 
+
+	//bi-directional many-to-one association to AtcTurno
+	@ManyToOne
+	@JoinColumn(name="idatcturno")
 	public AtcTurno getAtcTurno() {
 		return this.atcTurno;
 	}
@@ -80,6 +77,10 @@ public class AtcDescongeladoDetalleProcesoTempIng implements Serializable {
 		this.atcTurno = atcTurno;
 	}
 
+
+	//bi-directional many-to-one association to AtcUsuario
+	@ManyToOne
+	@JoinColumn(name="idatcusuario")
 	public AtcUsuario getAtcUsuario() {
 		return this.atcUsuario;
 	}

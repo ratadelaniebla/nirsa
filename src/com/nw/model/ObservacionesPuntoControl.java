@@ -11,67 +11,32 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="observaciones_punto_control")
+@NamedQuery(name="ObservacionesPuntoControl.findAll", query="SELECT o FROM ObservacionesPuntoControl o")
 public class ObservacionesPuntoControl implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idobservacionespuntocontrol;
-
 	private String accion;
-
 	private Integer aprobado1;
-
 	private Integer aprobado2;
-
 	private String desviacion;
-
 	private Timestamp fechaaprobado1;
-
 	private Timestamp fechaaprobado2;
-
 	private Timestamp fechareg;
-
 	private Integer secuenciaobservacion;
-
-	//bi-directional many-to-one association to Division
-	@ManyToOne
-	@JoinColumn(name="iddivision")
 	private Division division;
-
-	//bi-directional many-to-one association to Proceso
-	@ManyToOne
-	@JoinColumn(name="idproceso")
 	private Proceso proceso;
-
-	//bi-directional many-to-one association to Produccion
-	@ManyToOne
-	@JoinColumn(name="idproduccion")
 	private Produccion produccion;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario1")
 	private Usuario usuario1;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario2")
 	private Usuario usuario2;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario3;
 
 	public ObservacionesPuntoControl() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdobservacionespuntocontrol() {
 		return this.idobservacionespuntocontrol;
 	}
@@ -79,6 +44,7 @@ public class ObservacionesPuntoControl implements Serializable {
 	public void setIdobservacionespuntocontrol(Long idobservacionespuntocontrol) {
 		this.idobservacionespuntocontrol = idobservacionespuntocontrol;
 	}
+
 
 	public String getAccion() {
 		return this.accion;
@@ -88,6 +54,7 @@ public class ObservacionesPuntoControl implements Serializable {
 		this.accion = accion;
 	}
 
+
 	public Integer getAprobado1() {
 		return this.aprobado1;
 	}
@@ -95,6 +62,7 @@ public class ObservacionesPuntoControl implements Serializable {
 	public void setAprobado1(Integer aprobado1) {
 		this.aprobado1 = aprobado1;
 	}
+
 
 	public Integer getAprobado2() {
 		return this.aprobado2;
@@ -104,6 +72,7 @@ public class ObservacionesPuntoControl implements Serializable {
 		this.aprobado2 = aprobado2;
 	}
 
+
 	public String getDesviacion() {
 		return this.desviacion;
 	}
@@ -111,6 +80,7 @@ public class ObservacionesPuntoControl implements Serializable {
 	public void setDesviacion(String desviacion) {
 		this.desviacion = desviacion;
 	}
+
 
 	public Timestamp getFechaaprobado1() {
 		return this.fechaaprobado1;
@@ -120,6 +90,7 @@ public class ObservacionesPuntoControl implements Serializable {
 		this.fechaaprobado1 = fechaaprobado1;
 	}
 
+
 	public Timestamp getFechaaprobado2() {
 		return this.fechaaprobado2;
 	}
@@ -127,6 +98,7 @@ public class ObservacionesPuntoControl implements Serializable {
 	public void setFechaaprobado2(Timestamp fechaaprobado2) {
 		this.fechaaprobado2 = fechaaprobado2;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -136,6 +108,7 @@ public class ObservacionesPuntoControl implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public Integer getSecuenciaobservacion() {
 		return this.secuenciaobservacion;
 	}
@@ -144,6 +117,10 @@ public class ObservacionesPuntoControl implements Serializable {
 		this.secuenciaobservacion = secuenciaobservacion;
 	}
 
+
+	//bi-directional many-to-one association to Division
+	@ManyToOne
+	@JoinColumn(name="iddivision")
 	public Division getDivision() {
 		return this.division;
 	}
@@ -152,6 +129,10 @@ public class ObservacionesPuntoControl implements Serializable {
 		this.division = division;
 	}
 
+
+	//bi-directional many-to-one association to Proceso
+	@ManyToOne
+	@JoinColumn(name="idproceso")
 	public Proceso getProceso() {
 		return this.proceso;
 	}
@@ -160,6 +141,10 @@ public class ObservacionesPuntoControl implements Serializable {
 		this.proceso = proceso;
 	}
 
+
+	//bi-directional many-to-one association to Produccion
+	@ManyToOne
+	@JoinColumn(name="idproduccion")
 	public Produccion getProduccion() {
 		return this.produccion;
 	}
@@ -168,6 +153,10 @@ public class ObservacionesPuntoControl implements Serializable {
 		this.produccion = produccion;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -176,6 +165,10 @@ public class ObservacionesPuntoControl implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario1")
 	public Usuario getUsuario1() {
 		return this.usuario1;
 	}
@@ -184,6 +177,10 @@ public class ObservacionesPuntoControl implements Serializable {
 		this.usuario1 = usuario1;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario2")
 	public Usuario getUsuario2() {
 		return this.usuario2;
 	}
@@ -192,6 +189,10 @@ public class ObservacionesPuntoControl implements Serializable {
 		this.usuario2 = usuario2;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario3() {
 		return this.usuario3;
 	}

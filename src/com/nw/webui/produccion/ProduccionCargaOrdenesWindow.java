@@ -31,7 +31,10 @@ import com.nw.model.dao.ProduccionArchivoCargaOrdenDetalleDAO;
 import com.nw.model.dao.ProduccionDetalleOrdenDAO;
 import com.nw.model.dao.impl.ProduccionArchivoCargaOrdenDAOJpaImpl;
 import com.nw.model.dao.impl.ProduccionArchivoCargaOrdenDetalleDAOJpaImpl;
+import com.nw.model.dao.impl.ProduccionDAOJpaImpl;
 import com.nw.model.dao.impl.ProduccionDetalleOrdenDAOJpaImpl;
+import com.nw.model.dao.impl.TurnoDAOJpaImpl;
+import com.nw.model.dao.impl.UsuarioDAOJpaImpl;
 import com.nw.util.ExcelReadWrite;
 import com.nw.util.ProduccionCargaOrdenesControlXLS;
 import com.nw.util.Sistema;
@@ -187,19 +190,19 @@ public class ProduccionCargaOrdenesWindow extends GenericForwardComposer{
 		Object oObservacion = infoXLSCargaOrden.get("observacion");
 		
 		paco.setSemana(new Double(oSemana.toString()).intValue());
-		paco.setIdproduccion(new Long(oProduccion.toString()));
+		paco.setProduccion(new ProduccionDAOJpaImpl().getProduccionById(new Long(oProduccion.toString())));
 		paco.setObservacion(oObservacion.toString());
 		paco.setNombrearchivo(archivoOrdenDetalle.getName());
 		paco.setFechaarchivo(new Timestamp(System.currentTimeMillis()));
 		paco.setFechacarga(new Timestamp(System.currentTimeMillis()));
-		paco.setIdusuario((String)Sessions.getCurrent().getAttribute("usuario"));
 		
-		if (paco.getIdusuario()==null) {
+		//valida la informacion del usuario logueado
+		String idUsuario = (String) Sessions.getCurrent().getAttribute("usuario");
+		if (idUsuario==null) {
 			Sistema.mensaje("Error. Usuario no logueado.");
 			return null;
 		}
-			
-			
+		paco.setUsuario(new UsuarioDAOJpaImpl().getUser(idUsuario));
 		
 		for (int i = 0 ; infoXLSCargaOrden.size() > i ; i++) {
 			if (infoXLSCargaOrden.containsKey("TURNO_"+(i+1))){
@@ -212,7 +215,7 @@ public class ProduccionCargaOrdenesWindow extends GenericForwardComposer{
 						return null;
 					}
 						
-					pacoD.setIdturno(i+1);
+					pacoD.setTurno(new TurnoDAOJpaImpl().getFindTurnoId(i+1));
 					pacoD.setProduccionArchivoCargaOrden(paco);
 					listPacoD.add(pacoD);
 				}
@@ -225,61 +228,6 @@ public class ProduccionCargaOrdenesWindow extends GenericForwardComposer{
 		return filaUnica==true?null:paco;
 	}
 	
-//	public void registraArchivoCargaOrden(ProduccionArchivoCargaOrden produccionArchivoCargaOrden) {
-//		ProduccionArchivoCargaOrdenDAO pacoDAO = new ProduccionArchivoCargaOrdenDAOJpaImpl();
-//		
-//		List<ProduccionArchivoCargaOrdenDetalle> listaPacoOrDet = produccionArchivoCargaOrden.getProduccionArchivoCargaOrdenDetalles();
-//		List<ProduccionArchivoCargaOrdenDetalle> listaPacoOrDetNueva = new ArrayList<ProduccionArchivoCargaOrdenDetalle>();
-//		
-//		List<ProduccionArchivoCargaOrden> listaPacoActualiza = new ArrayList<ProduccionArchivoCargaOrden>();
-//		
-//		boolean isNuevoCargaOrden=false;
-//		for (ProduccionArchivoCargaOrdenDetalle pacoOrDet : listaPacoOrDet) {
-//			ProduccionArchivoCargaOrdenDetalleDAO cargaOrdenDetalleDao = new ProduccionArchivoCargaOrdenDetalleDAOJpaImpl();
-//			boolean existeArchivoCargaOrdenDetalle = cargaOrdenDetalleDao.existeArchivoCargaOrdenDetalle( 
-//							pacoOrDet.getIdturno(), pacoOrDet.getItem(), pacoOrDet.getOrden(), produccionArchivoCargaOrden.getIdproduccion());
-//			if (existeArchivoCargaOrdenDetalle) {
-//				System.out.println("si existe entonces actualiza");
-//				ProduccionArchivoCargaOrdenDetalle existePacoDet = new ProduccionArchivoCargaOrdenDetalle();
-//				existePacoDet = cargaOrdenDetalleDao.archivoCargaOrdenDetalles(
-//								pacoOrDet.getIdturno(), pacoOrDet.getItem(), pacoOrDet.getOrden(), produccionArchivoCargaOrden.getIdproduccion()).
-//								get(0);
-//				List<ProduccionArchivoCargaOrdenDetalle> listaExistePacoDet = new ArrayList<ProduccionArchivoCargaOrdenDetalle>();
-//				
-//				Long existePacoDetID = existePacoDet.getIdproduccionarchivocargaordendetalle();
-//
-//				ProduccionArchivoCargaOrden paco = new ProduccionArchivoCargaOrden();
-//				paco = copiaOrden( pacoDAO.archivoCargaOrdenPorID(
-//						existePacoDet.getProduccionArchivoCargaOrden().getIdproduccionarchivocargaorden()) );
-//				
-//				existePacoDet = copiaOrdenDetalle(pacoOrDet, paco);
-//				existePacoDet.setIdproduccionarchivocargaordendetalle(existePacoDetID);
-//				
-//				listaExistePacoDet.add(existePacoDet);
-//				paco.setProduccionArchivoCargaOrdenDetalles(listaExistePacoDet);
-//				
-//				listaPacoActualiza.add(paco);
-//				
-//			}else{
-//				System.out.println("no existe entonces inserta");
-//				isNuevoCargaOrden=true;
-//				listaPacoOrDetNueva.add(pacoOrDet);
-//			}
-//		}
-//		produccionArchivoCargaOrden.getProduccionArchivoCargaOrdenDetalles().clear();
-//		produccionArchivoCargaOrden.setProduccionArchivoCargaOrdenDetalles(listaPacoOrDetNueva);
-//		
-//		if (isNuevoCargaOrden) {
-//			pacoDAO.saveObject(produccionArchivoCargaOrden);
-//			registraDetalleOrden(produccionArchivoCargaOrden);
-//		}
-//		for (ProduccionArchivoCargaOrden pacoActualiza : listaPacoActualiza) {
-//			pacoDAO.updateObject(pacoActualiza);
-//			for (ProduccionArchivoCargaOrdenDetalle pacoD: pacoActualiza.getProduccionArchivoCargaOrdenDetalles()) {
-//				actualizaDetalleOrden(pacoD);
-//			}
-//		}
-//	}
 	
 	/**
 	 * Se encarga de realizar la validaciones para realizar la insercion de la informacion
@@ -300,12 +248,12 @@ public class ProduccionCargaOrdenesWindow extends GenericForwardComposer{
 		for (ProduccionArchivoCargaOrdenDetalle pacoOrDet : listaPacoOrDet) {
 			ProduccionArchivoCargaOrdenDetalleDAO cargaOrdenDetalleDao = new ProduccionArchivoCargaOrdenDetalleDAOJpaImpl();
 			boolean existeArchivoCargaOrdenDetalle = cargaOrdenDetalleDao.existeArchivoCargaOrdenDetalle( 
-							pacoOrDet.getIdturno(), pacoOrDet.getItem(), pacoOrDet.getOrden(), produccionArchivoCargaOrden.getIdproduccion());
+							pacoOrDet.getTurno().getIdturno(), pacoOrDet.getItem(), pacoOrDet.getOrden(), produccionArchivoCargaOrden.getProduccion().getIdproduccion());
 			if (existeArchivoCargaOrdenDetalle) {
 				System.out.println("si existe entonces actualiza");
 				ProduccionArchivoCargaOrdenDetalle existePacoDet = new ProduccionArchivoCargaOrdenDetalle();
 				existePacoDet = cargaOrdenDetalleDao.archivoCargaOrdenDetalles(
-								pacoOrDet.getIdturno(), pacoOrDet.getItem(), pacoOrDet.getOrden(), produccionArchivoCargaOrden.getIdproduccion()).
+								pacoOrDet.getTurno().getIdturno(), pacoOrDet.getItem(), pacoOrDet.getOrden(), produccionArchivoCargaOrden.getProduccion().getIdproduccion()).
 								get(0);
 				List<ProduccionArchivoCargaOrdenDetalle> listaExistePacoDet = new ArrayList<ProduccionArchivoCargaOrdenDetalle>();
 				
@@ -352,9 +300,9 @@ public class ProduccionCargaOrdenesWindow extends GenericForwardComposer{
 	private void actualizaDetalleOrden(ProduccionArchivoCargaOrdenDetalle pacoD){
 		ProduccionDetalleOrdenDAO pdoDAO = new ProduccionDetalleOrdenDAOJpaImpl();
 		ProduccionDetalleOrden pdo = new ProduccionDetalleOrden();
-		Long pdoId = null;
-		pdoId = pdoDAO.existeDetalleOrden(pacoD.getIdturno(), 
-				pacoD.getProduccionArchivoCargaOrden().getIdproduccion(), 
+		Integer pdoId = null;
+		pdoId = pdoDAO.existeDetalleOrden(pacoD.getTurno().getIdturno(), 
+				pacoD.getProduccionArchivoCargaOrden().getProduccion().getIdproduccion(), 
 				pacoD.getItem(),
 				pacoD.getOrden()).getIdproducciondetalleorden();
 		
@@ -378,9 +326,9 @@ public class ProduccionCargaOrdenesWindow extends GenericForwardComposer{
 		pdo.setFi(pacoD.getFi());
 		pdo.setFill(pacoD.getFill());
 		pdo.setFlake(pacoD.getFlake());
-		pdo.setIdproduccion(paco.getIdproduccion());
-		pdo.setIdturno(pacoD.getIdturno());
-		pdo.setIdusuario(paco.getIdusuario());
+		pdo.setProduccion(paco.getProduccion());
+		pdo.setTurno(pacoD.getTurno());
+		pdo.setUsuario(paco.getUsuario());
 		pdo.setItem(pacoD.getItem());
 		pdo.setLatas(pacoD.getLatas());
 		pdo.setLomolimpio(pacoD.getLomolimpio());
@@ -421,8 +369,8 @@ public class ProduccionCargaOrdenesWindow extends GenericForwardComposer{
 		destino.setIdproduccionarchivocargaorden(origen.getIdproduccionarchivocargaorden());
 		destino.setFechaarchivo(origen.getFechaarchivo());
 		destino.setFechacarga(origen.getFechacarga());
-		destino.setIdproduccion(origen.getIdproduccion());
-		destino.setIdusuario(origen.getIdusuario());
+		destino.setProduccion(origen.getProduccion());
+		destino.setUsuario(origen.getUsuario());
 		destino.setNombrearchivo(origen.getNombrearchivo());
 		destino.setObservacion(origen.getObservacion());
 		destino.setSemana(origen.getSemana());
@@ -445,7 +393,7 @@ public class ProduccionCargaOrdenesWindow extends GenericForwardComposer{
 		destino.setFi(origen.getFi());
 		destino.setFill(origen.getFill());
 		destino.setFlake(origen.getFlake());
-		destino.setIdturno(origen.getIdturno());
+		destino.setTurno(origen.getTurno());
 		destino.setItem(origen.getItem());
 		destino.setLatas(origen.getLatas());
 		destino.setLomolimpio(origen.getLomolimpio());

@@ -9,20 +9,19 @@ import javax.persistence.*;
  * 
  */
 @Entity
+@NamedQuery(name="Zonafao.findAll", query="SELECT z FROM Zonafao z")
 public class Zonafao implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idzonafao;
-
 	private String codigosap;
-
 	private String descripcion;
 
 	public Zonafao() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdzonafao() {
 		return this.idzonafao;
 	}
@@ -31,6 +30,7 @@ public class Zonafao implements Serializable {
 		this.idzonafao = idzonafao;
 	}
 
+
 	public String getCodigosap() {
 		return this.codigosap;
 	}
@@ -38,6 +38,7 @@ public class Zonafao implements Serializable {
 	public void setCodigosap(String codigosap) {
 		this.codigosap = codigosap;
 	}
+
 
 	public String getDescripcion() {
 		return this.descripcion;

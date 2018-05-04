@@ -10,67 +10,31 @@ import java.util.List;
  * 
  */
 @Entity
+@NamedQuery(name="Cajon.findAll", query="SELECT c FROM Cajon c")
 public class Cajon implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private String idcajon;
-
 	private Integer estadocajon;
-
 	private String observaciones;
-
 	private double tara;
-
-	//bi-directional many-to-one association to AtcEvisceradoSubproductoCrudo
-	@OneToMany(mappedBy="cajon")
 	private List<AtcEvisceradoSubproductoCrudo> atcEvisceradoSubproductoCrudos;
-
-	//bi-directional many-to-one association to AtcLimpiezaSubproductoCrudo
-	@OneToMany(mappedBy="cajon")
 	private List<AtcLimpiezaSubproductoCrudo> atcLimpiezaSubproductoCrudos;
-
-	//bi-directional many-to-one association to Area
-	@ManyToOne
-	@JoinColumn(name="idarea")
 	private Area area;
-
-	//bi-directional many-to-one association to CajonDetalleBarcoDescarga
-	@OneToMany(mappedBy="cajon")
 	private List<CajonDetalleBarcoDescarga> cajonDetalleBarcoDescargas;
-
-	//bi-directional many-to-one association to CalidadDetalleEspecietallaCajonBanda
-	@OneToMany(mappedBy="cajon")
 	private List<CalidadDetalleEspecietallaCajonBanda> calidadDetalleEspecietallaCajonBandas;
-
-	//bi-directional many-to-one association to CalidadDetalleTemperaturaCajonBanda
-	@OneToMany(mappedBy="cajon")
 	private List<CalidadDetalleTemperaturaCajonBanda> calidadDetalleTemperaturaCajonBandas;
-
-	//bi-directional many-to-one association to CamaraCajon
-	@OneToMany(mappedBy="cajon")
 	private List<CamaraCajon> camaraCajons;
-
-	//bi-directional many-to-one association to DesperdicioCajonHarina
-	@OneToMany(mappedBy="cajon")
 	private List<DesperdicioCajonHarina> desperdicioCajonHarinas;
-
-	//bi-directional many-to-one association to DesperdicioDetalle
-	@OneToMany(mappedBy="cajon")
 	private List<DesperdicioDetalle> desperdicioDetalles;
-
-	//bi-directional many-to-one association to EvisceradoSubproductoCrudo
-	@OneToMany(mappedBy="cajon")
 	private List<EvisceradoSubproductoCrudo> evisceradoSubproductoCrudos;
-
-	//bi-directional many-to-one association to HarinaRecepcionDetallePescaComprobante
-	@OneToMany(mappedBy="cajon")
 	private List<HarinaRecepcionDetallePescaComprobante> harinaRecepcionDetallePescaComprobantes;
 
 	public Cajon() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public String getIdcajon() {
 		return this.idcajon;
 	}
@@ -78,6 +42,7 @@ public class Cajon implements Serializable {
 	public void setIdcajon(String idcajon) {
 		this.idcajon = idcajon;
 	}
+
 
 	public Integer getEstadocajon() {
 		return this.estadocajon;
@@ -87,6 +52,7 @@ public class Cajon implements Serializable {
 		this.estadocajon = estadocajon;
 	}
 
+
 	public String getObservaciones() {
 		return this.observaciones;
 	}
@@ -94,6 +60,7 @@ public class Cajon implements Serializable {
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
 	}
+
 
 	public double getTara() {
 		return this.tara;
@@ -103,6 +70,9 @@ public class Cajon implements Serializable {
 		this.tara = tara;
 	}
 
+
+	//bi-directional many-to-one association to AtcEvisceradoSubproductoCrudo
+	@OneToMany(mappedBy="cajon")
 	public List<AtcEvisceradoSubproductoCrudo> getAtcEvisceradoSubproductoCrudos() {
 		return this.atcEvisceradoSubproductoCrudos;
 	}
@@ -111,6 +81,23 @@ public class Cajon implements Serializable {
 		this.atcEvisceradoSubproductoCrudos = atcEvisceradoSubproductoCrudos;
 	}
 
+	public AtcEvisceradoSubproductoCrudo addAtcEvisceradoSubproductoCrudo(AtcEvisceradoSubproductoCrudo atcEvisceradoSubproductoCrudo) {
+		getAtcEvisceradoSubproductoCrudos().add(atcEvisceradoSubproductoCrudo);
+		atcEvisceradoSubproductoCrudo.setCajon(this);
+
+		return atcEvisceradoSubproductoCrudo;
+	}
+
+	public AtcEvisceradoSubproductoCrudo removeAtcEvisceradoSubproductoCrudo(AtcEvisceradoSubproductoCrudo atcEvisceradoSubproductoCrudo) {
+		getAtcEvisceradoSubproductoCrudos().remove(atcEvisceradoSubproductoCrudo);
+		atcEvisceradoSubproductoCrudo.setCajon(null);
+
+		return atcEvisceradoSubproductoCrudo;
+	}
+
+
+	//bi-directional many-to-one association to AtcLimpiezaSubproductoCrudo
+	@OneToMany(mappedBy="cajon")
 	public List<AtcLimpiezaSubproductoCrudo> getAtcLimpiezaSubproductoCrudos() {
 		return this.atcLimpiezaSubproductoCrudos;
 	}
@@ -119,6 +106,24 @@ public class Cajon implements Serializable {
 		this.atcLimpiezaSubproductoCrudos = atcLimpiezaSubproductoCrudos;
 	}
 
+	public AtcLimpiezaSubproductoCrudo addAtcLimpiezaSubproductoCrudo(AtcLimpiezaSubproductoCrudo atcLimpiezaSubproductoCrudo) {
+		getAtcLimpiezaSubproductoCrudos().add(atcLimpiezaSubproductoCrudo);
+		atcLimpiezaSubproductoCrudo.setCajon(this);
+
+		return atcLimpiezaSubproductoCrudo;
+	}
+
+	public AtcLimpiezaSubproductoCrudo removeAtcLimpiezaSubproductoCrudo(AtcLimpiezaSubproductoCrudo atcLimpiezaSubproductoCrudo) {
+		getAtcLimpiezaSubproductoCrudos().remove(atcLimpiezaSubproductoCrudo);
+		atcLimpiezaSubproductoCrudo.setCajon(null);
+
+		return atcLimpiezaSubproductoCrudo;
+	}
+
+
+	//bi-directional many-to-one association to Area
+	@ManyToOne
+	@JoinColumn(name="idarea")
 	public Area getArea() {
 		return this.area;
 	}
@@ -127,6 +132,9 @@ public class Cajon implements Serializable {
 		this.area = area;
 	}
 
+
+	//bi-directional many-to-one association to CajonDetalleBarcoDescarga
+	@OneToMany(mappedBy="cajon")
 	public List<CajonDetalleBarcoDescarga> getCajonDetalleBarcoDescargas() {
 		return this.cajonDetalleBarcoDescargas;
 	}
@@ -135,6 +143,23 @@ public class Cajon implements Serializable {
 		this.cajonDetalleBarcoDescargas = cajonDetalleBarcoDescargas;
 	}
 
+	public CajonDetalleBarcoDescarga addCajonDetalleBarcoDescarga(CajonDetalleBarcoDescarga cajonDetalleBarcoDescarga) {
+		getCajonDetalleBarcoDescargas().add(cajonDetalleBarcoDescarga);
+		cajonDetalleBarcoDescarga.setCajon(this);
+
+		return cajonDetalleBarcoDescarga;
+	}
+
+	public CajonDetalleBarcoDescarga removeCajonDetalleBarcoDescarga(CajonDetalleBarcoDescarga cajonDetalleBarcoDescarga) {
+		getCajonDetalleBarcoDescargas().remove(cajonDetalleBarcoDescarga);
+		cajonDetalleBarcoDescarga.setCajon(null);
+
+		return cajonDetalleBarcoDescarga;
+	}
+
+
+	//bi-directional many-to-one association to CalidadDetalleEspecietallaCajonBanda
+	@OneToMany(mappedBy="cajon")
 	public List<CalidadDetalleEspecietallaCajonBanda> getCalidadDetalleEspecietallaCajonBandas() {
 		return this.calidadDetalleEspecietallaCajonBandas;
 	}
@@ -143,6 +168,23 @@ public class Cajon implements Serializable {
 		this.calidadDetalleEspecietallaCajonBandas = calidadDetalleEspecietallaCajonBandas;
 	}
 
+	public CalidadDetalleEspecietallaCajonBanda addCalidadDetalleEspecietallaCajonBanda(CalidadDetalleEspecietallaCajonBanda calidadDetalleEspecietallaCajonBanda) {
+		getCalidadDetalleEspecietallaCajonBandas().add(calidadDetalleEspecietallaCajonBanda);
+		calidadDetalleEspecietallaCajonBanda.setCajon(this);
+
+		return calidadDetalleEspecietallaCajonBanda;
+	}
+
+	public CalidadDetalleEspecietallaCajonBanda removeCalidadDetalleEspecietallaCajonBanda(CalidadDetalleEspecietallaCajonBanda calidadDetalleEspecietallaCajonBanda) {
+		getCalidadDetalleEspecietallaCajonBandas().remove(calidadDetalleEspecietallaCajonBanda);
+		calidadDetalleEspecietallaCajonBanda.setCajon(null);
+
+		return calidadDetalleEspecietallaCajonBanda;
+	}
+
+
+	//bi-directional many-to-one association to CalidadDetalleTemperaturaCajonBanda
+	@OneToMany(mappedBy="cajon")
 	public List<CalidadDetalleTemperaturaCajonBanda> getCalidadDetalleTemperaturaCajonBandas() {
 		return this.calidadDetalleTemperaturaCajonBandas;
 	}
@@ -151,6 +193,23 @@ public class Cajon implements Serializable {
 		this.calidadDetalleTemperaturaCajonBandas = calidadDetalleTemperaturaCajonBandas;
 	}
 
+	public CalidadDetalleTemperaturaCajonBanda addCalidadDetalleTemperaturaCajonBanda(CalidadDetalleTemperaturaCajonBanda calidadDetalleTemperaturaCajonBanda) {
+		getCalidadDetalleTemperaturaCajonBandas().add(calidadDetalleTemperaturaCajonBanda);
+		calidadDetalleTemperaturaCajonBanda.setCajon(this);
+
+		return calidadDetalleTemperaturaCajonBanda;
+	}
+
+	public CalidadDetalleTemperaturaCajonBanda removeCalidadDetalleTemperaturaCajonBanda(CalidadDetalleTemperaturaCajonBanda calidadDetalleTemperaturaCajonBanda) {
+		getCalidadDetalleTemperaturaCajonBandas().remove(calidadDetalleTemperaturaCajonBanda);
+		calidadDetalleTemperaturaCajonBanda.setCajon(null);
+
+		return calidadDetalleTemperaturaCajonBanda;
+	}
+
+
+	//bi-directional many-to-one association to CamaraCajon
+	@OneToMany(mappedBy="cajon")
 	public List<CamaraCajon> getCamaraCajons() {
 		return this.camaraCajons;
 	}
@@ -159,6 +218,23 @@ public class Cajon implements Serializable {
 		this.camaraCajons = camaraCajons;
 	}
 
+	public CamaraCajon addCamaraCajon(CamaraCajon camaraCajon) {
+		getCamaraCajons().add(camaraCajon);
+		camaraCajon.setCajon(this);
+
+		return camaraCajon;
+	}
+
+	public CamaraCajon removeCamaraCajon(CamaraCajon camaraCajon) {
+		getCamaraCajons().remove(camaraCajon);
+		camaraCajon.setCajon(null);
+
+		return camaraCajon;
+	}
+
+
+	//bi-directional many-to-one association to DesperdicioCajonHarina
+	@OneToMany(mappedBy="cajon")
 	public List<DesperdicioCajonHarina> getDesperdicioCajonHarinas() {
 		return this.desperdicioCajonHarinas;
 	}
@@ -167,6 +243,23 @@ public class Cajon implements Serializable {
 		this.desperdicioCajonHarinas = desperdicioCajonHarinas;
 	}
 
+	public DesperdicioCajonHarina addDesperdicioCajonHarina(DesperdicioCajonHarina desperdicioCajonHarina) {
+		getDesperdicioCajonHarinas().add(desperdicioCajonHarina);
+		desperdicioCajonHarina.setCajon(this);
+
+		return desperdicioCajonHarina;
+	}
+
+	public DesperdicioCajonHarina removeDesperdicioCajonHarina(DesperdicioCajonHarina desperdicioCajonHarina) {
+		getDesperdicioCajonHarinas().remove(desperdicioCajonHarina);
+		desperdicioCajonHarina.setCajon(null);
+
+		return desperdicioCajonHarina;
+	}
+
+
+	//bi-directional many-to-one association to DesperdicioDetalle
+	@OneToMany(mappedBy="cajon")
 	public List<DesperdicioDetalle> getDesperdicioDetalles() {
 		return this.desperdicioDetalles;
 	}
@@ -175,6 +268,23 @@ public class Cajon implements Serializable {
 		this.desperdicioDetalles = desperdicioDetalles;
 	}
 
+	public DesperdicioDetalle addDesperdicioDetalle(DesperdicioDetalle desperdicioDetalle) {
+		getDesperdicioDetalles().add(desperdicioDetalle);
+		desperdicioDetalle.setCajon(this);
+
+		return desperdicioDetalle;
+	}
+
+	public DesperdicioDetalle removeDesperdicioDetalle(DesperdicioDetalle desperdicioDetalle) {
+		getDesperdicioDetalles().remove(desperdicioDetalle);
+		desperdicioDetalle.setCajon(null);
+
+		return desperdicioDetalle;
+	}
+
+
+	//bi-directional many-to-one association to EvisceradoSubproductoCrudo
+	@OneToMany(mappedBy="cajon")
 	public List<EvisceradoSubproductoCrudo> getEvisceradoSubproductoCrudos() {
 		return this.evisceradoSubproductoCrudos;
 	}
@@ -183,12 +293,43 @@ public class Cajon implements Serializable {
 		this.evisceradoSubproductoCrudos = evisceradoSubproductoCrudos;
 	}
 
+	public EvisceradoSubproductoCrudo addEvisceradoSubproductoCrudo(EvisceradoSubproductoCrudo evisceradoSubproductoCrudo) {
+		getEvisceradoSubproductoCrudos().add(evisceradoSubproductoCrudo);
+		evisceradoSubproductoCrudo.setCajon(this);
+
+		return evisceradoSubproductoCrudo;
+	}
+
+	public EvisceradoSubproductoCrudo removeEvisceradoSubproductoCrudo(EvisceradoSubproductoCrudo evisceradoSubproductoCrudo) {
+		getEvisceradoSubproductoCrudos().remove(evisceradoSubproductoCrudo);
+		evisceradoSubproductoCrudo.setCajon(null);
+
+		return evisceradoSubproductoCrudo;
+	}
+
+
+	//bi-directional many-to-one association to HarinaRecepcionDetallePescaComprobante
+	@OneToMany(mappedBy="cajon")
 	public List<HarinaRecepcionDetallePescaComprobante> getHarinaRecepcionDetallePescaComprobantes() {
 		return this.harinaRecepcionDetallePescaComprobantes;
 	}
 
 	public void setHarinaRecepcionDetallePescaComprobantes(List<HarinaRecepcionDetallePescaComprobante> harinaRecepcionDetallePescaComprobantes) {
 		this.harinaRecepcionDetallePescaComprobantes = harinaRecepcionDetallePescaComprobantes;
+	}
+
+	public HarinaRecepcionDetallePescaComprobante addHarinaRecepcionDetallePescaComprobante(HarinaRecepcionDetallePescaComprobante harinaRecepcionDetallePescaComprobante) {
+		getHarinaRecepcionDetallePescaComprobantes().add(harinaRecepcionDetallePescaComprobante);
+		harinaRecepcionDetallePescaComprobante.setCajon(this);
+
+		return harinaRecepcionDetallePescaComprobante;
+	}
+
+	public HarinaRecepcionDetallePescaComprobante removeHarinaRecepcionDetallePescaComprobante(HarinaRecepcionDetallePescaComprobante harinaRecepcionDetallePescaComprobante) {
+		getHarinaRecepcionDetallePescaComprobantes().remove(harinaRecepcionDetallePescaComprobante);
+		harinaRecepcionDetallePescaComprobante.setCajon(null);
+
+		return harinaRecepcionDetallePescaComprobante;
 	}
 
 }

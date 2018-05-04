@@ -13,101 +13,43 @@ import java.util.List;
  */
 @Entity
 @Table(name="desperdicio_cajon_harina")
+@NamedQuery(name="DesperdicioCajonHarina.findAll", query="SELECT d FROM DesperdicioCajonHarina d")
 public class DesperdicioCajonHarina implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long iddesperdiciocajonharina;
-
 	private Integer diajuliano;
-
 	private Integer estado;
-
 	private Timestamp fechajoracreacionregisto;
-
-	@Temporal(TemporalType.DATE)
 	private Date fechaproduccion;
-
 	private Timestamp fechaselladodesperdicio;
-
 	private Timestamp fechaselladoharina;
-
 	private double pesobrutodesperdiciootraarea;
-
 	private double pesoharina;
-
 	private String sello1desperdicio;
-
 	private String sello1harina;
-
 	private String sello2desperdicio;
-
 	private String sello2harina;
-
 	private double tara;
-
 	private double temperatura;
-
 	private double valordiferenciapermitido;
-
-	//bi-directional many-to-one association to Area
-	@ManyToOne
-	@JoinColumn(name="idareaharina")
 	private Area area;
-
-	//bi-directional many-to-one association to Cajon
-	@ManyToOne
-	@JoinColumn(name="idcajon")
 	private Cajon cajon;
-
-	//bi-directional many-to-one association to Planta
-	@ManyToOne
-	@JoinColumn(name="idplanta")
 	private Planta planta;
-
-	//bi-directional many-to-one association to Produccion
-	@ManyToOne
-	@JoinColumn(name="idproduccion")
 	private Produccion produccion;
-
-	//bi-directional many-to-one association to Subproducto
-	@ManyToOne
-	@JoinColumn(name="idsubproducto")
 	private Subproducto subproducto;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturnodesperdicio")
 	private Turno turno1;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturnoproduccion")
 	private Turno turno2;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturnoharina")
 	private Turno turno3;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuariodesperdicio")
 	private Usuario usuario1;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuarioharina")
 	private Usuario usuario2;
-
-	//bi-directional many-to-one association to DesperdicioDetalle
-	@OneToMany(mappedBy="desperdicioCajonHarina")
 	private List<DesperdicioDetalle> desperdicioDetalles;
 
 	public DesperdicioCajonHarina() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIddesperdiciocajonharina() {
 		return this.iddesperdiciocajonharina;
 	}
@@ -115,6 +57,7 @@ public class DesperdicioCajonHarina implements Serializable {
 	public void setIddesperdiciocajonharina(Long iddesperdiciocajonharina) {
 		this.iddesperdiciocajonharina = iddesperdiciocajonharina;
 	}
+
 
 	public Integer getDiajuliano() {
 		return this.diajuliano;
@@ -124,6 +67,7 @@ public class DesperdicioCajonHarina implements Serializable {
 		this.diajuliano = diajuliano;
 	}
 
+
 	public Integer getEstado() {
 		return this.estado;
 	}
@@ -131,6 +75,7 @@ public class DesperdicioCajonHarina implements Serializable {
 	public void setEstado(Integer estado) {
 		this.estado = estado;
 	}
+
 
 	public Timestamp getFechajoracreacionregisto() {
 		return this.fechajoracreacionregisto;
@@ -140,6 +85,8 @@ public class DesperdicioCajonHarina implements Serializable {
 		this.fechajoracreacionregisto = fechajoracreacionregisto;
 	}
 
+
+	@Temporal(TemporalType.DATE)
 	public Date getFechaproduccion() {
 		return this.fechaproduccion;
 	}
@@ -147,6 +94,7 @@ public class DesperdicioCajonHarina implements Serializable {
 	public void setFechaproduccion(Date fechaproduccion) {
 		this.fechaproduccion = fechaproduccion;
 	}
+
 
 	public Timestamp getFechaselladodesperdicio() {
 		return this.fechaselladodesperdicio;
@@ -156,6 +104,7 @@ public class DesperdicioCajonHarina implements Serializable {
 		this.fechaselladodesperdicio = fechaselladodesperdicio;
 	}
 
+
 	public Timestamp getFechaselladoharina() {
 		return this.fechaselladoharina;
 	}
@@ -163,6 +112,7 @@ public class DesperdicioCajonHarina implements Serializable {
 	public void setFechaselladoharina(Timestamp fechaselladoharina) {
 		this.fechaselladoharina = fechaselladoharina;
 	}
+
 
 	public double getPesobrutodesperdiciootraarea() {
 		return this.pesobrutodesperdiciootraarea;
@@ -172,6 +122,7 @@ public class DesperdicioCajonHarina implements Serializable {
 		this.pesobrutodesperdiciootraarea = pesobrutodesperdiciootraarea;
 	}
 
+
 	public double getPesoharina() {
 		return this.pesoharina;
 	}
@@ -179,6 +130,7 @@ public class DesperdicioCajonHarina implements Serializable {
 	public void setPesoharina(double pesoharina) {
 		this.pesoharina = pesoharina;
 	}
+
 
 	public String getSello1desperdicio() {
 		return this.sello1desperdicio;
@@ -188,6 +140,7 @@ public class DesperdicioCajonHarina implements Serializable {
 		this.sello1desperdicio = sello1desperdicio;
 	}
 
+
 	public String getSello1harina() {
 		return this.sello1harina;
 	}
@@ -195,6 +148,7 @@ public class DesperdicioCajonHarina implements Serializable {
 	public void setSello1harina(String sello1harina) {
 		this.sello1harina = sello1harina;
 	}
+
 
 	public String getSello2desperdicio() {
 		return this.sello2desperdicio;
@@ -204,6 +158,7 @@ public class DesperdicioCajonHarina implements Serializable {
 		this.sello2desperdicio = sello2desperdicio;
 	}
 
+
 	public String getSello2harina() {
 		return this.sello2harina;
 	}
@@ -211,6 +166,7 @@ public class DesperdicioCajonHarina implements Serializable {
 	public void setSello2harina(String sello2harina) {
 		this.sello2harina = sello2harina;
 	}
+
 
 	public double getTara() {
 		return this.tara;
@@ -220,6 +176,7 @@ public class DesperdicioCajonHarina implements Serializable {
 		this.tara = tara;
 	}
 
+
 	public double getTemperatura() {
 		return this.temperatura;
 	}
@@ -227,6 +184,7 @@ public class DesperdicioCajonHarina implements Serializable {
 	public void setTemperatura(double temperatura) {
 		this.temperatura = temperatura;
 	}
+
 
 	public double getValordiferenciapermitido() {
 		return this.valordiferenciapermitido;
@@ -236,6 +194,10 @@ public class DesperdicioCajonHarina implements Serializable {
 		this.valordiferenciapermitido = valordiferenciapermitido;
 	}
 
+
+	//bi-directional many-to-one association to Area
+	@ManyToOne
+	@JoinColumn(name="idareaharina")
 	public Area getArea() {
 		return this.area;
 	}
@@ -244,6 +206,10 @@ public class DesperdicioCajonHarina implements Serializable {
 		this.area = area;
 	}
 
+
+	//bi-directional many-to-one association to Cajon
+	@ManyToOne
+	@JoinColumn(name="idcajon")
 	public Cajon getCajon() {
 		return this.cajon;
 	}
@@ -252,6 +218,10 @@ public class DesperdicioCajonHarina implements Serializable {
 		this.cajon = cajon;
 	}
 
+
+	//bi-directional many-to-one association to Planta
+	@ManyToOne
+	@JoinColumn(name="idplanta")
 	public Planta getPlanta() {
 		return this.planta;
 	}
@@ -260,6 +230,10 @@ public class DesperdicioCajonHarina implements Serializable {
 		this.planta = planta;
 	}
 
+
+	//bi-directional many-to-one association to Produccion
+	@ManyToOne
+	@JoinColumn(name="idproduccion")
 	public Produccion getProduccion() {
 		return this.produccion;
 	}
@@ -268,6 +242,10 @@ public class DesperdicioCajonHarina implements Serializable {
 		this.produccion = produccion;
 	}
 
+
+	//bi-directional many-to-one association to Subproducto
+	@ManyToOne
+	@JoinColumn(name="idsubproducto")
 	public Subproducto getSubproducto() {
 		return this.subproducto;
 	}
@@ -276,6 +254,10 @@ public class DesperdicioCajonHarina implements Serializable {
 		this.subproducto = subproducto;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturnodesperdicio")
 	public Turno getTurno1() {
 		return this.turno1;
 	}
@@ -284,6 +266,10 @@ public class DesperdicioCajonHarina implements Serializable {
 		this.turno1 = turno1;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturnoproduccion")
 	public Turno getTurno2() {
 		return this.turno2;
 	}
@@ -292,6 +278,10 @@ public class DesperdicioCajonHarina implements Serializable {
 		this.turno2 = turno2;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturnoharina")
 	public Turno getTurno3() {
 		return this.turno3;
 	}
@@ -300,6 +290,10 @@ public class DesperdicioCajonHarina implements Serializable {
 		this.turno3 = turno3;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuariodesperdicio")
 	public Usuario getUsuario1() {
 		return this.usuario1;
 	}
@@ -308,6 +302,10 @@ public class DesperdicioCajonHarina implements Serializable {
 		this.usuario1 = usuario1;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuarioharina")
 	public Usuario getUsuario2() {
 		return this.usuario2;
 	}
@@ -316,12 +314,29 @@ public class DesperdicioCajonHarina implements Serializable {
 		this.usuario2 = usuario2;
 	}
 
+
+	//bi-directional many-to-one association to DesperdicioDetalle
+	@OneToMany(mappedBy="desperdicioCajonHarina")
 	public List<DesperdicioDetalle> getDesperdicioDetalles() {
 		return this.desperdicioDetalles;
 	}
 
 	public void setDesperdicioDetalles(List<DesperdicioDetalle> desperdicioDetalles) {
 		this.desperdicioDetalles = desperdicioDetalles;
+	}
+
+	public DesperdicioDetalle addDesperdicioDetalle(DesperdicioDetalle desperdicioDetalle) {
+		getDesperdicioDetalles().add(desperdicioDetalle);
+		desperdicioDetalle.setDesperdicioCajonHarina(this);
+
+		return desperdicioDetalle;
+	}
+
+	public DesperdicioDetalle removeDesperdicioDetalle(DesperdicioDetalle desperdicioDetalle) {
+		getDesperdicioDetalles().remove(desperdicioDetalle);
+		desperdicioDetalle.setDesperdicioCajonHarina(null);
+
+		return desperdicioDetalle;
 	}
 
 }

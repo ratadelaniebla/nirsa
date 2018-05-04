@@ -11,92 +11,51 @@ import java.util.List;
  */
 @Entity
 @Table(name="produccion_orden_pedido")
+@NamedQuery(name="ProduccionOrdenPedido.findAll", query="SELECT p FROM ProduccionOrdenPedido p")
 public class ProduccionOrdenPedido implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idproduccionordenpedido;
-
 	private String aceite;
-
 	private double aceitexlata;
-
 	private String agua;
-
 	private double cajas;
-
 	private String cerradora;
-
 	private String cliente;
-
 	private String destino;
-
 	private double drenado;
-
 	private String envase;
-
 	private String especie;
-
 	private double fill;
-
 	private double fillpor;
-
 	private double flakeporcentaje;
-
 	private double formato;
-
 	private Integer item;
-
 	private double latas;
-
 	private String luthi;
-
 	private String marca;
-
 	private Integer materialfert;
-
 	private Integer materialhalb;
-
 	private String observaciones;
-
 	private String orden;
-
 	private Integer ordenfert;
-
 	private Integer ordenhalb;
-
 	private String posicion;
-
 	private String presentacion;
-
 	private Integer presentacionind;
-
 	private String producto;
-
 	private String tapa;
-
 	private double toneladas;
-
 	private String video;
-
-	//bi-directional many-to-one association to PouchProceso
-	@OneToMany(mappedBy="produccionOrdenPedido")
 	private List<PouchProceso> pouchProcesos;
-
-	//bi-directional many-to-one association to Produccion
-	@ManyToOne
-	@JoinColumn(name="idproduccion")
 	private Produccion produccion;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
 
 	public ProduccionOrdenPedido() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdproduccionordenpedido() {
 		return this.idproduccionordenpedido;
 	}
@@ -104,6 +63,7 @@ public class ProduccionOrdenPedido implements Serializable {
 	public void setIdproduccionordenpedido(Long idproduccionordenpedido) {
 		this.idproduccionordenpedido = idproduccionordenpedido;
 	}
+
 
 	public String getAceite() {
 		return this.aceite;
@@ -113,6 +73,7 @@ public class ProduccionOrdenPedido implements Serializable {
 		this.aceite = aceite;
 	}
 
+
 	public double getAceitexlata() {
 		return this.aceitexlata;
 	}
@@ -120,6 +81,7 @@ public class ProduccionOrdenPedido implements Serializable {
 	public void setAceitexlata(double aceitexlata) {
 		this.aceitexlata = aceitexlata;
 	}
+
 
 	public String getAgua() {
 		return this.agua;
@@ -129,6 +91,7 @@ public class ProduccionOrdenPedido implements Serializable {
 		this.agua = agua;
 	}
 
+
 	public double getCajas() {
 		return this.cajas;
 	}
@@ -136,6 +99,7 @@ public class ProduccionOrdenPedido implements Serializable {
 	public void setCajas(double cajas) {
 		this.cajas = cajas;
 	}
+
 
 	public String getCerradora() {
 		return this.cerradora;
@@ -145,6 +109,7 @@ public class ProduccionOrdenPedido implements Serializable {
 		this.cerradora = cerradora;
 	}
 
+
 	public String getCliente() {
 		return this.cliente;
 	}
@@ -152,6 +117,7 @@ public class ProduccionOrdenPedido implements Serializable {
 	public void setCliente(String cliente) {
 		this.cliente = cliente;
 	}
+
 
 	public String getDestino() {
 		return this.destino;
@@ -161,6 +127,7 @@ public class ProduccionOrdenPedido implements Serializable {
 		this.destino = destino;
 	}
 
+
 	public double getDrenado() {
 		return this.drenado;
 	}
@@ -168,6 +135,7 @@ public class ProduccionOrdenPedido implements Serializable {
 	public void setDrenado(double drenado) {
 		this.drenado = drenado;
 	}
+
 
 	public String getEnvase() {
 		return this.envase;
@@ -177,6 +145,7 @@ public class ProduccionOrdenPedido implements Serializable {
 		this.envase = envase;
 	}
 
+
 	public String getEspecie() {
 		return this.especie;
 	}
@@ -184,6 +153,7 @@ public class ProduccionOrdenPedido implements Serializable {
 	public void setEspecie(String especie) {
 		this.especie = especie;
 	}
+
 
 	public double getFill() {
 		return this.fill;
@@ -193,6 +163,7 @@ public class ProduccionOrdenPedido implements Serializable {
 		this.fill = fill;
 	}
 
+
 	public double getFillpor() {
 		return this.fillpor;
 	}
@@ -200,6 +171,7 @@ public class ProduccionOrdenPedido implements Serializable {
 	public void setFillpor(double fillpor) {
 		this.fillpor = fillpor;
 	}
+
 
 	public double getFlakeporcentaje() {
 		return this.flakeporcentaje;
@@ -209,6 +181,7 @@ public class ProduccionOrdenPedido implements Serializable {
 		this.flakeporcentaje = flakeporcentaje;
 	}
 
+
 	public double getFormato() {
 		return this.formato;
 	}
@@ -216,6 +189,7 @@ public class ProduccionOrdenPedido implements Serializable {
 	public void setFormato(double formato) {
 		this.formato = formato;
 	}
+
 
 	public Integer getItem() {
 		return this.item;
@@ -225,6 +199,7 @@ public class ProduccionOrdenPedido implements Serializable {
 		this.item = item;
 	}
 
+
 	public double getLatas() {
 		return this.latas;
 	}
@@ -232,6 +207,7 @@ public class ProduccionOrdenPedido implements Serializable {
 	public void setLatas(double latas) {
 		this.latas = latas;
 	}
+
 
 	public String getLuthi() {
 		return this.luthi;
@@ -241,6 +217,7 @@ public class ProduccionOrdenPedido implements Serializable {
 		this.luthi = luthi;
 	}
 
+
 	public String getMarca() {
 		return this.marca;
 	}
@@ -248,6 +225,7 @@ public class ProduccionOrdenPedido implements Serializable {
 	public void setMarca(String marca) {
 		this.marca = marca;
 	}
+
 
 	public Integer getMaterialfert() {
 		return this.materialfert;
@@ -257,6 +235,7 @@ public class ProduccionOrdenPedido implements Serializable {
 		this.materialfert = materialfert;
 	}
 
+
 	public Integer getMaterialhalb() {
 		return this.materialhalb;
 	}
@@ -264,6 +243,7 @@ public class ProduccionOrdenPedido implements Serializable {
 	public void setMaterialhalb(Integer materialhalb) {
 		this.materialhalb = materialhalb;
 	}
+
 
 	public String getObservaciones() {
 		return this.observaciones;
@@ -273,6 +253,7 @@ public class ProduccionOrdenPedido implements Serializable {
 		this.observaciones = observaciones;
 	}
 
+
 	public String getOrden() {
 		return this.orden;
 	}
@@ -280,6 +261,7 @@ public class ProduccionOrdenPedido implements Serializable {
 	public void setOrden(String orden) {
 		this.orden = orden;
 	}
+
 
 	public Integer getOrdenfert() {
 		return this.ordenfert;
@@ -289,6 +271,7 @@ public class ProduccionOrdenPedido implements Serializable {
 		this.ordenfert = ordenfert;
 	}
 
+
 	public Integer getOrdenhalb() {
 		return this.ordenhalb;
 	}
@@ -296,6 +279,7 @@ public class ProduccionOrdenPedido implements Serializable {
 	public void setOrdenhalb(Integer ordenhalb) {
 		this.ordenhalb = ordenhalb;
 	}
+
 
 	public String getPosicion() {
 		return this.posicion;
@@ -305,6 +289,7 @@ public class ProduccionOrdenPedido implements Serializable {
 		this.posicion = posicion;
 	}
 
+
 	public String getPresentacion() {
 		return this.presentacion;
 	}
@@ -312,6 +297,7 @@ public class ProduccionOrdenPedido implements Serializable {
 	public void setPresentacion(String presentacion) {
 		this.presentacion = presentacion;
 	}
+
 
 	public Integer getPresentacionind() {
 		return this.presentacionind;
@@ -321,6 +307,7 @@ public class ProduccionOrdenPedido implements Serializable {
 		this.presentacionind = presentacionind;
 	}
 
+
 	public String getProducto() {
 		return this.producto;
 	}
@@ -328,6 +315,7 @@ public class ProduccionOrdenPedido implements Serializable {
 	public void setProducto(String producto) {
 		this.producto = producto;
 	}
+
 
 	public String getTapa() {
 		return this.tapa;
@@ -337,6 +325,7 @@ public class ProduccionOrdenPedido implements Serializable {
 		this.tapa = tapa;
 	}
 
+
 	public double getToneladas() {
 		return this.toneladas;
 	}
@@ -344,6 +333,7 @@ public class ProduccionOrdenPedido implements Serializable {
 	public void setToneladas(double toneladas) {
 		this.toneladas = toneladas;
 	}
+
 
 	public String getVideo() {
 		return this.video;
@@ -353,6 +343,9 @@ public class ProduccionOrdenPedido implements Serializable {
 		this.video = video;
 	}
 
+
+	//bi-directional many-to-one association to PouchProceso
+	@OneToMany(mappedBy="produccionOrdenPedido")
 	public List<PouchProceso> getPouchProcesos() {
 		return this.pouchProcesos;
 	}
@@ -361,6 +354,24 @@ public class ProduccionOrdenPedido implements Serializable {
 		this.pouchProcesos = pouchProcesos;
 	}
 
+	public PouchProceso addPouchProceso(PouchProceso pouchProceso) {
+		getPouchProcesos().add(pouchProceso);
+		pouchProceso.setProduccionOrdenPedido(this);
+
+		return pouchProceso;
+	}
+
+	public PouchProceso removePouchProceso(PouchProceso pouchProceso) {
+		getPouchProcesos().remove(pouchProceso);
+		pouchProceso.setProduccionOrdenPedido(null);
+
+		return pouchProceso;
+	}
+
+
+	//bi-directional many-to-one association to Produccion
+	@ManyToOne
+	@JoinColumn(name="idproduccion")
 	public Produccion getProduccion() {
 		return this.produccion;
 	}
@@ -369,6 +380,10 @@ public class ProduccionOrdenPedido implements Serializable {
 		this.produccion = produccion;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}

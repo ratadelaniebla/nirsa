@@ -12,43 +12,24 @@ import java.util.List;
  */
 @Entity
 @Table(name="coccion_muestreo_temp_coche")
+@NamedQuery(name="CoccionMuestreoTempCoche.findAll", query="SELECT c FROM CoccionMuestreoTempCoche c")
 public class CoccionMuestreoTempCoche implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcoccionmuestreotempcoche;
-
 	private Timestamp fechareg;
-
 	private String observacion;
-
-	//bi-directional many-to-one association to CoccionDetalleMuestreoTempCoche
-	@OneToMany(mappedBy="coccionMuestreoTempCoche")
 	private List<CoccionDetalleMuestreoTempCoche> coccionDetalleMuestreoTempCoches;
-
-	//bi-directional many-to-one association to EvisceradoProceso
-	@ManyToOne
-	@JoinColumn(name="idevisceradoproceso")
 	private EvisceradoProceso evisceradoProceso;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
-
-	//bi-directional many-to-one association to ContraloriaCoccionDetalleMuestreoTempCoche
-	@OneToMany(mappedBy="coccionMuestreoTempCoche")
 	private List<ContraloriaCoccionDetalleMuestreoTempCoche> contraloriaCoccionDetalleMuestreoTempCoches;
 
 	public CoccionMuestreoTempCoche() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcoccionmuestreotempcoche() {
 		return this.idcoccionmuestreotempcoche;
 	}
@@ -56,6 +37,7 @@ public class CoccionMuestreoTempCoche implements Serializable {
 	public void setIdcoccionmuestreotempcoche(Long idcoccionmuestreotempcoche) {
 		this.idcoccionmuestreotempcoche = idcoccionmuestreotempcoche;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -65,6 +47,7 @@ public class CoccionMuestreoTempCoche implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public String getObservacion() {
 		return this.observacion;
 	}
@@ -73,6 +56,9 @@ public class CoccionMuestreoTempCoche implements Serializable {
 		this.observacion = observacion;
 	}
 
+
+	//bi-directional many-to-one association to CoccionDetalleMuestreoTempCoche
+	@OneToMany(mappedBy="coccionMuestreoTempCoche")
 	public List<CoccionDetalleMuestreoTempCoche> getCoccionDetalleMuestreoTempCoches() {
 		return this.coccionDetalleMuestreoTempCoches;
 	}
@@ -81,6 +67,24 @@ public class CoccionMuestreoTempCoche implements Serializable {
 		this.coccionDetalleMuestreoTempCoches = coccionDetalleMuestreoTempCoches;
 	}
 
+	public CoccionDetalleMuestreoTempCoche addCoccionDetalleMuestreoTempCoch(CoccionDetalleMuestreoTempCoche coccionDetalleMuestreoTempCoch) {
+		getCoccionDetalleMuestreoTempCoches().add(coccionDetalleMuestreoTempCoch);
+		coccionDetalleMuestreoTempCoch.setCoccionMuestreoTempCoche(this);
+
+		return coccionDetalleMuestreoTempCoch;
+	}
+
+	public CoccionDetalleMuestreoTempCoche removeCoccionDetalleMuestreoTempCoch(CoccionDetalleMuestreoTempCoche coccionDetalleMuestreoTempCoch) {
+		getCoccionDetalleMuestreoTempCoches().remove(coccionDetalleMuestreoTempCoch);
+		coccionDetalleMuestreoTempCoch.setCoccionMuestreoTempCoche(null);
+
+		return coccionDetalleMuestreoTempCoch;
+	}
+
+
+	//bi-directional many-to-one association to EvisceradoProceso
+	@ManyToOne
+	@JoinColumn(name="idevisceradoproceso")
 	public EvisceradoProceso getEvisceradoProceso() {
 		return this.evisceradoProceso;
 	}
@@ -89,6 +93,10 @@ public class CoccionMuestreoTempCoche implements Serializable {
 		this.evisceradoProceso = evisceradoProceso;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -97,6 +105,10 @@ public class CoccionMuestreoTempCoche implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}
@@ -105,12 +117,29 @@ public class CoccionMuestreoTempCoche implements Serializable {
 		this.usuario = usuario;
 	}
 
+
+	//bi-directional many-to-one association to ContraloriaCoccionDetalleMuestreoTempCoche
+	@OneToMany(mappedBy="coccionMuestreoTempCoche")
 	public List<ContraloriaCoccionDetalleMuestreoTempCoche> getContraloriaCoccionDetalleMuestreoTempCoches() {
 		return this.contraloriaCoccionDetalleMuestreoTempCoches;
 	}
 
 	public void setContraloriaCoccionDetalleMuestreoTempCoches(List<ContraloriaCoccionDetalleMuestreoTempCoche> contraloriaCoccionDetalleMuestreoTempCoches) {
 		this.contraloriaCoccionDetalleMuestreoTempCoches = contraloriaCoccionDetalleMuestreoTempCoches;
+	}
+
+	public ContraloriaCoccionDetalleMuestreoTempCoche addContraloriaCoccionDetalleMuestreoTempCoch(ContraloriaCoccionDetalleMuestreoTempCoche contraloriaCoccionDetalleMuestreoTempCoch) {
+		getContraloriaCoccionDetalleMuestreoTempCoches().add(contraloriaCoccionDetalleMuestreoTempCoch);
+		contraloriaCoccionDetalleMuestreoTempCoch.setCoccionMuestreoTempCoche(this);
+
+		return contraloriaCoccionDetalleMuestreoTempCoch;
+	}
+
+	public ContraloriaCoccionDetalleMuestreoTempCoche removeContraloriaCoccionDetalleMuestreoTempCoch(ContraloriaCoccionDetalleMuestreoTempCoche contraloriaCoccionDetalleMuestreoTempCoch) {
+		getContraloriaCoccionDetalleMuestreoTempCoches().remove(contraloriaCoccionDetalleMuestreoTempCoch);
+		contraloriaCoccionDetalleMuestreoTempCoch.setCoccionMuestreoTempCoche(null);
+
+		return contraloriaCoccionDetalleMuestreoTempCoch;
 	}
 
 }

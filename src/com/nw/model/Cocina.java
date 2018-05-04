@@ -10,32 +10,23 @@ import java.util.List;
  * 
  */
 @Entity
+@NamedQuery(name="Cocina.findAll", query="SELECT c FROM Cocina c")
 public class Cocina implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idcocina;
-
 	private String descripcion;
-
 	private Integer estado;
-
-	//bi-directional many-to-one association to CocinaAperturaCierreDetalle
-	@OneToMany(mappedBy="cocina")
 	private List<CocinaAperturaCierreDetalle> cocinaAperturaCierreDetalles;
-
-	//bi-directional many-to-one association to EvisceradoCocheModificacion
-	@OneToMany(mappedBy="cocina")
 	private List<EvisceradoCocheModificacion> evisceradoCocheModificacions;
-
-	//bi-directional many-to-one association to EvisceradoDetalleProcesoCoche
-	@OneToMany(mappedBy="cocina")
 	private List<EvisceradoDetalleProcesoCoche> evisceradoDetalleProcesoCoches;
+	private List<PanzasDetalleProcesoCoche> panzasDetalleProcesoCoches;
 
 	public Cocina() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdcocina() {
 		return this.idcocina;
 	}
@@ -43,6 +34,7 @@ public class Cocina implements Serializable {
 	public void setIdcocina(Integer idcocina) {
 		this.idcocina = idcocina;
 	}
+
 
 	public String getDescripcion() {
 		return this.descripcion;
@@ -52,6 +44,7 @@ public class Cocina implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+
 	public Integer getEstado() {
 		return this.estado;
 	}
@@ -60,6 +53,9 @@ public class Cocina implements Serializable {
 		this.estado = estado;
 	}
 
+
+	//bi-directional many-to-one association to CocinaAperturaCierreDetalle
+	@OneToMany(mappedBy="cocina")
 	public List<CocinaAperturaCierreDetalle> getCocinaAperturaCierreDetalles() {
 		return this.cocinaAperturaCierreDetalles;
 	}
@@ -68,6 +64,23 @@ public class Cocina implements Serializable {
 		this.cocinaAperturaCierreDetalles = cocinaAperturaCierreDetalles;
 	}
 
+	public CocinaAperturaCierreDetalle addCocinaAperturaCierreDetalle(CocinaAperturaCierreDetalle cocinaAperturaCierreDetalle) {
+		getCocinaAperturaCierreDetalles().add(cocinaAperturaCierreDetalle);
+		cocinaAperturaCierreDetalle.setCocina(this);
+
+		return cocinaAperturaCierreDetalle;
+	}
+
+	public CocinaAperturaCierreDetalle removeCocinaAperturaCierreDetalle(CocinaAperturaCierreDetalle cocinaAperturaCierreDetalle) {
+		getCocinaAperturaCierreDetalles().remove(cocinaAperturaCierreDetalle);
+		cocinaAperturaCierreDetalle.setCocina(null);
+
+		return cocinaAperturaCierreDetalle;
+	}
+
+
+	//bi-directional many-to-one association to EvisceradoCocheModificacion
+	@OneToMany(mappedBy="cocina")
 	public List<EvisceradoCocheModificacion> getEvisceradoCocheModificacions() {
 		return this.evisceradoCocheModificacions;
 	}
@@ -76,12 +89,68 @@ public class Cocina implements Serializable {
 		this.evisceradoCocheModificacions = evisceradoCocheModificacions;
 	}
 
+	public EvisceradoCocheModificacion addEvisceradoCocheModificacion(EvisceradoCocheModificacion evisceradoCocheModificacion) {
+		getEvisceradoCocheModificacions().add(evisceradoCocheModificacion);
+		evisceradoCocheModificacion.setCocina(this);
+
+		return evisceradoCocheModificacion;
+	}
+
+	public EvisceradoCocheModificacion removeEvisceradoCocheModificacion(EvisceradoCocheModificacion evisceradoCocheModificacion) {
+		getEvisceradoCocheModificacions().remove(evisceradoCocheModificacion);
+		evisceradoCocheModificacion.setCocina(null);
+
+		return evisceradoCocheModificacion;
+	}
+
+
+	//bi-directional many-to-one association to EvisceradoDetalleProcesoCoche
+	@OneToMany(mappedBy="cocina")
 	public List<EvisceradoDetalleProcesoCoche> getEvisceradoDetalleProcesoCoches() {
 		return this.evisceradoDetalleProcesoCoches;
 	}
 
 	public void setEvisceradoDetalleProcesoCoches(List<EvisceradoDetalleProcesoCoche> evisceradoDetalleProcesoCoches) {
 		this.evisceradoDetalleProcesoCoches = evisceradoDetalleProcesoCoches;
+	}
+
+	public EvisceradoDetalleProcesoCoche addEvisceradoDetalleProcesoCoch(EvisceradoDetalleProcesoCoche evisceradoDetalleProcesoCoch) {
+		getEvisceradoDetalleProcesoCoches().add(evisceradoDetalleProcesoCoch);
+		evisceradoDetalleProcesoCoch.setCocina(this);
+
+		return evisceradoDetalleProcesoCoch;
+	}
+
+	public EvisceradoDetalleProcesoCoche removeEvisceradoDetalleProcesoCoch(EvisceradoDetalleProcesoCoche evisceradoDetalleProcesoCoch) {
+		getEvisceradoDetalleProcesoCoches().remove(evisceradoDetalleProcesoCoch);
+		evisceradoDetalleProcesoCoch.setCocina(null);
+
+		return evisceradoDetalleProcesoCoch;
+	}
+
+
+	//bi-directional many-to-one association to PanzasDetalleProcesoCoche
+	@OneToMany(mappedBy="cocina")
+	public List<PanzasDetalleProcesoCoche> getPanzasDetalleProcesoCoches() {
+		return this.panzasDetalleProcesoCoches;
+	}
+
+	public void setPanzasDetalleProcesoCoches(List<PanzasDetalleProcesoCoche> panzasDetalleProcesoCoches) {
+		this.panzasDetalleProcesoCoches = panzasDetalleProcesoCoches;
+	}
+
+	public PanzasDetalleProcesoCoche addPanzasDetalleProcesoCoch(PanzasDetalleProcesoCoche panzasDetalleProcesoCoch) {
+		getPanzasDetalleProcesoCoches().add(panzasDetalleProcesoCoch);
+		panzasDetalleProcesoCoch.setCocina(this);
+
+		return panzasDetalleProcesoCoch;
+	}
+
+	public PanzasDetalleProcesoCoche removePanzasDetalleProcesoCoch(PanzasDetalleProcesoCoche panzasDetalleProcesoCoch) {
+		getPanzasDetalleProcesoCoches().remove(panzasDetalleProcesoCoch);
+		panzasDetalleProcesoCoch.setCocina(null);
+
+		return panzasDetalleProcesoCoch;
 	}
 
 }

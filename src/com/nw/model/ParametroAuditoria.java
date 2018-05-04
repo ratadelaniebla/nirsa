@@ -11,30 +11,21 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="parametro_auditoria")
+@NamedQuery(name="ParametroAuditoria.findAll", query="SELECT p FROM ParametroAuditoria p")
 public class ParametroAuditoria implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idparametroauditoria;
-
 	private String accionparametro;
-
 	private Timestamp fecharegistro;
-
-	//bi-directional many-to-one association to Parametro
-	@ManyToOne
-	@JoinColumn(name="idparametro")
 	private Parametro parametro;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public ParametroAuditoria() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdparametroauditoria() {
 		return this.idparametroauditoria;
 	}
@@ -42,6 +33,7 @@ public class ParametroAuditoria implements Serializable {
 	public void setIdparametroauditoria(Long idparametroauditoria) {
 		this.idparametroauditoria = idparametroauditoria;
 	}
+
 
 	public String getAccionparametro() {
 		return this.accionparametro;
@@ -51,6 +43,7 @@ public class ParametroAuditoria implements Serializable {
 		this.accionparametro = accionparametro;
 	}
 
+
 	public Timestamp getFecharegistro() {
 		return this.fecharegistro;
 	}
@@ -59,6 +52,10 @@ public class ParametroAuditoria implements Serializable {
 		this.fecharegistro = fecharegistro;
 	}
 
+
+	//bi-directional many-to-one association to Parametro
+	@ManyToOne
+	@JoinColumn(name="idparametro")
 	public Parametro getParametro() {
 		return this.parametro;
 	}
@@ -67,6 +64,10 @@ public class ParametroAuditoria implements Serializable {
 		this.parametro = parametro;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

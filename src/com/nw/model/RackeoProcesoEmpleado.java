@@ -11,39 +11,24 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="rackeo_proceso_empleado")
+@NamedQuery(name="RackeoProcesoEmpleado.findAll", query="SELECT r FROM RackeoProcesoEmpleado r")
 public class RackeoProcesoEmpleado implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idrackeoprocesoempleado;
-
 	private Integer estado;
-
 	private Timestamp fechareg;
-
 	private Integer mesa;
-
 	private Integer ubicacion;
-
-	//bi-directional many-to-one association to Empleado
-	@ManyToOne
-	@JoinColumn(name="idempleado")
 	private Empleado empleado;
-
-	//bi-directional many-to-one association to RackeoProceso
-	@ManyToOne
-	@JoinColumn(name="idrackeoproceso")
 	private RackeoProceso rackeoProceso;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public RackeoProcesoEmpleado() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdrackeoprocesoempleado() {
 		return this.idrackeoprocesoempleado;
 	}
@@ -51,6 +36,7 @@ public class RackeoProcesoEmpleado implements Serializable {
 	public void setIdrackeoprocesoempleado(Long idrackeoprocesoempleado) {
 		this.idrackeoprocesoempleado = idrackeoprocesoempleado;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -60,6 +46,7 @@ public class RackeoProcesoEmpleado implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Timestamp getFechareg() {
 		return this.fechareg;
 	}
@@ -67,6 +54,7 @@ public class RackeoProcesoEmpleado implements Serializable {
 	public void setFechareg(Timestamp fechareg) {
 		this.fechareg = fechareg;
 	}
+
 
 	public Integer getMesa() {
 		return this.mesa;
@@ -76,6 +64,7 @@ public class RackeoProcesoEmpleado implements Serializable {
 		this.mesa = mesa;
 	}
 
+
 	public Integer getUbicacion() {
 		return this.ubicacion;
 	}
@@ -84,6 +73,10 @@ public class RackeoProcesoEmpleado implements Serializable {
 		this.ubicacion = ubicacion;
 	}
 
+
+	//bi-directional many-to-one association to Empleado
+	@ManyToOne
+	@JoinColumn(name="idempleado")
 	public Empleado getEmpleado() {
 		return this.empleado;
 	}
@@ -92,6 +85,10 @@ public class RackeoProcesoEmpleado implements Serializable {
 		this.empleado = empleado;
 	}
 
+
+	//bi-directional many-to-one association to RackeoProceso
+	@ManyToOne
+	@JoinColumn(name="idrackeoproceso")
 	public RackeoProceso getRackeoProceso() {
 		return this.rackeoProceso;
 	}
@@ -100,6 +97,10 @@ public class RackeoProcesoEmpleado implements Serializable {
 		this.rackeoProceso = rackeoProceso;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

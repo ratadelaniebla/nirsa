@@ -12,39 +12,24 @@ import java.util.List;
  */
 @Entity
 @Table(name="atc_proceso_apertura_cierre_atun_crudo")
+@NamedQuery(name="AtcProcesoAperturaCierreAtunCrudo.findAll", query="SELECT a FROM AtcProcesoAperturaCierreAtunCrudo a")
 public class AtcProcesoAperturaCierreAtunCrudo implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idatcprocesoaperturacierre;
-
 	private Integer estado;
-
 	private Timestamp fechaapertura;
-
 	private Timestamp fechacierre;
-
-	//bi-directional many-to-one association to AtcDescongeladoProceso
-	@OneToMany(mappedBy="atcProcesoAperturaCierreAtunCrudo")
 	private List<AtcDescongeladoProceso> atcDescongeladoProcesos;
-
-	//bi-directional many-to-one association to AtcEvisceradoProceso
-	@OneToMany(mappedBy="atcProcesoAperturaCierreAtunCrudo")
 	private List<AtcEvisceradoProceso> atcEvisceradoProcesos;
-
-	//bi-directional many-to-one association to AtcLimpiezaProceso
-	@OneToMany(mappedBy="atcProcesoAperturaCierreAtunCrudo")
 	private List<AtcLimpiezaProceso> atcLimpiezaProcesos;
-
-	//bi-directional many-to-one association to AtcProceso
-	@ManyToOne
-	@JoinColumn(name="idatcproceso")
 	private AtcProceso atcProceso;
 
 	public AtcProcesoAperturaCierreAtunCrudo() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdatcprocesoaperturacierre() {
 		return this.idatcprocesoaperturacierre;
 	}
@@ -52,6 +37,7 @@ public class AtcProcesoAperturaCierreAtunCrudo implements Serializable {
 	public void setIdatcprocesoaperturacierre(Long idatcprocesoaperturacierre) {
 		this.idatcprocesoaperturacierre = idatcprocesoaperturacierre;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -61,6 +47,7 @@ public class AtcProcesoAperturaCierreAtunCrudo implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Timestamp getFechaapertura() {
 		return this.fechaapertura;
 	}
@@ -68,6 +55,7 @@ public class AtcProcesoAperturaCierreAtunCrudo implements Serializable {
 	public void setFechaapertura(Timestamp fechaapertura) {
 		this.fechaapertura = fechaapertura;
 	}
+
 
 	public Timestamp getFechacierre() {
 		return this.fechacierre;
@@ -77,6 +65,9 @@ public class AtcProcesoAperturaCierreAtunCrudo implements Serializable {
 		this.fechacierre = fechacierre;
 	}
 
+
+	//bi-directional many-to-one association to AtcDescongeladoProceso
+	@OneToMany(mappedBy="atcProcesoAperturaCierreAtunCrudo")
 	public List<AtcDescongeladoProceso> getAtcDescongeladoProcesos() {
 		return this.atcDescongeladoProcesos;
 	}
@@ -85,6 +76,23 @@ public class AtcProcesoAperturaCierreAtunCrudo implements Serializable {
 		this.atcDescongeladoProcesos = atcDescongeladoProcesos;
 	}
 
+	public AtcDescongeladoProceso addAtcDescongeladoProceso(AtcDescongeladoProceso atcDescongeladoProceso) {
+		getAtcDescongeladoProcesos().add(atcDescongeladoProceso);
+		atcDescongeladoProceso.setAtcProcesoAperturaCierreAtunCrudo(this);
+
+		return atcDescongeladoProceso;
+	}
+
+	public AtcDescongeladoProceso removeAtcDescongeladoProceso(AtcDescongeladoProceso atcDescongeladoProceso) {
+		getAtcDescongeladoProcesos().remove(atcDescongeladoProceso);
+		atcDescongeladoProceso.setAtcProcesoAperturaCierreAtunCrudo(null);
+
+		return atcDescongeladoProceso;
+	}
+
+
+	//bi-directional many-to-one association to AtcEvisceradoProceso
+	@OneToMany(mappedBy="atcProcesoAperturaCierreAtunCrudo")
 	public List<AtcEvisceradoProceso> getAtcEvisceradoProcesos() {
 		return this.atcEvisceradoProcesos;
 	}
@@ -93,6 +101,23 @@ public class AtcProcesoAperturaCierreAtunCrudo implements Serializable {
 		this.atcEvisceradoProcesos = atcEvisceradoProcesos;
 	}
 
+	public AtcEvisceradoProceso addAtcEvisceradoProceso(AtcEvisceradoProceso atcEvisceradoProceso) {
+		getAtcEvisceradoProcesos().add(atcEvisceradoProceso);
+		atcEvisceradoProceso.setAtcProcesoAperturaCierreAtunCrudo(this);
+
+		return atcEvisceradoProceso;
+	}
+
+	public AtcEvisceradoProceso removeAtcEvisceradoProceso(AtcEvisceradoProceso atcEvisceradoProceso) {
+		getAtcEvisceradoProcesos().remove(atcEvisceradoProceso);
+		atcEvisceradoProceso.setAtcProcesoAperturaCierreAtunCrudo(null);
+
+		return atcEvisceradoProceso;
+	}
+
+
+	//bi-directional many-to-one association to AtcLimpiezaProceso
+	@OneToMany(mappedBy="atcProcesoAperturaCierreAtunCrudo")
 	public List<AtcLimpiezaProceso> getAtcLimpiezaProcesos() {
 		return this.atcLimpiezaProcesos;
 	}
@@ -101,6 +126,24 @@ public class AtcProcesoAperturaCierreAtunCrudo implements Serializable {
 		this.atcLimpiezaProcesos = atcLimpiezaProcesos;
 	}
 
+	public AtcLimpiezaProceso addAtcLimpiezaProceso(AtcLimpiezaProceso atcLimpiezaProceso) {
+		getAtcLimpiezaProcesos().add(atcLimpiezaProceso);
+		atcLimpiezaProceso.setAtcProcesoAperturaCierreAtunCrudo(this);
+
+		return atcLimpiezaProceso;
+	}
+
+	public AtcLimpiezaProceso removeAtcLimpiezaProceso(AtcLimpiezaProceso atcLimpiezaProceso) {
+		getAtcLimpiezaProcesos().remove(atcLimpiezaProceso);
+		atcLimpiezaProceso.setAtcProcesoAperturaCierreAtunCrudo(null);
+
+		return atcLimpiezaProceso;
+	}
+
+
+	//bi-directional many-to-one association to AtcProceso
+	@ManyToOne
+	@JoinColumn(name="idatcproceso")
 	public AtcProceso getAtcProceso() {
 		return this.atcProceso;
 	}

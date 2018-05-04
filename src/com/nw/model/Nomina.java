@@ -9,23 +9,19 @@ import javax.persistence.*;
  * 
  */
 @Entity
+@NamedQuery(name="Nomina.findAll", query="SELECT n FROM Nomina n")
 public class Nomina implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idnomina;
-
 	private String nombrenomina;
-
-	//bi-directional many-to-one association to CentroCosto
-	@ManyToOne
-	@JoinColumn(name="idcentrocosto")
 	private CentroCosto centroCosto;
 
 	public Nomina() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdnomina() {
 		return this.idnomina;
 	}
@@ -33,6 +29,7 @@ public class Nomina implements Serializable {
 	public void setIdnomina(Long idnomina) {
 		this.idnomina = idnomina;
 	}
+
 
 	public String getNombrenomina() {
 		return this.nombrenomina;
@@ -42,6 +39,10 @@ public class Nomina implements Serializable {
 		this.nombrenomina = nombrenomina;
 	}
 
+
+	//bi-directional many-to-one association to CentroCosto
+	@ManyToOne
+	@JoinColumn(name="idcentrocosto")
 	public CentroCosto getCentroCosto() {
 		return this.centroCosto;
 	}

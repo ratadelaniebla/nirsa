@@ -11,30 +11,22 @@ import java.util.List;
  */
 @Entity
 @Table(name="calidad_muestra_area_motivo")
+@NamedQuery(name="CalidadMuestraAreaMotivo.findAll", query="SELECT c FROM CalidadMuestraAreaMotivo c")
 public class CalidadMuestraAreaMotivo implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idcalidadmuestraareamotivo;
-
 	private String descripcion;
-
 	private Integer estado;
-
 	private String texto;
-
-	//bi-directional many-to-one association to CalidadMuestraAreaCabecera
-	@OneToMany(mappedBy="calidadMuestraAreaMotivo")
 	private List<CalidadMuestraAreaCabecera> calidadMuestraAreaCabeceras;
-
-	//bi-directional many-to-one association to CalidadMuestraCabeceraDescargaMotivo
-	@OneToMany(mappedBy="calidadMuestraAreaMotivo")
 	private List<CalidadMuestraCabeceraDescargaMotivo> calidadMuestraCabeceraDescargaMotivos;
 
 	public CalidadMuestraAreaMotivo() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdcalidadmuestraareamotivo() {
 		return this.idcalidadmuestraareamotivo;
 	}
@@ -42,6 +34,7 @@ public class CalidadMuestraAreaMotivo implements Serializable {
 	public void setIdcalidadmuestraareamotivo(Integer idcalidadmuestraareamotivo) {
 		this.idcalidadmuestraareamotivo = idcalidadmuestraareamotivo;
 	}
+
 
 	public String getDescripcion() {
 		return this.descripcion;
@@ -51,6 +44,7 @@ public class CalidadMuestraAreaMotivo implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+
 	public Integer getEstado() {
 		return this.estado;
 	}
@@ -58,6 +52,7 @@ public class CalidadMuestraAreaMotivo implements Serializable {
 	public void setEstado(Integer estado) {
 		this.estado = estado;
 	}
+
 
 	public String getTexto() {
 		return this.texto;
@@ -67,6 +62,9 @@ public class CalidadMuestraAreaMotivo implements Serializable {
 		this.texto = texto;
 	}
 
+
+	//bi-directional many-to-one association to CalidadMuestraAreaCabecera
+	@OneToMany(mappedBy="calidadMuestraAreaMotivo")
 	public List<CalidadMuestraAreaCabecera> getCalidadMuestraAreaCabeceras() {
 		return this.calidadMuestraAreaCabeceras;
 	}
@@ -75,12 +73,43 @@ public class CalidadMuestraAreaMotivo implements Serializable {
 		this.calidadMuestraAreaCabeceras = calidadMuestraAreaCabeceras;
 	}
 
+	public CalidadMuestraAreaCabecera addCalidadMuestraAreaCabecera(CalidadMuestraAreaCabecera calidadMuestraAreaCabecera) {
+		getCalidadMuestraAreaCabeceras().add(calidadMuestraAreaCabecera);
+		calidadMuestraAreaCabecera.setCalidadMuestraAreaMotivo(this);
+
+		return calidadMuestraAreaCabecera;
+	}
+
+	public CalidadMuestraAreaCabecera removeCalidadMuestraAreaCabecera(CalidadMuestraAreaCabecera calidadMuestraAreaCabecera) {
+		getCalidadMuestraAreaCabeceras().remove(calidadMuestraAreaCabecera);
+		calidadMuestraAreaCabecera.setCalidadMuestraAreaMotivo(null);
+
+		return calidadMuestraAreaCabecera;
+	}
+
+
+	//bi-directional many-to-one association to CalidadMuestraCabeceraDescargaMotivo
+	@OneToMany(mappedBy="calidadMuestraAreaMotivo")
 	public List<CalidadMuestraCabeceraDescargaMotivo> getCalidadMuestraCabeceraDescargaMotivos() {
 		return this.calidadMuestraCabeceraDescargaMotivos;
 	}
 
 	public void setCalidadMuestraCabeceraDescargaMotivos(List<CalidadMuestraCabeceraDescargaMotivo> calidadMuestraCabeceraDescargaMotivos) {
 		this.calidadMuestraCabeceraDescargaMotivos = calidadMuestraCabeceraDescargaMotivos;
+	}
+
+	public CalidadMuestraCabeceraDescargaMotivo addCalidadMuestraCabeceraDescargaMotivo(CalidadMuestraCabeceraDescargaMotivo calidadMuestraCabeceraDescargaMotivo) {
+		getCalidadMuestraCabeceraDescargaMotivos().add(calidadMuestraCabeceraDescargaMotivo);
+		calidadMuestraCabeceraDescargaMotivo.setCalidadMuestraAreaMotivo(this);
+
+		return calidadMuestraCabeceraDescargaMotivo;
+	}
+
+	public CalidadMuestraCabeceraDescargaMotivo removeCalidadMuestraCabeceraDescargaMotivo(CalidadMuestraCabeceraDescargaMotivo calidadMuestraCabeceraDescargaMotivo) {
+		getCalidadMuestraCabeceraDescargaMotivos().remove(calidadMuestraCabeceraDescargaMotivo);
+		calidadMuestraCabeceraDescargaMotivo.setCalidadMuestraAreaMotivo(null);
+
+		return calidadMuestraCabeceraDescargaMotivo;
 	}
 
 }

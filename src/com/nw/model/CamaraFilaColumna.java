@@ -11,37 +11,24 @@ import java.util.List;
  */
 @Entity
 @Table(name="camara_fila_columna")
+@NamedQuery(name="CamaraFilaColumna.findAll", query="SELECT c FROM CamaraFilaColumna c")
 public class CamaraFilaColumna implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcamarafilacolumna;
-
 	private Integer estado;
-
 	private String idcolumna;
-
 	private Integer idfila;
-
 	private Integer idnivel;
-
-	//bi-directional many-to-one association to CamaraCajon
-	@OneToMany(mappedBy="camaraFilaColumna")
 	private List<CamaraCajon> camaraCajons;
-
-	//bi-directional many-to-one association to CamaraCajonUbicacion
-	@OneToMany(mappedBy="camaraFilaColumna")
 	private List<CamaraCajonUbicacion> camaraCajonUbicacions;
-
-	//bi-directional many-to-one association to Camara
-	@ManyToOne
-	@JoinColumn(name="idcamara")
 	private Camara camara;
 
 	public CamaraFilaColumna() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcamarafilacolumna() {
 		return this.idcamarafilacolumna;
 	}
@@ -49,6 +36,7 @@ public class CamaraFilaColumna implements Serializable {
 	public void setIdcamarafilacolumna(Long idcamarafilacolumna) {
 		this.idcamarafilacolumna = idcamarafilacolumna;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -58,6 +46,7 @@ public class CamaraFilaColumna implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public String getIdcolumna() {
 		return this.idcolumna;
 	}
@@ -65,6 +54,7 @@ public class CamaraFilaColumna implements Serializable {
 	public void setIdcolumna(String idcolumna) {
 		this.idcolumna = idcolumna;
 	}
+
 
 	public Integer getIdfila() {
 		return this.idfila;
@@ -74,6 +64,7 @@ public class CamaraFilaColumna implements Serializable {
 		this.idfila = idfila;
 	}
 
+
 	public Integer getIdnivel() {
 		return this.idnivel;
 	}
@@ -82,6 +73,9 @@ public class CamaraFilaColumna implements Serializable {
 		this.idnivel = idnivel;
 	}
 
+
+	//bi-directional many-to-one association to CamaraCajon
+	@OneToMany(mappedBy="camaraFilaColumna")
 	public List<CamaraCajon> getCamaraCajons() {
 		return this.camaraCajons;
 	}
@@ -90,6 +84,23 @@ public class CamaraFilaColumna implements Serializable {
 		this.camaraCajons = camaraCajons;
 	}
 
+	public CamaraCajon addCamaraCajon(CamaraCajon camaraCajon) {
+		getCamaraCajons().add(camaraCajon);
+		camaraCajon.setCamaraFilaColumna(this);
+
+		return camaraCajon;
+	}
+
+	public CamaraCajon removeCamaraCajon(CamaraCajon camaraCajon) {
+		getCamaraCajons().remove(camaraCajon);
+		camaraCajon.setCamaraFilaColumna(null);
+
+		return camaraCajon;
+	}
+
+
+	//bi-directional many-to-one association to CamaraCajonUbicacion
+	@OneToMany(mappedBy="camaraFilaColumna")
 	public List<CamaraCajonUbicacion> getCamaraCajonUbicacions() {
 		return this.camaraCajonUbicacions;
 	}
@@ -98,6 +109,24 @@ public class CamaraFilaColumna implements Serializable {
 		this.camaraCajonUbicacions = camaraCajonUbicacions;
 	}
 
+	public CamaraCajonUbicacion addCamaraCajonUbicacion(CamaraCajonUbicacion camaraCajonUbicacion) {
+		getCamaraCajonUbicacions().add(camaraCajonUbicacion);
+		camaraCajonUbicacion.setCamaraFilaColumna(this);
+
+		return camaraCajonUbicacion;
+	}
+
+	public CamaraCajonUbicacion removeCamaraCajonUbicacion(CamaraCajonUbicacion camaraCajonUbicacion) {
+		getCamaraCajonUbicacions().remove(camaraCajonUbicacion);
+		camaraCajonUbicacion.setCamaraFilaColumna(null);
+
+		return camaraCajonUbicacion;
+	}
+
+
+	//bi-directional many-to-one association to Camara
+	@ManyToOne
+	@JoinColumn(name="idcamara")
 	public Camara getCamara() {
 		return this.camara;
 	}

@@ -11,49 +11,32 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="planificacion_carga_archivo_detalle")
+@NamedQuery(name="PlanificacionCargaArchivoDetalle.findAll", query="SELECT p FROM PlanificacionCargaArchivoDetalle p")
 public class PlanificacionCargaArchivoDetalle implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idplanificacioncargaarchivodetalle;
-
 	private String camara;
-
 	private String columna;
-
 	private Timestamp entregacamara;
-
 	private Timestamp entregaprecamara;
-
 	private Integer estado;
-
 	private Timestamp fechaproduccion;
-
 	private String fila;
-
 	private String idcajon;
-
 	private Timestamp ingresodescongelado;
-
 	private Integer item;
-
 	private String lotesap;
-
 	private Integer pedido;
-
 	private String producto;
-
 	private Integer turno;
-
-	//bi-directional many-to-one association to PlanificacionCargaArchivo
-	@ManyToOne
-	@JoinColumn(name="idplanificacioncargaarchivo")
 	private PlanificacionCargaArchivo planificacionCargaArchivo;
 
 	public PlanificacionCargaArchivoDetalle() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdplanificacioncargaarchivodetalle() {
 		return this.idplanificacioncargaarchivodetalle;
 	}
@@ -61,6 +44,7 @@ public class PlanificacionCargaArchivoDetalle implements Serializable {
 	public void setIdplanificacioncargaarchivodetalle(Long idplanificacioncargaarchivodetalle) {
 		this.idplanificacioncargaarchivodetalle = idplanificacioncargaarchivodetalle;
 	}
+
 
 	public String getCamara() {
 		return this.camara;
@@ -70,6 +54,7 @@ public class PlanificacionCargaArchivoDetalle implements Serializable {
 		this.camara = camara;
 	}
 
+
 	public String getColumna() {
 		return this.columna;
 	}
@@ -77,6 +62,7 @@ public class PlanificacionCargaArchivoDetalle implements Serializable {
 	public void setColumna(String columna) {
 		this.columna = columna;
 	}
+
 
 	public Timestamp getEntregacamara() {
 		return this.entregacamara;
@@ -86,6 +72,7 @@ public class PlanificacionCargaArchivoDetalle implements Serializable {
 		this.entregacamara = entregacamara;
 	}
 
+
 	public Timestamp getEntregaprecamara() {
 		return this.entregaprecamara;
 	}
@@ -93,6 +80,7 @@ public class PlanificacionCargaArchivoDetalle implements Serializable {
 	public void setEntregaprecamara(Timestamp entregaprecamara) {
 		this.entregaprecamara = entregaprecamara;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -102,6 +90,7 @@ public class PlanificacionCargaArchivoDetalle implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Timestamp getFechaproduccion() {
 		return this.fechaproduccion;
 	}
@@ -109,6 +98,7 @@ public class PlanificacionCargaArchivoDetalle implements Serializable {
 	public void setFechaproduccion(Timestamp fechaproduccion) {
 		this.fechaproduccion = fechaproduccion;
 	}
+
 
 	public String getFila() {
 		return this.fila;
@@ -118,6 +108,7 @@ public class PlanificacionCargaArchivoDetalle implements Serializable {
 		this.fila = fila;
 	}
 
+
 	public String getIdcajon() {
 		return this.idcajon;
 	}
@@ -125,6 +116,7 @@ public class PlanificacionCargaArchivoDetalle implements Serializable {
 	public void setIdcajon(String idcajon) {
 		this.idcajon = idcajon;
 	}
+
 
 	public Timestamp getIngresodescongelado() {
 		return this.ingresodescongelado;
@@ -134,6 +126,7 @@ public class PlanificacionCargaArchivoDetalle implements Serializable {
 		this.ingresodescongelado = ingresodescongelado;
 	}
 
+
 	public Integer getItem() {
 		return this.item;
 	}
@@ -141,6 +134,7 @@ public class PlanificacionCargaArchivoDetalle implements Serializable {
 	public void setItem(Integer item) {
 		this.item = item;
 	}
+
 
 	public String getLotesap() {
 		return this.lotesap;
@@ -150,6 +144,7 @@ public class PlanificacionCargaArchivoDetalle implements Serializable {
 		this.lotesap = lotesap;
 	}
 
+
 	public Integer getPedido() {
 		return this.pedido;
 	}
@@ -157,6 +152,7 @@ public class PlanificacionCargaArchivoDetalle implements Serializable {
 	public void setPedido(Integer pedido) {
 		this.pedido = pedido;
 	}
+
 
 	public String getProducto() {
 		return this.producto;
@@ -166,6 +162,7 @@ public class PlanificacionCargaArchivoDetalle implements Serializable {
 		this.producto = producto;
 	}
 
+
 	public Integer getTurno() {
 		return this.turno;
 	}
@@ -174,6 +171,10 @@ public class PlanificacionCargaArchivoDetalle implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to PlanificacionCargaArchivo
+	@ManyToOne
+	@JoinColumn(name="idplanificacioncargaarchivo")
 	public PlanificacionCargaArchivo getPlanificacionCargaArchivo() {
 		return this.planificacionCargaArchivo;
 	}

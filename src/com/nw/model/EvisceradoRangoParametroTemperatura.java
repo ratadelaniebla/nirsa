@@ -10,20 +10,19 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="eviscerado_rango_parametro_temperatura")
+@NamedQuery(name="EvisceradoRangoParametroTemperatura.findAll", query="SELECT e FROM EvisceradoRangoParametroTemperatura e")
 public class EvisceradoRangoParametroTemperatura implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idevisceradorangoparametrotemperatura;
-
 	private double desde;
-
 	private double hasta;
 
 	public EvisceradoRangoParametroTemperatura() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdevisceradorangoparametrotemperatura() {
 		return this.idevisceradorangoparametrotemperatura;
 	}
@@ -32,6 +31,7 @@ public class EvisceradoRangoParametroTemperatura implements Serializable {
 		this.idevisceradorangoparametrotemperatura = idevisceradorangoparametrotemperatura;
 	}
 
+
 	public double getDesde() {
 		return this.desde;
 	}
@@ -39,6 +39,7 @@ public class EvisceradoRangoParametroTemperatura implements Serializable {
 	public void setDesde(double desde) {
 		this.desde = desde;
 	}
+
 
 	public double getHasta() {
 		return this.hasta;

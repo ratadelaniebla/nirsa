@@ -11,46 +11,26 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="atc_eviscerado_detalle_temp_panza")
+@NamedQuery(name="AtcEvisceradoDetalleTempPanza.findAll", query="SELECT a FROM AtcEvisceradoDetalleTempPanza a")
 public class AtcEvisceradoDetalleTempPanza implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idatcevisceradodetalletemppanza;
-
 	private Timestamp fechareg;
-
 	private Timestamp fecharegactualizacion;
-
 	private Integer nummuestralote;
-
 	private double temperatura;
-
 	private String usuarioactualizacion;
-
-	//bi-directional many-to-one association to AtcEvisceradoDetalleProcesoLote
-	@ManyToOne
-	@JoinColumn(name="idatcevisceradodetalleprocesolote")
 	private AtcEvisceradoDetalleProcesoLote atcEvisceradoDetalleProcesoLote;
-
-	//bi-directional many-to-one association to AtcEvisceradoTempPanza
-	@ManyToOne
-	@JoinColumn(name="idatcevisceradotemppanza")
 	private AtcEvisceradoTempPanza atcEvisceradoTempPanza;
-
-	//bi-directional many-to-one association to AtcTurno
-	@ManyToOne
-	@JoinColumn(name="idatcturno")
 	private AtcTurno atcTurno;
-
-	//bi-directional many-to-one association to AtcUsuario
-	@ManyToOne
-	@JoinColumn(name="idatcusuario")
 	private AtcUsuario atcUsuario;
 
 	public AtcEvisceradoDetalleTempPanza() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdatcevisceradodetalletemppanza() {
 		return this.idatcevisceradodetalletemppanza;
 	}
@@ -58,6 +38,7 @@ public class AtcEvisceradoDetalleTempPanza implements Serializable {
 	public void setIdatcevisceradodetalletemppanza(Long idatcevisceradodetalletemppanza) {
 		this.idatcevisceradodetalletemppanza = idatcevisceradodetalletemppanza;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -67,6 +48,7 @@ public class AtcEvisceradoDetalleTempPanza implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public Timestamp getFecharegactualizacion() {
 		return this.fecharegactualizacion;
 	}
@@ -74,6 +56,7 @@ public class AtcEvisceradoDetalleTempPanza implements Serializable {
 	public void setFecharegactualizacion(Timestamp fecharegactualizacion) {
 		this.fecharegactualizacion = fecharegactualizacion;
 	}
+
 
 	public Integer getNummuestralote() {
 		return this.nummuestralote;
@@ -83,6 +66,7 @@ public class AtcEvisceradoDetalleTempPanza implements Serializable {
 		this.nummuestralote = nummuestralote;
 	}
 
+
 	public double getTemperatura() {
 		return this.temperatura;
 	}
@@ -90,6 +74,7 @@ public class AtcEvisceradoDetalleTempPanza implements Serializable {
 	public void setTemperatura(double temperatura) {
 		this.temperatura = temperatura;
 	}
+
 
 	public String getUsuarioactualizacion() {
 		return this.usuarioactualizacion;
@@ -99,6 +84,10 @@ public class AtcEvisceradoDetalleTempPanza implements Serializable {
 		this.usuarioactualizacion = usuarioactualizacion;
 	}
 
+
+	//bi-directional many-to-one association to AtcEvisceradoDetalleProcesoLote
+	@ManyToOne
+	@JoinColumn(name="idatcevisceradodetalleprocesolote")
 	public AtcEvisceradoDetalleProcesoLote getAtcEvisceradoDetalleProcesoLote() {
 		return this.atcEvisceradoDetalleProcesoLote;
 	}
@@ -107,6 +96,10 @@ public class AtcEvisceradoDetalleTempPanza implements Serializable {
 		this.atcEvisceradoDetalleProcesoLote = atcEvisceradoDetalleProcesoLote;
 	}
 
+
+	//bi-directional many-to-one association to AtcEvisceradoTempPanza
+	@ManyToOne
+	@JoinColumn(name="idatcevisceradotemppanza")
 	public AtcEvisceradoTempPanza getAtcEvisceradoTempPanza() {
 		return this.atcEvisceradoTempPanza;
 	}
@@ -115,6 +108,10 @@ public class AtcEvisceradoDetalleTempPanza implements Serializable {
 		this.atcEvisceradoTempPanza = atcEvisceradoTempPanza;
 	}
 
+
+	//bi-directional many-to-one association to AtcTurno
+	@ManyToOne
+	@JoinColumn(name="idatcturno")
 	public AtcTurno getAtcTurno() {
 		return this.atcTurno;
 	}
@@ -123,6 +120,10 @@ public class AtcEvisceradoDetalleTempPanza implements Serializable {
 		this.atcTurno = atcTurno;
 	}
 
+
+	//bi-directional many-to-one association to AtcUsuario
+	@ManyToOne
+	@JoinColumn(name="idatcusuario")
 	public AtcUsuario getAtcUsuario() {
 		return this.atcUsuario;
 	}

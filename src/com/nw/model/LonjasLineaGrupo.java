@@ -11,32 +11,21 @@ import java.util.List;
  */
 @Entity
 @Table(name="lonjas_linea_grupo")
+@NamedQuery(name="LonjasLineaGrupo.findAll", query="SELECT l FROM LonjasLineaGrupo l")
 public class LonjasLineaGrupo implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idlonjaslineagrupo;
-
 	private String nombregrupo;
-
-	//bi-directional many-to-one association to LonjasGrupo
-	@ManyToOne
-	@JoinColumn(name="idlonjasgrupo")
 	private LonjasGrupo lonjasGrupo;
-
-	//bi-directional many-to-one association to LonjasLinea
-	@ManyToOne
-	@JoinColumn(name="idlonjaslinea")
 	private LonjasLinea lonjasLinea;
-
-	//bi-directional many-to-one association to LonjasProcesoEmpleado
-	@OneToMany(mappedBy="lonjasLineaGrupo")
 	private List<LonjasProcesoEmpleado> lonjasProcesoEmpleados;
 
 	public LonjasLineaGrupo() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdlonjaslineagrupo() {
 		return this.idlonjaslineagrupo;
 	}
@@ -44,6 +33,7 @@ public class LonjasLineaGrupo implements Serializable {
 	public void setIdlonjaslineagrupo(Integer idlonjaslineagrupo) {
 		this.idlonjaslineagrupo = idlonjaslineagrupo;
 	}
+
 
 	public String getNombregrupo() {
 		return this.nombregrupo;
@@ -53,6 +43,10 @@ public class LonjasLineaGrupo implements Serializable {
 		this.nombregrupo = nombregrupo;
 	}
 
+
+	//bi-directional many-to-one association to LonjasGrupo
+	@ManyToOne
+	@JoinColumn(name="idlonjasgrupo")
 	public LonjasGrupo getLonjasGrupo() {
 		return this.lonjasGrupo;
 	}
@@ -61,6 +55,10 @@ public class LonjasLineaGrupo implements Serializable {
 		this.lonjasGrupo = lonjasGrupo;
 	}
 
+
+	//bi-directional many-to-one association to LonjasLinea
+	@ManyToOne
+	@JoinColumn(name="idlonjaslinea")
 	public LonjasLinea getLonjasLinea() {
 		return this.lonjasLinea;
 	}
@@ -69,12 +67,29 @@ public class LonjasLineaGrupo implements Serializable {
 		this.lonjasLinea = lonjasLinea;
 	}
 
+
+	//bi-directional many-to-one association to LonjasProcesoEmpleado
+	@OneToMany(mappedBy="lonjasLineaGrupo")
 	public List<LonjasProcesoEmpleado> getLonjasProcesoEmpleados() {
 		return this.lonjasProcesoEmpleados;
 	}
 
 	public void setLonjasProcesoEmpleados(List<LonjasProcesoEmpleado> lonjasProcesoEmpleados) {
 		this.lonjasProcesoEmpleados = lonjasProcesoEmpleados;
+	}
+
+	public LonjasProcesoEmpleado addLonjasProcesoEmpleado(LonjasProcesoEmpleado lonjasProcesoEmpleado) {
+		getLonjasProcesoEmpleados().add(lonjasProcesoEmpleado);
+		lonjasProcesoEmpleado.setLonjasLineaGrupo(this);
+
+		return lonjasProcesoEmpleado;
+	}
+
+	public LonjasProcesoEmpleado removeLonjasProcesoEmpleado(LonjasProcesoEmpleado lonjasProcesoEmpleado) {
+		getLonjasProcesoEmpleados().remove(lonjasProcesoEmpleado);
+		lonjasProcesoEmpleado.setLonjasLineaGrupo(null);
+
+		return lonjasProcesoEmpleado;
 	}
 
 }

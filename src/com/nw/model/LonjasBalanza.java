@@ -10,32 +10,25 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="lonjas_balanza")
+@NamedQuery(name="LonjasBalanza.findAll", query="SELECT l FROM LonjasBalanza l")
 public class LonjasBalanza implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idlonjasbalanza;
-
 	private String descripcion;
-
 	private Integer estado;
-
 	private String idbalanza;
-
 	private String ipbalanza;
-
 	private Boolean lado1;
-
 	private Boolean lado2;
-
 	private Integer linea;
-
 	private Integer puertobalanza;
 
 	public LonjasBalanza() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdlonjasbalanza() {
 		return this.idlonjasbalanza;
 	}
@@ -43,6 +36,7 @@ public class LonjasBalanza implements Serializable {
 	public void setIdlonjasbalanza(Integer idlonjasbalanza) {
 		this.idlonjasbalanza = idlonjasbalanza;
 	}
+
 
 	public String getDescripcion() {
 		return this.descripcion;
@@ -52,6 +46,7 @@ public class LonjasBalanza implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+
 	public Integer getEstado() {
 		return this.estado;
 	}
@@ -59,6 +54,7 @@ public class LonjasBalanza implements Serializable {
 	public void setEstado(Integer estado) {
 		this.estado = estado;
 	}
+
 
 	public String getIdbalanza() {
 		return this.idbalanza;
@@ -68,6 +64,7 @@ public class LonjasBalanza implements Serializable {
 		this.idbalanza = idbalanza;
 	}
 
+
 	public String getIpbalanza() {
 		return this.ipbalanza;
 	}
@@ -75,6 +72,7 @@ public class LonjasBalanza implements Serializable {
 	public void setIpbalanza(String ipbalanza) {
 		this.ipbalanza = ipbalanza;
 	}
+
 
 	public Boolean getLado1() {
 		return this.lado1;
@@ -84,6 +82,7 @@ public class LonjasBalanza implements Serializable {
 		this.lado1 = lado1;
 	}
 
+
 	public Boolean getLado2() {
 		return this.lado2;
 	}
@@ -92,6 +91,7 @@ public class LonjasBalanza implements Serializable {
 		this.lado2 = lado2;
 	}
 
+
 	public Integer getLinea() {
 		return this.linea;
 	}
@@ -99,6 +99,7 @@ public class LonjasBalanza implements Serializable {
 	public void setLinea(Integer linea) {
 		this.linea = linea;
 	}
+
 
 	public Integer getPuertobalanza() {
 		return this.puertobalanza;

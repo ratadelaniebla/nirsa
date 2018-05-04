@@ -11,22 +11,19 @@ import java.util.List;
  */
 @Entity
 @Table(name="calidad_accion_correctiva_texto")
+@NamedQuery(name="CalidadAccionCorrectivaTexto.findAll", query="SELECT c FROM CalidadAccionCorrectivaTexto c")
 public class CalidadAccionCorrectivaTexto implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcalidadaccioncorrectivatexto;
-
 	private String descripcion;
-
-	//bi-directional many-to-one association to CalidadVariable
-	@OneToMany(mappedBy="calidadAccionCorrectivaTexto")
 	private List<CalidadVariable> calidadVariables;
 
 	public CalidadAccionCorrectivaTexto() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcalidadaccioncorrectivatexto() {
 		return this.idcalidadaccioncorrectivatexto;
 	}
@@ -34,6 +31,7 @@ public class CalidadAccionCorrectivaTexto implements Serializable {
 	public void setIdcalidadaccioncorrectivatexto(Long idcalidadaccioncorrectivatexto) {
 		this.idcalidadaccioncorrectivatexto = idcalidadaccioncorrectivatexto;
 	}
+
 
 	public String getDescripcion() {
 		return this.descripcion;
@@ -43,12 +41,29 @@ public class CalidadAccionCorrectivaTexto implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+
+	//bi-directional many-to-one association to CalidadVariable
+	@OneToMany(mappedBy="calidadAccionCorrectivaTexto")
 	public List<CalidadVariable> getCalidadVariables() {
 		return this.calidadVariables;
 	}
 
 	public void setCalidadVariables(List<CalidadVariable> calidadVariables) {
 		this.calidadVariables = calidadVariables;
+	}
+
+	public CalidadVariable addCalidadVariable(CalidadVariable calidadVariable) {
+		getCalidadVariables().add(calidadVariable);
+		calidadVariable.setCalidadAccionCorrectivaTexto(this);
+
+		return calidadVariable;
+	}
+
+	public CalidadVariable removeCalidadVariable(CalidadVariable calidadVariable) {
+		getCalidadVariables().remove(calidadVariable);
+		calidadVariable.setCalidadAccionCorrectivaTexto(null);
+
+		return calidadVariable;
 	}
 
 }

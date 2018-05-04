@@ -12,39 +12,23 @@ import java.util.List;
  */
 @Entity
 @Table(name="calidad_muestreo_temp_coches_eviscerado")
+@NamedQuery(name="CalidadMuestreoTempCochesEviscerado.findAll", query="SELECT c FROM CalidadMuestreoTempCochesEviscerado c")
 public class CalidadMuestreoTempCochesEviscerado implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcalidadmuestreotempcocheseviscerado;
-
 	private Timestamp fechareg;
-
 	private String observacion;
-
-	//bi-directional many-to-one association to CalidadDetalleMuestreoTempCochesEviscerado
-	@OneToMany(mappedBy="calidadMuestreoTempCochesEviscerado")
 	private List<CalidadDetalleMuestreoTempCochesEviscerado> calidadDetalleMuestreoTempCochesEviscerados;
-
-	//bi-directional many-to-one association to EvisceradoProceso
-	@ManyToOne
-	@JoinColumn(name="idevisceradoproceso")
 	private EvisceradoProceso evisceradoProceso;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public CalidadMuestreoTempCochesEviscerado() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcalidadmuestreotempcocheseviscerado() {
 		return this.idcalidadmuestreotempcocheseviscerado;
 	}
@@ -52,6 +36,7 @@ public class CalidadMuestreoTempCochesEviscerado implements Serializable {
 	public void setIdcalidadmuestreotempcocheseviscerado(Long idcalidadmuestreotempcocheseviscerado) {
 		this.idcalidadmuestreotempcocheseviscerado = idcalidadmuestreotempcocheseviscerado;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -61,6 +46,7 @@ public class CalidadMuestreoTempCochesEviscerado implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public String getObservacion() {
 		return this.observacion;
 	}
@@ -69,6 +55,9 @@ public class CalidadMuestreoTempCochesEviscerado implements Serializable {
 		this.observacion = observacion;
 	}
 
+
+	//bi-directional many-to-one association to CalidadDetalleMuestreoTempCochesEviscerado
+	@OneToMany(mappedBy="calidadMuestreoTempCochesEviscerado")
 	public List<CalidadDetalleMuestreoTempCochesEviscerado> getCalidadDetalleMuestreoTempCochesEviscerados() {
 		return this.calidadDetalleMuestreoTempCochesEviscerados;
 	}
@@ -77,6 +66,24 @@ public class CalidadMuestreoTempCochesEviscerado implements Serializable {
 		this.calidadDetalleMuestreoTempCochesEviscerados = calidadDetalleMuestreoTempCochesEviscerados;
 	}
 
+	public CalidadDetalleMuestreoTempCochesEviscerado addCalidadDetalleMuestreoTempCochesEviscerado(CalidadDetalleMuestreoTempCochesEviscerado calidadDetalleMuestreoTempCochesEviscerado) {
+		getCalidadDetalleMuestreoTempCochesEviscerados().add(calidadDetalleMuestreoTempCochesEviscerado);
+		calidadDetalleMuestreoTempCochesEviscerado.setCalidadMuestreoTempCochesEviscerado(this);
+
+		return calidadDetalleMuestreoTempCochesEviscerado;
+	}
+
+	public CalidadDetalleMuestreoTempCochesEviscerado removeCalidadDetalleMuestreoTempCochesEviscerado(CalidadDetalleMuestreoTempCochesEviscerado calidadDetalleMuestreoTempCochesEviscerado) {
+		getCalidadDetalleMuestreoTempCochesEviscerados().remove(calidadDetalleMuestreoTempCochesEviscerado);
+		calidadDetalleMuestreoTempCochesEviscerado.setCalidadMuestreoTempCochesEviscerado(null);
+
+		return calidadDetalleMuestreoTempCochesEviscerado;
+	}
+
+
+	//bi-directional many-to-one association to EvisceradoProceso
+	@ManyToOne
+	@JoinColumn(name="idevisceradoproceso")
 	public EvisceradoProceso getEvisceradoProceso() {
 		return this.evisceradoProceso;
 	}
@@ -85,6 +92,10 @@ public class CalidadMuestreoTempCochesEviscerado implements Serializable {
 		this.evisceradoProceso = evisceradoProceso;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -93,6 +104,10 @@ public class CalidadMuestreoTempCochesEviscerado implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

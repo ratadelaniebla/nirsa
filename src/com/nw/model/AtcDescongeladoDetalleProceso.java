@@ -12,75 +12,37 @@ import java.util.List;
  */
 @Entity
 @Table(name="atc_descongelado_detalle_proceso")
+@NamedQuery(name="AtcDescongeladoDetalleProceso.findAll", query="SELECT a FROM AtcDescongeladoDetalleProceso a")
 public class AtcDescongeladoDetalleProceso implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idatcdescongeladodetalleproceso;
-
 	private String cajonrevolteo;
-
 	private Boolean checkpermitirpesodiferencia;
-
 	private Integer checkpesocamara;
-
 	private Boolean checkpesodividido;
-
 	private Integer estado;
-
 	private Timestamp horafin;
-
 	private Timestamp horaingreso;
-
 	private Timestamp horainicio;
-
 	private String observaciones;
-
 	private double peso;
-
 	private double pesocomparativodiferenciacamara;
-
 	private double pesodiferenciacamara;
-
 	private double tara;
-
-	//bi-directional many-to-one association to AtcDescongeladoProceso
-	@ManyToOne
-	@JoinColumn(name="idatcdescongeladoproceso")
 	private AtcDescongeladoProceso atcDescongeladoProceso;
-
-	//bi-directional many-to-one association to AtcProduccionDetalleLoteCajon
-	@ManyToOne
-	@JoinColumn(name="idatcproducciondetallelotecajon")
 	private AtcProduccionDetalleLoteCajon atcProduccionDetalleLoteCajon;
-
-	//bi-directional many-to-one association to AtcTurno
-	@ManyToOne
-	@JoinColumn(name="idatcturno")
 	private AtcTurno atcTurno;
-
-	//bi-directional many-to-one association to AtcUsuario
-	@ManyToOne
-	@JoinColumn(name="idatcusuario")
 	private AtcUsuario atcUsuario;
-
-	//bi-directional many-to-one association to DescongeladoDucha
-	@ManyToOne
-	@JoinColumn(name="idducha")
 	private DescongeladoDucha descongeladoDucha;
-
-	//bi-directional many-to-one association to AtcDescongeladoDetalleProcesoTemp
-	@OneToMany(mappedBy="atcDescongeladoDetalleProceso")
 	private List<AtcDescongeladoDetalleProcesoTemp> atcDescongeladoDetalleProcesoTemps;
-
-	//bi-directional many-to-one association to AtcDescongeladoDetalleProcesoTempIng
-	@OneToMany(mappedBy="atcDescongeladoDetalleProceso")
 	private List<AtcDescongeladoDetalleProcesoTempIng> atcDescongeladoDetalleProcesoTempIngs;
 
 	public AtcDescongeladoDetalleProceso() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdatcdescongeladodetalleproceso() {
 		return this.idatcdescongeladodetalleproceso;
 	}
@@ -88,6 +50,7 @@ public class AtcDescongeladoDetalleProceso implements Serializable {
 	public void setIdatcdescongeladodetalleproceso(Long idatcdescongeladodetalleproceso) {
 		this.idatcdescongeladodetalleproceso = idatcdescongeladodetalleproceso;
 	}
+
 
 	public String getCajonrevolteo() {
 		return this.cajonrevolteo;
@@ -97,6 +60,7 @@ public class AtcDescongeladoDetalleProceso implements Serializable {
 		this.cajonrevolteo = cajonrevolteo;
 	}
 
+
 	public Boolean getCheckpermitirpesodiferencia() {
 		return this.checkpermitirpesodiferencia;
 	}
@@ -104,6 +68,7 @@ public class AtcDescongeladoDetalleProceso implements Serializable {
 	public void setCheckpermitirpesodiferencia(Boolean checkpermitirpesodiferencia) {
 		this.checkpermitirpesodiferencia = checkpermitirpesodiferencia;
 	}
+
 
 	public Integer getCheckpesocamara() {
 		return this.checkpesocamara;
@@ -113,6 +78,7 @@ public class AtcDescongeladoDetalleProceso implements Serializable {
 		this.checkpesocamara = checkpesocamara;
 	}
 
+
 	public Boolean getCheckpesodividido() {
 		return this.checkpesodividido;
 	}
@@ -120,6 +86,7 @@ public class AtcDescongeladoDetalleProceso implements Serializable {
 	public void setCheckpesodividido(Boolean checkpesodividido) {
 		this.checkpesodividido = checkpesodividido;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -129,6 +96,7 @@ public class AtcDescongeladoDetalleProceso implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Timestamp getHorafin() {
 		return this.horafin;
 	}
@@ -136,6 +104,7 @@ public class AtcDescongeladoDetalleProceso implements Serializable {
 	public void setHorafin(Timestamp horafin) {
 		this.horafin = horafin;
 	}
+
 
 	public Timestamp getHoraingreso() {
 		return this.horaingreso;
@@ -145,6 +114,7 @@ public class AtcDescongeladoDetalleProceso implements Serializable {
 		this.horaingreso = horaingreso;
 	}
 
+
 	public Timestamp getHorainicio() {
 		return this.horainicio;
 	}
@@ -152,6 +122,7 @@ public class AtcDescongeladoDetalleProceso implements Serializable {
 	public void setHorainicio(Timestamp horainicio) {
 		this.horainicio = horainicio;
 	}
+
 
 	public String getObservaciones() {
 		return this.observaciones;
@@ -161,6 +132,7 @@ public class AtcDescongeladoDetalleProceso implements Serializable {
 		this.observaciones = observaciones;
 	}
 
+
 	public double getPeso() {
 		return this.peso;
 	}
@@ -168,6 +140,7 @@ public class AtcDescongeladoDetalleProceso implements Serializable {
 	public void setPeso(double peso) {
 		this.peso = peso;
 	}
+
 
 	public double getPesocomparativodiferenciacamara() {
 		return this.pesocomparativodiferenciacamara;
@@ -177,6 +150,7 @@ public class AtcDescongeladoDetalleProceso implements Serializable {
 		this.pesocomparativodiferenciacamara = pesocomparativodiferenciacamara;
 	}
 
+
 	public double getPesodiferenciacamara() {
 		return this.pesodiferenciacamara;
 	}
@@ -184,6 +158,7 @@ public class AtcDescongeladoDetalleProceso implements Serializable {
 	public void setPesodiferenciacamara(double pesodiferenciacamara) {
 		this.pesodiferenciacamara = pesodiferenciacamara;
 	}
+
 
 	public double getTara() {
 		return this.tara;
@@ -193,6 +168,10 @@ public class AtcDescongeladoDetalleProceso implements Serializable {
 		this.tara = tara;
 	}
 
+
+	//bi-directional many-to-one association to AtcDescongeladoProceso
+	@ManyToOne
+	@JoinColumn(name="idatcdescongeladoproceso")
 	public AtcDescongeladoProceso getAtcDescongeladoProceso() {
 		return this.atcDescongeladoProceso;
 	}
@@ -201,6 +180,10 @@ public class AtcDescongeladoDetalleProceso implements Serializable {
 		this.atcDescongeladoProceso = atcDescongeladoProceso;
 	}
 
+
+	//bi-directional many-to-one association to AtcProduccionDetalleLoteCajon
+	@ManyToOne
+	@JoinColumn(name="idatcproducciondetallelotecajon")
 	public AtcProduccionDetalleLoteCajon getAtcProduccionDetalleLoteCajon() {
 		return this.atcProduccionDetalleLoteCajon;
 	}
@@ -209,6 +192,10 @@ public class AtcDescongeladoDetalleProceso implements Serializable {
 		this.atcProduccionDetalleLoteCajon = atcProduccionDetalleLoteCajon;
 	}
 
+
+	//bi-directional many-to-one association to AtcTurno
+	@ManyToOne
+	@JoinColumn(name="idatcturno")
 	public AtcTurno getAtcTurno() {
 		return this.atcTurno;
 	}
@@ -217,6 +204,10 @@ public class AtcDescongeladoDetalleProceso implements Serializable {
 		this.atcTurno = atcTurno;
 	}
 
+
+	//bi-directional many-to-one association to AtcUsuario
+	@ManyToOne
+	@JoinColumn(name="idatcusuario")
 	public AtcUsuario getAtcUsuario() {
 		return this.atcUsuario;
 	}
@@ -225,6 +216,10 @@ public class AtcDescongeladoDetalleProceso implements Serializable {
 		this.atcUsuario = atcUsuario;
 	}
 
+
+	//bi-directional many-to-one association to DescongeladoDucha
+	@ManyToOne
+	@JoinColumn(name="idducha")
 	public DescongeladoDucha getDescongeladoDucha() {
 		return this.descongeladoDucha;
 	}
@@ -233,6 +228,9 @@ public class AtcDescongeladoDetalleProceso implements Serializable {
 		this.descongeladoDucha = descongeladoDucha;
 	}
 
+
+	//bi-directional many-to-one association to AtcDescongeladoDetalleProcesoTemp
+	@OneToMany(mappedBy="atcDescongeladoDetalleProceso")
 	public List<AtcDescongeladoDetalleProcesoTemp> getAtcDescongeladoDetalleProcesoTemps() {
 		return this.atcDescongeladoDetalleProcesoTemps;
 	}
@@ -241,12 +239,43 @@ public class AtcDescongeladoDetalleProceso implements Serializable {
 		this.atcDescongeladoDetalleProcesoTemps = atcDescongeladoDetalleProcesoTemps;
 	}
 
+	public AtcDescongeladoDetalleProcesoTemp addAtcDescongeladoDetalleProcesoTemp(AtcDescongeladoDetalleProcesoTemp atcDescongeladoDetalleProcesoTemp) {
+		getAtcDescongeladoDetalleProcesoTemps().add(atcDescongeladoDetalleProcesoTemp);
+		atcDescongeladoDetalleProcesoTemp.setAtcDescongeladoDetalleProceso(this);
+
+		return atcDescongeladoDetalleProcesoTemp;
+	}
+
+	public AtcDescongeladoDetalleProcesoTemp removeAtcDescongeladoDetalleProcesoTemp(AtcDescongeladoDetalleProcesoTemp atcDescongeladoDetalleProcesoTemp) {
+		getAtcDescongeladoDetalleProcesoTemps().remove(atcDescongeladoDetalleProcesoTemp);
+		atcDescongeladoDetalleProcesoTemp.setAtcDescongeladoDetalleProceso(null);
+
+		return atcDescongeladoDetalleProcesoTemp;
+	}
+
+
+	//bi-directional many-to-one association to AtcDescongeladoDetalleProcesoTempIng
+	@OneToMany(mappedBy="atcDescongeladoDetalleProceso")
 	public List<AtcDescongeladoDetalleProcesoTempIng> getAtcDescongeladoDetalleProcesoTempIngs() {
 		return this.atcDescongeladoDetalleProcesoTempIngs;
 	}
 
 	public void setAtcDescongeladoDetalleProcesoTempIngs(List<AtcDescongeladoDetalleProcesoTempIng> atcDescongeladoDetalleProcesoTempIngs) {
 		this.atcDescongeladoDetalleProcesoTempIngs = atcDescongeladoDetalleProcesoTempIngs;
+	}
+
+	public AtcDescongeladoDetalleProcesoTempIng addAtcDescongeladoDetalleProcesoTempIng(AtcDescongeladoDetalleProcesoTempIng atcDescongeladoDetalleProcesoTempIng) {
+		getAtcDescongeladoDetalleProcesoTempIngs().add(atcDescongeladoDetalleProcesoTempIng);
+		atcDescongeladoDetalleProcesoTempIng.setAtcDescongeladoDetalleProceso(this);
+
+		return atcDescongeladoDetalleProcesoTempIng;
+	}
+
+	public AtcDescongeladoDetalleProcesoTempIng removeAtcDescongeladoDetalleProcesoTempIng(AtcDescongeladoDetalleProcesoTempIng atcDescongeladoDetalleProcesoTempIng) {
+		getAtcDescongeladoDetalleProcesoTempIngs().remove(atcDescongeladoDetalleProcesoTempIng);
+		atcDescongeladoDetalleProcesoTempIng.setAtcDescongeladoDetalleProceso(null);
+
+		return atcDescongeladoDetalleProcesoTempIng;
 	}
 
 }

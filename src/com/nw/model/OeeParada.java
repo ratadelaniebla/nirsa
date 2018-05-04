@@ -11,47 +11,27 @@ import java.util.List;
  */
 @Entity
 @Table(name="oee_parada")
+@NamedQuery(name="OeeParada.findAll", query="SELECT o FROM OeeParada o")
 public class OeeParada implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_oee_parada")
 	private Integer idOeeParada;
-
-	@Column(name="descripcion_parada")
 	private String descripcionParada;
-
-	@Column(name="estandar_modificado")
 	private Boolean estandarModificado;
-
 	private Boolean programada;
-
-	@Column(name="tiempo_muerto")
 	private Boolean tiempoMuerto;
-
-	@Column(name="tiempo_parada_programada")
 	private double tiempoParadaProgramada;
-
-	@Column(name="tipo_equipo_persona")
 	private Boolean tipoEquipoPersona;
-
-	//bi-directional many-to-one association to LimpiezaProcesoEmpleadoAditoriaMovimiento
-	@OneToMany(mappedBy="oeeParada")
 	private List<LimpiezaProcesoEmpleadoAditoriaMovimiento> limpiezaProcesoEmpleadoAditoriaMovimientos;
-
-	//bi-directional many-to-one association to OeeDetalleParada
-	@OneToMany(mappedBy="oeeParada")
 	private List<OeeDetalleParada> oeeDetalleParadas;
-
-	//bi-directional many-to-one association to Proceso
-	@ManyToOne
-	@JoinColumn(name="idproceso")
 	private Proceso proceso;
 
 	public OeeParada() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_oee_parada")
 	public Integer getIdOeeParada() {
 		return this.idOeeParada;
 	}
@@ -60,6 +40,8 @@ public class OeeParada implements Serializable {
 		this.idOeeParada = idOeeParada;
 	}
 
+
+	@Column(name="descripcion_parada")
 	public String getDescripcionParada() {
 		return this.descripcionParada;
 	}
@@ -68,6 +50,8 @@ public class OeeParada implements Serializable {
 		this.descripcionParada = descripcionParada;
 	}
 
+
+	@Column(name="estandar_modificado")
 	public Boolean getEstandarModificado() {
 		return this.estandarModificado;
 	}
@@ -75,6 +59,7 @@ public class OeeParada implements Serializable {
 	public void setEstandarModificado(Boolean estandarModificado) {
 		this.estandarModificado = estandarModificado;
 	}
+
 
 	public Boolean getProgramada() {
 		return this.programada;
@@ -84,6 +69,8 @@ public class OeeParada implements Serializable {
 		this.programada = programada;
 	}
 
+
+	@Column(name="tiempo_muerto")
 	public Boolean getTiempoMuerto() {
 		return this.tiempoMuerto;
 	}
@@ -92,6 +79,8 @@ public class OeeParada implements Serializable {
 		this.tiempoMuerto = tiempoMuerto;
 	}
 
+
+	@Column(name="tiempo_parada_programada")
 	public double getTiempoParadaProgramada() {
 		return this.tiempoParadaProgramada;
 	}
@@ -100,6 +89,8 @@ public class OeeParada implements Serializable {
 		this.tiempoParadaProgramada = tiempoParadaProgramada;
 	}
 
+
+	@Column(name="tipo_equipo_persona")
 	public Boolean getTipoEquipoPersona() {
 		return this.tipoEquipoPersona;
 	}
@@ -108,6 +99,9 @@ public class OeeParada implements Serializable {
 		this.tipoEquipoPersona = tipoEquipoPersona;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaProcesoEmpleadoAditoriaMovimiento
+	@OneToMany(mappedBy="oeeParada")
 	public List<LimpiezaProcesoEmpleadoAditoriaMovimiento> getLimpiezaProcesoEmpleadoAditoriaMovimientos() {
 		return this.limpiezaProcesoEmpleadoAditoriaMovimientos;
 	}
@@ -116,6 +110,23 @@ public class OeeParada implements Serializable {
 		this.limpiezaProcesoEmpleadoAditoriaMovimientos = limpiezaProcesoEmpleadoAditoriaMovimientos;
 	}
 
+	public LimpiezaProcesoEmpleadoAditoriaMovimiento addLimpiezaProcesoEmpleadoAditoriaMovimiento(LimpiezaProcesoEmpleadoAditoriaMovimiento limpiezaProcesoEmpleadoAditoriaMovimiento) {
+		getLimpiezaProcesoEmpleadoAditoriaMovimientos().add(limpiezaProcesoEmpleadoAditoriaMovimiento);
+		limpiezaProcesoEmpleadoAditoriaMovimiento.setOeeParada(this);
+
+		return limpiezaProcesoEmpleadoAditoriaMovimiento;
+	}
+
+	public LimpiezaProcesoEmpleadoAditoriaMovimiento removeLimpiezaProcesoEmpleadoAditoriaMovimiento(LimpiezaProcesoEmpleadoAditoriaMovimiento limpiezaProcesoEmpleadoAditoriaMovimiento) {
+		getLimpiezaProcesoEmpleadoAditoriaMovimientos().remove(limpiezaProcesoEmpleadoAditoriaMovimiento);
+		limpiezaProcesoEmpleadoAditoriaMovimiento.setOeeParada(null);
+
+		return limpiezaProcesoEmpleadoAditoriaMovimiento;
+	}
+
+
+	//bi-directional many-to-one association to OeeDetalleParada
+	@OneToMany(mappedBy="oeeParada")
 	public List<OeeDetalleParada> getOeeDetalleParadas() {
 		return this.oeeDetalleParadas;
 	}
@@ -124,6 +135,24 @@ public class OeeParada implements Serializable {
 		this.oeeDetalleParadas = oeeDetalleParadas;
 	}
 
+	public OeeDetalleParada addOeeDetalleParada(OeeDetalleParada oeeDetalleParada) {
+		getOeeDetalleParadas().add(oeeDetalleParada);
+		oeeDetalleParada.setOeeParada(this);
+
+		return oeeDetalleParada;
+	}
+
+	public OeeDetalleParada removeOeeDetalleParada(OeeDetalleParada oeeDetalleParada) {
+		getOeeDetalleParadas().remove(oeeDetalleParada);
+		oeeDetalleParada.setOeeParada(null);
+
+		return oeeDetalleParada;
+	}
+
+
+	//bi-directional many-to-one association to Proceso
+	@ManyToOne
+	@JoinColumn(name="idproceso")
 	public Proceso getProceso() {
 		return this.proceso;
 	}

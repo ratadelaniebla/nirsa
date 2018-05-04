@@ -10,35 +10,26 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="evolution_productos")
+@NamedQuery(name="EvolutionProducto.findAll", query="SELECT e FROM EvolutionProducto e")
 public class EvolutionProducto implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idevolutionproductos;
-
 	private String codigoapariencia;
-
 	private String codigoevolution;
-
 	private String codigotalla;
-
 	private String codigounidad;
-
-	@Column(name="\"descripcion evolution\"")
 	private String descripcion_evolution;
-
 	private Integer estado;
-
 	private Integer idevisceradocorte;
-
 	private String idgrupoadam;
-
 	private Integer idturno;
 
 	public EvolutionProducto() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdevolutionproductos() {
 		return this.idevolutionproductos;
 	}
@@ -46,6 +37,7 @@ public class EvolutionProducto implements Serializable {
 	public void setIdevolutionproductos(Integer idevolutionproductos) {
 		this.idevolutionproductos = idevolutionproductos;
 	}
+
 
 	public String getCodigoapariencia() {
 		return this.codigoapariencia;
@@ -55,6 +47,7 @@ public class EvolutionProducto implements Serializable {
 		this.codigoapariencia = codigoapariencia;
 	}
 
+
 	public String getCodigoevolution() {
 		return this.codigoevolution;
 	}
@@ -62,6 +55,7 @@ public class EvolutionProducto implements Serializable {
 	public void setCodigoevolution(String codigoevolution) {
 		this.codigoevolution = codigoevolution;
 	}
+
 
 	public String getCodigotalla() {
 		return this.codigotalla;
@@ -71,6 +65,7 @@ public class EvolutionProducto implements Serializable {
 		this.codigotalla = codigotalla;
 	}
 
+
 	public String getCodigounidad() {
 		return this.codigounidad;
 	}
@@ -79,6 +74,8 @@ public class EvolutionProducto implements Serializable {
 		this.codigounidad = codigounidad;
 	}
 
+
+	@Column(name="\"descripcion evolution\"")
 	public String getDescripcion_evolution() {
 		return this.descripcion_evolution;
 	}
@@ -86,6 +83,7 @@ public class EvolutionProducto implements Serializable {
 	public void setDescripcion_evolution(String descripcion_evolution) {
 		this.descripcion_evolution = descripcion_evolution;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -95,6 +93,7 @@ public class EvolutionProducto implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Integer getIdevisceradocorte() {
 		return this.idevisceradocorte;
 	}
@@ -103,6 +102,7 @@ public class EvolutionProducto implements Serializable {
 		this.idevisceradocorte = idevisceradocorte;
 	}
 
+
 	public String getIdgrupoadam() {
 		return this.idgrupoadam;
 	}
@@ -110,6 +110,7 @@ public class EvolutionProducto implements Serializable {
 	public void setIdgrupoadam(String idgrupoadam) {
 		this.idgrupoadam = idgrupoadam;
 	}
+
 
 	public Integer getIdturno() {
 		return this.idturno;

@@ -12,6 +12,7 @@ import java.util.List;
  */
 @Entity
 @Table(name="envasado_detalle_proceso_cambios")
+@NamedQuery(name="EnvasadoDetalleProcesoCambio.findAll", query="SELECT e FROM EnvasadoDetalleProcesoCambio e")
 public class EnvasadoDetalleProcesoCambio implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Long idenvasadodetalleprocesocambios;
@@ -23,16 +24,16 @@ public class EnvasadoDetalleProcesoCambio implements Serializable {
 	private Timestamp fechareg;
 	private double fill;
 	private double flake;
-	private Long idenvasadoproceso;
-	private Integer idmaquinacerradora;
-	private Long idproducciondetalleorden;
-	private Integer idturno;
-	private String idusuario;
 	private double latas;
 	private String observacion;
 	private String pesoneto;
 	private double porcentajeproteina;
+	private EnvasadoProceso envasadoProceso;
 	private EnvasadoTipoProteina envasadoTipoProteina;
+	private MaquinaCerradora maquinaCerradora;
+	private ProduccionDetalleOrden produccionDetalleOrden;
+	private Turno turno;
+	private Usuario usuario;
 	private List<EnvasadoDetalleProcesoCambiosLuthy> envasadoDetalleProcesoCambiosLuthies;
 
 	public EnvasadoDetalleProcesoCambio() {
@@ -122,51 +123,6 @@ public class EnvasadoDetalleProcesoCambio implements Serializable {
 	}
 
 
-	public Long getIdenvasadoproceso() {
-		return this.idenvasadoproceso;
-	}
-
-	public void setIdenvasadoproceso(Long idenvasadoproceso) {
-		this.idenvasadoproceso = idenvasadoproceso;
-	}
-
-
-	public Integer getIdmaquinacerradora() {
-		return this.idmaquinacerradora;
-	}
-
-	public void setIdmaquinacerradora(Integer idmaquinacerradora) {
-		this.idmaquinacerradora = idmaquinacerradora;
-	}
-
-
-	public Long getIdproducciondetalleorden() {
-		return this.idproducciondetalleorden;
-	}
-
-	public void setIdproducciondetalleorden(Long idproducciondetalleorden) {
-		this.idproducciondetalleorden = idproducciondetalleorden;
-	}
-
-
-	public Integer getIdturno() {
-		return this.idturno;
-	}
-
-	public void setIdturno(Integer idturno) {
-		this.idturno = idturno;
-	}
-
-
-	public String getIdusuario() {
-		return this.idusuario;
-	}
-
-	public void setIdusuario(String idusuario) {
-		this.idusuario = idusuario;
-	}
-
-
 	public double getLatas() {
 		return this.latas;
 	}
@@ -203,6 +159,18 @@ public class EnvasadoDetalleProcesoCambio implements Serializable {
 	}
 
 
+	//bi-directional many-to-one association to EnvasadoProceso
+	@ManyToOne
+	@JoinColumn(name="idenvasadoproceso")
+	public EnvasadoProceso getEnvasadoProceso() {
+		return this.envasadoProceso;
+	}
+
+	public void setEnvasadoProceso(EnvasadoProceso envasadoProceso) {
+		this.envasadoProceso = envasadoProceso;
+	}
+
+
 	//bi-directional many-to-one association to EnvasadoTipoProteina
 	@ManyToOne
 	@JoinColumn(name="idenvasadotipoproteina")
@@ -215,6 +183,54 @@ public class EnvasadoDetalleProcesoCambio implements Serializable {
 	}
 
 
+	//bi-directional many-to-one association to MaquinaCerradora
+	@ManyToOne
+	@JoinColumn(name="idmaquinacerradora")
+	public MaquinaCerradora getMaquinaCerradora() {
+		return this.maquinaCerradora;
+	}
+
+	public void setMaquinaCerradora(MaquinaCerradora maquinaCerradora) {
+		this.maquinaCerradora = maquinaCerradora;
+	}
+
+
+	//bi-directional many-to-one association to ProduccionDetalleOrden
+	@ManyToOne
+	@JoinColumn(name="idproducciondetalleorden")
+	public ProduccionDetalleOrden getProduccionDetalleOrden() {
+		return this.produccionDetalleOrden;
+	}
+
+	public void setProduccionDetalleOrden(ProduccionDetalleOrden produccionDetalleOrden) {
+		this.produccionDetalleOrden = produccionDetalleOrden;
+	}
+
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
+	public Turno getTurno() {
+		return this.turno;
+	}
+
+	public void setTurno(Turno turno) {
+		this.turno = turno;
+	}
+
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
+	public Usuario getUsuario() {
+		return this.usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+
 	//bi-directional many-to-one association to EnvasadoDetalleProcesoCambiosLuthy
 	@OneToMany(mappedBy="envasadoDetalleProcesoCambio")
 	public List<EnvasadoDetalleProcesoCambiosLuthy> getEnvasadoDetalleProcesoCambiosLuthies() {
@@ -223,6 +239,20 @@ public class EnvasadoDetalleProcesoCambio implements Serializable {
 
 	public void setEnvasadoDetalleProcesoCambiosLuthies(List<EnvasadoDetalleProcesoCambiosLuthy> envasadoDetalleProcesoCambiosLuthies) {
 		this.envasadoDetalleProcesoCambiosLuthies = envasadoDetalleProcesoCambiosLuthies;
+	}
+
+	public EnvasadoDetalleProcesoCambiosLuthy addEnvasadoDetalleProcesoCambiosLuthy(EnvasadoDetalleProcesoCambiosLuthy envasadoDetalleProcesoCambiosLuthy) {
+		getEnvasadoDetalleProcesoCambiosLuthies().add(envasadoDetalleProcesoCambiosLuthy);
+		envasadoDetalleProcesoCambiosLuthy.setEnvasadoDetalleProcesoCambio(this);
+
+		return envasadoDetalleProcesoCambiosLuthy;
+	}
+
+	public EnvasadoDetalleProcesoCambiosLuthy removeEnvasadoDetalleProcesoCambiosLuthy(EnvasadoDetalleProcesoCambiosLuthy envasadoDetalleProcesoCambiosLuthy) {
+		getEnvasadoDetalleProcesoCambiosLuthies().remove(envasadoDetalleProcesoCambiosLuthy);
+		envasadoDetalleProcesoCambiosLuthy.setEnvasadoDetalleProcesoCambio(null);
+
+		return envasadoDetalleProcesoCambiosLuthy;
 	}
 
 }

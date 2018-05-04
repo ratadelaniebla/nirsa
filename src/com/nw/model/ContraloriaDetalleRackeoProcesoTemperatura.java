@@ -11,37 +11,23 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="contraloria_detalle_rackeo_proceso_temperatura")
+@NamedQuery(name="ContraloriaDetalleRackeoProcesoTemperatura.findAll", query="SELECT c FROM ContraloriaDetalleRackeoProcesoTemperatura c")
 public class ContraloriaDetalleRackeoProcesoTemperatura implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcontraloriadetallerackeoprocesotemperatura;
-
 	private Timestamp fechareg;
-
 	private Integer nivel;
-
 	private double temperatura;
-
-	//bi-directional many-to-one association to DescongeladoDetalleProceso
-	@ManyToOne
-	@JoinColumn(name="iddescongeladodetalleproceso")
 	private DescongeladoDetalleProceso descongeladoDetalleProceso;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public ContraloriaDetalleRackeoProcesoTemperatura() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcontraloriadetallerackeoprocesotemperatura() {
 		return this.idcontraloriadetallerackeoprocesotemperatura;
 	}
@@ -49,6 +35,7 @@ public class ContraloriaDetalleRackeoProcesoTemperatura implements Serializable 
 	public void setIdcontraloriadetallerackeoprocesotemperatura(Long idcontraloriadetallerackeoprocesotemperatura) {
 		this.idcontraloriadetallerackeoprocesotemperatura = idcontraloriadetallerackeoprocesotemperatura;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -58,6 +45,7 @@ public class ContraloriaDetalleRackeoProcesoTemperatura implements Serializable 
 		this.fechareg = fechareg;
 	}
 
+
 	public Integer getNivel() {
 		return this.nivel;
 	}
@@ -65,6 +53,7 @@ public class ContraloriaDetalleRackeoProcesoTemperatura implements Serializable 
 	public void setNivel(Integer nivel) {
 		this.nivel = nivel;
 	}
+
 
 	public double getTemperatura() {
 		return this.temperatura;
@@ -74,6 +63,10 @@ public class ContraloriaDetalleRackeoProcesoTemperatura implements Serializable 
 		this.temperatura = temperatura;
 	}
 
+
+	//bi-directional many-to-one association to DescongeladoDetalleProceso
+	@ManyToOne
+	@JoinColumn(name="iddescongeladodetalleproceso")
 	public DescongeladoDetalleProceso getDescongeladoDetalleProceso() {
 		return this.descongeladoDetalleProceso;
 	}
@@ -82,6 +75,10 @@ public class ContraloriaDetalleRackeoProcesoTemperatura implements Serializable 
 		this.descongeladoDetalleProceso = descongeladoDetalleProceso;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -90,6 +87,10 @@ public class ContraloriaDetalleRackeoProcesoTemperatura implements Serializable 
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

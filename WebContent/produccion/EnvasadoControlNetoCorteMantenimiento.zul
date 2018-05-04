@@ -1,0 +1,78 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winEnavasadoControlNetoCorteWindow"
+		apply="com.nw.webui.produccion.EnavasadoControlNetoCorteMantenimientoWindow">
+
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="REG. CORTE PESO NETO"
+			style="color:blue;font-size:12px;font-weight:bold" />
+
+		<vbox id="vbxMain" width="300px">
+
+			<grid width="93%">
+				<rows>
+					<row>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar"
+								tooltiptext="Grabar" image="/img/grabar.gif" />
+						</toolbar>
+					</row>
+
+
+				</rows>
+			</grid>
+
+			<grid width="93%">
+				<rows>
+					<row>
+						<label id="lbFechaProduccion" value="Fecha Producción"/>
+						<datebox id="dteFechaProduccion" width="110px" readonly="true" format="dd/MM/yyyy"/>
+					</row>	
+					<row>
+						<label id="lbTurnoProduccion" value="Turno Produccion" />
+						 <listbox id="lbxTurnoProduccion" style="font-size:12px"
+						mold="select" width="120px" />
+					</row>	
+				</rows>
+			</grid>
+			
+			<grid width="93%">
+				<rows>
+					<row>
+						<toolbar id="tbcontrol">
+							<hbox>
+								<label value="Registro de Cortes."
+									style="color:blue;font-size:12px;font-weight:bold" />
+								<toolbarbutton id="btnAgregarItem"
+									tooltiptext="Agregar" image="/img/crear.gif" />
+								<toolbarbutton id="btnEliminarItem"
+									tooltiptext="Eliminar" image="/img/eliminar.gif" />
+							</hbox>
+						</toolbar>
+					</row>
+				</rows>		
+			</grid>
+			
+			<listbox id="lbxLista" multiple="true" checkmark="false" width="93%" visible="true">
+<!-- 				<listhead style="font-size:5px" > -->
+<!-- 					<listheader label="Luthy" width="50%"  style="font-size:5px" /> -->
+<!-- 					<listheader  width="30%" tooltiptext="Seleccionar un item" > -->
+<!-- 					   <toolbar> -->
+<!-- 							<toolbarbutton id="btnEliminar" label="Eliminar" -->
+<!-- 								tooltiptext="Eliminar luthy" image="/img/eliminar.gif" /> -->
+<!-- 						</toolbar> -->
+<!-- 					</listheader> -->
+<!-- 				</listhead> -->
+							  
+<!-- 				<listitem> -->
+<!-- 					<listcell></listcell> -->
+<!-- 					<listcell></listcell> -->
+<!-- 				</listitem> -->
+			</listbox>	
+			
+
+			<label value="."/>
+		</vbox>
+	</window>
+
+</zk>

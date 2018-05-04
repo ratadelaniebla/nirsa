@@ -12,38 +12,24 @@ import java.util.List;
  */
 @Entity
 @Table(name="produccion_carga_archivo_pedidos")
+@NamedQuery(name="ProduccionCargaArchivoPedido.findAll", query="SELECT p FROM ProduccionCargaArchivoPedido p")
 public class ProduccionCargaArchivoPedido implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idproduccionarchivocargapedidos;
-
 	private Timestamp fechaarchivo;
-
 	private Timestamp fechacarga;
-
 	private String nombrearchivo;
-
 	private Integer turnoarchivo;
-
-	//bi-directional many-to-one association to Produccion
-	@ManyToOne
-	@JoinColumn(name="idproduccion")
 	private Produccion produccion;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
-
-	//bi-directional many-to-one association to ProduccionDetalleArchivoPedido
-	@OneToMany(mappedBy="produccionCargaArchivoPedido")
 	private List<ProduccionDetalleArchivoPedido> produccionDetalleArchivoPedidos;
 
 	public ProduccionCargaArchivoPedido() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdproduccionarchivocargapedidos() {
 		return this.idproduccionarchivocargapedidos;
 	}
@@ -51,6 +37,7 @@ public class ProduccionCargaArchivoPedido implements Serializable {
 	public void setIdproduccionarchivocargapedidos(Long idproduccionarchivocargapedidos) {
 		this.idproduccionarchivocargapedidos = idproduccionarchivocargapedidos;
 	}
+
 
 	public Timestamp getFechaarchivo() {
 		return this.fechaarchivo;
@@ -60,6 +47,7 @@ public class ProduccionCargaArchivoPedido implements Serializable {
 		this.fechaarchivo = fechaarchivo;
 	}
 
+
 	public Timestamp getFechacarga() {
 		return this.fechacarga;
 	}
@@ -67,6 +55,7 @@ public class ProduccionCargaArchivoPedido implements Serializable {
 	public void setFechacarga(Timestamp fechacarga) {
 		this.fechacarga = fechacarga;
 	}
+
 
 	public String getNombrearchivo() {
 		return this.nombrearchivo;
@@ -76,6 +65,7 @@ public class ProduccionCargaArchivoPedido implements Serializable {
 		this.nombrearchivo = nombrearchivo;
 	}
 
+
 	public Integer getTurnoarchivo() {
 		return this.turnoarchivo;
 	}
@@ -84,6 +74,10 @@ public class ProduccionCargaArchivoPedido implements Serializable {
 		this.turnoarchivo = turnoarchivo;
 	}
 
+
+	//bi-directional many-to-one association to Produccion
+	@ManyToOne
+	@JoinColumn(name="idproduccion")
 	public Produccion getProduccion() {
 		return this.produccion;
 	}
@@ -92,6 +86,10 @@ public class ProduccionCargaArchivoPedido implements Serializable {
 		this.produccion = produccion;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}
@@ -100,12 +98,29 @@ public class ProduccionCargaArchivoPedido implements Serializable {
 		this.usuario = usuario;
 	}
 
+
+	//bi-directional many-to-one association to ProduccionDetalleArchivoPedido
+	@OneToMany(mappedBy="produccionCargaArchivoPedido")
 	public List<ProduccionDetalleArchivoPedido> getProduccionDetalleArchivoPedidos() {
 		return this.produccionDetalleArchivoPedidos;
 	}
 
 	public void setProduccionDetalleArchivoPedidos(List<ProduccionDetalleArchivoPedido> produccionDetalleArchivoPedidos) {
 		this.produccionDetalleArchivoPedidos = produccionDetalleArchivoPedidos;
+	}
+
+	public ProduccionDetalleArchivoPedido addProduccionDetalleArchivoPedido(ProduccionDetalleArchivoPedido produccionDetalleArchivoPedido) {
+		getProduccionDetalleArchivoPedidos().add(produccionDetalleArchivoPedido);
+		produccionDetalleArchivoPedido.setProduccionCargaArchivoPedido(this);
+
+		return produccionDetalleArchivoPedido;
+	}
+
+	public ProduccionDetalleArchivoPedido removeProduccionDetalleArchivoPedido(ProduccionDetalleArchivoPedido produccionDetalleArchivoPedido) {
+		getProduccionDetalleArchivoPedidos().remove(produccionDetalleArchivoPedido);
+		produccionDetalleArchivoPedido.setProduccionCargaArchivoPedido(null);
+
+		return produccionDetalleArchivoPedido;
 	}
 
 }

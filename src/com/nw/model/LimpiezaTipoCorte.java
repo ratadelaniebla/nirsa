@@ -11,22 +11,19 @@ import java.util.List;
  */
 @Entity
 @Table(name="limpieza_tipo_corte")
+@NamedQuery(name="LimpiezaTipoCorte.findAll", query="SELECT l FROM LimpiezaTipoCorte l")
 public class LimpiezaTipoCorte implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idlimpiezatipocorte;
-
 	private String descripcion;
-
-	//bi-directional many-to-one association to LimpiezaDetalleTipoCorte
-	@OneToMany(mappedBy="limpiezaTipoCorte")
 	private List<LimpiezaDetalleTipoCorte> limpiezaDetalleTipoCortes;
 
 	public LimpiezaTipoCorte() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdlimpiezatipocorte() {
 		return this.idlimpiezatipocorte;
 	}
@@ -34,6 +31,7 @@ public class LimpiezaTipoCorte implements Serializable {
 	public void setIdlimpiezatipocorte(Integer idlimpiezatipocorte) {
 		this.idlimpiezatipocorte = idlimpiezatipocorte;
 	}
+
 
 	public String getDescripcion() {
 		return this.descripcion;
@@ -43,12 +41,29 @@ public class LimpiezaTipoCorte implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaDetalleTipoCorte
+	@OneToMany(mappedBy="limpiezaTipoCorte")
 	public List<LimpiezaDetalleTipoCorte> getLimpiezaDetalleTipoCortes() {
 		return this.limpiezaDetalleTipoCortes;
 	}
 
 	public void setLimpiezaDetalleTipoCortes(List<LimpiezaDetalleTipoCorte> limpiezaDetalleTipoCortes) {
 		this.limpiezaDetalleTipoCortes = limpiezaDetalleTipoCortes;
+	}
+
+	public LimpiezaDetalleTipoCorte addLimpiezaDetalleTipoCorte(LimpiezaDetalleTipoCorte limpiezaDetalleTipoCorte) {
+		getLimpiezaDetalleTipoCortes().add(limpiezaDetalleTipoCorte);
+		limpiezaDetalleTipoCorte.setLimpiezaTipoCorte(this);
+
+		return limpiezaDetalleTipoCorte;
+	}
+
+	public LimpiezaDetalleTipoCorte removeLimpiezaDetalleTipoCorte(LimpiezaDetalleTipoCorte limpiezaDetalleTipoCorte) {
+		getLimpiezaDetalleTipoCortes().remove(limpiezaDetalleTipoCorte);
+		limpiezaDetalleTipoCorte.setLimpiezaTipoCorte(null);
+
+		return limpiezaDetalleTipoCorte;
 	}
 
 }

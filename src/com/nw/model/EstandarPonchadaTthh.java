@@ -10,35 +10,22 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="estandar_ponchada_tthh")
+@NamedQuery(name="EstandarPonchadaTthh.findAll", query="SELECT e FROM EstandarPonchadaTthh e")
 public class EstandarPonchadaTthh implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idestandarponchadatthh;
-
 	private String unidadmedida;
-
 	private double valor;
-
-	//bi-directional many-to-one association to EvisceradoPescadosLata
-	@ManyToOne
-	@JoinColumn(name="idevisceradopescadoslata")
 	private EvisceradoPescadosLata evisceradoPescadosLata;
-
-	//bi-directional many-to-one association to LimpiezaTipo
-	@ManyToOne
-	@JoinColumn(name="idlimpiezatipo")
 	private LimpiezaTipo limpiezaTipo;
-
-	//bi-directional many-to-one association to Talla
-	@ManyToOne
-	@JoinColumn(name="idtalla")
 	private Talla talla;
 
 	public EstandarPonchadaTthh() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdestandarponchadatthh() {
 		return this.idestandarponchadatthh;
 	}
@@ -46,6 +33,7 @@ public class EstandarPonchadaTthh implements Serializable {
 	public void setIdestandarponchadatthh(Integer idestandarponchadatthh) {
 		this.idestandarponchadatthh = idestandarponchadatthh;
 	}
+
 
 	public String getUnidadmedida() {
 		return this.unidadmedida;
@@ -55,6 +43,7 @@ public class EstandarPonchadaTthh implements Serializable {
 		this.unidadmedida = unidadmedida;
 	}
 
+
 	public double getValor() {
 		return this.valor;
 	}
@@ -63,6 +52,10 @@ public class EstandarPonchadaTthh implements Serializable {
 		this.valor = valor;
 	}
 
+
+	//bi-directional many-to-one association to EvisceradoPescadosLata
+	@ManyToOne
+	@JoinColumn(name="idevisceradopescadoslata")
 	public EvisceradoPescadosLata getEvisceradoPescadosLata() {
 		return this.evisceradoPescadosLata;
 	}
@@ -71,6 +64,10 @@ public class EstandarPonchadaTthh implements Serializable {
 		this.evisceradoPescadosLata = evisceradoPescadosLata;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaTipo
+	@ManyToOne
+	@JoinColumn(name="idlimpiezatipo")
 	public LimpiezaTipo getLimpiezaTipo() {
 		return this.limpiezaTipo;
 	}
@@ -79,6 +76,10 @@ public class EstandarPonchadaTthh implements Serializable {
 		this.limpiezaTipo = limpiezaTipo;
 	}
 
+
+	//bi-directional many-to-one association to Talla
+	@ManyToOne
+	@JoinColumn(name="idtalla")
 	public Talla getTalla() {
 		return this.talla;
 	}

@@ -12,56 +12,27 @@ import java.util.List;
  */
 @Entity
 @Table(name="observaciones_procesos")
+@NamedQuery(name="ObservacionesProceso.findAll", query="SELECT o FROM ObservacionesProceso o")
 public class ObservacionesProceso implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idobservacionesprocesos;
-
 	private Timestamp fechareg;
-
-	//bi-directional many-to-one association to CoccionProceso
-	@OneToMany(mappedBy="observacionesProceso")
 	private List<CoccionProceso> coccionProcesos;
-
-	//bi-directional many-to-one association to ControlBatchProceso
-	@OneToMany(mappedBy="observacionesProceso")
 	private List<ControlBatchProceso> controlBatchProcesos;
-
-	//bi-directional many-to-one association to DescongeladoProceso
-	@OneToMany(mappedBy="observacionesProceso")
 	private List<DescongeladoProceso> descongeladoProcesos;
-
-	//bi-directional many-to-one association to EvisceradoProceso
-	@OneToMany(mappedBy="observacionesProceso")
 	private List<EvisceradoProceso> evisceradoProcesos;
-
-	//bi-directional many-to-one association to LimpiezaProceso
-	@OneToMany(mappedBy="observacionesProceso")
 	private List<LimpiezaProceso> limpiezaProcesos;
-
-	//bi-directional many-to-one association to ObservacionesDetalleProceso
-	@OneToMany(mappedBy="observacionesProceso")
 	private List<ObservacionesDetalleProceso> observacionesDetalleProcesos;
-
-	//bi-directional many-to-one association to Proceso
-	@ManyToOne
-	@JoinColumn(name="idproceso")
 	private Proceso proceso;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
-
-	//bi-directional many-to-one association to RociadoProceso
-	@OneToMany(mappedBy="observacionesProceso")
 	private List<RociadoProceso> rociadoProcesos;
 
 	public ObservacionesProceso() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdobservacionesprocesos() {
 		return this.idobservacionesprocesos;
 	}
@@ -69,6 +40,7 @@ public class ObservacionesProceso implements Serializable {
 	public void setIdobservacionesprocesos(Long idobservacionesprocesos) {
 		this.idobservacionesprocesos = idobservacionesprocesos;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -78,6 +50,9 @@ public class ObservacionesProceso implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
+	//bi-directional many-to-one association to CoccionProceso
+	@OneToMany(mappedBy="observacionesProceso")
 	public List<CoccionProceso> getCoccionProcesos() {
 		return this.coccionProcesos;
 	}
@@ -86,6 +61,23 @@ public class ObservacionesProceso implements Serializable {
 		this.coccionProcesos = coccionProcesos;
 	}
 
+	public CoccionProceso addCoccionProceso(CoccionProceso coccionProceso) {
+		getCoccionProcesos().add(coccionProceso);
+		coccionProceso.setObservacionesProceso(this);
+
+		return coccionProceso;
+	}
+
+	public CoccionProceso removeCoccionProceso(CoccionProceso coccionProceso) {
+		getCoccionProcesos().remove(coccionProceso);
+		coccionProceso.setObservacionesProceso(null);
+
+		return coccionProceso;
+	}
+
+
+	//bi-directional many-to-one association to ControlBatchProceso
+	@OneToMany(mappedBy="observacionesProceso")
 	public List<ControlBatchProceso> getControlBatchProcesos() {
 		return this.controlBatchProcesos;
 	}
@@ -94,6 +86,23 @@ public class ObservacionesProceso implements Serializable {
 		this.controlBatchProcesos = controlBatchProcesos;
 	}
 
+	public ControlBatchProceso addControlBatchProceso(ControlBatchProceso controlBatchProceso) {
+		getControlBatchProcesos().add(controlBatchProceso);
+		controlBatchProceso.setObservacionesProceso(this);
+
+		return controlBatchProceso;
+	}
+
+	public ControlBatchProceso removeControlBatchProceso(ControlBatchProceso controlBatchProceso) {
+		getControlBatchProcesos().remove(controlBatchProceso);
+		controlBatchProceso.setObservacionesProceso(null);
+
+		return controlBatchProceso;
+	}
+
+
+	//bi-directional many-to-one association to DescongeladoProceso
+	@OneToMany(mappedBy="observacionesProceso")
 	public List<DescongeladoProceso> getDescongeladoProcesos() {
 		return this.descongeladoProcesos;
 	}
@@ -102,6 +111,23 @@ public class ObservacionesProceso implements Serializable {
 		this.descongeladoProcesos = descongeladoProcesos;
 	}
 
+	public DescongeladoProceso addDescongeladoProceso(DescongeladoProceso descongeladoProceso) {
+		getDescongeladoProcesos().add(descongeladoProceso);
+		descongeladoProceso.setObservacionesProceso(this);
+
+		return descongeladoProceso;
+	}
+
+	public DescongeladoProceso removeDescongeladoProceso(DescongeladoProceso descongeladoProceso) {
+		getDescongeladoProcesos().remove(descongeladoProceso);
+		descongeladoProceso.setObservacionesProceso(null);
+
+		return descongeladoProceso;
+	}
+
+
+	//bi-directional many-to-one association to EvisceradoProceso
+	@OneToMany(mappedBy="observacionesProceso")
 	public List<EvisceradoProceso> getEvisceradoProcesos() {
 		return this.evisceradoProcesos;
 	}
@@ -110,6 +136,23 @@ public class ObservacionesProceso implements Serializable {
 		this.evisceradoProcesos = evisceradoProcesos;
 	}
 
+	public EvisceradoProceso addEvisceradoProceso(EvisceradoProceso evisceradoProceso) {
+		getEvisceradoProcesos().add(evisceradoProceso);
+		evisceradoProceso.setObservacionesProceso(this);
+
+		return evisceradoProceso;
+	}
+
+	public EvisceradoProceso removeEvisceradoProceso(EvisceradoProceso evisceradoProceso) {
+		getEvisceradoProcesos().remove(evisceradoProceso);
+		evisceradoProceso.setObservacionesProceso(null);
+
+		return evisceradoProceso;
+	}
+
+
+	//bi-directional many-to-one association to LimpiezaProceso
+	@OneToMany(mappedBy="observacionesProceso")
 	public List<LimpiezaProceso> getLimpiezaProcesos() {
 		return this.limpiezaProcesos;
 	}
@@ -118,6 +161,23 @@ public class ObservacionesProceso implements Serializable {
 		this.limpiezaProcesos = limpiezaProcesos;
 	}
 
+	public LimpiezaProceso addLimpiezaProceso(LimpiezaProceso limpiezaProceso) {
+		getLimpiezaProcesos().add(limpiezaProceso);
+		limpiezaProceso.setObservacionesProceso(this);
+
+		return limpiezaProceso;
+	}
+
+	public LimpiezaProceso removeLimpiezaProceso(LimpiezaProceso limpiezaProceso) {
+		getLimpiezaProcesos().remove(limpiezaProceso);
+		limpiezaProceso.setObservacionesProceso(null);
+
+		return limpiezaProceso;
+	}
+
+
+	//bi-directional many-to-one association to ObservacionesDetalleProceso
+	@OneToMany(mappedBy="observacionesProceso")
 	public List<ObservacionesDetalleProceso> getObservacionesDetalleProcesos() {
 		return this.observacionesDetalleProcesos;
 	}
@@ -126,6 +186,24 @@ public class ObservacionesProceso implements Serializable {
 		this.observacionesDetalleProcesos = observacionesDetalleProcesos;
 	}
 
+	public ObservacionesDetalleProceso addObservacionesDetalleProceso(ObservacionesDetalleProceso observacionesDetalleProceso) {
+		getObservacionesDetalleProcesos().add(observacionesDetalleProceso);
+		observacionesDetalleProceso.setObservacionesProceso(this);
+
+		return observacionesDetalleProceso;
+	}
+
+	public ObservacionesDetalleProceso removeObservacionesDetalleProceso(ObservacionesDetalleProceso observacionesDetalleProceso) {
+		getObservacionesDetalleProcesos().remove(observacionesDetalleProceso);
+		observacionesDetalleProceso.setObservacionesProceso(null);
+
+		return observacionesDetalleProceso;
+	}
+
+
+	//bi-directional many-to-one association to Proceso
+	@ManyToOne
+	@JoinColumn(name="idproceso")
 	public Proceso getProceso() {
 		return this.proceso;
 	}
@@ -134,6 +212,10 @@ public class ObservacionesProceso implements Serializable {
 		this.proceso = proceso;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}
@@ -142,12 +224,29 @@ public class ObservacionesProceso implements Serializable {
 		this.usuario = usuario;
 	}
 
+
+	//bi-directional many-to-one association to RociadoProceso
+	@OneToMany(mappedBy="observacionesProceso")
 	public List<RociadoProceso> getRociadoProcesos() {
 		return this.rociadoProcesos;
 	}
 
 	public void setRociadoProcesos(List<RociadoProceso> rociadoProcesos) {
 		this.rociadoProcesos = rociadoProcesos;
+	}
+
+	public RociadoProceso addRociadoProceso(RociadoProceso rociadoProceso) {
+		getRociadoProcesos().add(rociadoProceso);
+		rociadoProceso.setObservacionesProceso(this);
+
+		return rociadoProceso;
+	}
+
+	public RociadoProceso removeRociadoProceso(RociadoProceso rociadoProceso) {
+		getRociadoProcesos().remove(rociadoProceso);
+		rociadoProceso.setObservacionesProceso(null);
+
+		return rociadoProceso;
 	}
 
 }

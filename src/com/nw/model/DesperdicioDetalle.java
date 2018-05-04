@@ -12,74 +12,33 @@ import java.util.List;
  */
 @Entity
 @Table(name="desperdicio_detalle")
+@NamedQuery(name="DesperdicioDetalle.findAll", query="SELECT d FROM DesperdicioDetalle d")
 public class DesperdicioDetalle implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long iddesperdiciodetalle;
-
 	private Integer diajuliano;
-
 	private Timestamp fecharegistro;
-
 	private String numerocajontemporal;
-
 	private Integer numerogavetas;
-
 	private double pesobruto;
-
 	private double pesoneto;
-
 	private String tipoingreso;
-
-	//bi-directional many-to-one association to Area
-	@ManyToOne
-	@JoinColumn(name="idarea")
 	private Area area;
-
-	//bi-directional many-to-one association to Cajon
-	@ManyToOne
-	@JoinColumn(name="idcajon")
 	private Cajon cajon;
-
-	//bi-directional many-to-one association to DesperdicioCajonHarina
-	@ManyToOne
-	@JoinColumn(name="iddesperdiciocajonharina")
 	private DesperdicioCajonHarina desperdicioCajonHarina;
-
-	//bi-directional many-to-one association to Lugar
-	@ManyToOne
-	@JoinColumn(name="idlugar")
 	private Lugar lugar;
-
-	//bi-directional many-to-one association to LugarDetalle
-	@ManyToOne
-	@JoinColumn(name="idlugardetalle")
 	private LugarDetalle lugarDetalle;
-
-	//bi-directional many-to-one association to Subproducto
-	@ManyToOne
-	@JoinColumn(name="idsubproducto")
 	private Subproducto subproducto;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
-
-	//bi-directional many-to-one association to DetalleLoteDesperdicio
-	@OneToMany(mappedBy="desperdicioDetalle")
 	private List<DetalleLoteDesperdicio> detalleLoteDesperdicios;
 
 	public DesperdicioDetalle() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIddesperdiciodetalle() {
 		return this.iddesperdiciodetalle;
 	}
@@ -87,6 +46,7 @@ public class DesperdicioDetalle implements Serializable {
 	public void setIddesperdiciodetalle(Long iddesperdiciodetalle) {
 		this.iddesperdiciodetalle = iddesperdiciodetalle;
 	}
+
 
 	public Integer getDiajuliano() {
 		return this.diajuliano;
@@ -96,6 +56,7 @@ public class DesperdicioDetalle implements Serializable {
 		this.diajuliano = diajuliano;
 	}
 
+
 	public Timestamp getFecharegistro() {
 		return this.fecharegistro;
 	}
@@ -103,6 +64,7 @@ public class DesperdicioDetalle implements Serializable {
 	public void setFecharegistro(Timestamp fecharegistro) {
 		this.fecharegistro = fecharegistro;
 	}
+
 
 	public String getNumerocajontemporal() {
 		return this.numerocajontemporal;
@@ -112,6 +74,7 @@ public class DesperdicioDetalle implements Serializable {
 		this.numerocajontemporal = numerocajontemporal;
 	}
 
+
 	public Integer getNumerogavetas() {
 		return this.numerogavetas;
 	}
@@ -119,6 +82,7 @@ public class DesperdicioDetalle implements Serializable {
 	public void setNumerogavetas(Integer numerogavetas) {
 		this.numerogavetas = numerogavetas;
 	}
+
 
 	public double getPesobruto() {
 		return this.pesobruto;
@@ -128,6 +92,7 @@ public class DesperdicioDetalle implements Serializable {
 		this.pesobruto = pesobruto;
 	}
 
+
 	public double getPesoneto() {
 		return this.pesoneto;
 	}
@@ -135,6 +100,7 @@ public class DesperdicioDetalle implements Serializable {
 	public void setPesoneto(double pesoneto) {
 		this.pesoneto = pesoneto;
 	}
+
 
 	public String getTipoingreso() {
 		return this.tipoingreso;
@@ -144,6 +110,10 @@ public class DesperdicioDetalle implements Serializable {
 		this.tipoingreso = tipoingreso;
 	}
 
+
+	//bi-directional many-to-one association to Area
+	@ManyToOne
+	@JoinColumn(name="idarea")
 	public Area getArea() {
 		return this.area;
 	}
@@ -152,6 +122,10 @@ public class DesperdicioDetalle implements Serializable {
 		this.area = area;
 	}
 
+
+	//bi-directional many-to-one association to Cajon
+	@ManyToOne
+	@JoinColumn(name="idcajon")
 	public Cajon getCajon() {
 		return this.cajon;
 	}
@@ -160,6 +134,10 @@ public class DesperdicioDetalle implements Serializable {
 		this.cajon = cajon;
 	}
 
+
+	//bi-directional many-to-one association to DesperdicioCajonHarina
+	@ManyToOne
+	@JoinColumn(name="iddesperdiciocajonharina")
 	public DesperdicioCajonHarina getDesperdicioCajonHarina() {
 		return this.desperdicioCajonHarina;
 	}
@@ -168,6 +146,10 @@ public class DesperdicioDetalle implements Serializable {
 		this.desperdicioCajonHarina = desperdicioCajonHarina;
 	}
 
+
+	//bi-directional many-to-one association to Lugar
+	@ManyToOne
+	@JoinColumn(name="idlugar")
 	public Lugar getLugar() {
 		return this.lugar;
 	}
@@ -176,6 +158,10 @@ public class DesperdicioDetalle implements Serializable {
 		this.lugar = lugar;
 	}
 
+
+	//bi-directional many-to-one association to LugarDetalle
+	@ManyToOne
+	@JoinColumn(name="idlugardetalle")
 	public LugarDetalle getLugarDetalle() {
 		return this.lugarDetalle;
 	}
@@ -184,6 +170,10 @@ public class DesperdicioDetalle implements Serializable {
 		this.lugarDetalle = lugarDetalle;
 	}
 
+
+	//bi-directional many-to-one association to Subproducto
+	@ManyToOne
+	@JoinColumn(name="idsubproducto")
 	public Subproducto getSubproducto() {
 		return this.subproducto;
 	}
@@ -192,6 +182,10 @@ public class DesperdicioDetalle implements Serializable {
 		this.subproducto = subproducto;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -200,6 +194,10 @@ public class DesperdicioDetalle implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}
@@ -208,12 +206,29 @@ public class DesperdicioDetalle implements Serializable {
 		this.usuario = usuario;
 	}
 
+
+	//bi-directional many-to-one association to DetalleLoteDesperdicio
+	@OneToMany(mappedBy="desperdicioDetalle")
 	public List<DetalleLoteDesperdicio> getDetalleLoteDesperdicios() {
 		return this.detalleLoteDesperdicios;
 	}
 
 	public void setDetalleLoteDesperdicios(List<DetalleLoteDesperdicio> detalleLoteDesperdicios) {
 		this.detalleLoteDesperdicios = detalleLoteDesperdicios;
+	}
+
+	public DetalleLoteDesperdicio addDetalleLoteDesperdicio(DetalleLoteDesperdicio detalleLoteDesperdicio) {
+		getDetalleLoteDesperdicios().add(detalleLoteDesperdicio);
+		detalleLoteDesperdicio.setDesperdicioDetalle(this);
+
+		return detalleLoteDesperdicio;
+	}
+
+	public DetalleLoteDesperdicio removeDetalleLoteDesperdicio(DetalleLoteDesperdicio detalleLoteDesperdicio) {
+		getDetalleLoteDesperdicios().remove(detalleLoteDesperdicio);
+		detalleLoteDesperdicio.setDesperdicioDetalle(null);
+
+		return detalleLoteDesperdicio;
 	}
 
 }

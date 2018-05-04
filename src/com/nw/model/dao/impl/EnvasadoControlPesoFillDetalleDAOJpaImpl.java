@@ -6,7 +6,6 @@ import java.util.List;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 
-import com.nw.model.EnvasadoControlPesoFillCabecera;
 import com.nw.model.EnvasadoControlPesoFillDetalle;
 import com.nw.model.dao.EnvasadoControlPesoFillDetalleDAO;
 

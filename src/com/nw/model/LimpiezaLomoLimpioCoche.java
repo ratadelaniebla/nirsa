@@ -12,46 +12,25 @@ import java.util.List;
  */
 @Entity
 @Table(name="limpieza_lomo_limpio_coche")
+@NamedQuery(name="LimpiezaLomoLimpioCoche.findAll", query="SELECT l FROM LimpiezaLomoLimpioCoche l")
 public class LimpiezaLomoLimpioCoche implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idlimpiezalomolimpiocoche;
-
 	private Integer estado;
-
 	private Timestamp fecharegistro;
-
 	private String secuencia;
-
-	//bi-directional many-to-one association to LimpiezaLinea
-	@ManyToOne
-	@JoinColumn(name="idlimpiezalinea")
 	private LimpiezaLinea limpiezaLinea;
-
-	//bi-directional many-to-one association to LimpiezaProcesoLoteActivo
-	@ManyToOne
-	@JoinColumn(name="idlimpiezaprocesoloteactivo")
 	private LimpiezaProcesoLoteActivo limpiezaProcesoLoteActivo;
-
-	//bi-directional many-to-one association to Proceso
-	@ManyToOne
-	@JoinColumn(name="idproceso")
 	private Proceso proceso;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
-
-	//bi-directional many-to-one association to LonjasDetalleProcesoCoche
-	@OneToMany(mappedBy="limpiezaLomoLimpioCoche")
 	private List<LonjasDetalleProcesoCoche> lonjasDetalleProcesoCoches;
 
 	public LimpiezaLomoLimpioCoche() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdlimpiezalomolimpiocoche() {
 		return this.idlimpiezalomolimpiocoche;
 	}
@@ -59,6 +38,7 @@ public class LimpiezaLomoLimpioCoche implements Serializable {
 	public void setIdlimpiezalomolimpiocoche(Long idlimpiezalomolimpiocoche) {
 		this.idlimpiezalomolimpiocoche = idlimpiezalomolimpiocoche;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -68,6 +48,7 @@ public class LimpiezaLomoLimpioCoche implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Timestamp getFecharegistro() {
 		return this.fecharegistro;
 	}
@@ -75,6 +56,7 @@ public class LimpiezaLomoLimpioCoche implements Serializable {
 	public void setFecharegistro(Timestamp fecharegistro) {
 		this.fecharegistro = fecharegistro;
 	}
+
 
 	public String getSecuencia() {
 		return this.secuencia;
@@ -84,6 +66,10 @@ public class LimpiezaLomoLimpioCoche implements Serializable {
 		this.secuencia = secuencia;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaLinea
+	@ManyToOne
+	@JoinColumn(name="idlimpiezalinea")
 	public LimpiezaLinea getLimpiezaLinea() {
 		return this.limpiezaLinea;
 	}
@@ -92,6 +78,10 @@ public class LimpiezaLomoLimpioCoche implements Serializable {
 		this.limpiezaLinea = limpiezaLinea;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaProcesoLoteActivo
+	@ManyToOne
+	@JoinColumn(name="idlimpiezaprocesoloteactivo")
 	public LimpiezaProcesoLoteActivo getLimpiezaProcesoLoteActivo() {
 		return this.limpiezaProcesoLoteActivo;
 	}
@@ -100,6 +90,10 @@ public class LimpiezaLomoLimpioCoche implements Serializable {
 		this.limpiezaProcesoLoteActivo = limpiezaProcesoLoteActivo;
 	}
 
+
+	//bi-directional many-to-one association to Proceso
+	@ManyToOne
+	@JoinColumn(name="idproceso")
 	public Proceso getProceso() {
 		return this.proceso;
 	}
@@ -108,6 +102,10 @@ public class LimpiezaLomoLimpioCoche implements Serializable {
 		this.proceso = proceso;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}
@@ -116,12 +114,29 @@ public class LimpiezaLomoLimpioCoche implements Serializable {
 		this.usuario = usuario;
 	}
 
+
+	//bi-directional many-to-one association to LonjasDetalleProcesoCoche
+	@OneToMany(mappedBy="limpiezaLomoLimpioCoche")
 	public List<LonjasDetalleProcesoCoche> getLonjasDetalleProcesoCoches() {
 		return this.lonjasDetalleProcesoCoches;
 	}
 
 	public void setLonjasDetalleProcesoCoches(List<LonjasDetalleProcesoCoche> lonjasDetalleProcesoCoches) {
 		this.lonjasDetalleProcesoCoches = lonjasDetalleProcesoCoches;
+	}
+
+	public LonjasDetalleProcesoCoche addLonjasDetalleProcesoCoch(LonjasDetalleProcesoCoche lonjasDetalleProcesoCoch) {
+		getLonjasDetalleProcesoCoches().add(lonjasDetalleProcesoCoch);
+		lonjasDetalleProcesoCoch.setLimpiezaLomoLimpioCoche(this);
+
+		return lonjasDetalleProcesoCoch;
+	}
+
+	public LonjasDetalleProcesoCoche removeLonjasDetalleProcesoCoch(LonjasDetalleProcesoCoche lonjasDetalleProcesoCoch) {
+		getLonjasDetalleProcesoCoches().remove(lonjasDetalleProcesoCoch);
+		lonjasDetalleProcesoCoch.setLimpiezaLomoLimpioCoche(null);
+
+		return lonjasDetalleProcesoCoch;
 	}
 
 }

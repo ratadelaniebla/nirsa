@@ -11,29 +11,22 @@ import java.util.List;
  */
 @Entity
 @Table(name="calidad_muestra_tipo_analisis")
+@NamedQuery(name="CalidadMuestraTipoAnalisi.findAll", query="SELECT c FROM CalidadMuestraTipoAnalisi c")
 public class CalidadMuestraTipoAnalisi implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idcalidadmuestratipoanalisis;
-
 	private Integer compositas;
-
 	private String descripcion;
-
 	private Integer limiteppm;
-
-	@Column(name="texto_individual")
 	private String textoIndividual;
-
-	//bi-directional many-to-one association to CalidadMuestraAreaCabecera
-	@OneToMany(mappedBy="calidadMuestraTipoAnalisi")
 	private List<CalidadMuestraAreaCabecera> calidadMuestraAreaCabeceras;
 
 	public CalidadMuestraTipoAnalisi() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdcalidadmuestratipoanalisis() {
 		return this.idcalidadmuestratipoanalisis;
 	}
@@ -41,6 +34,7 @@ public class CalidadMuestraTipoAnalisi implements Serializable {
 	public void setIdcalidadmuestratipoanalisis(Integer idcalidadmuestratipoanalisis) {
 		this.idcalidadmuestratipoanalisis = idcalidadmuestratipoanalisis;
 	}
+
 
 	public Integer getCompositas() {
 		return this.compositas;
@@ -50,6 +44,7 @@ public class CalidadMuestraTipoAnalisi implements Serializable {
 		this.compositas = compositas;
 	}
 
+
 	public String getDescripcion() {
 		return this.descripcion;
 	}
@@ -57,6 +52,7 @@ public class CalidadMuestraTipoAnalisi implements Serializable {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+
 
 	public Integer getLimiteppm() {
 		return this.limiteppm;
@@ -66,6 +62,8 @@ public class CalidadMuestraTipoAnalisi implements Serializable {
 		this.limiteppm = limiteppm;
 	}
 
+
+	@Column(name="texto_individual")
 	public String getTextoIndividual() {
 		return this.textoIndividual;
 	}
@@ -74,12 +72,29 @@ public class CalidadMuestraTipoAnalisi implements Serializable {
 		this.textoIndividual = textoIndividual;
 	}
 
+
+	//bi-directional many-to-one association to CalidadMuestraAreaCabecera
+	@OneToMany(mappedBy="calidadMuestraTipoAnalisi")
 	public List<CalidadMuestraAreaCabecera> getCalidadMuestraAreaCabeceras() {
 		return this.calidadMuestraAreaCabeceras;
 	}
 
 	public void setCalidadMuestraAreaCabeceras(List<CalidadMuestraAreaCabecera> calidadMuestraAreaCabeceras) {
 		this.calidadMuestraAreaCabeceras = calidadMuestraAreaCabeceras;
+	}
+
+	public CalidadMuestraAreaCabecera addCalidadMuestraAreaCabecera(CalidadMuestraAreaCabecera calidadMuestraAreaCabecera) {
+		getCalidadMuestraAreaCabeceras().add(calidadMuestraAreaCabecera);
+		calidadMuestraAreaCabecera.setCalidadMuestraTipoAnalisi(this);
+
+		return calidadMuestraAreaCabecera;
+	}
+
+	public CalidadMuestraAreaCabecera removeCalidadMuestraAreaCabecera(CalidadMuestraAreaCabecera calidadMuestraAreaCabecera) {
+		getCalidadMuestraAreaCabeceras().remove(calidadMuestraAreaCabecera);
+		calidadMuestraAreaCabecera.setCalidadMuestraTipoAnalisi(null);
+
+		return calidadMuestraAreaCabecera;
 	}
 
 }

@@ -11,34 +11,25 @@ import java.util.List;
  */
 @Entity
 @Table(name="limpieza_rallado_tipo")
+@NamedQuery(name="LimpiezaRalladoTipo.findAll", query="SELECT l FROM LimpiezaRalladoTipo l")
 public class LimpiezaRalladoTipo implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idlimpiezaralladotipo;
-
 	private Boolean almacenarpeso;
-
 	private String descripcion;
-
 	private Boolean produccionanterior;
-
 	private Boolean requierelinea;
-
 	private Boolean requierelote;
-
 	private double tara;
-
 	private double taradobleproposito;
-
-	//bi-directional many-to-one association to LimpiezaRalladoDetallePeso
-	@OneToMany(mappedBy="limpiezaRalladoTipo")
 	private List<LimpiezaRalladoDetallePeso> limpiezaRalladoDetallePesos;
 
 	public LimpiezaRalladoTipo() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdlimpiezaralladotipo() {
 		return this.idlimpiezaralladotipo;
 	}
@@ -46,6 +37,7 @@ public class LimpiezaRalladoTipo implements Serializable {
 	public void setIdlimpiezaralladotipo(Integer idlimpiezaralladotipo) {
 		this.idlimpiezaralladotipo = idlimpiezaralladotipo;
 	}
+
 
 	public Boolean getAlmacenarpeso() {
 		return this.almacenarpeso;
@@ -55,6 +47,7 @@ public class LimpiezaRalladoTipo implements Serializable {
 		this.almacenarpeso = almacenarpeso;
 	}
 
+
 	public String getDescripcion() {
 		return this.descripcion;
 	}
@@ -62,6 +55,7 @@ public class LimpiezaRalladoTipo implements Serializable {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+
 
 	public Boolean getProduccionanterior() {
 		return this.produccionanterior;
@@ -71,6 +65,7 @@ public class LimpiezaRalladoTipo implements Serializable {
 		this.produccionanterior = produccionanterior;
 	}
 
+
 	public Boolean getRequierelinea() {
 		return this.requierelinea;
 	}
@@ -78,6 +73,7 @@ public class LimpiezaRalladoTipo implements Serializable {
 	public void setRequierelinea(Boolean requierelinea) {
 		this.requierelinea = requierelinea;
 	}
+
 
 	public Boolean getRequierelote() {
 		return this.requierelote;
@@ -87,6 +83,7 @@ public class LimpiezaRalladoTipo implements Serializable {
 		this.requierelote = requierelote;
 	}
 
+
 	public double getTara() {
 		return this.tara;
 	}
@@ -94,6 +91,7 @@ public class LimpiezaRalladoTipo implements Serializable {
 	public void setTara(double tara) {
 		this.tara = tara;
 	}
+
 
 	public double getTaradobleproposito() {
 		return this.taradobleproposito;
@@ -103,12 +101,29 @@ public class LimpiezaRalladoTipo implements Serializable {
 		this.taradobleproposito = taradobleproposito;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaRalladoDetallePeso
+	@OneToMany(mappedBy="limpiezaRalladoTipo")
 	public List<LimpiezaRalladoDetallePeso> getLimpiezaRalladoDetallePesos() {
 		return this.limpiezaRalladoDetallePesos;
 	}
 
 	public void setLimpiezaRalladoDetallePesos(List<LimpiezaRalladoDetallePeso> limpiezaRalladoDetallePesos) {
 		this.limpiezaRalladoDetallePesos = limpiezaRalladoDetallePesos;
+	}
+
+	public LimpiezaRalladoDetallePeso addLimpiezaRalladoDetallePeso(LimpiezaRalladoDetallePeso limpiezaRalladoDetallePeso) {
+		getLimpiezaRalladoDetallePesos().add(limpiezaRalladoDetallePeso);
+		limpiezaRalladoDetallePeso.setLimpiezaRalladoTipo(this);
+
+		return limpiezaRalladoDetallePeso;
+	}
+
+	public LimpiezaRalladoDetallePeso removeLimpiezaRalladoDetallePeso(LimpiezaRalladoDetallePeso limpiezaRalladoDetallePeso) {
+		getLimpiezaRalladoDetallePesos().remove(limpiezaRalladoDetallePeso);
+		limpiezaRalladoDetallePeso.setLimpiezaRalladoTipo(null);
+
+		return limpiezaRalladoDetallePeso;
 	}
 
 }

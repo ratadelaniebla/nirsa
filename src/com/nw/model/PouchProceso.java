@@ -12,44 +12,24 @@ import java.util.List;
  */
 @Entity
 @Table(name="pouch_proceso")
+@NamedQuery(name="PouchProceso.findAll", query="SELECT p FROM PouchProceso p")
 public class PouchProceso implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idpouchproceso;
-
 	private Timestamp fechareg;
-
 	private Long ordenproduccion;
-
-	//bi-directional many-to-one association to PouchDetalleProcesoLote
-	@OneToMany(mappedBy="pouchProceso")
 	private List<PouchDetalleProcesoLote> pouchDetalleProcesoLotes;
-
-	//bi-directional many-to-one association to ProcesoAperturaCierre
-	@ManyToOne
-	@JoinColumn(name="idprocesoaperturacierre")
 	private ProcesoAperturaCierre procesoAperturaCierre;
-
-	//bi-directional many-to-one association to Produccion
-	@ManyToOne
-	@JoinColumn(name="idproduccion")
 	private Produccion produccion;
-
-	//bi-directional many-to-one association to ProduccionOrdenPedido
-	@ManyToOne
-	@JoinColumn(name="idproduccionordenpedido")
 	private ProduccionOrdenPedido produccionOrdenPedido;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public PouchProceso() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdpouchproceso() {
 		return this.idpouchproceso;
 	}
@@ -57,6 +37,7 @@ public class PouchProceso implements Serializable {
 	public void setIdpouchproceso(Long idpouchproceso) {
 		this.idpouchproceso = idpouchproceso;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -66,6 +47,7 @@ public class PouchProceso implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public Long getOrdenproduccion() {
 		return this.ordenproduccion;
 	}
@@ -74,6 +56,9 @@ public class PouchProceso implements Serializable {
 		this.ordenproduccion = ordenproduccion;
 	}
 
+
+	//bi-directional many-to-one association to PouchDetalleProcesoLote
+	@OneToMany(mappedBy="pouchProceso")
 	public List<PouchDetalleProcesoLote> getPouchDetalleProcesoLotes() {
 		return this.pouchDetalleProcesoLotes;
 	}
@@ -82,6 +67,24 @@ public class PouchProceso implements Serializable {
 		this.pouchDetalleProcesoLotes = pouchDetalleProcesoLotes;
 	}
 
+	public PouchDetalleProcesoLote addPouchDetalleProcesoLote(PouchDetalleProcesoLote pouchDetalleProcesoLote) {
+		getPouchDetalleProcesoLotes().add(pouchDetalleProcesoLote);
+		pouchDetalleProcesoLote.setPouchProceso(this);
+
+		return pouchDetalleProcesoLote;
+	}
+
+	public PouchDetalleProcesoLote removePouchDetalleProcesoLote(PouchDetalleProcesoLote pouchDetalleProcesoLote) {
+		getPouchDetalleProcesoLotes().remove(pouchDetalleProcesoLote);
+		pouchDetalleProcesoLote.setPouchProceso(null);
+
+		return pouchDetalleProcesoLote;
+	}
+
+
+	//bi-directional many-to-one association to ProcesoAperturaCierre
+	@ManyToOne
+	@JoinColumn(name="idprocesoaperturacierre")
 	public ProcesoAperturaCierre getProcesoAperturaCierre() {
 		return this.procesoAperturaCierre;
 	}
@@ -90,6 +93,10 @@ public class PouchProceso implements Serializable {
 		this.procesoAperturaCierre = procesoAperturaCierre;
 	}
 
+
+	//bi-directional many-to-one association to Produccion
+	@ManyToOne
+	@JoinColumn(name="idproduccion")
 	public Produccion getProduccion() {
 		return this.produccion;
 	}
@@ -98,6 +105,10 @@ public class PouchProceso implements Serializable {
 		this.produccion = produccion;
 	}
 
+
+	//bi-directional many-to-one association to ProduccionOrdenPedido
+	@ManyToOne
+	@JoinColumn(name="idproduccionordenpedido")
 	public ProduccionOrdenPedido getProduccionOrdenPedido() {
 		return this.produccionOrdenPedido;
 	}
@@ -106,6 +117,10 @@ public class PouchProceso implements Serializable {
 		this.produccionOrdenPedido = produccionOrdenPedido;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

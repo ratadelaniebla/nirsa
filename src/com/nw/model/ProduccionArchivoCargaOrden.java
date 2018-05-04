@@ -12,16 +12,17 @@ import java.util.List;
  */
 @Entity
 @Table(name="produccion_archivo_carga_orden")
+@NamedQuery(name="ProduccionArchivoCargaOrden.findAll", query="SELECT p FROM ProduccionArchivoCargaOrden p")
 public class ProduccionArchivoCargaOrden implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Long idproduccionarchivocargaorden;
 	private Timestamp fechaarchivo;
 	private Timestamp fechacarga;
-	private Long idproduccion;
-	private String idusuario;
 	private String nombrearchivo;
 	private String observacion;
 	private Integer semana;
+	private Produccion produccion;
+	private Usuario usuario;
 	private List<ProduccionArchivoCargaOrdenDetalle> produccionArchivoCargaOrdenDetalles;
 
 	public ProduccionArchivoCargaOrden() {
@@ -29,8 +30,7 @@ public class ProduccionArchivoCargaOrden implements Serializable {
 
 
 	@Id
-	@SequenceGenerator(name="PRODUCCION_ARCHIVO_CARGA_ORDEN_IDPRODUCCIONARCHIVOCARGAORDEN_GENERATOR", sequenceName="PRODUCCION_ARCHIVO_CARGA_ORDE_IDPRODUCCIONARCHIVOCARGAORDEN_SEQ")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PRODUCCION_ARCHIVO_CARGA_ORDEN_IDPRODUCCIONARCHIVOCARGAORDEN_GENERATOR")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdproduccionarchivocargaorden() {
 		return this.idproduccionarchivocargaorden;
 	}
@@ -55,24 +55,6 @@ public class ProduccionArchivoCargaOrden implements Serializable {
 
 	public void setFechacarga(Timestamp fechacarga) {
 		this.fechacarga = fechacarga;
-	}
-
-
-	public Long getIdproduccion() {
-		return this.idproduccion;
-	}
-
-	public void setIdproduccion(Long idproduccion) {
-		this.idproduccion = idproduccion;
-	}
-
-
-	public String getIdusuario() {
-		return this.idusuario;
-	}
-
-	public void setIdusuario(String idusuario) {
-		this.idusuario = idusuario;
 	}
 
 
@@ -103,6 +85,30 @@ public class ProduccionArchivoCargaOrden implements Serializable {
 	}
 
 
+	//bi-directional many-to-one association to Produccion
+	@ManyToOne
+	@JoinColumn(name="idproduccion")
+	public Produccion getProduccion() {
+		return this.produccion;
+	}
+
+	public void setProduccion(Produccion produccion) {
+		this.produccion = produccion;
+	}
+
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
+	public Usuario getUsuario() {
+		return this.usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+
 	//bi-directional many-to-one association to ProduccionArchivoCargaOrdenDetalle
 	@OneToMany(mappedBy="produccionArchivoCargaOrden")
 	public List<ProduccionArchivoCargaOrdenDetalle> getProduccionArchivoCargaOrdenDetalles() {
@@ -111,6 +117,20 @@ public class ProduccionArchivoCargaOrden implements Serializable {
 
 	public void setProduccionArchivoCargaOrdenDetalles(List<ProduccionArchivoCargaOrdenDetalle> produccionArchivoCargaOrdenDetalles) {
 		this.produccionArchivoCargaOrdenDetalles = produccionArchivoCargaOrdenDetalles;
+	}
+
+	public ProduccionArchivoCargaOrdenDetalle addProduccionArchivoCargaOrdenDetalle(ProduccionArchivoCargaOrdenDetalle produccionArchivoCargaOrdenDetalle) {
+		getProduccionArchivoCargaOrdenDetalles().add(produccionArchivoCargaOrdenDetalle);
+		produccionArchivoCargaOrdenDetalle.setProduccionArchivoCargaOrden(this);
+
+		return produccionArchivoCargaOrdenDetalle;
+	}
+
+	public ProduccionArchivoCargaOrdenDetalle removeProduccionArchivoCargaOrdenDetalle(ProduccionArchivoCargaOrdenDetalle produccionArchivoCargaOrdenDetalle) {
+		getProduccionArchivoCargaOrdenDetalles().remove(produccionArchivoCargaOrdenDetalle);
+		produccionArchivoCargaOrdenDetalle.setProduccionArchivoCargaOrden(null);
+
+		return produccionArchivoCargaOrdenDetalle;
 	}
 
 }

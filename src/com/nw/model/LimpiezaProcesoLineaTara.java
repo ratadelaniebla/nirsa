@@ -11,41 +11,25 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="limpieza_proceso_linea_tara")
+@NamedQuery(name="LimpiezaProcesoLineaTara.findAll", query="SELECT l FROM LimpiezaProcesoLineaTara l")
 public class LimpiezaProcesoLineaTara implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idlimpiezaprocesolineatara;
-
 	private Timestamp fechareg;
-
 	private Integer idlimpiezamateriallomo;
-
 	private Integer idlimpiezamaterialrallado;
-
 	private double taralonjas;
-
 	private double tararallado;
-
-	//bi-directional many-to-one association to LimpiezaLinea
-	@ManyToOne
-	@JoinColumn(name="idlinea")
 	private LimpiezaLinea limpiezaLinea;
-
-	//bi-directional many-to-one association to LimpiezaProceso
-	@ManyToOne
-	@JoinColumn(name="idlimpiezaproceso")
 	private LimpiezaProceso limpiezaProceso;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public LimpiezaProcesoLineaTara() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdlimpiezaprocesolineatara() {
 		return this.idlimpiezaprocesolineatara;
 	}
@@ -53,6 +37,7 @@ public class LimpiezaProcesoLineaTara implements Serializable {
 	public void setIdlimpiezaprocesolineatara(Integer idlimpiezaprocesolineatara) {
 		this.idlimpiezaprocesolineatara = idlimpiezaprocesolineatara;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -62,6 +47,7 @@ public class LimpiezaProcesoLineaTara implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public Integer getIdlimpiezamateriallomo() {
 		return this.idlimpiezamateriallomo;
 	}
@@ -69,6 +55,7 @@ public class LimpiezaProcesoLineaTara implements Serializable {
 	public void setIdlimpiezamateriallomo(Integer idlimpiezamateriallomo) {
 		this.idlimpiezamateriallomo = idlimpiezamateriallomo;
 	}
+
 
 	public Integer getIdlimpiezamaterialrallado() {
 		return this.idlimpiezamaterialrallado;
@@ -78,6 +65,7 @@ public class LimpiezaProcesoLineaTara implements Serializable {
 		this.idlimpiezamaterialrallado = idlimpiezamaterialrallado;
 	}
 
+
 	public double getTaralonjas() {
 		return this.taralonjas;
 	}
@@ -85,6 +73,7 @@ public class LimpiezaProcesoLineaTara implements Serializable {
 	public void setTaralonjas(double taralonjas) {
 		this.taralonjas = taralonjas;
 	}
+
 
 	public double getTararallado() {
 		return this.tararallado;
@@ -94,6 +83,10 @@ public class LimpiezaProcesoLineaTara implements Serializable {
 		this.tararallado = tararallado;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaLinea
+	@ManyToOne
+	@JoinColumn(name="idlinea")
 	public LimpiezaLinea getLimpiezaLinea() {
 		return this.limpiezaLinea;
 	}
@@ -102,6 +95,10 @@ public class LimpiezaProcesoLineaTara implements Serializable {
 		this.limpiezaLinea = limpiezaLinea;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaProceso
+	@ManyToOne
+	@JoinColumn(name="idlimpiezaproceso")
 	public LimpiezaProceso getLimpiezaProceso() {
 		return this.limpiezaProceso;
 	}
@@ -110,6 +107,10 @@ public class LimpiezaProcesoLineaTara implements Serializable {
 		this.limpiezaProceso = limpiezaProceso;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

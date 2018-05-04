@@ -11,42 +11,24 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="turno_gestion_detalle")
+@NamedQuery(name="TurnoGestionDetalle.findAll", query="SELECT t FROM TurnoGestionDetalle t")
 public class TurnoGestionDetalle implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idturnogestiondetalle;
-
 	private Timestamp fechadesde;
-
 	private Timestamp fechahasta;
-
 	private Timestamp fecharegistro;
-
-	//bi-directional many-to-one association to Area
-	@ManyToOne
-	@JoinColumn(name="idarea")
 	private Area area;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to TurnoGestionCabecera
-	@ManyToOne
-	@JoinColumn(name="idturnogestion")
 	private TurnoGestionCabecera turnoGestionCabecera;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public TurnoGestionDetalle() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdturnogestiondetalle() {
 		return this.idturnogestiondetalle;
 	}
@@ -54,6 +36,7 @@ public class TurnoGestionDetalle implements Serializable {
 	public void setIdturnogestiondetalle(Long idturnogestiondetalle) {
 		this.idturnogestiondetalle = idturnogestiondetalle;
 	}
+
 
 	public Timestamp getFechadesde() {
 		return this.fechadesde;
@@ -63,6 +46,7 @@ public class TurnoGestionDetalle implements Serializable {
 		this.fechadesde = fechadesde;
 	}
 
+
 	public Timestamp getFechahasta() {
 		return this.fechahasta;
 	}
@@ -70,6 +54,7 @@ public class TurnoGestionDetalle implements Serializable {
 	public void setFechahasta(Timestamp fechahasta) {
 		this.fechahasta = fechahasta;
 	}
+
 
 	public Timestamp getFecharegistro() {
 		return this.fecharegistro;
@@ -79,6 +64,10 @@ public class TurnoGestionDetalle implements Serializable {
 		this.fecharegistro = fecharegistro;
 	}
 
+
+	//bi-directional many-to-one association to Area
+	@ManyToOne
+	@JoinColumn(name="idarea")
 	public Area getArea() {
 		return this.area;
 	}
@@ -87,6 +76,10 @@ public class TurnoGestionDetalle implements Serializable {
 		this.area = area;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -95,6 +88,10 @@ public class TurnoGestionDetalle implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to TurnoGestionCabecera
+	@ManyToOne
+	@JoinColumn(name="idturnogestion")
 	public TurnoGestionCabecera getTurnoGestionCabecera() {
 		return this.turnoGestionCabecera;
 	}
@@ -103,6 +100,10 @@ public class TurnoGestionDetalle implements Serializable {
 		this.turnoGestionCabecera = turnoGestionCabecera;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

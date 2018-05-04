@@ -12,74 +12,34 @@ import java.util.List;
  */
 @Entity
 @Table(name="control_ficha_batch")
+@NamedQuery(name="ControlFichaBatch.findAll", query="SELECT c FROM ControlFichaBatch c")
 public class ControlFichaBatch implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcontrolfichabatch;
-
 	private Integer estado;
-
 	private Timestamp fechaactualizacion;
-
 	private Timestamp fechareg;
-
 	private Integer idmaterial;
-
 	private String idusuarioactualizacion;
-
 	private String observaciones;
-
 	private String tarjetacodigo;
-
-	//bi-directional many-to-one association to ControlDetalleBatchEsterilizado
-	@OneToMany(mappedBy="controlFichaBatch")
 	private List<ControlDetalleBatchEsterilizado> controlDetalleBatchEsterilizados;
-
-	//bi-directional many-to-one association to ControlDetalleBatchLimpieza
-	@OneToMany(mappedBy="controlFichaBatch")
 	private List<ControlDetalleBatchLimpieza> controlDetalleBatchLimpiezas;
-
-	//bi-directional many-to-one association to ControlDetalleBatchMaquina
-	@OneToMany(mappedBy="controlFichaBatch")
 	private List<ControlDetalleBatchMaquina> controlDetalleBatchMaquinas;
-
-	//bi-directional many-to-one association to ControlDetalleBatchRallado
-	@OneToMany(mappedBy="controlFichaBatch")
 	private List<ControlDetalleBatchRallado> controlDetalleBatchRallados;
-
-	//bi-directional many-to-one association to Area
-	@ManyToOne
-	@JoinColumn(name="idarea")
 	private Area area;
-
-	//bi-directional many-to-one association to CocinaAperturaCierreDetalle
-	@ManyToOne
-	@JoinColumn(name="idcocinaaperturacierredetalle")
 	private CocinaAperturaCierreDetalle cocinaAperturaCierreDetalle;
-
-	//bi-directional many-to-one association to ControlBatchProceso
-	@ManyToOne
-	@JoinColumn(name="idcontrolbatchproceso")
 	private ControlBatchProceso controlBatchProceso;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
-
-	//bi-directional many-to-one association to LimpiezaRalladoDetallePeso
-	@OneToMany(mappedBy="controlFichaBatch")
 	private List<LimpiezaRalladoDetallePeso> limpiezaRalladoDetallePesos;
-
-	//bi-directional many-to-one association to LimpiezaRalladoGabetaMezclaBatch
-	@OneToMany(mappedBy="controlFichaBatch")
 	private List<LimpiezaRalladoGabetaMezclaBatch> limpiezaRalladoGabetaMezclaBatches;
 
 	public ControlFichaBatch() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcontrolfichabatch() {
 		return this.idcontrolfichabatch;
 	}
@@ -87,6 +47,7 @@ public class ControlFichaBatch implements Serializable {
 	public void setIdcontrolfichabatch(Long idcontrolfichabatch) {
 		this.idcontrolfichabatch = idcontrolfichabatch;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -96,6 +57,7 @@ public class ControlFichaBatch implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Timestamp getFechaactualizacion() {
 		return this.fechaactualizacion;
 	}
@@ -103,6 +65,7 @@ public class ControlFichaBatch implements Serializable {
 	public void setFechaactualizacion(Timestamp fechaactualizacion) {
 		this.fechaactualizacion = fechaactualizacion;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -112,6 +75,7 @@ public class ControlFichaBatch implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public Integer getIdmaterial() {
 		return this.idmaterial;
 	}
@@ -119,6 +83,7 @@ public class ControlFichaBatch implements Serializable {
 	public void setIdmaterial(Integer idmaterial) {
 		this.idmaterial = idmaterial;
 	}
+
 
 	public String getIdusuarioactualizacion() {
 		return this.idusuarioactualizacion;
@@ -128,6 +93,7 @@ public class ControlFichaBatch implements Serializable {
 		this.idusuarioactualizacion = idusuarioactualizacion;
 	}
 
+
 	public String getObservaciones() {
 		return this.observaciones;
 	}
@@ -135,6 +101,7 @@ public class ControlFichaBatch implements Serializable {
 	public void setObservaciones(String observaciones) {
 		this.observaciones = observaciones;
 	}
+
 
 	public String getTarjetacodigo() {
 		return this.tarjetacodigo;
@@ -144,6 +111,9 @@ public class ControlFichaBatch implements Serializable {
 		this.tarjetacodigo = tarjetacodigo;
 	}
 
+
+	//bi-directional many-to-one association to ControlDetalleBatchEsterilizado
+	@OneToMany(mappedBy="controlFichaBatch")
 	public List<ControlDetalleBatchEsterilizado> getControlDetalleBatchEsterilizados() {
 		return this.controlDetalleBatchEsterilizados;
 	}
@@ -152,6 +122,23 @@ public class ControlFichaBatch implements Serializable {
 		this.controlDetalleBatchEsterilizados = controlDetalleBatchEsterilizados;
 	}
 
+	public ControlDetalleBatchEsterilizado addControlDetalleBatchEsterilizado(ControlDetalleBatchEsterilizado controlDetalleBatchEsterilizado) {
+		getControlDetalleBatchEsterilizados().add(controlDetalleBatchEsterilizado);
+		controlDetalleBatchEsterilizado.setControlFichaBatch(this);
+
+		return controlDetalleBatchEsterilizado;
+	}
+
+	public ControlDetalleBatchEsterilizado removeControlDetalleBatchEsterilizado(ControlDetalleBatchEsterilizado controlDetalleBatchEsterilizado) {
+		getControlDetalleBatchEsterilizados().remove(controlDetalleBatchEsterilizado);
+		controlDetalleBatchEsterilizado.setControlFichaBatch(null);
+
+		return controlDetalleBatchEsterilizado;
+	}
+
+
+	//bi-directional many-to-one association to ControlDetalleBatchLimpieza
+	@OneToMany(mappedBy="controlFichaBatch")
 	public List<ControlDetalleBatchLimpieza> getControlDetalleBatchLimpiezas() {
 		return this.controlDetalleBatchLimpiezas;
 	}
@@ -160,6 +147,23 @@ public class ControlFichaBatch implements Serializable {
 		this.controlDetalleBatchLimpiezas = controlDetalleBatchLimpiezas;
 	}
 
+	public ControlDetalleBatchLimpieza addControlDetalleBatchLimpieza(ControlDetalleBatchLimpieza controlDetalleBatchLimpieza) {
+		getControlDetalleBatchLimpiezas().add(controlDetalleBatchLimpieza);
+		controlDetalleBatchLimpieza.setControlFichaBatch(this);
+
+		return controlDetalleBatchLimpieza;
+	}
+
+	public ControlDetalleBatchLimpieza removeControlDetalleBatchLimpieza(ControlDetalleBatchLimpieza controlDetalleBatchLimpieza) {
+		getControlDetalleBatchLimpiezas().remove(controlDetalleBatchLimpieza);
+		controlDetalleBatchLimpieza.setControlFichaBatch(null);
+
+		return controlDetalleBatchLimpieza;
+	}
+
+
+	//bi-directional many-to-one association to ControlDetalleBatchMaquina
+	@OneToMany(mappedBy="controlFichaBatch")
 	public List<ControlDetalleBatchMaquina> getControlDetalleBatchMaquinas() {
 		return this.controlDetalleBatchMaquinas;
 	}
@@ -168,6 +172,23 @@ public class ControlFichaBatch implements Serializable {
 		this.controlDetalleBatchMaquinas = controlDetalleBatchMaquinas;
 	}
 
+	public ControlDetalleBatchMaquina addControlDetalleBatchMaquina(ControlDetalleBatchMaquina controlDetalleBatchMaquina) {
+		getControlDetalleBatchMaquinas().add(controlDetalleBatchMaquina);
+		controlDetalleBatchMaquina.setControlFichaBatch(this);
+
+		return controlDetalleBatchMaquina;
+	}
+
+	public ControlDetalleBatchMaquina removeControlDetalleBatchMaquina(ControlDetalleBatchMaquina controlDetalleBatchMaquina) {
+		getControlDetalleBatchMaquinas().remove(controlDetalleBatchMaquina);
+		controlDetalleBatchMaquina.setControlFichaBatch(null);
+
+		return controlDetalleBatchMaquina;
+	}
+
+
+	//bi-directional many-to-one association to ControlDetalleBatchRallado
+	@OneToMany(mappedBy="controlFichaBatch")
 	public List<ControlDetalleBatchRallado> getControlDetalleBatchRallados() {
 		return this.controlDetalleBatchRallados;
 	}
@@ -176,6 +197,24 @@ public class ControlFichaBatch implements Serializable {
 		this.controlDetalleBatchRallados = controlDetalleBatchRallados;
 	}
 
+	public ControlDetalleBatchRallado addControlDetalleBatchRallado(ControlDetalleBatchRallado controlDetalleBatchRallado) {
+		getControlDetalleBatchRallados().add(controlDetalleBatchRallado);
+		controlDetalleBatchRallado.setControlFichaBatch(this);
+
+		return controlDetalleBatchRallado;
+	}
+
+	public ControlDetalleBatchRallado removeControlDetalleBatchRallado(ControlDetalleBatchRallado controlDetalleBatchRallado) {
+		getControlDetalleBatchRallados().remove(controlDetalleBatchRallado);
+		controlDetalleBatchRallado.setControlFichaBatch(null);
+
+		return controlDetalleBatchRallado;
+	}
+
+
+	//bi-directional many-to-one association to Area
+	@ManyToOne
+	@JoinColumn(name="idarea")
 	public Area getArea() {
 		return this.area;
 	}
@@ -184,6 +223,10 @@ public class ControlFichaBatch implements Serializable {
 		this.area = area;
 	}
 
+
+	//bi-directional many-to-one association to CocinaAperturaCierreDetalle
+	@ManyToOne
+	@JoinColumn(name="idcocinaaperturacierredetalle")
 	public CocinaAperturaCierreDetalle getCocinaAperturaCierreDetalle() {
 		return this.cocinaAperturaCierreDetalle;
 	}
@@ -192,6 +235,10 @@ public class ControlFichaBatch implements Serializable {
 		this.cocinaAperturaCierreDetalle = cocinaAperturaCierreDetalle;
 	}
 
+
+	//bi-directional many-to-one association to ControlBatchProceso
+	@ManyToOne
+	@JoinColumn(name="idcontrolbatchproceso")
 	public ControlBatchProceso getControlBatchProceso() {
 		return this.controlBatchProceso;
 	}
@@ -200,6 +247,10 @@ public class ControlFichaBatch implements Serializable {
 		this.controlBatchProceso = controlBatchProceso;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}
@@ -208,6 +259,9 @@ public class ControlFichaBatch implements Serializable {
 		this.usuario = usuario;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaRalladoDetallePeso
+	@OneToMany(mappedBy="controlFichaBatch")
 	public List<LimpiezaRalladoDetallePeso> getLimpiezaRalladoDetallePesos() {
 		return this.limpiezaRalladoDetallePesos;
 	}
@@ -216,12 +270,43 @@ public class ControlFichaBatch implements Serializable {
 		this.limpiezaRalladoDetallePesos = limpiezaRalladoDetallePesos;
 	}
 
+	public LimpiezaRalladoDetallePeso addLimpiezaRalladoDetallePeso(LimpiezaRalladoDetallePeso limpiezaRalladoDetallePeso) {
+		getLimpiezaRalladoDetallePesos().add(limpiezaRalladoDetallePeso);
+		limpiezaRalladoDetallePeso.setControlFichaBatch(this);
+
+		return limpiezaRalladoDetallePeso;
+	}
+
+	public LimpiezaRalladoDetallePeso removeLimpiezaRalladoDetallePeso(LimpiezaRalladoDetallePeso limpiezaRalladoDetallePeso) {
+		getLimpiezaRalladoDetallePesos().remove(limpiezaRalladoDetallePeso);
+		limpiezaRalladoDetallePeso.setControlFichaBatch(null);
+
+		return limpiezaRalladoDetallePeso;
+	}
+
+
+	//bi-directional many-to-one association to LimpiezaRalladoGabetaMezclaBatch
+	@OneToMany(mappedBy="controlFichaBatch")
 	public List<LimpiezaRalladoGabetaMezclaBatch> getLimpiezaRalladoGabetaMezclaBatches() {
 		return this.limpiezaRalladoGabetaMezclaBatches;
 	}
 
 	public void setLimpiezaRalladoGabetaMezclaBatches(List<LimpiezaRalladoGabetaMezclaBatch> limpiezaRalladoGabetaMezclaBatches) {
 		this.limpiezaRalladoGabetaMezclaBatches = limpiezaRalladoGabetaMezclaBatches;
+	}
+
+	public LimpiezaRalladoGabetaMezclaBatch addLimpiezaRalladoGabetaMezclaBatch(LimpiezaRalladoGabetaMezclaBatch limpiezaRalladoGabetaMezclaBatch) {
+		getLimpiezaRalladoGabetaMezclaBatches().add(limpiezaRalladoGabetaMezclaBatch);
+		limpiezaRalladoGabetaMezclaBatch.setControlFichaBatch(this);
+
+		return limpiezaRalladoGabetaMezclaBatch;
+	}
+
+	public LimpiezaRalladoGabetaMezclaBatch removeLimpiezaRalladoGabetaMezclaBatch(LimpiezaRalladoGabetaMezclaBatch limpiezaRalladoGabetaMezclaBatch) {
+		getLimpiezaRalladoGabetaMezclaBatches().remove(limpiezaRalladoGabetaMezclaBatch);
+		limpiezaRalladoGabetaMezclaBatch.setControlFichaBatch(null);
+
+		return limpiezaRalladoGabetaMezclaBatch;
 	}
 
 }

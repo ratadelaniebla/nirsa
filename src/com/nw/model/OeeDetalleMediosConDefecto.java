@@ -12,75 +12,32 @@ import java.util.List;
  */
 @Entity
 @Table(name="oee_detalle_medios_con_defecto")
+@NamedQuery(name="OeeDetalleMediosConDefecto.findAll", query="SELECT o FROM OeeDetalleMediosConDefecto o")
 public class OeeDetalleMediosConDefecto implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_oee_detalle_medios_con_defecto")
 	private Long idOeeDetalleMediosConDefecto;
-
-	@Column(name="cantidad_defectos")
 	private Integer cantidadDefectos;
-
-	@Column(name="fecha_hora_registro")
 	private Timestamp fechaHoraRegistro;
-
-	@Column(name="fecha_registro")
 	private Timestamp fechaRegistro;
-
 	private String observacion;
-
-	//bi-directional many-to-one association to Empleado
-	@ManyToOne
-	@JoinColumn(name="idempleado")
 	private Empleado empleado;
-
-	//bi-directional many-to-one association to LimpiezaProcesoEmpleado
-	@ManyToOne
-	@JoinColumn(name="idlimpiezaprocesoempleado")
 	private LimpiezaProcesoEmpleado limpiezaProcesoEmpleado;
-
-	//bi-directional many-to-one association to OeeDefecto
-	@ManyToOne
-	@JoinColumn(name="id_oee_defectos")
 	private OeeDefecto oeeDefecto;
-
-	//bi-directional many-to-one association to Proceso
-	@ManyToOne
-	@JoinColumn(name="idproceso")
 	private Proceso proceso;
-
-	//bi-directional many-to-one association to ProcesoAperturaCierre
-	@ManyToOne
-	@JoinColumn(name="idprocesoaperturacierre")
 	private ProcesoAperturaCierre procesoAperturaCierre;
-
-	//bi-directional many-to-one association to ProduccionDetalleLote
-	@ManyToOne
-	@JoinColumn(name="idproducciondetallelote")
 	private ProduccionDetalleLote produccionDetalleLote;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
-
-	//bi-directional many-to-one association to OeeDetalleMediosConDefectoEnvasado
-	@OneToMany(mappedBy="oeeDetalleMediosConDefecto")
 	private List<OeeDetalleMediosConDefectoEnvasado> oeeDetalleMediosConDefectoEnvasados;
-
-	//bi-directional many-to-one association to OeeDetalleMediosConDefectoLimpieza
-	@OneToMany(mappedBy="oeeDetalleMediosConDefecto")
 	private List<OeeDetalleMediosConDefectoLimpieza> oeeDetalleMediosConDefectoLimpiezas;
-
-	//bi-directional many-to-one association to OeeDetalleMediosConDefectoLonja
-	@OneToMany(mappedBy="oeeDetalleMediosConDefecto")
 	private List<OeeDetalleMediosConDefectoLonja> oeeDetalleMediosConDefectoLonjas;
 
 	public OeeDetalleMediosConDefecto() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_oee_detalle_medios_con_defecto")
 	public Long getIdOeeDetalleMediosConDefecto() {
 		return this.idOeeDetalleMediosConDefecto;
 	}
@@ -89,6 +46,8 @@ public class OeeDetalleMediosConDefecto implements Serializable {
 		this.idOeeDetalleMediosConDefecto = idOeeDetalleMediosConDefecto;
 	}
 
+
+	@Column(name="cantidad_defectos")
 	public Integer getCantidadDefectos() {
 		return this.cantidadDefectos;
 	}
@@ -97,6 +56,8 @@ public class OeeDetalleMediosConDefecto implements Serializable {
 		this.cantidadDefectos = cantidadDefectos;
 	}
 
+
+	@Column(name="fecha_hora_registro")
 	public Timestamp getFechaHoraRegistro() {
 		return this.fechaHoraRegistro;
 	}
@@ -105,6 +66,8 @@ public class OeeDetalleMediosConDefecto implements Serializable {
 		this.fechaHoraRegistro = fechaHoraRegistro;
 	}
 
+
+	@Column(name="fecha_registro")
 	public Timestamp getFechaRegistro() {
 		return this.fechaRegistro;
 	}
@@ -112,6 +75,7 @@ public class OeeDetalleMediosConDefecto implements Serializable {
 	public void setFechaRegistro(Timestamp fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
 	}
+
 
 	public String getObservacion() {
 		return this.observacion;
@@ -121,6 +85,10 @@ public class OeeDetalleMediosConDefecto implements Serializable {
 		this.observacion = observacion;
 	}
 
+
+	//bi-directional many-to-one association to Empleado
+	@ManyToOne
+	@JoinColumn(name="idempleado")
 	public Empleado getEmpleado() {
 		return this.empleado;
 	}
@@ -129,6 +97,10 @@ public class OeeDetalleMediosConDefecto implements Serializable {
 		this.empleado = empleado;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaProcesoEmpleado
+	@ManyToOne
+	@JoinColumn(name="idlimpiezaprocesoempleado")
 	public LimpiezaProcesoEmpleado getLimpiezaProcesoEmpleado() {
 		return this.limpiezaProcesoEmpleado;
 	}
@@ -137,6 +109,10 @@ public class OeeDetalleMediosConDefecto implements Serializable {
 		this.limpiezaProcesoEmpleado = limpiezaProcesoEmpleado;
 	}
 
+
+	//bi-directional many-to-one association to OeeDefecto
+	@ManyToOne
+	@JoinColumn(name="id_oee_defectos")
 	public OeeDefecto getOeeDefecto() {
 		return this.oeeDefecto;
 	}
@@ -145,6 +121,10 @@ public class OeeDetalleMediosConDefecto implements Serializable {
 		this.oeeDefecto = oeeDefecto;
 	}
 
+
+	//bi-directional many-to-one association to Proceso
+	@ManyToOne
+	@JoinColumn(name="idproceso")
 	public Proceso getProceso() {
 		return this.proceso;
 	}
@@ -153,6 +133,10 @@ public class OeeDetalleMediosConDefecto implements Serializable {
 		this.proceso = proceso;
 	}
 
+
+	//bi-directional many-to-one association to ProcesoAperturaCierre
+	@ManyToOne
+	@JoinColumn(name="idprocesoaperturacierre")
 	public ProcesoAperturaCierre getProcesoAperturaCierre() {
 		return this.procesoAperturaCierre;
 	}
@@ -161,6 +145,10 @@ public class OeeDetalleMediosConDefecto implements Serializable {
 		this.procesoAperturaCierre = procesoAperturaCierre;
 	}
 
+
+	//bi-directional many-to-one association to ProduccionDetalleLote
+	@ManyToOne
+	@JoinColumn(name="idproducciondetallelote")
 	public ProduccionDetalleLote getProduccionDetalleLote() {
 		return this.produccionDetalleLote;
 	}
@@ -169,6 +157,10 @@ public class OeeDetalleMediosConDefecto implements Serializable {
 		this.produccionDetalleLote = produccionDetalleLote;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}
@@ -177,6 +169,9 @@ public class OeeDetalleMediosConDefecto implements Serializable {
 		this.usuario = usuario;
 	}
 
+
+	//bi-directional many-to-one association to OeeDetalleMediosConDefectoEnvasado
+	@OneToMany(mappedBy="oeeDetalleMediosConDefecto")
 	public List<OeeDetalleMediosConDefectoEnvasado> getOeeDetalleMediosConDefectoEnvasados() {
 		return this.oeeDetalleMediosConDefectoEnvasados;
 	}
@@ -185,6 +180,23 @@ public class OeeDetalleMediosConDefecto implements Serializable {
 		this.oeeDetalleMediosConDefectoEnvasados = oeeDetalleMediosConDefectoEnvasados;
 	}
 
+	public OeeDetalleMediosConDefectoEnvasado addOeeDetalleMediosConDefectoEnvasado(OeeDetalleMediosConDefectoEnvasado oeeDetalleMediosConDefectoEnvasado) {
+		getOeeDetalleMediosConDefectoEnvasados().add(oeeDetalleMediosConDefectoEnvasado);
+		oeeDetalleMediosConDefectoEnvasado.setOeeDetalleMediosConDefecto(this);
+
+		return oeeDetalleMediosConDefectoEnvasado;
+	}
+
+	public OeeDetalleMediosConDefectoEnvasado removeOeeDetalleMediosConDefectoEnvasado(OeeDetalleMediosConDefectoEnvasado oeeDetalleMediosConDefectoEnvasado) {
+		getOeeDetalleMediosConDefectoEnvasados().remove(oeeDetalleMediosConDefectoEnvasado);
+		oeeDetalleMediosConDefectoEnvasado.setOeeDetalleMediosConDefecto(null);
+
+		return oeeDetalleMediosConDefectoEnvasado;
+	}
+
+
+	//bi-directional many-to-one association to OeeDetalleMediosConDefectoLimpieza
+	@OneToMany(mappedBy="oeeDetalleMediosConDefecto")
 	public List<OeeDetalleMediosConDefectoLimpieza> getOeeDetalleMediosConDefectoLimpiezas() {
 		return this.oeeDetalleMediosConDefectoLimpiezas;
 	}
@@ -193,12 +205,43 @@ public class OeeDetalleMediosConDefecto implements Serializable {
 		this.oeeDetalleMediosConDefectoLimpiezas = oeeDetalleMediosConDefectoLimpiezas;
 	}
 
+	public OeeDetalleMediosConDefectoLimpieza addOeeDetalleMediosConDefectoLimpieza(OeeDetalleMediosConDefectoLimpieza oeeDetalleMediosConDefectoLimpieza) {
+		getOeeDetalleMediosConDefectoLimpiezas().add(oeeDetalleMediosConDefectoLimpieza);
+		oeeDetalleMediosConDefectoLimpieza.setOeeDetalleMediosConDefecto(this);
+
+		return oeeDetalleMediosConDefectoLimpieza;
+	}
+
+	public OeeDetalleMediosConDefectoLimpieza removeOeeDetalleMediosConDefectoLimpieza(OeeDetalleMediosConDefectoLimpieza oeeDetalleMediosConDefectoLimpieza) {
+		getOeeDetalleMediosConDefectoLimpiezas().remove(oeeDetalleMediosConDefectoLimpieza);
+		oeeDetalleMediosConDefectoLimpieza.setOeeDetalleMediosConDefecto(null);
+
+		return oeeDetalleMediosConDefectoLimpieza;
+	}
+
+
+	//bi-directional many-to-one association to OeeDetalleMediosConDefectoLonja
+	@OneToMany(mappedBy="oeeDetalleMediosConDefecto")
 	public List<OeeDetalleMediosConDefectoLonja> getOeeDetalleMediosConDefectoLonjas() {
 		return this.oeeDetalleMediosConDefectoLonjas;
 	}
 
 	public void setOeeDetalleMediosConDefectoLonjas(List<OeeDetalleMediosConDefectoLonja> oeeDetalleMediosConDefectoLonjas) {
 		this.oeeDetalleMediosConDefectoLonjas = oeeDetalleMediosConDefectoLonjas;
+	}
+
+	public OeeDetalleMediosConDefectoLonja addOeeDetalleMediosConDefectoLonja(OeeDetalleMediosConDefectoLonja oeeDetalleMediosConDefectoLonja) {
+		getOeeDetalleMediosConDefectoLonjas().add(oeeDetalleMediosConDefectoLonja);
+		oeeDetalleMediosConDefectoLonja.setOeeDetalleMediosConDefecto(this);
+
+		return oeeDetalleMediosConDefectoLonja;
+	}
+
+	public OeeDetalleMediosConDefectoLonja removeOeeDetalleMediosConDefectoLonja(OeeDetalleMediosConDefectoLonja oeeDetalleMediosConDefectoLonja) {
+		getOeeDetalleMediosConDefectoLonjas().remove(oeeDetalleMediosConDefectoLonja);
+		oeeDetalleMediosConDefectoLonja.setOeeDetalleMediosConDefecto(null);
+
+		return oeeDetalleMediosConDefectoLonja;
 	}
 
 }

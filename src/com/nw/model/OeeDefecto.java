@@ -11,29 +11,22 @@ import java.util.List;
  */
 @Entity
 @Table(name="oee_defectos")
+@NamedQuery(name="OeeDefecto.findAll", query="SELECT o FROM OeeDefecto o")
 public class OeeDefecto implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_oee_defectos")
 	private Integer idOeeDefectos;
-
-	@Column(name="descripcion_defecto")
+	private String abreviacion;
 	private String descripcionDefecto;
-
-	//bi-directional many-to-one association to Proceso
-	@ManyToOne
-	@JoinColumn(name="idproceso")
 	private Proceso proceso;
-
-	//bi-directional many-to-one association to OeeDetalleMediosConDefecto
-	@OneToMany(mappedBy="oeeDefecto")
 	private List<OeeDetalleMediosConDefecto> oeeDetalleMediosConDefectos;
 
 	public OeeDefecto() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_oee_defectos")
 	public Integer getIdOeeDefectos() {
 		return this.idOeeDefectos;
 	}
@@ -42,6 +35,17 @@ public class OeeDefecto implements Serializable {
 		this.idOeeDefectos = idOeeDefectos;
 	}
 
+
+	public String getAbreviacion() {
+		return this.abreviacion;
+	}
+
+	public void setAbreviacion(String abreviacion) {
+		this.abreviacion = abreviacion;
+	}
+
+
+	@Column(name="descripcion_defecto")
 	public String getDescripcionDefecto() {
 		return this.descripcionDefecto;
 	}
@@ -50,6 +54,10 @@ public class OeeDefecto implements Serializable {
 		this.descripcionDefecto = descripcionDefecto;
 	}
 
+
+	//bi-directional many-to-one association to Proceso
+	@ManyToOne
+	@JoinColumn(name="idproceso")
 	public Proceso getProceso() {
 		return this.proceso;
 	}
@@ -58,12 +66,29 @@ public class OeeDefecto implements Serializable {
 		this.proceso = proceso;
 	}
 
+
+	//bi-directional many-to-one association to OeeDetalleMediosConDefecto
+	@OneToMany(mappedBy="oeeDefecto")
 	public List<OeeDetalleMediosConDefecto> getOeeDetalleMediosConDefectos() {
 		return this.oeeDetalleMediosConDefectos;
 	}
 
 	public void setOeeDetalleMediosConDefectos(List<OeeDetalleMediosConDefecto> oeeDetalleMediosConDefectos) {
 		this.oeeDetalleMediosConDefectos = oeeDetalleMediosConDefectos;
+	}
+
+	public OeeDetalleMediosConDefecto addOeeDetalleMediosConDefecto(OeeDetalleMediosConDefecto oeeDetalleMediosConDefecto) {
+		getOeeDetalleMediosConDefectos().add(oeeDetalleMediosConDefecto);
+		oeeDetalleMediosConDefecto.setOeeDefecto(this);
+
+		return oeeDetalleMediosConDefecto;
+	}
+
+	public OeeDetalleMediosConDefecto removeOeeDetalleMediosConDefecto(OeeDetalleMediosConDefecto oeeDetalleMediosConDefecto) {
+		getOeeDetalleMediosConDefectos().remove(oeeDetalleMediosConDefecto);
+		oeeDetalleMediosConDefecto.setOeeDefecto(null);
+
+		return oeeDetalleMediosConDefecto;
 	}
 
 }

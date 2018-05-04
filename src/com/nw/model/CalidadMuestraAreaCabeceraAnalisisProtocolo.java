@@ -11,53 +11,34 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="calidad_muestra_area_cabecera_analisis_protocolo")
+@NamedQuery(name="CalidadMuestraAreaCabeceraAnalisisProtocolo.findAll", query="SELECT c FROM CalidadMuestraAreaCabeceraAnalisisProtocolo c")
 public class CalidadMuestraAreaCabeceraAnalisisProtocolo implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcalidadmuestraareacabeceraanalisisprotocolo;
-
 	private Integer ccaracteristico;
-
 	private Integer cnocaracteristico;
-
 	private Timestamp fecharegistro;
-
 	private Integer idcnocaracteristico;
-
 	private Integer idonocaracteristico;
-
 	private Integer idsnocaracteristico;
-
 	private Integer npiezasproteinadegradada;
-
 	private Integer ocaracteristico;
-
 	private Integer onocaracteristico;
-
 	private double pesopastoso;
-
 	private double pesopiezaspastoso;
-
 	private Integer scaracteristico;
-
 	private Integer snocaracteristico;
-
 	private Integer texturafirme;
-
 	private Integer texturapastosa;
-
 	private Integer texturasuave;
-
-	//bi-directional many-to-one association to CalidadMuestraAreaCabecera
-	@ManyToOne
-	@JoinColumn(name="idcalidadmuestraareacabecera")
 	private CalidadMuestraAreaCabecera calidadMuestraAreaCabecera;
 
 	public CalidadMuestraAreaCabeceraAnalisisProtocolo() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcalidadmuestraareacabeceraanalisisprotocolo() {
 		return this.idcalidadmuestraareacabeceraanalisisprotocolo;
 	}
@@ -65,6 +46,7 @@ public class CalidadMuestraAreaCabeceraAnalisisProtocolo implements Serializable
 	public void setIdcalidadmuestraareacabeceraanalisisprotocolo(Long idcalidadmuestraareacabeceraanalisisprotocolo) {
 		this.idcalidadmuestraareacabeceraanalisisprotocolo = idcalidadmuestraareacabeceraanalisisprotocolo;
 	}
+
 
 	public Integer getCcaracteristico() {
 		return this.ccaracteristico;
@@ -74,6 +56,7 @@ public class CalidadMuestraAreaCabeceraAnalisisProtocolo implements Serializable
 		this.ccaracteristico = ccaracteristico;
 	}
 
+
 	public Integer getCnocaracteristico() {
 		return this.cnocaracteristico;
 	}
@@ -81,6 +64,7 @@ public class CalidadMuestraAreaCabeceraAnalisisProtocolo implements Serializable
 	public void setCnocaracteristico(Integer cnocaracteristico) {
 		this.cnocaracteristico = cnocaracteristico;
 	}
+
 
 	public Timestamp getFecharegistro() {
 		return this.fecharegistro;
@@ -90,6 +74,7 @@ public class CalidadMuestraAreaCabeceraAnalisisProtocolo implements Serializable
 		this.fecharegistro = fecharegistro;
 	}
 
+
 	public Integer getIdcnocaracteristico() {
 		return this.idcnocaracteristico;
 	}
@@ -97,6 +82,7 @@ public class CalidadMuestraAreaCabeceraAnalisisProtocolo implements Serializable
 	public void setIdcnocaracteristico(Integer idcnocaracteristico) {
 		this.idcnocaracteristico = idcnocaracteristico;
 	}
+
 
 	public Integer getIdonocaracteristico() {
 		return this.idonocaracteristico;
@@ -106,6 +92,7 @@ public class CalidadMuestraAreaCabeceraAnalisisProtocolo implements Serializable
 		this.idonocaracteristico = idonocaracteristico;
 	}
 
+
 	public Integer getIdsnocaracteristico() {
 		return this.idsnocaracteristico;
 	}
@@ -113,6 +100,7 @@ public class CalidadMuestraAreaCabeceraAnalisisProtocolo implements Serializable
 	public void setIdsnocaracteristico(Integer idsnocaracteristico) {
 		this.idsnocaracteristico = idsnocaracteristico;
 	}
+
 
 	public Integer getNpiezasproteinadegradada() {
 		return this.npiezasproteinadegradada;
@@ -122,6 +110,7 @@ public class CalidadMuestraAreaCabeceraAnalisisProtocolo implements Serializable
 		this.npiezasproteinadegradada = npiezasproteinadegradada;
 	}
 
+
 	public Integer getOcaracteristico() {
 		return this.ocaracteristico;
 	}
@@ -129,6 +118,7 @@ public class CalidadMuestraAreaCabeceraAnalisisProtocolo implements Serializable
 	public void setOcaracteristico(Integer ocaracteristico) {
 		this.ocaracteristico = ocaracteristico;
 	}
+
 
 	public Integer getOnocaracteristico() {
 		return this.onocaracteristico;
@@ -138,6 +128,7 @@ public class CalidadMuestraAreaCabeceraAnalisisProtocolo implements Serializable
 		this.onocaracteristico = onocaracteristico;
 	}
 
+
 	public double getPesopastoso() {
 		return this.pesopastoso;
 	}
@@ -145,6 +136,7 @@ public class CalidadMuestraAreaCabeceraAnalisisProtocolo implements Serializable
 	public void setPesopastoso(double pesopastoso) {
 		this.pesopastoso = pesopastoso;
 	}
+
 
 	public double getPesopiezaspastoso() {
 		return this.pesopiezaspastoso;
@@ -154,6 +146,7 @@ public class CalidadMuestraAreaCabeceraAnalisisProtocolo implements Serializable
 		this.pesopiezaspastoso = pesopiezaspastoso;
 	}
 
+
 	public Integer getScaracteristico() {
 		return this.scaracteristico;
 	}
@@ -161,6 +154,7 @@ public class CalidadMuestraAreaCabeceraAnalisisProtocolo implements Serializable
 	public void setScaracteristico(Integer scaracteristico) {
 		this.scaracteristico = scaracteristico;
 	}
+
 
 	public Integer getSnocaracteristico() {
 		return this.snocaracteristico;
@@ -170,6 +164,7 @@ public class CalidadMuestraAreaCabeceraAnalisisProtocolo implements Serializable
 		this.snocaracteristico = snocaracteristico;
 	}
 
+
 	public Integer getTexturafirme() {
 		return this.texturafirme;
 	}
@@ -177,6 +172,7 @@ public class CalidadMuestraAreaCabeceraAnalisisProtocolo implements Serializable
 	public void setTexturafirme(Integer texturafirme) {
 		this.texturafirme = texturafirme;
 	}
+
 
 	public Integer getTexturapastosa() {
 		return this.texturapastosa;
@@ -186,6 +182,7 @@ public class CalidadMuestraAreaCabeceraAnalisisProtocolo implements Serializable
 		this.texturapastosa = texturapastosa;
 	}
 
+
 	public Integer getTexturasuave() {
 		return this.texturasuave;
 	}
@@ -194,6 +191,10 @@ public class CalidadMuestraAreaCabeceraAnalisisProtocolo implements Serializable
 		this.texturasuave = texturasuave;
 	}
 
+
+	//bi-directional many-to-one association to CalidadMuestraAreaCabecera
+	@ManyToOne
+	@JoinColumn(name="idcalidadmuestraareacabecera")
 	public CalidadMuestraAreaCabecera getCalidadMuestraAreaCabecera() {
 		return this.calidadMuestraAreaCabecera;
 	}

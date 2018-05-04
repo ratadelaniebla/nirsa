@@ -10,23 +10,19 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="calidad_aprobacion_descarga_cuba")
+@NamedQuery(name="CalidadAprobacionDescargaCuba.findAll", query="SELECT c FROM CalidadAprobacionDescargaCuba c")
 public class CalidadAprobacionDescargaCuba implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcalidadaprobaciondescargacuba;
-
 	private String observacion;
-
-	//bi-directional many-to-one association to BarcoEstibaCuba
-	@ManyToOne
-	@JoinColumn(name="idbarcoestibacuba")
 	private BarcoEstibaCuba barcoEstibaCuba;
 
 	public CalidadAprobacionDescargaCuba() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcalidadaprobaciondescargacuba() {
 		return this.idcalidadaprobaciondescargacuba;
 	}
@@ -34,6 +30,7 @@ public class CalidadAprobacionDescargaCuba implements Serializable {
 	public void setIdcalidadaprobaciondescargacuba(Long idcalidadaprobaciondescargacuba) {
 		this.idcalidadaprobaciondescargacuba = idcalidadaprobaciondescargacuba;
 	}
+
 
 	public String getObservacion() {
 		return this.observacion;
@@ -43,6 +40,10 @@ public class CalidadAprobacionDescargaCuba implements Serializable {
 		this.observacion = observacion;
 	}
 
+
+	//bi-directional many-to-one association to BarcoEstibaCuba
+	@ManyToOne
+	@JoinColumn(name="idbarcoestibacuba")
 	public BarcoEstibaCuba getBarcoEstibaCuba() {
 		return this.barcoEstibaCuba;
 	}

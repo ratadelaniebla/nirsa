@@ -11,36 +11,24 @@ import java.util.List;
  */
 @Entity
 @Table(name="pcc_parametros")
+@NamedQuery(name="PccParametro.findAll", query="SELECT p FROM PccParametro p")
 public class PccParametro implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idpccparametros;
-
 	private String descripcion;
-
-	@Column(name="hora_anticipacion")
 	private Integer horaAnticipacion;
-
-	@Column(name="hora_final")
 	private Integer horaFinal;
-
-	@Column(name="minuto_anticipacion")
 	private Integer minutoAnticipacion;
-
-	@Column(name="minuto_final")
 	private Integer minutoFinal;
-
 	private double temperatura;
-
-	//bi-directional many-to-one association to CorreosPccParametro
-	@OneToMany(mappedBy="pccParametro")
 	private List<CorreosPccParametro> correosPccParametros;
 
 	public PccParametro() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdpccparametros() {
 		return this.idpccparametros;
 	}
@@ -48,6 +36,7 @@ public class PccParametro implements Serializable {
 	public void setIdpccparametros(Integer idpccparametros) {
 		this.idpccparametros = idpccparametros;
 	}
+
 
 	public String getDescripcion() {
 		return this.descripcion;
@@ -57,6 +46,8 @@ public class PccParametro implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+
+	@Column(name="hora_anticipacion")
 	public Integer getHoraAnticipacion() {
 		return this.horaAnticipacion;
 	}
@@ -65,6 +56,8 @@ public class PccParametro implements Serializable {
 		this.horaAnticipacion = horaAnticipacion;
 	}
 
+
+	@Column(name="hora_final")
 	public Integer getHoraFinal() {
 		return this.horaFinal;
 	}
@@ -73,6 +66,8 @@ public class PccParametro implements Serializable {
 		this.horaFinal = horaFinal;
 	}
 
+
+	@Column(name="minuto_anticipacion")
 	public Integer getMinutoAnticipacion() {
 		return this.minutoAnticipacion;
 	}
@@ -81,6 +76,8 @@ public class PccParametro implements Serializable {
 		this.minutoAnticipacion = minutoAnticipacion;
 	}
 
+
+	@Column(name="minuto_final")
 	public Integer getMinutoFinal() {
 		return this.minutoFinal;
 	}
@@ -88,6 +85,7 @@ public class PccParametro implements Serializable {
 	public void setMinutoFinal(Integer minutoFinal) {
 		this.minutoFinal = minutoFinal;
 	}
+
 
 	public double getTemperatura() {
 		return this.temperatura;
@@ -97,12 +95,29 @@ public class PccParametro implements Serializable {
 		this.temperatura = temperatura;
 	}
 
+
+	//bi-directional many-to-one association to CorreosPccParametro
+	@OneToMany(mappedBy="pccParametro")
 	public List<CorreosPccParametro> getCorreosPccParametros() {
 		return this.correosPccParametros;
 	}
 
 	public void setCorreosPccParametros(List<CorreosPccParametro> correosPccParametros) {
 		this.correosPccParametros = correosPccParametros;
+	}
+
+	public CorreosPccParametro addCorreosPccParametro(CorreosPccParametro correosPccParametro) {
+		getCorreosPccParametros().add(correosPccParametro);
+		correosPccParametro.setPccParametro(this);
+
+		return correosPccParametro;
+	}
+
+	public CorreosPccParametro removeCorreosPccParametro(CorreosPccParametro correosPccParametro) {
+		getCorreosPccParametros().remove(correosPccParametro);
+		correosPccParametro.setPccParametro(null);
+
+		return correosPccParametro;
 	}
 
 }

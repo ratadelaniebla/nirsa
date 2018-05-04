@@ -10,16 +10,17 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="desperdicio_control_desperdicio")
+@NamedQuery(name="DesperdicioControlDesperdicio.findAll", query="SELECT d FROM DesperdicioControlDesperdicio d")
 public class DesperdicioControlDesperdicio implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idcontroldesperdicio;
 
 	public DesperdicioControlDesperdicio() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdcontroldesperdicio() {
 		return this.idcontroldesperdicio;
 	}

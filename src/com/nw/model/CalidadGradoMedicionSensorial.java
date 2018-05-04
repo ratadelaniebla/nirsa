@@ -10,22 +10,20 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="calidad_grado_medicion_sensorial")
+@NamedQuery(name="CalidadGradoMedicionSensorial.findAll", query="SELECT c FROM CalidadGradoMedicionSensorial c")
 public class CalidadGradoMedicionSensorial implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idgrado;
-
 	private String abreviacion;
-
 	private String descripcion;
-
 	private String valor;
 
 	public CalidadGradoMedicionSensorial() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdgrado() {
 		return this.idgrado;
 	}
@@ -33,6 +31,7 @@ public class CalidadGradoMedicionSensorial implements Serializable {
 	public void setIdgrado(Integer idgrado) {
 		this.idgrado = idgrado;
 	}
+
 
 	public String getAbreviacion() {
 		return this.abreviacion;
@@ -42,6 +41,7 @@ public class CalidadGradoMedicionSensorial implements Serializable {
 		this.abreviacion = abreviacion;
 	}
 
+
 	public String getDescripcion() {
 		return this.descripcion;
 	}
@@ -49,6 +49,7 @@ public class CalidadGradoMedicionSensorial implements Serializable {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+
 
 	public String getValor() {
 		return this.valor;

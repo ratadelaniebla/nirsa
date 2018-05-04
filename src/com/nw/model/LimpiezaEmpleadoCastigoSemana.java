@@ -11,28 +11,23 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="limpieza_empleado_castigo_semana")
+@NamedQuery(name="LimpiezaEmpleadoCastigoSemana.findAll", query="SELECT l FROM LimpiezaEmpleadoCastigoSemana l")
 public class LimpiezaEmpleadoCastigoSemana implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idlimpiezaempleadocastigosemana;
-
 	private Boolean castigo;
-
 	private String cedula;
-
 	private Timestamp fecharegisto;
-
 	private Integer idempleado;
-
 	private Long idproduccion;
-
 	private Integer semana;
 
 	public LimpiezaEmpleadoCastigoSemana() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdlimpiezaempleadocastigosemana() {
 		return this.idlimpiezaempleadocastigosemana;
 	}
@@ -40,6 +35,7 @@ public class LimpiezaEmpleadoCastigoSemana implements Serializable {
 	public void setIdlimpiezaempleadocastigosemana(Long idlimpiezaempleadocastigosemana) {
 		this.idlimpiezaempleadocastigosemana = idlimpiezaempleadocastigosemana;
 	}
+
 
 	public Boolean getCastigo() {
 		return this.castigo;
@@ -49,6 +45,7 @@ public class LimpiezaEmpleadoCastigoSemana implements Serializable {
 		this.castigo = castigo;
 	}
 
+
 	public String getCedula() {
 		return this.cedula;
 	}
@@ -56,6 +53,7 @@ public class LimpiezaEmpleadoCastigoSemana implements Serializable {
 	public void setCedula(String cedula) {
 		this.cedula = cedula;
 	}
+
 
 	public Timestamp getFecharegisto() {
 		return this.fecharegisto;
@@ -65,6 +63,7 @@ public class LimpiezaEmpleadoCastigoSemana implements Serializable {
 		this.fecharegisto = fecharegisto;
 	}
 
+
 	public Integer getIdempleado() {
 		return this.idempleado;
 	}
@@ -73,6 +72,7 @@ public class LimpiezaEmpleadoCastigoSemana implements Serializable {
 		this.idempleado = idempleado;
 	}
 
+
 	public Long getIdproduccion() {
 		return this.idproduccion;
 	}
@@ -80,6 +80,7 @@ public class LimpiezaEmpleadoCastigoSemana implements Serializable {
 	public void setIdproduccion(Long idproduccion) {
 		this.idproduccion = idproduccion;
 	}
+
 
 	public Integer getSemana() {
 		return this.semana;

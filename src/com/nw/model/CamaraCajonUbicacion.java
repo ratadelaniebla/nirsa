@@ -11,48 +11,27 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="camara_cajon_ubicacion")
+@NamedQuery(name="CamaraCajonUbicacion.findAll", query="SELECT c FROM CamaraCajonUbicacion c")
 public class CamaraCajonUbicacion implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcamaracajonubicacion;
-
 	private String columnapasillo;
-
 	private Timestamp fechareg;
-
 	private Integer idmovimiento;
-
 	private String idusuario;
-
 	private String ladopasillo;
-
 	private String observaciones;
-
-	//bi-directional many-to-one association to Camara
-	@ManyToOne
-	@JoinColumn(name="idcamara")
 	private Camara camara;
-
-	//bi-directional many-to-one association to CamaraArea
-	@ManyToOne
-	@JoinColumn(name="idcamaraarea")
 	private CamaraArea camaraArea;
-
-	//bi-directional many-to-one association to CamaraCajon
-	@ManyToOne
-	@JoinColumn(name="idcamaracajon")
 	private CamaraCajon camaraCajon;
-
-	//bi-directional many-to-one association to CamaraFilaColumna
-	@ManyToOne
-	@JoinColumn(name="idfilacolumna")
 	private CamaraFilaColumna camaraFilaColumna;
 
 	public CamaraCajonUbicacion() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcamaracajonubicacion() {
 		return this.idcamaracajonubicacion;
 	}
@@ -60,6 +39,7 @@ public class CamaraCajonUbicacion implements Serializable {
 	public void setIdcamaracajonubicacion(Long idcamaracajonubicacion) {
 		this.idcamaracajonubicacion = idcamaracajonubicacion;
 	}
+
 
 	public String getColumnapasillo() {
 		return this.columnapasillo;
@@ -69,6 +49,7 @@ public class CamaraCajonUbicacion implements Serializable {
 		this.columnapasillo = columnapasillo;
 	}
 
+
 	public Timestamp getFechareg() {
 		return this.fechareg;
 	}
@@ -76,6 +57,7 @@ public class CamaraCajonUbicacion implements Serializable {
 	public void setFechareg(Timestamp fechareg) {
 		this.fechareg = fechareg;
 	}
+
 
 	public Integer getIdmovimiento() {
 		return this.idmovimiento;
@@ -85,6 +67,7 @@ public class CamaraCajonUbicacion implements Serializable {
 		this.idmovimiento = idmovimiento;
 	}
 
+
 	public String getIdusuario() {
 		return this.idusuario;
 	}
@@ -92,6 +75,7 @@ public class CamaraCajonUbicacion implements Serializable {
 	public void setIdusuario(String idusuario) {
 		this.idusuario = idusuario;
 	}
+
 
 	public String getLadopasillo() {
 		return this.ladopasillo;
@@ -101,6 +85,7 @@ public class CamaraCajonUbicacion implements Serializable {
 		this.ladopasillo = ladopasillo;
 	}
 
+
 	public String getObservaciones() {
 		return this.observaciones;
 	}
@@ -109,6 +94,10 @@ public class CamaraCajonUbicacion implements Serializable {
 		this.observaciones = observaciones;
 	}
 
+
+	//bi-directional many-to-one association to Camara
+	@ManyToOne
+	@JoinColumn(name="idcamara")
 	public Camara getCamara() {
 		return this.camara;
 	}
@@ -117,6 +106,10 @@ public class CamaraCajonUbicacion implements Serializable {
 		this.camara = camara;
 	}
 
+
+	//bi-directional many-to-one association to CamaraArea
+	@ManyToOne
+	@JoinColumn(name="idcamaraarea")
 	public CamaraArea getCamaraArea() {
 		return this.camaraArea;
 	}
@@ -125,6 +118,10 @@ public class CamaraCajonUbicacion implements Serializable {
 		this.camaraArea = camaraArea;
 	}
 
+
+	//bi-directional many-to-one association to CamaraCajon
+	@ManyToOne
+	@JoinColumn(name="idcamaracajon")
 	public CamaraCajon getCamaraCajon() {
 		return this.camaraCajon;
 	}
@@ -133,6 +130,10 @@ public class CamaraCajonUbicacion implements Serializable {
 		this.camaraCajon = camaraCajon;
 	}
 
+
+	//bi-directional many-to-one association to CamaraFilaColumna
+	@ManyToOne
+	@JoinColumn(name="idfilacolumna")
 	public CamaraFilaColumna getCamaraFilaColumna() {
 		return this.camaraFilaColumna;
 	}

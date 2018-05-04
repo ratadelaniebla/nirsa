@@ -12,58 +12,30 @@ import java.util.List;
  */
 @Entity
 @Table(name="limpieza_rallado_detalle_pesos")
+@NamedQuery(name="LimpiezaRalladoDetallePeso.findAll", query="SELECT l FROM LimpiezaRalladoDetallePeso l")
 public class LimpiezaRalladoDetallePeso implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idlimpiezaralladodetallepesos;
-
 	private Boolean almacenarpeso;
-
 	private Boolean automatico;
-
 	private Timestamp fechareg;
-
 	private Integer gaveta;
-
 	private Long idlimpiezadetalleprocesolote;
-
 	private double peso;
-
 	private double tara;
-
-	//bi-directional many-to-one association to ControlDetalleBatchRallado
-	@OneToMany(mappedBy="limpiezaRalladoDetallePeso")
 	private List<ControlDetalleBatchRallado> controlDetalleBatchRallados;
-
-	//bi-directional many-to-one association to LimpiezaRalladoBatchDetalle
-	@OneToMany(mappedBy="limpiezaRalladoDetallePeso")
 	private List<LimpiezaRalladoBatchDetalle> limpiezaRalladoBatchDetalles;
-
-	//bi-directional many-to-one association to ControlFichaBatch
-	@ManyToOne
-	@JoinColumn(name="idcontrolfichabatch")
 	private ControlFichaBatch controlFichaBatch;
-
-	//bi-directional many-to-one association to LimpiezaLinea
-	@ManyToOne
-	@JoinColumn(name="idlimpiezalinea")
 	private LimpiezaLinea limpiezaLinea;
-
-	//bi-directional many-to-one association to LimpiezaProceso
-	@ManyToOne
-	@JoinColumn(name="idlimpiezaproceso")
 	private LimpiezaProceso limpiezaProceso;
-
-	//bi-directional many-to-one association to LimpiezaRalladoTipo
-	@ManyToOne
-	@JoinColumn(name="idlimpiezaralladotipo")
 	private LimpiezaRalladoTipo limpiezaRalladoTipo;
 
 	public LimpiezaRalladoDetallePeso() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdlimpiezaralladodetallepesos() {
 		return this.idlimpiezaralladodetallepesos;
 	}
@@ -71,6 +43,7 @@ public class LimpiezaRalladoDetallePeso implements Serializable {
 	public void setIdlimpiezaralladodetallepesos(Long idlimpiezaralladodetallepesos) {
 		this.idlimpiezaralladodetallepesos = idlimpiezaralladodetallepesos;
 	}
+
 
 	public Boolean getAlmacenarpeso() {
 		return this.almacenarpeso;
@@ -80,6 +53,7 @@ public class LimpiezaRalladoDetallePeso implements Serializable {
 		this.almacenarpeso = almacenarpeso;
 	}
 
+
 	public Boolean getAutomatico() {
 		return this.automatico;
 	}
@@ -87,6 +61,7 @@ public class LimpiezaRalladoDetallePeso implements Serializable {
 	public void setAutomatico(Boolean automatico) {
 		this.automatico = automatico;
 	}
+
 
 	public Timestamp getFechareg() {
 		return this.fechareg;
@@ -96,6 +71,7 @@ public class LimpiezaRalladoDetallePeso implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+
 	public Integer getGaveta() {
 		return this.gaveta;
 	}
@@ -103,6 +79,7 @@ public class LimpiezaRalladoDetallePeso implements Serializable {
 	public void setGaveta(Integer gaveta) {
 		this.gaveta = gaveta;
 	}
+
 
 	public Long getIdlimpiezadetalleprocesolote() {
 		return this.idlimpiezadetalleprocesolote;
@@ -112,6 +89,7 @@ public class LimpiezaRalladoDetallePeso implements Serializable {
 		this.idlimpiezadetalleprocesolote = idlimpiezadetalleprocesolote;
 	}
 
+
 	public double getPeso() {
 		return this.peso;
 	}
@@ -119,6 +97,7 @@ public class LimpiezaRalladoDetallePeso implements Serializable {
 	public void setPeso(double peso) {
 		this.peso = peso;
 	}
+
 
 	public double getTara() {
 		return this.tara;
@@ -128,6 +107,9 @@ public class LimpiezaRalladoDetallePeso implements Serializable {
 		this.tara = tara;
 	}
 
+
+	//bi-directional many-to-one association to ControlDetalleBatchRallado
+	@OneToMany(mappedBy="limpiezaRalladoDetallePeso")
 	public List<ControlDetalleBatchRallado> getControlDetalleBatchRallados() {
 		return this.controlDetalleBatchRallados;
 	}
@@ -136,6 +118,23 @@ public class LimpiezaRalladoDetallePeso implements Serializable {
 		this.controlDetalleBatchRallados = controlDetalleBatchRallados;
 	}
 
+	public ControlDetalleBatchRallado addControlDetalleBatchRallado(ControlDetalleBatchRallado controlDetalleBatchRallado) {
+		getControlDetalleBatchRallados().add(controlDetalleBatchRallado);
+		controlDetalleBatchRallado.setLimpiezaRalladoDetallePeso(this);
+
+		return controlDetalleBatchRallado;
+	}
+
+	public ControlDetalleBatchRallado removeControlDetalleBatchRallado(ControlDetalleBatchRallado controlDetalleBatchRallado) {
+		getControlDetalleBatchRallados().remove(controlDetalleBatchRallado);
+		controlDetalleBatchRallado.setLimpiezaRalladoDetallePeso(null);
+
+		return controlDetalleBatchRallado;
+	}
+
+
+	//bi-directional many-to-one association to LimpiezaRalladoBatchDetalle
+	@OneToMany(mappedBy="limpiezaRalladoDetallePeso")
 	public List<LimpiezaRalladoBatchDetalle> getLimpiezaRalladoBatchDetalles() {
 		return this.limpiezaRalladoBatchDetalles;
 	}
@@ -144,6 +143,24 @@ public class LimpiezaRalladoDetallePeso implements Serializable {
 		this.limpiezaRalladoBatchDetalles = limpiezaRalladoBatchDetalles;
 	}
 
+	public LimpiezaRalladoBatchDetalle addLimpiezaRalladoBatchDetalle(LimpiezaRalladoBatchDetalle limpiezaRalladoBatchDetalle) {
+		getLimpiezaRalladoBatchDetalles().add(limpiezaRalladoBatchDetalle);
+		limpiezaRalladoBatchDetalle.setLimpiezaRalladoDetallePeso(this);
+
+		return limpiezaRalladoBatchDetalle;
+	}
+
+	public LimpiezaRalladoBatchDetalle removeLimpiezaRalladoBatchDetalle(LimpiezaRalladoBatchDetalle limpiezaRalladoBatchDetalle) {
+		getLimpiezaRalladoBatchDetalles().remove(limpiezaRalladoBatchDetalle);
+		limpiezaRalladoBatchDetalle.setLimpiezaRalladoDetallePeso(null);
+
+		return limpiezaRalladoBatchDetalle;
+	}
+
+
+	//bi-directional many-to-one association to ControlFichaBatch
+	@ManyToOne
+	@JoinColumn(name="idcontrolfichabatch")
 	public ControlFichaBatch getControlFichaBatch() {
 		return this.controlFichaBatch;
 	}
@@ -152,6 +169,10 @@ public class LimpiezaRalladoDetallePeso implements Serializable {
 		this.controlFichaBatch = controlFichaBatch;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaLinea
+	@ManyToOne
+	@JoinColumn(name="idlimpiezalinea")
 	public LimpiezaLinea getLimpiezaLinea() {
 		return this.limpiezaLinea;
 	}
@@ -160,6 +181,10 @@ public class LimpiezaRalladoDetallePeso implements Serializable {
 		this.limpiezaLinea = limpiezaLinea;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaProceso
+	@ManyToOne
+	@JoinColumn(name="idlimpiezaproceso")
 	public LimpiezaProceso getLimpiezaProceso() {
 		return this.limpiezaProceso;
 	}
@@ -168,6 +193,10 @@ public class LimpiezaRalladoDetallePeso implements Serializable {
 		this.limpiezaProceso = limpiezaProceso;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaRalladoTipo
+	@ManyToOne
+	@JoinColumn(name="idlimpiezaralladotipo")
 	public LimpiezaRalladoTipo getLimpiezaRalladoTipo() {
 		return this.limpiezaRalladoTipo;
 	}

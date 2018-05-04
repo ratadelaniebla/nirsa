@@ -1,33 +1,11 @@
 package com.nw.model.dao.impl;
 
-import java.io.Serializable;
 import java.util.List;
 
-import com.nw.model.ProduccionArchivoCargaOrden;
 import com.nw.model.ProduccionArchivoCargaOrdenDetalle;
 import com.nw.model.dao.ProduccionArchivoCargaOrdenDetalleDAO;
 
 public class ProduccionArchivoCargaOrdenDetalleDAOJpaImpl extends BaseDaoJpaImpl implements ProduccionArchivoCargaOrdenDetalleDAO{
-
-	@Override
-	public List getObjects(Class clazz) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Object getObject(Class clazz, Serializable id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void removeObject(Class clazz, Serializable id) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	
 
 	@Override
 	public boolean existeArchivoCargaOrdenDetalle(Integer idturno, Integer item, String orden, Long idproduccion) {

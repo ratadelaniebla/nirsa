@@ -11,28 +11,22 @@ import java.util.List;
  */
 @Entity
 @Table(name="limpieza_calidad_maestro_subproducto")
+@NamedQuery(name="LimpiezaCalidadMaestroSubproducto.findAll", query="SELECT l FROM LimpiezaCalidadMaestroSubproducto l")
 public class LimpiezaCalidadMaestroSubproducto implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idlimpiezacalidadmaestrosubproducto;
-
 	private Boolean aplicataralomo;
-
 	private Boolean aplicatararallado;
-
 	private String descripcion;
-
 	private double otratara;
-	
-	//bi-directional many-to-one association to LimpiezaCalidadGrupoMaestroSubproducto
-	@OneToMany(mappedBy="limpiezaCalidadMaestroSubproducto")
 	private List<LimpiezaCalidadGrupoMaestroSubproducto> limpiezaCalidadGrupoMaestroSubproductos;
 
 	public LimpiezaCalidadMaestroSubproducto() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdlimpiezacalidadmaestrosubproducto() {
 		return this.idlimpiezacalidadmaestrosubproducto;
 	}
@@ -40,6 +34,7 @@ public class LimpiezaCalidadMaestroSubproducto implements Serializable {
 	public void setIdlimpiezacalidadmaestrosubproducto(Integer idlimpiezacalidadmaestrosubproducto) {
 		this.idlimpiezacalidadmaestrosubproducto = idlimpiezacalidadmaestrosubproducto;
 	}
+
 
 	public Boolean getAplicataralomo() {
 		return this.aplicataralomo;
@@ -49,6 +44,7 @@ public class LimpiezaCalidadMaestroSubproducto implements Serializable {
 		this.aplicataralomo = aplicataralomo;
 	}
 
+
 	public Boolean getAplicatararallado() {
 		return this.aplicatararallado;
 	}
@@ -56,6 +52,7 @@ public class LimpiezaCalidadMaestroSubproducto implements Serializable {
 	public void setAplicatararallado(Boolean aplicatararallado) {
 		this.aplicatararallado = aplicatararallado;
 	}
+
 
 	public String getDescripcion() {
 		return this.descripcion;
@@ -65,6 +62,18 @@ public class LimpiezaCalidadMaestroSubproducto implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+
+	public double getOtratara() {
+		return this.otratara;
+	}
+
+	public void setOtratara(double otratara) {
+		this.otratara = otratara;
+	}
+
+
+	//bi-directional many-to-one association to LimpiezaCalidadGrupoMaestroSubproducto
+	@OneToMany(mappedBy="limpiezaCalidadMaestroSubproducto")
 	public List<LimpiezaCalidadGrupoMaestroSubproducto> getLimpiezaCalidadGrupoMaestroSubproductos() {
 		return this.limpiezaCalidadGrupoMaestroSubproductos;
 	}
@@ -73,12 +82,18 @@ public class LimpiezaCalidadMaestroSubproducto implements Serializable {
 		this.limpiezaCalidadGrupoMaestroSubproductos = limpiezaCalidadGrupoMaestroSubproductos;
 	}
 
-	public double getOtratara() {
-		return otratara;
+	public LimpiezaCalidadGrupoMaestroSubproducto addLimpiezaCalidadGrupoMaestroSubproducto(LimpiezaCalidadGrupoMaestroSubproducto limpiezaCalidadGrupoMaestroSubproducto) {
+		getLimpiezaCalidadGrupoMaestroSubproductos().add(limpiezaCalidadGrupoMaestroSubproducto);
+		limpiezaCalidadGrupoMaestroSubproducto.setLimpiezaCalidadMaestroSubproducto(this);
+
+		return limpiezaCalidadGrupoMaestroSubproducto;
 	}
 
-	public void setOtratara(double otratara) {
-		this.otratara = otratara;
+	public LimpiezaCalidadGrupoMaestroSubproducto removeLimpiezaCalidadGrupoMaestroSubproducto(LimpiezaCalidadGrupoMaestroSubproducto limpiezaCalidadGrupoMaestroSubproducto) {
+		getLimpiezaCalidadGrupoMaestroSubproductos().remove(limpiezaCalidadGrupoMaestroSubproducto);
+		limpiezaCalidadGrupoMaestroSubproducto.setLimpiezaCalidadMaestroSubproducto(null);
+
+		return limpiezaCalidadGrupoMaestroSubproducto;
 	}
 
 }

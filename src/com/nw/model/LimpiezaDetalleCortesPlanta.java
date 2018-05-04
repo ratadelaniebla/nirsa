@@ -11,35 +11,23 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="limpieza_detalle_cortes_planta")
+@NamedQuery(name="LimpiezaDetalleCortesPlanta.findAll", query="SELECT l FROM LimpiezaDetalleCortesPlanta l")
 public class LimpiezaDetalleCortesPlanta implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idlimpiezadetallecortesplanta;
-
 	private Integer corte;
-	
-	private double personaspanza;
-	
-	
-	@Column(name="fecha_desde")
 	private Timestamp fechaDesde;
-
-	@Column(name="fecha_fin_corte_anterior")
 	private Timestamp fechaFinCorteAnterior;
-
-	@Column(name="fecha_hasta")
 	private Timestamp fechaHasta;
-
-	//bi-directional many-to-one association to LimpiezaCabeceraCortesPlanta
-	@ManyToOne
-	@JoinColumn(name="idlimpiezacabeceracortesplanta")
+	private double personaspanza;
 	private LimpiezaCabeceraCortesPlanta limpiezaCabeceraCortesPlanta;
 
 	public LimpiezaDetalleCortesPlanta() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdlimpiezadetallecortesplanta() {
 		return this.idlimpiezadetallecortesplanta;
 	}
@@ -47,6 +35,7 @@ public class LimpiezaDetalleCortesPlanta implements Serializable {
 	public void setIdlimpiezadetallecortesplanta(Long idlimpiezadetallecortesplanta) {
 		this.idlimpiezadetallecortesplanta = idlimpiezadetallecortesplanta;
 	}
+
 
 	public Integer getCorte() {
 		return this.corte;
@@ -56,6 +45,8 @@ public class LimpiezaDetalleCortesPlanta implements Serializable {
 		this.corte = corte;
 	}
 
+
+	@Column(name="fecha_desde")
 	public Timestamp getFechaDesde() {
 		return this.fechaDesde;
 	}
@@ -64,6 +55,8 @@ public class LimpiezaDetalleCortesPlanta implements Serializable {
 		this.fechaDesde = fechaDesde;
 	}
 
+
+	@Column(name="fecha_fin_corte_anterior")
 	public Timestamp getFechaFinCorteAnterior() {
 		return this.fechaFinCorteAnterior;
 	}
@@ -72,6 +65,8 @@ public class LimpiezaDetalleCortesPlanta implements Serializable {
 		this.fechaFinCorteAnterior = fechaFinCorteAnterior;
 	}
 
+
+	@Column(name="fecha_hasta")
 	public Timestamp getFechaHasta() {
 		return this.fechaHasta;
 	}
@@ -80,20 +75,25 @@ public class LimpiezaDetalleCortesPlanta implements Serializable {
 		this.fechaHasta = fechaHasta;
 	}
 
+
+	public double getPersonaspanza() {
+		return this.personaspanza;
+	}
+
+	public void setPersonaspanza(double personaspanza) {
+		this.personaspanza = personaspanza;
+	}
+
+
+	//bi-directional many-to-one association to LimpiezaCabeceraCortesPlanta
+	@ManyToOne
+	@JoinColumn(name="idlimpiezacabeceracortesplanta")
 	public LimpiezaCabeceraCortesPlanta getLimpiezaCabeceraCortesPlanta() {
 		return this.limpiezaCabeceraCortesPlanta;
 	}
 
 	public void setLimpiezaCabeceraCortesPlanta(LimpiezaCabeceraCortesPlanta limpiezaCabeceraCortesPlanta) {
 		this.limpiezaCabeceraCortesPlanta = limpiezaCabeceraCortesPlanta;
-	}
-
-	public double getPersonaspanza() {
-		return personaspanza;
-	}
-
-	public void setPersonaspanza(double personaspanza) {
-		this.personaspanza = personaspanza;
 	}
 
 }

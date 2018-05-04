@@ -12,87 +12,36 @@ import java.util.List;
  */
 @Entity
 @Table(name="proceso_apertura_cierre")
+@NamedQuery(name="ProcesoAperturaCierre.findAll", query="SELECT p FROM ProcesoAperturaCierre p")
 public class ProcesoAperturaCierre implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idprocesoaperturacierre;
-
 	private Integer estado;
-
 	private Timestamp fechaapertura;
-
 	private Timestamp fechacierre;
-
-	//bi-directional many-to-one association to ControlBatchProceso
-	@OneToMany(mappedBy="procesoAperturaCierre")
 	private List<ControlBatchProceso> controlBatchProcesos;
-
-	//bi-directional many-to-one association to DescongeladoProceso
-	@OneToMany(mappedBy="procesoAperturaCierre")
 	private List<DescongeladoProceso> descongeladoProcesos;
-
-	//bi-directional many-to-one association to EnvasadoProceso
-	@OneToMany(mappedBy="procesoAperturaCierre")
 	private List<EnvasadoProceso> envasadoProcesos;
-
-	//bi-directional many-to-one association to EspecialidadesProceso
-	@OneToMany(mappedBy="procesoAperturaCierre")
 	private List<EspecialidadesProceso> especialidadesProcesos;
-
-	//bi-directional many-to-one association to EvisceradoProceso
-	@OneToMany(mappedBy="procesoAperturaCierre")
 	private List<EvisceradoProceso> evisceradoProcesos;
-
-	//bi-directional many-to-one association to LimpiezaProceso
-	@OneToMany(mappedBy="procesoAperturaCierre")
 	private List<LimpiezaProceso> limpiezaProcesos;
-
-	//bi-directional many-to-one association to LonjasProceso
-	@OneToMany(mappedBy="procesoAperturaCierre")
 	private List<LonjasProceso> lonjasProcesos;
-
-	//bi-directional many-to-one association to OeeDetalleMediosConDefecto
-	@OneToMany(mappedBy="procesoAperturaCierre")
 	private List<OeeDetalleMediosConDefecto> oeeDetalleMediosConDefectos;
-
-	//bi-directional many-to-one association to OeeDetalleParada
-	@OneToMany(mappedBy="procesoAperturaCierre")
 	private List<OeeDetalleParada> oeeDetalleParadas;
-
-	//bi-directional many-to-one association to OeeEnvasadoCabeceraVelocidadMaquinaCerradora
-	@OneToMany(mappedBy="procesoAperturaCierre")
 	private List<OeeEnvasadoCabeceraVelocidadMaquinaCerradora> oeeEnvasadoCabeceraVelocidadMaquinaCerradoras;
-
-	//bi-directional many-to-one association to PanzasProceso
-	@OneToMany(mappedBy="procesoAperturaCierre")
 	private List<PanzasProceso> panzasProcesos;
-
-	//bi-directional many-to-one association to PouchProceso
-	@OneToMany(mappedBy="procesoAperturaCierre")
 	private List<PouchProceso> pouchProcesos;
-
-	//bi-directional many-to-one association to Proceso
-	@ManyToOne
-	@JoinColumn(name="idproceso")
 	private Proceso proceso;
-
-	//bi-directional many-to-one association to RackeoProceso
-	@OneToMany(mappedBy="procesoAperturaCierre")
 	private List<RackeoProceso> rackeoProcesos;
-
-	//bi-directional many-to-one association to TunelDetalleProcesoCoche
-	@OneToMany(mappedBy="procesoAperturaCierre")
 	private List<TunelDetalleProcesoCoche> tunelDetalleProcesoCoches;
-
-	//bi-directional many-to-one association to TunelDetalleProcesoCocheSalida
-	@OneToMany(mappedBy="procesoAperturaCierre")
 	private List<TunelDetalleProcesoCocheSalida> tunelDetalleProcesoCocheSalidas;
 
 	public ProcesoAperturaCierre() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdprocesoaperturacierre() {
 		return this.idprocesoaperturacierre;
 	}
@@ -100,6 +49,7 @@ public class ProcesoAperturaCierre implements Serializable {
 	public void setIdprocesoaperturacierre(Long idprocesoaperturacierre) {
 		this.idprocesoaperturacierre = idprocesoaperturacierre;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -109,6 +59,7 @@ public class ProcesoAperturaCierre implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Timestamp getFechaapertura() {
 		return this.fechaapertura;
 	}
@@ -116,6 +67,7 @@ public class ProcesoAperturaCierre implements Serializable {
 	public void setFechaapertura(Timestamp fechaapertura) {
 		this.fechaapertura = fechaapertura;
 	}
+
 
 	public Timestamp getFechacierre() {
 		return this.fechacierre;
@@ -125,6 +77,9 @@ public class ProcesoAperturaCierre implements Serializable {
 		this.fechacierre = fechacierre;
 	}
 
+
+	//bi-directional many-to-one association to ControlBatchProceso
+	@OneToMany(mappedBy="procesoAperturaCierre")
 	public List<ControlBatchProceso> getControlBatchProcesos() {
 		return this.controlBatchProcesos;
 	}
@@ -133,6 +88,23 @@ public class ProcesoAperturaCierre implements Serializable {
 		this.controlBatchProcesos = controlBatchProcesos;
 	}
 
+	public ControlBatchProceso addControlBatchProceso(ControlBatchProceso controlBatchProceso) {
+		getControlBatchProcesos().add(controlBatchProceso);
+		controlBatchProceso.setProcesoAperturaCierre(this);
+
+		return controlBatchProceso;
+	}
+
+	public ControlBatchProceso removeControlBatchProceso(ControlBatchProceso controlBatchProceso) {
+		getControlBatchProcesos().remove(controlBatchProceso);
+		controlBatchProceso.setProcesoAperturaCierre(null);
+
+		return controlBatchProceso;
+	}
+
+
+	//bi-directional many-to-one association to DescongeladoProceso
+	@OneToMany(mappedBy="procesoAperturaCierre")
 	public List<DescongeladoProceso> getDescongeladoProcesos() {
 		return this.descongeladoProcesos;
 	}
@@ -141,6 +113,23 @@ public class ProcesoAperturaCierre implements Serializable {
 		this.descongeladoProcesos = descongeladoProcesos;
 	}
 
+	public DescongeladoProceso addDescongeladoProceso(DescongeladoProceso descongeladoProceso) {
+		getDescongeladoProcesos().add(descongeladoProceso);
+		descongeladoProceso.setProcesoAperturaCierre(this);
+
+		return descongeladoProceso;
+	}
+
+	public DescongeladoProceso removeDescongeladoProceso(DescongeladoProceso descongeladoProceso) {
+		getDescongeladoProcesos().remove(descongeladoProceso);
+		descongeladoProceso.setProcesoAperturaCierre(null);
+
+		return descongeladoProceso;
+	}
+
+
+	//bi-directional many-to-one association to EnvasadoProceso
+	@OneToMany(mappedBy="procesoAperturaCierre")
 	public List<EnvasadoProceso> getEnvasadoProcesos() {
 		return this.envasadoProcesos;
 	}
@@ -149,6 +138,23 @@ public class ProcesoAperturaCierre implements Serializable {
 		this.envasadoProcesos = envasadoProcesos;
 	}
 
+	public EnvasadoProceso addEnvasadoProceso(EnvasadoProceso envasadoProceso) {
+		getEnvasadoProcesos().add(envasadoProceso);
+		envasadoProceso.setProcesoAperturaCierre(this);
+
+		return envasadoProceso;
+	}
+
+	public EnvasadoProceso removeEnvasadoProceso(EnvasadoProceso envasadoProceso) {
+		getEnvasadoProcesos().remove(envasadoProceso);
+		envasadoProceso.setProcesoAperturaCierre(null);
+
+		return envasadoProceso;
+	}
+
+
+	//bi-directional many-to-one association to EspecialidadesProceso
+	@OneToMany(mappedBy="procesoAperturaCierre")
 	public List<EspecialidadesProceso> getEspecialidadesProcesos() {
 		return this.especialidadesProcesos;
 	}
@@ -157,6 +163,23 @@ public class ProcesoAperturaCierre implements Serializable {
 		this.especialidadesProcesos = especialidadesProcesos;
 	}
 
+	public EspecialidadesProceso addEspecialidadesProceso(EspecialidadesProceso especialidadesProceso) {
+		getEspecialidadesProcesos().add(especialidadesProceso);
+		especialidadesProceso.setProcesoAperturaCierre(this);
+
+		return especialidadesProceso;
+	}
+
+	public EspecialidadesProceso removeEspecialidadesProceso(EspecialidadesProceso especialidadesProceso) {
+		getEspecialidadesProcesos().remove(especialidadesProceso);
+		especialidadesProceso.setProcesoAperturaCierre(null);
+
+		return especialidadesProceso;
+	}
+
+
+	//bi-directional many-to-one association to EvisceradoProceso
+	@OneToMany(mappedBy="procesoAperturaCierre")
 	public List<EvisceradoProceso> getEvisceradoProcesos() {
 		return this.evisceradoProcesos;
 	}
@@ -165,6 +188,23 @@ public class ProcesoAperturaCierre implements Serializable {
 		this.evisceradoProcesos = evisceradoProcesos;
 	}
 
+	public EvisceradoProceso addEvisceradoProceso(EvisceradoProceso evisceradoProceso) {
+		getEvisceradoProcesos().add(evisceradoProceso);
+		evisceradoProceso.setProcesoAperturaCierre(this);
+
+		return evisceradoProceso;
+	}
+
+	public EvisceradoProceso removeEvisceradoProceso(EvisceradoProceso evisceradoProceso) {
+		getEvisceradoProcesos().remove(evisceradoProceso);
+		evisceradoProceso.setProcesoAperturaCierre(null);
+
+		return evisceradoProceso;
+	}
+
+
+	//bi-directional many-to-one association to LimpiezaProceso
+	@OneToMany(mappedBy="procesoAperturaCierre")
 	public List<LimpiezaProceso> getLimpiezaProcesos() {
 		return this.limpiezaProcesos;
 	}
@@ -173,6 +213,23 @@ public class ProcesoAperturaCierre implements Serializable {
 		this.limpiezaProcesos = limpiezaProcesos;
 	}
 
+	public LimpiezaProceso addLimpiezaProceso(LimpiezaProceso limpiezaProceso) {
+		getLimpiezaProcesos().add(limpiezaProceso);
+		limpiezaProceso.setProcesoAperturaCierre(this);
+
+		return limpiezaProceso;
+	}
+
+	public LimpiezaProceso removeLimpiezaProceso(LimpiezaProceso limpiezaProceso) {
+		getLimpiezaProcesos().remove(limpiezaProceso);
+		limpiezaProceso.setProcesoAperturaCierre(null);
+
+		return limpiezaProceso;
+	}
+
+
+	//bi-directional many-to-one association to LonjasProceso
+	@OneToMany(mappedBy="procesoAperturaCierre")
 	public List<LonjasProceso> getLonjasProcesos() {
 		return this.lonjasProcesos;
 	}
@@ -181,6 +238,23 @@ public class ProcesoAperturaCierre implements Serializable {
 		this.lonjasProcesos = lonjasProcesos;
 	}
 
+	public LonjasProceso addLonjasProceso(LonjasProceso lonjasProceso) {
+		getLonjasProcesos().add(lonjasProceso);
+		lonjasProceso.setProcesoAperturaCierre(this);
+
+		return lonjasProceso;
+	}
+
+	public LonjasProceso removeLonjasProceso(LonjasProceso lonjasProceso) {
+		getLonjasProcesos().remove(lonjasProceso);
+		lonjasProceso.setProcesoAperturaCierre(null);
+
+		return lonjasProceso;
+	}
+
+
+	//bi-directional many-to-one association to OeeDetalleMediosConDefecto
+	@OneToMany(mappedBy="procesoAperturaCierre")
 	public List<OeeDetalleMediosConDefecto> getOeeDetalleMediosConDefectos() {
 		return this.oeeDetalleMediosConDefectos;
 	}
@@ -189,6 +263,23 @@ public class ProcesoAperturaCierre implements Serializable {
 		this.oeeDetalleMediosConDefectos = oeeDetalleMediosConDefectos;
 	}
 
+	public OeeDetalleMediosConDefecto addOeeDetalleMediosConDefecto(OeeDetalleMediosConDefecto oeeDetalleMediosConDefecto) {
+		getOeeDetalleMediosConDefectos().add(oeeDetalleMediosConDefecto);
+		oeeDetalleMediosConDefecto.setProcesoAperturaCierre(this);
+
+		return oeeDetalleMediosConDefecto;
+	}
+
+	public OeeDetalleMediosConDefecto removeOeeDetalleMediosConDefecto(OeeDetalleMediosConDefecto oeeDetalleMediosConDefecto) {
+		getOeeDetalleMediosConDefectos().remove(oeeDetalleMediosConDefecto);
+		oeeDetalleMediosConDefecto.setProcesoAperturaCierre(null);
+
+		return oeeDetalleMediosConDefecto;
+	}
+
+
+	//bi-directional many-to-one association to OeeDetalleParada
+	@OneToMany(mappedBy="procesoAperturaCierre")
 	public List<OeeDetalleParada> getOeeDetalleParadas() {
 		return this.oeeDetalleParadas;
 	}
@@ -197,6 +288,23 @@ public class ProcesoAperturaCierre implements Serializable {
 		this.oeeDetalleParadas = oeeDetalleParadas;
 	}
 
+	public OeeDetalleParada addOeeDetalleParada(OeeDetalleParada oeeDetalleParada) {
+		getOeeDetalleParadas().add(oeeDetalleParada);
+		oeeDetalleParada.setProcesoAperturaCierre(this);
+
+		return oeeDetalleParada;
+	}
+
+	public OeeDetalleParada removeOeeDetalleParada(OeeDetalleParada oeeDetalleParada) {
+		getOeeDetalleParadas().remove(oeeDetalleParada);
+		oeeDetalleParada.setProcesoAperturaCierre(null);
+
+		return oeeDetalleParada;
+	}
+
+
+	//bi-directional many-to-one association to OeeEnvasadoCabeceraVelocidadMaquinaCerradora
+	@OneToMany(mappedBy="procesoAperturaCierre")
 	public List<OeeEnvasadoCabeceraVelocidadMaquinaCerradora> getOeeEnvasadoCabeceraVelocidadMaquinaCerradoras() {
 		return this.oeeEnvasadoCabeceraVelocidadMaquinaCerradoras;
 	}
@@ -205,6 +313,23 @@ public class ProcesoAperturaCierre implements Serializable {
 		this.oeeEnvasadoCabeceraVelocidadMaquinaCerradoras = oeeEnvasadoCabeceraVelocidadMaquinaCerradoras;
 	}
 
+	public OeeEnvasadoCabeceraVelocidadMaquinaCerradora addOeeEnvasadoCabeceraVelocidadMaquinaCerradora(OeeEnvasadoCabeceraVelocidadMaquinaCerradora oeeEnvasadoCabeceraVelocidadMaquinaCerradora) {
+		getOeeEnvasadoCabeceraVelocidadMaquinaCerradoras().add(oeeEnvasadoCabeceraVelocidadMaquinaCerradora);
+		oeeEnvasadoCabeceraVelocidadMaquinaCerradora.setProcesoAperturaCierre(this);
+
+		return oeeEnvasadoCabeceraVelocidadMaquinaCerradora;
+	}
+
+	public OeeEnvasadoCabeceraVelocidadMaquinaCerradora removeOeeEnvasadoCabeceraVelocidadMaquinaCerradora(OeeEnvasadoCabeceraVelocidadMaquinaCerradora oeeEnvasadoCabeceraVelocidadMaquinaCerradora) {
+		getOeeEnvasadoCabeceraVelocidadMaquinaCerradoras().remove(oeeEnvasadoCabeceraVelocidadMaquinaCerradora);
+		oeeEnvasadoCabeceraVelocidadMaquinaCerradora.setProcesoAperturaCierre(null);
+
+		return oeeEnvasadoCabeceraVelocidadMaquinaCerradora;
+	}
+
+
+	//bi-directional many-to-one association to PanzasProceso
+	@OneToMany(mappedBy="procesoAperturaCierre")
 	public List<PanzasProceso> getPanzasProcesos() {
 		return this.panzasProcesos;
 	}
@@ -213,6 +338,23 @@ public class ProcesoAperturaCierre implements Serializable {
 		this.panzasProcesos = panzasProcesos;
 	}
 
+	public PanzasProceso addPanzasProceso(PanzasProceso panzasProceso) {
+		getPanzasProcesos().add(panzasProceso);
+		panzasProceso.setProcesoAperturaCierre(this);
+
+		return panzasProceso;
+	}
+
+	public PanzasProceso removePanzasProceso(PanzasProceso panzasProceso) {
+		getPanzasProcesos().remove(panzasProceso);
+		panzasProceso.setProcesoAperturaCierre(null);
+
+		return panzasProceso;
+	}
+
+
+	//bi-directional many-to-one association to PouchProceso
+	@OneToMany(mappedBy="procesoAperturaCierre")
 	public List<PouchProceso> getPouchProcesos() {
 		return this.pouchProcesos;
 	}
@@ -221,6 +363,24 @@ public class ProcesoAperturaCierre implements Serializable {
 		this.pouchProcesos = pouchProcesos;
 	}
 
+	public PouchProceso addPouchProceso(PouchProceso pouchProceso) {
+		getPouchProcesos().add(pouchProceso);
+		pouchProceso.setProcesoAperturaCierre(this);
+
+		return pouchProceso;
+	}
+
+	public PouchProceso removePouchProceso(PouchProceso pouchProceso) {
+		getPouchProcesos().remove(pouchProceso);
+		pouchProceso.setProcesoAperturaCierre(null);
+
+		return pouchProceso;
+	}
+
+
+	//bi-directional many-to-one association to Proceso
+	@ManyToOne
+	@JoinColumn(name="idproceso")
 	public Proceso getProceso() {
 		return this.proceso;
 	}
@@ -229,6 +389,9 @@ public class ProcesoAperturaCierre implements Serializable {
 		this.proceso = proceso;
 	}
 
+
+	//bi-directional many-to-one association to RackeoProceso
+	@OneToMany(mappedBy="procesoAperturaCierre")
 	public List<RackeoProceso> getRackeoProcesos() {
 		return this.rackeoProcesos;
 	}
@@ -237,6 +400,23 @@ public class ProcesoAperturaCierre implements Serializable {
 		this.rackeoProcesos = rackeoProcesos;
 	}
 
+	public RackeoProceso addRackeoProceso(RackeoProceso rackeoProceso) {
+		getRackeoProcesos().add(rackeoProceso);
+		rackeoProceso.setProcesoAperturaCierre(this);
+
+		return rackeoProceso;
+	}
+
+	public RackeoProceso removeRackeoProceso(RackeoProceso rackeoProceso) {
+		getRackeoProcesos().remove(rackeoProceso);
+		rackeoProceso.setProcesoAperturaCierre(null);
+
+		return rackeoProceso;
+	}
+
+
+	//bi-directional many-to-one association to TunelDetalleProcesoCoche
+	@OneToMany(mappedBy="procesoAperturaCierre")
 	public List<TunelDetalleProcesoCoche> getTunelDetalleProcesoCoches() {
 		return this.tunelDetalleProcesoCoches;
 	}
@@ -245,12 +425,43 @@ public class ProcesoAperturaCierre implements Serializable {
 		this.tunelDetalleProcesoCoches = tunelDetalleProcesoCoches;
 	}
 
+	public TunelDetalleProcesoCoche addTunelDetalleProcesoCoch(TunelDetalleProcesoCoche tunelDetalleProcesoCoch) {
+		getTunelDetalleProcesoCoches().add(tunelDetalleProcesoCoch);
+		tunelDetalleProcesoCoch.setProcesoAperturaCierre(this);
+
+		return tunelDetalleProcesoCoch;
+	}
+
+	public TunelDetalleProcesoCoche removeTunelDetalleProcesoCoch(TunelDetalleProcesoCoche tunelDetalleProcesoCoch) {
+		getTunelDetalleProcesoCoches().remove(tunelDetalleProcesoCoch);
+		tunelDetalleProcesoCoch.setProcesoAperturaCierre(null);
+
+		return tunelDetalleProcesoCoch;
+	}
+
+
+	//bi-directional many-to-one association to TunelDetalleProcesoCocheSalida
+	@OneToMany(mappedBy="procesoAperturaCierre")
 	public List<TunelDetalleProcesoCocheSalida> getTunelDetalleProcesoCocheSalidas() {
 		return this.tunelDetalleProcesoCocheSalidas;
 	}
 
 	public void setTunelDetalleProcesoCocheSalidas(List<TunelDetalleProcesoCocheSalida> tunelDetalleProcesoCocheSalidas) {
 		this.tunelDetalleProcesoCocheSalidas = tunelDetalleProcesoCocheSalidas;
+	}
+
+	public TunelDetalleProcesoCocheSalida addTunelDetalleProcesoCocheSalida(TunelDetalleProcesoCocheSalida tunelDetalleProcesoCocheSalida) {
+		getTunelDetalleProcesoCocheSalidas().add(tunelDetalleProcesoCocheSalida);
+		tunelDetalleProcesoCocheSalida.setProcesoAperturaCierre(this);
+
+		return tunelDetalleProcesoCocheSalida;
+	}
+
+	public TunelDetalleProcesoCocheSalida removeTunelDetalleProcesoCocheSalida(TunelDetalleProcesoCocheSalida tunelDetalleProcesoCocheSalida) {
+		getTunelDetalleProcesoCocheSalidas().remove(tunelDetalleProcesoCocheSalida);
+		tunelDetalleProcesoCocheSalida.setProcesoAperturaCierre(null);
+
+		return tunelDetalleProcesoCocheSalida;
 	}
 
 }

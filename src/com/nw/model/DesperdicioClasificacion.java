@@ -10,18 +10,18 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="desperdicio_clasificacion")
+@NamedQuery(name="DesperdicioClasificacion.findAll", query="SELECT d FROM DesperdicioClasificacion d")
 public class DesperdicioClasificacion implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer iddesperdicioclasificacion;
-
 	private String descripcion;
 
 	public DesperdicioClasificacion() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIddesperdicioclasificacion() {
 		return this.iddesperdicioclasificacion;
 	}
@@ -29,6 +29,7 @@ public class DesperdicioClasificacion implements Serializable {
 	public void setIddesperdicioclasificacion(Integer iddesperdicioclasificacion) {
 		this.iddesperdicioclasificacion = iddesperdicioclasificacion;
 	}
+
 
 	public String getDescripcion() {
 		return this.descripcion;

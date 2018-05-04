@@ -11,28 +11,21 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="calidad_respuesta_pregunta_bpmdesembarco")
+@NamedQuery(name="CalidadRespuestaPreguntaBpmdesembarco.findAll", query="SELECT c FROM CalidadRespuestaPreguntaBpmdesembarco c")
 public class CalidadRespuestaPreguntaBpmdesembarco implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@EmbeddedId
 	private CalidadRespuestaPreguntaBpmdesembarcoPK id;
-
 	private Integer cumplimiento;
-
 	private Timestamp fechareg;
-
 	private String observaciones;
-
 	private Integer turnolabor;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public CalidadRespuestaPreguntaBpmdesembarco() {
 	}
 
+
+	@EmbeddedId
 	public CalidadRespuestaPreguntaBpmdesembarcoPK getId() {
 		return this.id;
 	}
@@ -40,6 +33,7 @@ public class CalidadRespuestaPreguntaBpmdesembarco implements Serializable {
 	public void setId(CalidadRespuestaPreguntaBpmdesembarcoPK id) {
 		this.id = id;
 	}
+
 
 	public Integer getCumplimiento() {
 		return this.cumplimiento;
@@ -49,6 +43,7 @@ public class CalidadRespuestaPreguntaBpmdesembarco implements Serializable {
 		this.cumplimiento = cumplimiento;
 	}
 
+
 	public Timestamp getFechareg() {
 		return this.fechareg;
 	}
@@ -56,6 +51,7 @@ public class CalidadRespuestaPreguntaBpmdesembarco implements Serializable {
 	public void setFechareg(Timestamp fechareg) {
 		this.fechareg = fechareg;
 	}
+
 
 	public String getObservaciones() {
 		return this.observaciones;
@@ -65,6 +61,7 @@ public class CalidadRespuestaPreguntaBpmdesembarco implements Serializable {
 		this.observaciones = observaciones;
 	}
 
+
 	public Integer getTurnolabor() {
 		return this.turnolabor;
 	}
@@ -73,6 +70,10 @@ public class CalidadRespuestaPreguntaBpmdesembarco implements Serializable {
 		this.turnolabor = turnolabor;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

@@ -10,26 +10,22 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="lonjas_tarifas")
+@NamedQuery(name="LonjasTarifa.findAll", query="SELECT l FROM LonjasTarifa l")
 public class LonjasTarifa implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idlonjastarifa;
-
 	private Integer fundaspordia;
-
 	private Integer fundasporhora;
-
 	private Integer hora;
-
 	private String idtalla;
-
 	private double incentivopordia;
 
 	public LonjasTarifa() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdlonjastarifa() {
 		return this.idlonjastarifa;
 	}
@@ -37,6 +33,7 @@ public class LonjasTarifa implements Serializable {
 	public void setIdlonjastarifa(Long idlonjastarifa) {
 		this.idlonjastarifa = idlonjastarifa;
 	}
+
 
 	public Integer getFundaspordia() {
 		return this.fundaspordia;
@@ -46,6 +43,7 @@ public class LonjasTarifa implements Serializable {
 		this.fundaspordia = fundaspordia;
 	}
 
+
 	public Integer getFundasporhora() {
 		return this.fundasporhora;
 	}
@@ -53,6 +51,7 @@ public class LonjasTarifa implements Serializable {
 	public void setFundasporhora(Integer fundasporhora) {
 		this.fundasporhora = fundasporhora;
 	}
+
 
 	public Integer getHora() {
 		return this.hora;
@@ -62,6 +61,7 @@ public class LonjasTarifa implements Serializable {
 		this.hora = hora;
 	}
 
+
 	public String getIdtalla() {
 		return this.idtalla;
 	}
@@ -69,6 +69,7 @@ public class LonjasTarifa implements Serializable {
 	public void setIdtalla(String idtalla) {
 		this.idtalla = idtalla;
 	}
+
 
 	public double getIncentivopordia() {
 		return this.incentivopordia;

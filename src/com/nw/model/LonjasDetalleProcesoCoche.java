@@ -11,45 +11,24 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="lonjas_detalle_proceso_coche")
+@NamedQuery(name="LonjasDetalleProcesoCoche.findAll", query="SELECT l FROM LonjasDetalleProcesoCoche l")
 public class LonjasDetalleProcesoCoche implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idlonjasdetalleprocesocoche;
-
 	private Integer estado;
-
 	private Timestamp fecharegistro;
-
-	//bi-directional many-to-one association to LimpiezaLomoLimpioCoche
-	@ManyToOne
-	@JoinColumn(name="idlimpiezalomolimpiocoche")
 	private LimpiezaLomoLimpioCoche limpiezaLomoLimpioCoche;
-
-	//bi-directional many-to-one association to LonjasDetalleProcesoLote
-	@ManyToOne
-	@JoinColumn(name="idlonjasdetalleprocesolote")
 	private LonjasDetalleProcesoLote lonjasDetalleProcesoLote;
-
-	//bi-directional many-to-one association to LonjasLinea
-	@ManyToOne
-	@JoinColumn(name="idlonjaslinea")
 	private LonjasLinea lonjasLinea;
-
-	//bi-directional many-to-one association to LonjasProceso
-	@ManyToOne
-	@JoinColumn(name="idlonjasproceso")
 	private LonjasProceso lonjasProceso;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
 	public LonjasDetalleProcesoCoche() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdlonjasdetalleprocesocoche() {
 		return this.idlonjasdetalleprocesocoche;
 	}
@@ -57,6 +36,7 @@ public class LonjasDetalleProcesoCoche implements Serializable {
 	public void setIdlonjasdetalleprocesocoche(Long idlonjasdetalleprocesocoche) {
 		this.idlonjasdetalleprocesocoche = idlonjasdetalleprocesocoche;
 	}
+
 
 	public Integer getEstado() {
 		return this.estado;
@@ -66,6 +46,7 @@ public class LonjasDetalleProcesoCoche implements Serializable {
 		this.estado = estado;
 	}
 
+
 	public Timestamp getFecharegistro() {
 		return this.fecharegistro;
 	}
@@ -74,6 +55,10 @@ public class LonjasDetalleProcesoCoche implements Serializable {
 		this.fecharegistro = fecharegistro;
 	}
 
+
+	//bi-directional many-to-one association to LimpiezaLomoLimpioCoche
+	@ManyToOne
+	@JoinColumn(name="idlimpiezalomolimpiocoche")
 	public LimpiezaLomoLimpioCoche getLimpiezaLomoLimpioCoche() {
 		return this.limpiezaLomoLimpioCoche;
 	}
@@ -82,6 +67,10 @@ public class LonjasDetalleProcesoCoche implements Serializable {
 		this.limpiezaLomoLimpioCoche = limpiezaLomoLimpioCoche;
 	}
 
+
+	//bi-directional many-to-one association to LonjasDetalleProcesoLote
+	@ManyToOne
+	@JoinColumn(name="idlonjasdetalleprocesolote")
 	public LonjasDetalleProcesoLote getLonjasDetalleProcesoLote() {
 		return this.lonjasDetalleProcesoLote;
 	}
@@ -90,6 +79,10 @@ public class LonjasDetalleProcesoCoche implements Serializable {
 		this.lonjasDetalleProcesoLote = lonjasDetalleProcesoLote;
 	}
 
+
+	//bi-directional many-to-one association to LonjasLinea
+	@ManyToOne
+	@JoinColumn(name="idlonjaslinea")
 	public LonjasLinea getLonjasLinea() {
 		return this.lonjasLinea;
 	}
@@ -98,6 +91,10 @@ public class LonjasDetalleProcesoCoche implements Serializable {
 		this.lonjasLinea = lonjasLinea;
 	}
 
+
+	//bi-directional many-to-one association to LonjasProceso
+	@ManyToOne
+	@JoinColumn(name="idlonjasproceso")
 	public LonjasProceso getLonjasProceso() {
 		return this.lonjasProceso;
 	}
@@ -106,6 +103,10 @@ public class LonjasDetalleProcesoCoche implements Serializable {
 		this.lonjasProceso = lonjasProceso;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

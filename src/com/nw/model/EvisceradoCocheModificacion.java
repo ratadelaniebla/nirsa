@@ -11,99 +11,45 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="eviscerado_coche_modificacion")
+@NamedQuery(name="EvisceradoCocheModificacion.findAll", query="SELECT e FROM EvisceradoCocheModificacion e")
 public class EvisceradoCocheModificacion implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idevisceradocochemodificacion;
-
 	private Integer canastillas;
-
 	private Long codbarra;
-
 	private Integer estadoespecial;
-
 	private Integer estadouso;
-
 	private Timestamp fechaactualizacion;
-
 	private Timestamp fechareg;
-
 	private Timestamp fecharegrecepcocheconica;
-
 	private Integer idcochedia;
-
 	private Integer idcochelote;
-
 	private Long idcocheprincipal;
-
 	private Long idcocinaaperturacierredetallerecepcocheconica;
-
 	private Integer idcocinarecepcocheconica;
-
 	private String idusuariorecepcocheconica;
-
 	private Integer pescadoadicional;
-
 	private double peso;
-
 	private double tara;
-
 	private String tipoingreso;
-
 	private String tipoingresocontingencia;
-
 	private String tipoingresotara;
-
-	//bi-directional many-to-one association to Cocina
-	@ManyToOne
-	@JoinColumn(name="idcocina")
 	private Cocina cocina;
-
-	//bi-directional many-to-one association to CocinaAperturaCierreDetalle
-	@ManyToOne
-	@JoinColumn(name="idcocinaaperturacierredetalle")
 	private CocinaAperturaCierreDetalle cocinaAperturaCierreDetalle;
-
-	//bi-directional many-to-one association to EvisceradoCorte
-	@ManyToOne
-	@JoinColumn(name="idevisceradocorte")
 	private EvisceradoCorte evisceradoCorte;
-
-	//bi-directional many-to-one association to EvisceradoDetalleProceso
-	@ManyToOne
-	@JoinColumn(name="idevisceradodetalleproceso")
 	private EvisceradoDetalleProceso evisceradoDetalleProceso;
-
-	//bi-directional many-to-one association to EvisceradoDetalleProcesoCoche
-	@ManyToOne
-	@JoinColumn(name="idevisceradodetalleprocesocoche")
 	private EvisceradoDetalleProcesoCoche evisceradoDetalleProcesoCoche;
-
-	//bi-directional many-to-one association to EvisceradoPescadosLata
-	@ManyToOne
-	@JoinColumn(name="idevisceradopescadoslata")
 	private EvisceradoPescadosLata evisceradoPescadosLata;
-
-	//bi-directional many-to-one association to Turno
-	@ManyToOne
-	@JoinColumn(name="idturno")
 	private Turno turno;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuario")
 	private Usuario usuario1;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuarioactualizacion")
 	private Usuario usuario2;
 
 	public EvisceradoCocheModificacion() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdevisceradocochemodificacion() {
 		return this.idevisceradocochemodificacion;
 	}
@@ -111,6 +57,7 @@ public class EvisceradoCocheModificacion implements Serializable {
 	public void setIdevisceradocochemodificacion(Long idevisceradocochemodificacion) {
 		this.idevisceradocochemodificacion = idevisceradocochemodificacion;
 	}
+
 
 	public Integer getCanastillas() {
 		return this.canastillas;
@@ -120,6 +67,7 @@ public class EvisceradoCocheModificacion implements Serializable {
 		this.canastillas = canastillas;
 	}
 
+
 	public Long getCodbarra() {
 		return this.codbarra;
 	}
@@ -127,6 +75,7 @@ public class EvisceradoCocheModificacion implements Serializable {
 	public void setCodbarra(Long codbarra) {
 		this.codbarra = codbarra;
 	}
+
 
 	public Integer getEstadoespecial() {
 		return this.estadoespecial;
@@ -136,6 +85,7 @@ public class EvisceradoCocheModificacion implements Serializable {
 		this.estadoespecial = estadoespecial;
 	}
 
+
 	public Integer getEstadouso() {
 		return this.estadouso;
 	}
@@ -143,6 +93,7 @@ public class EvisceradoCocheModificacion implements Serializable {
 	public void setEstadouso(Integer estadouso) {
 		this.estadouso = estadouso;
 	}
+
 
 	public Timestamp getFechaactualizacion() {
 		return this.fechaactualizacion;
@@ -152,6 +103,7 @@ public class EvisceradoCocheModificacion implements Serializable {
 		this.fechaactualizacion = fechaactualizacion;
 	}
 
+
 	public Timestamp getFechareg() {
 		return this.fechareg;
 	}
@@ -159,6 +111,7 @@ public class EvisceradoCocheModificacion implements Serializable {
 	public void setFechareg(Timestamp fechareg) {
 		this.fechareg = fechareg;
 	}
+
 
 	public Timestamp getFecharegrecepcocheconica() {
 		return this.fecharegrecepcocheconica;
@@ -168,6 +121,7 @@ public class EvisceradoCocheModificacion implements Serializable {
 		this.fecharegrecepcocheconica = fecharegrecepcocheconica;
 	}
 
+
 	public Integer getIdcochedia() {
 		return this.idcochedia;
 	}
@@ -175,6 +129,7 @@ public class EvisceradoCocheModificacion implements Serializable {
 	public void setIdcochedia(Integer idcochedia) {
 		this.idcochedia = idcochedia;
 	}
+
 
 	public Integer getIdcochelote() {
 		return this.idcochelote;
@@ -184,6 +139,7 @@ public class EvisceradoCocheModificacion implements Serializable {
 		this.idcochelote = idcochelote;
 	}
 
+
 	public Long getIdcocheprincipal() {
 		return this.idcocheprincipal;
 	}
@@ -191,6 +147,7 @@ public class EvisceradoCocheModificacion implements Serializable {
 	public void setIdcocheprincipal(Long idcocheprincipal) {
 		this.idcocheprincipal = idcocheprincipal;
 	}
+
 
 	public Long getIdcocinaaperturacierredetallerecepcocheconica() {
 		return this.idcocinaaperturacierredetallerecepcocheconica;
@@ -200,6 +157,7 @@ public class EvisceradoCocheModificacion implements Serializable {
 		this.idcocinaaperturacierredetallerecepcocheconica = idcocinaaperturacierredetallerecepcocheconica;
 	}
 
+
 	public Integer getIdcocinarecepcocheconica() {
 		return this.idcocinarecepcocheconica;
 	}
@@ -207,6 +165,7 @@ public class EvisceradoCocheModificacion implements Serializable {
 	public void setIdcocinarecepcocheconica(Integer idcocinarecepcocheconica) {
 		this.idcocinarecepcocheconica = idcocinarecepcocheconica;
 	}
+
 
 	public String getIdusuariorecepcocheconica() {
 		return this.idusuariorecepcocheconica;
@@ -216,6 +175,7 @@ public class EvisceradoCocheModificacion implements Serializable {
 		this.idusuariorecepcocheconica = idusuariorecepcocheconica;
 	}
 
+
 	public Integer getPescadoadicional() {
 		return this.pescadoadicional;
 	}
@@ -223,6 +183,7 @@ public class EvisceradoCocheModificacion implements Serializable {
 	public void setPescadoadicional(Integer pescadoadicional) {
 		this.pescadoadicional = pescadoadicional;
 	}
+
 
 	public double getPeso() {
 		return this.peso;
@@ -232,6 +193,7 @@ public class EvisceradoCocheModificacion implements Serializable {
 		this.peso = peso;
 	}
 
+
 	public double getTara() {
 		return this.tara;
 	}
@@ -239,6 +201,7 @@ public class EvisceradoCocheModificacion implements Serializable {
 	public void setTara(double tara) {
 		this.tara = tara;
 	}
+
 
 	public String getTipoingreso() {
 		return this.tipoingreso;
@@ -248,6 +211,7 @@ public class EvisceradoCocheModificacion implements Serializable {
 		this.tipoingreso = tipoingreso;
 	}
 
+
 	public String getTipoingresocontingencia() {
 		return this.tipoingresocontingencia;
 	}
@@ -255,6 +219,7 @@ public class EvisceradoCocheModificacion implements Serializable {
 	public void setTipoingresocontingencia(String tipoingresocontingencia) {
 		this.tipoingresocontingencia = tipoingresocontingencia;
 	}
+
 
 	public String getTipoingresotara() {
 		return this.tipoingresotara;
@@ -264,6 +229,10 @@ public class EvisceradoCocheModificacion implements Serializable {
 		this.tipoingresotara = tipoingresotara;
 	}
 
+
+	//bi-directional many-to-one association to Cocina
+	@ManyToOne
+	@JoinColumn(name="idcocina")
 	public Cocina getCocina() {
 		return this.cocina;
 	}
@@ -272,6 +241,10 @@ public class EvisceradoCocheModificacion implements Serializable {
 		this.cocina = cocina;
 	}
 
+
+	//bi-directional many-to-one association to CocinaAperturaCierreDetalle
+	@ManyToOne
+	@JoinColumn(name="idcocinaaperturacierredetalle")
 	public CocinaAperturaCierreDetalle getCocinaAperturaCierreDetalle() {
 		return this.cocinaAperturaCierreDetalle;
 	}
@@ -280,6 +253,10 @@ public class EvisceradoCocheModificacion implements Serializable {
 		this.cocinaAperturaCierreDetalle = cocinaAperturaCierreDetalle;
 	}
 
+
+	//bi-directional many-to-one association to EvisceradoCorte
+	@ManyToOne
+	@JoinColumn(name="idevisceradocorte")
 	public EvisceradoCorte getEvisceradoCorte() {
 		return this.evisceradoCorte;
 	}
@@ -288,6 +265,10 @@ public class EvisceradoCocheModificacion implements Serializable {
 		this.evisceradoCorte = evisceradoCorte;
 	}
 
+
+	//bi-directional many-to-one association to EvisceradoDetalleProceso
+	@ManyToOne
+	@JoinColumn(name="idevisceradodetalleproceso")
 	public EvisceradoDetalleProceso getEvisceradoDetalleProceso() {
 		return this.evisceradoDetalleProceso;
 	}
@@ -296,6 +277,10 @@ public class EvisceradoCocheModificacion implements Serializable {
 		this.evisceradoDetalleProceso = evisceradoDetalleProceso;
 	}
 
+
+	//bi-directional many-to-one association to EvisceradoDetalleProcesoCoche
+	@ManyToOne
+	@JoinColumn(name="idevisceradodetalleprocesocoche")
 	public EvisceradoDetalleProcesoCoche getEvisceradoDetalleProcesoCoche() {
 		return this.evisceradoDetalleProcesoCoche;
 	}
@@ -304,6 +289,10 @@ public class EvisceradoCocheModificacion implements Serializable {
 		this.evisceradoDetalleProcesoCoche = evisceradoDetalleProcesoCoche;
 	}
 
+
+	//bi-directional many-to-one association to EvisceradoPescadosLata
+	@ManyToOne
+	@JoinColumn(name="idevisceradopescadoslata")
 	public EvisceradoPescadosLata getEvisceradoPescadosLata() {
 		return this.evisceradoPescadosLata;
 	}
@@ -312,6 +301,10 @@ public class EvisceradoCocheModificacion implements Serializable {
 		this.evisceradoPescadosLata = evisceradoPescadosLata;
 	}
 
+
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
 	public Turno getTurno() {
 		return this.turno;
 	}
@@ -320,6 +313,10 @@ public class EvisceradoCocheModificacion implements Serializable {
 		this.turno = turno;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuario")
 	public Usuario getUsuario1() {
 		return this.usuario1;
 	}
@@ -328,6 +325,10 @@ public class EvisceradoCocheModificacion implements Serializable {
 		this.usuario1 = usuario1;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuarioactualizacion")
 	public Usuario getUsuario2() {
 		return this.usuario2;
 	}

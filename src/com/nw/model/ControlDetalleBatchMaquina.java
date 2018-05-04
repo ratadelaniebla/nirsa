@@ -11,57 +11,30 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="control_detalle_batch_maquina")
+@NamedQuery(name="ControlDetalleBatchMaquina.findAll", query="SELECT c FROM ControlDetalleBatchMaquina c")
 public class ControlDetalleBatchMaquina implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idcontroldetallebatchmaquina;
-
 	private String codproducto;
-
 	private Integer estado;
-
 	private Timestamp fechaactualizacion;
-
 	private Timestamp fechafin;
-
 	private Timestamp fechainicio;
-
 	private String idusuarioactualizacion;
-
 	private String idusuariofin;
-
 	private String observaciones;
-
-	//bi-directional many-to-one association to ControlFichaBatch
-	@ManyToOne
-	@JoinColumn(name="idcontrolfichabatch")
 	private ControlFichaBatch controlFichaBatch;
-
-	//bi-directional many-to-one association to MaquinaCerradora
-	@ManyToOne
-	@JoinColumn(name="idmaquinacerradora")
 	private MaquinaCerradora maquinaCerradora;
-
-	//bi-directional many-to-one association to MaquinaDetectorMetal
-	@ManyToOne
-	@JoinColumn(name="idmaquinadetectormetal")
 	private MaquinaDetectorMetal maquinaDetectorMetal;
-
-	//bi-directional many-to-one association to MaquinaLinea
-	@ManyToOne
-	@JoinColumn(name="idmaquinalinea")
 	private MaquinaLinea maquinaLinea;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="idusuarioinicio")
 	private Usuario usuario;
 
 	public ControlDetalleBatchMaquina() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdcontroldetallebatchmaquina() {
 		return this.idcontroldetallebatchmaquina;
 	}
@@ -69,6 +42,7 @@ public class ControlDetalleBatchMaquina implements Serializable {
 	public void setIdcontroldetallebatchmaquina(Long idcontroldetallebatchmaquina) {
 		this.idcontroldetallebatchmaquina = idcontroldetallebatchmaquina;
 	}
+
 
 	public String getCodproducto() {
 		return this.codproducto;
@@ -78,6 +52,7 @@ public class ControlDetalleBatchMaquina implements Serializable {
 		this.codproducto = codproducto;
 	}
 
+
 	public Integer getEstado() {
 		return this.estado;
 	}
@@ -85,6 +60,7 @@ public class ControlDetalleBatchMaquina implements Serializable {
 	public void setEstado(Integer estado) {
 		this.estado = estado;
 	}
+
 
 	public Timestamp getFechaactualizacion() {
 		return this.fechaactualizacion;
@@ -94,6 +70,7 @@ public class ControlDetalleBatchMaquina implements Serializable {
 		this.fechaactualizacion = fechaactualizacion;
 	}
 
+
 	public Timestamp getFechafin() {
 		return this.fechafin;
 	}
@@ -101,6 +78,7 @@ public class ControlDetalleBatchMaquina implements Serializable {
 	public void setFechafin(Timestamp fechafin) {
 		this.fechafin = fechafin;
 	}
+
 
 	public Timestamp getFechainicio() {
 		return this.fechainicio;
@@ -110,6 +88,7 @@ public class ControlDetalleBatchMaquina implements Serializable {
 		this.fechainicio = fechainicio;
 	}
 
+
 	public String getIdusuarioactualizacion() {
 		return this.idusuarioactualizacion;
 	}
@@ -117,6 +96,7 @@ public class ControlDetalleBatchMaquina implements Serializable {
 	public void setIdusuarioactualizacion(String idusuarioactualizacion) {
 		this.idusuarioactualizacion = idusuarioactualizacion;
 	}
+
 
 	public String getIdusuariofin() {
 		return this.idusuariofin;
@@ -126,6 +106,7 @@ public class ControlDetalleBatchMaquina implements Serializable {
 		this.idusuariofin = idusuariofin;
 	}
 
+
 	public String getObservaciones() {
 		return this.observaciones;
 	}
@@ -134,6 +115,10 @@ public class ControlDetalleBatchMaquina implements Serializable {
 		this.observaciones = observaciones;
 	}
 
+
+	//bi-directional many-to-one association to ControlFichaBatch
+	@ManyToOne
+	@JoinColumn(name="idcontrolfichabatch")
 	public ControlFichaBatch getControlFichaBatch() {
 		return this.controlFichaBatch;
 	}
@@ -142,6 +127,10 @@ public class ControlDetalleBatchMaquina implements Serializable {
 		this.controlFichaBatch = controlFichaBatch;
 	}
 
+
+	//bi-directional many-to-one association to MaquinaCerradora
+	@ManyToOne
+	@JoinColumn(name="idmaquinacerradora")
 	public MaquinaCerradora getMaquinaCerradora() {
 		return this.maquinaCerradora;
 	}
@@ -150,6 +139,10 @@ public class ControlDetalleBatchMaquina implements Serializable {
 		this.maquinaCerradora = maquinaCerradora;
 	}
 
+
+	//bi-directional many-to-one association to MaquinaDetectorMetal
+	@ManyToOne
+	@JoinColumn(name="idmaquinadetectormetal")
 	public MaquinaDetectorMetal getMaquinaDetectorMetal() {
 		return this.maquinaDetectorMetal;
 	}
@@ -158,6 +151,10 @@ public class ControlDetalleBatchMaquina implements Serializable {
 		this.maquinaDetectorMetal = maquinaDetectorMetal;
 	}
 
+
+	//bi-directional many-to-one association to MaquinaLinea
+	@ManyToOne
+	@JoinColumn(name="idmaquinalinea")
 	public MaquinaLinea getMaquinaLinea() {
 		return this.maquinaLinea;
 	}
@@ -166,6 +163,10 @@ public class ControlDetalleBatchMaquina implements Serializable {
 		this.maquinaLinea = maquinaLinea;
 	}
 
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idusuarioinicio")
 	public Usuario getUsuario() {
 		return this.usuario;
 	}

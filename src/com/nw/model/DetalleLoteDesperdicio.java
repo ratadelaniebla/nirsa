@@ -10,23 +10,19 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="detalle_lote_desperdicio")
+@NamedQuery(name="DetalleLoteDesperdicio.findAll", query="SELECT d FROM DetalleLoteDesperdicio d")
 public class DetalleLoteDesperdicio implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long iddetallelotedesperdicio;
-
 	private String lote;
-
-	//bi-directional many-to-one association to DesperdicioDetalle
-	@ManyToOne
-	@JoinColumn(name="iddesperdiciodetalle")
 	private DesperdicioDetalle desperdicioDetalle;
 
 	public DetalleLoteDesperdicio() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIddetallelotedesperdicio() {
 		return this.iddetallelotedesperdicio;
 	}
@@ -34,6 +30,7 @@ public class DetalleLoteDesperdicio implements Serializable {
 	public void setIddetallelotedesperdicio(Long iddetallelotedesperdicio) {
 		this.iddetallelotedesperdicio = iddetallelotedesperdicio;
 	}
+
 
 	public String getLote() {
 		return this.lote;
@@ -43,6 +40,10 @@ public class DetalleLoteDesperdicio implements Serializable {
 		this.lote = lote;
 	}
 
+
+	//bi-directional many-to-one association to DesperdicioDetalle
+	@ManyToOne
+	@JoinColumn(name="iddesperdiciodetalle")
 	public DesperdicioDetalle getDesperdicioDetalle() {
 		return this.desperdicioDetalle;
 	}

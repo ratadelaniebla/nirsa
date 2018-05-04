@@ -10,26 +10,19 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="barco_estiba_cuba_detalle_mezcla")
+@NamedQuery(name="BarcoEstibaCubaDetalleMezcla.findAll", query="SELECT b FROM BarcoEstibaCubaDetalleMezcla b")
 public class BarcoEstibaCubaDetalleMezcla implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long idbarcoestibacubadetallemezcla;
-
-	//bi-directional many-to-one association to BarcoEstibaCuba
-	@ManyToOne
-	@JoinColumn(name="idbarcoestibacuba")
 	private BarcoEstibaCuba barcoEstibaCuba;
-
-	//bi-directional many-to-one association to CamaraCajon
-	@ManyToOne
-	@JoinColumn(name="idcamaracajon")
 	private CamaraCajon camaraCajon;
 
 	public BarcoEstibaCubaDetalleMezcla() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getIdbarcoestibacubadetallemezcla() {
 		return this.idbarcoestibacubadetallemezcla;
 	}
@@ -38,6 +31,10 @@ public class BarcoEstibaCubaDetalleMezcla implements Serializable {
 		this.idbarcoestibacubadetallemezcla = idbarcoestibacubadetallemezcla;
 	}
 
+
+	//bi-directional many-to-one association to BarcoEstibaCuba
+	@ManyToOne
+	@JoinColumn(name="idbarcoestibacuba")
 	public BarcoEstibaCuba getBarcoEstibaCuba() {
 		return this.barcoEstibaCuba;
 	}
@@ -46,6 +43,10 @@ public class BarcoEstibaCubaDetalleMezcla implements Serializable {
 		this.barcoEstibaCuba = barcoEstibaCuba;
 	}
 
+
+	//bi-directional many-to-one association to CamaraCajon
+	@ManyToOne
+	@JoinColumn(name="idcamaracajon")
 	public CamaraCajon getCamaraCajon() {
 		return this.camaraCajon;
 	}

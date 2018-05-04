@@ -11,60 +11,29 @@ import java.util.List;
  */
 @Entity
 @Table(name="eviscerado_pescados_lata")
+@NamedQuery(name="EvisceradoPescadosLata.findAll", query="SELECT e FROM EvisceradoPescadosLata e")
 public class EvisceradoPescadosLata implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idevisceradopescadoslata;
-
 	private Integer cantidad;
-
 	private String especificacion;
-
-	//bi-directional many-to-one association to EstandarClasificacionProdTalla
-	@OneToMany(mappedBy="evisceradoPescadosLata")
 	private List<EstandarClasificacionProdTalla> estandarClasificacionProdTallas;
-
-	//bi-directional many-to-one association to EstandarClasificacionTalla
-	@OneToMany(mappedBy="evisceradoPescadosLata")
 	private List<EstandarClasificacionTalla> estandarClasificacionTallas;
-
-	//bi-directional many-to-one association to EstandarClasificacionTallaPlexus
-	@OneToMany(mappedBy="evisceradoPescadosLata")
 	private List<EstandarClasificacionTallaPlexus> estandarClasificacionTallaPlexuses;
-
-	//bi-directional many-to-one association to EstandarClasificacionXPeso
-	@OneToMany(mappedBy="evisceradoPescadosLata")
 	private List<EstandarClasificacionXPeso> estandarClasificacionXPesos;
-
-	//bi-directional many-to-one association to EstandarPonchadaTthh
-	@OneToMany(mappedBy="evisceradoPescadosLata")
 	private List<EstandarPonchadaTthh> estandarPonchadaTthhs;
-
-	//bi-directional many-to-one association to EvisceradoCocheModificacion
-	@OneToMany(mappedBy="evisceradoPescadosLata")
 	private List<EvisceradoCocheModificacion> evisceradoCocheModificacions;
-
-	//bi-directional many-to-one association to EvisceradoDetalleProcesoCoche
-	@OneToMany(mappedBy="evisceradoPescadosLata")
 	private List<EvisceradoDetalleProcesoCoche> evisceradoDetalleProcesoCoches;
-
-	//bi-directional many-to-one association to LimpiezaDespellejadoPonchada
-	@OneToMany(mappedBy="evisceradoPescadosLata")
 	private List<LimpiezaDespellejadoPonchada> limpiezaDespellejadoPonchadas;
-
-	//bi-directional many-to-one association to LimpiezaDetallePesoDespellejadoT
-	@OneToMany(mappedBy="evisceradoPescadosLata")
 	private List<LimpiezaDetallePesoDespellejadoT> limpiezaDetallePesoDespellejadoTs;
-
-	//bi-directional many-to-one association to LimpiezaFileteadoPonchada
-	@OneToMany(mappedBy="evisceradoPescadosLata")
 	private List<LimpiezaFileteadoPonchada> limpiezaFileteadoPonchadas;
 
 	public EvisceradoPescadosLata() {
 	}
 
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Integer getIdevisceradopescadoslata() {
 		return this.idevisceradopescadoslata;
 	}
@@ -72,6 +41,7 @@ public class EvisceradoPescadosLata implements Serializable {
 	public void setIdevisceradopescadoslata(Integer idevisceradopescadoslata) {
 		this.idevisceradopescadoslata = idevisceradopescadoslata;
 	}
+
 
 	public Integer getCantidad() {
 		return this.cantidad;
@@ -81,6 +51,7 @@ public class EvisceradoPescadosLata implements Serializable {
 		this.cantidad = cantidad;
 	}
 
+
 	public String getEspecificacion() {
 		return this.especificacion;
 	}
@@ -89,6 +60,9 @@ public class EvisceradoPescadosLata implements Serializable {
 		this.especificacion = especificacion;
 	}
 
+
+	//bi-directional many-to-one association to EstandarClasificacionProdTalla
+	@OneToMany(mappedBy="evisceradoPescadosLata")
 	public List<EstandarClasificacionProdTalla> getEstandarClasificacionProdTallas() {
 		return this.estandarClasificacionProdTallas;
 	}
@@ -97,6 +71,23 @@ public class EvisceradoPescadosLata implements Serializable {
 		this.estandarClasificacionProdTallas = estandarClasificacionProdTallas;
 	}
 
+	public EstandarClasificacionProdTalla addEstandarClasificacionProdTalla(EstandarClasificacionProdTalla estandarClasificacionProdTalla) {
+		getEstandarClasificacionProdTallas().add(estandarClasificacionProdTalla);
+		estandarClasificacionProdTalla.setEvisceradoPescadosLata(this);
+
+		return estandarClasificacionProdTalla;
+	}
+
+	public EstandarClasificacionProdTalla removeEstandarClasificacionProdTalla(EstandarClasificacionProdTalla estandarClasificacionProdTalla) {
+		getEstandarClasificacionProdTallas().remove(estandarClasificacionProdTalla);
+		estandarClasificacionProdTalla.setEvisceradoPescadosLata(null);
+
+		return estandarClasificacionProdTalla;
+	}
+
+
+	//bi-directional many-to-one association to EstandarClasificacionTalla
+	@OneToMany(mappedBy="evisceradoPescadosLata")
 	public List<EstandarClasificacionTalla> getEstandarClasificacionTallas() {
 		return this.estandarClasificacionTallas;
 	}
@@ -105,6 +96,23 @@ public class EvisceradoPescadosLata implements Serializable {
 		this.estandarClasificacionTallas = estandarClasificacionTallas;
 	}
 
+	public EstandarClasificacionTalla addEstandarClasificacionTalla(EstandarClasificacionTalla estandarClasificacionTalla) {
+		getEstandarClasificacionTallas().add(estandarClasificacionTalla);
+		estandarClasificacionTalla.setEvisceradoPescadosLata(this);
+
+		return estandarClasificacionTalla;
+	}
+
+	public EstandarClasificacionTalla removeEstandarClasificacionTalla(EstandarClasificacionTalla estandarClasificacionTalla) {
+		getEstandarClasificacionTallas().remove(estandarClasificacionTalla);
+		estandarClasificacionTalla.setEvisceradoPescadosLata(null);
+
+		return estandarClasificacionTalla;
+	}
+
+
+	//bi-directional many-to-one association to EstandarClasificacionTallaPlexus
+	@OneToMany(mappedBy="evisceradoPescadosLata")
 	public List<EstandarClasificacionTallaPlexus> getEstandarClasificacionTallaPlexuses() {
 		return this.estandarClasificacionTallaPlexuses;
 	}
@@ -113,6 +121,23 @@ public class EvisceradoPescadosLata implements Serializable {
 		this.estandarClasificacionTallaPlexuses = estandarClasificacionTallaPlexuses;
 	}
 
+	public EstandarClasificacionTallaPlexus addEstandarClasificacionTallaPlexus(EstandarClasificacionTallaPlexus estandarClasificacionTallaPlexus) {
+		getEstandarClasificacionTallaPlexuses().add(estandarClasificacionTallaPlexus);
+		estandarClasificacionTallaPlexus.setEvisceradoPescadosLata(this);
+
+		return estandarClasificacionTallaPlexus;
+	}
+
+	public EstandarClasificacionTallaPlexus removeEstandarClasificacionTallaPlexus(EstandarClasificacionTallaPlexus estandarClasificacionTallaPlexus) {
+		getEstandarClasificacionTallaPlexuses().remove(estandarClasificacionTallaPlexus);
+		estandarClasificacionTallaPlexus.setEvisceradoPescadosLata(null);
+
+		return estandarClasificacionTallaPlexus;
+	}
+
+
+	//bi-directional many-to-one association to EstandarClasificacionXPeso
+	@OneToMany(mappedBy="evisceradoPescadosLata")
 	public List<EstandarClasificacionXPeso> getEstandarClasificacionXPesos() {
 		return this.estandarClasificacionXPesos;
 	}
@@ -121,6 +146,23 @@ public class EvisceradoPescadosLata implements Serializable {
 		this.estandarClasificacionXPesos = estandarClasificacionXPesos;
 	}
 
+	public EstandarClasificacionXPeso addEstandarClasificacionXPeso(EstandarClasificacionXPeso estandarClasificacionXPeso) {
+		getEstandarClasificacionXPesos().add(estandarClasificacionXPeso);
+		estandarClasificacionXPeso.setEvisceradoPescadosLata(this);
+
+		return estandarClasificacionXPeso;
+	}
+
+	public EstandarClasificacionXPeso removeEstandarClasificacionXPeso(EstandarClasificacionXPeso estandarClasificacionXPeso) {
+		getEstandarClasificacionXPesos().remove(estandarClasificacionXPeso);
+		estandarClasificacionXPeso.setEvisceradoPescadosLata(null);
+
+		return estandarClasificacionXPeso;
+	}
+
+
+	//bi-directional many-to-one association to EstandarPonchadaTthh
+	@OneToMany(mappedBy="evisceradoPescadosLata")
 	public List<EstandarPonchadaTthh> getEstandarPonchadaTthhs() {
 		return this.estandarPonchadaTthhs;
 	}
@@ -129,6 +171,23 @@ public class EvisceradoPescadosLata implements Serializable {
 		this.estandarPonchadaTthhs = estandarPonchadaTthhs;
 	}
 
+	public EstandarPonchadaTthh addEstandarPonchadaTthh(EstandarPonchadaTthh estandarPonchadaTthh) {
+		getEstandarPonchadaTthhs().add(estandarPonchadaTthh);
+		estandarPonchadaTthh.setEvisceradoPescadosLata(this);
+
+		return estandarPonchadaTthh;
+	}
+
+	public EstandarPonchadaTthh removeEstandarPonchadaTthh(EstandarPonchadaTthh estandarPonchadaTthh) {
+		getEstandarPonchadaTthhs().remove(estandarPonchadaTthh);
+		estandarPonchadaTthh.setEvisceradoPescadosLata(null);
+
+		return estandarPonchadaTthh;
+	}
+
+
+	//bi-directional many-to-one association to EvisceradoCocheModificacion
+	@OneToMany(mappedBy="evisceradoPescadosLata")
 	public List<EvisceradoCocheModificacion> getEvisceradoCocheModificacions() {
 		return this.evisceradoCocheModificacions;
 	}
@@ -137,6 +196,23 @@ public class EvisceradoPescadosLata implements Serializable {
 		this.evisceradoCocheModificacions = evisceradoCocheModificacions;
 	}
 
+	public EvisceradoCocheModificacion addEvisceradoCocheModificacion(EvisceradoCocheModificacion evisceradoCocheModificacion) {
+		getEvisceradoCocheModificacions().add(evisceradoCocheModificacion);
+		evisceradoCocheModificacion.setEvisceradoPescadosLata(this);
+
+		return evisceradoCocheModificacion;
+	}
+
+	public EvisceradoCocheModificacion removeEvisceradoCocheModificacion(EvisceradoCocheModificacion evisceradoCocheModificacion) {
+		getEvisceradoCocheModificacions().remove(evisceradoCocheModificacion);
+		evisceradoCocheModificacion.setEvisceradoPescadosLata(null);
+
+		return evisceradoCocheModificacion;
+	}
+
+
+	//bi-directional many-to-one association to EvisceradoDetalleProcesoCoche
+	@OneToMany(mappedBy="evisceradoPescadosLata")
 	public List<EvisceradoDetalleProcesoCoche> getEvisceradoDetalleProcesoCoches() {
 		return this.evisceradoDetalleProcesoCoches;
 	}
@@ -145,6 +221,23 @@ public class EvisceradoPescadosLata implements Serializable {
 		this.evisceradoDetalleProcesoCoches = evisceradoDetalleProcesoCoches;
 	}
 
+	public EvisceradoDetalleProcesoCoche addEvisceradoDetalleProcesoCoch(EvisceradoDetalleProcesoCoche evisceradoDetalleProcesoCoch) {
+		getEvisceradoDetalleProcesoCoches().add(evisceradoDetalleProcesoCoch);
+		evisceradoDetalleProcesoCoch.setEvisceradoPescadosLata(this);
+
+		return evisceradoDetalleProcesoCoch;
+	}
+
+	public EvisceradoDetalleProcesoCoche removeEvisceradoDetalleProcesoCoch(EvisceradoDetalleProcesoCoche evisceradoDetalleProcesoCoch) {
+		getEvisceradoDetalleProcesoCoches().remove(evisceradoDetalleProcesoCoch);
+		evisceradoDetalleProcesoCoch.setEvisceradoPescadosLata(null);
+
+		return evisceradoDetalleProcesoCoch;
+	}
+
+
+	//bi-directional many-to-one association to LimpiezaDespellejadoPonchada
+	@OneToMany(mappedBy="evisceradoPescadosLata")
 	public List<LimpiezaDespellejadoPonchada> getLimpiezaDespellejadoPonchadas() {
 		return this.limpiezaDespellejadoPonchadas;
 	}
@@ -153,6 +246,23 @@ public class EvisceradoPescadosLata implements Serializable {
 		this.limpiezaDespellejadoPonchadas = limpiezaDespellejadoPonchadas;
 	}
 
+	public LimpiezaDespellejadoPonchada addLimpiezaDespellejadoPonchada(LimpiezaDespellejadoPonchada limpiezaDespellejadoPonchada) {
+		getLimpiezaDespellejadoPonchadas().add(limpiezaDespellejadoPonchada);
+		limpiezaDespellejadoPonchada.setEvisceradoPescadosLata(this);
+
+		return limpiezaDespellejadoPonchada;
+	}
+
+	public LimpiezaDespellejadoPonchada removeLimpiezaDespellejadoPonchada(LimpiezaDespellejadoPonchada limpiezaDespellejadoPonchada) {
+		getLimpiezaDespellejadoPonchadas().remove(limpiezaDespellejadoPonchada);
+		limpiezaDespellejadoPonchada.setEvisceradoPescadosLata(null);
+
+		return limpiezaDespellejadoPonchada;
+	}
+
+
+	//bi-directional many-to-one association to LimpiezaDetallePesoDespellejadoT
+	@OneToMany(mappedBy="evisceradoPescadosLata")
 	public List<LimpiezaDetallePesoDespellejadoT> getLimpiezaDetallePesoDespellejadoTs() {
 		return this.limpiezaDetallePesoDespellejadoTs;
 	}
@@ -161,12 +271,43 @@ public class EvisceradoPescadosLata implements Serializable {
 		this.limpiezaDetallePesoDespellejadoTs = limpiezaDetallePesoDespellejadoTs;
 	}
 
+	public LimpiezaDetallePesoDespellejadoT addLimpiezaDetallePesoDespellejadoT(LimpiezaDetallePesoDespellejadoT limpiezaDetallePesoDespellejadoT) {
+		getLimpiezaDetallePesoDespellejadoTs().add(limpiezaDetallePesoDespellejadoT);
+		limpiezaDetallePesoDespellejadoT.setEvisceradoPescadosLata(this);
+
+		return limpiezaDetallePesoDespellejadoT;
+	}
+
+	public LimpiezaDetallePesoDespellejadoT removeLimpiezaDetallePesoDespellejadoT(LimpiezaDetallePesoDespellejadoT limpiezaDetallePesoDespellejadoT) {
+		getLimpiezaDetallePesoDespellejadoTs().remove(limpiezaDetallePesoDespellejadoT);
+		limpiezaDetallePesoDespellejadoT.setEvisceradoPescadosLata(null);
+
+		return limpiezaDetallePesoDespellejadoT;
+	}
+
+
+	//bi-directional many-to-one association to LimpiezaFileteadoPonchada
+	@OneToMany(mappedBy="evisceradoPescadosLata")
 	public List<LimpiezaFileteadoPonchada> getLimpiezaFileteadoPonchadas() {
 		return this.limpiezaFileteadoPonchadas;
 	}
 
 	public void setLimpiezaFileteadoPonchadas(List<LimpiezaFileteadoPonchada> limpiezaFileteadoPonchadas) {
 		this.limpiezaFileteadoPonchadas = limpiezaFileteadoPonchadas;
+	}
+
+	public LimpiezaFileteadoPonchada addLimpiezaFileteadoPonchada(LimpiezaFileteadoPonchada limpiezaFileteadoPonchada) {
+		getLimpiezaFileteadoPonchadas().add(limpiezaFileteadoPonchada);
+		limpiezaFileteadoPonchada.setEvisceradoPescadosLata(this);
+
+		return limpiezaFileteadoPonchada;
+	}
+
+	public LimpiezaFileteadoPonchada removeLimpiezaFileteadoPonchada(LimpiezaFileteadoPonchada limpiezaFileteadoPonchada) {
+		getLimpiezaFileteadoPonchadas().remove(limpiezaFileteadoPonchada);
+		limpiezaFileteadoPonchada.setEvisceradoPescadosLata(null);
+
+		return limpiezaFileteadoPonchada;
 	}
 
 }
