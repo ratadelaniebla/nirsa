@@ -577,14 +577,14 @@ public class ProduccionCargaOrdenesControlXLS {
 	public static boolean validaInformacionUnica(ProduccionArchivoCargaOrden paco) {
 		HashMap<String, Object> auxUnico = new HashMap<String, Object>();
 		for (ProduccionArchivoCargaOrdenDetalle pacod: paco.getProduccionArchivoCargaOrdenDetalles()) {
-			String idturno = pacod.getIdturno().toString();
+			String idturno = pacod.getTurno().getIdturno().toString();
 			String item = pacod.getItem().toString();
 			String orden = pacod.getOrden();
-			String idProduccion = paco.getIdproduccion().toString();
+			String idProduccion = paco.getProduccion().getIdproduccion().toString();
 			String key = idturno.concat(item).concat(orden).concat(idProduccion);
 			
 			ProduccionDAOJpaImpl produccionDao = new ProduccionDAOJpaImpl();
-			Date fechaproduccion = produccionDao.getProduccionById(paco.getIdproduccion()).getFechaproduccion();
+			Date fechaproduccion = produccionDao.getProduccionById(paco.getProduccion().getIdproduccion()).getFechaproduccion();
 			
 			String fechaFormat = new SimpleDateFormat("dd/MM/yyyy").format(fechaproduccion);
 			//validad que la informacion no se encuentre duplicada por produccion, turno, item y orden dentro de la hoja de calculos
@@ -657,8 +657,5 @@ public class ProduccionCargaOrdenesControlXLS {
 				lControl = lControl.substring(0, lControl.indexOf("."));
 		return lControl;
 	}
-	
 
 }
-
-

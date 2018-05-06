@@ -23,6 +23,11 @@ public class EnvasadoControlPesoNetoCabeceraDAOJpaImpl extends BaseDaoJpaImpl im
 			
 			t.begin();
 			ecpfc =	em.merge(envasadoControlPesoNetoCabecera);
+			if (t.isActive())
+				System.out.println("activa");
+			else
+				System.out.println("close");
+			System.out.println(ecpfc.getIdenvasadocontrolpesonetocabecera());
 			t.commit();
 			
 			return ecpfc;

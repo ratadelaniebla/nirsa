@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.nw.model.EnvasadoLineaCerradora;
 
-public interface EnvasadoLineaCerradoraDAO {
+public interface MaquinaCerradoraDAO {
 	
 	public EnvasadoLineaCerradora getEnvasadoLineaCerradora(Integer id);
 	

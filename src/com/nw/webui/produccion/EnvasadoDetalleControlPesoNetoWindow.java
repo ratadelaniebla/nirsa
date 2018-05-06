@@ -23,23 +23,25 @@ import org.zkoss.zul.Textbox;
 
 import com.nw.model.EnvasadoCaldoVegetalProteina;
 import com.nw.model.EnvasadoControlNetoCorteDetalle;
+import com.nw.model.EnvasadoControlPesoFillCabecera;
 import com.nw.model.EnvasadoControlPesoNetoCabecera;
 import com.nw.model.EnvasadoControlPesoNetoDetalle;
-import com.nw.model.EnvasadoLineaCerradora;
 import com.nw.model.EnvasadoProceso;
+import com.nw.model.MaquinaCerradora;
 import com.nw.model.Produccion;
 import com.nw.model.ProduccionDetalleOrden;
 import com.nw.model.Turno;
 import com.nw.model.dao.EnvasadoCaldoVegetalProteinaDAO;
 import com.nw.model.dao.EnvasadoControlNetoCorteCabeceraDAO;
+import com.nw.model.dao.EnvasadoControlPesoFillCabeceraDAO;
 import com.nw.model.dao.EnvasadoControlPesoNetoCabeceraDAO;
-import com.nw.model.dao.EnvasadoLineaCerradoraDAO;
 import com.nw.model.dao.ProduccionDetalleOrdenDAO;
 import com.nw.model.dao.impl.EnvasadoCaldoVegetalProteinaDAOJpaImpl;
 import com.nw.model.dao.impl.EnvasadoControlNetoCorteCabeceraDAOJpaImpl;
+import com.nw.model.dao.impl.EnvasadoControlPesoFillCabeceraDAOJpaImpl;
 import com.nw.model.dao.impl.EnvasadoControlPesoNetoCabeceraDAOJpaImpl;
-import com.nw.model.dao.impl.EnvasadoLineaCerradoraDAOJpaImpl;
 import com.nw.model.dao.impl.EnvasadoProcesoDAOJpaImpl;
+import com.nw.model.dao.impl.MaquinaCerradoraDAOJpaImpl;
 import com.nw.model.dao.impl.ProduccionDAOJpaImpl;
 import com.nw.model.dao.impl.ProduccionDetalleOrdenDAOJpaImpl;
 import com.nw.model.dao.impl.TurnoDAOJpaImpl;
@@ -57,19 +59,21 @@ public class EnvasadoDetalleControlPesoNetoWindow extends GenericForwardComposer
 	private static final long serialVersionUID = 1L;
 	private static final Integer ESTADO = 1;
 	
-	private Long idenvasadocontrolpesonetocabecera;
+	EnvasadoControlPesoNetoCabecera ecpnc;
+	EnvasadoControlPesoFillCabecera ecpfc;
 	
 	AnnotateDataBinder binder;
 	
+	ProduccionDetalleOrden pdo;
 	EnvasadoProceso envasadoProceso;
 	Produccion produccion;
 	Turno turno;
 	
 	Textbox txtProduccionTurno, txtOrden, txtProducto, txtCliente, txtObservacion;
-	Listbox lbxTurnoLabor, lbxItemOrden, lbxLineaCerradora, lbxcvprot, lbxCorte;
+	Listbox lbxTurnoLabor, lbxItemOrden, lbxMCerradora, lbxcvprot, lbxCorte;
 	Listbox lbxMes, lbxDias, lbxHoras, lbxMinutos;
 	Textbox txtPesoEnvase, txtPLomos, txtTrozos, txtRallado, txtAgua, txtAceite, txtprot, txtcv, txtPesoneto;
-	Label lbTurnoLabor, lbItemOrden, lbLineaCerradora, lbcvprot, lbPesoEnvase, lbPLomos, lbTrozos, lbRallado, lbAgua, lbAceite, lbprot, lbcv, lbCorte, lbPesoneto;
+	Label lbTurnoLabor, lbItemOrden, lbMCerradora, lbcvprot, lbPesoEnvase, lbPLomos, lbTrozos, lbRallado, lbAgua, lbAceite, lbprot, lbcv, lbCorte, lbPesoneto;
 	
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
@@ -84,7 +88,7 @@ public class EnvasadoDetalleControlPesoNetoWindow extends GenericForwardComposer
 		txtProduccionTurno.setValue(cargaProduccionTurno());
 		cargaTurno();
 		cargaItemOrden(turno.getIdturno(), produccion.getIdproduccion());
-		cargaLineaCerradora();
+		cargaMaquinaCerradora();
 		cargaCVPROT();
 		cargaCorte();
 	}
@@ -182,68 +186,62 @@ public class EnvasadoDetalleControlPesoNetoWindow extends GenericForwardComposer
 	
 	@SuppressWarnings("unchecked")
 	public void onSelect$lbxItemOrden() throws InterruptedException{
-		ProduccionDetalleOrden pdo = (ProduccionDetalleOrden)lbxItemOrden.getSelectedItem().getValue();
+		pdo = (ProduccionDetalleOrden)lbxItemOrden.getSelectedItem().getValue();
 		txtOrden.setValue(pdo.getOrden());
 		txtProducto.setValue(pdo.getProducto());
 		txtCliente.setValue(pdo.getCliente());
 		
 		EnvasadoControlPesoNetoCabeceraDAO ecpncDAO = new EnvasadoControlPesoNetoCabeceraDAOJpaImpl();
-		EnvasadoControlPesoNetoCabecera ecpnc = ecpncDAO.getByProduccionTurnoOrden(
-				envasadoProceso.getIdenvasadoproceso(), pdo.getIdproducciondetalleorden());
-		idenvasadocontrolpesonetocabecera = ecpnc.getIdenvasadocontrolpesonetocabecera();
+		ecpnc = ecpncDAO.getByProduccionTurnoOrden(envasadoProceso.getIdenvasadoproceso(), pdo.getIdproducciondetalleorden());
+		EnvasadoControlPesoFillCabeceraDAO ecpfcDAO = new EnvasadoControlPesoFillCabeceraDAOJpaImpl();
+		ecpfc = ecpfcDAO.getByProduccionTurnoOrden(envasadoProceso.getIdenvasadoproceso(), pdo.getIdproducciondetalleorden());
 		
-		if (idenvasadocontrolpesonetocabecera !=null) {
-			txtOrden.setValue(pdo.getOrden());
-			txtProducto.setValue(pdo.getProducto());
-			txtCliente.setValue(pdo.getCliente());
-			
-			for(Listitem li : (List<Listitem>)lbxLineaCerradora.getItems()) {
-				if(ecpnc.getEnvasadoLineaCerradora().getIdenvasadolineacerradora()
-						.equals(((EnvasadoLineaCerradora)li.getValue()).getIdenvasadolineacerradora())){
-					lbxLineaCerradora.setSelectedItem(li);
+		for(Listitem li : (List<Listitem>)lbxMCerradora.getItems()) {
+			if (ecpnc.getMaquinaCerradora()!=null) {
+				if(ecpnc.getMaquinaCerradora().getIdmaquinacerradora()
+						.equals(((MaquinaCerradora)li.getValue()).getIdmaquinacerradora())){
+					lbxMCerradora.setSelectedItem(li);
 					break;
 				}
+			} else {
+				lbxMCerradora.setSelectedIndex(0);
 			}
-			
-			txtPesoEnvase.setValue(String.valueOf(ecpnc.getPesoenvase()));
-			txtPLomos.setValue(String.valueOf(ecpnc.getProcentajelomos()));
-			txtTrozos.setValue(String.valueOf(ecpnc.getProcentajetrozos()));
-			txtRallado.setValue(String.valueOf(ecpnc.getProcentajerallado()));
-			txtAgua.setValue(String.valueOf(ecpnc.getAgua()));
-			txtAceite.setValue(String.valueOf(ecpnc.getAceite()));
-			
+		}
+		if(ecpfc.getIdenvasadocontrolpesofillcabecera()!=null) {
+		
+			txtPesoEnvase.setValue(String.valueOf(ecpfc.getPesoenvase()));
+			txtPLomos.setValue(String.valueOf(ecpfc.getProcentajelomos()));
+			txtTrozos.setValue(String.valueOf(ecpfc.getProcentajetrozos()));
+			txtRallado.setValue(String.valueOf(ecpfc.getProcentajerallado()));
+			txtAgua.setValue(String.valueOf(ecpfc.getAgua()));
+			txtAceite.setValue(String.valueOf(ecpfc.getAceite()));
 			for(Listitem li : (List<Listitem>)lbxcvprot.getItems()) {
-				if(ecpnc.getEnvasadoCaldoVegetalProteina().getIdenvasadocaldovegetalproteina()
-						.equals(((EnvasadoCaldoVegetalProteina)li.getValue()).getIdenvasadocaldovegetalproteina())){
-					lbxcvprot.setSelectedItem(li);
-					break;
+				if (ecpfc.getEnvasadoCaldoVegetalProteina()!=null) {
+					if(ecpfc.getEnvasadoCaldoVegetalProteina().getIdenvasadocaldovegetalproteina()
+							.equals(((EnvasadoCaldoVegetalProteina)li.getValue()).getIdenvasadocaldovegetalproteina())){
+						lbxcvprot.setSelectedItem(li);
+						break;
+					}
+				} else {
+					lbxcvprot.setSelectedIndex(0);
 				}
 			}
-			
-			txtprot.setValue(String.valueOf(ecpnc.getProteina()));
-			txtcv.setValue(String.valueOf(ecpnc.getCaldovegetal()));
+			txtprot.setValue(String.valueOf(ecpfc.getProteina()));
+			txtcv.setValue(String.valueOf(ecpfc.getCaldovegetal()));
 			txtPesoneto.setValue(null);
 			lbxMes.setSelectedIndex(0);
 			lbxDias.getItems().clear();
 			lbxHoras.setSelectedIndex(0);
 			lbxMinutos.setSelectedIndex(0);
 			txtObservacion.setValue(ecpnc.getObservacion());
-			
-			
-//			seleccionaMes(obtieneFechaCambio(ecpnc.getFechareg(), Calendar.MONTH)+1);
-//			seleccionaDia(obtieneFechaCambio(ecpnc.getFechareg(), Calendar.DAY_OF_MONTH));
-//			seleccionaHora(obtieneFechaCambio(ecpnc.getFechareg(), Calendar.HOUR_OF_DAY));
-//			seleccionaMinuto(obtieneFechaCambio(ecpnc.getFechareg(), Calendar.MINUTE));
-			
 		} else {
-			lbxLineaCerradora.setSelectedIndex(0);
 			txtPesoEnvase.setValue(null);
 			txtPLomos.setValue(null);
 			txtTrozos.setValue(null);
 			txtRallado.setValue(null);
 			txtAgua.setValue(null);
 			txtAceite.setValue(null);
-			lbxcvprot.setSelectedIndex(0);
+			lbxcvprot.getItems().clear();
 			txtprot.setValue(null);
 			txtcv.setValue(null);
 			txtPesoneto.setValue(null);
@@ -255,28 +253,28 @@ public class EnvasadoDetalleControlPesoNetoWindow extends GenericForwardComposer
 		}
 	}
 	
-	private void cargaLineaCerradora() {
-		EnvasadoLineaCerradoraDAO elcDAO = new EnvasadoLineaCerradoraDAOJpaImpl();
-		List<EnvasadoLineaCerradora> listELC = elcDAO.getEnvasadoLineaCerradoraAll();
+	private void cargaMaquinaCerradora() {
+		MaquinaCerradoraDAOJpaImpl mcDAOJpaImpl = new MaquinaCerradoraDAOJpaImpl();
+		List<MaquinaCerradora> listELC = mcDAOJpaImpl.getAll();
 		
 		if (listELC.isEmpty()) {
-			Sistema.mensaje("No se encuentra configurada informacion para Linea Cerradora.");
+			Sistema.mensaje("No se encuentra configurada informacion para Maquina Cerradora.");
 			return;
 		}
 		
-		lbxLineaCerradora.getItems().clear();
+		lbxMCerradora.getItems().clear();
 		Listitem li = new Listitem();
-		li.setValue(new EnvasadoLineaCerradora());
-		li.setParent(lbxLineaCerradora);
+		li.setValue(new MaquinaCerradora());
+		li.setParent(lbxMCerradora);
 		
-		for (EnvasadoLineaCerradora elc : listELC) {
+		for (MaquinaCerradora mc : listELC) {
 			li = new Listitem();
-			li.setValue(elc);
-			new Listcell(elc.getNumeroenvasadolineacerradora().toString()).setParent(li);
-			li.setParent(lbxLineaCerradora);
+			li.setValue(mc);
+			new Listcell(mc.getDescripcion()).setParent(li);
+			li.setParent(lbxMCerradora);
 		}
 		
-		lbxLineaCerradora.setSelectedIndex(0);
+		lbxMCerradora.setSelectedIndex(0);
 		
 	}
 	
@@ -360,22 +358,22 @@ public class EnvasadoDetalleControlPesoNetoWindow extends GenericForwardComposer
 		if(!validaCampos())
 			return;
 		
-		if (idenvasadocontrolpesonetocabecera!=null)
-			ecpnc.setIdenvasadocontrolpesonetocabecera(idenvasadocontrolpesonetocabecera);
+		if (this.ecpnc.getIdenvasadocontrolpesonetocabecera()!=null)
+			ecpnc.setIdenvasadocontrolpesonetocabecera(this.ecpnc.getIdenvasadocontrolpesonetocabecera());
 		ecpnc.setEnvasadoProceso(envasadoProceso);
 		ecpnc.setTurno(((Turno)lbxTurnoLabor.getSelectedItem().getValue()));
 		ecpnc.setProduccionDetalleOrden((ProduccionDetalleOrden)lbxItemOrden.getSelectedItem().getValue());
 		
-		ecpnc.setEnvasadoLineaCerradora((EnvasadoLineaCerradora)lbxLineaCerradora.getSelectedItem().getValue());
-		ecpnc.setPesoenvase(parseDouble(txtPesoEnvase.getValue()));
-		ecpnc.setProcentajelomos(parseDouble(txtPLomos.getValue()));
-		ecpnc.setProcentajetrozos(parseDouble(txtTrozos.getValue()));
-		ecpnc.setProcentajerallado(parseDouble(txtRallado.getValue()));
-		ecpnc.setAgua(parseDouble(txtAgua.getValue()));
-		ecpnc.setAceite(parseDouble(txtAceite.getValue()));
-		ecpnc.setEnvasadoCaldoVegetalProteina((EnvasadoCaldoVegetalProteina)lbxcvprot.getSelectedItem().getValue());
-		ecpnc.setProteina(parseDouble(txtprot.getValue()));
-		ecpnc.setCaldovegetal(parseDouble(txtcv.getValue()));
+		ecpnc.setMaquinaCerradora((MaquinaCerradora)lbxMCerradora.getSelectedItem().getValue());
+//		ecpnc.setPesoenvase(parseDouble(txtPesoEnvase.getValue()));
+//		ecpnc.setProcentajelomos(parseDouble(txtPLomos.getValue()));
+//		ecpnc.setProcentajetrozos(parseDouble(txtTrozos.getValue()));
+//		ecpnc.setProcentajerallado(parseDouble(txtRallado.getValue()));
+//		ecpnc.setAgua(parseDouble(txtAgua.getValue()));
+//		ecpnc.setAceite(parseDouble(txtAceite.getValue()));
+//		ecpnc.setEnvasadoCaldoVegetalProteina((EnvasadoCaldoVegetalProteina)lbxcvprot.getSelectedItem().getValue());
+//		ecpnc.setProteina(parseDouble(txtprot.getValue()));
+//		ecpnc.setCaldovegetal(parseDouble(txtcv.getValue()));
 		
 		Timestamp fechaRegistro = obtieneFechaRegistro();
 		if (fechaRegistro==null)
@@ -383,6 +381,7 @@ public class EnvasadoDetalleControlPesoNetoWindow extends GenericForwardComposer
 		ecpnc.setFechareg(new Timestamp(System.currentTimeMillis()));
 		ecpnc.setObservacion(txtObservacion.getValue());
 		//valida la informacion del usuario logueado
+		
 		String idUsuario = (String) Sessions.getCurrent().getAttribute("usuario");
 		if (idUsuario==null) {
 			Sistema.mensaje("Error. Usuario no logueado.");
@@ -405,6 +404,11 @@ public class EnvasadoDetalleControlPesoNetoWindow extends GenericForwardComposer
 			return;
 		}
 		
+		if (ecpfc.getIdenvasadocontrolpesofillcabecera()==null) {
+			Sistema.mensaje("Error. No se encuentra configurada informacion de peso Fill.");
+			return;
+		}
+			
 		if(ecpncDAO.updateEnvasadoControlPesoNetoCabecera(ecpnc)==null) {
 			Sistema.mensaje("Error al guardar la informacion.");
 			return;
@@ -476,8 +480,8 @@ public class EnvasadoDetalleControlPesoNetoWindow extends GenericForwardComposer
 		camposNumericos.add(listaEtiquetas);
 		
 		listaEtiquetas = new ArrayList<Object>(); 
-		listaEtiquetas.add(lbLineaCerradora);
-		listaEtiquetas.add(lbxLineaCerradora);
+		listaEtiquetas.add(lbMCerradora);
+		listaEtiquetas.add(lbxMCerradora);
 		camposNumericos.add(listaEtiquetas);
 		
 		listaEtiquetas = new ArrayList<Object>(); 

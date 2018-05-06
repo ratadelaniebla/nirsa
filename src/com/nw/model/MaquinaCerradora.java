@@ -1,8 +1,16 @@
 package com.nw.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 
 /**
@@ -21,6 +29,7 @@ public class MaquinaCerradora implements Serializable {
 	private List<ControlDetalleBatchEsterilizado> controlDetalleBatchEsterilizados;
 	private List<ControlDetalleBatchMaquina> controlDetalleBatchMaquinas;
 	private List<EnvasadoDetalleProcesoCambio> envasadoDetalleProcesoCambios;
+	private List<EnvasadoControlPesoNetoCabecera> envasadoControlPesoNetoCabecera;
 	private List<LuthyMaquinaCerradoraEstandar> luthyMaquinaCerradoraEstandars;
 	private List<OeeDetalleMediosConDefectoEnvasado> oeeDetalleMediosConDefectoEnvasados;
 	private List<OeeDetalleParadaEnvasado> oeeDetalleParadaEnvasados;
@@ -142,6 +151,31 @@ public class MaquinaCerradora implements Serializable {
 		envasadoDetalleProcesoCambio.setMaquinaCerradora(null);
 
 		return envasadoDetalleProcesoCambio;
+	}
+	
+	
+	//bi-directional many-to-one association to EnvasadoDetalleProcesoCambio
+	@OneToMany(mappedBy="maquinaCerradora")
+	public List<EnvasadoControlPesoNetoCabecera> getEnvasadoControlPesoNetoCabecera() {
+		return this.envasadoControlPesoNetoCabecera;
+	}
+
+	public void setEnvasadoControlPesoNetoCabecera(List<EnvasadoControlPesoNetoCabecera> envasadoControlPesoNetoCabecera) {
+		this.envasadoControlPesoNetoCabecera = envasadoControlPesoNetoCabecera;
+	}
+
+	public EnvasadoControlPesoNetoCabecera addEnvasadoControlPesoNetoCabecera(EnvasadoControlPesoNetoCabecera envasadoControlPesoNetoCabecera) {
+		getEnvasadoControlPesoNetoCabecera().add(envasadoControlPesoNetoCabecera);
+		envasadoControlPesoNetoCabecera.setMaquinaCerradora(this);
+
+		return envasadoControlPesoNetoCabecera;
+	}
+
+	public EnvasadoControlPesoNetoCabecera removeEnvasadoControlPesoNetoCabecera(EnvasadoControlPesoNetoCabecera envasadoControlPesoNetoCabecera) {
+		getEnvasadoControlPesoNetoCabecera().remove(envasadoControlPesoNetoCabecera);
+		envasadoControlPesoNetoCabecera.setMaquinaCerradora(null);
+
+		return envasadoControlPesoNetoCabecera;
 	}
 
 

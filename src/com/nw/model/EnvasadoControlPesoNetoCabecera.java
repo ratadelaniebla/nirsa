@@ -27,7 +27,7 @@ public class EnvasadoControlPesoNetoCabecera implements Serializable {
 	private double procentajetrozos;
 	private double proteina;
 	private EnvasadoCaldoVegetalProteina envasadoCaldoVegetalProteina;
-	private EnvasadoLineaCerradora envasadoLineaCerradora;
+	private MaquinaCerradora maquinaCerradora;
 	private EnvasadoProceso envasadoProceso;
 	private ProduccionDetalleOrden produccionDetalleOrden;
 	private Turno turno;
@@ -153,13 +153,13 @@ public class EnvasadoControlPesoNetoCabecera implements Serializable {
 
 	//bi-directional many-to-one association to EnvasadoLineaCerradora
 	@ManyToOne
-	@JoinColumn(name="idenvasadolineacerradora")
-	public EnvasadoLineaCerradora getEnvasadoLineaCerradora() {
-		return this.envasadoLineaCerradora;
+	@JoinColumn(name="idmaquinacerradora")
+	public MaquinaCerradora getMaquinaCerradora() {
+		return this.maquinaCerradora;
 	}
 
-	public void setEnvasadoLineaCerradora(EnvasadoLineaCerradora envasadoLineaCerradora) {
-		this.envasadoLineaCerradora = envasadoLineaCerradora;
+	public void setMaquinaCerradora(MaquinaCerradora maquinaCerradora) {
+		this.maquinaCerradora = maquinaCerradora;
 	}
 
 

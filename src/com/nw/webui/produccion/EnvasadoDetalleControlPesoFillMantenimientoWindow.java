@@ -37,7 +37,7 @@ import com.nw.model.dao.EnvasadoCaldoVegetalProteinaDAO;
 import com.nw.model.dao.EnvasadoControlFillCorteCabeceraDAO;
 import com.nw.model.dao.EnvasadoControlPesoFillCabeceraDAO;
 import com.nw.model.dao.EnvasadoControlPesoFillDetalleDAO;
-import com.nw.model.dao.EnvasadoLineaCerradoraDAO;
+import com.nw.model.dao.MaquinaCerradoraDAO;
 import com.nw.model.dao.ProduccionDetalleOrdenDAO;
 import com.nw.model.dao.impl.EnvasadoCaldoVegetalProteinaDAOJpaImpl;
 import com.nw.model.dao.impl.EnvasadoControlFillCorteCabeceraDAOJpaImpl;
@@ -334,7 +334,7 @@ private static final String NUEVO = "- NUEVO -";
 	}
 	
 	private void cargaLineaCerradora() {
-		EnvasadoLineaCerradoraDAO elcDAO = new EnvasadoLineaCerradoraDAOJpaImpl();
+		MaquinaCerradoraDAO elcDAO = new EnvasadoLineaCerradoraDAOJpaImpl();
 		List<EnvasadoLineaCerradora> listELC = elcDAO.getEnvasadoLineaCerradoraAll();
 		
 		if (listELC.isEmpty()) {

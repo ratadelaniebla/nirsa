@@ -82,56 +82,56 @@
 				<rows>
 				
 					<row>
-						<label id="lbLineaCerradora" value="Linea Cerradora" />
-						 <listbox id="lbxLineaCerradora" style="font-size:12px"
-						mold="select" width="120px" />
+						<label id="lbMCerradora" value="Maquina Cerradora" />
+						 <listbox id="lbxMCerradora" style="font-size:12px"
+						mold="select" width="120px" disabled="true"/>
 					</row>	
 									
 					<row>
 						<label id="lbPesoEnvase" value="Peso Envase" />
-						<textbox id="txtPesoEnvase"></textbox>
+						<textbox id="txtPesoEnvase" readonly="true"></textbox>
 					</row>
 					<row>
 						<label id="lbPLomos" value="%Lomos" />
-						<textbox id="txtPLomos"></textbox>
+						<textbox id="txtPLomos" readonly="true"></textbox>
 					</row>
 
 					<row>
 						<label id="lbTrozos" value="%Trozos" />
-						<textbox id="txtTrozos"></textbox>
+						<textbox id="txtTrozos" readonly="true"></textbox>
 					</row>
 
 					<row>
 						<label id="lbRallado" value="%Rallado" />
-						<textbox id="txtRallado"></textbox>
+						<textbox id="txtRallado" readonly="true"></textbox>
 					</row>
 					
 				
 					<row>
 						<label id="lbAgua" value="Agua" />
-						<textbox id="txtAgua"></textbox>
+						<textbox id="txtAgua" readonly="true"></textbox>
 					</row>
 
 					<row>
 						<label id="lbAceite" value="Aceite" />
-						<textbox id="txtAceite"></textbox>
+						<textbox id="txtAceite" readonly="true"></textbox>
 					</row>
 
 					<row>
 						<label id="lbcvprot" value="cvprot" />
 						<listbox id="lbxcvprot" style="font-size:12px"
-						mold="select" width="120px" />						
+						mold="select" width="120px" disabled="true"/>						
 					</row>
 
 
 					<row>
 						<label id="lbprot" value="Proteina" />
-						<textbox id="txtprot"></textbox>
+						<textbox id="txtprot" readonly="true"></textbox>
 					</row>
 					
 					<row>
 						<label id="lbcv" value="Caldo V." />
-						<textbox id="txtcv"></textbox>
+						<textbox id="txtcv" readonly="true"></textbox>
 					</row>
 					
 					

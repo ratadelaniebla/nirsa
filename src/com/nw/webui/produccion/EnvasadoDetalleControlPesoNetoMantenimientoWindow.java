@@ -25,25 +25,27 @@ import org.zkoss.zul.Textbox;
 
 import com.nw.model.EnvasadoCaldoVegetalProteina;
 import com.nw.model.EnvasadoControlNetoCorteDetalle;
+import com.nw.model.EnvasadoControlPesoFillCabecera;
 import com.nw.model.EnvasadoControlPesoNetoCabecera;
 import com.nw.model.EnvasadoControlPesoNetoDetalle;
-import com.nw.model.EnvasadoLineaCerradora;
 import com.nw.model.EnvasadoProceso;
+import com.nw.model.MaquinaCerradora;
 import com.nw.model.Produccion;
 import com.nw.model.ProduccionDetalleOrden;
 import com.nw.model.Turno;
 import com.nw.model.dao.EnvasadoCaldoVegetalProteinaDAO;
 import com.nw.model.dao.EnvasadoControlNetoCorteCabeceraDAO;
+import com.nw.model.dao.EnvasadoControlPesoFillCabeceraDAO;
 import com.nw.model.dao.EnvasadoControlPesoNetoCabeceraDAO;
 import com.nw.model.dao.EnvasadoControlPesoNetoDetalleDAO;
-import com.nw.model.dao.EnvasadoLineaCerradoraDAO;
 import com.nw.model.dao.ProduccionDetalleOrdenDAO;
 import com.nw.model.dao.impl.EnvasadoCaldoVegetalProteinaDAOJpaImpl;
 import com.nw.model.dao.impl.EnvasadoControlNetoCorteCabeceraDAOJpaImpl;
+import com.nw.model.dao.impl.EnvasadoControlPesoFillCabeceraDAOJpaImpl;
 import com.nw.model.dao.impl.EnvasadoControlPesoNetoCabeceraDAOJpaImpl;
 import com.nw.model.dao.impl.EnvasadoControlPesoNetoDetalleDAOJpaImpl;
-import com.nw.model.dao.impl.EnvasadoLineaCerradoraDAOJpaImpl;
 import com.nw.model.dao.impl.EnvasadoProcesoDAOJpaImpl;
+import com.nw.model.dao.impl.MaquinaCerradoraDAOJpaImpl;
 import com.nw.model.dao.impl.ProduccionDAOJpaImpl;
 import com.nw.model.dao.impl.ProduccionDetalleOrdenDAOJpaImpl;
 import com.nw.model.dao.impl.TurnoDAOJpaImpl;
@@ -67,8 +69,8 @@ private static final String NUEVO = "- NUEVO -";
 	Label   lbFechaProduccion;
 	Datebox dteFechaProduccion;
 	
-	Label   lbTurnoProduccion,  lbTurnoLabor,  lbItemOrdenCliente,  lbItemOrden,  lbLineaCerradora,  lbcvprot,  lbCorte;
-	Listbox lbxTurnoProduccion, lbxTurnoLabor, lbxItemOrdenCliente, lbxItemOrden, lbxLineaCerradora, lbxcvprot, lbxCorte; 
+	Label   lbTurnoProduccion,  lbTurnoLabor,  lbItemOrdenCliente,  lbItemOrden,  lbMCerradora,  lbcvprot,  lbCorte;
+	Listbox lbxTurnoProduccion, lbxTurnoLabor, lbxItemOrdenCliente, lbxItemOrden, lbxMCerradora, lbxcvprot, lbxCorte; 
 	
 	Label   lbOrden,  lbProducto,  lbCliente,  lbPesoEnvase,  lbPLomos,  lbTrozos,  lbRallado,  lbAgua,  lbAceite,  lbprot,  lbcv,  lbPesoneto,  lbObservacion;
 	Textbox txtOrden, txtProducto, txtCliente, txtPesoEnvase, txtPLomos, txtTrozos, txtRallado, txtAgua, txtAceite, txtprot, txtcv, txtPesoneto, txtObservacion;
@@ -76,6 +78,10 @@ private static final String NUEVO = "- NUEVO -";
 	Listbox lbxMes, lbxDias, lbxHoras, lbxMinutos;
 	
 	Checkbox ChkEliminar;
+	
+	private EnvasadoControlPesoFillCabecera ecpfc;
+	private ProduccionDetalleOrden pdo;
+	private EnvasadoProceso envasadoProceso;
 	private Produccion produccion;
 	
 	public void doAfterCompose(Component comp) throws Exception {
@@ -130,9 +136,9 @@ private static final String NUEVO = "- NUEVO -";
 	 * carga la lista Item-Orden-Peso-FechaReg-Cliente
 	 */
 	public void onSelect$lbxTurnoProduccion() {
-		EnvasadoProceso ep = (EnvasadoProceso)lbxTurnoProduccion.getSelectedItem().getValue();
+		envasadoProceso = (EnvasadoProceso)lbxTurnoProduccion.getSelectedItem().getValue();
 		EnvasadoControlPesoNetoCabeceraDAO ecpncDAO = new EnvasadoControlPesoNetoCabeceraDAOJpaImpl();
-		List<EnvasadoControlPesoNetoCabecera> listaEcpnc = ecpncDAO.getByProduccion(ep.getIdenvasadoproceso());
+		List<EnvasadoControlPesoNetoCabecera> listaEcpnc = ecpncDAO.getByProduccion(envasadoProceso.getIdenvasadoproceso());
 		ProduccionDetalleOrden pdo;
 		lbxItemOrdenCliente.getItems().clear();
 		
@@ -242,10 +248,12 @@ private static final String NUEVO = "- NUEVO -";
 	}
 	
 	public void onSelect$lbxItemOrden() {
-		ProduccionDetalleOrden pdo = (ProduccionDetalleOrden)lbxItemOrden.getSelectedItem().getValue();
+		pdo = (ProduccionDetalleOrden)lbxItemOrden.getSelectedItem().getValue();
 		txtOrden.setValue(pdo.getOrden());
 		txtProducto.setValue(pdo.getProducto());
 		txtCliente.setValue(pdo.getCliente());
+		
+		cargaInformacionFormulario();
 		
 	}
 	
@@ -333,27 +341,26 @@ private static final String NUEVO = "- NUEVO -";
 	}
 	
 	private void cargaLineaCerradora() {
-		EnvasadoLineaCerradoraDAO elcDAO = new EnvasadoLineaCerradoraDAOJpaImpl();
-		List<EnvasadoLineaCerradora> listELC = elcDAO.getEnvasadoLineaCerradoraAll();
+		List<MaquinaCerradora> listELC = (List<MaquinaCerradora>)new MaquinaCerradoraDAOJpaImpl().getAll();
 		
 		if (listELC.isEmpty()) {
 			Sistema.mensaje("No se encuentra configurada informacion para Linea Cerradora.");
 			return;
 		}
 		
-		lbxLineaCerradora.getItems().clear();
+		lbxMCerradora.getItems().clear();
 		Listitem li = new Listitem();
-		li.setValue(new EnvasadoLineaCerradora());
-		li.setParent(lbxLineaCerradora);
+		li.setValue(new MaquinaCerradora());
+		li.setParent(lbxMCerradora);
 		
-		for (EnvasadoLineaCerradora elc : listELC) {
+		for (MaquinaCerradora elc : listELC) {
 			li = new Listitem();
 			li.setValue(elc);
-			new Listcell(elc.getNumeroenvasadolineacerradora().toString()).setParent(li);
-			li.setParent(lbxLineaCerradora);
+			new Listcell(elc.getDescripcion()).setParent(li);
+			li.setParent(lbxMCerradora);
 		}
 		
-		lbxLineaCerradora.setSelectedIndex(0);
+		lbxMCerradora.setSelectedIndex(0);
 		
 	}
 	
@@ -386,12 +393,21 @@ private static final String NUEVO = "- NUEVO -";
 		Compuesto compuesto = (Compuesto)lbxItemOrdenCliente.getSelectedItem().getValue();
 		EnvasadoControlPesoNetoCabecera ecpnc = compuesto.envasadoControlPesoNetoCabecera;
 		EnvasadoControlPesoNetoDetalle ecpnd = compuesto.envasadoControlPesoNetoDetalle;
-		ProduccionDetalleOrden pdo = ecpnc.getProduccionDetalleOrden();
+		if (ecpnc.getProduccionDetalleOrden()!=null)
+			pdo = ecpnc.getProduccionDetalleOrden();
+		else {
+			if (lbxItemOrden.getSelectedItem()!=null)
+				pdo = (ProduccionDetalleOrden)lbxItemOrden.getSelectedItem().getValue();
+			else
+				pdo = new ProduccionDetalleOrden();
+		}
+		EnvasadoControlPesoFillCabeceraDAO ecpfcDAO = new EnvasadoControlPesoFillCabeceraDAOJpaImpl();
+		ecpfc = ecpfcDAO.getByProduccionTurnoOrden(envasadoProceso.getIdenvasadoproceso(), pdo.getIdproducciondetalleorden());
 		if (pdo==null)
 			pdo = new ProduccionDetalleOrden();
 		
-		if (ecpnc.getEnvasadoLineaCerradora()==null)
-			ecpnc.setEnvasadoLineaCerradora(new EnvasadoLineaCerradora());
+		if (ecpnc.getMaquinaCerradora()==null)
+			ecpnc.setMaquinaCerradora(new MaquinaCerradora());
 		
 		if (ecpnc.getEnvasadoCaldoVegetalProteina()==null)
 			ecpnc.setEnvasadoCaldoVegetalProteina(new EnvasadoCaldoVegetalProteina());
@@ -400,26 +416,27 @@ private static final String NUEVO = "- NUEVO -";
 		txtProducto.setValue(pdo.getProducto());
 		txtCliente.setValue(pdo.getCliente());
 		
-		for (Listitem li : (List<Listitem>)lbxLineaCerradora.getItems())
-			if (ecpnc.getEnvasadoLineaCerradora().getIdenvasadolineacerradora()==null) {
-				lbxLineaCerradora.setSelectedIndex(0);
+		for (Listitem li : (List<Listitem>)lbxMCerradora.getItems())
+			if (ecpnc.getMaquinaCerradora().getIdmaquinacerradora()==null) {
+				lbxMCerradora.setSelectedIndex(0);
 				break;
-			} else if ( ecpnc.getEnvasadoLineaCerradora().getIdenvasadolineacerradora() 
-						.equals(((EnvasadoLineaCerradora) li.getValue()).getIdenvasadolineacerradora()) ) {
-				lbxLineaCerradora.setSelectedItem(li);
+			} else if ( ecpnc.getMaquinaCerradora().getIdmaquinacerradora() 
+						.equals(((MaquinaCerradora) li.getValue()).getIdmaquinacerradora()) ) {
+				lbxMCerradora.setSelectedItem(li);
 				break;
 			}
 					
 		for(Listitem li : (List<Listitem>)lbxcvprot.getItems())
-			if (ecpnc.getEnvasadoCaldoVegetalProteina().getIdenvasadocaldovegetalproteina()==null) {
+			if (ecpfc.getEnvasadoCaldoVegetalProteina()==null) {
 				lbxcvprot.setSelectedIndex(0);
 				break;
-			} else if (ecpnc.getEnvasadoCaldoVegetalProteina().getIdenvasadocaldovegetalproteina()
+			} else if (ecpfc.getEnvasadoCaldoVegetalProteina().getIdenvasadocaldovegetalproteina()
 						.equals(((EnvasadoCaldoVegetalProteina) li.getValue()).getIdenvasadocaldovegetalproteina())) {
 				lbxcvprot.setSelectedItem(li);
 				break;
 			}
-		if (ecpnc.getIdenvasadocontrolpesonetocabecera()==null) {
+		if (ecpfc.getIdenvasadocontrolpesofillcabecera()==null 
+				&& !"- NUEVO -".equals(lbxItemOrdenCliente.getSelectedItem().getLabel())) {
 			txtPesoEnvase.setValue(null);
 			txtPLomos.setValue(null);
 			txtTrozos.setValue(null);
@@ -431,14 +448,14 @@ private static final String NUEVO = "- NUEVO -";
 			txtPesoneto.setValue(null);
 			txtObservacion.setValue(null);
 		} else {
-			txtPesoEnvase.setValue(String.valueOf(ecpnc.getPesoenvase()));
-			txtPLomos.setValue(String.valueOf(ecpnc.getProcentajelomos()));
-			txtTrozos.setValue(String.valueOf(ecpnc.getProcentajetrozos()));
-			txtRallado.setValue(String .valueOf(ecpnc.getProcentajerallado()));
-			txtAgua.setValue(String.valueOf(ecpnc.getAgua()));
-			txtAceite.setValue(String.valueOf(ecpnc.getAceite()));
-			txtprot.setValue(String.valueOf(ecpnc.getProteina()));
-			txtcv.setValue(String.valueOf(ecpnc.getCaldovegetal()));
+			txtPesoEnvase.setValue(String.valueOf(ecpfc.getPesoenvase()));
+			txtPLomos.setValue(String.valueOf(ecpfc.getProcentajelomos()));
+			txtTrozos.setValue(String.valueOf(ecpfc.getProcentajetrozos()));
+			txtRallado.setValue(String .valueOf(ecpfc.getProcentajerallado()));
+			txtAgua.setValue(String.valueOf(ecpfc.getAgua()));
+			txtAceite.setValue(String.valueOf(ecpfc.getAceite()));
+			txtprot.setValue(String.valueOf(ecpfc.getProteina()));
+			txtcv.setValue(String.valueOf(ecpfc.getCaldovegetal()));
 			txtPesoneto.setValue(String.valueOf(ecpnd.getPesoneto()));
 			txtObservacion.setValue(ecpnc.getObservacion());
 		}
@@ -556,22 +573,22 @@ private static final String NUEVO = "- NUEVO -";
 		
 		if(!validaCampos())
 			return;
-		ProduccionDetalleOrden pdo = (ProduccionDetalleOrden)lbxItemOrden.getSelectedItem().getValue();
+//		ProduccionDetalleOrden pdo = (ProduccionDetalleOrden)lbxItemOrden.getSelectedItem().getValue();
 
 		ecpnc.setEnvasadoProceso((EnvasadoProceso)lbxTurnoProduccion.getSelectedItem().getValue());
 		ecpnc.setEnvasadoControlPesoNetoDetalles(Arrays.asList(ecpnd));
 		ecpnc.setTurno(((Turno)lbxTurnoLabor.getSelectedItem().getValue()));
 		ecpnc.setProduccionDetalleOrden(pdo);
-		ecpnc.setEnvasadoLineaCerradora((EnvasadoLineaCerradora)lbxLineaCerradora.getSelectedItem().getValue());
-		ecpnc.setPesoenvase(parseDouble(txtPesoEnvase.getValue()));
-		ecpnc.setProcentajelomos(parseDouble(txtPLomos.getValue()));
-		ecpnc.setProcentajetrozos(parseDouble(txtTrozos.getValue()));
-		ecpnc.setProcentajerallado(parseDouble(txtRallado.getValue()));
-		ecpnc.setAgua(parseDouble(txtAgua.getValue()));
-		ecpnc.setAceite(parseDouble(txtAceite.getValue()));
-		ecpnc.setEnvasadoCaldoVegetalProteina((EnvasadoCaldoVegetalProteina)lbxcvprot.getSelectedItem().getValue());
-		ecpnc.setProteina(parseDouble(txtprot.getValue()));
-		ecpnc.setCaldovegetal(parseDouble(txtcv.getValue()));
+		ecpnc.setMaquinaCerradora((MaquinaCerradora)lbxMCerradora.getSelectedItem().getValue());
+//		ecpnc.setPesoenvase(parseDouble(txtPesoEnvase.getValue()));
+//		ecpnc.setProcentajelomos(parseDouble(txtPLomos.getValue()));
+//		ecpnc.setProcentajetrozos(parseDouble(txtTrozos.getValue()));
+//		ecpnc.setProcentajerallado(parseDouble(txtRallado.getValue()));
+//		ecpnc.setAgua(parseDouble(txtAgua.getValue()));
+//		ecpnc.setAceite(parseDouble(txtAceite.getValue()));
+//		ecpnc.setEnvasadoCaldoVegetalProteina((EnvasadoCaldoVegetalProteina)lbxcvprot.getSelectedItem().getValue());
+//		ecpnc.setProteina(parseDouble(txtprot.getValue()));
+//		ecpnc.setCaldovegetal(parseDouble(txtcv.getValue()));
 		
 		ecpnd.setPesoneto(parseDouble(txtPesoneto.getValue()));
 		
@@ -753,8 +770,8 @@ private static final String NUEVO = "- NUEVO -";
 		camposNumericos.add(listaEtiquetas);
 		
 		listaEtiquetas = new ArrayList<Object>(); 
-		listaEtiquetas.add(lbLineaCerradora);
-		listaEtiquetas.add(lbxLineaCerradora);
+		listaEtiquetas.add(lbMCerradora);
+		listaEtiquetas.add(lbxMCerradora);
 		camposNumericos.add(listaEtiquetas);
 		
 		listaEtiquetas = new ArrayList<Object>(); 

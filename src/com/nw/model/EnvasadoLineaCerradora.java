@@ -17,7 +17,6 @@ public class EnvasadoLineaCerradora implements Serializable {
 	private Integer idenvasadolineacerradora;
 	private Integer numeroenvasadolineacerradora;
 	private List<EnvasadoControlPesoFillCabecera> envasadoControlPesoFillCabeceras;
-	private List<EnvasadoControlPesoNetoCabecera> envasadoControlPesoNetoCabeceras;
 
 	public EnvasadoLineaCerradora() {
 	}
@@ -65,31 +64,6 @@ public class EnvasadoLineaCerradora implements Serializable {
 		envasadoControlPesoFillCabecera.setEnvasadoLineaCerradora(null);
 
 		return envasadoControlPesoFillCabecera;
-	}
-
-
-	//bi-directional many-to-one association to EnvasadoControlPesoNetoCabecera
-	@OneToMany(mappedBy="envasadoLineaCerradora")
-	public List<EnvasadoControlPesoNetoCabecera> getEnvasadoControlPesoNetoCabeceras() {
-		return this.envasadoControlPesoNetoCabeceras;
-	}
-
-	public void setEnvasadoControlPesoNetoCabeceras(List<EnvasadoControlPesoNetoCabecera> envasadoControlPesoNetoCabeceras) {
-		this.envasadoControlPesoNetoCabeceras = envasadoControlPesoNetoCabeceras;
-	}
-
-	public EnvasadoControlPesoNetoCabecera addEnvasadoControlPesoNetoCabecera(EnvasadoControlPesoNetoCabecera envasadoControlPesoNetoCabecera) {
-		getEnvasadoControlPesoNetoCabeceras().add(envasadoControlPesoNetoCabecera);
-		envasadoControlPesoNetoCabecera.setEnvasadoLineaCerradora(this);
-
-		return envasadoControlPesoNetoCabecera;
-	}
-
-	public EnvasadoControlPesoNetoCabecera removeEnvasadoControlPesoNetoCabecera(EnvasadoControlPesoNetoCabecera envasadoControlPesoNetoCabecera) {
-		getEnvasadoControlPesoNetoCabeceras().remove(envasadoControlPesoNetoCabecera);
-		envasadoControlPesoNetoCabecera.setEnvasadoLineaCerradora(null);
-
-		return envasadoControlPesoNetoCabecera;
 	}
 
 }

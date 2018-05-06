@@ -311,7 +311,6 @@ public class EnavasadoControlNetoCorteMantenimientoWindow extends GenericForward
 		}
 		
 		Sistema.mensaje("Cambios guardados exitosamente.");
-		
 		limpiarFormulario();
 		binder.loadAll();
 //		iniciaFormulario();
