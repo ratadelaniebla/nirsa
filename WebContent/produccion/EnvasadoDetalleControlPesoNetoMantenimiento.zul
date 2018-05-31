@@ -1,13 +1,20 @@
-<?page id = "pagwinRegistroPesoNeto" title="" contentType="text/html;charset=UTF-8"?>
+<?page id = "pagwinRegistroPesoNeto" title="" contentType="text/html;charset=UTF-8" automaticTimeout="false"?>
 <zk>
-	<window id="winRegistroPesoNetoWindow" apply="com.nw.webui.produccion.EnvasadoDetalleControlPesoNetoMantenimientoWindow" >
-		
+	<window id="winRegistroPesoNetoWindow"
+		title="MANT. PESO NETO" style="color:blue;font-size:12px;font-weight:bold"
+		mode="modal"
+		border="auto"
+		width="30%"
+		defaultActionOnShow="moveDown"
+		position="left,top"
+		closable="true"
+		maximizable="true"
+		apply="com.nw.webui.produccion.EnvasadoDetalleControlPesoNetoMantenimientoWindow">
 		<script src="/js/noBarra.js" type="text/javascript" />
-		<label value="MANT. PESO NETO" style="color:blue;font-size:12px;font-weight:bold" />
 		
-		<vbox id="vbxMain" width="300px">
+		<vbox id="vbxMain" width="100%">
 		
-		  <grid width="99%">
+		  <grid width="93%">
 				<rows>
 					<row>
 						<toolbar>
@@ -20,9 +27,9 @@
 				</rows>
 			</grid>
 
-			<grid width="99%">
+			<grid width="93%">
 				<rows>
-				
+					<group label="Informacion Cabecera" spans="2" open="true"/>
 					<row>
 						<label id="lbFechaProduccion" value="Fecha Producción"/>
 						<datebox id="dteFechaProduccion" width="110px" readonly="false" format="dd/MM/yyyy"/>
@@ -56,37 +63,38 @@
 
 					<row>
 						<label id="lbOrden" value="Orden" />
-							<textbox id="txtOrden"
-							readonly="true"></textbox>
+							<label id="txtOrden" />
 					</row>
 
 					<row>
 						<label id="lbProducto" value="Producto" />
-							<textbox id="txtProducto"
-							readonly="true"></textbox>
+						<label id="txtProducto" />
 					</row>
 					
 					<row>
 						<label id="lbCliente" value="Cliente" />
-							<textbox id="txtCliente"
-							readonly="true"></textbox>
-					</row>					
+						<label id="txtCliente" />
+					</row>				
 
-
+					<row>
+						<label id="lbMCerradora" value="Maquina Cerradora" />
+						 <listbox id="lbxMCerradora" style="font-size:12px"
+						mold="select" width="120px" disabled="false"/>
+					</row>
 				</rows>
 			</grid>
 
 
 
-			<grid width="99%">
+			<grid width="93%">
 				<rows>
-				
-					<row>
-						<label id="lbMCerradora" value="Maquina Cerradora" />
-						 <listbox id="lbxMCerradora" style="font-size:12px"
-						mold="select" width="120px" disabled="true"/>
-					</row>	
+					<group id="gpPeso" label="Informacion Detalle" spans="2" open="false"/>
 									
+					<row>
+						<label id="lbVideoJet" value="Video Jet"/>
+						<textbox id="txtVideoJet" readonly="true"/>
+					</row>
+					
 					<row>
 						<label id="lbPesoEnvase" value="Peso Envase" />
 						<textbox id="txtPesoEnvase" readonly="true"></textbox>
@@ -118,49 +126,82 @@
 					</row>
 
 					<row>
-						<label id="lbcvprot" value="cvprot" />
+						<label id="lbcvprot" value="Caldo-Vegetal-Proteina" />
 						<listbox id="lbxcvprot" style="font-size:12px"
 						mold="select" width="120px" disabled="true"/>						
 					</row>
 
 
+<!-- 					<row> -->
+<!-- 						<label id="lbprot" value="Proteina" /> -->
+<!-- 						<textbox id="txtprot" readonly="true"></textbox> -->
+<!-- 					</row> -->
+					
+<!-- 					<row> -->
+<!-- 						<label id="lbcv" value="Caldo V." /> -->
+<!-- 						<textbox id="txtcv" readonly="true"></textbox> -->
+<!-- 					</row> -->
+
 					<row>
-						<label id="lbprot" value="Proteina" />
-						<textbox id="txtprot" readonly="true"></textbox>
+						<label id="lbCaldoVegetal" value="Caldo Vegetal (g.)" />
+						<textbox id="txtCaldoVegetal" readonly="true"></textbox>
 					</row>
 					
 					<row>
-						<label id="lbcv" value="Caldo V." />
-						<textbox id="txtcv" readonly="true"></textbox>
+						<label id="lbConcentracion" value="%Concentracion" />
+						<textbox id="txtConcentracion" readonly="true"></textbox>
 					</row>
-					
-					
 				</rows>	
 			</grid>
 
-
-				
-
-			<grid width="99%">
+			<grid width="93%" height="70px">
+				<columns >
+					<column width="20%"></column>
+					<column width="58%"></column>
+					<column width="22%"></column>
+				</columns>
 				<rows>
 					<row>
-						<label id="lbCorte" value="Corte"></label>
-						<listbox id="lbxCorte" style="font-size:12px" mold="select" width="120px">
-							<listitem></listitem>
-						</listbox>
+						<label id="lbTara" value="Tara" />
+							<textbox id="txtTara"
+							readonly="false"></textbox>
 					</row>
 					<row>
-						<label id="lbPesoneto" value="Peso neto" />
-						<textbox id="txtPesoneto"></textbox>
+						<label value="Corte: "></label>
+						<listbox id="lbxCorte" mold="select" width="120px" style="font-size:12px;font-weight:bold" />
+						<button  id="btnAgregarItem" label="Agregar"  image="/img/crear.gif"    hoverImage="/img/crear.gif"    orient="vertical" dir="reverse" 
+							style="color:blue;font-size:10px;font-weight:bold"
+							width="40px"/>
 					</row>
-				</rows>	
+				</rows>
 			</grid>
-
-			<vbox>
+			<grid width="93%">
+				<rows id="rsCorte">
+				</rows>
+			</grid>
+			
+			<grid width="93%">
+				<columns >
+					<column width="78%"></column>
+					<column width="22%"></column>
+				</columns>
+				<rows>
+				
+					<row>
+					
+						<checkbox id="cbxEliminar" label="Confirmar"/>
+						<button id="btnEliminarItem" label="Eliminar" image="/img/eliminar.gif" hoverImage="/img/eliminar.gif" orient="vertical" dir="reverse" 
+							style="color:blue;font-size:10px;font-weight:bold" 
+							width="40px"/>
+					</row>
+				</rows>
+			</grid>
+			
+			<vbox visible="false">
 				<label value="Fecha Hora Registro" style="color:blue;font-size:12px;font-weight:bold" />			
 			</vbox>
 			
-			<grid width="99%">
+			<grid width="93%" visible="false">
 				<rows>
 					<row>
 						<hbox>
@@ -284,18 +325,33 @@
 				</rows>
 			</grid>
 
-			<label id="lbObservacion" value="Observacion" />
-			<textbox id="txtObservacion" rows="3" width="99%">
-			</textbox>
+			<grid width="93%">
+				<rows>
+					<group id="lbObservacion" label="Observacion"/>
+					<row>
+						<textbox id="txtObservacion" rows="3" width="98%"/>
+					</row>
+				</rows>
+			</grid>
 			
+			<grid width="93%">
+				<rows>
+					<row>
+						<toolbar>
+							<toolbarbutton id="btnGrabarBot" label="Grabar"
+								tooltiptext="Grabar" image="/img/grabar.gif" />
+						</toolbar>
+					</row>
+				</rows>
+			</grid>
 			
-			<grid>
+			<grid width="93%">
 				<rows>			
 					<row>
 
 						<hbox>
 							<label value="Confirmar" />
-							<checkbox id="ChkEliminar" width="99%"></checkbox>
+							<checkbox id="cbxEliminarOrden" width="93%"></checkbox>
 						</hbox>
 
 						<hbox>

@@ -1,9 +1,15 @@
 package com.nw.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 
 /**
@@ -26,6 +32,7 @@ public class Produccion implements Serializable {
 	private List<DuchaAperturaCierreDetalle> duchaAperturaCierreDetalles;
 	private List<EnvasadoProceso> envasadoProcesos;
 	private List<EspecialidadesProceso> especialidadesProcesos;
+	private List<EsterilizadoProceso> esterilizadoProcesos;
 	private List<EvisceradoProceso> evisceradoProcesos;
 	private List<EvolutionAuditoriaDetalle> evolutionAuditoriaDetalles;
 	private List<LimpiezaAsignacionCanastilla> limpiezaAsignacionCanastillas;
@@ -50,6 +57,7 @@ public class Produccion implements Serializable {
 	private List<RackeoProceso> rackeoProcesos;
 	private List<ReportesPuntoControl> reportesPuntoControls;
 	private List<RociadoProceso> rociadoProcesos;
+	private List<EsterilizadoProcesoParada> esterilizadoProcesoParadas;
 
 	public Produccion() {
 	}
@@ -309,6 +317,31 @@ public class Produccion implements Serializable {
 	}
 
 
+	//bi-directional many-to-one association to EsterilizadoProceso
+	@OneToMany(mappedBy="produccion")
+	public List<EsterilizadoProceso> getEsterilizadoProcesos() {
+		return this.esterilizadoProcesos;
+	}
+
+	public void setEsterilizadoProcesos(List<EsterilizadoProceso> esterilizadoProcesos) {
+		this.esterilizadoProcesos = esterilizadoProcesos;
+	}
+
+	public EsterilizadoProceso addEsterilizadoProceso(EsterilizadoProceso esterilizadoProceso) {
+		getEsterilizadoProcesos().add(esterilizadoProceso);
+		esterilizadoProceso.setProduccion(this);
+
+		return esterilizadoProceso;
+	}
+
+	public EsterilizadoProceso removeEsterilizadoProceso(EsterilizadoProceso esterilizadoProceso) {
+		getEsterilizadoProcesos().remove(esterilizadoProceso);
+		esterilizadoProceso.setProduccion(null);
+
+		return esterilizadoProceso;
+	}
+
+	
 	//bi-directional many-to-one association to EvisceradoProceso
 	@OneToMany(mappedBy="produccion")
 	public List<EvisceradoProceso> getEvisceradoProcesos() {
@@ -906,6 +939,31 @@ public class Produccion implements Serializable {
 		rociadoProceso.setProduccion(null);
 
 		return rociadoProceso;
+	}
+	
+	
+	//bi-directional many-to-one association to EsterilizadoProcesoParada
+	@OneToMany(mappedBy="produccion")
+	public List<EsterilizadoProcesoParada> getEsterilizadoProcesoParadas() {
+		return this.esterilizadoProcesoParadas;
+	}
+
+	public void setEsterilizadoProcesoParadas(List<EsterilizadoProcesoParada> esterilizadoProcesoParadas) {
+		this.esterilizadoProcesoParadas = esterilizadoProcesoParadas;
+	}
+
+	public EsterilizadoProcesoParada addEsterilizadoProcesoParada(EsterilizadoProcesoParada esterilizadoProcesoParada) {
+		getEsterilizadoProcesoParadas().add(esterilizadoProcesoParada);
+		esterilizadoProcesoParada.setProduccion(this);
+
+		return esterilizadoProcesoParada;
+	}
+
+	public EsterilizadoProcesoParada removeEsterilizadoProcesoParada(EsterilizadoProcesoParada esterilizadoProcesoParada) {
+		getEsterilizadoProcesoParadas().remove(esterilizadoProcesoParada);
+		esterilizadoProcesoParada.setProduccion(null);
+
+		return esterilizadoProcesoParada;
 	}
 
 }

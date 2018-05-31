@@ -9,9 +9,11 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Query;
+import javax.persistence.NoResultException;
 //import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
 import com.avante.core.jpa.JPAPersistenceManager;
 import com.nw.model.BarcoDescarga;
 import com.nw.model.BarcoEstibaCuba;
@@ -893,7 +895,10 @@ public List<ProduccionArchivoCargaLote> ListaProduccionArchivoLote(Long codigo, 
 					qry.setParameter("fecha", fecha );
 					produccion=(Produccion) qry.getSingleResult();
 				    return  produccion;
-			} catch (RuntimeException e) {
+			} catch (NoResultException ne) {
+				System.out.println("No existe produccion para la fecha -> " + fecha);
+				return null;
+			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("No existe produccion para la fecha -> " + fecha);
 				return null;
@@ -925,5 +930,4 @@ public List<ProduccionArchivoCargaLote> ListaProduccionArchivoLote(Long codigo, 
 		em.close();
 		return prod; 		
 	}
-	
 }

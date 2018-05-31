@@ -35,7 +35,6 @@ public class EnvasadoControlPesoNetoDetalleDAOJpaImpl extends BaseDaoJpaImpl imp
 	}
 	
 	public boolean eliminaEnvasadoControlPesoNetoDetalle(EnvasadoControlPesoNetoDetalle ecpnd) {
-		
 		try {
 			t.begin();
 			if (!em.contains(ecpnd))
@@ -62,6 +61,25 @@ public class EnvasadoControlPesoNetoDetalleDAOJpaImpl extends BaseDaoJpaImpl imp
 					+ "WHERE e.envasadoControlPesoNetoCabecera.idenvasadocontrolpesonetocabecera = :idenvasadocontrolpesonetocabecera ";
 			return em
 					.createQuery(sql)
+					.setParameter("idenvasadocontrolpesonetocabecera", idenvasadocontrolpesonetocabecera)
+					.getResultList();
+		} catch( NoResultException e) {
+			return new ArrayList<EnvasadoControlPesoNetoDetalle>();
+		} catch( Exception e) {
+			e.printStackTrace();
+			return new ArrayList<EnvasadoControlPesoNetoDetalle>();
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<EnvasadoControlPesoNetoDetalle> obtieneByEnvasadoControlPesoNetoDetalleByCorte(Long idenvasadocontrolnetocortedetalle, Long idenvasadocontrolpesonetocabecera) {
+		try {
+			String sql = "SELECT e FROM EnvasadoControlPesoNetoDetalle e "
+					+ "WHERE e.envasadoControlNetoCorteDetalle.idenvasadocontrolnetocortedetalle = :idenvasadocontrolnetocortedetalle "
+					+ "AND e.envasadoControlPesoNetoCabecera.idenvasadocontrolpesonetocabecera = :idenvasadocontrolpesonetocabecera";
+			return em
+					.createQuery(sql)
+					.setParameter("idenvasadocontrolnetocortedetalle", idenvasadocontrolnetocortedetalle)
 					.setParameter("idenvasadocontrolpesonetocabecera", idenvasadocontrolpesonetocabecera)
 					.getResultList();
 		} catch( NoResultException e) {

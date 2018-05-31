@@ -1,8 +1,16 @@
 package com.nw.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 
 /**
@@ -16,6 +24,8 @@ public class Usuario implements Serializable {
 	private String idusuario;
 	private String clave;
 	private String usuario;
+	private List<EsterilizadoCoche> esterilizadoCoches;
+	private List<EsterilizadoProcesoParadaCoche> esterilizadoProcesoParadaCoches;
 	private List<BarcoDescarga> barcoDescargas;
 	private List<CalidadDescongeladoDetalleTempAgua> calidadDescongeladoDetalleTempAguas;
 	private List<CalidadDescongeladoDetalleTempPescado> calidadDescongeladoDetalleTempPescados;
@@ -190,6 +200,9 @@ public class Usuario implements Serializable {
 	private List<TunelDetalleProcesoCoche> tunelDetalleProcesoCoches;
 	private List<TunelDetalleProcesoCocheSalida> tunelDetalleProcesoCocheSalidas;
 	private List<TurnoGestionDetalle> turnoGestionDetalles;
+	private List<EnvasadoFichaTecnica> envasadoFichaTecnicas;
+	private List<EsterilizadoProcesoParada> esterilizadoProcesoParadas;
+	private List<EsterilizadoProceso> esterilizadoProcesos;
 	private Area area;
 	private Departamento departamento;
 	private Grupo grupo;
@@ -228,6 +241,56 @@ public class Usuario implements Serializable {
 	}
 
 
+	//bi-directional many-to-one association to EsterilizadoCoche
+	@OneToMany(mappedBy="usuario")
+	public List<EsterilizadoCoche> getEsterilizadoCoches() {
+		return this.esterilizadoCoches;
+	}
+
+	public void setEsterilizadoCoches(List<EsterilizadoCoche> esterilizadoCoches) {
+		this.esterilizadoCoches = esterilizadoCoches;
+	}
+
+	public EsterilizadoCoche addEsterilizadoCoch(EsterilizadoCoche esterilizadoCoch) {
+		getEsterilizadoCoches().add(esterilizadoCoch);
+		esterilizadoCoch.setUsuario(this);
+
+		return esterilizadoCoch;
+	}
+
+	public EsterilizadoCoche removeEsterilizadoCoch(EsterilizadoCoche esterilizadoCoch) {
+		getEsterilizadoCoches().remove(esterilizadoCoch);
+		esterilizadoCoch.setUsuario(null);
+
+		return esterilizadoCoch;
+	}
+
+
+	//bi-directional many-to-one association to EsterilizadoProcesoParadaCoche
+	@OneToMany(mappedBy="usuario")
+	public List<EsterilizadoProcesoParadaCoche> getEsterilizadoProcesoParadaCoches() {
+		return this.esterilizadoProcesoParadaCoches;
+	}
+
+	public void setEsterilizadoProcesoParadaCoches(List<EsterilizadoProcesoParadaCoche> esterilizadoProcesoParadaCoches) {
+		this.esterilizadoProcesoParadaCoches = esterilizadoProcesoParadaCoches;
+	}
+
+	public EsterilizadoProcesoParadaCoche addEsterilizadoProcesoParadaCoch(EsterilizadoProcesoParadaCoche esterilizadoProcesoParadaCoch) {
+		getEsterilizadoProcesoParadaCoches().add(esterilizadoProcesoParadaCoch);
+		esterilizadoProcesoParadaCoch.setUsuario(this);
+
+		return esterilizadoProcesoParadaCoch;
+	}
+
+	public EsterilizadoProcesoParadaCoche removeEsterilizadoProcesoParadaCoch(EsterilizadoProcesoParadaCoche esterilizadoProcesoParadaCoch) {
+		getEsterilizadoProcesoParadaCoches().remove(esterilizadoProcesoParadaCoch);
+		esterilizadoProcesoParadaCoch.setUsuario(null);
+
+		return esterilizadoProcesoParadaCoch;
+	}
+		
+		
 	//bi-directional many-to-one association to BarcoDescarga
 	@OneToMany(mappedBy="usuario")
 	public List<BarcoDescarga> getBarcoDescargas() {
@@ -4637,5 +4700,81 @@ public class Usuario implements Serializable {
 
 		return usuariosAprobacion;
 	}
+	
+	
+	//bi-directional many-to-one association to EnvasadoFichaTecnica
+	@OneToMany(mappedBy="usuario")
+	public List<EnvasadoFichaTecnica> getEnvasadoFichaTecnicas() {
+		return this.envasadoFichaTecnicas;
+	}
+
+	public void setEnvasadoFichaTecnicas(List<EnvasadoFichaTecnica> envasadoFichaTecnicas) {
+		this.envasadoFichaTecnicas = envasadoFichaTecnicas;
+	}
+
+	public EnvasadoFichaTecnica addEnvasadoFichaTecnica(EnvasadoFichaTecnica envasadoFichaTecnica) {
+		getEnvasadoFichaTecnicas().add(envasadoFichaTecnica);
+		envasadoFichaTecnica.setUsuario(this);
+
+		return envasadoFichaTecnica;
+	}
+
+	public EnvasadoFichaTecnica removeEnvasadoFichaTecnica(EnvasadoFichaTecnica envasadoFichaTecnica) {
+		getEnvasadoFichaTecnicas().remove(envasadoFichaTecnica);
+		envasadoFichaTecnica.setUsuario(null);
+
+		return envasadoFichaTecnica;
+	}
+	
+	
+	//bi-directional many-to-one association to EsterilizadoProcesoParada
+	@OneToMany(mappedBy="usuario")
+	public List<EsterilizadoProcesoParada> getEsterilizadoProcesoParadas() {
+		return this.esterilizadoProcesoParadas;
+	}
+
+	public void setEsterilizadoProcesoParadas(List<EsterilizadoProcesoParada> esterilizadoProcesoParadas) {
+		this.esterilizadoProcesoParadas = esterilizadoProcesoParadas;
+	}
+
+	public EsterilizadoProcesoParada addEsterilizadoProcesoParada(EsterilizadoProcesoParada esterilizadoProcesoParada) {
+		getEsterilizadoProcesoParadas().add(esterilizadoProcesoParada);
+		esterilizadoProcesoParada.setUsuario(this);
+
+		return esterilizadoProcesoParada;
+	}
+
+	public EsterilizadoProcesoParada removeEsterilizadoProcesoParada(EsterilizadoProcesoParada esterilizadoProcesoParada) {
+		getEsterilizadoProcesoParadas().remove(esterilizadoProcesoParada);
+		esterilizadoProcesoParada.setUsuario(null);
+
+		return esterilizadoProcesoParada;
+	}
+	
+	
+	//bi-directional many-to-one association to EsterilizadoProceso
+	@OneToMany(mappedBy="usuario")
+	public List<EsterilizadoProceso> getEsterilizadoProcesos() {
+		return this.esterilizadoProcesos;
+	}
+
+	public void setEsterilizadoProcesos(List<EsterilizadoProceso> esterilizadoProcesos) {
+		this.esterilizadoProcesos = esterilizadoProcesos;
+	}
+
+	public EsterilizadoProceso addEsterilizadoProceso(EsterilizadoProceso esterilizadoProceso) {
+		getEsterilizadoProcesos().add(esterilizadoProceso);
+		esterilizadoProceso.setUsuario(this);
+
+		return esterilizadoProceso;
+	}
+
+	public EsterilizadoProceso removeEsterilizadoProceso(EsterilizadoProceso esterilizadoProceso) {
+		getEsterilizadoProcesos().remove(esterilizadoProceso);
+		esterilizadoProceso.setUsuario(null);
+
+		return esterilizadoProceso;
+	}
+
 
 }

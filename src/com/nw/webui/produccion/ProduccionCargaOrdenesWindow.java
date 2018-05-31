@@ -330,6 +330,7 @@ public class ProduccionCargaOrdenesWindow extends GenericForwardComposer{
 		pdo.setTurno(pacoD.getTurno());
 		pdo.setUsuario(paco.getUsuario());
 		pdo.setItem(pacoD.getItem());
+		pdo.setFormato(pacoD.getFormato());
 		pdo.setLatas(pacoD.getLatas());
 		pdo.setLomolimpio(pacoD.getLomolimpio());
 		pdo.setMarca(pacoD.getMarca());
@@ -395,6 +396,7 @@ public class ProduccionCargaOrdenesWindow extends GenericForwardComposer{
 		destino.setFlake(origen.getFlake());
 		destino.setTurno(origen.getTurno());
 		destino.setItem(origen.getItem());
+		destino.setFormato(origen.getFormato());
 		destino.setLatas(origen.getLatas());
 		destino.setLomolimpio(origen.getLomolimpio());
 		destino.setMarca(origen.getMarca());

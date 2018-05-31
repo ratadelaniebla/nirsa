@@ -111,7 +111,7 @@ public class ReporteExcel {
 		  
 			
 		  ByteArrayOutputStream out = new ByteArrayOutputStream();
-			OutputStream output = new FileOutputStream(new File("JasperReport.pdf"));
+			OutputStream output = new FileOutputStream(new File("C:\\mbaque\\JasperReport.pdf"));
 			//OutputStream output = new FileOutputStream(""); // esta linea es de prueba
 			JasperExportManager.exportReportToPdfStream(jasperPrint, output);
 			// coding For Excel:

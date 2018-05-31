@@ -54,7 +54,7 @@ public class ProgamaProduccionImpresion {
 		EjecutarReporte(parameters, ruta_report_principal);
 	}
 	
-	public void doImprimirProgramaPesoFillNeto(String nombre_report, String logo, Long idenvasadocontrolpesofillcabecera) throws JRException, SuspendNotAllowedException, InterruptedException 
+	public void doImprimirProgramaPesoFill(String nombre_report, String logo, Long idenvasadocontrolpesofillcabecera) throws JRException, SuspendNotAllowedException, InterruptedException 
 	{			
 		//Obtenemos la ruta del reporte .jrxml
 		String ruta_report = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/reportes").toString()+System.getProperty("file.separator");
@@ -66,6 +66,59 @@ public class ProgamaProduccionImpresion {
 		parameters.put("LOGO", ruta_logo);
 		parameters.put("SUBREPORT_DIR", ruta_report);
 		parameters.put("idenvasadocontrolpesofillcabecera", idenvasadocontrolpesofillcabecera);
+		
+		//Ejecutamos el reporte
+		EjecutarReporte(parameters, ruta_report_principal);
+	}
+	
+	public void doImprimirProgramaPesoNeto(String nombre_report, String logo, Long idenvasadocontrolpesonetocabecera) throws JRException, SuspendNotAllowedException, InterruptedException 
+	{			
+		//Obtenemos la ruta del reporte .jrxml
+		String ruta_report = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/reportes").toString()+System.getProperty("file.separator");
+		String ruta_report_principal = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/reportes").toString()+System.getProperty("file.separator")+nombre_report;
+		String ruta_logo = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/img").toString()+System.getProperty("file.separator")+logo;
+
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		
+		parameters.put("LOGO", ruta_logo);
+		parameters.put("SUBREPORT_DIR", ruta_report);
+		parameters.put("idenvasadocontrolpesonetocabecera", idenvasadocontrolpesonetocabecera);
+		
+		//Ejecutamos el reporte
+		EjecutarReporte(parameters, ruta_report_principal);
+	}
+	
+	public void doImprimirReporteProductosEnvasado(String nombre_report, String logo, Long idproduccion, Integer idturno) throws JRException, SuspendNotAllowedException, InterruptedException 
+	{			
+		//Obtenemos la ruta del reporte .jrxml
+		String ruta_report = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/reportes").toString()+System.getProperty("file.separator");
+		String ruta_report_principal = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/reportes").toString()+System.getProperty("file.separator")+nombre_report;
+		String ruta_logo = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/img").toString()+System.getProperty("file.separator")+logo;
+
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		
+		parameters.put("LOGO", ruta_logo);
+		parameters.put("SUBREPORT_DIR", ruta_report);
+		parameters.put("idproduccion", idproduccion);
+		parameters.put("idturno", idturno);
+		
+		//Ejecutamos el reporte
+		EjecutarReporte(parameters, ruta_report_principal);
+	}
+	
+	public void doImprimirReporteMaquinaPlantaAtunera(String nombre_report, String logo, Long idproduccion, Integer idturno) throws JRException, SuspendNotAllowedException, InterruptedException 
+	{			
+		//Obtenemos la ruta del reporte .jrxml
+		String ruta_report = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/reportes").toString()+System.getProperty("file.separator");
+		String ruta_report_principal = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/reportes").toString()+System.getProperty("file.separator")+nombre_report;
+		String ruta_logo = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/img").toString()+System.getProperty("file.separator")+logo;
+
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		
+		parameters.put("LOGO", ruta_logo);
+		parameters.put("SUBREPORT_DIR", ruta_report);
+		parameters.put("idproduccion", idproduccion);
+		parameters.put("idturno", idturno);
 		
 		//Ejecutamos el reporte
 		EjecutarReporte(parameters, ruta_report_principal);

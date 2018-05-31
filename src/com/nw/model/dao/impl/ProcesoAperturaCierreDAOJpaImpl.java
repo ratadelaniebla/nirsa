@@ -180,19 +180,15 @@ public class ProcesoAperturaCierreDAOJpaImpl extends BaseDaoJpaImpl implements
 		}
 	}
 
-	public ProcesoAperturaCierre guardarAperturaCierre(
-			ProcesoAperturaCierre procesoAperturaCierre) {
-		ProcesoAperturaCierre loc_proceso = new ProcesoAperturaCierre();
+	public ProcesoAperturaCierre guardarAperturaCierre(ProcesoAperturaCierre procesoAperturaCierre) {
+		EntityTransaction t = em.getTransaction();
 		try {
-			EntityTransaction t = em.getTransaction();
 			t.begin();
-			loc_proceso = em.merge(procesoAperturaCierre);
-			t.commit();
-			return loc_proceso;
-
+			return em.merge(procesoAperturaCierre);
 		} catch (Exception e) {
-			// TODO: handle exception
-			return loc_proceso = null;
+			return null;
+		} finally {
+			t.commit();
 		}
 	}
 

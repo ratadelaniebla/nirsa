@@ -3,10 +3,6 @@ package com.nw.util;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.math.BigDecimal;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -14,14 +10,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
-
-import net.sf.jasperreports.engine.JRException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.tools.ant.types.CommandlineJava.SysProperties;
 import org.zkoss.util.media.AMedia;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.Path;
@@ -34,16 +26,13 @@ import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Window;
 
- 
 import com.nw.model.LimpiezaDetalleProcesoBandeja;
 import com.nw.model.LimpiezaProceso;
-import com.nw.model.LimpiezaProcesoEmpleado;
-import com.nw.model.Parametro;
-import com.nw.model.dao.impl.LimpiezaProcesoEmpleadoDAOJpaImpl;
-import com.nw.model.dao.impl.ParametroDAOJpaImpl;
 import com.nw.model.dao.impl.PccParametroDAOJpaImpl;
 import com.nw.model.dao.impl.ProcesoAperturaCierreDAOJpaImpl;
 import com.nw.model.dao.impl.ProduccionDAOJpaImpl;
+
+import net.sf.jasperreports.engine.JRException;
 
 
 @SuppressWarnings("unchecked")

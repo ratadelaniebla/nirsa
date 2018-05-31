@@ -7,8 +7,9 @@
 	<parameter name="idproducciondetalleorden" class="java.lang.Long"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[SELECT SUM
-	( d.pesofill ), (max(d.pesofill) - min(d.pesofill)) rango,
+		<![CDATA[SELECT
+	SUM( d.pesofill )/ COUNT( d.pesofill) SUM,
+	(max(d.pesofill) - min(d.pesofill)) rango,
 	(select trim(to_char(cd.hora,'00')||':'||trim(to_char(cd.minuto,'00')))
 	from envasado_control_fill_corte_detalle cd
 	where cd.idenvasadocontrolfillcortedetalle = d.idenvasadocontrolfillcortedetalle) corte
@@ -74,21 +75,21 @@ ORDER BY
 							<tickLabelFont/>
 						</axisFormat>
 					</valueAxisFormat>
-					<rangeAxisMinValueExpression><![CDATA[$V{minPeso}]]></rangeAxisMinValueExpression>
+					<rangeAxisMinValueExpression><![CDATA[0]]></rangeAxisMinValueExpression>
 					<rangeAxisMaxValueExpression><![CDATA[$V{maxPeso}]]></rangeAxisMaxValueExpression>
 				</linePlot>
 			</lineChart>
-			<textField evaluationTime="Report">
-				<reportElement x="110" y="133" width="100" height="20"/>
+			<textField isStretchWithOverflow="true" evaluationTime="Report" pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+				<reportElement x="125" y="133" width="100" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total}/$V{contador}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="133" width="100" height="20"/>
+				<reportElement x="0" y="133" width="125" height="20"/>
 				<textElement verticalAlignment="Middle">
-					<font isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[PROMEDIO FILL WT:]]></text>
 			</staticText>
@@ -120,17 +121,18 @@ ORDER BY
 							<tickLabelFont/>
 						</axisFormat>
 					</valueAxisFormat>
+					<rangeAxisMinValueExpression><![CDATA[0]]></rangeAxisMinValueExpression>
 				</linePlot>
 			</lineChart>
 			<staticText>
-				<reportElement x="0" y="308" width="123" height="20"/>
+				<reportElement x="0" y="308" width="125" height="20"/>
 				<textElement verticalAlignment="Middle">
-					<font isBold="true"/>
+					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[PROMEDIO DE RANGO:]]></text>
 			</staticText>
-			<textField isStretchWithOverflow="true" evaluationTime="Report" isBlankWhenNull="true">
-				<reportElement x="134" y="308" width="100" height="20"/>
+			<textField isStretchWithOverflow="true" evaluationTime="Report" pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+				<reportElement x="125" y="308" width="100" height="20"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>

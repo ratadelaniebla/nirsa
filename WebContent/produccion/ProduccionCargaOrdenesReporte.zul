@@ -10,7 +10,7 @@
 
 					<row>
 						<label value="Producción:"/>
-						<datebox id="dteFecha1" width="110px" format="dd/MM/yyyy " readonly="true"/>
+						<datebox id="dteFecha1" width="110px" format="dd/MM/yyyy" readonly="true"/>
 					</row>					
 	  
 					

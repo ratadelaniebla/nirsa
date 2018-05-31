@@ -3,34 +3,57 @@ package com.nw.model.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
 
+import com.avante.core.jpa.JPAPersistenceManager;
 import com.nw.model.EnvasadoControlPesoFillCabecera;
+import com.nw.model.EnvasadoControlPesoFillDetalle;
 import com.nw.model.dao.EnvasadoControlPesoFillCabeceraDAO;
 
 public class EnvasadoControlPesoFillCabeceraDAOJpaImpl extends BaseDaoJpaImpl implements EnvasadoControlPesoFillCabeceraDAO {
 
-	private EntityTransaction t;
-	
+	@PersistenceContext
+	private EntityManagerFactory emf;
+    private EntityManager em;
+    private EntityTransaction t;
 	public EnvasadoControlPesoFillCabeceraDAOJpaImpl(){
-		t = em.getTransaction();
+		emf = JPAPersistenceManager.getInstance().getEntityManagerFactory();
+		//emf = Persistence.createEntityManagerFactory("NW");
+        em = emf.createEntityManager();
+        t = em.getTransaction();
 	}
 	
 	public EnvasadoControlPesoFillCabecera updateEnvasadoControlPesoFillCabecera(EnvasadoControlPesoFillCabecera envasadoControlPesoFillCabecera) {
+		
 		EnvasadoControlPesoFillCabecera ecpfc = null;
+		t = em.getTransaction();
+		List<EnvasadoControlPesoFillDetalle> listEcpfd = new ArrayList<EnvasadoControlPesoFillDetalle>();
 		try {
 			
 			t.begin();
+			for( EnvasadoControlPesoFillDetalle envasadoControlPesoFillDetalle : envasadoControlPesoFillCabecera.getEnvasadoControlPesoFillDetalles() ) {
+				listEcpfd.add(em.merge(envasadoControlPesoFillDetalle));
+			}
+			envasadoControlPesoFillCabecera.setEnvasadoControlPesoFillDetalles(listEcpfd);
 			ecpfc =	em.merge(envasadoControlPesoFillCabecera);
 			t.commit();
 			
-			return ecpfc;
 		} catch(Exception e) {
-			t.rollback();
+			try {
+				t.rollback();
+			}catch(Exception er) {
+				e.printStackTrace();
+				return null;
+			}
 			e.printStackTrace();
-			return null;
 		}
+		
+		return ecpfc;
+		
 	}
 	
 	public EnvasadoControlPesoFillCabecera getByProduccionTurnoOrden(Long idenvasadoproceso, Integer idproducciondetalleorden) {

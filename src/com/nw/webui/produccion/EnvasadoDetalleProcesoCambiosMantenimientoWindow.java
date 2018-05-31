@@ -13,29 +13,42 @@ import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Datebox;
+import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Textbox;
 
+import com.nw.model.EnvasadoCaldoVegetalProteina;
 import com.nw.model.EnvasadoDetalleProcesoCambio;
 import com.nw.model.EnvasadoDetalleProcesoCambiosLuthy;
+import com.nw.model.EnvasadoFichaTecnica;
+import com.nw.model.EnvasadoMotivoCambio;
 import com.nw.model.EnvasadoProceso;
-import com.nw.model.EnvasadoTipoProteina;
+import com.nw.model.EnvasadoProveedorLata;
+import com.nw.model.EnvasadoProveedorTapa;
 import com.nw.model.Luthy;
 import com.nw.model.MaquinaCerradora;
 import com.nw.model.Produccion;
 import com.nw.model.ProduccionDetalleOrden;
 import com.nw.model.Turno;
+import com.nw.model.dao.EnvasadoCaldoVegetalProteinaDAO;
 import com.nw.model.dao.EnvasadoDetalleProcesoCambioDAO;
 import com.nw.model.dao.EnvasadoDetalleProcesoCambiosLuthyDAO;
-import com.nw.model.dao.EnvasadoTipoProteinaDAO;
+import com.nw.model.dao.EnvasadoFichaTecnicaDAO;
+import com.nw.model.dao.EnvasadoMotivoCambioDAO;
+import com.nw.model.dao.EnvasadoProveedorLataDAO;
+import com.nw.model.dao.EnvasadoProveedorTapaDAO;
 import com.nw.model.dao.LuthyDAO;
 import com.nw.model.dao.ProduccionDetalleOrdenDAO;
+import com.nw.model.dao.impl.EnvasadoCaldoVegetalProteinaDAOJpaImpl;
 import com.nw.model.dao.impl.EnvasadoDetalleProcesoCambiosDAOJpaimpl;
 import com.nw.model.dao.impl.EnvasadoDetalleProcesoCambiosLuthyDAOJpaimpl;
+import com.nw.model.dao.impl.EnvasadoFichaTecnicaDAOJpaImpl;
+import com.nw.model.dao.impl.EnvasadoMotivoCambioDAOJpaImpl;
 import com.nw.model.dao.impl.EnvasadoProcesoDAOJpaImpl;
-import com.nw.model.dao.impl.EnvasadoTipoProteinaDAOJpaImpl;
+import com.nw.model.dao.impl.EnvasadoProveedorLataDAOJpaImpl;
+import com.nw.model.dao.impl.EnvasadoProveedorTapaDAOJpaImpl;
 import com.nw.model.dao.impl.LuthyDAOJpaImpl;
 import com.nw.model.dao.impl.MaquinaCerradoraDAOJpaImpl;
 import com.nw.model.dao.impl.ProduccionDAOJpaImpl;
@@ -58,15 +71,22 @@ public class EnvasadoDetalleProcesoCambiosMantenimientoWindow extends GenericFor
 	
 	Datebox dteFechaProduccion;
 	
-	Textbox txtOrden, txtProducto, txtTapa, txtPresentacion, txtCodVideoJet, txtPNeto, txtDestino, txtObservacion;
-	
+	Textbox txtNetoFormulado, txtSalmuera, txtConcentracion, txtDensidad, txtFormato;
+	Textbox txtTapa, txtPresentacion, txtCodVideoJet, txtPNeto, txtDestino, txtObservacion;
+	Label	txtOrden, txtProducto, txtMarca;
 	Listbox lbxTurnoProduccion, lbxItemOrdenFillPresentacion;
-	Listbox lbxTurnoLabor, lbxItemOrden, lbxMSelladora, lbxLuthy, lbxLista, lbxTipoProteina;
+	Listbox lbxTurnoLabor, lbxItemOrden, lbxMSelladora, lbxLuthy, lbxLista, lbxTipoProteina, lbxMotivoCambio;
 	Listbox lbxMes, lbxDias, lbxHoras, lbxMinutos;
 
-//	Doublebox ;
-	Textbox dcbFill, dcbH2O, dcbAceite, dcbProteina, dcbDrenado, dcbFlakes, dcbLatas;
-	Checkbox chkEliminar; 
+	Textbox txtH2O, txtAceite, txtProteina, txtDrenado, txtFlakes, txtLatas;
+	Checkbox chkEliminar;
+	
+	Label 	lbFill1,  lbFill2,  lbFillPromedio;
+	Textbox txtFill1, txtFill2, txtFillPromedio;
+	
+	Label 	lbProveedorLata,  lbProveedorTapa;
+	Listbox lbxProveedorLata, lbxProveedorTapa;
+	
 	private Produccion produccion;
 	
 	@Override
@@ -76,6 +96,9 @@ public class EnvasadoDetalleProcesoCambiosMantenimientoWindow extends GenericFor
 		
 		cargarListaTurnoLabor();
 		cargalbxTipoProteina();
+		cargaMotivoCambio();
+		cargaProveedorTapa();
+		cargaProveedorLata();
 		binder.loadAll();
 	}
 	
@@ -151,7 +174,7 @@ public class EnvasadoDetalleProcesoCambiosMantenimientoWindow extends GenericFor
 			li.setValue(edpc);
 			pdo = pdoDAO.obtieneDetalleOrdenById(edpc.getProduccionDetalleOrden().getIdproducciondetalleorden());
 			label = new StringBuilder();
-			label.append(pdo.getItem()).append(" - ").append(pdo.getOrden()).append(" - ").append(edpc.getFill()).append(" - ").append(pdo.getProducto()); 
+			label.append(pdo.getItem()).append(" - ").append(pdo.getOrden()).append(" - ").append(edpc.getFillPromedio()).append(" - ").append(pdo.getProducto()); 
 			new Listcell(label.toString()).setParent(li);
 			li.setParent(lbxItemOrdenFillPresentacion);
 		}
@@ -187,9 +210,10 @@ public class EnvasadoDetalleProcesoCambiosMantenimientoWindow extends GenericFor
 			li = new Listitem();
 			li.setValue(pdo);
 			label = new StringBuilder();
-			label.append(pdo.getItem()).append(" - ").append(pdo.getOrden());
+			label.append(pdo.getItem()).append(" - ").append(pdo.getOrden()+ " - " + pdo.getCliente());
 			new Listcell(label.toString()).setParent(li);
 			li.setParent(lbxItemOrden);
+			System.out.println(edpc.getProduccionDetalleOrden().getIdproducciondetalleorden()+"--"+pdo.getIdproducciondetalleorden());
 			if(edpc.getProduccionDetalleOrden().getIdproducciondetalleorden().equals(pdo.getIdproducciondetalleorden()))
 				index=cont;
 			cont++;
@@ -227,29 +251,53 @@ public class EnvasadoDetalleProcesoCambiosMantenimientoWindow extends GenericFor
  		if(pdo.getIdproducciondetalleorden()==null)
  			return;
  		
+ 		if (edpc.getEnvasadoCaldoVegetalProteina()==null)
+ 			edpc.setEnvasadoCaldoVegetalProteina(new EnvasadoCaldoVegetalProteina());
+
+ 		txtFill1.setValue(String.valueOf(edpc.getFillRango1()));
+		txtFill2.setValue(String.valueOf(edpc.getFillRango2()));
+		txtFillPromedio.setValue(String.valueOf(edpc.getFillPromedio()));
+ 		txtNetoFormulado.setValue(String.valueOf(edpc.getPesonetoformulado()));
+ 		txtSalmuera.setValue(String.valueOf(edpc.getSal()));
+ 		txtConcentracion.setValue(String.valueOf(edpc.getConcentracion()));
+ 		txtFormato.setValue(String.valueOf(edpc.getFormato()));
+ 		txtDensidad.setValue(String.valueOf(edpc.getDensidad()));
+ 		
 		txtOrden.setValue(pdo.getOrden());
 		txtProducto.setValue(pdo.getProducto());
+		txtMarca.setValue(pdo.getMarca());
 		seleccionaMCerradora(edpc.getMaquinaCerradora().getIdmaquinacerradora());
 		cargaLuthyConfigurado(edpc.getEnvasadoDetalleProcesoCambiosLuthies());
-		dcbFill.setValue(String.valueOf(edpc.getFill()));
-		dcbH2O.setValue(String.valueOf(edpc.getAg()));
-		dcbAceite.setValue(String.valueOf(edpc.getAc()));
-		cargaTipoProteinaConfigurado(edpc.getEnvasadoTipoProteina().getIdenvasadotipoproteina());
-		dcbProteina.setValue(String.valueOf(edpc.getPorcentajeproteina()));
+		
+		if (edpc.getEnvasadoProveedorLata()!=null)
+			cargaEnvasadoLata(edpc.getEnvasadoProveedorLata().getIdenvasadoproveedorlatas());
+		else
+			lbxProveedorLata.setSelectedIndex(0);
+		
+		if (edpc.getEnvasadoProveedorTapa()!=null)
+			cargaEnvasadoTapa(edpc.getEnvasadoProveedorTapa().getIdenvasadoproveedortapa());
+		else
+			lbxProveedorTapa.setSelectedIndex(0);
+		txtH2O.setValue(String.valueOf(edpc.getAg()));
+		txtAceite.setValue(String.valueOf(edpc.getAc()));
+		cargaTipoProteinaConfigurado(edpc.getEnvasadoCaldoVegetalProteina().getIdenvasadocaldovegetalproteina());
+		txtProteina.setValue(String.valueOf(edpc.getPorcentajeproteina()));
 		txtCodVideoJet.setValue(edpc.getCodvideojet());
 		txtTapa.setValue(pdo.getTapa());
 		txtPresentacion.setValue(pdo.getPresentacion());
-		dcbDrenado.setValue(String.valueOf(edpc.getDre()));
-		dcbFlakes.setValue(String.valueOf(edpc.getFlake()));
+		txtDrenado.setValue(String.valueOf(edpc.getDre()));
+		txtFlakes.setValue(String.valueOf(edpc.getFlake()));
+		txtCodVideoJet.setValue(pdo.getVideo());
 		txtPNeto.setValue(edpc.getPesoneto());
 		txtDestino.setValue(pdo.getDestino());
-		dcbLatas.setValue(String.valueOf(edpc.getLatas()));
+		txtLatas.setValue(String.valueOf(edpc.getLatas()));
 		
 		seleccionaMes(obtieneFechaCambio(edpc.getFechacambio(), Calendar.MONTH)+1);
 		seleccionaDia(obtieneFechaCambio(edpc.getFechacambio(), Calendar.DAY_OF_MONTH));
 		seleccionaHora(obtieneFechaCambio(edpc.getFechacambio(), Calendar.HOUR_OF_DAY));
 		seleccionaMinuto(obtieneFechaCambio(edpc.getFechacambio(), Calendar.MINUTE));
 		
+		cargaMotivoCambioConfigurado(edpc.getEnvasadoMotivoCambio().getIdenvasadomotivocambios());
 		txtObservacion.setValue(edpc.getObservacion());
 	}
 	
@@ -262,17 +310,32 @@ public class EnvasadoDetalleProcesoCambiosMantenimientoWindow extends GenericFor
  		if(pdo.getIdproducciondetalleorden()==null)
  			return;
  		
+ 		EnvasadoFichaTecnicaDAO eftDAO = new EnvasadoFichaTecnicaDAOJpaImpl();
+		EnvasadoFichaTecnica eft = eftDAO.getByOrden(pdo.getIdproducciondetalleorden());
+		
 		txtOrden.setValue(pdo.getOrden());
 		txtProducto.setValue(pdo.getProducto());
+		txtMarca.setValue(pdo.getProducto());
+		
+		txtFill1.setValue(String.valueOf(eft.getFillRango1()));
+		txtFill2.setValue(String.valueOf(eft.getFillRango2()));
+		txtFillPromedio.setValue(String.valueOf(eft.getFillPromedio()));
+		
+		txtNetoFormulado.setValue(String.valueOf(eft.getPesoNetoFormulado()));
+		txtH2O.setValue(String.valueOf(eft.getAgua()));
+		txtAceite.setValue(String.valueOf(eft.getAceite()));
+		txtProteina.setValue(String.valueOf(eft.getCaldoVegetal()));
+		txtSalmuera.setValue(String.valueOf(eft.getSal()));
+		txtConcentracion.setValue(String.valueOf(eft.getConcentracion()));
+		txtDensidad.setValue(String.valueOf(eft.getDensidad()));
+		
 		//crga maquina selladora
 		//carga luthy
-		dcbFill.setValue(String.valueOf(pdo.getFill()));
-		dcbH2O.setValue(String.valueOf(pdo.getAg()));
-		dcbAceite.setValue(String.valueOf(pdo.getAc()));
 		txtTapa.setValue(pdo.getTapa());
 		txtPresentacion.setValue(pdo.getProducto());
-		dcbDrenado.setValue(String.valueOf(pdo.getDre()));
-		dcbFlakes.setValue(String.valueOf(pdo.getFlake()));
+		txtDrenado.setValue(String.valueOf(pdo.getDre()));
+		txtFlakes.setValue(String.valueOf(pdo.getFlake()));
+		txtCodVideoJet.setValue(pdo.getVideo());
 		
 		String pNeto = pdo.getPresentacion();
 		if (pNeto!=null)
@@ -280,7 +343,7 @@ public class EnvasadoDetalleProcesoCambiosMantenimientoWindow extends GenericFor
 				txtPNeto.setValue(pNeto.substring(pNeto.indexOf("X")+2, pNeto.length()));
 		
 		txtDestino.setValue(pdo.getDestino());
-		dcbLatas.setValue(String.valueOf(pdo.getLatas()));
+		txtLatas.setValue(String.valueOf(pdo.getLatas()));
 
 		txtObservacion.setValue(null);
 	}
@@ -448,27 +511,101 @@ public class EnvasadoDetalleProcesoCambiosMantenimientoWindow extends GenericFor
 	 * carga la informacion de tipo proteina que se encuentre configurada en la tabla.
 	 */
 	public void cargalbxTipoProteina() {
-		EnvasadoTipoProteinaDAO etpDAO = new EnvasadoTipoProteinaDAOJpaImpl();
-		List<EnvasadoTipoProteina> listaTipoProteina = etpDAO.getAll();
+		EnvasadoCaldoVegetalProteinaDAO etpDAO = new EnvasadoCaldoVegetalProteinaDAOJpaImpl();
+		List<EnvasadoCaldoVegetalProteina> listaEnvasadoCaldoVegetalProteina = etpDAO.getEnvasadoCaldoVegetalProteina();
 		
-		if (listaTipoProteina.isEmpty()) {
+		if (listaEnvasadoCaldoVegetalProteina.isEmpty()) {
 			Sistema.mensaje("No se encuentra configuracion para Tipos de proteina.");
 			return;
 		}
 			
 		lbxTipoProteina.getItems().clear();
 		Listitem li = new Listitem();
-		li.setValue(new EnvasadoTipoProteina());
+		li.setValue(new EnvasadoCaldoVegetalProteina());
 		li.setParent(lbxTipoProteina);
 		
-		for (EnvasadoTipoProteina etp : listaTipoProteina) {
+		for (EnvasadoCaldoVegetalProteina ecvp : listaEnvasadoCaldoVegetalProteina) {
 			li = new Listitem();
-			li.setValue(etp);
-			new Listcell(etp.getDescripcion()).setParent(li);
+			li.setValue(ecvp);
+			new Listcell(ecvp.getDescripcion()).setParent(li);
 			li.setParent(lbxTipoProteina);
 		}
 		
 		lbxTipoProteina.setSelectedIndex(0);
+	}
+	
+	private void cargaMotivoCambio() {
+		EnvasadoMotivoCambioDAO edpcDAO = new EnvasadoMotivoCambioDAOJpaImpl();
+		List<EnvasadoMotivoCambio> listaEdpc = edpcDAO.getAll();
+		
+		lbxMotivoCambio.getItems().clear();
+		Listitem li = new Listitem();
+		li.setValue(new EnvasadoMotivoCambio());
+		li.setParent(lbxMotivoCambio);
+		
+		for (EnvasadoMotivoCambio envasadoMotivoCambio : listaEdpc) {
+			li = new Listitem();
+			li.setValue(envasadoMotivoCambio);
+			new Listcell(envasadoMotivoCambio.getDescripcion()).setParent(li);
+			li.setParent(lbxMotivoCambio);
+		}
+		
+		if (listaEdpc.isEmpty()) {
+			Sistema.mensaje("Error. No existen motivos configurados en el sitema.");
+			return;
+		}
+		lbxMotivoCambio.setSelectedIndex(0);
+		
+	}
+	
+	private void cargaProveedorTapa() {
+		EnvasadoProveedorTapaDAO ecvpDAO = new EnvasadoProveedorTapaDAOJpaImpl();
+		List<EnvasadoProveedorTapa> listEPT = ecvpDAO.getEnvasadoProveedorTapa();
+		
+		if (listEPT.isEmpty()) {
+			Sistema.mensaje("No se encuentra configurado informacion para Caldo-Vegetal-Proteina.");
+			return;
+		}
+		
+		lbxProveedorTapa.getItems().clear();
+		Listitem li = new Listitem();
+		li.setValue(new EnvasadoProveedorTapa());
+		li.setParent(lbxProveedorTapa);
+		
+		for (EnvasadoProveedorTapa ept : listEPT) {
+			li = new Listitem();
+			li.setValue(ept);
+			new Listcell(ept.getDescripcion()).setParent(li);
+			li.setParent(lbxProveedorTapa);
+		}
+		
+		lbxProveedorTapa.setSelectedIndex(0);
+		
+	}
+	
+	private void cargaProveedorLata() {
+		EnvasadoProveedorLataDAO ecvpDAO = new EnvasadoProveedorLataDAOJpaImpl();
+		List<EnvasadoProveedorLata> listEPL = ecvpDAO.getEnvasadoProveedorLata();
+		
+		if (listEPL.isEmpty()) {
+			Sistema.mensaje("No se encuentra configurado informacion para Caldo-Vegetal-Proteina.");
+			return;
+		}
+		
+		lbxProveedorLata.getItems().clear();
+		Listitem li = new Listitem();
+		li.setValue(new EnvasadoProveedorLata());
+		li.setParent(lbxProveedorLata);
+		
+		for (EnvasadoProveedorLata epL : listEPL) {
+			li = new Listitem();
+			li.setValue(epL);
+			new Listcell(epL.getDescripcion()).setParent(li);
+			li.setParent(lbxProveedorLata);
+		}
+		
+		lbxProveedorLata.setSelectedIndex(0);
+		
 	}
 	
 	/**
@@ -478,13 +615,69 @@ public class EnvasadoDetalleProcesoCambiosMantenimientoWindow extends GenericFor
 	public void cargaTipoProteinaConfigurado(Integer idTipoProteina) {
 		int index=0;
 		for(Listitem li : (List<Listitem>)lbxTipoProteina.getItems()) {
-			if (idTipoProteina.equals(((EnvasadoTipoProteina)li.getValue()).getIdenvasadotipoproteina())) {
-				lbxTipoProteina.setSelectedIndex(index);
+			if (idTipoProteina!=null)
+				if (idTipoProteina.equals(((EnvasadoCaldoVegetalProteina)li.getValue()).getIdenvasadocaldovegetalproteina())) {
+					lbxTipoProteina.setSelectedIndex(index);
+					break;
+				}
+			index++;
+		}
+	}
+	
+	/**
+	 * carga la informacion del motivo que se encuentre configurado para el cambio Fill Weigth.
+	 * @param Idenvasadomotivocambios
+	 */
+	@SuppressWarnings("unchecked")
+	public void cargaMotivoCambioConfigurado(Long Idenvasadomotivocambios) {
+		
+		int index=0;
+		
+		if (Idenvasadomotivocambios==null) {
+			lbxMotivoCambio.setSelectedIndex(0);
+			return;
+		}
+		for(Listitem li : (List<Listitem>)lbxMotivoCambio.getItems()) {
+			if (Idenvasadomotivocambios.equals(((EnvasadoMotivoCambio)li.getValue()).getIdenvasadomotivocambios())) {
+				lbxMotivoCambio.setSelectedIndex(index);
 				break;
 			}
 			index++;
 		}
 	}
+	
+	/**
+	 * carga el proveedor lata que se encuentre configurado para cambio en fill weigth 
+	 */
+	@SuppressWarnings("unchecked")
+	public void cargaEnvasadoLata(Integer idEnvasadoLata) {
+		int index=0;
+		for(Listitem li : (List<Listitem>)lbxProveedorLata.getItems()) {
+			if (idEnvasadoLata!=null)
+				if (idEnvasadoLata.equals(((EnvasadoProveedorLata)li.getValue()).getIdenvasadoproveedorlatas())) {
+					lbxProveedorLata.setSelectedIndex(index);
+					break;
+				}
+			index++;
+		}
+	}
+	
+	/**
+	 * carga el proveedor lata que se encuentre configurado para cambio en fill weigth 
+	 */
+	@SuppressWarnings("unchecked")
+	public void cargaEnvasadoTapa(Integer idEnvasadoTapa) {
+		int index=0;
+		for(Listitem li : (List<Listitem>)lbxProveedorTapa.getItems()) {
+			if (idEnvasadoTapa!=null)
+				if (idEnvasadoTapa.equals(((EnvasadoProveedorTapa)li.getValue()).getIdenvasadoproveedortapa())) {
+					lbxProveedorTapa.setSelectedIndex(index);
+					break;
+				}
+			index++;
+		}
+	}
+	
 	/**
 	 * elimina el listcell que se encuentre chekeado
 	 * @throws InterruptedException
@@ -639,6 +832,21 @@ public class EnvasadoDetalleProcesoCambiosMantenimientoWindow extends GenericFor
 			return Timestamp.valueOf(fechaCambio);
 	}
 
+	public void onBlur$txtFill1() {
+		Double fill1 = parseDouble(txtFill1.getValue());
+		Double fill2 = parseDouble(txtFill2.getValue());
+		Double promedio = (fill1+fill2)/2;
+		txtFillPromedio.setValue(String.valueOf(promedio));
+	}
+	
+	public void onBlur$txtFill2() {
+		onBlur$txtFill1();
+	}
+	
+	public void onClick$btnGrabarBot() {
+		onClick$btnGrabar();
+	}
+	
 	@SuppressWarnings("unchecked")
 	public void onClick$btnGrabar() {
 		try {
@@ -713,87 +921,82 @@ public class EnvasadoDetalleProcesoCambiosMantenimientoWindow extends GenericFor
 			}
 			edpc.setEnvasadoDetalleProcesoCambiosLuthies(listaEdpcL);
 			
-			EnvasadoTipoProteina etp = (EnvasadoTipoProteina)lbxTipoProteina.getSelectedItem().getValue();
-			if (etp.getIdenvasadotipoproteina()==null) {
+			EnvasadoCaldoVegetalProteina ecvp = (EnvasadoCaldoVegetalProteina)lbxTipoProteina.getSelectedItem().getValue();
+			if (ecvp.getIdenvasadocaldovegetalproteina()==null) {
 				Sistema.mensaje("Debe seleccionar un valor para el campo Tipo Proteina");
 				return;
 			}
-			edpc.setEnvasadoTipoProteina(etp);
+			edpc.setEnvasadoCaldoVegetalProteina(ecvp);
 			
-			try {
-				if (dcbFill.getValue()==null?true:dcbFill.getValue().isEmpty()?true:false) {
-					Sistema.mensaje("Se debe agrega un valor para el campo %Fill");
-					dcbFill.setFocus(true);
-					return;
-				} else if(parseDouble(dcbFill.getValue()) < 0){
-					Sistema.mensaje("El campo %Fill no permite numeros negativos.");
-					dcbFill.setValue(null);
-					dcbFill.setFocus(true);
-					return;
-				}
-			} catch(Exception e) {
-				Sistema.mensaje("El campo %Fill solo acepta numeros.");
-				dcbFill.setValue(null);
-				dcbFill.setFocus(true);
+			EnvasadoProveedorLata epl = (EnvasadoProveedorLata)lbxProveedorLata.getSelectedItem().getValue();
+			if (epl.getIdenvasadoproveedorlatas()==null) {
+				Sistema.mensaje("Debe seleccionar un valor para el campo Proveedor Lata");
 				return;
 			}
-			edpc.setFill(parseDouble(dcbFill.getValue()));
+			edpc.setEnvasadoProveedorLata(epl);
+			
+			EnvasadoProveedorTapa ept = (EnvasadoProveedorTapa)lbxProveedorTapa.getSelectedItem().getValue();
+			if (ept.getIdenvasadoproveedortapa()==null) {
+				Sistema.mensaje("Debe seleccionar un valor para el campo Proveedor Tapa");
+				return;
+			}
+			edpc.setEnvasadoProveedorTapa(ept);
 			
 			try {
-				if (dcbH2O.getValue()==null?true:dcbH2O.getValue().isEmpty()?true:false) {
+				if (txtH2O.getValue()==null?true:txtH2O.getValue().isEmpty()?true:false) {
 					Sistema.mensaje("Se debe agrega un valor para el campo %H2O");
-					dcbH2O.setFocus(true);
+					txtH2O.setFocus(true);
 					return;
-				} else if(parseDouble(dcbH2O.getValue()) < 0){
+				} else if(parseDouble(txtH2O.getValue()) < 0){
 					Sistema.mensaje("El campo %H2O no permite numeros negativos.");
-					dcbH2O.setValue(null);
-					dcbH2O.setFocus(true);
+					txtH2O.setValue(null);
+					txtH2O.setFocus(true);
 					return;
 				}
 			} catch(Exception e) {
 				Sistema.mensaje("El campo %H2O solo acepta numeros.");
-				dcbH2O.setValue(null);
-				dcbH2O.setFocus(true);
+				txtH2O.setValue(null);
+				txtH2O.setFocus(true);
 				return;
 			}
-			edpc.setAg(parseDouble(dcbH2O.getValue()));//H2O = ag
+			edpc.setAg(parseDouble(txtH2O.getValue()));//H2O = ag
 			
 			try {
-				if (dcbAceite.getValue()==null?true:dcbAceite.getValue().isEmpty()?true:false) {
+				if (txtAceite.getValue()==null?true:txtAceite.getValue().isEmpty()?true:false) {
 					Sistema.mensaje("Se debe agrega un valor para el campo %Aceite");
-					dcbAceite.setFocus(true);
+					txtAceite.setFocus(true);
 					return;
-				} else if(parseDouble(dcbAceite.getValue()) < 0){
+				} else if(parseDouble(txtAceite.getValue()) < 0){
 					Sistema.mensaje("El campo %Aceite no permite numeros negativos.");
-					dcbAceite.setValue(null);
-					dcbAceite.setFocus(true);
+					txtAceite.setValue(null);
+					txtAceite.setFocus(true);
 					return;
 				}
 			} catch(Exception e) {
 				Sistema.mensaje("El campo %Aceite solo acepta numeros.");
-				dcbAceite.setValue(null);
-				dcbAceite.setFocus(true);
+				txtAceite.setValue(null);
+				txtAceite.setFocus(true);
 				return;
 			}
-			edpc.setAc(parseDouble(dcbAceite.getValue()));
+			edpc.setAc(parseDouble(txtAceite.getValue()));
 			try {
-				if (dcbProteina.getValue()==null?true:dcbProteina.getValue().isEmpty()?true:false) {
+				if (txtProteina.getValue()==null?true:txtProteina.getValue().isEmpty()?true:false) {
 					Sistema.mensaje("Se debe agrega un valor para el campo %Proteina");
-					dcbProteina.setFocus(true);
+					txtProteina.setFocus(true);
 					return;
-				} else if(parseDouble(dcbProteina.getValue()) < 0){
+				} else if(parseDouble(txtProteina.getValue()) < 0){
 					Sistema.mensaje("El campo %Proteina no permite numeros negativos.");
-					dcbProteina.setValue(null);
-					dcbProteina.setFocus(true);
+					txtProteina.setValue(null);
+					txtProteina.setFocus(true);
 					return;
 				}
 			} catch(Exception e) {
 				Sistema.mensaje("El campo %Proteina solo acepta numeros.");
-				dcbProteina.setValue(null);
-				dcbProteina.setFocus(true);
+				txtProteina.setValue(null);
+				txtProteina.setFocus(true);
 				return;
 			}	
-			edpc.setPorcentajeproteina(parseDouble(dcbProteina.getValue()));//aceite = AC
+			edpc.setPorcentajeproteina(parseDouble(txtProteina.getValue()));//aceite = AC
 			
 			if (txtCodVideoJet.getValue()==null?true:txtCodVideoJet.getValue().isEmpty()?true:false) {
 				Sistema.mensaje("Se debe agrega un valor para el campo Cod. Video Jet");
@@ -809,41 +1012,41 @@ public class EnvasadoDetalleProcesoCambiosMantenimientoWindow extends GenericFor
 			//tapa =visual
 			//presentacion=producto visual
 			try {
-				if (dcbDrenado.getValue()==null?true:dcbDrenado.getValue().isEmpty()?true:false) {
+				if (txtDrenado.getValue()==null?true:txtDrenado.getValue().isEmpty()?true:false) {
 					Sistema.mensaje("Se debe agrega un valor para el campo Drenado");
-					dcbDrenado.setFocus(true);
+					txtDrenado.setFocus(true);
 					return;
-				} else if(parseDouble(dcbDrenado.getValue()) < 0){
+				} else if(parseDouble(txtDrenado.getValue()) < 0){
 					Sistema.mensaje("El campo Drenado no permite numeros negativos.");
-					dcbDrenado.setValue(null);
-					dcbDrenado.setFocus(true);
+					txtDrenado.setValue(null);
+					txtDrenado.setFocus(true);
 					return;
 				}
 			} catch(Exception e) {
 				Sistema.mensaje("El campo Drenado solo acepta numeros.");
-				dcbDrenado.setValue(null);
-				dcbDrenado.setFocus(true);
+				txtDrenado.setValue(null);
+				txtDrenado.setFocus(true);
 				return;
 			}	
-			edpc.setDre(parseDouble(dcbDrenado.getValue()));
+			edpc.setDre(parseDouble(txtDrenado.getValue()));
 			try {
-				if (dcbFlakes.getValue()==null?true:dcbFlakes.getValue().isEmpty()?true:false) {
+				if (txtFlakes.getValue()==null?true:txtFlakes.getValue().isEmpty()?true:false) {
 					Sistema.mensaje("Se debe agrega un valor para el campo %Flakes");
-					dcbFlakes.setFocus(true);
+					txtFlakes.setFocus(true);
 					return;
-				} else if(parseDouble(dcbFlakes.getValue()) < 0){
+				} else if(parseDouble(txtFlakes.getValue()) < 0){
 					Sistema.mensaje("El campo %Flakes no permite numeros negativos.");
-					dcbFlakes.setValue(null);
-					dcbFlakes.setFocus(true);
+					txtFlakes.setValue(null);
+					txtFlakes.setFocus(true);
 					return;
 				}
 			} catch(Exception e) {
 				Sistema.mensaje("El campo #Flakes solo acepta numeros.");
-				dcbFlakes.setValue(null);
-				dcbFlakes.setFocus(true);
+				txtFlakes.setValue(null);
+				txtFlakes.setFocus(true);
 				return;
 			}
-			edpc.setFlake(parseDouble(dcbFlakes.getValue()));
+			edpc.setFlake(parseDouble(txtFlakes.getValue()));
 			
 			if (txtPNeto.getValue()==null?true:txtPNeto.getValue().isEmpty()?true:false) {
 				Sistema.mensaje("Se debe agrega un valor para el campo P. Neto");
@@ -853,32 +1056,179 @@ public class EnvasadoDetalleProcesoCambiosMantenimientoWindow extends GenericFor
 			edpc.setPesoneto(txtPNeto.getValue());
 			//destino=visual
 			try{
-				if (dcbLatas.getValue()==null?true:dcbLatas.getValue().isEmpty()?true:false) {
+				if (txtLatas.getValue()==null?true:txtLatas.getValue().isEmpty()?true:false) {
 					Sistema.mensaje("Se debe agrega un valor para el campo #Latas");
-					dcbLatas.setFocus(true);
+					txtLatas.setFocus(true);
 					return;
-				} else if(parseDouble(dcbLatas.getValue()) < 0){
+				} else if(parseDouble(txtLatas.getValue()) < 0){
 					Sistema.mensaje("El campo Latas no permite numeros negativos.");
-					dcbLatas.setValue(null);
-					dcbLatas.setFocus(true);
+					txtLatas.setValue(null);
+					txtLatas.setFocus(true);
 					return;
 				}
 			} catch(Exception e) {
 				Sistema.mensaje("El campo #Latas solo acepta numeros.");
-				dcbLatas.setValue(null);
-				dcbLatas.setFocus(true);
+				txtLatas.setValue(null);
+				txtLatas.setFocus(true);
 				return;
 			}
-			edpc.setLatas(parseDouble(dcbLatas.getValue()));
+			edpc.setLatas(parseDouble(txtLatas.getValue()));
+			
+			
+			try {
+				if (txtFill1.getValue()==null?true:txtFill1.getValue().isEmpty()?true:false) {
+					Sistema.mensaje("Se debe agrega un valor para el campo "+lbFill1.getValue());
+					txtFill1.setFocus(true);
+					return;
+				} else if(parseDouble(txtFill1.getValue()) < 0){
+					Sistema.mensaje("El campo "+lbFill1.getValue()+" no permite numeros negativos.");
+					txtFill1.setValue(null);
+					txtFill1.setFocus(true);
+					return;
+				}
+			} catch(Exception e) {
+				Sistema.mensaje("El campo "+lbFill1.getValue()+" solo acepta numeros.");
+				txtFill1.setValue(null);
+				txtFill1.setFocus(true);
+				return;
+			}
+			edpc.setFillRango1(parseDouble(txtFill1.getValue()));
+			
+			try {
+				if (txtFill2.getValue()==null?true:txtFill2.getValue().isEmpty()?true:false) {
+					Sistema.mensaje("Se debe agrega un valor para el campo "+lbFill2.getValue());
+					txtFill2.setFocus(true);
+					return;
+				} else if(parseDouble(txtFill2.getValue()) < 0){
+					Sistema.mensaje("El campo "+lbFill2.getValue()+" no permite numeros negativos.");
+					txtFill2.setValue(null);
+					txtFill2.setFocus(true);
+					return;
+				}
+			} catch(Exception e) {
+				Sistema.mensaje("El campo "+lbFill2.getValue()+" solo acepta numeros.");
+				txtFill2.setValue(null);
+				txtFill2.setFocus(true);
+				return;
+			}
+			edpc.setFillRango2(parseDouble(txtFill2.getValue()));
+			
+			edpc.setFillPromedio(parseDouble(txtFillPromedio.getValue()));
+			
+			
+			try {
+				if (txtNetoFormulado.getValue()==null?true:txtNetoFormulado.getValue().isEmpty()?true:false) {
+					Sistema.mensaje("Se debe agrega un valor para el campo P. Neto Formulado (g.)");
+					txtNetoFormulado.setFocus(true);
+					return;
+				} else if(parseDouble(txtLatas.getValue()) < 0){
+					Sistema.mensaje("El campo P. Neto Formulado (g.) no permite numeros negativos.");
+					txtNetoFormulado.setValue(null);
+					txtNetoFormulado.setFocus(true);
+					return;
+				}
+			} catch(Exception e) {
+				Sistema.mensaje("El campo P. Neto Formulado (g.) solo acepta numeros.");
+				txtNetoFormulado.setValue(null);
+				txtNetoFormulado.setFocus(true);
+				return;
+			}
+			edpc.setPesonetoformulado(parseDouble(txtNetoFormulado.getValue()));
+			
+			try {
+				if (txtSalmuera.getValue()==null?true:txtSalmuera.getValue().isEmpty()?true:false) {
+					Sistema.mensaje("Se debe agrega un valor para el campo %Salmuera");
+					txtSalmuera.setFocus(true);
+					return;
+				} else if(parseDouble(txtSalmuera.getValue()) < 0){
+					Sistema.mensaje("El campo %Salmuera no permite numeros negativos.");
+					txtSalmuera.setValue(null);
+					txtSalmuera.setFocus(true);
+					return;
+				}
+			} catch(Exception e) {
+				Sistema.mensaje("El campo %Salmuera solo acepta numeros.");
+				txtSalmuera.setValue(null);
+				txtSalmuera.setFocus(true);
+				return;
+			}
+			edpc.setSal(parseDouble(txtSalmuera.getValue()));
+			
+			try {
+				if (txtConcentracion.getValue()==null?true:txtConcentracion.getValue().isEmpty()?true:false) {
+					Sistema.mensaje("Se debe agrega un valor para el campo %Conc. CV");
+					txtConcentracion.setFocus(true);
+					return;
+				} else if(parseDouble(txtConcentracion.getValue()) < 0){
+					Sistema.mensaje("El campo %Conc. CV no permite numeros negativos.");
+					txtConcentracion.setValue(null);
+					txtConcentracion.setFocus(true);
+					return;
+				}
+			} catch(Exception e) {
+				Sistema.mensaje("El campo %Conc. CV solo acepta numeros.");
+				txtConcentracion.setValue(null);
+				txtConcentracion.setFocus(true);
+				return;
+			}
+			edpc.setConcentracion(parseDouble(txtConcentracion.getValue()));
+			
+			try {
+				if (txtFormato.getValue()==null?true:txtFormato.getValue().isEmpty()?true:false) {
+					Sistema.mensaje("Se debe agrega un valor para el campo Formato");
+					txtFormato.setFocus(true);
+					return;
+				} else if(parseDouble(txtFormato.getValue()) < 0){
+					Sistema.mensaje("El campo Formato no permite numeros negativos.");
+					txtFormato.setValue(null);
+					txtFormato.setFocus(true);
+					return;
+				}
+			} catch(Exception e) {
+				Sistema.mensaje("El campo Formato solo acepta numeros.");
+				txtFormato.setValue(null);
+				txtFormato.setFocus(true);
+				return;
+			}
+			edpc.setFormato(parseDouble(txtFormato.getValue()));
+			
+			try {
+				if (txtDensidad.getValue()==null?true:txtDensidad.getValue().isEmpty()?true:false) {
+					Sistema.mensaje("Se debe agrega un valor para el campo Densidad");
+					txtDensidad.setFocus(true);
+					return;
+				} else if(parseDouble(txtDensidad.getValue()) < 0){
+					Sistema.mensaje("El campo Densidad no permite numeros negativos.");
+					txtDensidad.setValue(null);
+					txtDensidad.setFocus(true);
+					return;
+				}
+			} catch(Exception e) {
+				Sistema.mensaje("El campo Densidad solo acepta numeros.");
+				txtDensidad.setValue(null);
+				txtDensidad.setFocus(true);
+				return;
+			}
+			edpc.setDensidad(parseDouble(txtDensidad.getValue()));
 			
 			Timestamp fechaRegistro = obtieneFechaRegistro();
 			if (fechaRegistro==null)
 				return;
 			edpc.setFechacambio(fechaRegistro);
 			edpc.setFechareg(new Timestamp(System.currentTimeMillis()));
+			
+			EnvasadoMotivoCambio emc = (EnvasadoMotivoCambio) lbxMotivoCambio.getSelectedItem().getValue();
+			if (emc.getIdenvasadomotivocambios()==null) {
+				Sistema.mensaje("Debe seleccionar un valor para el motivo del cambio.");
+				return;
+			}
+			edpc.setEnvasadoMotivoCambio(emc);
+			
 			edpc.setObservacion(txtObservacion.getValue());
 			
-			List<EnvasadoDetalleProcesoCambiosLuthy> edpcl = daoJpa.saveOrUpdate(edpc);
+			verificaCambiosValorInicial(edpc);
+			
+			List<EnvasadoDetalleProcesoCambiosLuthy> edpcl = daoJpa.saveOrUpdate(edpc).getEnvasadoDetalleProcesoCambiosLuthies();
 			
 			cargaLuthyConfigurado(edpcl);
 			
@@ -893,6 +1243,64 @@ public class EnvasadoDetalleProcesoCambiosMantenimientoWindow extends GenericFor
 			e.printStackTrace();
 			
 		}
+	}
+	
+	
+	private boolean verificaCambiosValorInicial(EnvasadoDetalleProcesoCambio edpc) {
+		ProduccionDetalleOrden pdo = (ProduccionDetalleOrden) lbxItemOrden.getSelectedItem()
+				.getValue();
+
+		EnvasadoFichaTecnicaDAO eftDAO = new EnvasadoFichaTecnicaDAOJpaImpl();
+		EnvasadoFichaTecnica eft = eftDAO.getByOrden(pdo.getIdproducciondetalleorden());
+
+		edpc.setCodvideojetcambio(
+				verificaCambios(edpc.getCodvideojet(), pdo.getVideo()));
+		edpc.setFillRango1Cambio(
+				verificaCambios(edpc.getFillRango1(), eft.getFillRango1()));
+		edpc.setFillRango2Cambio(
+				verificaCambios(edpc.getFillRango2(), eft.getFillRango2()));
+		edpc.setFillPromedioCambio(
+				verificaCambios(edpc.getFillPromedio(), eft.getFillPromedio()));
+		edpc.setPesonetoformuladocambio(
+				verificaCambios(edpc.getPesonetoformulado(), eft.getPesoNetoFormulado()));
+		edpc.setFlakecambio(
+				verificaCambios(edpc.getFlake(), pdo.getFlake()));
+		edpc.setAgcambio(
+				verificaCambios(edpc.getAg(), eft.getAgua()));
+		edpc.setAccambio(
+				verificaCambios(edpc.getAc(), eft.getAceite()));
+		edpc.setEnvasadocaldovegetalproteinacambio(
+				verificaCambios(edpc.getEnvasadoCaldoVegetalProteina().getIdenvasadocaldovegetalproteina(),eft.getEnvasadoCaldoVegetalProteina().getIdenvasadocaldovegetalproteina()));
+		edpc.setPorcentajeproteinacambio(
+				verificaCambios(edpc.getPorcentajeproteina(), eft.getCaldoVegetal()));
+		edpc.setSalcambio(
+				verificaCambios(edpc.getSal(), eft.getSal()));
+		edpc.setConcentracioncambio(
+				verificaCambios(edpc.getConcentracion(), eft.getConcentracion()));
+		edpc.setFormatocambio(
+				verificaCambios(edpc.getFormato(), pdo.getFormato()));
+		edpc.setDensidadcambio(
+				verificaCambios(edpc.getDensidad(), eft.getDensidad()));
+		edpc.setEnvasadoproveedorlatascambio(
+				verificaCambios(edpc.getEnvasadoProveedorLata().getIdenvasadoproveedorlatas(), eft.getEnvasadoProveedorLata().getIdenvasadoproveedorlatas()));
+		edpc.setEnvasadoproveedortapacambio(
+				verificaCambios(edpc.getEnvasadoProveedorTapa().getIdenvasadoproveedortapa(), eft.getEnvasadoProveedorTapa().getIdenvasadoproveedortapa()));
+		
+		return false;
+	}
+	
+	private boolean verificaCambios(Object valorInicial, Object valorCambio) {
+		if (valorInicial==null&&valorCambio==null)
+			return false;
+		if (valorInicial==null&&valorCambio!=null)
+			return true;
+		if (valorInicial!=null&&valorCambio==null)
+			return true;
+		
+		if (valorInicial.equals(valorCambio))
+			return false;
+		else 
+			return true;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -990,29 +1398,44 @@ public class EnvasadoDetalleProcesoCambiosMantenimientoWindow extends GenericFor
 		}
 			
 		lbxTurnoLabor.setSelectedIndex(0);
+		
+		txtFill1.setValue(null);
+		txtFill2.setValue(null);
+		txtFillPromedio.setValue(null);
+		
+		txtNetoFormulado.setValue(null);
+ 		txtSalmuera.setValue(null);
+ 		txtConcentracion.setValue(null);
+ 		txtFormato.setValue(null);
+ 		txtDensidad.setValue(null);
+ 		
 		txtOrden.setValue(null);
 		txtProducto.setValue(null);
+		txtMarca.setValue(null);
 		lbxMSelladora.setSelectedIndex(0);
 		lbxLista.getItems().clear();
 		lbxLista.setVisible(false);
 		lbxTipoProteina.setSelectedIndex(0);
+		lbxProveedorLata.setSelectedIndex(0);
+		lbxProveedorTapa.setSelectedIndex(0);
 		txtCodVideoJet.setValue(null);
-		dcbFill.setValue(null);
-		dcbH2O.setValue(null);
-		dcbAceite.setValue(null);
-		dcbProteina.setValue(null);
+		txtH2O.setValue(null);
+		txtAceite.setValue(null);
+		txtProteina.setValue(null);
 		txtTapa.setValue(null);
 		txtPresentacion.setValue(null);
-		dcbDrenado.setValue(null);
-		dcbFlakes.setValue(null);
+		txtDrenado.setValue(null);
+		txtFlakes.setValue(null);
+		txtCodVideoJet.setValue(null);
 		txtPNeto.setValue(null);
 		txtDestino.setValue(null);
-		dcbLatas.setValue(null);
+		txtLatas.setValue(null);
 		lbxMes.setSelectedIndex(0);
 		lbxDias.getItems().clear();
 		lbxHoras.setSelectedIndex(0);
 		lbxMinutos.setSelectedIndex(0);
 		txtObservacion.setValue(null);
+		lbxMotivoCambio.setSelectedIndex(0);
 		chkEliminar.setChecked(false);
 	}
 	

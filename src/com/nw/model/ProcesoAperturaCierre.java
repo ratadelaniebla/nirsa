@@ -2,6 +2,7 @@ package com.nw.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class ProcesoAperturaCierre implements Serializable {
 	private List<DescongeladoProceso> descongeladoProcesos;
 	private List<EnvasadoProceso> envasadoProcesos;
 	private List<EspecialidadesProceso> especialidadesProcesos;
+	private List<EsterilizadoProceso> esterilizadoProcesos;
 	private List<EvisceradoProceso> evisceradoProcesos;
 	private List<LimpiezaProceso> limpiezaProcesos;
 	private List<LonjasProceso> lonjasProcesos;
@@ -178,6 +180,31 @@ public class ProcesoAperturaCierre implements Serializable {
 	}
 
 
+	//bi-directional many-to-one association to EsterilizadoProceso
+	@OneToMany(mappedBy="procesoAperturaCierre")
+	public List<EsterilizadoProceso> getEsterilizadoProcesos() {
+		return this.esterilizadoProcesos;
+	}
+
+	public void setEsterilizadoProcesos(List<EsterilizadoProceso> esterilizadoProcesos) {
+		this.esterilizadoProcesos = esterilizadoProcesos;
+	}
+
+	public EsterilizadoProceso addEsterilizadoProceso(EsterilizadoProceso esterilizadoProceso) {
+		getEsterilizadoProcesos().add(esterilizadoProceso);
+		esterilizadoProceso.setProcesoAperturaCierre(this);
+
+		return esterilizadoProceso;
+	}
+
+	public EsterilizadoProceso removeEsterilizadoProceso(EsterilizadoProceso esterilizadoProceso) {
+		getEsterilizadoProcesos().remove(esterilizadoProceso);
+		esterilizadoProceso.setProcesoAperturaCierre(null);
+
+		return esterilizadoProceso;
+	}
+		
+		
 	//bi-directional many-to-one association to EvisceradoProceso
 	@OneToMany(mappedBy="procesoAperturaCierre")
 	public List<EvisceradoProceso> getEvisceradoProcesos() {

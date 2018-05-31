@@ -1,9 +1,7 @@
 package com.nw.webui.produccion;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
@@ -17,10 +15,13 @@ import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zkplus.databind.AnnotateDataBinder;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Datebox;
+import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Listbox;
 import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
+import org.zkoss.zul.Row;
+import org.zkoss.zul.Rows;
 import org.zkoss.zul.Textbox;
 
 import com.nw.model.EnvasadoCaldoVegetalProteina;
@@ -28,6 +29,7 @@ import com.nw.model.EnvasadoControlNetoCorteDetalle;
 import com.nw.model.EnvasadoControlPesoFillCabecera;
 import com.nw.model.EnvasadoControlPesoNetoCabecera;
 import com.nw.model.EnvasadoControlPesoNetoDetalle;
+import com.nw.model.EnvasadoFichaTecnica;
 import com.nw.model.EnvasadoProceso;
 import com.nw.model.MaquinaCerradora;
 import com.nw.model.Produccion;
@@ -38,14 +40,17 @@ import com.nw.model.dao.EnvasadoControlNetoCorteCabeceraDAO;
 import com.nw.model.dao.EnvasadoControlPesoFillCabeceraDAO;
 import com.nw.model.dao.EnvasadoControlPesoNetoCabeceraDAO;
 import com.nw.model.dao.EnvasadoControlPesoNetoDetalleDAO;
+import com.nw.model.dao.EnvasadoFichaTecnicaDAO;
 import com.nw.model.dao.ProduccionDetalleOrdenDAO;
 import com.nw.model.dao.impl.EnvasadoCaldoVegetalProteinaDAOJpaImpl;
 import com.nw.model.dao.impl.EnvasadoControlNetoCorteCabeceraDAOJpaImpl;
 import com.nw.model.dao.impl.EnvasadoControlPesoFillCabeceraDAOJpaImpl;
 import com.nw.model.dao.impl.EnvasadoControlPesoNetoCabeceraDAOJpaImpl;
 import com.nw.model.dao.impl.EnvasadoControlPesoNetoDetalleDAOJpaImpl;
+import com.nw.model.dao.impl.EnvasadoFichaTecnicaDAOJpaImpl;
 import com.nw.model.dao.impl.EnvasadoProcesoDAOJpaImpl;
 import com.nw.model.dao.impl.MaquinaCerradoraDAOJpaImpl;
+import com.nw.model.dao.impl.ParametroDAOJpaImpl;
 import com.nw.model.dao.impl.ProduccionDAOJpaImpl;
 import com.nw.model.dao.impl.ProduccionDetalleOrdenDAOJpaImpl;
 import com.nw.model.dao.impl.TurnoDAOJpaImpl;
@@ -58,11 +63,11 @@ import com.nw.util.Sistema;
  * @since 18/04/2018
  */
 public class EnvasadoDetalleControlPesoNetoMantenimientoWindow extends GenericForwardComposer {
-private static final String NUEVO = "- NUEVO -";
 //	private static Log logger = LogFactory.getLog(EnvasadoDetalleControlPesoNetoMantenimientoWindow.class);
 	/**
 	 * 
 	 */
+	private static final int valorMaximoPesoFill = 10016;
 	private static final long serialVersionUID = 1L;
 	AnnotateDataBinder binder;
 	
@@ -72,14 +77,15 @@ private static final String NUEVO = "- NUEVO -";
 	Label   lbTurnoProduccion,  lbTurnoLabor,  lbItemOrdenCliente,  lbItemOrden,  lbMCerradora,  lbcvprot,  lbCorte;
 	Listbox lbxTurnoProduccion, lbxTurnoLabor, lbxItemOrdenCliente, lbxItemOrden, lbxMCerradora, lbxcvprot, lbxCorte; 
 	
-	Label   lbOrden,  lbProducto,  lbCliente,  lbPesoEnvase,  lbPLomos,  lbTrozos,  lbRallado,  lbAgua,  lbAceite,  lbprot,  lbcv,  lbPesoneto,  lbObservacion;
-	Textbox txtOrden, txtProducto, txtCliente, txtPesoEnvase, txtPLomos, txtTrozos, txtRallado, txtAgua, txtAceite, txtprot, txtcv, txtPesoneto, txtObservacion;
-	
+	Label   lbVideoJet,  lbOrden,  lbProducto,  lbCliente,  lbTara,  lbPesoEnvase,  lbPLomos,  lbTrozos,  lbRallado,  lbAgua,  lbAceite,  lbCaldoVegetal,  lbConcentracion,  lbPesoneto,  lbObservacion;
+	Textbox txtVideoJet,									txtTara, txtPesoEnvase, txtPLomos, txtTrozos, txtRallado, txtAgua, txtAceite, txtCaldoVegetal, txtConcentracion, txtObservacion;
+	Label				 txtOrden, txtProducto, txtCliente;
 	Listbox lbxMes, lbxDias, lbxHoras, lbxMinutos;
 	
-	Checkbox ChkEliminar;
+	Checkbox cbxEliminar, cbxEliminarOrden;
 	
-	private EnvasadoControlPesoFillCabecera ecpfc;
+	Rows rsCorte;
+	
 	private ProduccionDetalleOrden pdo;
 	private EnvasadoProceso envasadoProceso;
 	private Produccion produccion;
@@ -143,11 +149,7 @@ private static final String NUEVO = "- NUEVO -";
 		lbxItemOrdenCliente.getItems().clear();
 		
 		Listitem li = new Listitem();
-		li.setValue(new Compuesto(new EnvasadoControlPesoNetoCabecera(), new EnvasadoControlPesoNetoDetalle()));
-		li.setParent(lbxItemOrdenCliente);
-		
-		li = new Listitem(NUEVO);
-		li.setValue(new Compuesto(new EnvasadoControlPesoNetoCabecera(), new EnvasadoControlPesoNetoDetalle()));
+		li.setValue(new Compuesto(new EnvasadoControlPesoNetoCabecera()));
 		li.setParent(lbxItemOrdenCliente);
 		
 		/**
@@ -200,23 +202,22 @@ private static final String NUEVO = "- NUEVO -";
 					});
 			
 			
-			for(EnvasadoControlPesoNetoDetalle ecpnd : ecpnc.getEnvasadoControlPesoNetoDetalles()) {
+//			for(EnvasadoControlPesoNetoDetalle ecpnd : ecpnc.getEnvasadoControlPesoNetoDetalles()) {
 				li = new Listitem();
-				li.setValue(new Compuesto(ecpnc, ecpnd));
+				li.setValue(new Compuesto(ecpnc));
 				
 				new Listcell(pdo.getItem()
 						+"-"+pdo.getOrden()
-						+"-"+ecpnd.getPesoneto()
-						+"-"+new SimpleDateFormat("dd/MM/yyyy").format(ecpnd.getFechareg())
 						+"-"+pdo.getCliente())
 				.setParent(li);
 				
 				li.setParent(lbxItemOrdenCliente);
-			}
+//			}
 		}
 		
 		lbxItemOrdenCliente.setSelectedIndex(0);
 		
+		cargaCorte();
 	}
 	
 	private void cargaTurno(){
@@ -252,6 +253,7 @@ private static final String NUEVO = "- NUEVO -";
 		txtOrden.setValue(pdo.getOrden());
 		txtProducto.setValue(pdo.getProducto());
 		txtCliente.setValue(pdo.getCliente());
+		txtVideoJet.setValue(pdo.getVideo());
 		
 		cargaInformacionFormulario();
 		
@@ -286,30 +288,95 @@ private static final String NUEVO = "- NUEVO -";
 		
 	}
 	
+	private int cont=1;
+	public void onClick$btnAgregarItem() {
+		Row row = new Row();
+		Checkbox cbxCorteItem;
+		Intbox tbxCorteItem;
+		
+		cbxCorteItem = new Checkbox();
+		cbxCorteItem.setChecked(false);
+		cbxCorteItem.setWidth("10px");
+		cbxCorteItem.setParent(row);
+		
+		tbxCorteItem = new Intbox();
+		tbxCorteItem.setTabindex(cont);
+		tbxCorteItem.setParent(row);
+		
+		row.setValue(null);
+		row.setParent(rsCorte);
+		
+		cont = cont+1;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void onClick$btnEliminarItem() {
+		
+		List<Row> rowsElimina = new ArrayList<Row>();
+		
+		if (rsCorte.getChildren().isEmpty()) {
+			Sistema.mensaje("No existen elementos seleccionados para eliminar.");
+			return;
+		}
+		
+		if (!cbxEliminar.isChecked()) {
+			Sistema.mensaje("Debe confirmar para eliminar los elementos seleccionados.");
+			return;
+		}
+		
+		EnvasadoControlPesoNetoDetalleDAO envasadoControlPesoNetoDetalle = new EnvasadoControlPesoNetoDetalleDAOJpaImpl();
+		for (Row r :(List<Row>)rsCorte.getChildren()) {
+			Checkbox cbx = (Checkbox)r.getChildren().get(0);
+			
+			if (cbx.isChecked()) {
+				rowsElimina.add(r);
+				if (r.getValue()==null)
+					envasadoControlPesoNetoDetalle.eliminaEnvasadoControlPesoNetoDetalle((EnvasadoControlPesoNetoDetalle)r.getValue());
+			}
+		}
+		
+		cbxEliminar.setChecked(false);
+		binder.loadComponent(rsCorte);
+
+		int iItemOrdenCliente = lbxItemOrdenCliente.getSelectedIndex();
+		int iCorte = lbxCorte.getSelectedIndex();
+ 		onSelect$lbxTurnoProduccion();
+		lbxItemOrdenCliente.setSelectedIndex(iItemOrdenCliente);
+		onSelect$lbxItemOrdenCliente();
+		lbxCorte.setSelectedIndex(iCorte);
+		onSelect$lbxCorte();
+		
+	}
+	
 	private void cargaCorte() {
 		
-		Compuesto compuesto = (Compuesto)lbxItemOrdenCliente.getSelectedItem().getValue();
+		lbxCorte.getItems().clear();
 		
+		Compuesto compuesto = (Compuesto)lbxItemOrdenCliente.getSelectedItem().getValue();
+		EnvasadoControlPesoNetoCabecera ecpnc = compuesto.envasadoControlPesoNetoCabecera; 
 		EnvasadoControlNetoCorteCabeceraDAO ecfccDAO = new EnvasadoControlNetoCorteCabeceraDAOJpaImpl();
 		
 		EnvasadoProceso envasadoProceso = (EnvasadoProceso)lbxTurnoProduccion.getSelectedItem().getValue();
-		List<EnvasadoControlNetoCorteDetalle> listaEcfcd = ecfccDAO
+		List<EnvasadoControlNetoCorteDetalle> listaEcncd = ecfccDAO
 				.obtieneByIdEnvasadoProceso(envasadoProceso.getIdenvasadoproceso())
 				.getEnvasadoControlNetoCorteDetalles();
 		
-		if (listaEcfcd != null)
-			if (listaEcfcd.isEmpty()) {
+		if (listaEcncd != null) {
+			if (listaEcncd.isEmpty()) {
 				Sistema.mensaje("No se encuentra configurado informacion para la configuracion de cortes.");
 				return;
 			}
+		} else if (listaEcncd == null) {
+			Sistema.mensaje("No se encuentra configurado informacion para la configuracion de cortes.");
+			return;
+		}
 		
-		lbxCorte.getItems().clear();
 		Listitem li = new Listitem();
 		li.setValue(new EnvasadoControlNetoCorteDetalle());
 		li.setParent(lbxCorte);
 		
 		
-		Collections.sort(listaEcfcd, new Comparator<EnvasadoControlNetoCorteDetalle>() 		
+		Collections.sort(listaEcncd, new Comparator<EnvasadoControlNetoCorteDetalle>() 		
 		{
 			@Override
 			public int compare(EnvasadoControlNetoCorteDetalle o1, EnvasadoControlNetoCorteDetalle o2) {
@@ -317,27 +384,75 @@ private static final String NUEVO = "- NUEVO -";
 			}
 		});
 		
-		
+		List<EnvasadoControlPesoNetoDetalle> listaEcpnd;
 		String hora, minuto;
-		for (EnvasadoControlNetoCorteDetalle ecfcd : listaEcfcd) {
+		for (EnvasadoControlNetoCorteDetalle liEcncd : listaEcncd) {
 			li = new Listitem();
-			li.setValue(ecfcd);
+			li.setValue(liEcncd);
 
-			hora = ecfcd.getHora()<=9?"0"+ecfcd.getHora():ecfcd.getHora().toString();
-			minuto = ecfcd.getMinuto()<=9?"0"+ecfcd.getMinuto():ecfcd.getMinuto().toString();
+			hora = liEcncd.getHora()<=9?"0"+liEcncd.getHora():liEcncd.getHora().toString();
+			minuto = liEcncd.getMinuto()<=9?"0"+liEcncd.getMinuto():liEcncd.getMinuto().toString();
 			
-			new Listcell(ecfcd.getCorte()+" -> "+hora+":"+minuto)
+			listaEcpnd = new ArrayList<>();
+			
+			if(ecpnc!=null)
+				if (ecpnc.getEnvasadoControlPesoNetoDetalles()!=null)
+					for (EnvasadoControlPesoNetoDetalle ecpfd : ecpnc.getEnvasadoControlPesoNetoDetalles())
+						if (liEcncd.getIdenvasadocontrolnetocortedetalle().equals(ecpfd.getEnvasadoControlNetoCorteDetalle().getIdenvasadocontrolnetocortedetalle())) {
+							listaEcpnd.add(ecpfd);
+						}
+			System.out.println(listaEcpnd.size());
+			new Listcell(liEcncd.getCorte()+" ("+listaEcpnd.size()+")"+" -> "+hora+":"+minuto)
 				.setParent(li);
 			li.setParent(lbxCorte);
 			
-			if (compuesto.envasadoControlPesoNetoDetalle.getIdenvasadocontrolpesonetodetalle()!=null)
-				if (compuesto.envasadoControlPesoNetoDetalle.getEnvasadoControlNetoCorteDetalle().getIdenvasadocontrolnetocortedetalle()!=null)
-					if (ecfcd.getIdenvasadocontrolnetocortedetalle().equals(compuesto.envasadoControlPesoNetoDetalle
-							.getEnvasadoControlNetoCorteDetalle().getIdenvasadocontrolnetocortedetalle())) 
-						lbxCorte.setSelectedItem(li);
 		}
 		if (lbxCorte.getSelectedIndex()<0)
 			lbxCorte.setSelectedIndex(0);
+	}
+	
+	private void cargaListaCorte(int numeroCortes) {
+		double numero = new ParametroDAOJpaImpl().findById(valorMaximoPesoFill).getValor();
+		for (int i=0; i<numero-numeroCortes ; i++)
+			onClick$btnAgregarItem();
+	}
+	
+	public void onSelect$lbxCorte() {
+		
+		rsCorte.getChildren().clear();
+		EnvasadoControlPesoNetoCabecera envasadoControlPesoNetoCabecera = ((Compuesto) lbxItemOrdenCliente
+				.getSelectedItem().getValue()).envasadoControlPesoNetoCabecera;
+		
+		List<EnvasadoControlPesoNetoDetalle> listaEcpnd = new ArrayList<EnvasadoControlPesoNetoDetalle>();
+		EnvasadoControlPesoNetoDetalleDAO ecpndDAO = new EnvasadoControlPesoNetoDetalleDAOJpaImpl();
+		EnvasadoControlNetoCorteDetalle envasadoControlNetoCorteDetalle = (EnvasadoControlNetoCorteDetalle)lbxCorte.getSelectedItem().getValue();
+		listaEcpnd = ecpndDAO.obtieneByEnvasadoControlPesoNetoDetalleByCorte(
+				envasadoControlNetoCorteDetalle.getIdenvasadocontrolnetocortedetalle(), envasadoControlPesoNetoCabecera.getIdenvasadocontrolpesonetocabecera());
+
+		Row row;
+		
+		for (EnvasadoControlPesoNetoDetalle ecpfd : listaEcpnd) {
+			row = new Row();
+				Checkbox chx = new Checkbox();
+				chx.setParent(row);
+				
+				Intbox ibx = new Intbox();
+				ibx.setValue( (int) ecpfd.getPesoneto() );
+				ibx.setTabindex(cont);
+				ibx.setReadonly(false);
+				ibx.setParent(row);
+			row.setValue(ecpfd);
+			row.setParent(rsCorte);
+
+			cont=cont+1;
+		}
+		
+		if (listaEcpnd.isEmpty())
+			cargaListaCorte(0);
+		else
+			cargaListaCorte(listaEcpnd.size());
+		
+		
 	}
 	
 	private void cargaLineaCerradora() {
@@ -392,7 +507,6 @@ private static final String NUEVO = "- NUEVO -";
 	private void cargaInformacionFormulario() {
 		Compuesto compuesto = (Compuesto)lbxItemOrdenCliente.getSelectedItem().getValue();
 		EnvasadoControlPesoNetoCabecera ecpnc = compuesto.envasadoControlPesoNetoCabecera;
-		EnvasadoControlPesoNetoDetalle ecpnd = compuesto.envasadoControlPesoNetoDetalle;
 		if (ecpnc.getProduccionDetalleOrden()!=null)
 			pdo = ecpnc.getProduccionDetalleOrden();
 		else {
@@ -401,20 +515,21 @@ private static final String NUEVO = "- NUEVO -";
 			else
 				pdo = new ProduccionDetalleOrden();
 		}
-		EnvasadoControlPesoFillCabeceraDAO ecpfcDAO = new EnvasadoControlPesoFillCabeceraDAOJpaImpl();
-		ecpfc = ecpfcDAO.getByProduccionTurnoOrden(envasadoProceso.getIdenvasadoproceso(), pdo.getIdproducciondetalleorden());
+//		EnvasadoControlPesoFillCabeceraDAO ecpfcDAO = new EnvasadoControlPesoFillCabeceraDAOJpaImpl();
+//		ecpfc = ecpfcDAO.getByProduccionTurnoOrden(envasadoProceso.getIdenvasadoproceso(), pdo.getIdproducciondetalleorden());
 		if (pdo==null)
 			pdo = new ProduccionDetalleOrden();
 		
 		if (ecpnc.getMaquinaCerradora()==null)
 			ecpnc.setMaquinaCerradora(new MaquinaCerradora());
 		
-		if (ecpnc.getEnvasadoCaldoVegetalProteina()==null)
-			ecpnc.setEnvasadoCaldoVegetalProteina(new EnvasadoCaldoVegetalProteina());
 		
 		txtOrden.setValue(pdo.getOrden());
 		txtProducto.setValue(pdo.getProducto());
 		txtCliente.setValue(pdo.getCliente());
+		txtVideoJet.setValue(pdo.getVideo());
+		
+		
 		
 		for (Listitem li : (List<Listitem>)lbxMCerradora.getItems())
 			if (ecpnc.getMaquinaCerradora().getIdmaquinacerradora()==null) {
@@ -426,51 +541,51 @@ private static final String NUEVO = "- NUEVO -";
 				break;
 			}
 					
-		for(Listitem li : (List<Listitem>)lbxcvprot.getItems())
-			if (ecpfc.getEnvasadoCaldoVegetalProteina()==null) {
-				lbxcvprot.setSelectedIndex(0);
-				break;
-			} else if (ecpfc.getEnvasadoCaldoVegetalProteina().getIdenvasadocaldovegetalproteina()
-						.equals(((EnvasadoCaldoVegetalProteina) li.getValue()).getIdenvasadocaldovegetalproteina())) {
-				lbxcvprot.setSelectedItem(li);
-				break;
-			}
-		if (ecpfc.getIdenvasadocontrolpesofillcabecera()==null 
-				&& !"- NUEVO -".equals(lbxItemOrdenCliente.getSelectedItem().getLabel())) {
+		if (ecpnc.getIdenvasadocontrolpesonetocabecera()==null) {
+			txtTara.setValue(null);
+			txtObservacion.setValue(null);
+		} else {
+			txtTara.setValue(String.valueOf(ecpnc.getTara()));
+			txtObservacion.setValue(ecpnc.getObservacion());
+		}
+		if(pdo!=null) {
+			EnvasadoFichaTecnicaDAO eftDAO = new EnvasadoFichaTecnicaDAOJpaImpl();
+			EnvasadoFichaTecnica eft = eftDAO.getByOrden(pdo.getIdproducciondetalleorden());
+			
+			for(Listitem li : (List<Listitem>)lbxcvprot.getItems())
+				if (eft.getEnvasadoCaldoVegetalProteina()==null) {
+					lbxcvprot.setSelectedIndex(0);
+					break;
+				} else if (eft.getEnvasadoCaldoVegetalProteina().getIdenvasadocaldovegetalproteina()
+							.equals(((EnvasadoCaldoVegetalProteina) li.getValue()).getIdenvasadocaldovegetalproteina())) {
+					lbxcvprot.setSelectedItem(li);
+					break;
+				}
+			txtPesoEnvase.setValue(String.valueOf(eft.getPesoNetoFormulado()));
+			txtPLomos.setValue(String.valueOf(eft.getLomo()));
+			txtTrozos.setValue(String.valueOf(eft.getTrozos()));
+			txtRallado.setValue(String .valueOf(eft.getRallado()));
+			txtAgua.setValue(String.valueOf(eft.getAgua()));
+			txtAceite.setValue(String.valueOf(eft.getAceite()));
+			txtCaldoVegetal.setValue(String.valueOf(eft.getCaldoVegetal()));
+			txtConcentracion.setValue(String.valueOf(eft.getConcentracion()));
+		} else {
+		
+			lbxcvprot.setSelectedIndex(0);
 			txtPesoEnvase.setValue(null);
 			txtPLomos.setValue(null);
 			txtTrozos.setValue(null);
 			txtRallado.setValue(null);
 			txtAgua.setValue(null);
 			txtAceite.setValue(null);
-			txtprot.setValue(null);
-			txtcv.setValue(null);
-			txtPesoneto.setValue(null);
-			txtObservacion.setValue(null);
-		} else {
-			txtPesoEnvase.setValue(String.valueOf(ecpfc.getPesoenvase()));
-			txtPLomos.setValue(String.valueOf(ecpfc.getProcentajelomos()));
-			txtTrozos.setValue(String.valueOf(ecpfc.getProcentajetrozos()));
-			txtRallado.setValue(String .valueOf(ecpfc.getProcentajerallado()));
-			txtAgua.setValue(String.valueOf(ecpfc.getAgua()));
-			txtAceite.setValue(String.valueOf(ecpfc.getAceite()));
-			txtprot.setValue(String.valueOf(ecpfc.getProteina()));
-			txtcv.setValue(String.valueOf(ecpfc.getCaldovegetal()));
-			txtPesoneto.setValue(String.valueOf(ecpnd.getPesoneto()));
-			txtObservacion.setValue(ecpnc.getObservacion());
+			txtCaldoVegetal.setValue(null);
+			txtConcentracion.setValue(null);
+			
 		}
 		
-		if (ecpnd.getFecharegusuario()==null) {
-			lbxMes.setSelectedIndex(0);;
-			lbxDias.getItems().clear();
-			lbxHoras.setSelectedIndex(0);
-			lbxMinutos.setSelectedIndex(0);
-		} else {
-			seleccionaMes(obtieneFechaCambio(ecpnd.getFecharegusuario(), Calendar.MONTH)+1);
-			seleccionaDia(obtieneFechaCambio(ecpnd.getFecharegusuario(), Calendar.DAY_OF_MONTH));
-			seleccionaHora(obtieneFechaCambio(ecpnd.getFecharegusuario(), Calendar.HOUR_OF_DAY));
-			seleccionaMinuto(obtieneFechaCambio(ecpnd.getFecharegusuario(), Calendar.MINUTE));
-		}
+		lbxCorte.setSelectedIndex(0);
+		if (!rsCorte.getChildren().isEmpty())
+			rsCorte.getChildren().clear();
 	}
 	
 	/**
@@ -559,27 +674,24 @@ private static final String NUEVO = "- NUEVO -";
 		lbxDias.setSelectedIndex(0);
 	}
 	
-	@SuppressWarnings("unchecked")
+	public void onClick$btnGrabarBot() {
+		onClick$btnGrabar();
+	}
+	
 	public void onClick$btnGrabar() {
 		Compuesto compuesto = (Compuesto)lbxItemOrdenCliente.getSelectedItem().getValue();
 		
 		EnvasadoControlPesoNetoCabecera ecpnc = compuesto.envasadoControlPesoNetoCabecera;
-		EnvasadoControlPesoNetoDetalle ecpnd = compuesto.envasadoControlPesoNetoDetalle;
-		
-		if (NUEVO.equals(lbxItemOrdenCliente.getSelectedItem().getLabel())) {
-			ecpnc.setEnvasadoControlPesoNetoDetalles(new ArrayList<EnvasadoControlPesoNetoDetalle>());
-		}
-			
 		
 		if(!validaCampos())
 			return;
 //		ProduccionDetalleOrden pdo = (ProduccionDetalleOrden)lbxItemOrden.getSelectedItem().getValue();
 
 		ecpnc.setEnvasadoProceso((EnvasadoProceso)lbxTurnoProduccion.getSelectedItem().getValue());
-		ecpnc.setEnvasadoControlPesoNetoDetalles(Arrays.asList(ecpnd));
 		ecpnc.setTurno(((Turno)lbxTurnoLabor.getSelectedItem().getValue()));
 		ecpnc.setProduccionDetalleOrden(pdo);
 		ecpnc.setMaquinaCerradora((MaquinaCerradora)lbxMCerradora.getSelectedItem().getValue());
+		ecpnc.setTara(parseDouble(txtTara.getValue()));
 //		ecpnc.setPesoenvase(parseDouble(txtPesoEnvase.getValue()));
 //		ecpnc.setProcentajelomos(parseDouble(txtPLomos.getValue()));
 //		ecpnc.setProcentajetrozos(parseDouble(txtTrozos.getValue()));
@@ -589,16 +701,8 @@ private static final String NUEVO = "- NUEVO -";
 //		ecpnc.setEnvasadoCaldoVegetalProteina((EnvasadoCaldoVegetalProteina)lbxcvprot.getSelectedItem().getValue());
 //		ecpnc.setProteina(parseDouble(txtprot.getValue()));
 //		ecpnc.setCaldovegetal(parseDouble(txtcv.getValue()));
-		
-		ecpnd.setPesoneto(parseDouble(txtPesoneto.getValue()));
-		
-		Timestamp fechaRegistro = obtieneFechaRegistro();
-		if (fechaRegistro==null)
-			return;
-		
+
 		ecpnc.setFechareg(new Timestamp(System.currentTimeMillis()));
-		ecpnd.setFecharegusuario(fechaRegistro);
-		ecpnd.setFechareg(new Timestamp(System.currentTimeMillis()));
 		
 		String idUsuario = (String) Sessions.getCurrent().getAttribute("usuario");
 		if (idUsuario==null) {
@@ -606,14 +710,22 @@ private static final String NUEVO = "- NUEVO -";
 			return;
 		}
 		ecpnc.setUsuario(new UsuarioDAOJpaImpl().getUser(idUsuario));
-		ecpnc.getEnvasadoControlPesoNetoDetalles().get(0).setUsuario(new UsuarioDAOJpaImpl().getUser(idUsuario));
 		
-		EnvasadoControlNetoCorteDetalle envasadoControlNetoCorteDetalle = (EnvasadoControlNetoCorteDetalle)lbxCorte.getSelectedItem().getValue();
-		ecpnc.getEnvasadoControlPesoNetoDetalles().get(0).setEnvasadoControlNetoCorteDetalle(envasadoControlNetoCorteDetalle);
+		/***detalle***/
+		List<EnvasadoControlPesoNetoDetalle> listaEcpnd = obtieneDetallesPesoNeto(ecpnc, idUsuario);
+		
+		if (listaEcpnd==null) {
+			Sistema.mensaje("Error al guardar el detalle de la informacion.");
+			return;
+		} else if (listaEcpnd.isEmpty()) {
+			Sistema.mensaje("Debe Agregar valores para Peso Fill.");
+			return;
+		}
+			
+		ecpnc.setEnvasadoControlPesoNetoDetalles(listaEcpnd);
+		/************/
 		
 		ecpnc.setObservacion(txtObservacion.getValue());
-		ecpnd.setEnvasadoControlPesoNetoCabecera(ecpnc);
-		ecpnc.setEnvasadoControlPesoNetoDetalles(Arrays.asList(ecpnd));
 		EnvasadoControlPesoNetoCabeceraDAO ecpncDAO = new EnvasadoControlPesoNetoCabeceraDAOJpaImpl();
 		
 		if(ecpncDAO.updateEnvasadoControlPesoNetoCabecera(ecpnc)==null) {
@@ -621,26 +733,64 @@ private static final String NUEVO = "- NUEVO -";
 			return;
 		}
 		
-		EnvasadoControlPesoNetoDetalleDAO ecpndDAO = new EnvasadoControlPesoNetoDetalleDAOJpaImpl();
-		if (!NUEVO.equalsIgnoreCase(lbxItemOrdenCliente.getSelectedItem().getLabel()))
-			if(ecpndDAO.updateEnvasadoControlPesoNetoDetalle(ecpnd)==null) {
-				Sistema.mensaje("Error al guardar el detalle de la informacion.");
-				return;
-			}
 		Sistema.mensaje("Cambios guardados exitosamente.");
 		
-		onSelect$lbxTurnoProduccion();
+		int iItemOrdenCliente = lbxItemOrdenCliente.getSelectedIndex();
+		int iCorte = lbxCorte.getSelectedIndex();
+ 		onSelect$lbxTurnoProduccion();
+		lbxItemOrdenCliente.setSelectedIndex(iItemOrdenCliente);
+		onSelect$lbxItemOrdenCliente();
+		lbxCorte.setSelectedIndex(iCorte);
+		onSelect$lbxCorte();
 		
-		for (Listitem li : (List<Listitem>)lbxItemOrdenCliente.getItems())
-			if(((Compuesto)li.getValue()).envasadoControlPesoNetoCabecera.getProduccionDetalleOrden()!=null)
-			if(ecpnc.getProduccionDetalleOrden().getIdproducciondetalleorden().equals(
-			((Compuesto)li.getValue()).envasadoControlPesoNetoCabecera.getProduccionDetalleOrden().getIdproducciondetalleorden()))
-				lbxItemOrdenCliente.setSelectedItem(li);			
+
+	}
+	
+	private List<EnvasadoControlPesoNetoDetalle> obtieneDetallesPesoNeto(EnvasadoControlPesoNetoCabecera ecpnc, String idUsuario) {
+		try {
+			List<EnvasadoControlPesoNetoDetalle> listaCpnd = new ArrayList<EnvasadoControlPesoNetoDetalle>();
+			EnvasadoControlPesoNetoDetalle cpnd; 
+			
+			@SuppressWarnings("unchecked")
+			List<Row> listaLbxPesoNeto = (List<Row>)rsCorte.getChildren();
+			
+			for (Row listitem : listaLbxPesoNeto) {
+				
+				Intbox txtPesoNeto = (Intbox)listitem.getChildren().get(1);
+				
+				if (txtPesoNeto.getValue()==null) {
+					continue;
+				}
+				
+				if (listitem.getValue()==null) {
+					cpnd = new EnvasadoControlPesoNetoDetalle();
+					cpnd.setUsuario(new UsuarioDAOJpaImpl().getUser(idUsuario));
+				} else {
+					cpnd = (EnvasadoControlPesoNetoDetalle)listitem.getValue();
+					if(!new Double(txtPesoNeto.getValue()).equals(cpnd.getPesoneto())) {
+						cpnd.setPesoneto(txtPesoNeto.getValue());
+						cpnd.setUsuario(new UsuarioDAOJpaImpl().getUser(idUsuario));
+					}
+				}
+				cpnd.setFechareg(new Timestamp(System.currentTimeMillis()));
+				cpnd.setEnvasadoControlPesoNetoCabecera(ecpnc);
+				cpnd.setEnvasadoControlNetoCorteDetalle((EnvasadoControlNetoCorteDetalle)lbxCorte.getSelectedItem().getValue());
+				cpnd.setPesoneto(txtPesoNeto.getValue());
+				
+				
+				
+				listaCpnd.add(cpnd);
+			}
+		
+			return listaCpnd;
+		} catch( Exception e) {
+			return null;
+		}
 	}
 	
 	public void onClick$btnEliminar(){
-		if(!ChkEliminar.isChecked()) {
-			Sistema.mensaje("Debe confirmar para poder eliminar.");
+		if (!cbxEliminarOrden.isChecked()) {
+			Sistema.mensaje("Debe confirmar para eliminar los elementos seleccionados.");
 			return;
 		}
 		
@@ -654,10 +804,11 @@ private static final String NUEVO = "- NUEVO -";
 		
 		EnvasadoControlPesoNetoDetalleDAO ecpndDAO = new  EnvasadoControlPesoNetoDetalleDAOJpaImpl();
 		
-		if (!ecpndDAO.eliminaEnvasadoControlPesoNetoDetalle(c.envasadoControlPesoNetoDetalle)){
-			
-			Sistema.mensaje("Registro en uso");
-			return;
+		for (EnvasadoControlPesoNetoDetalle envasadoControlPesoNetoDetalle : c.envasadoControlPesoNetoCabecera.getEnvasadoControlPesoNetoDetalles()) {
+			if (!ecpndDAO.eliminaEnvasadoControlPesoNetoDetalle(envasadoControlPesoNetoDetalle)){
+				Sistema.mensaje("Registro en uso");
+				return;
+			}
 		}
 		
 		List<EnvasadoControlPesoNetoDetalle> obtieneByIdEnvasadoControlPesoNetoDetalle = ecpndDAO.obtieneByIdEnvasadoControlPesoNetoDetalle
@@ -682,6 +833,7 @@ private static final String NUEVO = "- NUEVO -";
 		cargaLineaCerradora();
 		lbxItemOrden.setSelectedIndex(0);
 		onSelect$lbxItemOrden();
+		txtTara.setValue(null);
 		txtPesoEnvase.setValue(null);
 		txtPLomos.setValue(null);
 		txtTrozos.setValue(null);
@@ -689,16 +841,15 @@ private static final String NUEVO = "- NUEVO -";
 		txtAgua.setValue(null);
 		txtAceite.setValue(null);
 		cargaCVPROT();
-		txtprot.setValue(null);
-		txtcv.setValue(null);
+		txtCaldoVegetal.setValue(null);
+		txtConcentracion.setValue(null);
 		lbxCorte.getItems().clear();
-		txtPesoneto.setValue(null);
 		txtObservacion.setValue(null);
 		lbxMes.setSelectedIndex(0);
 		lbxDias.getItems().clear();
 		lbxHoras.setSelectedIndex(0);
 		lbxMinutos.setSelectedIndex(0);
-		ChkEliminar.setChecked(false);
+		cbxEliminar.setChecked(false);
 		
 	}
 	
@@ -775,63 +926,63 @@ private static final String NUEVO = "- NUEVO -";
 		camposNumericos.add(listaEtiquetas);
 		
 		listaEtiquetas = new ArrayList<Object>(); 
-		listaEtiquetas.add(lbPesoEnvase);
-		listaEtiquetas.add(txtPesoEnvase);
+		listaEtiquetas.add(lbTara);
+		listaEtiquetas.add(txtTara);
 		camposNumericos.add(listaEtiquetas);
 		
-		listaEtiquetas = new ArrayList<Object>(); 
-		listaEtiquetas.add(lbPLomos);
-		listaEtiquetas.add(txtPLomos);
-		camposNumericos.add(listaEtiquetas);
-		
-		listaEtiquetas = new ArrayList<Object>(); 
-		listaEtiquetas.add(lbTrozos);
-		listaEtiquetas.add(txtTrozos);
-		camposNumericos.add(listaEtiquetas);
-		
-		listaEtiquetas = new ArrayList<Object>(); 
-		listaEtiquetas.add(lbRallado);
-		listaEtiquetas.add(txtRallado);
-		camposNumericos.add(listaEtiquetas);
-		
-		listaEtiquetas = new ArrayList<Object>(); 
-		listaEtiquetas.add(lbAgua);
-		listaEtiquetas.add(txtAgua);
-		camposNumericos.add(listaEtiquetas);
-		
-		listaEtiquetas = new ArrayList<Object>(); 
-		listaEtiquetas.add(lbAceite);
-		listaEtiquetas.add(txtAceite);
-		camposNumericos.add(listaEtiquetas);
-		
-		listaEtiquetas = new ArrayList<Object>(); 
-		listaEtiquetas.add(lbcvprot);
-		listaEtiquetas.add(lbxcvprot);
-		camposNumericos.add(listaEtiquetas);
-		
-		listaEtiquetas = new ArrayList<Object>(); 
-		listaEtiquetas.add(lbprot);
-		listaEtiquetas.add(txtprot);
-		camposNumericos.add(listaEtiquetas);
-		
-		listaEtiquetas = new ArrayList<Object>(); 
-		listaEtiquetas.add(lbPLomos);
-		listaEtiquetas.add(txtPLomos);
-		camposNumericos.add(listaEtiquetas);
-		
-		listaEtiquetas = new ArrayList<Object>(); 
-		listaEtiquetas.add(lbcv);
-		listaEtiquetas.add(txtcv);
-		camposNumericos.add(listaEtiquetas);
+//		listaEtiquetas = new ArrayList<Object>(); 
+//		listaEtiquetas.add(lbPesoEnvase);
+//		listaEtiquetas.add(txtPesoEnvase);
+//		camposNumericos.add(listaEtiquetas);
+//		
+//		listaEtiquetas = new ArrayList<Object>(); 
+//		listaEtiquetas.add(lbPLomos);
+//		listaEtiquetas.add(txtPLomos);
+//		camposNumericos.add(listaEtiquetas);
+//		
+//		listaEtiquetas = new ArrayList<Object>(); 
+//		listaEtiquetas.add(lbTrozos);
+//		listaEtiquetas.add(txtTrozos);
+//		camposNumericos.add(listaEtiquetas);
+//		
+//		listaEtiquetas = new ArrayList<Object>(); 
+//		listaEtiquetas.add(lbRallado);
+//		listaEtiquetas.add(txtRallado);
+//		camposNumericos.add(listaEtiquetas);
+//		
+//		listaEtiquetas = new ArrayList<Object>(); 
+//		listaEtiquetas.add(lbAgua);
+//		listaEtiquetas.add(txtAgua);
+//		camposNumericos.add(listaEtiquetas);
+//		
+//		listaEtiquetas = new ArrayList<Object>(); 
+//		listaEtiquetas.add(lbAceite);
+//		listaEtiquetas.add(txtAceite);
+//		camposNumericos.add(listaEtiquetas);
+//		
+//		listaEtiquetas = new ArrayList<Object>(); 
+//		listaEtiquetas.add(lbcvprot);
+//		listaEtiquetas.add(lbxcvprot);
+//		camposNumericos.add(listaEtiquetas);
+//		
+//		listaEtiquetas = new ArrayList<Object>(); 
+//		listaEtiquetas.add(lbCaldoVegetal);
+//		listaEtiquetas.add(txtCaldoVegetal);
+//		camposNumericos.add(listaEtiquetas);
+//		
+//		listaEtiquetas = new ArrayList<Object>(); 
+//		listaEtiquetas.add(lbPLomos);
+//		listaEtiquetas.add(txtPLomos);
+//		camposNumericos.add(listaEtiquetas);
+//		
+//		listaEtiquetas = new ArrayList<Object>(); 
+//		listaEtiquetas.add(lbConcentracion);
+//		listaEtiquetas.add(txtConcentracion);
+//		camposNumericos.add(listaEtiquetas);
 		
 		listaEtiquetas = new ArrayList<Object>(); 
 		listaEtiquetas.add(lbCorte);
 		listaEtiquetas.add(lbxCorte);
-		camposNumericos.add(listaEtiquetas);
-		
-		listaEtiquetas = new ArrayList<Object>(); 
-		listaEtiquetas.add(lbPesoneto);
-		listaEtiquetas.add(txtPesoneto);
 		camposNumericos.add(listaEtiquetas);
 		
 		Label etiqueta;
@@ -914,11 +1065,9 @@ private static final String NUEVO = "- NUEVO -";
 		
 		public EnvasadoControlPesoNetoCabecera envasadoControlPesoNetoCabecera;
 		
-		public EnvasadoControlPesoNetoDetalle envasadoControlPesoNetoDetalle;
 		
-		public Compuesto(EnvasadoControlPesoNetoCabecera envasadoControlPesoNetoCabecera, EnvasadoControlPesoNetoDetalle envasadoControlPesoNetoDetalle) {
+		public Compuesto(EnvasadoControlPesoNetoCabecera envasadoControlPesoNetoCabecera) {
 			this.envasadoControlPesoNetoCabecera = envasadoControlPesoNetoCabecera;
-			this.envasadoControlPesoNetoDetalle = envasadoControlPesoNetoDetalle;
 		}
 		
 	}

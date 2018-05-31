@@ -1,0 +1,225 @@
+<?page id = "pagwinEnvasadoDetalleProcesoCambiosWindow" title="" contentType="text/html;charset=UTF-8" automaticTimeout="false"?>
+<zk>
+	<window id="winEnvasadoFichaTecnica"
+		title="FICHA TECNICA" style="color:blue;font-size:12px;font-weight:bold"
+		mode="modal"
+		border="auto"
+		width="30%"
+		defaultActionOnShow="moveDown"
+		position="left,top"
+		closable="true"
+		maximizable="true"
+		apply="com.nw.webui.produccion.EnvasadoFichaTecnicaWindow">
+		
+		<script src="/js/noBarra.js" type="text/javascript" />
+		
+		<vbox id="vbxMain" width="100%">
+		
+		  <grid width="93%">
+		  	<columns>
+		  		<column width="40%"></column>
+		  		<column width="60%"></column>
+		  	</columns>
+				<rows>
+					<row spans="2">
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar"
+								tooltiptext="Grabar" image="/img/grabar.gif" />
+						</toolbar>
+					</row>
+
+
+				</rows>
+			</grid>
+
+			<grid width="93%">
+				
+				<columns>
+			  		<column width="40%"></column>
+			  		<column width="60%"></column>
+			  	</columns>
+				
+				<rows>
+					<group label="Informacion Cabecera" spans="2" open="true"/>
+					<row>
+						<label id="lbProduccionTurno" value="Produccion - Turno" />
+						<textbox id="txtProduccionTurno"
+							readonly="true" width="98%">
+						</textbox>
+					</row>
+
+					<row>
+						<label id="lbTurnoLabor" value="Turno Labor" />
+						 <listbox id="lbxTurnoLabor" style="font-size:12px"
+						mold="select"  width="98%" />
+					</row>
+					
+					<row>
+						<label id="lbItemOrdenCLiente" value="Item-Orden-Cliente-Marca" />
+						 <listbox id="lbxItemOrdenCLiente" style="font-size:12px"
+						mold="select"  width="98%" />
+					</row>
+					
+				</rows>
+			</grid>
+			
+			<grid width="93%">
+				<columns>
+			  		<column width="40%"></column>
+			  		<column width="60%"></column>
+			  	</columns>
+				<rows>
+					<group label="Informacion de la Orden" spans="2" open="true"/>
+					<row>
+						<label id="lbPesoNeto" value="Peso Neto" />
+						<textbox id="txtPesoNeto" width="98%" readonly="true"/>
+					</row>
+					<row>
+						<label id="lbPesoDrenado" value="Peso Drenado" />
+						<textbox id="txtPesoDrenado" width="98%" readonly="true"/>
+					</row>
+					<row>
+						<label id="lbAguaAc" value="%Agua (Ac)" />
+						<textbox id="txtAguaAc" width="98%" readonly="true"/>
+					</row>
+					<row>
+						<label id="lbAceiteAg" value="%Aceite (Ag)" />
+						<textbox id="txtAceiteAg" width="98%" readonly="true"/>
+					</row>
+					<row>
+						<label id="lbFormato" value="Formato" />
+						<textbox id="txtFormato" width="98%" readonly="true"></textbox>
+					</row>
+					<row>
+						<label id="lbEnvase" value="Envase" />
+						<textbox id="txtEnvase" width="98%" readonly="true"/>
+					</row>
+					<row>
+						<label id="lbTapa" value="Tapa" />
+						<textbox id="txtTapa" width="98%" readonly="true"/>
+					</row>
+				</rows>
+			</grid>
+			
+			<grid width="93%">
+				<columns>
+			  		<column width="40%"></column>
+			  		<column width="60%"></column>
+			  	</columns>
+				<rows>
+					<group label="Informacion Detalle" spans="2" open="true"/>
+					<row>
+						<label id="lbFill1" value="Fill Min." />
+						<textbox id="txtFill1" width="98%" readonly="false"/>
+					</row>
+					<row>
+						<label id="lbFill2" value="Fill Max." />
+						<textbox id="txtFill2" width="98%" readonly="false"/>
+					</row>
+					<row>
+						<label id="lbFillPromedio" value="Fill" />
+						<textbox id="txtFillPromedio" width="98%" readonly="true"/>
+					</row>
+					<row>
+						<label id="lbFillPlanificado" value="Fill Planificado" />
+						<textbox id="txtFillPlanificado" width="98%" readonly="true"/>
+					</row>
+					<row>
+						<label id="lbPNetoFormulado" value="Peso Neto Formulado" />
+						 <textbox id="txtPNetoFormulado" 
+								width="98%" />
+					</row>
+					<row>
+						<label id="lbAgua" value="Agua (g.)" />
+						 <textbox id="txtAgua" 
+								width="98%" />
+					</row>
+					
+					<row>
+						<label id="lbAceite" value="Aceite (g.)" />
+						 <textbox id="txtAceite" 
+								width="98%" />
+					</row>
+					
+					<row>
+						<label id="lbcvprot" value="Tipo CV" />
+						 <listbox id="lbxcvprot" style="font-size:12px"
+						mold="select"  width="98%" />
+					</row>
+					
+					<row>
+						<label id="lbCaldoVegetal" value="Caldo Vegetal (g.)" />
+						 <textbox id="txtCaldoVegetal" 
+								width="98%" />
+					</row>
+					
+					<row>
+						<label id="lbConcentracion" value="Concentracion" />
+						 <textbox id="txtConcentracion" 
+								width="98%" />
+					</row>
+					
+					<row>
+						<label id="lbSal" value="% Salmuera" />
+						<textbox id="txtSal" 
+								width="98%" />
+					</row>
+					
+					<row>
+						<label id="lbDensidad" value="Densidad" />
+						<textbox id="txtDensidad" 
+								width="98%" />
+					</row>
+					
+					<row>
+						<label id="lbTrozo" value="%Trozo" />
+						<textbox id="txtTrozo" 
+								width="98%" />
+					</row>
+					
+					<row>
+						<label id="lbLomo" value="%Lomo" />
+						<textbox id="txtLomo" 
+								width="98%" />
+					</row>
+					
+					<row>
+						<label id="lbRallado" value="%Rallado" />
+						<textbox id="txtRallado" 
+								width="98%" />
+					</row>
+					
+					<row>
+						<label id="lbProveedorEnvase" value="Proveedor Envase" />
+						<listbox id="lbxProveedorEnvase" style="font-size:12px"
+						mold="select"  width="98%" />
+					</row>
+					<row>
+						<label id="lbProveedorLoteEnvase" value="Proveedor lote Envase" />
+						<textbox id="txtProveedorLoteEnvase" rows="3" width="98%" />
+					</row>
+					<row>
+						<label id="lbProveedorTapa" value="Proveedor Tapa" />
+						<listbox id="lbxProveedorTapa" style="font-size:12px"
+						mold="select"  width="98%" />
+					</row>
+					<row>
+						<label id="lbProveedorLoteTapa" value="Proveedor lote Envase" />
+						<textbox id="txtProveedorLoteTapa" rows="3" width="98%" />
+					</row>
+				</rows>
+			</grid>
+			
+			<grid width="93%">
+				<rows>
+					<group id="lbObservacion" label="Observacion"/>
+					<row>
+						<textbox id="txtObservacion" rows="3" width="98%" />
+					</row>
+				</rows>
+			</grid>
+					
+			<label value="."/>
+		</vbox>
+	</window>
+</zk>

@@ -2,6 +2,7 @@ package com.nw.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -15,6 +16,9 @@ public class Turno implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer idturno;
 	private String nombre;
+	private List<EsterilizadoCoche> esterilizadoCoches;
+	private List<EsterilizadoProceso> esterilizadoProcesos;
+	private List<EsterilizadoProcesoParadaCoche> esterilizadoProcesoParadaCoches;
 	private List<CalidadDescongeladoDetalleTempAgua> calidadDescongeladoDetalleTempAguas;
 	private List<CalidadDescongeladoDetalleTempPescado> calidadDescongeladoDetalleTempPescados;
 	private List<CalidadDescongeladoTempAgua> calidadDescongeladoTempAguas;
@@ -128,6 +132,81 @@ public class Turno implements Serializable {
 	}
 
 
+	//bi-directional many-to-one association to EsterilizadoCoche
+	@OneToMany(mappedBy="turno")
+	public List<EsterilizadoCoche> getEsterilizadoCoches() {
+		return this.esterilizadoCoches;
+	}
+
+	public void setEsterilizadoCoches(List<EsterilizadoCoche> esterilizadoCoches) {
+		this.esterilizadoCoches = esterilizadoCoches;
+	}
+
+	public EsterilizadoCoche addEsterilizadoCoch(EsterilizadoCoche esterilizadoCoch) {
+		getEsterilizadoCoches().add(esterilizadoCoch);
+		esterilizadoCoch.setTurno(this);
+
+		return esterilizadoCoch;
+	}
+
+	public EsterilizadoCoche removeEsterilizadoCoch(EsterilizadoCoche esterilizadoCoch) {
+		getEsterilizadoCoches().remove(esterilizadoCoch);
+		esterilizadoCoch.setTurno(null);
+
+		return esterilizadoCoch;
+	}
+
+
+	//bi-directional many-to-one association to EsterilizadoProceso
+	@OneToMany(mappedBy="turno")
+	public List<EsterilizadoProceso> getEsterilizadoProcesos() {
+		return this.esterilizadoProcesos;
+	}
+
+	public void setEsterilizadoProcesos(List<EsterilizadoProceso> esterilizadoProcesos) {
+		this.esterilizadoProcesos = esterilizadoProcesos;
+	}
+
+	public EsterilizadoProceso addEsterilizadoProceso(EsterilizadoProceso esterilizadoProceso) {
+		getEsterilizadoProcesos().add(esterilizadoProceso);
+		esterilizadoProceso.setTurno(this);
+
+		return esterilizadoProceso;
+	}
+
+	public EsterilizadoProceso removeEsterilizadoProceso(EsterilizadoProceso esterilizadoProceso) {
+		getEsterilizadoProcesos().remove(esterilizadoProceso);
+		esterilizadoProceso.setTurno(null);
+
+		return esterilizadoProceso;
+	}
+
+
+	//bi-directional many-to-one association to EsterilizadoProcesoParadaCoche
+	@OneToMany(mappedBy="turno")
+	public List<EsterilizadoProcesoParadaCoche> getEsterilizadoProcesoParadaCoches() {
+		return this.esterilizadoProcesoParadaCoches;
+	}
+
+	public void setEsterilizadoProcesoParadaCoches(List<EsterilizadoProcesoParadaCoche> esterilizadoProcesoParadaCoches) {
+		this.esterilizadoProcesoParadaCoches = esterilizadoProcesoParadaCoches;
+	}
+
+	public EsterilizadoProcesoParadaCoche addEsterilizadoProcesoParadaCoch(EsterilizadoProcesoParadaCoche esterilizadoProcesoParadaCoch) {
+		getEsterilizadoProcesoParadaCoches().add(esterilizadoProcesoParadaCoch);
+		esterilizadoProcesoParadaCoch.setTurno(this);
+
+		return esterilizadoProcesoParadaCoch;
+	}
+
+	public EsterilizadoProcesoParadaCoche removeEsterilizadoProcesoParadaCoch(EsterilizadoProcesoParadaCoche esterilizadoProcesoParadaCoch) {
+		getEsterilizadoProcesoParadaCoches().remove(esterilizadoProcesoParadaCoch);
+		esterilizadoProcesoParadaCoch.setTurno(null);
+
+		return esterilizadoProcesoParadaCoch;
+	}
+		
+		
 	//bi-directional many-to-one association to CalidadDescongeladoDetalleTempAgua
 	@OneToMany(mappedBy="turno")
 	public List<CalidadDescongeladoDetalleTempAgua> getCalidadDescongeladoDetalleTempAguas() {

@@ -189,6 +189,7 @@ public class ProduccionCargaOrdenesControlXLS {
 		double flake;
 //		Integer idturno;
 		Integer item;
+		double formato;
 		Integer latas;
 		double lomolimpio;
 		String marca;
@@ -473,6 +474,21 @@ public class ProduccionCargaOrdenesControlXLS {
 			}
 			
 			//formato
+			try {
+//				if (!validaCampoObligatorio(listPacoDet.get(23), "Formato"))
+//					return null;
+				formato = listPacoDet.get(23).getNumericCellValue();
+				pacoD.setFormato(formato);
+			} catch( Exception e) {
+				try {
+					formato = Double.parseDouble(listPacoDet.get(23).getStringCellValue());
+					pacoD.setFormato(formato);
+					
+				} catch (Exception e2) {
+					Sistema.mensaje("El valor de la columna Formato debe ser numérico. ["+listPacoDet.get(23)+"]");
+					e.printStackTrace();
+				}
+			}
 			//luthi
 			//cerradora
 			//pres

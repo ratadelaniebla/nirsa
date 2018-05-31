@@ -1,0 +1,69 @@
+<?page id = "pagAutoclaveParada" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winAutoclaveParadaCoche" apply="com.nw.webui.produccion.AutoclaveParadaCocheWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="ASIGNACION COCHE" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain">
+			<grid width="99%">  
+				<rows>
+					<row>
+						<label value="Id Coche" />
+						<longbox id="txtCocheId" maxlength="8" width="120px" />
+					</row>
+					<row>
+						<label/>
+						<toolbar>
+							<toolbarbutton id="btnConsultar" label="Consultar" tooltiptext="Consultar" image="/img/buscar.gif" />
+						</toolbar>
+					</row>
+					
+					<row>
+						<label value="# Coche Cliente" />
+						<textbox id="txtCocheCliente" readonly="true" width="120px" />
+					</row>
+					<row>
+						<label value="Día Producción" />
+						<textbox id="txtProduccion" readonly="true" width="120px" />
+					</row>
+					<row>
+						<label value="Cliente" />
+						<textbox id="txtCliente" readonly="true" width="120px" />
+					</row>
+					<row>
+						<label value="Código" />
+						<textbox id="txtCodigo" readonly="true" width="120px" />
+					</row>
+				</rows>
+			</grid>	
+			
+			
+			<grid width="99%"> 
+				<rows>
+					<row>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif" disabled="true" />
+						</toolbar>
+					</row>
+				</rows>
+			</grid>	
+			
+			<grid width="99%">  
+				<rows>
+					<row>
+						<label value="Turno"/>
+						<listbox id="lbxTurno" style="font-size:12px" mold="select" width="120px"/>
+					</row>
+					<row>
+						<label value="Autoclave"/>
+						<listbox id="lbxAutoclave" style="font-size:12px" mold="select" width="120px"/>
+					</row>
+					<row>
+						<label value="Parada"/>
+						<intbox id="txtParada" readonly="true" width="120px"/>
+					</row>
+				</rows>
+			</grid>	
+			
+		</vbox>
+	</window>
+</zk> 

@@ -1,16 +1,21 @@
-<?page id = "pagwinEnvasadoDetalleProcesoCambiosWindow" title="" contentType="text/html;charset=UTF-8"?>
+<?page id = "pagwinEnvasadoDetalleProcesoCambiosWindow" title="" contentType="text/html;charset=UTF-8" automaticTimeout="false"?>
 <zk>
-	<window id="winEnvasadoDetalleProcesoCambiosWindow" apply="com.nw.webui.produccion.EnvasadoDetalleProcesoCambiosWindow" width="100%">
-		<!-- 
-		apply="com.nw.webui.produccion"
-		 -->
+	<window id="winEnvasadoDetalleProcesoCambiosWindow" 
+		title="REGISTRO CAMBIOS FILL WEIGTH" style="color:blue;font-size:12px;font-weight:bold"
+		mode="modal"
+		border="auto"
+		width="30%"
+		defaultActionOnShow="moveDown"
+		position="left,top"
+		closable="true"
+		maximizable="false"
+		apply="com.nw.webui.produccion.EnvasadoDetalleProcesoCambiosWindow">
 		
 		<script src="/js/noBarra.js" type="text/javascript" />
-		<label value="CAMBIOS FILL WEIGTH" style="color:blue;font-size:12px;font-weight:bold" />
 		
-		<vbox id="vbxMain" width="300px">
+		<vbox id="vbxMain" width="100%">
 		
-		  <grid width="99%">
+		  <grid width="93%">
 				<rows>
 					<row>
 						<toolbar>
@@ -23,159 +28,205 @@
 				</rows>
 			</grid>
 
-			<grid width="99%">
+			<grid width="93%">
+				<columns >
+					<column width="50%"></column>
+					<column width="50%"></column>
+				</columns>
 				<rows>
 					<row>
 						<label value="Produccion - Turno" />
-						<textbox id="txtProduccionTurno"
-							readonly="true">
-						</textbox>
+						<label id="txtProduccionTurno"
+							 width="98%" />
 					</row>
-
 
 					<row>
 						<label value="Turno Labor" />
 						 <listbox id="lbxTurnoLabor" style="font-size:12px"
-						mold="select" width="120px" />
+						mold="select"  width="98%" />
 					</row>
 					
 				    <row>
 						<label value="Item - Orden" />
 						 <listbox id="lbxItemOrden" style="font-size:12px"
-								mold="select" width="120px" />
+								mold="select"  width="98%" />
 					</row>
 
 					<row>
 						<label value="Orden" />
-							<textbox id="txtOrden"
-							readonly="true"></textbox>
+						<label id="txtOrden"
+							width="98%" />
 					</row>
 
 					<row>
 						<label value="Producto" />
-							<textbox id="txtProducto"
-							readonly="true"></textbox>
+						<label id="txtProducto"
+							width="98%" />
+					</row>
+					
+					<row>
+						<label value="Marca" />
+						<label id="txtMarca"
+							 width="98%" />
 					</row>
 
 					<row>
 						<label value="M. Selladora" />
 						 <listbox id="lbxMSelladora" style="font-size:12px"
-						mold="select" width="120px" />
+						mold="select"  width="98%" />
 					</row>
 				</rows>
 			</grid>
 
 
-			<grid width="99%">
+			<grid width="93%">
 				<rows>
-								<row>
-									<toolbar id="tbcontrol5">
-										<hbox>
-						<label value="Luthy" />
-						 <listbox id="lbxLuthy" style="font-size:12px"
-								mold="select" width="120px" />
-					
-											
-																					
-											<toolbarbutton id="btnAgregarItem" tooltiptext="Agregar" image="/img/crear.gif"/>
-											<toolbarbutton id="btnEliminarItem" tooltiptext="Eliminar" image="/img/eliminar.gif"/>
-										</hbox>
-									</toolbar>
-								</row>				</rows>
+					<row>
+						<toolbar id="tbcontrol5">
+							<hbox>
+								<label value="Luthy" width="100px" />
+							 	<listbox id="lbxLuthy" style="font-size:12px" mold="select" width="150px"/>
+								<toolbarbutton id="btnAgregarItem" tooltiptext="Agregar" image="/img/crear.gif"/>
+								<toolbarbutton id="btnEliminarItem" tooltiptext="Eliminar" image="/img/eliminar.gif"/>
+							</hbox>
+						</toolbar>
+					</row>
+				</rows>
 			</grid>	
 
-
-		    <listbox id="lbxLista" 
-		        multiple="true" checkmark="false" width="95%" visible="false">
-				<listhead style="font-size:5px" >
-					<listheader label="Luthy" width="50%"  style="font-size:5px" />
-					<listheader  width="30%" tooltiptext="Seleccionar un item" >
-					   <toolbar>
-							<toolbarbutton id="btnEliminar" label="Eliminar"
-								tooltiptext="Eliminar luthy" image="/img/eliminar.gif" />
-						</toolbar>
-					</listheader>
-				</listhead>
-							  
-<!-- 				<listitem> -->
-<!-- 					<listcell></listcell> -->
-<!-- 					<listcell >  -->
-<!-- 						<checkbox checked="false"  > </checkbox>  -->
-<!-- 					</listcell> -->
-<!-- 				</listitem> -->
-			</listbox>	
-
-
-
-
-
-
-			<grid width="99%">
+			<grid width="93%">
+				<rows>
+						<row>
+					    <listbox id="lbxLista" multiple="true" checkmark="false" width="98%" visible="false">
+							<listhead style="font-size:5px" >
+								<listheader label="Luthy" width="50%"  style="font-size:5px" />
+								<listheader  width="30%" tooltiptext="Seleccionar un item" >
+								   <toolbar>
+										<toolbarbutton id="btnEliminar" label="Eliminar" tooltiptext="Eliminar luthy" image="/img/eliminar.gif" />
+									</toolbar>
+								</listheader>
+							</listhead>
+						</listbox>
+					</row>
+				</rows>
+			</grid>
+			
+			<grid width="93%">
+				<columns >
+					<column width="50%"></column>
+					<column width="50%"></column>
+				</columns>
 				<rows>
 					<row>
-						<label value="%Fill" />
-						<textbox id="dcbFill"></textbox>
-					</row>
-					<row>
-						<label value="%H2O" />
-						<textbox id="dcbH2O"></textbox>
+						<label value="Cod. Video Jet" />
+						<textbox id="txtCodVideoJet" width="98%"> </textbox>
 					</row>
 					
 					<row>
-						<label value="%Aceite" />
-						<textbox id="dcbAceite"></textbox>
+						<label value="P. Neto Formulado (g.)" />
+						<textbox id="txtNetoFormulado" width="98%"> </textbox>
+					</row>	
+					
+					<row>
+						<label id="lbFill1" value="Fill Min (g.)" />
+						<textbox id="txtFill1" width="98%" readonly="false"/>
+					</row>
+					<row>
+						<label id="lbFill2" value="Fill Max (g.)" />
+						<textbox id="txtFill2" width="98%" readonly="false"/>
+					</row>
+					<row>
+						<label id="lbFillPromedio" value="Fill (g.)" />
+						<textbox id="txtFillPromedio" width="98%" readonly="true"/>
+					</row>
+					
+					<row>
+						<label value="%Flakes" />
+						<textbox id="txtFlakes" width="98%"></textbox>
+					</row>
+					
+					<row>
+						<label value="Agua (g.)" />
+						<textbox id="txtH2O" width="98%"></textbox>
+					</row>
+					
+					<row>
+						<label value="Aceite (g.)" />
+						<textbox id="txtAceite" width="98%"></textbox>
 					</row>
 					
 					<row>
 						<label value="Tipo Proteina" />
 						<listbox id="lbxTipoProteina" style="font-size:12px"
-								mold="select" width="120px" />
+								mold="select"  width="98%" disabled="false"/>
 					</row>
 					
 					<row>
-						<label value="%Proteina" />
-						<textbox id="dcbProteina"> </textbox>
+						<label value="Caldo Vegetal (g.)" />
+						<textbox id="txtProteina"  width="98%" > </textbox>
 					</row>	
 					
 					<row>
-						<label value="Cod. Video Jet" />
-						<textbox id="txtCodVideoJet"> </textbox>
-					</row>	
-
+						<label value="#Latas" />
+						<textbox id="txtLatas" width="98%"></textbox>
+					</row>
+					
+					<row>
+						<label value="%Salmuera" />
+						<textbox id="txtSalmuera" width="98%" readonly="false"></textbox>
+					</row>
+					
+					<row>
+						<label value="%Conc. CV" />
+						<textbox id="txtConcentracion" width="98%" readonly="false"></textbox>
+					</row>
+					
+					<row>
+						<label value="Formato" />
+						<textbox id="txtFormato" width="98%" readonly="false"></textbox>
+					</row>
+					
+					<row>
+						<label value="Densidad" />
+						<textbox id="txtDensidad" width="98%" readonly="false"></textbox>
+					</row>
+					
+					<row>
+						<label value="Proveedor Envase" />
+						<listbox id="lbxProveedorLata" style="font-size:12px"
+								mold="select"  width="98%" disabled="false"/>
+					</row>
+					
+					<row>
+						<label value="Proveedor Tapa" />
+						<listbox id="lbxProveedorTapa" style="font-size:12px"
+								mold="select"  width="98%" disabled="false"/>
+					</row>
+					
 					<row>
 						<label value="Tapa" />
-						<textbox id="txtTapa" readonly="true"> </textbox>
+						<textbox id="txtTapa" readonly="true" width="98%"> </textbox>
 					</row>					
 
 					<row>
 						<label value="Presentación" />
-						<textbox id="txtPresentacion" readonly="true"> </textbox>
+						<textbox id="txtPresentacion" readonly="true" width="98%"> </textbox>
 					</row>					
 
 					<row>
-						<label value="Drenado" />
-						<textbox id="dcbDrenado"></textbox>
+						<label value="P. Neto (g.)" />
+						<textbox id="txtPNeto" readonly="true" width="98%"> </textbox>
 					</row>
-
+					
 					<row>
-						<label value="%Flakes" />
-						<textbox id="dcbFlakes"></textbox>
-					</row>
-
-					<row>
-						<label value="P. Neto" />
-						<textbox id="txtPNeto" readonly="true"> </textbox>
+						<label value="P. Drenado (g.)" />
+						<textbox id="txtDrenado" width="98%" readonly="true"></textbox>
 					</row>					
 
 					<row>
 						<label value="Destino" />
-						<textbox id="txtDestino" readonly="true"> </textbox>
+						<textbox id="txtDestino" readonly="true" width="98%"> </textbox>
 					</row>					
-
-					<row>
-						<label value="#Latas" />
-						<textbox id="dcbLatas"></textbox>
-					</row>
 					
 				</rows>	
 			</grid>
@@ -186,7 +237,7 @@
 				<label value="Fecha Hora Registro" style="color:blue;font-size:12px;font-weight:bold" />			
 			</vbox>
 			
-			<grid width="99%">
+			<grid width="93%">
 				<rows>
 					<row>
 						<hbox>
@@ -309,11 +360,38 @@
 					</row>
 				</rows>
 			</grid>
-
-			<label value="Observacion" />
-			<textbox id="txtObservacion" rows="3" width="99%">
-			</textbox>
 			
+			<grid width="93%">
+				<columns >
+					<column width="50%"></column>
+					<column width="50%"></column>
+				</columns>
+				<rows>
+					<row>
+						<label id="lbMotivoCambio" value="Motivo"/>
+						<listbox id="lbxMotivoCambio" style="font-size:12px" mold="select" width="98%">
+							<listitem > </listitem>
+						</listbox>
+					</row>
+					<row>
+						<label value="Observacion" />
+						<textbox id="txtObservacion" rows="3" width="98%"/>
+					</row>
+				</rows>
+			</grid>
+			
+			<grid width="93%">
+				<rows>
+					<row>
+						<toolbar>
+							<toolbarbutton id="btnGrabarBot" label="Grabar"
+								tooltiptext="Grabar" image="/img/grabar.gif" />
+						</toolbar>
+					</row>
+
+
+				</rows>
+			</grid>
 			<label value="."/>
 		</vbox>
 	</window>

@@ -8,7 +8,7 @@
 				<rows>
 					<row>
 						<label value="Fecha Produccion:" style="color:blue" />
-						<datebox id="dteFecReg" width="80px" disabled="false" />
+						<datebox id="dteFecReg" width="80px" format="dd/MM/yyyy" disabled="false" />
 					</row>
 				</rows>
 			</grid>

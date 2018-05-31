@@ -21,10 +21,10 @@ public class ProduccionArchivoCargaOrdenDetalleDAOJpaImpl extends BaseDaoJpaImpl
 	public List<ProduccionArchivoCargaOrdenDetalle> archivoCargaOrdenDetalles(Integer idturno, Integer item, String orden, Long idproduccion) {
 		
 		String sql = "SELECT a FROM ProduccionArchivoCargaOrdenDetalle a " +
-				"where a.idturno	= :turno " +
+				"where a.turno.idturno	= :turno " +
 				"and a.item 		= :item " +
 				"and a.orden 		= :orden "+
-				"and a.produccionArchivoCargaOrden.idproduccion = :idproduccion ";
+				"and a.produccionArchivoCargaOrden.produccion.idproduccion = :idproduccion ";
 		return (List<ProduccionArchivoCargaOrdenDetalle>) em.createQuery(sql)
 				.setParameter("turno", idturno)
 				.setParameter("item", item)

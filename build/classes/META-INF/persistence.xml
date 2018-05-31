@@ -211,7 +211,6 @@
       	<class>com.nw.model.EnvasadoDetalleProcesoCambiosLuthy</class>
       	<class>com.nw.model.EnvasadoLineaCerradora</class>
       	<class>com.nw.model.EnvasadoProceso</class>
-      	<class>com.nw.model.EnvasadoTipoProteina</class>
       	<class>com.nw.model.EspecialidadesIncidencia</class>
       	<class>com.nw.model.EspecialidadesIncidenciaEnlatado</class>
       	<class>com.nw.model.EspecialidadesIngrediente</class>
@@ -466,7 +465,16 @@
       	<class>com.nw.model.Usuario</class>
       	<class>com.nw.model.UsuariosAprobacion</class>
       	<class>com.nw.model.Volqueta</class>
-      	<class>com.nw.model.Zonafao</class>      	
+      	<class>com.nw.model.Zonafao</class>
+      	<class>com.nw.model.EnvasadoMotivoCambio</class>
+      	<class>com.nw.model.EnvasadoFichaTecnica</class>
+      	<class>com.nw.model.EnvasadoProveedorLata</class>
+      	<class>com.nw.model.EnvasadoProveedorTapa</class>
+      	<class>com.nw.model.Autoclave</class>
+      	<class>com.nw.model.EsterilizadoCoche</class>
+      	<class>com.nw.model.EsterilizadoProceso</class>
+      	<class>com.nw.model.EsterilizadoProcesoParada</class>
+      	<class>com.nw.model.EsterilizadoProcesoParadaCoche</class>      	
 		<properties>
 
 			<property name="eclipselink.logging.level" value="FINEST"/>

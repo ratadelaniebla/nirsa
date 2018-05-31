@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="EnvasadoDetalleControlPesoFillCabecera" pageWidth="575" pageHeight="842" columnWidth="555" leftMargin="0" rightMargin="20" topMargin="0" bottomMargin="0">
-	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="15"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="LOGO" class="java.lang.String"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
@@ -9,28 +9,83 @@
 	</parameter>
 	<parameter name="idenvasadocontrolpesofillcabecera" class="java.lang.Long"/>
 	<queryString>
-		<![CDATA[select o.orden, c.pesoenvase,
-c.procentajelomos||' / '||c.procentajetrozos||' / '||c.procentajerallado lomo_trozo_rallado,
-l.numeroenvasadolineacerradora,
-c.agua, c.aceite, c.caldovegetal+c.proteina caldo_prot, c.caldovegetal, c.proteina, c.fechareg, o.cliente,
-(select t.nombre from turno t where t.idturno = c.idturnolabor) turno
-from produccion_detalle_orden o, envasado_control_peso_fill_cabecera c, envasado_linea_cerradora l
-where o.idproducciondetalleorden = c.idproducciondetalleorden
-and c.idenvasadolineacerradora = l.idenvasadolineacerradora
-and c.idenvasadocontrolpesofillcabecera = $P{idenvasadocontrolpesofillcabecera}]]>
+		<![CDATA[SELECT
+	o.orden,
+	C.tara,o.dre drenado,
+	(select f.peso_neto_formulado
+             from envasado_ficha_tecnica f
+            where f.idproducciondetalleorden = o.idproducciondetalleorden limit 1) pesoatunrecomendado,
+	o.presentacion pesoneto,
+	(select f.lomo
+             from envasado_ficha_tecnica f
+            where f.idproducciondetalleorden = o.idproducciondetalleorden limit 1) lomo,
+	(select f.trozos
+             from envasado_ficha_tecnica f
+            where f.idproducciondetalleorden = o.idproducciondetalleorden limit 1) trozo,
+	(select f.rallado
+             from envasado_ficha_tecnica f
+            where f.idproducciondetalleorden = o.idproducciondetalleorden limit 1) rallado,
+
+	l.numeroenvasadolineacerradora,
+	(select f.agua
+             from envasado_ficha_tecnica f
+            where f.idproducciondetalleorden = o.idproducciondetalleorden limit 1) agua,
+	(select f.aceite
+             from envasado_ficha_tecnica f
+            where f.idproducciondetalleorden = o.idproducciondetalleorden limit 1) aceite,
+	C.caldovegetal + C.proteina caldo_prot,
+	(select f.concentracion
+             from envasado_ficha_tecnica f
+            where f.idproducciondetalleorden = o.idproducciondetalleorden limit 1) caldovegetal,
+	(select (select descripcion
+		from envasado_caldo_vegetal_proteina v
+		where v.idenvasadocaldovegetalproteina = f.idenvasadocaldovegetalproteina)
+             from envasado_ficha_tecnica f
+            where f.idproducciondetalleorden = o.idproducciondetalleorden limit 1) proteina,
+	C.fechareg,
+	o.cliente,
+	( SELECT T.nombre FROM turno T WHERE T.idturno = C.idturnolabor ) turno,
+	(
+		SELECT
+			array_to_string( ARRAY_AGG ( DISTINCT u.idusuario ), ', ' )
+		FROM
+			usuario u
+		WHERE
+			u.idusuario IN ( SELECT
+					DISTINCT idusuario
+				       FROM
+					envasado_control_peso_fill_detalle ed
+				       WHERE
+					ed.idenvasadocontrolpesofillcabecera = C.idenvasadocontrolpesofillcabecera
+				     )
+	) usuario
+FROM
+	produccion_detalle_orden o,
+	envasado_control_peso_fill_cabecera C,
+	envasado_linea_cerradora l
+WHERE
+	o.idproducciondetalleorden = C.idproducciondetalleorden
+	AND C.idenvasadolineacerradora = l.idenvasadolineacerradora
+	AND C.idenvasadocontrolpesofillcabecera = $P{idenvasadocontrolpesofillcabecera}]]>
 	</queryString>
 	<field name="orden" class="java.lang.String"/>
-	<field name="pesoenvase" class="java.lang.Double"/>
-	<field name="lomo_trozo_rallado" class="java.lang.String"/>
+	<field name="tara" class="java.lang.Double"/>
+	<field name="drenado" class="java.lang.Double"/>
+	<field name="pesoatunrecomendado" class="java.lang.Double"/>
+	<field name="pesoneto" class="java.lang.String"/>
+	<field name="lomo" class="java.lang.Double"/>
+	<field name="trozo" class="java.lang.Double"/>
+	<field name="rallado" class="java.lang.Double"/>
 	<field name="numeroenvasadolineacerradora" class="java.lang.Integer"/>
 	<field name="agua" class="java.lang.Double"/>
 	<field name="aceite" class="java.lang.Double"/>
 	<field name="caldo_prot" class="java.lang.Double"/>
 	<field name="caldovegetal" class="java.lang.Double"/>
-	<field name="proteina" class="java.lang.Double"/>
+	<field name="proteina" class="java.lang.String"/>
 	<field name="fechareg" class="java.sql.Timestamp"/>
 	<field name="cliente" class="java.lang.String"/>
 	<field name="turno" class="java.lang.String"/>
+	<field name="usuario" class="java.lang.String"/>
 	<detail>
 		<band height="50" splitType="Stretch">
 			<image scaleImage="RetainShape" hAlign="Left" vAlign="Bottom" onErrorType="Blank">
@@ -72,7 +127,9 @@ and c.idenvasadocontrolpesofillcabecera = $P{idenvasadocontrolpesofillcabecera}]
 		<band height="20">
 			<staticText>
 				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="150" height="20"/>
-				<textElement verticalAlignment="Bottom" markup="none"/>
+				<textElement verticalAlignment="Bottom" markup="none">
+					<font size="9"/>
+				</textElement>
 				<text><![CDATA[CODIGO]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
@@ -85,7 +142,9 @@ and c.idenvasadocontrolpesofillcabecera = $P{idenvasadocontrolpesofillcabecera}]
 			</textField>
 			<staticText>
 				<reportElement stretchType="RelativeToBandHeight" x="240" y="0" width="63" height="20"/>
-				<textElement verticalAlignment="Bottom" markup="none"/>
+				<textElement verticalAlignment="Bottom" markup="none">
+					<font size="9"/>
+				</textElement>
 				<text><![CDATA[LINEA]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
@@ -98,7 +157,9 @@ and c.idenvasadocontrolpesofillcabecera = $P{idenvasadocontrolpesofillcabecera}]
 			</textField>
 			<staticText>
 				<reportElement stretchType="RelativeToBandHeight" x="395" y="0" width="80" height="20"/>
-				<textElement verticalAlignment="Bottom" markup="none"/>
+				<textElement verticalAlignment="Bottom" markup="none">
+					<font size="9"/>
+				</textElement>
 				<text><![CDATA[FECHA]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
@@ -113,8 +174,10 @@ and c.idenvasadocontrolpesofillcabecera = $P{idenvasadocontrolpesofillcabecera}]
 		<band height="20">
 			<staticText>
 				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="150" height="20"/>
-				<textElement verticalAlignment="Bottom" markup="none"/>
-				<text><![CDATA[PESO DE ENVASE]]></text>
+				<textElement verticalAlignment="Bottom" markup="none">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[PESO TARA]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="150" y="0" width="80" height="20"/>
@@ -122,12 +185,14 @@ and c.idenvasadocontrolpesofillcabecera = $P{idenvasadocontrolpesofillcabecera}]
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement verticalAlignment="Bottom"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{pesoenvase}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{tara}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement stretchType="RelativeToBandHeight" x="240" y="0" width="63" height="20"/>
-				<textElement verticalAlignment="Bottom" markup="none"/>
-				<text><![CDATA[AGUA]]></text>
+				<textElement verticalAlignment="Bottom" markup="none">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[*AGUA]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="303" y="0" width="80" height="20"/>
@@ -147,27 +212,26 @@ and c.idenvasadocontrolpesofillcabecera = $P{idenvasadocontrolpesofillcabecera}]
 			</textField>
 			<staticText>
 				<reportElement stretchType="RelativeToBandHeight" x="395" y="0" width="80" height="20"/>
-				<textElement verticalAlignment="Bottom" markup="none"/>
+				<textElement verticalAlignment="Bottom" markup="none">
+					<font size="9"/>
+				</textElement>
 				<text><![CDATA[CLIENTE]]></text>
 			</staticText>
 		</band>
 		<band height="20">
 			<staticText>
 				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="150" height="20"/>
-				<textElement verticalAlignment="Bottom" markup="none"/>
-				<text><![CDATA[PESO RECOMENDADO ATUN]]></text>
+				<textElement verticalAlignment="Bottom" markup="none">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[*PESO RECOMENDADO ATUN ]]></text>
 			</staticText>
-			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="150" y="0" width="80" height="20"/>
-				<box>
-					<bottomPen lineWidth="1.0"/>
-				</box>
-				<textElement verticalAlignment="Bottom"/>
-			</textField>
 			<staticText>
 				<reportElement stretchType="RelativeToBandHeight" x="240" y="0" width="63" height="20"/>
-				<textElement verticalAlignment="Bottom" markup="none"/>
-				<text><![CDATA[ACEITE]]></text>
+				<textElement verticalAlignment="Bottom" markup="none">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[*ACEITE]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="303" y="0" width="80" height="20"/>
@@ -187,15 +251,10 @@ and c.idenvasadocontrolpesofillcabecera = $P{idenvasadocontrolpesofillcabecera}]
 			</textField>
 			<staticText>
 				<reportElement stretchType="RelativeToBandHeight" x="395" y="0" width="80" height="20"/>
-				<textElement verticalAlignment="Bottom" markup="none"/>
+				<textElement verticalAlignment="Bottom" markup="none">
+					<font size="9"/>
+				</textElement>
 				<text><![CDATA[TURNO]]></text>
-			</staticText>
-		</band>
-		<band height="20">
-			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="150" height="20"/>
-				<textElement verticalAlignment="Bottom" markup="none"/>
-				<text><![CDATA[PESO NETO]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="150" y="0" width="80" height="20"/>
@@ -203,10 +262,22 @@ and c.idenvasadocontrolpesofillcabecera = $P{idenvasadocontrolpesofillcabecera}]
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{pesoatunrecomendado}]]></textFieldExpression>
 			</textField>
+		</band>
+		<band height="20">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="150" height="20"/>
+				<textElement verticalAlignment="Bottom" markup="none">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[PESO NETO]]></text>
+			</staticText>
 			<staticText>
 				<reportElement stretchType="RelativeToBandHeight" x="240" y="0" width="63" height="20"/>
-				<textElement verticalAlignment="Bottom" markup="none"/>
+				<textElement verticalAlignment="Bottom" markup="none">
+					<font size="9"/>
+				</textElement>
 				<text><![CDATA[CV + PROT]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
@@ -219,7 +290,9 @@ and c.idenvasadocontrolpesofillcabecera = $P{idenvasadocontrolpesofillcabecera}]
 			</textField>
 			<staticText>
 				<reportElement stretchType="RelativeToBandHeight" x="395" y="0" width="80" height="20"/>
-				<textElement verticalAlignment="Bottom" markup="none"/>
+				<textElement verticalAlignment="Bottom" markup="none">
+					<font size="9"/>
+				</textElement>
 				<text><![CDATA[PESADOR]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
@@ -228,25 +301,34 @@ and c.idenvasadocontrolpesofillcabecera = $P{idenvasadocontrolpesofillcabecera}]
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{usuario}]]></textFieldExpression>
 			</textField>
-		</band>
-		<band height="20">
-			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="150" height="20"/>
-				<textElement verticalAlignment="Bottom" markup="none"/>
-				<text><![CDATA[PESO D.W.]]></text>
-			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="150" y="0" width="80" height="20"/>
 				<box>
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{pesoneto}
+.substring(
+    ($F{pesoneto}.indexOf( "X" ))+2,
+    $F{pesoneto}.length() )]]></textFieldExpression>
 			</textField>
+		</band>
+		<band height="20">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="150" height="20"/>
+				<textElement verticalAlignment="Bottom" markup="none">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[PESO DRENADO]]></text>
+			</staticText>
 			<staticText>
 				<reportElement stretchType="RelativeToBandHeight" x="240" y="0" width="63" height="20"/>
-				<textElement verticalAlignment="Bottom" markup="none"/>
-				<text><![CDATA[CV]]></text>
+				<textElement verticalAlignment="Bottom" markup="none">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[*CV]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="303" y="0" width="80" height="20"/>
@@ -265,15 +347,10 @@ and c.idenvasadocontrolpesofillcabecera = $P{idenvasadocontrolpesofillcabecera}]
 			</textField>
 			<staticText>
 				<reportElement stretchType="RelativeToBandHeight" x="395" y="0" width="80" height="20"/>
-				<textElement verticalAlignment="Bottom" markup="none"/>
+				<textElement verticalAlignment="Bottom" markup="none">
+					<font size="9"/>
+				</textElement>
 				<text><![CDATA[SUPERVISOR]]></text>
-			</staticText>
-		</band>
-		<band height="20">
-			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="150" height="20"/>
-				<textElement verticalAlignment="Bottom" markup="none"/>
-				<text><![CDATA[LOMOS/TROZOS/RALLADO]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="RelativeToBandHeight" x="150" y="0" width="80" height="20"/>
@@ -281,20 +358,39 @@ and c.idenvasadocontrolpesofillcabecera = $P{idenvasadocontrolpesofillcabecera}]
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement verticalAlignment="Bottom"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{lomo_trozo_rallado}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{drenado}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="20">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="150" height="20"/>
+				<textElement verticalAlignment="Bottom" markup="none">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[*LOMOS/TROZOS/RALLADO]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="150" y="0" width="80" height="20"/>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Bottom"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{lomo}+" / "+$F{trozo}+" / "+$F{rallado}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement stretchType="RelativeToBandHeight" x="240" y="0" width="63" height="20"/>
-				<textElement verticalAlignment="Bottom" markup="none"/>
-				<text><![CDATA[PROT]]></text>
+				<textElement verticalAlignment="Bottom" markup="none">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[*PROT(caldo_proteina)]]></text>
 			</staticText>
-			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="false">
 				<reportElement stretchType="RelativeToBandHeight" x="303" y="0" width="80" height="20"/>
 				<box>
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement verticalAlignment="Bottom"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{proteina}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{proteina}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

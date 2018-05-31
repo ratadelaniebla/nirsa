@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="EnvasadoDetalleControlPesoFillTotal" pageWidth="575" pageHeight="842" columnWidth="555" leftMargin="0" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="0.75"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idenvasadoproceso" class="java.lang.Long"/>
+	<parameter name="idproducciondetalleorden" class="java.lang.Long"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+          SUM( d.pesoneto )/count( d.pesoneto) SUM,
+	(max(d.pesoneto) - min(d.pesoneto)) rango,
+	(select trim(to_char(cd.hora,'00')||':'||trim(to_char(cd.minuto,'00')))
+	from envasado_control_neto_corte_detalle cd
+	where cd.idenvasadocontrolnetocortedetalle = d.idenvasadocontrolnetocortedetalle) corte
+FROM
+	envasado_control_peso_neto_cabecera C,
+	envasado_control_peso_neto_detalle D
+WHERE
+	C.idenvasadocontrolpesonetocabecera = d.idenvasadocontrolpesonetocabecera
+	AND C.idenvasadoproceso = $P{idenvasadoproceso}
+	AND C.idproducciondetalleorden = $P{idproducciondetalleorden}
+GROUP BY
+	idenvasadocontrolnetocortedetalle
+ORDER BY
+	corte]]>
+	</queryString>
+	<field name="sum" class="java.lang.Double"/>
+	<field name="rango" class="java.lang.Double"/>
+	<field name="corte" class="java.lang.String"/>
+	<variable name="minPeso" class="java.lang.Double" calculation="Lowest">
+		<variableExpression><![CDATA[$F{sum}]]></variableExpression>
+	</variable>
+	<variable name="maxPeso" class="java.lang.Double" calculation="Highest">
+		<variableExpression><![CDATA[$F{sum}]]></variableExpression>
+	</variable>
+	<variable name="contador" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[new Integer($F{sum}.intValue()> 0     ?$V{contador}.intValue() + 1     :$V{contador}.intValue() )]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<variable name="total" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{sum}]]></variableExpression>
+	</variable>
+	<variable name="rango" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{rango}]]></variableExpression>
+	</variable>
+	<title>
+		<band height="328" splitType="Stretch">
+			<lineChart>
+				<chart isShowLegend="true" evaluationTime="Report">
+					<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="535" height="133" isPrintWhenDetailOverflows="true"/>
+					<chartTitle position="Top"/>
+					<chartSubtitle/>
+					<chartLegend position="Bottom"/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Peso Neto"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{corte}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{sum}]]></valueExpression>
+						<labelExpression><![CDATA["label"]]></labelExpression>
+					</categorySeries>
+				</categoryDataset>
+				<linePlot isShowLines="true" isShowShapes="true">
+					<plot labelRotation="0.0"/>
+					<categoryAxisFormat labelRotation="0.0">
+						<axisFormat verticalTickLabels="true">
+							<labelFont/>
+							<tickLabelFont/>
+						</axisFormat>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat>
+							<labelFont/>
+							<tickLabelFont/>
+						</axisFormat>
+					</valueAxisFormat>
+					<rangeAxisMinValueExpression><![CDATA[0]]></rangeAxisMinValueExpression>
+					<rangeAxisMaxValueExpression><![CDATA[$V{maxPeso}]]></rangeAxisMaxValueExpression>
+				</linePlot>
+			</lineChart>
+			<textField isStretchWithOverflow="true" evaluationTime="Report" pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+				<reportElement x="125" y="133" width="125" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{total}/$V{contador}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="133" width="125" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PROMEDIO NETO WT:]]></text>
+			</staticText>
+			<lineChart>
+				<chart evaluationTime="Report">
+					<reportElement x="0" y="175" width="535" height="133"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Rango Peso Neto"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{corte}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{rango}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<linePlot>
+					<plot/>
+					<categoryAxisFormat>
+						<axisFormat>
+							<labelFont/>
+							<tickLabelFont/>
+						</axisFormat>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat>
+							<labelFont/>
+							<tickLabelFont/>
+						</axisFormat>
+					</valueAxisFormat>
+					<rangeAxisMinValueExpression><![CDATA[0]]></rangeAxisMinValueExpression>
+				</linePlot>
+			</lineChart>
+			<staticText>
+				<reportElement x="0" y="308" width="125" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PROMEDIO DE RANGO:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" evaluationTime="Report" pattern="#,##0.00;-#,##0.00" isBlankWhenNull="true">
+				<reportElement x="125" y="308" width="125" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$V{rango}/$V{contador}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>

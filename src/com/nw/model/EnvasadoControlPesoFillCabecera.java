@@ -1,9 +1,18 @@
 package com.nw.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 
 /**
@@ -33,7 +42,9 @@ public class EnvasadoControlPesoFillCabecera implements Serializable {
 	private Turno turno;
 	private Usuario usuario;
 	private List<EnvasadoControlPesoFillDetalle> envasadoControlPesoFillDetalles;
-
+	private Luthy luthy;
+	private double tara;
+	
 	public EnvasadoControlPesoFillCabecera() {
 	}
 
@@ -235,4 +246,27 @@ public class EnvasadoControlPesoFillCabecera implements Serializable {
 		return envasadoControlPesoFillDetalle;
 	}
 
+	//bi-directional many-to-one association to Luthy
+	@ManyToOne
+	@JoinColumn(name="idluthy")
+	public Luthy getLuthy() {
+		return this.luthy;
+	}
+
+	public void setLuthy(Luthy luthy) {
+		this.luthy = luthy;
+	}
+
+
+	public double getTara() {
+		return tara;
+	}
+
+
+	public void setTara(double tara) {
+		this.tara = tara;
+	}
+
+	
+	
 }

@@ -13,25 +13,25 @@ import com.nw.model.dao.EnvasadoDetalleProcesoCambioDAO;
 public class EnvasadoDetalleProcesoCambiosDAOJpaimpl extends BaseDaoJpaImpl implements EnvasadoDetalleProcesoCambioDAO{
  
 	@Override
-	public List<EnvasadoDetalleProcesoCambiosLuthy> saveOrUpdate(EnvasadoDetalleProcesoCambio envasadoDetalleProcesoCambio) {
+	public EnvasadoDetalleProcesoCambio saveOrUpdate(EnvasadoDetalleProcesoCambio envasadoDetalleProcesoCambio) {
 		EntityTransaction t = em.getTransaction();
-		List<EnvasadoDetalleProcesoCambiosLuthy> edpcLuthy = new ArrayList<EnvasadoDetalleProcesoCambiosLuthy>();
+		EnvasadoDetalleProcesoCambio edpc = new EnvasadoDetalleProcesoCambio();
 		try {
 			t.begin();
-			em.merge(envasadoDetalleProcesoCambio);
+			edpc = em.merge(envasadoDetalleProcesoCambio);
 			
-			if (!envasadoDetalleProcesoCambio.getEnvasadoDetalleProcesoCambiosLuthies().isEmpty())
-				for (EnvasadoDetalleProcesoCambiosLuthy edpcL : envasadoDetalleProcesoCambio.getEnvasadoDetalleProcesoCambiosLuthies())
-					edpcLuthy.add((EnvasadoDetalleProcesoCambiosLuthy)em.merge(edpcL));
+//			if (!envasadoDetalleProcesoCambio.getEnvasadoDetalleProcesoCambiosLuthies().isEmpty())
+//				for (EnvasadoDetalleProcesoCambiosLuthy edpcL : envasadoDetalleProcesoCambio.getEnvasadoDetalleProcesoCambiosLuthies())
+//					edpcLuthy.add((EnvasadoDetalleProcesoCambiosLuthy)em.merge(edpcL));
 			
 			t.commit();
-			return edpcLuthy;
+			return edpc;
 		} catch (RuntimeException e) {
 			if (t.isActive()) {
 				t.rollback();
 			}
 			e.printStackTrace();
-			return new ArrayList<EnvasadoDetalleProcesoCambiosLuthy>();
+			return new EnvasadoDetalleProcesoCambio();
 		} finally {
 //			em.close();
 		}
@@ -41,7 +41,7 @@ public class EnvasadoDetalleProcesoCambiosDAOJpaimpl extends BaseDaoJpaImpl impl
 	public List<EnvasadoDetalleProcesoCambio> getEnvasadoDetalleProcesoCambioByIdEProceso(Long idenvasadoproceso) {
 		try {
 			Query qryPro = em.createQuery(" SELECT edpc FROM EnvasadoDetalleProcesoCambio edpc " + 
-					" where edpc.idenvasadoproceso = :idenvasadoproceso order by  edpc.idproducciondetalleorden");
+					" where edpc.envasadoProceso.idenvasadoproceso = :idenvasadoproceso order by  edpc.produccionDetalleOrden.idproducciondetalleorden");
 
 			qryPro.setParameter("idenvasadoproceso", idenvasadoproceso);
 			return (List<EnvasadoDetalleProcesoCambio>) qryPro.getResultList();

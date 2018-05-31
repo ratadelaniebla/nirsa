@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="detallesFillWeigth" language="groovy" pageWidth="1975" pageHeight="595" orientation="Landscape" columnWidth="1975" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="1199"/>
+	<property name="ireport.x" value="327"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="idenvasadoproceso" class="java.lang.Long"/>
 	<parameter name="IDTURNO" class="java.lang.Integer"/>
 	<queryString>
-		<![CDATA[select  t.numeroluthy MAQUINA, m.descripcion, d.orden, e.codvideojet CODIGO, d.producto,       e.fill,    e.ag, e.ac, porcentajeproteina proteina, (select p.descripcion from envasado_tipo_proteina p where p.idenvasadotipoproteina = e.idenvasadotipoproteina ) tipo_proteina, d.envase, d.tapa, d.presentacion, d.dre, e.flake, e.pesoneto pneto, d.destino||' / '||d.cliente destino_cliente, to_char(fechacambio,'HH24' ) HORA, d.latas, e.observacion
+		<![CDATA[select  t.numeroluthy MAQUINA, m.descripcion, d.orden, e.codvideojet CODIGO, d.producto, e.ag, e.ac, porcentajeproteina proteina,
+(select
+
+(select p.descripcion
+from envasado_caldo_vegetal_proteina p
+ where p.idenvasadocaldovegetalproteina = f.idenvasadocaldovegetalproteina)
+
+from envasado_ficha_tecnica f
+where f.idproducciondetalleorden = d.idproducciondetalleorden)
+ tipo_proteina,
+
+d.envase, d.tapa, d.presentacion, d.dre, e.flake, e.pesoneto pneto, d.destino||' / '||d.cliente destino_cliente, to_char(fechacambio,'HH24' ) HORA, d.latas, e.observacion
 from envasado_detalle_proceso_cambios e, envasado_detalle_proceso_cambios_luthy l, produccion_detalle_orden d, luthy t, maquina_cerradora m
 where e.idproducciondetalleorden = d.idproducciondetalleorden
 and e.idenvasadodetalleprocesocambios = l.idenvasadodetalleprocesocambios
@@ -19,7 +30,6 @@ and e.idenvasadoproceso = $P{idenvasadoproceso}]]>
 	<field name="orden" class="java.lang.String"/>
 	<field name="codigo" class="java.lang.String"/>
 	<field name="producto" class="java.lang.String"/>
-	<field name="fill" class="java.lang.Double"/>
 	<field name="ag" class="java.lang.Double"/>
 	<field name="ac" class="java.lang.Double"/>
 	<field name="proteina" class="java.lang.Double"/>
@@ -32,7 +42,7 @@ and e.idenvasadoproceso = $P{idenvasadoproceso}]]>
 	<field name="pneto" class="java.lang.String"/>
 	<field name="destino_cliente" class="java.lang.String"/>
 	<field name="hora" class="java.lang.String"/>
-	<field name="latas" class="java.lang.Integer"/>
+	<field name="latas" class="java.lang.Double"/>
 	<field name="observacion" class="java.lang.String"/>
 	<variable name="observacion" class="java.lang.String">
 		<variableExpression><![CDATA[$V{observacion}+"\n"+$F{observacion}]]></variableExpression>
@@ -96,18 +106,7 @@ and e.idenvasadoproceso = $P{idenvasadoproceso}]]>
 				<text><![CDATA[DESCP. PRODUCTO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="653" y="0" width="64" height="20"/>
-				<box>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[PESO FILL]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="717" y="0" width="52" height="20"/>
+				<reportElement x="653" y="0" width="52" height="20"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -118,7 +117,7 @@ and e.idenvasadoproceso = $P{idenvasadoproceso}]]>
 				<text><![CDATA[%H2O]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="769" y="0" width="58" height="20"/>
+				<reportElement x="705" y="0" width="58" height="20"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -129,7 +128,7 @@ and e.idenvasadoproceso = $P{idenvasadoproceso}]]>
 				<text><![CDATA[%ACEITE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="827" y="0" width="77" height="20"/>
+				<reportElement x="763" y="0" width="77" height="20"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -140,7 +139,7 @@ and e.idenvasadoproceso = $P{idenvasadoproceso}]]>
 				<text><![CDATA[%PROTEINA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="904" y="0" width="107" height="20"/>
+				<reportElement x="840" y="0" width="107" height="20"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -151,7 +150,7 @@ and e.idenvasadoproceso = $P{idenvasadoproceso}]]>
 				<text><![CDATA[TIPO PROTEINA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1011" y="0" width="83" height="20"/>
+				<reportElement x="947" y="0" width="83" height="20"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -162,7 +161,7 @@ and e.idenvasadoproceso = $P{idenvasadoproceso}]]>
 				<text><![CDATA[ENVASE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1094" y="0" width="73" height="20"/>
+				<reportElement x="1030" y="0" width="73" height="20"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -173,7 +172,7 @@ and e.idenvasadoproceso = $P{idenvasadoproceso}]]>
 				<text><![CDATA[TAPA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1470" y="0" width="84" height="20"/>
+				<reportElement x="1406" y="0" width="84" height="20"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -184,7 +183,7 @@ and e.idenvasadoproceso = $P{idenvasadoproceso}]]>
 				<text><![CDATA[P.NETO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1554" y="0" width="252" height="20"/>
+				<reportElement x="1490" y="0" width="252" height="20"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -195,7 +194,7 @@ and e.idenvasadoproceso = $P{idenvasadoproceso}]]>
 				<text><![CDATA[DESTINO/CLIENTE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1806" y="0" width="56" height="20"/>
+				<reportElement x="1742" y="0" width="56" height="20"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -206,7 +205,7 @@ and e.idenvasadoproceso = $P{idenvasadoproceso}]]>
 				<text><![CDATA[HORA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1862" y="0" width="112" height="20"/>
+				<reportElement x="1798" y="0" width="112" height="20"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -217,7 +216,7 @@ and e.idenvasadoproceso = $P{idenvasadoproceso}]]>
 				<text><![CDATA[CANTIDAD LATAS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1388" y="0" width="82" height="20"/>
+				<reportElement x="1324" y="0" width="82" height="20"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -228,7 +227,7 @@ and e.idenvasadoproceso = $P{idenvasadoproceso}]]>
 				<text><![CDATA[%FLAKES]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1167" y="0" width="142" height="20"/>
+				<reportElement x="1103" y="0" width="142" height="20"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -239,7 +238,7 @@ and e.idenvasadoproceso = $P{idenvasadoproceso}]]>
 				<text><![CDATA[PRESENTACION]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="1309" y="0" width="79" height="20"/>
+				<reportElement x="1245" y="0" width="79" height="20"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -309,18 +308,7 @@ and e.idenvasadoproceso = $P{idenvasadoproceso}]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{producto}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="653" y="0" width="64" height="20"/>
-				<box>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{fill}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="717" y="0" width="52" height="20"/>
+				<reportElement stretchType="RelativeToBandHeight" x="653" y="0" width="52" height="20"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -331,7 +319,7 @@ and e.idenvasadoproceso = $P{idenvasadoproceso}]]>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{ag}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="769" y="0" width="58" height="20"/>
+				<reportElement stretchType="RelativeToBandHeight" x="705" y="0" width="58" height="20"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -342,7 +330,7 @@ and e.idenvasadoproceso = $P{idenvasadoproceso}]]>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{ac}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="827" y="0" width="77" height="20"/>
+				<reportElement stretchType="RelativeToBandHeight" x="763" y="0" width="77" height="20"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -353,7 +341,7 @@ and e.idenvasadoproceso = $P{idenvasadoproceso}]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{proteina}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="904" y="0" width="107" height="20"/>
+				<reportElement stretchType="RelativeToBandHeight" x="840" y="0" width="107" height="20"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -364,7 +352,7 @@ and e.idenvasadoproceso = $P{idenvasadoproceso}]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{tipo_proteina}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="1011" y="0" width="83" height="20"/>
+				<reportElement stretchType="RelativeToBandHeight" x="947" y="0" width="83" height="20"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -375,7 +363,7 @@ and e.idenvasadoproceso = $P{idenvasadoproceso}]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{envase}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="1094" y="0" width="73" height="20"/>
+				<reportElement stretchType="RelativeToBandHeight" x="1030" y="0" width="73" height="20"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -386,7 +374,7 @@ and e.idenvasadoproceso = $P{idenvasadoproceso}]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{tapa}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="1167" y="0" width="142" height="20"/>
+				<reportElement stretchType="RelativeToBandHeight" x="1103" y="0" width="142" height="20"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -397,7 +385,7 @@ and e.idenvasadoproceso = $P{idenvasadoproceso}]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{presentacion}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="1862" y="0" width="112" height="20"/>
+				<reportElement stretchType="RelativeToBandHeight" x="1798" y="0" width="112" height="20"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -408,7 +396,7 @@ and e.idenvasadoproceso = $P{idenvasadoproceso}]]>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{latas}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="1388" y="0" width="82" height="20"/>
+				<reportElement stretchType="RelativeToBandHeight" x="1324" y="0" width="82" height="20"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -419,7 +407,7 @@ and e.idenvasadoproceso = $P{idenvasadoproceso}]]>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{flake}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="1470" y="0" width="84" height="20"/>
+				<reportElement stretchType="RelativeToBandHeight" x="1406" y="0" width="84" height="20"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -430,7 +418,7 @@ and e.idenvasadoproceso = $P{idenvasadoproceso}]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{pneto}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="1554" y="0" width="252" height="20"/>
+				<reportElement stretchType="RelativeToBandHeight" x="1490" y="0" width="252" height="20"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -441,7 +429,7 @@ and e.idenvasadoproceso = $P{idenvasadoproceso}]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{destino_cliente}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="1806" y="0" width="56" height="20"/>
+				<reportElement stretchType="RelativeToBandHeight" x="1742" y="0" width="56" height="20"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -452,7 +440,7 @@ and e.idenvasadoproceso = $P{idenvasadoproceso}]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{hora}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="1309" y="0" width="79" height="20"/>
+				<reportElement stretchType="RelativeToBandHeight" x="1245" y="0" width="79" height="20"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>

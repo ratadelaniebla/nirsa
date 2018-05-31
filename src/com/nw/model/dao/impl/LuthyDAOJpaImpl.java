@@ -30,12 +30,8 @@ public class LuthyDAOJpaImpl extends BaseDaoJpaImpl implements LuthyDAO {
 
 	@SuppressWarnings("unchecked")
 	public List<Luthy> getAll() {
-		StringBuilder sbuilder = new StringBuilder();
 		try {
-			sbuilder.append("SELECT m ");
-			sbuilder.append("FROM Luthy m ");
-			return (List<Luthy>) em.createQuery(sbuilder.toString())
-					.getResultList();
+			return (List<Luthy>)getObjects(Luthy.class);
 		} catch (Exception e) {
 			em.close();
 			return null;

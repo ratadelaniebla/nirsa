@@ -2,6 +2,7 @@ package com.nw.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
 import java.util.List;
 
 
@@ -48,9 +49,12 @@ public class ProduccionDetalleOrden implements Serializable {
 	private String tapa;
 	private double ton;
 	private String video;
+	private double formato;
+	private List<EsterilizadoCoche> esterilizadoCoches;
 	private List<EnvasadoControlPesoFillCabecera> envasadoControlPesoFillCabeceras;
 	private List<EnvasadoControlPesoNetoCabecera> envasadoControlPesoNetoCabeceras;
 	private List<EnvasadoDetalleProcesoCambio> envasadoDetalleProcesoCambios;
+	private List<EnvasadoFichaTecnica> envasadoFichaTecnicas;
 	private Produccion produccion;
 	private Turno turno;
 	private Usuario usuario;
@@ -366,7 +370,41 @@ public class ProduccionDetalleOrden implements Serializable {
 		this.video = video;
 	}
 
+	
+	public double getFormato() {
+		return formato;
+	}
 
+	public void setFormato(double formato) {
+		this.formato = formato;
+	}
+
+
+	//bi-directional many-to-one association to EsterilizadoCoche
+	@OneToMany(mappedBy="produccionDetalleOrden")
+	public List<EsterilizadoCoche> getEsterilizadoCoches() {
+		return this.esterilizadoCoches;
+	}
+
+	public void setEsterilizadoCoches(List<EsterilizadoCoche> esterilizadoCoches) {
+		this.esterilizadoCoches = esterilizadoCoches;
+	}
+
+	public EsterilizadoCoche addEsterilizadoCoch(EsterilizadoCoche esterilizadoCoch) {
+		getEsterilizadoCoches().add(esterilizadoCoch);
+		esterilizadoCoch.setProduccionDetalleOrden(this);
+
+		return esterilizadoCoch;
+	}
+
+	public EsterilizadoCoche removeEsterilizadoCoch(EsterilizadoCoche esterilizadoCoch) {
+		getEsterilizadoCoches().remove(esterilizadoCoch);
+		esterilizadoCoch.setProduccionDetalleOrden(null);
+
+		return esterilizadoCoch;
+	}
+		
+	
 	//bi-directional many-to-one association to EnvasadoControlPesoFillCabecera
 	@OneToMany(mappedBy="produccionDetalleOrden")
 	public List<EnvasadoControlPesoFillCabecera> getEnvasadoControlPesoFillCabeceras() {
@@ -464,6 +502,32 @@ public class ProduccionDetalleOrden implements Serializable {
 	public void setTurno(Turno turno) {
 		this.turno = turno;
 	}
+	
+	
+	//bi-directional many-to-one association to EnvasadoFichaTecnica
+	@OneToMany(mappedBy="produccionDetalleOrden")
+	public List<EnvasadoFichaTecnica> getEnvasadoFichaTecnicas() {
+		return this.envasadoFichaTecnicas;
+	}
+
+	public void setEnvasadoFichaTecnicas(List<EnvasadoFichaTecnica> envasadoFichaTecnicas) {
+		this.envasadoFichaTecnicas = envasadoFichaTecnicas;
+	}
+
+	public EnvasadoFichaTecnica addEnvasadoFichaTecnica(EnvasadoFichaTecnica envasadoFichaTecnica) {
+		getEnvasadoFichaTecnicas().add(envasadoFichaTecnica);
+		envasadoFichaTecnica.setProduccionDetalleOrden(this);
+
+		return envasadoFichaTecnica;
+	}
+
+	public EnvasadoFichaTecnica removeEnvasadoFichaTecnica(EnvasadoFichaTecnica envasadoFichaTecnica) {
+		getEnvasadoFichaTecnicas().remove(envasadoFichaTecnica);
+		envasadoFichaTecnica.setProduccionDetalleOrden(null);
+
+		return envasadoFichaTecnica;
+	}
+
 
 
 	//bi-directional many-to-one association to Usuario

@@ -33,6 +33,7 @@ public class EnvasadoControlPesoNetoCabecera implements Serializable {
 	private Turno turno;
 	private Usuario usuario;
 	private List<EnvasadoControlPesoNetoDetalle> envasadoControlPesoNetoDetalles;
+	private double tara;
 
 	public EnvasadoControlPesoNetoCabecera() {
 	}
@@ -234,5 +235,16 @@ public class EnvasadoControlPesoNetoCabecera implements Serializable {
 
 		return envasadoControlPesoNetoDetalle;
 	}
+
+
+	public double getTara() {
+		return tara;
+	}
+
+	public void setTara(double tara) {
+		this.tara = tara;
+	}
+	
+	
 
 }

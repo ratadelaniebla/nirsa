@@ -1,0 +1,79 @@
+<?page title="" contentType="text/html;charset=UTF-8" automaticTimeout="false"?>
+<zk>
+	<window id="winCierreLonja" 	apply="com.nw.webui.produccion.EsterilizadoCocheWindow" >
+		
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="COCHE-CREACION"
+			style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain" width="100%">
+			<grid width="290px">
+				<columns>
+					<column width="100px"></column>
+					<column width="100px"></column>
+				</columns>
+				<rows>
+
+					<row>
+						<label value="Autoclave - Parada - Día Producción "></label>
+						<toolbar>
+							<hbox>
+								<listbox id="lbxAutoClaveParadaProduccion" mold="select" width="120px" />
+								<toolbarbutton id="btnAutoClaveParadaProduccion" tooltiptext="Actualizar" image="/img/refrescar.gif" width="100%" />
+							</hbox>
+						</toolbar>
+					</row>
+					<row>
+						<label value="Turno Labor"></label>
+						<listbox id="lbxTurnoLabor"
+							mold="select" width="100%">
+						</listbox>
+					</row>
+					<row>
+						<label value="Turno Prod."></label>
+						<listbox id="lbxTurno"
+							mold="select" width="100%">
+						</listbox>
+					</row>
+					<row>
+						<label value="Cliente"></label>
+						<listbox id="lbxCliente" 
+							mold="select" width="100%">
+						</listbox>
+					</row>
+					<row>
+						<label value="Codigo Video"></label>
+						<label id="txtCodigo" width="100%" />
+					</row>
+				</rows>
+			</grid>
+
+			<grid>
+				<columns>
+					<column width="45%"></column>
+					<column width="55%"></column>
+				</columns>
+				<rows>
+					<row>
+						<label value="# Sequecia Coche"></label>
+						<label id="ibxIdCodigo" width="100%" />
+					</row>
+					<row>
+						<label value="# Act. Coches Cliente"></label>
+						<label id="ibxCocheCliente" width="100%" />
+					</row>
+				</rows>
+			</grid>
+			
+			<grid width="99%">
+				<rows>
+					<row>
+						<toolbar>
+							<toolbarbutton id="btnGrabar"
+								label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif" />
+						</toolbar>
+					</row>
+				</rows>
+			</grid>
+		</vbox>
+	</window>
+</zk>

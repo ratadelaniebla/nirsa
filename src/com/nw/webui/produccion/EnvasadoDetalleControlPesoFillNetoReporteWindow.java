@@ -11,6 +11,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.Sessions;
 import org.zkoss.zk.ui.SuspendNotAllowedException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.util.GenericForwardComposer;
@@ -21,11 +22,14 @@ import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 
 import com.nw.model.EnvasadoControlPesoFillCabecera;
+import com.nw.model.EnvasadoControlPesoNetoCabecera;
 import com.nw.model.EnvasadoProceso;
 import com.nw.model.Produccion;
 import com.nw.model.Turno;
 import com.nw.model.dao.EnvasadoControlPesoFillCabeceraDAO;
+import com.nw.model.dao.EnvasadoControlPesoNetoCabeceraDAO;
 import com.nw.model.dao.impl.EnvasadoControlPesoFillCabeceraDAOJpaImpl;
+import com.nw.model.dao.impl.EnvasadoControlPesoNetoCabeceraDAOJpaImpl;
 import com.nw.model.dao.impl.EnvasadoProcesoDAOJpaImpl;
 import com.nw.model.dao.impl.ProduccionDAOJpaImpl;
 import com.nw.model.dao.impl.TurnoDAOJpaImpl;
@@ -42,8 +46,8 @@ public class EnvasadoDetalleControlPesoFillNetoReporteWindow extends GenericForw
 	AnnotateDataBinder binder;
 	
 	Datebox dteFecha1;
-	Listbox lbxTurno, lbxItemOrdenCliente;
-
+	Listbox  lbxReporte, lbxTurno, lbxItemOrdenCliente;
+	Boolean isPesoFill;
 	Produccion produccion;
 	EnvasadoProceso envasadoProceso;
 	
@@ -79,6 +83,17 @@ public class EnvasadoDetalleControlPesoFillNetoReporteWindow extends GenericForw
 		lbxTurno.setSelectedIndex(0);
 	}
 	
+	public void onSelect$lbxReporte() {
+		if("lclPesoFill".equals(lbxReporte.getSelectedItem().getId())) {
+			isPesoFill=true;
+			
+		} else if ("lclPesoNeto".equals(lbxReporte.getSelectedItem().getId())) {
+			isPesoFill=false;
+		}
+		lbxTurno.setSelectedIndex(0);
+		lbxItemOrdenCliente.getItems().clear();
+	}
+	
 	public void onSelect$lbxTurno() {
 
 		envasadoProceso = new EnvasadoProceso();
@@ -110,6 +125,15 @@ public class EnvasadoDetalleControlPesoFillNetoReporteWindow extends GenericForw
 			}
 		}
 		
+		if(isPesoFill!=null)
+			if (isPesoFill) {
+				cargaItemOrdenClienteFill();
+			} else {
+				cargaItemOrdenClienteNeto();
+			}
+	}
+	
+	private void cargaItemOrdenClienteFill() {
 		Listitem li;
 		EnvasadoControlPesoFillCabeceraDAO ecpfcDAO = new EnvasadoControlPesoFillCabeceraDAOJpaImpl();
 		
@@ -138,29 +162,56 @@ public class EnvasadoDetalleControlPesoFillNetoReporteWindow extends GenericForw
 		lbxItemOrdenCliente.setSelectedIndex(0);
 	}
 	
+	private void cargaItemOrdenClienteNeto() {
+		Listitem li;
+		EnvasadoControlPesoNetoCabeceraDAO ecpncDAO = new EnvasadoControlPesoNetoCabeceraDAOJpaImpl();
+		
+		lbxItemOrdenCliente.getItems().clear();
+		
+		li = new Listitem();
+		li.setValue(new EnvasadoControlPesoNetoCabecera());
+		li.setParent(lbxItemOrdenCliente);
+		
+		List<EnvasadoControlPesoNetoCabecera> listaEcpnc = ecpncDAO.getByProduccion(envasadoProceso.getIdenvasadoproceso());
+		Collections.sort(listaEcpnc, new Comparator<EnvasadoControlPesoNetoCabecera>() 		
+		{
+			@Override
+			public int compare(EnvasadoControlPesoNetoCabecera o1, EnvasadoControlPesoNetoCabecera o2) {
+				return new Integer(o1.getProduccionDetalleOrden().getItem()).compareTo(o2.getProduccionDetalleOrden().getItem());
+			}
+		});
+		
+		for (EnvasadoControlPesoNetoCabecera ecpnc : listaEcpnc ) {
+			li = new Listitem();
+			li.setValue(ecpnc);
+			new Listcell(ecpnc.getProduccionDetalleOrden().getItem()+"- "+ecpnc.getProduccionDetalleOrden().getOrden()).setParent(li);
+			li.setParent(lbxItemOrdenCliente);
+		}
+		
+		lbxItemOrdenCliente.setSelectedIndex(0);
+	}
+	
 	public void onClick$btnPdf(Event event) throws SuspendNotAllowedException, JRException, InterruptedException{
 		if (!validar())
 			return;
-		EnvasadoControlPesoFillCabecera ecpfc = (EnvasadoControlPesoFillCabecera)lbxItemOrdenCliente.getSelectedItem().getValue();
 
-		new ProgamaProduccionImpresion().doImprimirProgramaPesoFillNeto("EnvasadoDetalleControlPesoFillReporte.jasper",
-				"logo_real.gif", ecpfc.getIdenvasadocontrolpesofillcabecera());
+		if (isPesoFill) {
+			EnvasadoControlPesoFillCabecera ecpfc = (EnvasadoControlPesoFillCabecera)lbxItemOrdenCliente.getSelectedItem().getValue();
+			new ProgamaProduccionImpresion().doImprimirProgramaPesoFill("EnvasadoDetalleControlPesoFillReporte.jasper",
+					"logo_real.gif", ecpfc.getIdenvasadocontrolpesofillcabecera());
+		} else {
+			EnvasadoControlPesoNetoCabecera ecpnc = (EnvasadoControlPesoNetoCabecera)lbxItemOrdenCliente.getSelectedItem().getValue();
+			new ProgamaProduccionImpresion().doImprimirProgramaPesoNeto("EnvasadoDetalleControlPesoNetoReporte.jasper",
+					"logo_real.gif", ecpnc.getIdenvasadocontrolpesonetocabecera());
+		}
 	}
 	
 	public void onClick$btnExcel(Event event) throws Exception  {
 		if (!validar())
 			return;
-		EnvasadoControlPesoFillCabecera ecpfc = (EnvasadoControlPesoFillCabecera)lbxItemOrdenCliente.getSelectedItem().getValue();
-
-		//Ejecutamos el reporte
-		doImprimir2("EnvasadoDetalleControlPesoFillReporte.jasper", "EnvasadoDetalleControlPesoFillReporte", ecpfc.getIdenvasadocontrolpesofillcabecera());
-	}
-	
-	public void doImprimir2(String nombre_report, String nombre_descarga_report, Long idenvasadocontrolpesofillcabecera) throws JRException, SuspendNotAllowedException, InterruptedException, FileNotFoundException 
-	{
-		String logo = "logo_real.gif";
 		
 		//Obtenemos la ruta del reporte .jrxml
+		String logo = "logo_real.gif";
 		String ruta_logo = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/img").toString()+System.getProperty("file.separator")+logo;
 		String ruta_sub_report = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/reportes").toString()+System.getProperty("file.separator");
 
@@ -168,12 +219,39 @@ public class EnvasadoDetalleControlPesoFillNetoReporteWindow extends GenericForw
 		Map<String,Object> parameters = new HashMap<String,Object>();	
 		parameters.put("LOGO",ruta_logo);
 		parameters.put("SUBREPORT_DIR", ruta_sub_report);
-		parameters.put("idenvasadocontrolpesofillcabecera", idenvasadocontrolpesofillcabecera);
+		parameters.put("USUARIO",(String)Sessions.getCurrent().getAttribute("usuario"));
 		
+		//Ejecutamos el reporte
+		if (isPesoFill) {
+			EnvasadoControlPesoFillCabecera ecpfc = (EnvasadoControlPesoFillCabecera)lbxItemOrdenCliente.getSelectedItem().getValue();
+			parameters.put("idenvasadocontrolpesofillcabecera", ecpfc.getIdenvasadocontrolpesofillcabecera());
+			doImprimir2("EnvasadoDetalleControlPesoFillReporte.jasper", "EnvasadoDetalleControlPesoFillReporte", parameters);
+		} else {
+			EnvasadoControlPesoNetoCabecera ecpnc = (EnvasadoControlPesoNetoCabecera)lbxItemOrdenCliente.getSelectedItem().getValue();
+			parameters.put("idenvasadocontrolpesonetocabecera", ecpnc.getIdenvasadocontrolpesonetocabecera());
+			doImprimir2("EnvasadoDetalleControlPesoNetoReporte.jasper", "EnvasadoDetalleControlPesoNetoReporte", parameters);
+		}
+	}
+	
+	public void doImprimir2(String nombre_report, String nombre_descarga_report, Map<String,Object> parameters) throws JRException, SuspendNotAllowedException, InterruptedException, FileNotFoundException 
+	{
+		String logo = "logo_real.gif";
 		new ReporteExcel().generarExcelJasper(nombre_descarga_report, nombre_report, logo, parameters);
 	}
 	
 	private boolean validar() {
+		if (lbxReporte.getSelectedItem().getId()==null) {
+			Sistema.mensaje("Seleccione el tipo de reporte.");
+			lbxReporte.focus();
+			return false;
+		}
+		
+		if (isPesoFill==null) {
+			Sistema.mensaje("Seleccione el tipo de reporte.");
+			lbxReporte.focus();
+			return false;
+		}
+		
 		if (dteFecha1.getValue()==null){
 			Sistema.mensaje("Seleccione la fecha Producción");
 			dteFecha1.focus();
@@ -192,13 +270,23 @@ public class EnvasadoDetalleControlPesoFillNetoReporteWindow extends GenericForw
 			lbxTurno.focus();
 			return false;
 		}
-		EnvasadoControlPesoFillCabecera ecpfc = (EnvasadoControlPesoFillCabecera)lbxItemOrdenCliente.getSelectedItem().getValue();
-		if (ecpfc.getIdenvasadocontrolpesofillcabecera()==null) {
-			Sistema.mensaje("Debe elegir un valor para Item - Orden.");
-			lbxTurno.focus();
-			return false;
-		}
 		
+		
+		if (isPesoFill) {
+			EnvasadoControlPesoFillCabecera ecpfc = (EnvasadoControlPesoFillCabecera)lbxItemOrdenCliente.getSelectedItem().getValue();
+			if (ecpfc.getIdenvasadocontrolpesofillcabecera()==null) {
+				Sistema.mensaje("Debe elegir un valor para Item - Orden.");
+				lbxTurno.focus();
+				return false;
+			}
+		}  else {
+			EnvasadoControlPesoNetoCabecera ecpnc = (EnvasadoControlPesoNetoCabecera)lbxItemOrdenCliente.getSelectedItem().getValue();
+			if (ecpnc.getIdenvasadocontrolpesonetocabecera()==null) {
+				Sistema.mensaje("Debe elegir un valor para Item - Orden.");
+				lbxTurno.focus();
+				return false;
+			}
+		}
 		return true;
 	}
 

@@ -36,7 +36,7 @@ WHERE
 	<field name="contador" class="java.lang.Long"/>
 	<field name="pesofill" class="java.lang.Double"/>
 	<variable name="sumPesoFill" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{pesofill}]]></variableExpression>
+		<variableExpression><![CDATA[$F{pesofill}/$F{contador}]]></variableExpression>
 		<initialValueExpression><![CDATA[0.0]]></initialValueExpression>
 	</variable>
 	<variable name="maxPesoFill" class="java.lang.Double" calculation="Highest">

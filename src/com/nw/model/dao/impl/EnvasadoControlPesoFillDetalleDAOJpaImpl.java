@@ -72,4 +72,22 @@ public class EnvasadoControlPesoFillDetalleDAOJpaImpl extends BaseDaoJpaImpl imp
 		}
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<EnvasadoControlPesoFillDetalle> obtieneByEnvasadoControlPesoFillDetalleByCorte(Long idenvasadocontrolfillcortedetalle, Long idenvasadocontrolpesofillcabecera) {
+		try {
+			String sql = "SELECT e FROM EnvasadoControlPesoFillDetalle e "
+					+ "WHERE e.envasadoControlFillCorteDetalle.idenvasadocontrolfillcortedetalle = :idenvasadocontrolfillcortedetalle "
+					+ "AND e.envasadoControlPesoFillCabecera.idenvasadocontrolpesofillcabecera = :idenvasadocontrolpesofillcabecera";
+			return em
+					.createQuery(sql)
+					.setParameter("idenvasadocontrolfillcortedetalle", idenvasadocontrolfillcortedetalle)
+					.setParameter("idenvasadocontrolpesofillcabecera", idenvasadocontrolpesofillcabecera)
+					.getResultList();
+		} catch( NoResultException e) {
+			return new ArrayList<EnvasadoControlPesoFillDetalle>();
+		} catch( Exception e) {
+			e.printStackTrace();
+			return new ArrayList<EnvasadoControlPesoFillDetalle>();
+		}
+	}
 }

@@ -1,8 +1,14 @@
 package com.nw.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 
 /**
@@ -20,6 +26,7 @@ public class Luthy implements Serializable {
 	private List<LuthyMaquinaCerradoraEstandar> luthyMaquinaCerradoraEstandars;
 	private List<OeeDetalleMediosConDefectoEnvasado> oeeDetalleMediosConDefectoEnvasados;
 	private List<OeeEnvasadoDetalleVelocidadMaquinaCerradora> oeeEnvasadoDetalleVelocidadMaquinaCerradoras;
+	private List<EnvasadoControlPesoFillCabecera> envasadoControlPesoFillCabeceras;
 
 	public Luthy() {
 	}
@@ -152,5 +159,30 @@ public class Luthy implements Serializable {
 
 		return oeeEnvasadoDetalleVelocidadMaquinaCerradora;
 	}
+	
+	//bi-directional many-to-one association to EnvasadoControlPesoFillCabecera
+		@OneToMany(mappedBy="luthy")
+		public List<EnvasadoControlPesoFillCabecera> getEnvasadoControlPesoFillCabeceras() {
+			return this.envasadoControlPesoFillCabeceras;
+		}
+
+		public void setEnvasadoControlPesoFillCabeceras(List<EnvasadoControlPesoFillCabecera> envasadoControlPesoFillCabeceras) {
+			this.envasadoControlPesoFillCabeceras = envasadoControlPesoFillCabeceras;
+		}
+
+		public EnvasadoControlPesoFillCabecera addEnvasadoControlPesoFillCabecera(EnvasadoControlPesoFillCabecera envasadoControlPesoFillCabecera) {
+			getEnvasadoControlPesoFillCabeceras().add(envasadoControlPesoFillCabecera);
+			envasadoControlPesoFillCabecera.setLuthy(this);
+
+			return envasadoControlPesoFillCabecera;
+		}
+
+		public EnvasadoControlPesoFillCabecera removeEnvasadoControlPesoFillCabecera(EnvasadoControlPesoFillCabecera envasadoControlPesoFillCabecera) {
+			getEnvasadoControlPesoFillCabeceras().remove(envasadoControlPesoFillCabecera);
+			envasadoControlPesoFillCabecera.setLuthy(null);
+
+			return envasadoControlPesoFillCabecera;
+		}
+
 
 }

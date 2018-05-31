@@ -7,6 +7,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 
 import com.nw.model.EnvasadoControlPesoNetoCabecera;
+import com.nw.model.EnvasadoControlPesoNetoDetalle;
 import com.nw.model.dao.EnvasadoControlPesoNetoCabeceraDAO;
 
 public class EnvasadoControlPesoNetoCabeceraDAOJpaImpl extends BaseDaoJpaImpl implements EnvasadoControlPesoNetoCabeceraDAO {
@@ -22,18 +23,18 @@ public class EnvasadoControlPesoNetoCabeceraDAOJpaImpl extends BaseDaoJpaImpl im
 		try {
 			
 			t.begin();
+			List<EnvasadoControlPesoNetoDetalle> listaEcpnd = new ArrayList<EnvasadoControlPesoNetoDetalle>();
+			for(EnvasadoControlPesoNetoDetalle ecpnd : envasadoControlPesoNetoCabecera.getEnvasadoControlPesoNetoDetalles())
+				listaEcpnd.add(em.merge(ecpnd));
+			envasadoControlPesoNetoCabecera.setEnvasadoControlPesoNetoDetalles(listaEcpnd);
 			ecpfc =	em.merge(envasadoControlPesoNetoCabecera);
-			if (t.isActive())
-				System.out.println("activa");
-			else
-				System.out.println("close");
-			System.out.println(ecpfc.getIdenvasadocontrolpesonetocabecera());
 			t.commit();
 			
 			return ecpfc;
 		} catch(Exception e) {
-			t.rollback();
 			e.printStackTrace();
+			try {t.rollback();}catch(Exception e1) {e1.printStackTrace();}
+			
 			return null;
 		}
 	}

@@ -1,0 +1,78 @@
+<?page id = "pagAutoclaveParada" title="" contentType="text/html;charset=UTF-8" automaticTimeout="false"?>
+<zk>
+	<window id="winAutoclaveParada" 
+		apply="com.nw.webui.produccion.AutoclaveParadaWindow">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="AUTOCLAVE-PARADA" style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain" width="99%">
+			<grid width="290px">
+				<columns>
+					<column width="50%"></column>
+					<column width="50%"></column>
+				</columns>
+				<rows>
+					<row>
+						<label value="Día Producción" />
+						<toolbar>
+							<hbox>
+								<listbox id="lbxProduccion" mold="select" width="100%" />
+								<toolbarbutton id="btnActualizar" label="" tooltiptext="Actualizar" image="/img/refrescar.gif" width="100%" />
+							</hbox>
+						</toolbar>
+					</row>
+					<row>
+						<label value="Apertura/Cierre"/>
+						<listbox id="lbxAperturaCierre"  mold="select" width="100%">
+							<listitem selected="true"/>
+							<listitem label="Apertura" value="1"/>
+							<listitem label="Cierre" value="0" />
+						</listbox>
+					</row>
+					<row>
+						<label value="Autoclave"/>
+						<listbox id="lbxAutoclave" style="font-size:12px" mold="select" width="100%"/>
+					</row>
+				</rows>
+			</grid>
+			<grid width="99%" visible="false">
+				<columns>
+					<column width="50%"></column>
+					<column width="50%"></column>
+				</columns>
+				<rows>
+					<row>
+						<toolbar>
+							<toolbarbutton id="btnConsultar" label="Consultar" tooltiptext="Consultar" image="/img/buscar.gif" />
+						</toolbar>
+					</row>
+				</rows>
+			</grid>	
+			<grid width="99%">
+				<columns>
+					<column width="50%"></column>
+					<column width="50%"></column>
+				</columns>  
+				<rows>
+					<row>
+						<label value="Parada"/>
+						<intbox id="txtParada" readonly="true" width="100%"/>
+					</row>
+				</rows>
+			</grid>	
+			<grid width="290px">
+				<columns>
+					<column width="50%"></column>
+					<column width="50%"></column>
+				</columns>
+				<rows>
+					<row>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif" width="100%" />
+						</toolbar>
+						<checkbox id="cbxConfirmar" label="Revisado"></checkbox>
+					</row>
+				</rows>
+			</grid>	
+		</vbox>
+	</window>
+</zk> 

@@ -48,7 +48,8 @@ public class ProduccionArchivoCargaOrdenDetalle implements Serializable {
 	private String video;
 	private ProduccionArchivoCargaOrden produccionArchivoCargaOrden;
 	private Turno turno;
-
+	private double formato;
+	
 	public ProduccionArchivoCargaOrdenDetalle() {
 	}
 
@@ -375,4 +376,15 @@ public class ProduccionArchivoCargaOrdenDetalle implements Serializable {
 		this.turno = turno;
 	}
 
+
+	public double getFormato() {
+		return formato;
+	}
+
+
+	public void setFormato(double formato) {
+		this.formato = formato;
+	}
+
+	
 }

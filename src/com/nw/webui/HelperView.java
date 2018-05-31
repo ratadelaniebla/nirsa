@@ -5,6 +5,7 @@ import org.zkoss.zul.Listcell;
 import org.zkoss.zul.Listitem;
 import org.zkoss.zul.Textbox;
 
+import com.nw.model.Autoclave;
 import com.nw.model.BarcoDescarga;
 import com.nw.model.LimpiezaLinea;
 import com.nw.model.LimpiezaProceso;
@@ -13,6 +14,7 @@ import com.nw.model.ProcesoAperturaCierre;
 import com.nw.model.Produccion;
 import com.nw.model.ProduccionDetalleLote;
 import com.nw.model.Turno;
+import com.nw.model.dao.impl.AutoClaveDAOJpaImpl;
 import com.nw.model.dao.impl.BarcoDescargaDAOJpaImpl;
 import com.nw.model.dao.impl.LimpiezaAperturaCierreDAOJpaImpl;
 import com.nw.model.dao.impl.LimpiezaLineaDAOJpaImpl;
@@ -116,6 +118,16 @@ public class HelperView {
 		Sistema.setPosicionPrimerItem(lbxTipoLimpieza);
 	}
 
+	public void cargarAutoclaves(Listbox lbxAutoclave){
+		Sistema.agregarListitemEnBlanco(lbxAutoclave);
+		for (Autoclave t: new AutoClaveDAOJpaImpl().getFindAutoClaveAll()){
+			Listitem li = new Listitem();
+			li.setValue(t);
+			new Listcell( t.getDescripcion()).setParent(li);
+			li.setParent(lbxAutoclave);
+		}
+		Sistema.setPosicionPrimerItem(lbxAutoclave);
+	}
 	/**
 	 * Carga los turnos en el listbox especificado
 	 * @param lbxTurno
@@ -130,7 +142,7 @@ public class HelperView {
 		}
 		Sistema.setPosicionPrimerItem(lbxTurno);
 	}
-
+	
 	/**
 	 * Muestra la fecha del proceso de limpieza activo y devuelve el objeto LimpiezaProceso
 	 * @param txtDiaProduccion

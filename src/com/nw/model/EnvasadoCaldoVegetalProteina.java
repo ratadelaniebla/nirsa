@@ -1,8 +1,15 @@
 package com.nw.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 
 /**
@@ -18,7 +25,9 @@ public class EnvasadoCaldoVegetalProteina implements Serializable {
 	private String descripcion;
 	private List<EnvasadoControlPesoFillCabecera> envasadoControlPesoFillCabeceras;
 	private List<EnvasadoControlPesoNetoCabecera> envasadoControlPesoNetoCabeceras;
-
+	private List<EnvasadoFichaTecnica> envasadoFichaTecnicas;
+	private List<EnvasadoDetalleProcesoCambio> envasadoDetalleProcesoCambios;
+	
 	public EnvasadoCaldoVegetalProteina() {
 	}
 
@@ -83,13 +92,63 @@ public class EnvasadoCaldoVegetalProteina implements Serializable {
 		envasadoControlPesoNetoCabecera.setEnvasadoCaldoVegetalProteina(this);
 
 		return envasadoControlPesoNetoCabecera;
-	}
+	} 
 
 	public EnvasadoControlPesoNetoCabecera removeEnvasadoControlPesoNetoCabecera(EnvasadoControlPesoNetoCabecera envasadoControlPesoNetoCabecera) {
 		getEnvasadoControlPesoNetoCabeceras().remove(envasadoControlPesoNetoCabecera);
 		envasadoControlPesoNetoCabecera.setEnvasadoCaldoVegetalProteina(null);
 
 		return envasadoControlPesoNetoCabecera;
+	}
+	
+	
+	//bi-directional many-to-one association to EnvasadoFichaTecnica
+	@OneToMany(mappedBy="envasadoCaldoVegetalProteina")
+	public List<EnvasadoFichaTecnica> getEnvasadoFichaTecnicas() {
+		return this.envasadoFichaTecnicas;
+	}
+
+	public void setEnvasadoFichaTecnicas(List<EnvasadoFichaTecnica> envasadoFichaTecnicas) {
+		this.envasadoFichaTecnicas = envasadoFichaTecnicas;
+	}
+
+	public EnvasadoFichaTecnica addEnvasadoFichaTecnica(EnvasadoFichaTecnica envasadoFichaTecnica) {
+		getEnvasadoFichaTecnicas().add(envasadoFichaTecnica);
+		envasadoFichaTecnica.setEnvasadoCaldoVegetalProteina(this);
+
+		return envasadoFichaTecnica;
+	}
+
+	public EnvasadoFichaTecnica removeEnvasadoFichaTecnica(EnvasadoFichaTecnica envasadoFichaTecnica) {
+		getEnvasadoFichaTecnicas().remove(envasadoFichaTecnica);
+		envasadoFichaTecnica.setEnvasadoCaldoVegetalProteina(null);
+
+		return envasadoFichaTecnica;
+	}
+	
+	
+	//bi-directional many-to-one association to EnvasadoDetalleProcesoCambio
+	@OneToMany(mappedBy="envasadoCaldoVegetalProteina")
+	public List<EnvasadoDetalleProcesoCambio> getEnvasadoDetalleProcesoCambios() {
+		return this.envasadoDetalleProcesoCambios;
+	}
+
+	public void setEnvasadoDetalleProcesoCambios(List<EnvasadoDetalleProcesoCambio> envasadoDetalleProcesoCambios) {
+		this.envasadoDetalleProcesoCambios = envasadoDetalleProcesoCambios;
+	}
+
+	public EnvasadoDetalleProcesoCambio addEnvasadoDetalleProcesoCambio(EnvasadoDetalleProcesoCambio envasadoDetalleProcesoCambio) {
+		getEnvasadoDetalleProcesoCambios().add(envasadoDetalleProcesoCambio);
+		envasadoDetalleProcesoCambio.setEnvasadoCaldoVegetalProteina(this);
+
+		return envasadoDetalleProcesoCambio;
+	}
+
+	public EnvasadoDetalleProcesoCambio removeEnvasadoDetalleProcesoCambio(EnvasadoDetalleProcesoCambio envasadoDetalleProcesoCambio) {
+		getEnvasadoDetalleProcesoCambios().remove(envasadoDetalleProcesoCambio);
+		envasadoDetalleProcesoCambio.setEnvasadoCaldoVegetalProteina(null);
+
+		return envasadoDetalleProcesoCambio;
 	}
 
 }

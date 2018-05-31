@@ -1,35 +1,38 @@
 package com.nw.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
+
+import javax.persistence.*;
+
+import com.nw.model.EnvasadoDetalleProcesoCambio;
 
 
 /**
- * The persistent class for the envasado_tipo_proteina database table.
+ * The persistent class for the envasado_motivo_cambios database table.
  * 
  */
 @Entity
-@Table(name="envasado_tipo_proteina")
-@NamedQuery(name="EnvasadoTipoProteina.findAll", query="SELECT e FROM EnvasadoTipoProteina e")
-public class EnvasadoTipoProteina implements Serializable {
+@Table(name="envasado_motivo_cambios")
+@NamedQuery(name="EnvasadoMotivoCambio.findAll", query="SELECT e FROM EnvasadoMotivoCambio e")
+public class EnvasadoMotivoCambio implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private Integer idenvasadotipoproteina;
+	private Long idenvasadomotivocambios;
 	private String descripcion;
 	private List<EnvasadoDetalleProcesoCambio> envasadoDetalleProcesoCambios;
 
-	public EnvasadoTipoProteina() {
+	public EnvasadoMotivoCambio() {
 	}
 
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	public Integer getIdenvasadotipoproteina() {
-		return this.idenvasadotipoproteina;
+	public Long getIdenvasadomotivocambios() {
+		return this.idenvasadomotivocambios;
 	}
 
-	public void setIdenvasadotipoproteina(Integer idenvasadotipoproteina) {
-		this.idenvasadotipoproteina = idenvasadotipoproteina;
+	public void setIdenvasadomotivocambios(Long idenvasadomotivocambios) {
+		this.idenvasadomotivocambios = idenvasadomotivocambios;
 	}
 
 
@@ -41,9 +44,8 @@ public class EnvasadoTipoProteina implements Serializable {
 		this.descripcion = descripcion;
 	}
 
-
 	//bi-directional many-to-one association to EnvasadoDetalleProcesoCambio
-	@OneToMany(mappedBy="envasadoTipoProteina")
+	@OneToMany(mappedBy="envasadoMotivoCambio")
 	public List<EnvasadoDetalleProcesoCambio> getEnvasadoDetalleProcesoCambios() {
 		return this.envasadoDetalleProcesoCambios;
 	}
@@ -54,16 +56,15 @@ public class EnvasadoTipoProteina implements Serializable {
 
 	public EnvasadoDetalleProcesoCambio addEnvasadoDetalleProcesoCambio(EnvasadoDetalleProcesoCambio envasadoDetalleProcesoCambio) {
 		getEnvasadoDetalleProcesoCambios().add(envasadoDetalleProcesoCambio);
-		envasadoDetalleProcesoCambio.setEnvasadoTipoProteina(this);
+		envasadoDetalleProcesoCambio.setEnvasadoMotivoCambio(this);
 
 		return envasadoDetalleProcesoCambio;
 	}
 
 	public EnvasadoDetalleProcesoCambio removeEnvasadoDetalleProcesoCambio(EnvasadoDetalleProcesoCambio envasadoDetalleProcesoCambio) {
 		getEnvasadoDetalleProcesoCambios().remove(envasadoDetalleProcesoCambio);
-		envasadoDetalleProcesoCambio.setEnvasadoTipoProteina(null);
+		envasadoDetalleProcesoCambio.setEnvasadoMotivoCambio(null);
 
 		return envasadoDetalleProcesoCambio;
 	}
-
 }

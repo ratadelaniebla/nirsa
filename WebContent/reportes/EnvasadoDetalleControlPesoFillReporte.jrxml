@@ -7,6 +7,8 @@
 		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
 	</parameter>
 	<parameter name="idenvasadocontrolpesofillcabecera" class="java.lang.Long"/>
+	<parameter name="LOGO" class="java.lang.String"/>
+	<parameter name="USUARIO" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select idenvasadocontrolpesofillcabecera, idenvasadoproceso, idproducciondetalleorden
 from envasado_control_peso_fill_cabecera
@@ -21,6 +23,9 @@ where idenvasadocontrolpesofillcabecera = $P{idenvasadocontrolpesofillcabecera};
 				<reportElement x="0" y="0" width="555" height="40"/>
 				<subreportParameter name="idenvasadocontrolpesofillcabecera">
 					<subreportParameterExpression><![CDATA[$F{idenvasadocontrolpesofillcabecera}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="LOGO">
+					<subreportParameterExpression><![CDATA[$P{LOGO}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "EnvasadoDetalleControlPesoFillCabecera.jasper"]]></subreportExpression>
@@ -57,9 +62,10 @@ where idenvasadocontrolpesofillcabecera = $P{idenvasadocontrolpesofillcabecera};
 				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + "EnvasadoDetalleControlPesoFillTotal.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
+		<band height="50"/>
 	</detail>
 	<pageFooter>
-		<band height="20" splitType="Stretch">
+		<band height="54" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="0" width="120" height="20"/>
 				<box>
@@ -92,6 +98,54 @@ where idenvasadocontrolpesofillcabecera = $P{idenvasadocontrolpesofillcabecera};
 				<textElement textAlignment="Right" verticalAlignment="Bottom"/>
 				<text><![CDATA[901750]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="62" y="39" width="102" height="15"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{USUARIO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="39" width="62" height="15"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Usuario:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement x="280" y="39" width="144" height="15"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="218" y="39" width="62" height="15"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Fecha Emisión:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="470" y="39" width="85" height="15"/>
+				<box>
+					<topPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Pag. "+$V{PAGE_NUMBER}+" de" +" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageFooter>
 </jasperReport>

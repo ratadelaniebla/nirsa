@@ -1,0 +1,85 @@
+<?page title="" contentType="text/html;charset=UTF-8" automaticTimeout="false"?>
+<zk>
+	<window id="winCierreLonja"
+		apply="com.nw.webui.produccion.EsterilizadoAperturaCierreProcesoWindow">
+		
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="APERTURA-CIERRE-PROCESO"
+			style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain" width="98%">
+			<grid>
+				<columns>
+					<column width="45%"></column>
+					<column width="55%"></column>
+				</columns>
+				<rows>
+					<row>
+						<label id="lbAperturaCierre" value="Apertura/Cierre"></label>
+						<listbox id="lbxAperturaCierre" mold="select" width="95%">
+							<listitem label=""></listitem>
+							<listitem label="Apertura"></listitem>
+							<listitem label="Cierre"></listitem>
+						</listbox>
+					</row>
+				</rows>
+			</grid>
+			
+			<grid id="gdApertura" visible="false">
+				<columns>
+					<column width="45%"></column>
+					<column width="55%"></column>
+				</columns>
+				<rows>
+					<row>
+						<label id="lbFechaProduccion" value="Fecha Labor"/>
+						<datebox visible="true" id="dteFechaProduccion" width="80%"  readonly="true" format="dd/MM/yyyy"/>
+					</row>
+				</rows>
+			</grid>
+			
+			<grid id="gdCierre" visible="false">
+				<columns>
+					<column width="45%"></column>
+					<column width="55%"></column>
+				</columns>
+				<rows>
+					<row>
+						<label id="lbFechaProduccion1" value="Fecha Labor"/>
+						<listbox visible="true" id="lbxFechaProduccion" mold="select" width="95%"  />
+					</row>
+				</rows>
+			</grid>
+			
+			<grid id="gdTurno">
+				<columns>
+					<column width="45%"></column>
+					<column width="55%"></column>
+				</columns>
+				<rows>
+					<row>
+						<label id="lbTurno" value="Turno labor"></label>
+						<listbox id="lbxTurno" mold="select" width="95%">
+						</listbox>
+					</row>
+				</rows>
+			</grid>
+
+			<grid width="99%">
+				<columns>
+					<column width="45%"></column>
+					<column width="55%"></column>
+				</columns>
+				<rows>
+					<row>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif"  width="100%"/>
+						</toolbar>
+						<checkbox id="chbRevisado"
+							label="Revisado">
+						</checkbox>
+					</row>
+				</rows>
+			</grid>
+		</vbox>
+	</window>
+</zk>

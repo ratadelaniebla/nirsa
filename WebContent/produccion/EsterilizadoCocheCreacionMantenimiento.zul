@@ -1,0 +1,88 @@
+<?page title="" contentType="text/html;charset=UTF-8" automaticTimeout="false"?>
+<zk>
+	<window id="winCierreLonja" 	apply="com.nw.webui.produccion.EsterilizadoCocheMantenimientoWindow" >
+		
+		<script src="/js/noBarra.js" type="text/javascript" />
+		<label value="COCHE-MANTENIMIENTO"
+			style="color:blue;font-size:12px;font-weight:bold" />
+		<vbox id="vbxMain" width="100%">
+			<grid width="290px">
+				<columns>
+					<column width="100px"></column>
+					<column width="100px"></column>
+				</columns>
+				<rows>
+					<row>
+						<label value="Día Producción" />
+						<datebox id="dteFechaProduccion" width="98px" readonly="true" format="dd/MM/yyyy"/>
+					</row>
+					<row>
+						<label value="Id Coche" />
+						<vbox width="100%">
+							<intbox id="intCocheId" maxlength="8" width="100%" />
+							<toolbar>
+								<toolbarbutton id="btnConsultar" label="Consultar" tooltiptext="Consultar" image="/img/buscar.gif" />
+							</toolbar>
+						</vbox>
+					</row>
+					<row>
+						<label value="Autoclave - Parada"></label>
+						<listbox id="lbxAutoClaveParada"
+							mold="select" width="100%">
+						</listbox>
+					</row>
+					<row>
+						<label value="Turno Labor"></label>
+						<listbox id="lbxTurnoLabor"
+							mold="select" width="100%">
+						</listbox>
+					</row>
+					<row>
+						<label value="Turno Prod."></label>
+						<listbox id="lbxTurnoProduccion"
+							mold="select" width="100%">
+						</listbox>
+					</row>
+					<row>
+						<label value="Cliente"></label>
+						<listbox id="lbxCliente" 
+							mold="select" width="100%">
+						</listbox>
+					</row>
+					<row>
+						<label value="Codigo Video"></label>
+						<label id="lbCodigoValor" width="100%" />
+					</row>
+				</rows>
+			</grid>
+
+			<grid>
+				<columns>
+					<column width="45%"></column>
+					<column width="55%"></column>
+				</columns>
+				<rows>
+					<row>
+						<label id="lbSequeciaCoche"  value="# Sequecia Coche"></label>
+						<label id="lbSequeciaCocheValor" width="100%" />
+					</row>
+					<row>
+						<label value="# Act. Coches Cliente"></label>
+						<label id="lbCochesClienteValor" width="100%" />
+					</row>
+				</rows>
+			</grid>
+			
+			<grid width="99%">
+				<rows>
+					<row>
+						<toolbar>
+							<toolbarbutton id="btnGrabar"
+								label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif" />
+						</toolbar>
+					</row>
+				</rows>
+			</grid>
+		</vbox>
+	</window>
+</zk>

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteOrdenDetalle" pageWidth="2680" pageHeight="595" orientation="Landscape" columnWidth="2680" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteOrdenDetalle" pageWidth="2774" pageHeight="595" orientation="Landscape" columnWidth="2774" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="2637"/>
+	<property name="ireport.x" value="2174"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="PSIDPRODUCCIONARCHIVOCARGAORDEN" class="java.lang.Long"/>
 	<parameter name="IDTURNO" class="java.lang.Integer"/>
-	<parameter name="sumTon" class="java.lang.Double" isForPrompting="false">
+	<parameter name="sumTon" class="java.lang.Double">
 		<defaultValueExpression><![CDATA[$V{sumTon}]]></defaultValueExpression>
 	</parameter>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[SELECT idproduccionarchivocargaordendetalle, idproduccionarchivocargaorden,
+		<![CDATA[SELECT idproduccionarchivocargaordendetalle, idproduccionarchivocargaorden, formato,
        idturno, item, orden, ps, cliente, marca, producto, tapa, dre,
        fi, esp, ac, ag, mesa, cajas, ton, materialfer, materialhal,
-       ordenfer, ordenhal, video, latas, fill, lomolimpio, crudo, ren,
+       ordenfer, ordenhal, video, latas, lomolimpio, crudo, ren,
        flake, ralladoempacado, CASE WHEN reproceso=true THEN 'X' ELSE '-' END reproceso, observacion
   FROM produccion_archivo_carga_orden_detalle
 WHERE idproduccionarchivocargaorden = $P{PSIDPRODUCCIONARCHIVOCARGAORDEN}
@@ -22,6 +22,7 @@ order by item asc]]>
 	</queryString>
 	<field name="idproduccionarchivocargaordendetalle" class="java.lang.Long"/>
 	<field name="idproduccionarchivocargaorden" class="java.lang.Long"/>
+	<field name="formato" class="java.lang.Double"/>
 	<field name="idturno" class="java.lang.Integer"/>
 	<field name="item" class="java.lang.Integer"/>
 	<field name="orden" class="java.lang.String"/>
@@ -43,8 +44,7 @@ order by item asc]]>
 	<field name="ordenfer" class="java.lang.Integer"/>
 	<field name="ordenhal" class="java.lang.Integer"/>
 	<field name="video" class="java.lang.String"/>
-	<field name="latas" class="java.lang.Integer"/>
-	<field name="fill" class="java.lang.Double"/>
+	<field name="latas" class="java.lang.Double"/>
 	<field name="lomolimpio" class="java.lang.Double"/>
 	<field name="crudo" class="java.lang.Double"/>
 	<field name="ren" class="java.lang.Double"/>
@@ -113,7 +113,7 @@ order by item asc]]>
 				<text><![CDATA[Cliente]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" x="292" y="0" width="62" height="20" isPrintWhenDetailOverflows="true"/>
+				<reportElement stretchType="RelativeToBandHeight" x="292" y="0" width="100" height="20" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -126,7 +126,7 @@ order by item asc]]>
 				<text><![CDATA[Marca]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" x="354" y="0" width="147" height="20" isPrintWhenDetailOverflows="true"/>
+				<reportElement stretchType="RelativeToBandHeight" x="392" y="0" width="208" height="20" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -139,7 +139,7 @@ order by item asc]]>
 				<text><![CDATA[Producto]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" x="501" y="0" width="62" height="20" isPrintWhenDetailOverflows="true"/>
+				<reportElement stretchType="RelativeToBandHeight" x="600" y="0" width="62" height="20" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -152,7 +152,7 @@ order by item asc]]>
 				<text><![CDATA[Tapa]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" x="563" y="0" width="62" height="20" isPrintWhenDetailOverflows="true"/>
+				<reportElement stretchType="RelativeToBandHeight" x="662" y="0" width="62" height="20" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -165,7 +165,7 @@ order by item asc]]>
 				<text><![CDATA[Dre]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" x="625" y="0" width="62" height="20" isPrintWhenDetailOverflows="true"/>
+				<reportElement stretchType="RelativeToBandHeight" x="724" y="0" width="62" height="20" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -178,7 +178,7 @@ order by item asc]]>
 				<text><![CDATA[FI%]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" x="687" y="0" width="62" height="20" isPrintWhenDetailOverflows="true"/>
+				<reportElement stretchType="RelativeToBandHeight" x="786" y="0" width="62" height="20" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -191,7 +191,7 @@ order by item asc]]>
 				<text><![CDATA[Esp]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" x="749" y="0" width="62" height="20" isPrintWhenDetailOverflows="true"/>
+				<reportElement stretchType="RelativeToBandHeight" x="848" y="0" width="62" height="20" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -204,7 +204,7 @@ order by item asc]]>
 				<text><![CDATA[Ac.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" x="811" y="0" width="62" height="20" isPrintWhenDetailOverflows="true"/>
+				<reportElement stretchType="RelativeToBandHeight" x="910" y="0" width="62" height="20" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -217,7 +217,7 @@ order by item asc]]>
 				<text><![CDATA[Ag.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" x="873" y="0" width="62" height="20" isPrintWhenDetailOverflows="true"/>
+				<reportElement stretchType="RelativeToBandHeight" x="972" y="0" width="62" height="20" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -230,7 +230,7 @@ order by item asc]]>
 				<text><![CDATA[Mesa]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" x="935" y="0" width="62" height="20" isPrintWhenDetailOverflows="true"/>
+				<reportElement stretchType="RelativeToBandHeight" x="1034" y="0" width="62" height="20" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -243,7 +243,7 @@ order by item asc]]>
 				<text><![CDATA[Cajas]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" x="997" y="0" width="62" height="20" isPrintWhenDetailOverflows="true"/>
+				<reportElement stretchType="RelativeToBandHeight" x="1096" y="0" width="62" height="20" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -256,7 +256,7 @@ order by item asc]]>
 				<text><![CDATA[Ton]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" x="1059" y="0" width="103" height="20" isPrintWhenDetailOverflows="true"/>
+				<reportElement stretchType="RelativeToBandHeight" x="1158" y="0" width="103" height="20" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -269,7 +269,7 @@ order by item asc]]>
 				<text><![CDATA[Material fert]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" x="1162" y="0" width="110" height="20" isPrintWhenDetailOverflows="true"/>
+				<reportElement stretchType="RelativeToBandHeight" x="1261" y="0" width="110" height="20" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -282,7 +282,7 @@ order by item asc]]>
 				<text><![CDATA[Material HAL]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" x="1272" y="0" width="94" height="20" isPrintWhenDetailOverflows="true"/>
+				<reportElement stretchType="RelativeToBandHeight" x="1371" y="0" width="94" height="20" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -295,7 +295,7 @@ order by item asc]]>
 				<text><![CDATA[Orden fert]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" x="1366" y="0" width="93" height="20" isPrintWhenDetailOverflows="true"/>
+				<reportElement stretchType="RelativeToBandHeight" x="1465" y="0" width="93" height="20" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -308,7 +308,7 @@ order by item asc]]>
 				<text><![CDATA[Orden hal]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" x="1459" y="0" width="93" height="20" isPrintWhenDetailOverflows="true"/>
+				<reportElement stretchType="RelativeToBandHeight" x="1558" y="0" width="93" height="20" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -321,7 +321,7 @@ order by item asc]]>
 				<text><![CDATA[Video]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" x="1552" y="0" width="73" height="20" isPrintWhenDetailOverflows="true"/>
+				<reportElement stretchType="RelativeToBandHeight" x="1724" y="0" width="73" height="20" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -334,20 +334,7 @@ order by item asc]]>
 				<text><![CDATA[Latas]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" x="1625" y="0" width="73" height="20" isPrintWhenDetailOverflows="true"/>
-				<box>
-					<topPen lineWidth="0.5" lineStyle="Solid"/>
-					<leftPen lineWidth="0.5" lineStyle="Solid"/>
-					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
-					<rightPen lineWidth="0.5" lineStyle="Solid"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Fill]]></text>
-			</staticText>
-			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" x="1698" y="0" width="96" height="20" isPrintWhenDetailOverflows="true"/>
+				<reportElement stretchType="RelativeToBandHeight" x="1797" y="0" width="96" height="20" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -360,7 +347,7 @@ order by item asc]]>
 				<text><![CDATA[Lomo Limpio]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" x="1794" y="0" width="96" height="20" isPrintWhenDetailOverflows="true"/>
+				<reportElement stretchType="RelativeToBandHeight" x="1893" y="0" width="96" height="20" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -373,7 +360,7 @@ order by item asc]]>
 				<text><![CDATA[Crudo]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" x="1890" y="0" width="96" height="20" isPrintWhenDetailOverflows="true"/>
+				<reportElement stretchType="RelativeToBandHeight" x="1989" y="0" width="96" height="20" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -386,7 +373,7 @@ order by item asc]]>
 				<text><![CDATA[Rend]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" x="1986" y="0" width="78" height="20" isPrintWhenDetailOverflows="true"/>
+				<reportElement stretchType="RelativeToBandHeight" x="2085" y="0" width="78" height="20" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -399,7 +386,7 @@ order by item asc]]>
 				<text><![CDATA[%FLAKE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" x="2064" y="0" width="68" height="20" isPrintWhenDetailOverflows="true"/>
+				<reportElement stretchType="RelativeToBandHeight" x="2163" y="0" width="68" height="20" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -412,7 +399,7 @@ order by item asc]]>
 				<text><![CDATA[RALLADO Empacado]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" x="2132" y="0" width="388" height="20" isPrintWhenDetailOverflows="true"/>
+				<reportElement stretchType="RelativeToBandHeight" x="2231" y="0" width="388" height="20" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -425,7 +412,7 @@ order by item asc]]>
 				<text><![CDATA[OBSERVACION]]></text>
 			</staticText>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" x="2520" y="0" width="81" height="20" isPrintWhenDetailOverflows="true"/>
+				<reportElement stretchType="RelativeToBandHeight" x="2619" y="0" width="81" height="20" isPrintWhenDetailOverflows="true"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -436,6 +423,19 @@ order by item asc]]>
 					<font size="7" isBold="true"/>
 				</textElement>
 				<text><![CDATA[REPROCESO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="1651" y="0" width="73" height="20" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Formato]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -494,7 +494,7 @@ order by item asc]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{cliente}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="292" y="0" width="62" height="14"/>
+				<reportElement stretchType="RelativeToBandHeight" x="292" y="0" width="100" height="14"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -507,7 +507,7 @@ order by item asc]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{marca}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="354" y="0" width="147" height="14"/>
+				<reportElement stretchType="RelativeToBandHeight" x="392" y="0" width="208" height="14"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -520,7 +520,7 @@ order by item asc]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{producto}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="501" y="0" width="62" height="14"/>
+				<reportElement stretchType="RelativeToBandHeight" x="600" y="0" width="62" height="14"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -533,7 +533,7 @@ order by item asc]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{tapa}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="###########0.####" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="563" y="0" width="62" height="14"/>
+				<reportElement stretchType="RelativeToBandHeight" x="662" y="0" width="62" height="14"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -546,7 +546,7 @@ order by item asc]]>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{dre}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="###########0.####" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="625" y="0" width="62" height="14"/>
+				<reportElement stretchType="RelativeToBandHeight" x="724" y="0" width="62" height="14"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -559,7 +559,7 @@ order by item asc]]>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{fi}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="687" y="0" width="62" height="14"/>
+				<reportElement stretchType="RelativeToBandHeight" x="786" y="0" width="62" height="14"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -572,7 +572,7 @@ order by item asc]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{esp}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="###########0.####" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="749" y="0" width="62" height="14"/>
+				<reportElement stretchType="RelativeToBandHeight" x="848" y="0" width="62" height="14"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -585,7 +585,7 @@ order by item asc]]>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{ac}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="###########0.####" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="811" y="0" width="62" height="14"/>
+				<reportElement stretchType="RelativeToBandHeight" x="910" y="0" width="62" height="14"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -598,7 +598,7 @@ order by item asc]]>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{ag}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="###########0.####" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="873" y="0" width="62" height="14"/>
+				<reportElement stretchType="RelativeToBandHeight" x="972" y="0" width="62" height="14"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -611,7 +611,7 @@ order by item asc]]>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{mesa}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="###########0.####" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="935" y="0" width="62" height="14"/>
+				<reportElement stretchType="RelativeToBandHeight" x="1034" y="0" width="62" height="14"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -624,7 +624,7 @@ order by item asc]]>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{cajas}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="###########0.000" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="997" y="0" width="62" height="14"/>
+				<reportElement stretchType="RelativeToBandHeight" x="1096" y="0" width="62" height="14"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -637,7 +637,7 @@ order by item asc]]>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{ton}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="###########0.####" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="1059" y="0" width="103" height="14"/>
+				<reportElement stretchType="RelativeToBandHeight" x="1158" y="0" width="103" height="14"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -650,7 +650,7 @@ order by item asc]]>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{materialfer}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="###########0.####" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="1162" y="0" width="110" height="14"/>
+				<reportElement stretchType="RelativeToBandHeight" x="1261" y="0" width="110" height="14"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -663,7 +663,7 @@ order by item asc]]>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{materialhal}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="1272" y="0" width="94" height="14"/>
+				<reportElement stretchType="RelativeToBandHeight" x="1371" y="0" width="94" height="14"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -676,7 +676,7 @@ order by item asc]]>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{ordenfer}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="###########0.####" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="1366" y="0" width="93" height="14"/>
+				<reportElement stretchType="RelativeToBandHeight" x="1465" y="0" width="93" height="14"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -689,7 +689,7 @@ order by item asc]]>
 				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{ordenhal}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="###########0.####" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="1459" y="0" width="93" height="14"/>
+				<reportElement stretchType="RelativeToBandHeight" x="1558" y="0" width="93" height="14"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -702,7 +702,7 @@ order by item asc]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{video}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="###########0.000" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="1552" y="0" width="73" height="14"/>
+				<reportElement stretchType="RelativeToBandHeight" x="1724" y="0" width="73" height="14"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -712,23 +712,10 @@ order by item asc]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="7"/>
 				</textElement>
-				<textFieldExpression class="java.lang.Integer"><![CDATA[$F{latas}]]></textFieldExpression>
-			</textField>
-			<textField isStretchWithOverflow="true" pattern="###########0.####" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="1625" y="0" width="73" height="14"/>
-				<box>
-					<topPen lineWidth="0.5" lineStyle="Solid"/>
-					<leftPen lineWidth="0.5" lineStyle="Solid"/>
-					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
-					<rightPen lineWidth="0.5" lineStyle="Solid"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="7"/>
-				</textElement>
-				<textFieldExpression class="java.lang.Double"><![CDATA[$F{fill}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{latas}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="###########0.000" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="1698" y="0" width="96" height="14"/>
+				<reportElement stretchType="RelativeToBandHeight" x="1797" y="0" width="96" height="14"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -741,7 +728,7 @@ order by item asc]]>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{lomolimpio}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="###########0.000" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="1794" y="0" width="96" height="14"/>
+				<reportElement stretchType="RelativeToBandHeight" x="1893" y="0" width="96" height="14"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -754,7 +741,7 @@ order by item asc]]>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{crudo}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0.0 %" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="1890" y="0" width="96" height="14"/>
+				<reportElement stretchType="RelativeToBandHeight" x="1989" y="0" width="96" height="14"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -767,7 +754,7 @@ order by item asc]]>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{ren}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="#,##0 %" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="1986" y="0" width="78" height="14"/>
+				<reportElement stretchType="RelativeToBandHeight" x="2085" y="0" width="78" height="14"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -780,7 +767,7 @@ order by item asc]]>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{flake}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="############.###" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="2064" y="0" width="68" height="14"/>
+				<reportElement stretchType="RelativeToBandHeight" x="2163" y="0" width="68" height="14"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -793,7 +780,7 @@ order by item asc]]>
 				<textFieldExpression class="java.lang.Double"><![CDATA[$F{ralladoempacado}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="2132" y="0" width="388" height="14"/>
+				<reportElement stretchType="RelativeToBandHeight" x="2231" y="0" width="388" height="14"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -806,7 +793,7 @@ order by item asc]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{observacion}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
-				<reportElement stretchType="RelativeToBandHeight" x="2520" y="0" width="81" height="14"/>
+				<reportElement stretchType="RelativeToBandHeight" x="2619" y="0" width="81" height="14"/>
 				<box>
 					<topPen lineWidth="0.5" lineStyle="Solid"/>
 					<leftPen lineWidth="0.5" lineStyle="Solid"/>
@@ -817,6 +804,19 @@ order by item asc]]>
 					<font size="7"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{reproceso}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="###########0.####" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="1651" y="0" width="73" height="14"/>
+				<box>
+					<topPen lineWidth="0.5" lineStyle="Solid"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{formato}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

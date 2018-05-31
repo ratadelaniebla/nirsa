@@ -1,5 +1,7 @@
 package com.nw.model.dao;
 
+import java.util.List;
+
 import com.nw.model.LimpiezaProceso;
 
 /**
@@ -11,9 +13,9 @@ public interface LimpiezaProcesoDAO extends Dao {
 
 	public LimpiezaProceso getLimpiezaProcesoByProcesoAperturaCierreId(Long procesoAperturaCierreId, Long vip);
 
-
 	LimpiezaProceso getLimpiezaProcesoByProcesoAperturaCierreId(
 			Long procesoAperturaCierreId);
-
+	
+	public List<LimpiezaProceso> obtieneLimpiezaProcesoNUltimos (Integer limit);
 	
 }

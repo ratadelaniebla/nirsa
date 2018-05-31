@@ -9,6 +9,20 @@
 		<grid width="99%">
 			<rows>
 				<row>
+					<label value="Tipo Reporte"/>
+					<listbox id="lbxReporte" style="font-size:12px" mold="select" width="120px">
+						<listitem>
+							<listcell label="" />
+						</listitem>
+						<listitem id="lclPesoFill">
+							<listcell label="Peso Fill" />
+						</listitem>
+						<listitem id="lclPesoNeto">
+							<listcell label="Peso Neto" />
+						</listitem>
+					</listbox>
+				</row>
+				<row>
 					<label value="Producción:"/>
 					<datebox id="dteFecha1" width="110px" format="dd/MM/yyyy " readonly="true"/>
 				</row>
