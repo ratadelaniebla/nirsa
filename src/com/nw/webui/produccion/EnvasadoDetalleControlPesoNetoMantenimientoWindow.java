@@ -144,7 +144,7 @@ public class EnvasadoDetalleControlPesoNetoMantenimientoWindow extends GenericFo
 	public void onSelect$lbxTurnoProduccion() {
 		envasadoProceso = (EnvasadoProceso)lbxTurnoProduccion.getSelectedItem().getValue();
 		EnvasadoControlPesoNetoCabeceraDAO ecpncDAO = new EnvasadoControlPesoNetoCabeceraDAOJpaImpl();
-		List<EnvasadoControlPesoNetoCabecera> listaEcpnc = ecpncDAO.getByProduccion(envasadoProceso.getIdenvasadoproceso());
+		List<EnvasadoControlPesoNetoCabecera> listaEcpnc = ecpncDAO.getByEnvasadoproceso(envasadoProceso.getIdenvasadoproceso());
 		ProduccionDetalleOrden pdo;
 		lbxItemOrdenCliente.getItems().clear();
 		

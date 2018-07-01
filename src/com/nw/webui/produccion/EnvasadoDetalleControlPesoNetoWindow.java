@@ -515,10 +515,12 @@ public class EnvasadoDetalleControlPesoNetoWindow extends GenericForwardComposer
 			Sistema.mensaje("Error. No se encuentra configurada informacion de peso Fill.");
 			return;
 		}
-			
-		if(ecpncDAO.updateEnvasadoControlPesoNetoCabecera(ecpnc)==null) {
+		EnvasadoControlPesoNetoCabecera ecpncAUX = ecpncDAO.updateEnvasadoControlPesoNetoCabecera(ecpnc);
+		if(ecpncAUX==null) {
 			Sistema.mensaje("Error al guardar la informacion.");
 			return;
+		} else {
+			ecpnc = ecpncAUX;
 		}
 		
 		Sistema.mensaje("Cambios guardados exitosamente.");

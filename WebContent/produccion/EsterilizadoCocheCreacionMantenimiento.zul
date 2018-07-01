@@ -17,13 +17,17 @@
 						<datebox id="dteFechaProduccion" width="98px" readonly="true" format="dd/MM/yyyy"/>
 					</row>
 					<row>
-						<label value="Id Coche" />
+						<label value="# Coche" />
 						<vbox width="100%">
 							<intbox id="intCocheId" maxlength="8" width="100%" />
 							<toolbar>
 								<toolbarbutton id="btnConsultar" label="Consultar" tooltiptext="Consultar" image="/img/buscar.gif" />
 							</toolbar>
 						</vbox>
+					</row>
+					<row>
+						<label value="Fecha Produccion"></label>
+						<label id="lbFechaProduccion" width="100%" />
 					</row>
 					<row>
 						<label value="Autoclave - Parada"></label>
@@ -50,8 +54,40 @@
 						</listbox>
 					</row>
 					<row>
-						<label value="Codigo Video"></label>
-						<label id="lbCodigoValor" width="100%" />
+						<label value="Producto"></label>
+						<label id="lbProducto" width="100%" />
+					</row>
+					<row>
+						<label value="Codigo Video Jet"></label>
+						<label id="lbCodigoVideoJet" width="100%" />
+					</row>
+					<row>
+						<label value="Envase"></label>
+						<listbox id="lbxDescripcionEvase" 
+							mold="select" width="100%">
+						</listbox>
+					</row>
+					
+					<row>
+						<label value="Maquina Cerradora"></label>
+						<listbox id="lbxMCerradora" 
+							mold="select" width="100%">
+						</listbox>
+					</row>
+					<row>
+						<label value="Tipo Coche"></label>
+						<listbox id="lbxTipoCoche" 
+							mold="select" width="100%">
+						</listbox>
+					</row>
+					<row width="100%">
+						<label value="Hora Sellado 1ra Lata (*)" />
+						<vbox width="100%">
+							<datebox id="dteHoraSellado1raLata" width="90%" readonly="false" format="dd-MM-yyyy a hh:mm:ss"/>
+							<toolbar width="100%">
+								<toolbarbutton width="99%" id="btnHoraSellado1raLata" label="Hora Sistema" />
+							</toolbar>
+						</vbox>
 					</row>
 				</rows>
 			</grid>
@@ -62,7 +98,7 @@
 					<column width="55%"></column>
 				</columns>
 				<rows>
-					<row>
+					<row visible="false">
 						<label id="lbSequeciaCoche"  value="# Sequecia Coche"></label>
 						<label id="lbSequeciaCocheValor" width="100%" />
 					</row>

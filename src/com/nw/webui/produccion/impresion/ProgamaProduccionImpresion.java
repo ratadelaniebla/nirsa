@@ -124,6 +124,25 @@ public class ProgamaProduccionImpresion {
 		EjecutarReporte(parameters, ruta_report_principal);
 	}
 	
+	public void doImprimirProgramaAutoClaveControl(String nombre_report, String logo, Long idproduccion, Integer idTurno) throws JRException, SuspendNotAllowedException, InterruptedException 
+	{			
+		//Obtenemos la ruta del reporte .jrxml
+		String ruta_report = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/reportes").toString()+System.getProperty("file.separator");
+		String ruta_report_principal = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/reportes").toString()+System.getProperty("file.separator")+nombre_report;
+		String ruta_logo = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/img").toString()+System.getProperty("file.separator")+logo;
+
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		
+		parameters.put("LOGO", ruta_logo);
+		parameters.put("IDPRODUCCION", idproduccion);
+		parameters.put("SUBREPORT_DIR", ruta_report);
+		if(idTurno!=null)
+			parameters.put("IDTURNO", idTurno);
+		
+		//Ejecutamos el reporte
+		EjecutarReporte(parameters, ruta_report_principal);
+	}
+	
 	public void EjecutarReporte(Map<String, Object> parameters, String ruta_report) throws JRException, SuspendNotAllowedException, InterruptedException 
 	{			
 		

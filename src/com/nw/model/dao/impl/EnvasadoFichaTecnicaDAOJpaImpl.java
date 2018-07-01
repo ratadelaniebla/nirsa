@@ -24,7 +24,12 @@ public class EnvasadoFichaTecnicaDAOJpaImpl extends BaseDaoJpaImpl
 
 			return eft;
 		} catch (Exception e) {
+			try {
 			t.rollback();
+			} catch(Exception e2) {
+				e.printStackTrace();
+				return null;
+			}
 			e.printStackTrace();
 			return null;
 		}

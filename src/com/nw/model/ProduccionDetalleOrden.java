@@ -47,6 +47,8 @@ public class ProduccionDetalleOrden implements Serializable {
 	private Boolean reproceso;
 	private Integer semana;
 	private String tapa;
+	private String luthy;
+	private String cerradora;
 	private double ton;
 	private String video;
 	private double formato;
@@ -379,6 +381,23 @@ public class ProduccionDetalleOrden implements Serializable {
 		this.formato = formato;
 	}
 
+
+	public String getLuthy() {
+		return luthy;
+	}
+
+	public void setLuthy(String luthy) {
+		this.luthy = luthy;
+	}
+
+
+	public String getCerradora() {
+		return cerradora;
+	}
+
+	public void setCerradora(String cerradora) {
+		this.cerradora = cerradora;
+	}
 
 	//bi-directional many-to-one association to EsterilizadoCoche
 	@OneToMany(mappedBy="produccionDetalleOrden")

@@ -50,11 +50,15 @@ public class EnvasadoDetalleProcesoCambiosDAOJpaimpl extends BaseDaoJpaImpl impl
 		}
 	}
 	
-	public EnvasadoDetalleProcesoCambio getEnvasadoDetalleProcesoCambioById(Long idproducciondetalleorden) {
+	public EnvasadoDetalleProcesoCambio getEnvasadoDetalleProcesoCambioById(Integer idproducciondetalleorden) {
 		try {
-			return em.find(EnvasadoDetalleProcesoCambio.class, idproducciondetalleorden);
+			Query qryPro = em.createQuery(" SELECT edpc FROM EnvasadoDetalleProcesoCambio edpc "
+					+ " where edpc.produccionDetalleOrden.idproducciondetalleorden = :idproducciondetalleorden "
+					+ " order by  edpc.produccionDetalleOrden.idproducciondetalleorden desc")
+					.setParameter("idproducciondetalleorden", idproducciondetalleorden);
+			return (EnvasadoDetalleProcesoCambio)qryPro.getResultList().get(0);
 		} catch (Exception e) {
-			return new EnvasadoDetalleProcesoCambio();
+			return null;
 		}
 	}
 	

@@ -1,9 +1,14 @@
 package com.nw.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
-
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 
 /**
@@ -60,6 +65,7 @@ public class Turno implements Serializable {
 	private List<DesperdicioCajonHarina> desperdicioCajonHarinas2;
 	private List<DesperdicioCajonHarina> desperdicioCajonHarinas3;
 	private List<DesperdicioDetalle> desperdicioDetalles;
+	private List<EsterilizadoProcesoParada> esterilizadoProcesoParadas;
 	private List<EnvasadoControlPesoFillCabecera> envasadoControlPesoFillCabeceras;
 	private List<EnvasadoControlPesoNetoCabecera> envasadoControlPesoNetoCabeceras;
 	private List<EnvasadoDetalleProcesoCambio> envasadoDetalleProcesoCambios;
@@ -107,7 +113,7 @@ public class Turno implements Serializable {
 	private List<RociadoDetalleProcesoCocheTemperatura> rociadoDetalleProcesoCocheTemperaturas;
 	private List<RociadoMuestreoTempCoche> rociadoMuestreoTempCoches;
 	private List<TurnoGestionDetalle> turnoGestionDetalles;
-
+	
 	public Turno() {
 	}
 
@@ -1232,6 +1238,31 @@ public class Turno implements Serializable {
 	}
 
 
+	//bi-directional many-to-one association to EsterilizadoProcesoParada
+	@OneToMany(mappedBy="turno")
+	public List<EsterilizadoProcesoParada> getEsterilizadoProcesoParadas() {
+		return this.esterilizadoProcesoParadas;
+	}
+
+	public void setEsterilizadoProcesoParadas(List<EsterilizadoProcesoParada> esterilizadoProcesoParadas) {
+		this.esterilizadoProcesoParadas = esterilizadoProcesoParadas;
+	}
+
+	public EsterilizadoProcesoParada addEsterilizadoProcesoParada(EsterilizadoProcesoParada esterilizadoProcesoParada) {
+		getEsterilizadoProcesoParadas().add(esterilizadoProcesoParada);
+		esterilizadoProcesoParada.setTurno(this);
+
+		return esterilizadoProcesoParada;
+	}
+
+	public EsterilizadoProcesoParada removeEsterilizadoProcesoParada(EsterilizadoProcesoParada esterilizadoProcesoParada) {
+		getEsterilizadoProcesoParadas().remove(esterilizadoProcesoParada);
+		esterilizadoProcesoParada.setTurno(null);
+
+		return esterilizadoProcesoParada;
+	}
+		
+		
 	//bi-directional many-to-one association to EnvasadoControlPesoFillCabecera
 	@OneToMany(mappedBy="turno")
 	public List<EnvasadoControlPesoFillCabecera> getEnvasadoControlPesoFillCabeceras() {

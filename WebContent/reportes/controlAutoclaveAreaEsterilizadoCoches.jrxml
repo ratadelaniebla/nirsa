@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report2" language="groovy" pageWidth="30" pageHeight="440" columnWidth="30" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="4.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="numparada" class="java.lang.Integer"/>
+	<parameter name="idenvasadotamanoenvase" class="java.lang.Integer"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
+	<parameter name="IDPRODUCCION" class="java.lang.Long"/>
+	<queryString>
+		<![CDATA[SELECT
+	am.descripcion,
+	(
+		SELECT COUNT
+			( C.codbarra )
+		FROM
+			esterilizado_proceso_parada_coche pc,
+			esterilizado_coche C,
+			esterilizado_proceso_parada P,
+			autoclave A
+		WHERE
+			pc.idesterilizadocoche = C.idesterilizadocoche
+			AND pc.idesterilizadoprocesoparada = P.idesterilizadoprocesoparada
+			AND P.idautoclave = A.idautoclave
+			AND P.numparada = $P{numparada}
+			AND C.idenvasadotamanoenvase = $P{idenvasadotamanoenvase}
+			AND P.idautoclave = am.idautoclave
+			AND p.idproduccion = $P{IDPRODUCCION}
+	) cantidadcoches
+FROM
+	autoclave am
+
+ORDER BY
+	am.descripcion ASC]]>
+	</queryString>
+	<field name="descripcion" class="java.lang.String"/>
+	<field name="cantidadcoches" class="java.lang.Long"/>
+	<detail>
+		<band height="10" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="10" isPrintWhenDetailOverflows="true"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cantidadcoches}.equals(new Long("0"))?
+"":
+$F{cantidadcoches}.toString()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -8,8 +8,8 @@
 		<vbox id="vbxMain" width="100%">
 			<grid width="290px">
 				<columns>
-					<column width="100px"></column>
-					<column width="100px"></column>
+					<column width="120px"></column>
+					<column width="170px"></column>
 				</columns>
 				<rows>
 
@@ -17,7 +17,7 @@
 						<label value="Autoclave - Parada - Día Producción "></label>
 						<toolbar>
 							<hbox>
-								<listbox id="lbxAutoClaveParadaProduccion" mold="select" width="120px" />
+								<listbox id="lbxAutoClaveParadaProduccion" mold="select" width="130px" />
 								<toolbarbutton id="btnAutoClaveParadaProduccion" tooltiptext="Actualizar" image="/img/refrescar.gif" width="100%" />
 							</hbox>
 						</toolbar>
@@ -41,8 +41,39 @@
 						</listbox>
 					</row>
 					<row>
-						<label value="Codigo Video"></label>
-						<label id="txtCodigo" width="100%" />
+						<label value="Producto"></label>
+						<label id="lbProducto" width="100%" />
+					</row>
+					<row>
+						<label value="Codigo Video Jet"></label>
+						<label id="lbCodigoVideoJet" width="100%" />
+					</row>
+					<row>
+						<label value="Envase"></label>
+						<listbox id="lbxDescripcionEvase" 
+							mold="select" width="100%">
+						</listbox>
+					</row>
+					<row>
+						<label value="Maquina Cerradora"></label>
+						<listbox id="lbxMCerradora" 
+							mold="select" width="100%">
+						</listbox>
+					</row>
+					<row>
+						<label value="Tipo Coche"></label>
+						<listbox id="lbxTipoCoche" 
+							mold="select" width="100%">
+						</listbox>
+					</row>
+					<row width="100%">
+						<label value="Hora Sellado 1ra Lata (*)" />
+						<vbox width="100%">
+							<datebox id="dteHoraSellado1raLata" width="90%" readonly="false" format="dd-MM-yyyy a hh:mm:ss"/>
+							<toolbar width="100%">
+								<toolbarbutton width="99%" id="btnHoraSellado1raLata" label="Hora Sistema" />
+							</toolbar>
+						</vbox>
 					</row>
 				</rows>
 			</grid>
@@ -55,11 +86,11 @@
 				<rows>
 					<row>
 						<label value="# Sequecia Coche"></label>
-						<label id="ibxIdCodigo" width="100%" />
+						<label id="lbSequeciaCoche" width="100%" />
 					</row>
 					<row>
 						<label value="# Act. Coches Cliente"></label>
-						<label id="ibxCocheCliente" width="100%" />
+						<label id="lbCocheCliente" width="100%" />
 					</row>
 				</rows>
 			</grid>

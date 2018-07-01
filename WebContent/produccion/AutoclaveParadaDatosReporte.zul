@@ -1,0 +1,74 @@
+<?page title="DESCONGELADO CAMARA" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="descongeladoCamaraWin" apply="com.nw.webui.produccion.AutoclaveParadaDatosReporteWindow" >
+
+		<label value="Reporte Carga de Ordenes" style="color:blue;font-size:11px;font-weight:bold"/>
+		<vbox  id="vbxMain" width="100%">
+		
+			<grid width="99%">
+				<columns>
+					<column width="40%"></column>
+					<column width="60%"></column>
+				</columns>
+				<rows>
+					<row>
+						<label value="Producción:"/>
+						<datebox id="dteFecha1" width="90%" format="dd/MM/yyyy " readonly="true"/>
+					</row>
+				</rows>
+			</grid>
+			<grid width="99%">
+				<columns>
+					<column width="40%"></column>
+					<column width="60%"></column>
+				</columns>
+				<rows>
+					<row>
+						<label value="Reporte: "></label>
+						<listbox id="lbxReporte" mold="select" width="99%">
+							<listitem></listitem>
+							<listitem id="1" label="INFORME DIARIO Y REGISTRO DE PRODUCCION"></listitem>
+							<listitem id="2" label="CONTROL DE CALIDAD DE COCHES"></listitem>
+							<listitem id="3" label="CONTROL DE EFICIENCIA DE AUTOCLAVES"></listitem>
+							<listitem id="4" label="CONTROL DE PRODUCTO EN AUTOCLAVES"></listitem>
+						</listbox>
+					</row>
+				</rows>
+			</grid>
+			<grid width="99%">
+				<columns>
+					<column width="40%"></column>
+					<column width="60%"></column>
+				</columns>
+				<rows>
+	  				<row id="rRowTurno" visible="false">
+						<label value="Turno:"/>
+						<listbox id="lbxTurno" style="font-size:12px" mold="select" width="120px"> </listbox>
+					</row>	
+					
+				</rows>
+			</grid>
+			<grid width="99%">
+				<columns>
+					<column width="40%"></column>
+					<column width="60%"></column>
+				</columns>
+				<rows>
+					<row>
+							<label value="Imprimir" style="color:blue;font-size:12px;font-weight:bold"/>
+<vbox>
+							<toolbar>
+								<hbox>
+								<toolbarbutton id="btnPdf" label=" Visualiza PDF"/>
+								<toolbarbutton id="btnExcel" label="Excel"/>
+								</hbox>
+							</toolbar>
+						</vbox>
+					</row>
+				</rows>
+			</grid>
+
+			
+	</vbox> 
+</window>
+</zk>

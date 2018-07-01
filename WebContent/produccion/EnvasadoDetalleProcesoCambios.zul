@@ -34,6 +34,7 @@
 					<column width="50%"></column>
 				</columns>
 				<rows>
+					<group label="Información Producción" spans="2" open="true"/>
 					<row>
 						<label value="Produccion - Turno" />
 						<label id="txtProduccionTurno"
@@ -47,12 +48,12 @@
 					</row>
 					
 				    <row>
-						<label value="Item - Orden" />
+						<label value="Item-Ord.Pedido-Pos.OP-Cliente-Marca" />
 						 <listbox id="lbxItemOrden" style="font-size:12px"
 								mold="select"  width="98%" />
 					</row>
 
-					<row>
+					<row visible="false">
 						<label value="Orden" />
 						<label id="txtOrden"
 							width="98%" />
@@ -64,49 +65,63 @@
 							width="98%" />
 					</row>
 					
-					<row>
+					<row visible="false">
 						<label value="Marca" />
 						<label id="txtMarca"
 							 width="98%" />
 					</row>
-
-					<row>
-						<label value="M. Selladora" />
-						 <listbox id="lbxMSelladora" style="font-size:12px"
-						mold="select"  width="98%" />
-					</row>
 				</rows>
 			</grid>
 
-
 			<grid width="93%">
 				<rows>
-					<row>
-						<toolbar id="tbcontrol5">
-							<hbox>
-								<label value="Luthy" width="100px" />
-							 	<listbox id="lbxLuthy" style="font-size:12px" mold="select" width="150px"/>
-								<toolbarbutton id="btnAgregarItem" tooltiptext="Agregar" image="/img/crear.gif"/>
-								<toolbarbutton id="btnEliminarItem" tooltiptext="Eliminar" image="/img/eliminar.gif"/>
-							</hbox>
-						</toolbar>
-					</row>
-				</rows>
-			</grid>	
-
-			<grid width="93%">
-				<rows>
+				<group label="Información Plan Producción" spans="2" open="true"/>
+				<row>
+					<label value="Cod. Video Jet" />
+					<textbox id="txtCodVideoJet" width="98%"> </textbox>
+				</row>
+				<row>
+					<label value="Formato" />
+					<textbox id="txtFormato" width="98%" readonly="false"></textbox>
+				</row>
+				<row spans="2">
+				<vbox width="392px">
+				<grid width="392px">
+					<rows>
 						<row>
-					    <listbox id="lbxLista" multiple="true" checkmark="false" width="98%" visible="false">
-							<listhead style="font-size:5px" >
-								<listheader label="Luthy" width="50%"  style="font-size:5px" />
-								<listheader  width="30%" tooltiptext="Seleccionar un item" >
-								   <toolbar>
-										<toolbarbutton id="btnEliminar" label="Eliminar" tooltiptext="Eliminar luthy" image="/img/eliminar.gif" />
-									</toolbar>
-								</listheader>
-							</listhead>
-						</listbox>
+							<toolbar id="tbcontrol5">
+								<hbox>
+									<label value="Maq.Llenadora" width="100px" />
+								 	<listbox id="lbxLuthy" style="font-size:12px" mold="select" width="150px"/>
+									<toolbarbutton id="btnAgregarItem" tooltiptext="Agregar" image="/img/crear.gif"/>
+									<toolbarbutton id="btnEliminarItem" tooltiptext="Eliminar" image="/img/eliminar.gif"/>
+								</hbox>
+							</toolbar>
+						</row>
+					</rows>
+				</grid>	
+				<grid width="392px">
+					<rows>
+							<row>
+						    <listbox id="lbxLista" multiple="true" checkmark="false" width="98%" visible="false">
+								<listhead style="font-size:5px" >
+									<listheader label="Luthy" width="50%"  style="font-size:5px" />
+									<listheader  width="30%" tooltiptext="Seleccionar un item" >
+									   <toolbar>
+											<toolbarbutton id="btnEliminar" label="Eliminar" tooltiptext="Eliminar luthy" image="/img/eliminar.gif" />
+										</toolbar>
+									</listheader>
+								</listhead>
+							</listbox>
+						</row>
+					</rows>
+				</grid>
+				</vbox>
+				</row>
+					<row>
+						<label value="M. Cerradora" />
+						 <listbox id="lbxMSelladora" style="font-size:12px"
+						mold="select"  width="98%" />
 					</row>
 				</rows>
 			</grid>
@@ -117,44 +132,35 @@
 					<column width="50%"></column>
 				</columns>
 				<rows>
+					<group label="Fórmula Producción" spans="2" open="true"/>
 					<row>
-						<label value="Cod. Video Jet" />
-						<textbox id="txtCodVideoJet" width="98%"> </textbox>
-					</row>
-					
-					<row>
-						<label value="P. Neto Formulado (g.)" />
-						<textbox id="txtNetoFormulado" width="98%"> </textbox>
-					</row>	
-					
-					<row>
-						<label id="lbFill1" value="Fill Min (g.)" />
+						<label id="lbFill1" value="Peso Fill Min (g.)" />
 						<textbox id="txtFill1" width="98%" readonly="false"/>
 					</row>
 					<row>
-						<label id="lbFill2" value="Fill Max (g.)" />
+						<label id="lbFill2" value="Peso Fill Max (g.)" />
 						<textbox id="txtFill2" width="98%" readonly="false"/>
 					</row>
 					<row>
-						<label id="lbFillPromedio" value="Fill (g.)" />
+						<label id="lbFillPromedio" value="Peso Fill (g.)" />
 						<textbox id="txtFillPromedio" width="98%" readonly="true"/>
 					</row>
-					
 					<row>
-						<label value="%Flakes" />
-						<textbox id="txtFlakes" width="98%"></textbox>
-					</row>
-					
+						<label value="Peso Neto(g.)" />
+						<textbox id="txtNetoFormulado" width="98%"> </textbox>
+					</row>	
 					<row>
-						<label value="Agua (g.)" />
-						<textbox id="txtH2O" width="98%"></textbox>
-					</row>
-					
-					<row>
-						<label value="Aceite (g.)" />
+						<label value="Aceite(g.)" />
 						<textbox id="txtAceite" width="98%"></textbox>
 					</row>
-					
+					<row>
+						<label value="Agua(g.)" />
+						<textbox id="txtH2O" width="98%"></textbox>
+					</row>
+					<row>
+						<label value="Flakes(%)" />
+						<textbox id="txtFlakes" width="98%"></textbox>
+					</row>
 					<row>
 						<label value="Tipo Proteina" />
 						<listbox id="lbxTipoProteina" style="font-size:12px"
@@ -162,7 +168,7 @@
 					</row>
 					
 					<row>
-						<label value="Caldo Vegetal (g.)" />
+						<label value="Caldo Vegetal(g.)" />
 						<textbox id="txtProteina"  width="98%" > </textbox>
 					</row>	
 					
@@ -179,11 +185,6 @@
 					<row>
 						<label value="%Conc. CV" />
 						<textbox id="txtConcentracion" width="98%" readonly="false"></textbox>
-					</row>
-					
-					<row>
-						<label value="Formato" />
-						<textbox id="txtFormato" width="98%" readonly="false"></textbox>
 					</row>
 					
 					<row>

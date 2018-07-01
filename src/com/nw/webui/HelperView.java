@@ -137,7 +137,8 @@ public class HelperView {
 		for (Turno t: new TurnoDAOJpaImpl().getTurnos()){
 			Listitem li = new Listitem();
 			li.setValue(t);
-			new Listcell( t.getIdturno().toString()+" "+t.getNombre()).setParent(li);
+//			new Listcell( t.getIdturno().toString()+" "+t.getNombre()).setParent(li);
+			new Listcell( t.getNombre()).setParent(li);
 			li.setParent(lbxTurno);
 		}
 		Sistema.setPosicionPrimerItem(lbxTurno);

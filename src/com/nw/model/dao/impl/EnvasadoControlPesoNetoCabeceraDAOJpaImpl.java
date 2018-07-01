@@ -58,13 +58,30 @@ public class EnvasadoControlPesoNetoCabeceraDAOJpaImpl extends BaseDaoJpaImpl im
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<EnvasadoControlPesoNetoCabecera> getByProduccion(Long idenvasadoproceso) {
+	public List<EnvasadoControlPesoNetoCabecera> getByEnvasadoproceso(Long idenvasadoproceso) {
 		try {
 			String sql = "SELECT e FROM EnvasadoControlPesoNetoCabecera e "
 					+ "WHERE e.envasadoProceso.idenvasadoproceso = :idenvasadoproceso ";
 			return em
 					.createQuery(sql)
 					.setParameter("idenvasadoproceso", idenvasadoproceso)
+					.getResultList();
+		} catch( NoResultException e) {
+			return new ArrayList<EnvasadoControlPesoNetoCabecera>();
+		} catch( Exception e) {
+			e.printStackTrace();
+			return new ArrayList<EnvasadoControlPesoNetoCabecera>();
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<EnvasadoControlPesoNetoCabecera> getByOrdenProduccion(Long idproduccion) {
+		try {
+			String sql = "SELECT e FROM EnvasadoControlPesoNetoCabecera e "
+					+ "WHERE e.produccionDetalleOrden.produccion.idproduccion = :idproduccion ";
+			return em
+					.createQuery(sql)
+					.setParameter("idproduccion", idproduccion)
 					.getResultList();
 		} catch( NoResultException e) {
 			return new ArrayList<EnvasadoControlPesoNetoCabecera>();

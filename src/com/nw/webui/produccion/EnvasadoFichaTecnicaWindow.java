@@ -60,14 +60,17 @@ public class EnvasadoFichaTecnicaWindow extends GenericForwardComposer {
 	Produccion produccion;
 	Turno turno;
 	
-	Textbox txtProduccionTurno, txtObservacion;
+	Textbox txtProduccionTurno, txtProducto, txtObservacion;
 	Listbox lbxTurnoLabor, lbxItemOrdenCLiente, lbxcvprot;
 	
-	Textbox txtFormato, txtPNetoFormulado, txtAgua, txtAceite, txtCaldoVegetal, txtConcentracion, txtSal, txtDensidad, txtTrozo, txtLomo, txtRallado;
-	Label   lbFormato,  lbPNetoFormulado,  lbAgua,  lbAceite,  lbCaldoVegetal,  lbConcentracion,  lbSal,  lbDensidad,  lbTrozo,  lbLomo, lbRallado;
+	Textbox txtFormato2, txtFormato, txtPNetoFormulado, txtAgua, txtAceite, txtCaldoVegetal, txtConcentracion, txtSal, txtDensidad, txtTrozo, txtLomo, txtRallado;
+	Label   lbFormato2,  lbFormato,  lbPNetoFormulado,  lbAgua,  lbAceite,  lbCaldoVegetal,  lbConcentracion,  lbSal,  lbDensidad,  lbTrozo,  lbLomo, lbRallado;
 	
 	Textbox txtFillPlanificado, txtFill1, txtFill2, txtFillPromedio, txtPesoNeto, txtPesoDrenado, txtAguaAc, txtAceiteAg, txtEnvase, txtTapa;
-	Label   lbFillPlanificado,  lbFill1,  lbFill2,  lbFillPromedio,  lbPesoNeto,  lbPesoDrenado,  lbAguaAc,  lbAceiteAg,  lbEnvase,  lbTapa;
+	Label	lbFillPlanificado,  lbFill1,  lbFill2,  lbFillPromedio,  lbPesoNeto,  lbPesoDrenado,  lbAguaAc,  lbAceiteAg,  lbEnvase,  lbTapa;
+	
+	Textbox txtEspecie, txtTamEnvase, txtTipoTapa, txtFlakeMax, txtCantCajas, txtVideoJet, txtMaqLlenadora, txtMaqCerradora, txtFlake;
+	Label   lbEspecie,  lbTamEnvase,  lbTipoTapa,  lbFlakeMax,  lbCantCajas,  lbVideoJet,  lbMaqLlenadora,  lbCerradora,  lbFlakes;
 	
 	Textbox txtProveedorLoteEnvase, txtProveedorLoteTapa;
 	Label 	lbProveedorLoteEnvase, 	lbProveedorLoteTapa;
@@ -82,10 +85,7 @@ public class EnvasadoFichaTecnicaWindow extends GenericForwardComposer {
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);
 		binder = new AnnotateDataBinder(comp);
-//		
 		cargaInicial();
-//		
-//		binder.loadAll();
 	}
 	
 	private void cargaInicial() {
@@ -96,6 +96,7 @@ public class EnvasadoFichaTecnicaWindow extends GenericForwardComposer {
 		cargaProveedorTapa();
 		cargaProveedorLata();
 	}
+	
 	/**
 	 * se encarga de realizar las primeras validaciones en el zul y Carga&Valida
 	 * la informacion de produccion y turno
@@ -182,6 +183,7 @@ public class EnvasadoFichaTecnicaWindow extends GenericForwardComposer {
 			System.out.println(produccionDetalleOrden.getIdproducciondetalleorden());
 			itemOrden = produccionDetalleOrden.getItem() 
 					+ " - " + produccionDetalleOrden.getOrden()
+					+ " - " + produccionDetalleOrden.getPs()
 					+ " - " + produccionDetalleOrden.getCliente()
 					+ " - " + produccionDetalleOrden.getMarca();
 			li = new Listitem();
@@ -203,23 +205,45 @@ public class EnvasadoFichaTecnicaWindow extends GenericForwardComposer {
 		if (pdo.getIdproducciondetalleorden()!=null) {
 			String pesoNeto = pdo.getPresentacion()
 					.substring(pdo.getPresentacion().toUpperCase().indexOf("X")+2, pdo.getPresentacion().length());
+			txtProducto.setValue(pdo.getProducto());
 			txtPesoNeto.setValue(pesoNeto);
 			txtPesoDrenado.setValue(String.valueOf(pdo.getDre()));
 			txtAguaAc.setValue(String.valueOf(pdo.getAg()));
 			txtAceiteAg.setValue(String.valueOf(pdo.getAc()));
 			txtFormato.setValue(String.valueOf(pdo.getFormato()));
+			txtFormato2.setValue(String.valueOf(pdo.getFormato()));
 			txtEnvase.setValue(pdo.getEnvase());
 			txtTapa.setValue(pdo.getTapa());
 			txtFillPlanificado.setValue(String.valueOf(pdo.getFill()));
+			txtEspecie.setValue(String.valueOf(pdo.getEsp()));
+			txtTamEnvase.setValue(String.valueOf(pdo.getEnvase()));
+			txtTipoTapa.setValue(String.valueOf(pdo.getTapa()));
+			txtFlakeMax.setValue(String.valueOf(pdo.getFi()));
+			txtCantCajas.setValue(String.valueOf(pdo.getCajas()));
+			txtVideoJet.setValue(pdo.getVideo());
+			txtMaqLlenadora.setValue(pdo.getLuthy());
+			txtMaqCerradora.setValue(pdo.getCerradora());
+			txtFlake.setValue(String.valueOf(pdo.getFlake()));
 		} else {
+			txtProducto.setValue(null);
 			txtPesoNeto.setValue(null);
 			txtPesoDrenado.setValue(null);
 			txtAguaAc.setValue(null);
 			txtAceiteAg.setValue(null);
 			txtFormato.setValue(null);
+			txtFormato2.setValue(null);
 			txtEnvase.setValue(null);
 			txtTapa.setValue(null);
 			txtFillPlanificado.setValue(null);
+			txtEspecie.setValue(null);
+			txtTamEnvase.setValue(null);
+			txtTipoTapa.setValue(null);
+			txtFlakeMax.setValue(null);
+			txtCantCajas.setValue(null);
+			txtVideoJet.setValue(null);
+			txtMaqLlenadora.setValue(null);
+			txtMaqCerradora.setValue(null);
+			txtFlake.setValue(null);
 		}
 		if (eft.getIdenvasadofichatecnica()==null) {
 			txtFillPromedio.setValue(null);
@@ -433,9 +457,19 @@ public class EnvasadoFichaTecnicaWindow extends GenericForwardComposer {
 		txtAguaAc.setValue(null);
 		txtAceiteAg.setValue(null);
 		txtFormato.setValue(null);
+		txtFormato2.setValue(null);
 		txtEnvase.setValue(null);
 		txtTapa.setValue(null);
 		txtFillPlanificado.setValue(null);
+		txtEspecie.setValue(null);
+		txtTamEnvase.setValue(null);
+		txtTipoTapa.setValue(null);
+		txtFlakeMax.setValue(null);
+		txtCantCajas.setValue(null);
+		txtVideoJet.setValue(null);
+		txtMaqLlenadora.setValue(null);
+		txtMaqCerradora.setValue(null);
+		txtFlake.setValue(null);
 		
 		txtFill1.setValue(null);
 		txtFill2.setValue(null);

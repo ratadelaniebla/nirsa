@@ -537,7 +537,9 @@ public class EnvasadoDetalleControlPesoFillMantenimientoWindow extends GenericFo
 		ProduccionDetalleOrden pdo = ecpfc.getProduccionDetalleOrden();
 		
 		EnvasadoFichaTecnicaDAO eftDAO = new EnvasadoFichaTecnicaDAOJpaImpl();
-		EnvasadoFichaTecnica eft = eftDAO.getByOrden(ecpfc.getProduccionDetalleOrden().getIdproducciondetalleorden());
+		EnvasadoFichaTecnica eft = ecpfc.getProduccionDetalleOrden()==null?
+					new EnvasadoFichaTecnica():
+					eftDAO.getByOrden(ecpfc.getProduccionDetalleOrden().getIdproducciondetalleorden());
 		
 		if (pdo==null)
 			pdo = new ProduccionDetalleOrden();
@@ -828,47 +830,47 @@ public class EnvasadoDetalleControlPesoFillMantenimientoWindow extends GenericFo
 		
 	}
 	
-	private Timestamp obtieneFechaRegistro() {
-		String dia ="";
-		String mes ="";
-		String hora ="";
-		String min ="";
-		String mensaje = new String();
-		
-		if (lbxMinutos.getSelectedItem().getValue()!=null)
-			min = lbxMinutos.getSelectedItem().getValue().toString();
-		else
-			mensaje="Por favor seleccione un valor para Minuto.";
-		
-		if(lbxHoras.getSelectedItem().getValue()!=null)
-			hora = lbxHoras.getSelectedItem().getValue().toString();
-		else
-			mensaje="Por favor seleccione un valor para Hora.";
-		
-		if (lbxDias.getSelectedItem()!=null && lbxDias.getSelectedItem().getValue()!=null) {
-			if (!"0".equals(lbxDias.getSelectedItem().getValue().toString()))
-				dia = lbxDias.getSelectedItem().getValue().toString();
-			else
-				mensaje="Por favor seleccione un valor para Dia.";
-		} else
-			mensaje="Por favor seleccione un valor para Dia.";
-		
-		if (lbxMes.getSelectedItem().getValue()!=null)
-			mes = lbxMes.getSelectedItem().getValue().toString();
-		else
-			mensaje="Por favor seleccione un valor para Mes.";
-		
-		int anio = Calendar.getInstance().get(Calendar.YEAR);
-		
-		int second = Calendar.getInstance().get(Calendar.SECOND);
-
-		String fechaCambio = anio+"-"+mes+"-"+dia+" "+hora+":"+min+":"+second;
-		if (!mensaje.isEmpty()) {
-			Sistema.mensaje(mensaje);
-			return null;
-		} else 
-			return Timestamp.valueOf(fechaCambio);
-	}
+//	private Timestamp obtieneFechaRegistro() {
+//		String dia ="";
+//		String mes ="";
+//		String hora ="";
+//		String min ="";
+//		String mensaje = new String();
+//		
+//		if (lbxMinutos.getSelectedItem().getValue()!=null)
+//			min = lbxMinutos.getSelectedItem().getValue().toString();
+//		else
+//			mensaje="Por favor seleccione un valor para Minuto.";
+//		
+//		if(lbxHoras.getSelectedItem().getValue()!=null)
+//			hora = lbxHoras.getSelectedItem().getValue().toString();
+//		else
+//			mensaje="Por favor seleccione un valor para Hora.";
+//		
+//		if (lbxDias.getSelectedItem()!=null && lbxDias.getSelectedItem().getValue()!=null) {
+//			if (!"0".equals(lbxDias.getSelectedItem().getValue().toString()))
+//				dia = lbxDias.getSelectedItem().getValue().toString();
+//			else
+//				mensaje="Por favor seleccione un valor para Dia.";
+//		} else
+//			mensaje="Por favor seleccione un valor para Dia.";
+//		
+//		if (lbxMes.getSelectedItem().getValue()!=null)
+//			mes = lbxMes.getSelectedItem().getValue().toString();
+//		else
+//			mensaje="Por favor seleccione un valor para Mes.";
+//		
+//		int anio = Calendar.getInstance().get(Calendar.YEAR);
+//		
+//		int second = Calendar.getInstance().get(Calendar.SECOND);
+//
+//		String fechaCambio = anio+"-"+mes+"-"+dia+" "+hora+":"+min+":"+second;
+//		if (!mensaje.isEmpty()) {
+//			Sistema.mensaje(mensaje);
+//			return null;
+//		} else 
+//			return Timestamp.valueOf(fechaCambio);
+//	}
 	
 
 	private boolean validaCampos() {

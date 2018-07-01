@@ -27,13 +27,21 @@ public class EsterilizadoCoche implements Serializable {
 	private Long idesterilizadocoche;
 	private Integer codbarra;
 	private Integer estado;
-	private Timestamp fechainiciollenado;
+	private Timestamp fechainiciollenado; 
 	private Timestamp fechareg;
+	private Timestamp horaselladolata;
+	private Timestamp fecharegcantidadmuestras;
+	private String idusuariomuestras;
+	private Integer cantidadmuestras;
+	private String observacion;
 	private EsterilizadoProceso esterilizadoProceso;
 	private ProduccionDetalleOrden produccionDetalleOrden;
 	private Turno turno;
 	private Usuario usuario;
+	private EnvasadoTamanoEnvase envasadoTamanoEnvase;
 	private List<EsterilizadoProcesoParadaCoche> esterilizadoProcesoParadaCoches;
+	private EsterilizadoTipoCoche esterilizadoTipoCoche;
+	private MaquinaCerradora maquinaCerradora;
 
 	public EsterilizadoCoche() {
 	}
@@ -85,6 +93,54 @@ public class EsterilizadoCoche implements Serializable {
 		this.fechareg = fechareg;
 	}
 
+	
+	public Timestamp getHoraselladolata() {
+		return this.horaselladolata;
+	}
+
+	public void setHoraselladolata(Timestamp horaselladolata) {
+		this.horaselladolata = horaselladolata;
+	}
+	
+
+	public Timestamp getFecharegcantidadmuestras() {
+		return fecharegcantidadmuestras;
+	}
+
+
+	public void setFecharegcantidadmuestras(Timestamp fecharegcantidadmuestras) {
+		this.fecharegcantidadmuestras = fecharegcantidadmuestras;
+	}
+
+
+	public String getIdusuariomuestras() {
+		return idusuariomuestras;
+	}
+
+
+	public void setIdusuariomuestras(String idusuariomuestras) {
+		this.idusuariomuestras = idusuariomuestras;
+	}
+
+
+	public Integer getCantidadmuestras() {
+		return cantidadmuestras;
+	}
+
+
+	public void setCantidadmuestras(Integer cantidadmuestras) {
+		this.cantidadmuestras = cantidadmuestras;
+	}
+
+	
+	public String getObservacion() {
+		return observacion;
+	}
+
+	public void setObservacion(String observacion) {
+		this.observacion = observacion;
+	}
+
 
 	//bi-directional many-to-one association to EsterilizadoProceso
 	@ManyToOne
@@ -98,6 +154,18 @@ public class EsterilizadoCoche implements Serializable {
 	}
 
 
+	//bi-directional many-to-one association to EnvasadoTamanoEnvase
+	@ManyToOne
+	@JoinColumn(name="idenvasadotamanoenvase")
+	public EnvasadoTamanoEnvase getEnvasadoTamanoEnvase() {
+		return this.envasadoTamanoEnvase;
+	}
+
+	public void setEnvasadoTamanoEnvase(EnvasadoTamanoEnvase envasadoTamanoEnvase) {
+		this.envasadoTamanoEnvase = envasadoTamanoEnvase;
+	}
+		
+		
 	//bi-directional many-to-one association to ProduccionDetalleOrden
 	@ManyToOne
 	@JoinColumn(name="idproducciondetalleorden")
@@ -132,7 +200,31 @@ public class EsterilizadoCoche implements Serializable {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+	
 
+	//bi-directional many-to-one association to EsterilizadoTipoCoche
+	@ManyToOne
+	@JoinColumn(name="idesterilizadotipocoche")
+	public EsterilizadoTipoCoche getEsterilizadoTipoCoche() {
+		return this.esterilizadoTipoCoche;
+	}
+
+	public void setEsterilizadoTipoCoche(EsterilizadoTipoCoche esterilizadoTipoCoche) {
+		this.esterilizadoTipoCoche = esterilizadoTipoCoche;
+	}
+
+	
+	//bi-directional many-to-one association to MaquinaCerradora
+	@ManyToOne
+	@JoinColumn(name="idmaquinacerradora")
+	public MaquinaCerradora getMaquinaCerradora() {
+		return this.maquinaCerradora;
+	}
+
+	public void setMaquinaCerradora(MaquinaCerradora maquinaCerradora) {
+		this.maquinaCerradora = maquinaCerradora;
+	}
+	
 
 	//bi-directional many-to-one association to EsterilizadoProcesoParadaCoche
 	@OneToMany(mappedBy="esterilizadoCoche")

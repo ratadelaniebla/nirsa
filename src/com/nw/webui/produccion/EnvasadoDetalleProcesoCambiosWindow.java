@@ -187,7 +187,12 @@ public class EnvasadoDetalleProcesoCambiosWindow extends GenericForwardComposer{
 		li.setParent(lbxItemOrden);
 		
 		for (ProduccionDetalleOrden produccionDetalleOrden : listaProduccionDetalleOrden) {
-			itemOrden = produccionDetalleOrden.getItem() + " - " + produccionDetalleOrden.getOrden() + " - " + produccionDetalleOrden.getCliente();
+			itemOrden = produccionDetalleOrden.getItem() 
+					+ " - " + produccionDetalleOrden.getOrden()
+					+ " - " + produccionDetalleOrden.getPs()
+					+ " - " + produccionDetalleOrden.getCliente()
+					+ " - " + produccionDetalleOrden.getMarca();
+			
 			li = new Listitem();
 			li.setValue(produccionDetalleOrden);
 			new Listcell(itemOrden).setParent(li);
@@ -1111,7 +1116,6 @@ public class EnvasadoDetalleProcesoCambiosWindow extends GenericForwardComposer{
 	
 	private void limpiarFormulario() {
 		//Limpia Texto
-//		txtProduccionTurno.setValue("");
 		txtOrden.setValue("");
 		txtProducto.setValue("");
 		txtMarca.setValue(null);
@@ -1121,6 +1125,15 @@ public class EnvasadoDetalleProcesoCambiosWindow extends GenericForwardComposer{
 		txtObservacion.setValue("");
 		txtCodVideoJet.setValue("");
 		txtPNeto.setValue("");
+		
+		txtNetoFormulado.setValue(null);
+		txtFill1.setValue(null);
+		txtFill2.setValue(null);
+		txtFillPromedio.setValue(null);
+		txtSalmuera.setValue(null);
+		txtConcentracion.setValue(null);
+		txtFormato.setValue(null);
+		txtDensidad.setValue(null);
 		
 		lbxTurnoLabor.getItems().clear();
 		lbxItemOrden.getItems().clear();

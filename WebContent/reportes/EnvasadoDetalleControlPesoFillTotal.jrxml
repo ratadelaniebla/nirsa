@@ -12,22 +12,26 @@
 	(max(d.pesofill) - min(d.pesofill)) rango,
 	(select trim(to_char(cd.hora,'00')||':'||trim(to_char(cd.minuto,'00')))
 	from envasado_control_fill_corte_detalle cd
-	where cd.idenvasadocontrolfillcortedetalle = d.idenvasadocontrolfillcortedetalle) corte
+	where cd.idenvasadocontrolfillcortedetalle = d.idenvasadocontrolfillcortedetalle) corte,
+	f.fill_promedio
 FROM
 	envasado_control_peso_fill_cabecera C,
-	envasado_control_peso_fill_detalle D
+	envasado_control_peso_fill_detalle D,
+	envasado_ficha_tecnica f
 WHERE
 	C.idenvasadocontrolpesofillcabecera = d.idenvasadocontrolpesofillcabecera
+	AND c.idproducciondetalleorden = f.idproducciondetalleorden
 	AND C.idenvasadoproceso = $P{idenvasadoproceso}
 	AND C.idproducciondetalleorden = $P{idproducciondetalleorden}
 GROUP BY
-	idenvasadocontrolfillcortedetalle
+	idenvasadocontrolfillcortedetalle, f.fill_promedio
 ORDER BY
 	corte]]>
 	</queryString>
 	<field name="sum" class="java.lang.Double"/>
 	<field name="rango" class="java.lang.Double"/>
 	<field name="corte" class="java.lang.String"/>
+	<field name="fill_promedio" class="java.lang.Double"/>
 	<variable name="minPeso" class="java.lang.Double" calculation="Lowest">
 		<variableExpression><![CDATA[$F{sum}]]></variableExpression>
 	</variable>
@@ -59,6 +63,12 @@ ORDER BY
 						<categoryExpression><![CDATA[$F{corte}]]></categoryExpression>
 						<valueExpression><![CDATA[$F{sum}]]></valueExpression>
 						<labelExpression><![CDATA["label"]]></labelExpression>
+					</categorySeries>
+					<categorySeries>
+						<seriesExpression><![CDATA["Peso Fill"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{corte}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{fill_promedio}]]></valueExpression>
+						<labelExpression><![CDATA["Promedio"]]></labelExpression>
 					</categorySeries>
 				</categoryDataset>
 				<linePlot isShowLines="true" isShowShapes="true">

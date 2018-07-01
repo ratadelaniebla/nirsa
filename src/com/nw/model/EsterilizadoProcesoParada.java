@@ -27,22 +27,41 @@ public class EsterilizadoProcesoParada implements Serializable {
 	private Long idesterilizadoprocesoparada;
 	private Integer blider;
 	private Integer estado;
-	private Timestamp horacerradoventeo;
-	private Timestamp horainiciovapor;
 	private Timestamp fechareg;
+	private Integer finproceso;
+	private String flujoaguals;
+	private Timestamp horacerradoventeo;
+	private Timestamp horacerradoventeo2;
+	private Timestamp horafinalenfriamiento;
+	private Timestamp horafinproceso;
+	private Timestamp horainicioproceso;
+	private Timestamp horainiciovapor;
+	private Timestamp horaregmanometro;
+	private Timestamp horaregmanometro2;
+	private Timestamp horasalida;
+	private Timestamp horaselladolata;
+	private String idusuariomod;
 	private Long numerografica;
 	private Integer numparada;
-	private double presionmanometro;
-	private double temperaturacerradoventeo;
-	private double temperaturagrafica;
-	private double temperaturainicial;
-	private double temperaturamercurio;
+	private String presionmanometro;
+	private String presionmanometro2;
+	private String presionvaporpsi;
+	private String temperaturacerradoventeo;
+	private String temperaturacerradoventeo2;
+	private String temperaturagrafica;
+	private String temperaturagrafica2;
+	private String temperaturainicial;
+	private String temperaturamercurio;
+	private String temperaturamercurio2;
+	private String temperaturasalida;
+	private Timestamp horadescarga;
 	private Autoclave autoclave;
 	private EsterilizadoProceso esterilizadoProceso;
 	private Usuario usuario;
 	private Produccion produccion;
 	private List<EsterilizadoProcesoParadaCoche> esterilizadoProcesoParadaCoches;
-
+	private Turno turno;
+	
 	public EsterilizadoProcesoParada() {
 	}
 
@@ -121,48 +140,227 @@ public class EsterilizadoProcesoParada implements Serializable {
 	}
 
 
-	public double getPresionmanometro() {
+	public String getPresionmanometro() {
 		return this.presionmanometro;
 	}
 
-	public void setPresionmanometro(double presionmanometro) {
+	public void setPresionmanometro(String presionmanometro) {
 		this.presionmanometro = presionmanometro;
 	}
 
 
-	public double getTemperaturacerradoventeo() {
+	public String getTemperaturacerradoventeo() {
 		return this.temperaturacerradoventeo;
 	}
 
-	public void setTemperaturacerradoventeo(double temperaturacerradoventeo) {
+	public void setTemperaturacerradoventeo(String temperaturacerradoventeo) {
 		this.temperaturacerradoventeo = temperaturacerradoventeo;
 	}
 
 
-	public double getTemperaturagrafica() {
+	public String getTemperaturagrafica() {
 		return this.temperaturagrafica;
 	}
 
-	public void setTemperaturagrafica(double temperaturagrafica) {
+	public void setTemperaturagrafica(String temperaturagrafica) {
 		this.temperaturagrafica = temperaturagrafica;
 	}
 
 
-	public double getTemperaturainicial() {
+	public String getTemperaturainicial() {
 		return this.temperaturainicial;
 	}
 
-	public void setTemperaturainicial(double temperaturainicial) {
+	public void setTemperaturainicial(String temperaturainicial) {
 		this.temperaturainicial = temperaturainicial;
 	}
 
 
-	public double getTemperaturamercurio() {
+	public String getTemperaturamercurio() {
 		return this.temperaturamercurio;
 	}
 
-	public void setTemperaturamercurio(double temperaturamercurio) {
+	public void setTemperaturamercurio(String temperaturamercurio) {
 		this.temperaturamercurio = temperaturamercurio;
+	}
+
+
+	public Integer getFinproceso() {
+		return finproceso;
+	}
+
+
+	public void setFinproceso(Integer finproceso) {
+		this.finproceso = finproceso;
+	}
+
+
+	public String getFlujoaguals() {
+		return flujoaguals;
+	}
+
+
+	public void setFlujoaguals(String flujoaguals) {
+		this.flujoaguals = flujoaguals;
+	}
+
+
+	public Timestamp getHorafinalenfriamiento() {
+		return horafinalenfriamiento;
+	}
+
+
+	public void setHorafinalenfriamiento(Timestamp horafinalenfriamiento) {
+		this.horafinalenfriamiento = horafinalenfriamiento;
+	}
+
+
+	public Timestamp getHorafinproceso() {
+		return horafinproceso;
+	}
+
+
+	public void setHorafinproceso(Timestamp horafinproceso) {
+		this.horafinproceso = horafinproceso;
+	}
+
+
+	public Timestamp getHorainicioproceso() {
+		return horainicioproceso;
+	}
+
+
+	public void setHorainicioproceso(Timestamp horainicioproceso) {
+		this.horainicioproceso = horainicioproceso;
+	}
+
+
+	public Timestamp getHoraregmanometro()  {
+		return horaregmanometro;
+	}
+
+
+	public void setHoraregmanometro(Timestamp horaregmanometro) {
+		this.horaregmanometro = horaregmanometro;
+	}
+
+
+	public Timestamp getHorasalida() {
+		return horasalida;
+	}
+
+
+	public void setHorasalida(Timestamp horasalida) {
+		this.horasalida = horasalida;
+	}
+
+
+	public Timestamp getHoraselladolata() {
+		return horaselladolata;
+	}
+
+
+	public void setHoraselladolata(Timestamp horaselladolata) {
+		this.horaselladolata = horaselladolata;
+	}
+
+
+	public String getPresionvaporpsi() {
+		return presionvaporpsi;
+	}
+
+
+	public void setPresionvaporpsi(String presionvaporpsi) {
+		this.presionvaporpsi = presionvaporpsi;
+	}
+
+
+	public String getTemperaturasalida() {
+		return temperaturasalida;
+	}
+
+
+	public void setTemperaturasalida(String temperaturasalida) {
+		this.temperaturasalida = temperaturasalida;
+	}
+
+	
+	public Timestamp getHoracerradoventeo2() {
+		return horacerradoventeo2;
+	}
+
+
+	public void setHoracerradoventeo2(Timestamp horacerradoventeo2) {
+		this.horacerradoventeo2 = horacerradoventeo2;
+	}
+
+
+	public Timestamp getHoraregmanometro2() {
+		return horaregmanometro2;
+	}
+
+
+	public void setHoraregmanometro2(Timestamp horaregmanometro2) {
+		this.horaregmanometro2 = horaregmanometro2;
+	}
+
+
+	public String getPresionmanometro2() {
+		return presionmanometro2;
+	}
+
+
+	public void setPresionmanometro2(String presionmanometro2) {
+		this.presionmanometro2 = presionmanometro2;
+	}
+
+
+	public String getTemperaturacerradoventeo2() {
+		return temperaturacerradoventeo2;
+	}
+
+
+	public void setTemperaturacerradoventeo2(String temperaturacerradoventeo2) {
+		this.temperaturacerradoventeo2 = temperaturacerradoventeo2;
+	}
+
+
+	public String getTemperaturagrafica2() {
+		return temperaturagrafica2;
+	}
+
+
+	public void setTemperaturagrafica2(String temperaturagrafica2) {
+		this.temperaturagrafica2 = temperaturagrafica2;
+	}
+
+
+	public String getTemperaturamercurio2() {
+		return temperaturamercurio2;
+	}
+
+
+	public void setTemperaturamercurio2(String temperaturamercurio2) {
+		this.temperaturamercurio2 = temperaturamercurio2;
+	}
+
+
+	public String getIdusuariomod() {
+		return idusuariomod;
+	}
+
+
+	public void setIdusuariomod(String idusuariomod) {
+		this.idusuariomod = idusuariomod;
+	}
+
+
+	public Timestamp getHoradescarga() {
+		return horadescarga;
+	}
+
+	public void setHoradescarga(Timestamp horadescarga) {
+		this.horadescarga = horadescarga;
 	}
 
 
@@ -236,4 +434,14 @@ public class EsterilizadoProcesoParada implements Serializable {
 		return esterilizadoProcesoParadaCoch;
 	}
 
+	//bi-directional many-to-one association to Turno
+	@ManyToOne
+	@JoinColumn(name="idturno")
+	public Turno getTurno() {
+		return this.turno;
+	}
+
+	public void setTurno(Turno turno) {
+		this.turno = turno;
+	}
 }

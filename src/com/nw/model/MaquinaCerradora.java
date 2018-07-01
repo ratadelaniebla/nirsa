@@ -34,7 +34,8 @@ public class MaquinaCerradora implements Serializable {
 	private List<OeeDetalleMediosConDefectoEnvasado> oeeDetalleMediosConDefectoEnvasados;
 	private List<OeeDetalleParadaEnvasado> oeeDetalleParadaEnvasados;
 	private List<OeeEnvasadoCabeceraVelocidadMaquinaCerradora> oeeEnvasadoCabeceraVelocidadMaquinaCerradoras;
-
+	private List<EsterilizadoCoche> esterilizadoCoches;
+	
 	public MaquinaCerradora() {
 	}
 
@@ -278,4 +279,28 @@ public class MaquinaCerradora implements Serializable {
 		return oeeEnvasadoCabeceraVelocidadMaquinaCerradora;
 	}
 
+	
+	//bi-directional many-to-one association to EsterilizadoCoche
+	@OneToMany(mappedBy="maquinaCerradora")
+	public List<EsterilizadoCoche> getEsterilizadoCoches() {
+		return this.esterilizadoCoches;
+	}
+
+	public void setEsterilizadoCoches(List<EsterilizadoCoche> esterilizadoCoches) {
+		this.esterilizadoCoches = esterilizadoCoches;
+	}
+
+	public EsterilizadoCoche addEsterilizadoCoch(EsterilizadoCoche esterilizadoCoch) {
+		getEsterilizadoCoches().add(esterilizadoCoch);
+		esterilizadoCoch.setMaquinaCerradora(this);
+
+		return esterilizadoCoch;
+	}
+
+	public EsterilizadoCoche removeEsterilizadoCoch(EsterilizadoCoche esterilizadoCoch) {
+		getEsterilizadoCoches().remove(esterilizadoCoch);
+		esterilizadoCoch.setMaquinaCerradora(null);
+
+		return esterilizadoCoch;
+	}
 }

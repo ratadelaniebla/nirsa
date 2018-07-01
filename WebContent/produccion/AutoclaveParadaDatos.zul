@@ -1,0 +1,342 @@
+<?page id = "pagAutoclaveParadaDatos" title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winAutoclaveParadaDatos" 
+		title="AUTOCLAVE-PARADA DATOS"
+		style="color:blue;font-size:12px;font-weight:bold"
+		mode="modal"
+		border="auto"
+		defaultActionOnShow="moveDown"
+		position="left,top"
+		closable="true"
+		maximizable="true"
+		apply="com.nw.webui.produccion.AutoclaveParadaDatosWindow"
+		width="99%">
+		<script src="/js/noBarra.js" type="text/javascript" />
+		
+<!-- 		<label value="AUTOCLAVE-PARADA DATOS" style="color:blue;font-size:12px;font-weight:bold" /> -->
+		
+		<vbox id="vbxMain" width="99%">
+			
+			<grid width="99%" id="grdGrabar"> 
+				<rows>
+					<row>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar" tooltiptext="Grabar" image="/img/grabar.gif" />
+						</toolbar>
+					</row>
+				</rows>
+			</grid>	
+			
+			<grid width="99%">  
+				<rows>
+					<row>
+						<label value="Consultar por día de Producción" />
+						
+						<hbox>
+							<datebox id="dteFechaProduccion" width="110px" format="dd/MM/yyyy" readonly="true"/>							
+							<toolbar id="tbConsultar">
+								<toolbarbutton id="btnConsultar" label="CONSULTAR" />
+							</toolbar>
+						</hbox>
+						
+					</row>
+			
+					<row>
+						<label value="Ver Paradas en Curso "/>
+						<checkbox id="chkVerParadasEnCurso"></checkbox>
+					</row>
+			
+					
+					<row>
+						<label id="lbAutoclaveParada" value="Autoclave/ Parada / Día de Producción (*)"/>
+						
+						<hbox>
+							<listbox id="lbxAutoclaveParada" style="font-size:12px; color:#000000" mold="select" width="280px"/>
+							<toolbar>
+								<toolbarbutton id="btnActulizarParadas" label="ACTUALIZAR" />
+							</toolbar>
+						</hbox>
+						
+					</row>
+			
+					<row>
+						<label id="lbTurno" value="Turno Labor"/>
+						<listbox id="lbxTurno" style="font-size:12px" mold="select" width="120px"/>
+					</row>
+			
+				</rows>
+			</grid>
+				
+			<grid width="99%">
+				<rows>
+					<row>
+						<label value="GUIA DE ESTADO DE COCINAS/COCINADAS:" style="color:black;font-size:11.5px;font-weight:bold"/>
+						<hbox>
+							<label id="lbGuiaAbierta" value="ABIERTA" style="color:black;font-size:10px;font-weight:bold"/>
+							<space width="2px"></space>
+							<label id="lbGuiaIniciada" value="INICIADA" style="color:blue;font-size:10px;font-weight:bold"/>
+							<space width="2px"></space>
+							<label id="lbGuiaFinalizada" value="FINALIZADA" style="color:red;font-size:10px;font-weight:bold"/>                                                                                                                                                             
+							<space width="2px"></space>
+							<label id="lbGuiaFinProceso" value="FIN PROCESO" style="color:green;font-size:10px;font-weight:bold"/>
+						</hbox>
+					</row>
+				</rows>
+			</grid>
+			
+			<hbox width="99%">
+			
+				<grid width="700px">  
+					<rows>
+					
+						<row>
+							<label id="lbBliderAbierto"  value="Blider Abierto"/>
+							<checkbox id="chkBliderAbierto"></checkbox>
+							<!-- 
+							<intbox id="txtBlider" maxlength="4" width="120px"/>
+							 --> 
+						</row>
+						
+						<row>
+							<label value="Número gráfica"/>
+							<longbox id="lobNumeroGrafica" maxlength="8" width="120px"/> 
+						</row>					
+	
+						<row>
+							<label value="Hora Sellado 1ra Lata (*)"/>
+							
+							<hbox>
+								<datebox id="dteHoraSellado1raLata" format="dd-MM-yyyy a hh:mm:ss" width="140px" readonly="true" />							
+								<toolbar id="tbTomarHoraSellado1raLata">
+									<toolbarbutton id="btnTomarHoraSellado1raLata" label="TOMAR HORA ACT." />
+								</toolbar>
+							</hbox> 
+						</row>
+	
+	
+						<row>
+							<label id="lbPresionVaporPsi" value="Presión Vapor psi (P)"/>
+							<textbox id="dbxPresionVaporPsi" width="120px"/> 
+						</row>	
+	
+						<row>
+							<label value="Hora Avertura Vapor (*)"/>
+							<hbox>
+								<datebox id="dteHoraAverturaVapor" format="dd-MM-yyyy a hh:mm:ss" width="140px" readonly="true"/>
+								<toolbar id="tbTomarHoraAverturaVapor">
+									<toolbarbutton id="btnTomarHoraAverturaVapor" label="TOMAR HORA ACT." />
+								</toolbar>
+							</hbox>
+							 
+						</row>
+							
+							
+						<row>
+							<label value="Cerrado de Venteo"/>
+														
+							<hbox>
+								<vbox>
+										<hbox>
+											<label value="Hora"/>
+											<hbox>
+												<datebox id="dteHoraCerradoVenteo" format="yyyy-MM-dd a hh:mm:ss" width="140px" readonly="true"/>																			
+												<toolbar id="tbTomarHoraCerradoVenteo">
+													<toolbarbutton id="btnTomarHoraCerradoVenteo" label="TOMAR HORA ACT." />
+												</toolbar>												
+											</hbox>
+										</hbox>
+										
+										<hbox>
+											<label id="lbTempCerradoVenteo" value="Temperatura"/>
+											<textbox id="dbxTempCerradoVenteo" width="120px"/>
+										</hbox>
+								</vbox>		 
+							 </hbox>						 
+						</row>
+						
+						<row>
+							<label value="Cerrado de Venteo"/>
+														
+							<hbox>
+								<vbox>
+										<hbox>
+											<label value="Hora"/>
+											<hbox>
+												<datebox id="dteHoraCerradoVenteo2" format="yyyy-MM-dd a hh:mm:ss" width="140px" readonly="true"/>																			
+												<toolbar id="tbTomarHoraCerradoVenteo2">
+													<toolbarbutton id="btnTomarHoraCerradoVenteo2" label="TOMAR HORA ACT." />
+												</toolbar>												
+											</hbox>
+										</hbox>
+										
+										<hbox>
+											<label id="lbTempCerradoVenteo2" value="Temperatura"/>
+											<textbox id="dbxTempCerradoVenteo2" width="120px"/>
+										</hbox>
+								</vbox>		 
+							 </hbox>						 
+						</row>				
+	
+	
+						<row>
+							<label id="lbHoraInicioProceso" value="Hora Inicio Proceso (*)"/>
+							
+							<hbox>
+								<datebox id="dteHoraInicioProceso" format="dd-MM-yyyy a hh:mm:ss" width="140px" readonly="true"/>
+								<toolbar id="tbHoraInicioProceso">
+									<toolbarbutton id="btnHoraInicioProceso" label="TOMAR HORA ACT." />
+								</toolbar>
+							</hbox>												
+							 
+						</row>
+	
+						<row>
+							<label id="lbHoraFinProceso" value="Hora Fin Proceso (*)"/>
+							
+							<hbox>
+								<datebox id="dteHoraFinProceso" format="dd-MM-yyyy a hh:mm:ss" width="140px" readonly="true"/>
+								<toolbar id="tbHoraFinProceso">
+									<toolbarbutton id="btnHoraFinProceso" label="TOMAR HORA ACT." />
+								</toolbar>
+							</hbox>
+							 
+						</row>
+	
+	
+						<row>
+							<label id="lbTiempoProceso" value="Tiempo Proceso (*)"/>
+							<textbox id="txtTiempoProceso" width="99%" readonly="true" ></textbox>
+						</row>
+						
+					
+					</rows>	
+				</grid>
+			
+				<grid width="700px">
+					<rows>
+						<row>
+							<label value="Hora Final Enfriamiento (*)"/>
+							
+							<hbox>
+								<datebox id="dteHoraFinalEnfriamiento" format="dd-MM-yyyy a hh:mm:ss" width="140px" readonly="true"/>
+								<toolbar id="tbHoraFinalEnfriamiento">
+									<toolbarbutton id="btnHoraFinalEnfriamiento" label="TOMAR HORA ACT." />
+								</toolbar>
+							</hbox>							
+							 
+						</row>					
+						<row>
+							<label value="Hora Salida (*)"/>
+							<hbox>
+								<datebox id="dteHoraSalida" format="dd-MM-yyyy a hh:mm:ss" width="140px" readonly="true"/>
+								<toolbar id="tbHoraSalida">
+									<toolbarbutton id="btnHoraSalida" label="TOMAR HORA ACT." />
+								</toolbar>
+							</hbox>							 
+						</row>						
+
+						<row>
+							<label id="lbFlujoAguaLS" value="Flujo Agua LS"/>
+							<textbox id="dbxFlujoAguaLS" width="120px"/> 
+						</row>
+							
+						<row>
+							<label id="lbTempMercurio" value="Temp./Lectura (*) Mercurio"/>
+							<vbox>
+								<textbox id="dbxTempMercurio" width="120px"/> 
+								<textbox id="dbxTempMercurio2" width="120px"/> 
+							</vbox>
+						</row>
+						
+						<row>
+							<label id="lbTempGrafica" value="Temp/Lectura (*) Gráfica"/>
+							<vbox>
+								<textbox id="dbxTempGrafica" width="120px"/>
+								<textbox id="dbxTempGrafica2" width="120px"/>
+							</vbox>
+						</row>		
+						
+						<row>
+							<label id="lbPresionManometro" value="Presión Manómetro PSI(*)"/>
+							<vbox>
+								<textbox id="dbxPresionManometro" width="120px"/>
+								<textbox id="dbxPresionManometro2" width="120px"/>
+							</vbox>
+						</row>								
+
+						<row>
+							<label value="Hora Registro Pre. Manometro (*)"/>
+							<vbox>
+								<hbox>
+									<datebox id="dteHoraRegistroPreManometro" format="dd-MM-yyyy a hh:mm:ss" width="140px" readonly="true"/>
+									<toolbar id="tbHoraRegistroPreManometro">
+										<toolbarbutton id="btnHoraRegistroPreManometro" label="TOMAR HORA ACT." />
+									</toolbar>
+								</hbox>
+								<hbox>
+									<datebox id="dteHoraRegistroPreManometro2" format="dd-MM-yyyy a hh:mm:ss" width="140px" readonly="true"/>
+									<toolbar id="tbHoraRegistroPreManometro2">
+										<toolbarbutton id="btnHoraRegistroPreManometro2" label="TOMAR HORA ACT." />
+									</toolbar>
+								</hbox>
+							</vbox>
+						</row>	
+												
+						<row>
+							<label id="lbTempInicio" value="Temperatura Inicial por lata (*)"/>
+							<textbox id="dbxTempInicio" width="120px"/> 
+						</row>
+						
+						
+						<row>
+							<label id="lbTempSalida" value="Temperatura Salida por lata (*)"/>
+							<textbox id="dbxTempSalida" width="120px"/> 
+						</row>					
+						
+						
+						<row>
+							<label id="lbFinProceso" value="Fin proceso NW"/>
+							<checkbox id="chkFinProceso"></checkbox>
+						</row>						
+
+					</rows>
+				</grid>	
+			
+			</hbox>
+			
+			
+			<grid id="gridLista" width="99%">
+				<rows>
+					<row>
+						<listbox id="lbxSales" multiple="true" checkmark="false" width="100%" >
+							<listhead style="font-size:8px"  >
+								<listheader label="#Coche" width="15%" />
+								<listheader label="Orden" width="20%" />
+								<listheader label="Cliente " width="20%" />
+								<listheader label="Tamaño Envase" width="18%" />
+								<listheader label="Codigo Completo (Video Jet)" width="20%" />
+							</listhead>
+							<listitem>
+								<listcell></listcell>
+								<listcell></listcell>
+								<listcell></listcell>
+								<listcell></listcell>
+								<listcell></listcell>
+							</listitem>
+						</listbox>
+					</row>
+				</rows>
+			</grid>				
+					
+			<grid width="99%">
+				<rows>
+					<row>
+						<label id="lbTotalCoches" value="Total Coches"/>
+						<intbox id="itbTotalCoches" width="99%" readonly="true"/> 
+					</row>				
+				</rows>
+			</grid>
+			
+		</vbox>
+	</window>
+</zk> 

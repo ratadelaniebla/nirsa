@@ -172,7 +172,7 @@ public class EnvasadoDetalleControlPesoFillNetoReporteWindow extends GenericForw
 		li.setValue(new EnvasadoControlPesoNetoCabecera());
 		li.setParent(lbxItemOrdenCliente);
 		
-		List<EnvasadoControlPesoNetoCabecera> listaEcpnc = ecpncDAO.getByProduccion(envasadoProceso.getIdenvasadoproceso());
+		List<EnvasadoControlPesoNetoCabecera> listaEcpnc = ecpncDAO.getByEnvasadoproceso(envasadoProceso.getIdenvasadoproceso());
 		Collections.sort(listaEcpnc, new Comparator<EnvasadoControlPesoNetoCabecera>() 		
 		{
 			@Override

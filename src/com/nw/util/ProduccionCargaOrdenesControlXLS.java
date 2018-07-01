@@ -190,6 +190,8 @@ public class ProduccionCargaOrdenesControlXLS {
 //		Integer idturno;
 		Integer item;
 		double formato;
+		String luthy;
+		String cerradora;
 		Integer latas;
 		double lomolimpio;
 		String marca;
@@ -490,7 +492,31 @@ public class ProduccionCargaOrdenesControlXLS {
 				}
 			}
 			//luthi
+			try {
+				luthy = listPacoDet.get(24).getStringCellValue();
+				pacoD.setLuthy(luthy);
+			} catch (Exception e) {
+				if ( Cell.CELL_TYPE_NUMERIC == listPacoDet.get(24).getCellType() ){
+					luthy = formatoCeldaDoubleToString( listPacoDet.get(24).getNumericCellValue() );
+					pacoD.setLuthy(luthy);
+				} else {
+					Sistema.mensaje("El formato de la columna Luthy debe ser texto. ["+listPacoDet.get(24)+"]");
+					e.printStackTrace();
+				}
+			}
 			//cerradora
+			try {
+				cerradora = listPacoDet.get(25).getStringCellValue();
+				pacoD.setCerradora(cerradora);
+			} catch (Exception e) {
+				if ( Cell.CELL_TYPE_NUMERIC == listPacoDet.get(25).getCellType() ){
+					cerradora = formatoCeldaDoubleToString( listPacoDet.get(25).getNumericCellValue() );
+					pacoD.setCerradora(cerradora);
+				} else {
+					Sistema.mensaje("El formato de la columna Cerradora debe ser texto. ["+listPacoDet.get(25)+"]");
+					e.printStackTrace();
+				}
+			}
 			//pres
 			try {
 				latas = (int)listPacoDet.get(27).getNumericCellValue();

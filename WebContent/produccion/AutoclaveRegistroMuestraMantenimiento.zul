@@ -1,0 +1,117 @@
+<?page id = "pagAutoclaveRegistroMuestra" title="Registro de Muestras para Autoclave" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="winAutoclaveParada" title="" 
+		apply="com.nw.webui.produccion.AutoclaveRegistroMuestraMantenimientoWindow">
+		
+		<script src="/js/noBarra.js" type="text/javascript" />
+		
+		<label value="Mant. Muestras Latas-Salida Autoclave" style="color:blue;font-size:12px;font-weight:bold" />
+		
+		<vbox id="vbxMain" width="100%">
+			<grid width="95%">
+				<rows>
+					<row>
+						<toolbar>
+							<toolbarbutton id="btnGrabar" label="Grabar"
+								tooltiptext="Grabar" image="/img/grabar.gif" />
+						</toolbar>
+					</row>
+
+
+				</rows>
+			</grid>
+			<grid width="95%">
+				<columns>
+					<column width="35%"></column>
+					<column width="65%"></column>
+				</columns>
+				<rows>
+					<row>
+						<label id="lbProduccion" value="Produccion" width="100px"></label>
+						<datebox id="dteProduccion" width="98px" readonly="true" format="dd/MM/yyyy"/>
+					</row>
+					<row>
+						<label id="lbParada" value="Parada" width="100px"></label>
+						<listbox id="lbxParada" mold="select" width="150px"></listbox>
+					</row>
+					<row>
+						<label id="lbCoches" value="Coches" width="100px"></label>
+						<listbox id="lbxCoches" mold="select" width="150px"></listbox>
+					</row>
+				</rows>
+			</grid>
+			<grid width="95%">
+				<columns>
+					<column width="35%"></column>
+					<column width="65%"></column>
+				</columns>
+				<rows>
+					<row>
+						<label id="lbHoraFinProceso" value="Hora Fin Proceso"></label>
+						<label id="lbHoraFinProcesoValor"></label>
+					</row>
+					<row>
+						<label id="lbCliente" value="Cliente"></label>
+						<label id="lbClienteValor"></label>
+					</row>
+					<row>
+						<label id="lbCodigo" value="Codigo Video Jet"></label>
+						<label id="lbCodigoValor"></label>
+					</row>
+				</rows>
+			</grid>
+			<grid width="95%">
+				<columns>
+					<column width="35%"></column>
+					<column width="65%"></column>
+				</columns>
+				<rows>
+					<row>
+						<label id="lbHoraDescarga"  value="Hora Descarga"></label>
+						<datebox id="dteHoraDescarga" width="90%" readonly="true" format="dd/MM/yyyy HH:mm:ss"/>
+					</row>
+					<row>
+						<label id="lbObservacion"  value="Observacion"></label>
+						<textbox id="txtObservacion" rows="3" width="98%"/>
+					</row>
+				</rows>
+			</grid>
+			<grid width="95%">
+				<columns>
+					<column width="35%"></column>
+					<column width="65%"></column>
+				</columns>
+				<rows>
+					<row>
+						<label id="lbMuetras" value="Muestras"></label>
+						<hbox>
+							<intbox id="intMuestras"></intbox>
+							<toolbarbutton id="btnAgregarItem" tooltiptext="Agregar" image="/img/crear.gif"/>
+							<toolbarbutton id="btnEliminarItem" tooltiptext="Eliminar" image="/img/eliminar.gif"/>
+						</hbox>
+					</row>
+				</rows>
+			</grid>
+			<grid width="95%">
+				<columns>
+					<column width="35%"></column>
+					<column width="65%"></column>
+				</columns>
+				<rows>
+					<row spans="2">
+						<listbox id="lbxMuestrasDetalle" width="90%" multiple="true" checkmark="true">
+							<listhead>
+								<listheader label="Coches" width="50%"></listheader>
+								<listheader label="Cantidad Muestras" width="50%"></listheader>
+							</listhead>
+<!-- 							<listitem> -->
+<!-- 								<listcell label="ss"></listcell> -->
+<!-- 								<listcell label="ww"></listcell> -->
+<!-- 							</listitem> -->
+						</listbox>
+					</row>
+				</rows>
+			</grid>
+		</vbox>
+	</window>
+</zk>

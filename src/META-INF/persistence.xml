@@ -42,6 +42,7 @@
       	<class>com.nw.model.AtcProduccionDetalleLoteCajon</class>
       	<class>com.nw.model.AtcTurno</class>
       	<class>com.nw.model.AtcUsuario</class>
+      	<class>com.nw.model.Autoclave</class>
       	<class>com.nw.model.AvParametro</class>
       	<class>com.nw.model.Balanza</class>
       	<class>com.nw.model.Banda</class>
@@ -209,8 +210,13 @@
       	<class>com.nw.model.EnvasadoControlPesoNetoDetalle</class>
       	<class>com.nw.model.EnvasadoDetalleProcesoCambio</class>
       	<class>com.nw.model.EnvasadoDetalleProcesoCambiosLuthy</class>
+      	<class>com.nw.model.EnvasadoFichaTecnica</class>
       	<class>com.nw.model.EnvasadoLineaCerradora</class>
+      	<class>com.nw.model.EnvasadoMotivoCambio</class>
       	<class>com.nw.model.EnvasadoProceso</class>
+      	<class>com.nw.model.EnvasadoProveedorLata</class>
+      	<class>com.nw.model.EnvasadoProveedorTapa</class>
+      	<class>com.nw.model.EnvasadoTamanoEnvase</class>
       	<class>com.nw.model.EspecialidadesIncidencia</class>
       	<class>com.nw.model.EspecialidadesIncidenciaEnlatado</class>
       	<class>com.nw.model.EspecialidadesIngrediente</class>
@@ -244,6 +250,11 @@
       	<class>com.nw.model.EstandarRendimientosAtun</class>
       	<class>com.nw.model.EstandarTiemposDescongelado</class>
       	<class>com.nw.model.EstandarTiemposPrecamara</class>
+      	<class>com.nw.model.EsterilizadoCoche</class>
+      	<class>com.nw.model.EsterilizadoProceso</class>
+      	<class>com.nw.model.EsterilizadoProcesoParada</class>
+      	<class>com.nw.model.EsterilizadoProcesoParadaCoche</class>
+      	<class>com.nw.model.EsterilizadoTipoCoche</class>
       	<class>com.nw.model.EvisceradoAuditoriaReimpresion</class>
       	<class>com.nw.model.EvisceradoCocheModificacion</class>
       	<class>com.nw.model.EvisceradoCorte</class>
@@ -466,51 +477,15 @@
       	<class>com.nw.model.UsuariosAprobacion</class>
       	<class>com.nw.model.Volqueta</class>
       	<class>com.nw.model.Zonafao</class>
-      	<class>com.nw.model.EnvasadoMotivoCambio</class>
-      	<class>com.nw.model.EnvasadoFichaTecnica</class>
-      	<class>com.nw.model.EnvasadoProveedorLata</class>
-      	<class>com.nw.model.EnvasadoProveedorTapa</class>
-      	<class>com.nw.model.Autoclave</class>
-      	<class>com.nw.model.EsterilizadoCoche</class>
-      	<class>com.nw.model.EsterilizadoProceso</class>
-      	<class>com.nw.model.EsterilizadoProcesoParada</class>
-      	<class>com.nw.model.EsterilizadoProcesoParadaCoche</class>      	
+      	
 		<properties>
 
 			<property name="eclipselink.logging.level" value="FINEST"/>
-			<!-- <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/nw_des"/>-->
 			<property name="eclipselink.weaving.eager" value="false"/>
-		<!-- 	<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/> 192.198.20.134  -->
 			<property name="eclipselink.cache.shared.default" value="false"/>
 			<property name="eclipselink.jdbc.url" value="jdbc:postgresql://localhost:5432/nw_des"/>
 			<property name="eclipselink.jdbc.driver" value="org.postgresql.Driver"/>
-			
 		
-		<!-- Original 
-			<property name="eclipselink.logging.level" value="INFO" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/nw_des" />
-			<property name="eclipselink.weaving.eager" value="false" /> 
-			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
-			<property name="eclipselink.cache.shared.default" value="false"/>
-		 -->	
-
-			<!--
-			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://192.198.20.134:5432/nw_des" />
-			-->			
-			<!-- localhost -->
-			<!-- Manejo customizado de las sesiones -->			
-			<!-- default, can be overridden by SessionAvanteCustomizer -->
-			<!--<property name="eclipselink.session.customizer"
-				value="com.avante.core.jpa.JPAEclipseLinkSessionCustomizer" /> -->
-			<!--<property name="javax.persistence.target-database" value="PostgreSQL"/>
-			-->
-			<!-- conexión a pruebas locales 		
-			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://172.17.18.31:5432/nw_des" />					
- 			-->
-			<!-- <property name="javax.persistence.jdbc.user" value="haroldnav" /> --> 
-    		<!--  <property name="javax.persistence.jdbc.password" value="Nirvana76:" /> -->
-			<!-- <property name="eclipselink.logging.file" value="default()"/> -->
-			
 		</properties>
 	</persistence-unit>
 </persistence>

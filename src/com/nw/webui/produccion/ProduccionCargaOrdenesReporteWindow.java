@@ -19,7 +19,6 @@ import com.nw.model.dao.impl.ProduccionDAOJpaImpl;
 import com.nw.util.ReporteExcel;
 import com.nw.util.Sistema;
 import com.nw.webui.produccion.impresion.ProgamaProduccionImpresion;
-
 public class ProduccionCargaOrdenesReporteWindow extends GenericForwardComposer{
 
 	private static final long serialVersionUID = 1L;

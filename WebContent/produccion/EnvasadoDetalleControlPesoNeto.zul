@@ -148,7 +148,7 @@
 					</row>
 					<row>
 					
-						<label value="Corte: "></label>
+						<label id="lbCorte" value="Corte: "></label>
 						<listbox id="lbxCorte" mold="select" width="120px" style="font-size:12px;font-weight:bold" />
 						<button  id="btnAgregarItem" label="Agregar"  image="/img/crear.gif"    hoverImage="/img/crear.gif"    orient="vertical" dir="reverse" 
 							style="color:blue;font-size:10px;font-weight:bold"

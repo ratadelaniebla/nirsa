@@ -44,6 +44,8 @@ public class ProduccionArchivoCargaOrdenDetalle implements Serializable {
 	private double ren;
 	private Boolean reproceso;
 	private String tapa;
+	private String luthy;
+	private String cerradora;
 	private double ton;
 	private String video;
 	private ProduccionArchivoCargaOrden produccionArchivoCargaOrden;
@@ -350,6 +352,24 @@ public class ProduccionArchivoCargaOrdenDetalle implements Serializable {
 
 	public void setVideo(String video) {
 		this.video = video;
+	}
+
+
+	public String getLuthy() {
+		return luthy;
+	}
+
+	public void setLuthy(String luthy) {
+		this.luthy = luthy;
+	}
+
+
+	public String getCerradora() {
+		return cerradora;
+	}
+
+	public void setCerradora(String cerradora) {
+		this.cerradora = cerradora;
 	}
 
 
